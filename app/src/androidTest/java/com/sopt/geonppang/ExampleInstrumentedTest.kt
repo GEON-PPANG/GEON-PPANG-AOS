@@ -1,4 +1,4 @@
-package com.example.geonppang
+package com.sopt.geonppang
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

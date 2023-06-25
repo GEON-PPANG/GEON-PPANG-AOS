@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.geonppang'
+    namespace 'com.sopt.geonppang'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.geonppang"
+        applicationId "com.sopt.geonppang"
         minSdk 28
         targetSdk 33
         versionCode 1
