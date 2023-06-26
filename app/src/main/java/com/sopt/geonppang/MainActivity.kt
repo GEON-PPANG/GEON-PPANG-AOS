@@ -1,11 +1,11 @@
 package com.sopt.geonppang
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.sopt.geonppang.databinding.ActivityMainBinding
+import com.sopt.geonppang.util.binding.BindingActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
     }
 }
