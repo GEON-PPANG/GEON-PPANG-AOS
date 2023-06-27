@@ -1,6 +1,7 @@
-package com.sopt.geonppang
+package com.sopt.geonppang.presentation
 
 import android.os.Bundle
+import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityMainBinding
 import com.sopt.geonppang.util.binding.BindingActivity
 
