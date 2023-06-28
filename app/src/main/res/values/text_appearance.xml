@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.LargeTitle" parent="">
+        <item name="android:textSize">34dp</item>
+        <item name="android:fontFamily">@font/pretendard_b</item>
+    </style>
+
+    <style name="TextAppearance.Title1" parent="">
+        <item name="android:textSize">24dp</item>
+        <item name="android:fontFamily">@font/pretendard_b</item>
+    </style>
+
+    <style name="TextAppearance.Title2" parent="">
+        <item name="android:textSize">20dp</item>
+        <item name="android:fontFamily">@font/pretendard_b</item>
+    </style>
+
+    <style name="TextAppearance.Headline" parent="">
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/pretendard_b</item>
+    </style>
+
+    <style name="TextAppearance.Subhead" parent="">
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/pretendard_m</item>
+    </style>
+
+    <style name="TextAppearance.BodyB1" parent="">
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/pretendard_b</item>
+    </style>
+
+    <style name="TextAppearance.BodyM1" parent="">
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/pretendard_m</item>
+    </style>
+
+    <style name="TextAppearance.BodyB2" parent="">
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/pretendard_b</item>
+    </style>
+
+    <style name="TextAppearance.BodyM2" parent="">
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/pretendard_m</item>
+    </style>
+
+    <style name="TextAppearance.Caption1" parent="">
+        <item name="android:textSize">12dp</item>
+        <item name="android:fontFamily">@font/pretendard_m</item>
+    </style>
+
+    <style name="TextAppearance.Caption2" parent="">
+        <item name="android:textSize">10dp</item>
+        <item name="android:fontFamily">@font/pretendard_m</item>
+    </style>
+</resources>
