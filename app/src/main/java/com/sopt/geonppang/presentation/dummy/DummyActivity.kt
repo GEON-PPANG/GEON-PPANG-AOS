@@ -14,8 +14,8 @@ class DummyActivity : BindingActivity<ActivityDummyBinding>(R.layout.activity_du
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
-        //binding.lifecycleOwner = this
-        //binding에서 LiveData를 사용할 경우 해당 코드 필요
+        // binding.lifecycleOwner = this
+        // binding에서 LiveData를 사용할 경우 해당 코드 필요
     }
 
     private fun initLayout() {

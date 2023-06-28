@@ -16,10 +16,8 @@ class DummyViewModel @Inject constructor(
         viewModelScope.launch {
             dummyRepositoryImpl.uploadDummy("name", "dummy")
                 .onSuccess {
-
                 }
                 .onFailure {
-
                 }
         }
     }
