@@ -2,19 +2,19 @@ package com.sopt.geonppang.presentation.dummy
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.geonppang.data.repository.DummyRepositoryImpl
+import com.sopt.geonppang.domain.repository.DummyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DummyViewModel @Inject constructor(
-    private val dummyRepositoryImpl: DummyRepositoryImpl,
+    private val dummyRepository: DummyRepository,
 ) : ViewModel() {
 
     fun uploadDummy() {
         viewModelScope.launch {
-            dummyRepositoryImpl.uploadDummy("name", "dummy")
+            dummyRepository.uploadDummy("name", "dummy")
                 .onSuccess {
                 }
                 .onFailure {
