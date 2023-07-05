@@ -4,61 +4,76 @@
     <style name="TextAppearance.LargeTitle" parent="">
         <item name="android:textSize">34dp</item>
         <item name="android:fontFamily">@font/pretendard_b</item>
+        <item name="android:lineHeight">38dp</item>
     </style>
 
     <style name="TextAppearance.Title1" parent="">
         <item name="android:textSize">24dp</item>
         <item name="android:fontFamily">@font/pretendard_b</item>
+        <item name="android:lineHeight">30dp</item>
+
     </style>
 
     <style name="TextAppearance.Title2" parent="">
         <item name="android:textSize">20dp</item>
         <item name="android:fontFamily">@font/pretendard_b</item>
+        <item name="android:lineHeight">28dp</item>
+
     </style>
 
     <style name="TextAppearance.Headline" parent="">
         <item name="android:textSize">16dp</item>
         <item name="android:fontFamily">@font/pretendard_b</item>
+        <item name="android:lineHeight">20dp</item>
+
     </style>
 
     <style name="TextAppearance.Subhead" parent="">
         <item name="android:textSize">14dp</item>
         <item name="android:fontFamily">@font/pretendard_m</item>
+        <item name="android:lineHeight">18dp</item>
     </style>
 
     <style name="TextAppearance.BodyB1" parent="">
         <item name="android:textSize">16dp</item>
         <item name="android:fontFamily">@font/pretendard_b</item>
+        <item name="android:lineHeight">20dp</item>
     </style>
 
     <style name="TextAppearance.BodyM1" parent="">
         <item name="android:textSize">16dp</item>
         <item name="android:fontFamily">@font/pretendard_m</item>
+        <item name="android:lineHeight">20dp</item>
     </style>
 
     <style name="TextAppearance.BodyB2" parent="">
         <item name="android:textSize">14dp</item>
         <item name="android:fontFamily">@font/pretendard_b</item>
+        <item name="android:lineHeight">18dp</item>
     </style>
 
     <style name="TextAppearance.BodyM2" parent="">
         <item name="android:textSize">14dp</item>
         <item name="android:fontFamily">@font/pretendard_m</item>
+        <item name="android:lineHeight">18dp</item>
     </style>
 
 
     <style name="TextAppearance.CaptionB1" parent="">
         <item name="android:textSize">12dp</item>
         <item name="android:fontFamily">@font/pretendard_b</item>
+        <item name="android:lineHeight">16dp</item>
     </style>
 
     <style name="TextAppearance.CaptionM1" parent="">
         <item name="android:textSize">12dp</item>
         <item name="android:fontFamily">@font/pretendard_m</item>
+        <item name="android:lineHeight">16dp</item>
     </style>
 
     <style name="TextAppearance.CaptionM2" parent="">
         <item name="android:textSize">10dp</item>
         <item name="android:fontFamily">@font/pretendard_m</item>
+        <item name="android:lineHeight">17dp</item>
     </style>
 </resources>
