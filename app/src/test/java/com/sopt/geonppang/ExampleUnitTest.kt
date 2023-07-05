@@ -1,4 +1,4 @@
-package com.example.geonppang
+package com.sopt.geonppang
 
 import org.junit.Test
 
