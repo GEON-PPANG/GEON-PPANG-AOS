@@ -14,6 +14,7 @@
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
         <item name="android:includeFontPadding">false</item>
+        <item name="bottomSheetDialogTheme">@style/Style.BottomSheetDialog</item>
     </style>
 
     <!--  Widget  -->
@@ -28,14 +29,8 @@
     <style name="Widget.FullButton.Basic" parent="Widget.Material.Button.Basic">
         <item name="android:layout_height">@dimen/button_height</item>
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_marginHorizontal">25dp</item>
+        <item name="android:layout_marginHorizontal">24dp</item>
         <item name="cornerRadius">11dp</item>
-    </style>
-
-    <!-- Circle Image View -->
-    <style name="Style.CircleImageView.Half" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
     </style>
 
     <style name="Widget.Material3.Chip.Style" parent="">
@@ -44,6 +39,28 @@
         <item name="chipStartPadding">0dp</item>
         <item name="android:checked">false</item>
         <item name="android:clickable">false</item>
+    </style>
+
+    <style name="Style.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Style.BottomSheet</item>
+    </style>
+
+    <style name="Style.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/Style.ShapeAppearance.BottomSheetDialog</item>
+    </style>
+
+    <style name="Style.ShapeAppearance.BottomSheetDialog" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">12dp</item>
+        <item name="cornerSizeTopLeft">12dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <!-- Circle Image View -->
+    <style name="Style.CircleImageView.Half" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
     </style>
 
     <style name="Style.Material3.Chip.Station.Category" parent="Widget.Material3.Chip.Style">
