@@ -5,19 +5,20 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
 
     <color name="main_1">#1C5532</color>
     <color name="main_2">#1C6739</color>
     <color name="main_3">#238448</color>
 
-    <color name="point">#F0683E</color>
+    <color name="point_1">#F0683E</color>
+    <color name="point_2">#FFCFC0</color>
+
+    <color name="error">#FF2633</color>
 
     <color name="background_1">#FBFAF8</color>
     <color name="background_2">#FAF7F2</color>
 
-    <color name="gray_50">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
     <color name="gray_100">#F9F9F9</color>
     <color name="gray_200">#EBEBEB</color>
     <color name="gray_300">#CBC8C5</color>
@@ -25,6 +26,5 @@
     <color name="gray_500">#656565</color>
     <color name="gray_600">#3D3A3A</color>
     <color name="gray_700">#262525</color>
-    <color name="gray_800">#000000</color>
-
+    <color name="black">#000000</color>
 </resources>

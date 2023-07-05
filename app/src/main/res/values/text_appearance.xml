@@ -46,12 +46,18 @@
         <item name="android:fontFamily">@font/pretendard_m</item>
     </style>
 
-    <style name="TextAppearance.Caption1" parent="">
+
+    <style name="TextAppearance.CaptionB1" parent="">
+        <item name="android:textSize">12dp</item>
+        <item name="android:fontFamily">@font/pretendard_b</item>
+    </style>
+
+    <style name="TextAppearance.CaptionM1" parent="">
         <item name="android:textSize">12dp</item>
         <item name="android:fontFamily">@font/pretendard_m</item>
     </style>
 
-    <style name="TextAppearance.Caption2" parent="">
+    <style name="TextAppearance.CaptionM2" parent="">
         <item name="android:textSize">10dp</item>
         <item name="android:fontFamily">@font/pretendard_m</item>
     </style>
