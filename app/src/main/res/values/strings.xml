@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">GeonPpang</string>
+
+    <!--  home  -->
+    <string name="home_best_title1">바이블님 맞춤\t</string>
+    <string name="home_best_bakery_title2">BEST 건빵집</string>
+    <string name="home_search_hint">궁금한 건빵집을 입력해주세요!</string>
+    <string name="home_best_review_title2">BEST 리뷰</string>
+    <string name="home_caption">건빵은 건강한 빵집의 위치와 성분 정보를 제공하여 소비자의 선택을 돕는 용도의 서비스입니다. 건빵의 모든 정보는 제조사에서 제공한 정보입니다. 이는 소비자의 구매를 돕기 위한 참고 사항이며, 제공 정보의 오류에 대한 책임을 지지 않습니다.</string>
+    <string name="home_review_count">리뷰(%d)</string>
+    <string name="home_bookmark_count">%d명</string>
+
 </resources>
