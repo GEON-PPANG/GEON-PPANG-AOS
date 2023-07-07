@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.sopt.geonppang.presentation.dummy.DummyViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing24" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing24" />
+
+        <ImageButton
+            android:id="@+id/img_back_arrow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="26dp"
+            android:background="@null"
+            android:padding="12dp"
+            android:src="@drawable/ic_arrow_left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_sign_up_page_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginRight="24dp"
+            android:padding="12dp"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.Subhead"
+            android:textColor="#CBC8C5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1/6" />
+
+        <TextView
+            android:id="@+id/tv_input_email_phrase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="8dp"
+            android:text="회원가입을 위한\n이메일을 알려주세요!"
+            android:textAppearance="@style/TextAppearance.Title1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_back_arrow" />
+
+        <LinearLayout
+            android:id="@+id/linear_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/background_et_input_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_input_email_phrase"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_email_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Subhead"
+                android:textColor="#878784"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="16dp"
+                android:text="이메일"/>
+
+            <EditText
+                android:id="@+id/et_write_your_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="이메일을 입력해주세요"
+                android:textColorHint="#CBC8C5"
+                android:textAppearance="@style/TextAppearance.Subhead"
+                android:paddingVertical="5dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="4dp"
+                android:background=""
+                android:inputType="text"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_double_check"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/linear_email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="36dp"
+            android:text="중복확인"
+            android:paddingVertical="18dp"
+            android:textAppearance="@style/TextAppearance.BodyB1"
+            android:textColor="#878784"
+            android:background="@drawable/background_btn_double_check"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginBottom="48dp"
+            android:text="다음"
+            android:paddingVertical="18dp"
+            android:textAppearance="@style/TextAppearance.BodyM1"
+            android:textColor="#878784"
+            android:background="@drawable/background_btn_next"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
