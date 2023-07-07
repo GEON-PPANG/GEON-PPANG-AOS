@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -12,8 +13,38 @@
         tools:context="com.sopt.geonppang.presentation.MainActivity">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fcv_container"
+            android:id="@+id/fcv_home_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/view_top_shadow"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_top_shadow"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="74dp"
+            android:background="@drawable/bottom_navigation_top_shadow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bnv_home"
+            android:layout_width="0dp"
+            android:layout_height="86dp"
+            android:background="@drawable/background_bottom_navigation"
+            android:paddingBottom="28dp"
+            app:itemIconTint="@drawable/menu_selector_color"
+            app:itemPaddingBottom="4dp"
+            app:itemPaddingTop="14dp"
+            app:itemTextAppearanceActive="@style/TextAppearance.CaptionB1"
+            app:itemTextAppearanceInactive="@style/TextAppearance.CaptionB1"
+            app:itemTextColor="@drawable/menu_selector_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bnv_menu" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
