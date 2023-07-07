@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.sopt.geonppang.presentation.dummy.DummyViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing24" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing24" />
+
+        <ImageButton
+            android:id="@+id/img_back_arrow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="26dp"
+            android:background="@null"
+            android:padding="12dp"
+            android:src="@drawable/ic_arrow_left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_sign_up_page_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginRight="24dp"
+            android:padding="12dp"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.Subhead"
+            android:textColor="#CBC8C5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1/6" />
+
+        <TextView
+            android:id="@+id/tv_input_email_phrase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/welcome_nickname"
+            android:textAppearance="@style/TextAppearance.Title1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_back_arrow" />
+
+        <LinearLayout
+            android:id="@+id/linear_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/background_et_input_email"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_input_email_phrase">
+
+            <TextView
+                android:id="@+id/tv_email_text"
+                visibility="@{}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/tv_nickname"
+                android:textAppearance="@style/TextAppearance.Subhead"
+                android:textColor="#878784" /><!--visibility viewModel 만든 후 구현 예정-->
+
+
+            <EditText
+                android:id="@+id/et_write_your_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp"
+                android:background=""
+                android:hint="@string/nickname_hint"
+                android:inputType="text"
+                android:paddingVertical="5dp"
+                android:textAppearance="@style/TextAppearance.Subhead"
+                android:textColorHint="#CBC8C5" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_email_error_msg"
+            visibility="@{}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="24dp"
+            android:text="@string/nickname_error"
+            android:textAppearance="@style/TextAppearance.CaptionM1"
+            android:textColor="#FF2633"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linear_email" /><!--visibility viewModel 만든 후 구현 예정-->
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_double_check"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/background_btn_double_check"
+            android:paddingVertical="18dp"
+            android:text="@string/double_check"
+            android:textAppearance="@style/TextAppearance.BodyB1"
+            android:textColor="#878784"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linear_email" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginBottom="48dp"
+            android:background="@drawable/background_btn_next"
+            android:paddingVertical="18dp"
+            android:text="@string/txt_next_btn"
+            android:textAppearance="@style/TextAppearance.BodyM1"
+            android:textColor="#878784"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
