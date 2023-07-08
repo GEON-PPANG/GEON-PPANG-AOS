@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">GeonPpang</string>
+
+    <!--  search view  -->
+    <string name="search_hint">궁금한 건빵집을 입력해주세요!</string>
+    <string name="search_recent_search">최근 검색어</string>
+    <string name="search_delete_all">전체삭제</string>
 </resources>
