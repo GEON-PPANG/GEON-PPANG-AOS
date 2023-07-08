@@ -97,12 +97,12 @@
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="16dp"
-                android:background=""
+                android:background="@null"
                 android:hint="@string/nickname_hint"
                 android:inputType="text"
                 android:paddingVertical="5dp"
                 android:textAppearance="@style/TextAppearance.Subhead"
-                android:textColorHint="#CBC8C5" />
+                android:textColorHint="@color/gray_300" />
 
         </LinearLayout>
 
