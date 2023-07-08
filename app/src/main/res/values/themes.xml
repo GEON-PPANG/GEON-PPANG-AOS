@@ -74,10 +74,10 @@
 
     <!--  TODO naming 고민  -->
     <style name="Widget.Material3.Chip.Style.Radius3.Stroke" parent="Widget.Material3.Chip.Style.Radius3">
-        <item name="android:paddingVertical">1dp</item>
+        <item name="android:paddingVertical">4dp</item>
         <item name="chipStrokeColor">@color/gray_300</item>
-        <item name="textStartPadding">5dp</item>
-        <item name="textEndPadding">5dp</item>
+        <item name="textStartPadding">8dp</item>
+        <item name="textEndPadding">8dp</item>
         <item name="chipStrokeWidth">0.5dp</item>
         <item name="android:textAppearance">@style/TextAppearance.CaptionM1</item>
         <item name="android:textColor">@color/gray_400</item>
