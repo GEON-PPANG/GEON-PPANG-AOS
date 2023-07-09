@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">GeonPpang</string>
+
+    <!--    filter    -->
+    <string name="filter_next">다음</string>
+    <string name="filter_ask_bread_type">어떤 빵을 원하시나요?</string>
+    <string name="filter_duplicate_selection">중복선택이 가능해요!</string>
+    <string name="filter_ask_nutrient_type">어떤 성분을 원하시나요?</string>
+    <string name="start_geon_ppang">시작하기</string>
 </resources>
