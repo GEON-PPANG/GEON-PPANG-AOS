@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sopt.geonppang.domain.model.Filter
+import com.sopt.geonppang.domain.model.NutrientFilter
+import timber.log.Timber
 
 class FilterViewModel : ViewModel() {
     private val _mainPurposeFilterList = listOf(
@@ -42,11 +44,28 @@ class FilterViewModel : ViewModel() {
     )
     val breadTypeFilterList = _breadTypeFilterList
 
+    private val _nutrientTypeFilterList = listOf(
+        NutrientFilter(
+            title = "영양성분 공개"
+        ),
+        NutrientFilter(
+            title = "원재료 공개"
+        ),
+        NutrientFilter(
+            title = "비공개"
+        )
+    )
+    val nutrientTypeFilterList = _nutrientTypeFilterList
+
     private val _mainPurposeFilterSelectedItemIndex: MutableLiveData<Int> = MutableLiveData()
     val mainPurposeFilterSelectedItemIndex: LiveData<Int> = _mainPurposeFilterSelectedItemIndex
 
     private val _breadTypeFilterSelectedItemList: MutableLiveData<List<Int>> = MutableLiveData()
     val breadTypeFilterSelectedItemList: LiveData<List<Int>> = _breadTypeFilterSelectedItemList
+
+    private val _nutrientTypeFilterSelectedItemList: MutableLiveData<List<Int>> = MutableLiveData()
+    val nutrientTypeFilterSelectedItemList: LiveData<List<Int>> =
+        _nutrientTypeFilterSelectedItemList
 
     private val _isNextBtnEnabled: MutableLiveData<Boolean> = MutableLiveData()
     val isNextBtnEnabled: LiveData<Boolean> = _isNextBtnEnabled
@@ -71,5 +90,19 @@ class FilterViewModel : ViewModel() {
 
         _breadTypeFilterSelectedItemList.value = currentList
         _isNextBtnEnabled.value = (!currentList.isEmpty())
+    }
+
+    fun setNutrientTypeFilterSelectedItemList(index: Int) {
+        val currentList = _nutrientTypeFilterSelectedItemList.value.orEmpty().toMutableList()
+
+        if (currentList.contains(index)) currentList.remove(index)
+        else {
+            currentList.add(index)
+            currentList.sort()
+        }
+
+        _nutrientTypeFilterSelectedItemList.value = currentList
+        _isNextBtnEnabled.value = (!currentList.isEmpty())
+        Timber.e(nutrientTypeFilterSelectedItemList.value.toString())
     }
 }
