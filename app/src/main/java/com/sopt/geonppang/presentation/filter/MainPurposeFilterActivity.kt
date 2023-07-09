@@ -29,6 +29,10 @@ class MainPurposeFilterActivity :
     }
 
     private fun addListeners() {
+        binding.ivMainPurposeFilterArrowLeft.setOnClickListener {
+            finish()
+        }
+
         binding.btnMainPurposeFilterNext.setOnClickListener {
             val intent = Intent(this, BreadTypeFilterActivity::class.java)
             startActivity(intent)

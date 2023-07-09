@@ -30,6 +30,10 @@ class NutrientTypeFilterActivity :
     }
 
     private fun addListeners() {
+        binding.ivNutrientTypeFilterArrowLeft.setOnClickListener {
+            finish()
+        }
+
         binding.btnNutrientTypeFilterNext.setOnClickListener {
             val intent = Intent(this, StartGeonPpangActivity::class.java)
             startActivity(intent)

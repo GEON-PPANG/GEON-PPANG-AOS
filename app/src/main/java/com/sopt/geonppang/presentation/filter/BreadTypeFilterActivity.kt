@@ -30,6 +30,10 @@ class BreadTypeFilterActivity :
     }
 
     private fun addListeners() {
+        binding.ivBreadTypeFilterArrowLeft.setOnClickListener {
+            finish()
+        }
+
         binding.btnBreadTypeFilterNext.setOnClickListener {
             val intent = Intent(this, NutrientTypeFilterActivity::class.java)
             startActivity(intent)
