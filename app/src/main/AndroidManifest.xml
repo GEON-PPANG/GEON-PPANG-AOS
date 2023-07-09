@@ -16,7 +16,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name="com.sopt.geonppang.presentation.dummy.DummyActivity"
+            android:name=".presentation.filter.StartGeonPpangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.filter.NutrientTypeFilterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.filter.MainPurposeFilterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.filter.BreadTypeFilterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.dummy.DummyActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
