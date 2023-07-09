@@ -32,7 +32,7 @@
             android:id="@+id/iv_bread_type_filter_arrow_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="46dp"
+            android:layout_marginTop="38dp"
             android:src="@drawable/ic_arrow_left"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,12 +41,12 @@
             android:id="@+id/tv_bread_type_filter_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="49dp"
+            android:layout_marginTop="41dp"
             android:textAppearance="@style/TextAppearance.Subhead"
             android:textColor="@color/gray_300"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="4/6" />
+            tools:text="5/6" />
 
         <TextView
             android:id="@+id/tv_bread_type_filter_title"
