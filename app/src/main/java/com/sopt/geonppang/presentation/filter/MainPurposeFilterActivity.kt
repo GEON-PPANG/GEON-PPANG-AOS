@@ -1,5 +1,6 @@
 package com.sopt.geonppang.presentation.filter
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.geonppang.R
@@ -17,6 +18,7 @@ class MainPurposeFilterActivity :
         binding.lifecycleOwner = this
 
         initLayout()
+        addListeners()
     }
 
     private fun initLayout() {
@@ -24,5 +26,12 @@ class MainPurposeFilterActivity :
         adapter.submitList(viewModel.mainPurposeFilterList)
 
         binding.rvMainPurposeFilterOption.adapter = adapter
+    }
+
+    private fun addListeners() {
+        binding.btnMainPurposeFilterNext.setOnClickListener {
+            val intent = Intent(this, BreadTypeFilterActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
