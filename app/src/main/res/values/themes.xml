@@ -29,8 +29,7 @@
     <style name="Widget.FullButton.Basic" parent="Widget.Material.Button.Basic">
         <item name="android:layout_height">@dimen/button_height</item>
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_marginHorizontal">24dp</item>
-        <item name="cornerRadius">11dp</item>
+        <item name="cornerRadius">12dp</item>
     </style>
 
     <style name="Widget.Material3.Chip.Style" parent="">
