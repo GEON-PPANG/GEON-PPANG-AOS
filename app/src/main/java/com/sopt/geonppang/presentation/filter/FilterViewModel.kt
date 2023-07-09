@@ -42,14 +42,34 @@ class FilterViewModel : ViewModel() {
     )
     val breadTypeFilterList = _breadTypeFilterList
 
-    private val _mainPurposeFilterSelectedItemIndex: MutableLiveData<Int> = MutableLiveData(-1)
+    private val _mainPurposeFilterSelectedItemIndex: MutableLiveData<Int> = MutableLiveData()
     val mainPurposeFilterSelectedItemIndex: LiveData<Int> = _mainPurposeFilterSelectedItemIndex
 
-    val _isNextBtnEnabled: MutableLiveData<Boolean> = MutableLiveData()
+    private val _breadTypeFilterSelectedItemList: MutableLiveData<List<Int>> = MutableLiveData()
+    val breadTypeFilterSelectedItemList: LiveData<List<Int>> = _breadTypeFilterSelectedItemList
+
+    private val _isNextBtnEnabled: MutableLiveData<Boolean> = MutableLiveData()
     val isNextBtnEnabled: LiveData<Boolean> = _isNextBtnEnabled
 
     fun setMainPurposeFilterSelectedItemIndex(index: Int) {
         _mainPurposeFilterSelectedItemIndex.value = index
         _isNextBtnEnabled.value = (index != -1)
+    }
+
+    fun setIsNextBtnEnabled(value: Boolean) {
+        _isNextBtnEnabled.value = value
+    }
+
+    fun setBreadTypeFilterSelectedItemList(index: Int) {
+        val currentList = _breadTypeFilterSelectedItemList.value.orEmpty().toMutableList()
+
+        if (currentList.contains(index)) currentList.remove(index)
+        else {
+            currentList.add(index)
+            currentList.sort()
+        }
+
+        _breadTypeFilterSelectedItemList.value = currentList
+        _isNextBtnEnabled.value = (!currentList.isEmpty())
     }
 }
