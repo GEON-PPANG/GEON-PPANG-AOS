@@ -71,11 +71,21 @@
             app:layout_constraintTop_toTopOf="@+id/et_search"
             tools:src="@drawable/ic_search" />
 
+        <View
+            android:id="@+id/line1"
+            visibility="@{viewModel.searchCount == null}"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/spacing12"
+            android:background="@color/gray_200"
+            app:layout_constraintTop_toBottomOf="@id/et_search"
+            tools:visibility="gone" />
+
         <TextView
             android:id="@+id/tv_search_recent_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="39dp"
+            android:layout_marginTop="38dp"
             android:text="@{viewModel.searchCount == null ? @string/search_recent_search : @string/search_result}"
             android:textAppearance="@style/TextAppearance.Headline"
             android:textColor="@color/gray_600"
@@ -112,7 +122,7 @@
             visibility="@{viewModel.searchCount != null}"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="19dp"
             android:background="@color/gray_200"
             app:layout_constraintTop_toBottomOf="@+id/tv_search_recent_search" />
 
@@ -127,10 +137,10 @@
             <!--     image 수정       -->
             <ImageView
                 android:id="@+id/iv_search_init"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginTop="121dp"
-                android:src="@drawable/ic_launcher_background"
+                android:layout_marginTop="116dp"
+                android:src="@drawable/img_search_init"
                 app:layout_constraintDimensionRatio="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -140,11 +150,11 @@
                 android:id="@+id/tv_search_init_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/search_init_description"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.Title2"
-                android:textColor="@color/gray_400"
+                android:textColor="@color/gray_300"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_search_init" />
@@ -158,17 +168,15 @@
             android:layout_height="0dp"
             android:layout_marginTop="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_search_recent_search"
-            tools:visibility="gone">
+            app:layout_constraintTop_toBottomOf="@id/tv_search_recent_search">
 
             <!--     image 수정       -->
             <ImageView
                 android:id="@+id/iv_search_empty"
-                android:layout_width="100dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="106dp"
-                android:src="@drawable/ic_launcher_background"
-                app:layout_constraintDimensionRatio="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:src="@drawable/img_search_empty"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -177,11 +185,11 @@
                 android:id="@+id/tv_search_empty_description1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/search_empty_description1"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.Title2"
-                android:textColor="@color/gray_400"
+                android:textColor="@color/gray_300"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_search_empty" />
@@ -205,6 +213,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
+            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_line_top"

@@ -127,6 +127,6 @@ class SearchViewModel : ViewModel() {
 
     val inputSearch = MutableStateFlow("")
 
-    private var _searchCount = MutableStateFlow<Int?>(8)
+    private var _searchCount = MutableStateFlow<Int?>(6)
     val searchCount get() = _searchCount.asStateFlow()
 }
