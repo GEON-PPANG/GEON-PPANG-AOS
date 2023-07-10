@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="40dp"
-            android:background="@drawable/background_et_input_email"
+            android:background="@{!viewModel.nickname.empty &amp; !viewModel.isValidNickname()? @drawable/background_need_change_status : @drawable/background_normal_status }"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,14 +80,13 @@
 
             <TextView
                 android:id="@+id/tv_email_text"
-                visibility="@{}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/tv_nickname"
                 android:textAppearance="@style/TextAppearance.Subhead"
-                android:textColor="#878784" /><!--visibility viewModel 만든 후 구현 예정-->
+                android:textColor="#878784" />
 
 
             <EditText
@@ -99,6 +98,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@null"
                 android:hint="@string/nickname_hint"
+                android:text="@={viewModel.nickname}"
                 android:inputType="text"
                 android:paddingVertical="5dp"
                 android:textAppearance="@style/TextAppearance.Subhead"
@@ -108,7 +108,7 @@
 
         <TextView
             android:id="@+id/tv_email_error_msg"
-            visibility="@{}"
+            visibility="@{!viewModel.nickname.empty &amp; !viewModel.isValidNickname()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -124,13 +124,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="36dp"
-            android:background="@drawable/background_btn_double_check"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/background_btn_double_check_enable"
+            android:enabled="@{viewModel.isValidNickname()}"
             android:paddingVertical="18dp"
             android:text="@string/double_check"
             android:textAppearance="@style/TextAppearance.BodyB1"
-            android:textColor="#878784"
+            android:textColor="@drawable/btn_double_check_txt_color"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.52"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linear_email" />
 
@@ -142,9 +144,10 @@
             android:layout_marginBottom="48dp"
             android:background="@drawable/background_btn_next"
             android:paddingVertical="18dp"
+            android:enabled="@{viewModel.completeNickname}"
             android:text="@string/txt_next_btn"
             android:textAppearance="@style/TextAppearance.BodyM1"
-            android:textColor="#878784"
+            android:textColor="@drawable/btn_next_txt_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
