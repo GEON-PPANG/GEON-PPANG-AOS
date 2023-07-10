@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="34dp"
             android:background="@null"
             android:padding="12dp"
             android:src="@drawable/ic_arrow_left"
@@ -45,7 +45,7 @@
             android:id="@+id/tv_sign_up_page_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="34dp"
             android:layout_marginRight="24dp"
             android:padding="12dp"
             android:textAlignment="textEnd"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="40dp"
-            android:background="@{!viewModel.email.empty &amp; !viewModel.isValidEmail()? @drawable/background_need_change_status : @drawable/background_normal_status }"
+            android:background="@{!viewModel.email.empty &amp; !viewModel.isValidEmail()? @drawable/background_need_change_status : @drawable/background_normal_status   }"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +86,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/tv_email"
                 android:textAppearance="@style/TextAppearance.Subhead"
-                android:textColor="#878784" />
+                android:textColor="@{!viewModel.email.empty &amp; !viewModel.isValidEmail() ? @color/error : @color/gray_400}" />
 
 
             <EditText
