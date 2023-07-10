@@ -91,6 +91,7 @@
             app:layout_constraintWidth="0dp">
 
             <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
                 visibility="@{bakery.breadType.isGlutenFree}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,6 +99,7 @@
                 android:text="글루텐프리" />
 
             <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
                 visibility="@{bakery.breadType.isVegan}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -105,6 +107,7 @@
                 android:text="비건빵" />
 
             <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
                 visibility="@{bakery.breadType.isNutFree}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -112,6 +115,7 @@
                 android:text="넛프리" />
 
             <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
                 visibility="@{bakery.breadType.isSugarFree}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
