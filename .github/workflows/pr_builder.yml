@@ -48,7 +48,8 @@ jobs:
         if: ${{ success() }}
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_COLOR: '#73E5B5'
+          SLACK_COLOR: '#F0683E'
+          SLACK_ICON: https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/77060011/55372c86-acf3-4847-9457-c83b87e571c4
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_TITLE: '🥐 GEON-PPANG/AOS PR Check S.U.C.C.E.S.S 🥐'
           MSG_MINIMAL: true
@@ -58,7 +59,8 @@ jobs:
         if: ${{ failure() }}
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_COLOR: '#FF774B'
+          SLACK_COLOR: '#238448'
+          SLACK_ICON: https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/77060011/55372c86-acf3-4847-9457-c83b87e571c4
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_TITLE: 'GEON-PPANG/AOS Debug build Fail❌'
           MSG_MINIMAL: true
