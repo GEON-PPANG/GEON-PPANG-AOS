@@ -10,6 +10,5 @@ class StartGeonPpangActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 }
