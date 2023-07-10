@@ -1,7 +1,0 @@
-<resources>
-    <!--  Spacing  -->
-
-
-    <!-- Widget Size -->
-    <dimen name="button_height">56dp</dimen>
-</resources>
