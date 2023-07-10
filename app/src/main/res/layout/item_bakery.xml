@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="bakery"
+            type="com.sopt.geonppang.domain.model.Bakery" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="22dp">
+
+
+        <ImageView
+            android:id="@+id/iv_bakery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_border_radius_5"
+            android:src="@{context.getDrawable(bakery.bakeryPicture)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/bbang1" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            app:layout_constraintEnd_toEndOf="@id/iv_bakery"
+            app:layout_constraintStart_toStartOf="@id/iv_bakery"
+            app:layout_constraintTop_toTopOf="@id/iv_bakery">
+
+            <ImageView
+                android:id="@+id/iv_haccp_mark"
+                visibility="@{bakery.isHACCP}"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="-8dp"
+                android:src="@drawable/ic_haccp_mark" />
+
+            <ImageView
+                android:id="@+id/iv_vegan_mark"
+                visibility="@{bakery.isVegan}"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="-8dp"
+                android:src="@drawable/ic_vegan_mark" />
+
+            <ImageView
+                android:id="@+id/iv_gmo_mark"
+                visibility="@{bakery.isNonGMO}"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_gmo_mark" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_bakery"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="39dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{bakery.bakeryName}"
+            android:textAppearance="@style/TextAppearance.Title2"
+            android:textColor="@color/gray_700"
+            app:layout_constraintEnd_toStartOf="@+id/linear_bookmark"
+            app:layout_constraintStart_toEndOf="@+id/iv_bakery"
+            app:layout_constraintTop_toTopOf="@+id/iv_bakery"
+            tools:text="건대 초코빵" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_bakery_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="39dp"
+            app:chipSpacingHorizontal="4dp"
+            app:chipSpacingVertical="5dp"
+            app:layout_constraintEnd_toStartOf="@+id/linear_bookmark"
+            app:layout_constraintStart_toStartOf="@id/tv_bakery"
+            app:layout_constraintTop_toBottomOf="@id/tv_bakery"
+            app:layout_constraintWidth="0dp">
+
+            <com.google.android.material.chip.Chip
+                visibility="@{bakery.breadType.isGlutenFree}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:text="글루텐프리" />
+
+            <com.google.android.material.chip.Chip
+                visibility="@{bakery.breadType.isVegan}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:text="비건빵" />
+
+            <com.google.android.material.chip.Chip
+                visibility="@{bakery.breadType.isNutFree}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:text="넛프리" />
+
+            <com.google.android.material.chip.Chip
+                visibility="@{bakery.breadType.isSugarFree}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:text="저당,무설탕" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_station_1"
+            style="@style/Style.Material3.Chip.Station.Category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/main_3"
+            android:text="@{bakery.firstNearStation}"
+            app:layout_constraintStart_toStartOf="@+id/tv_bakery"
+            app:layout_constraintTop_toBottomOf="@id/cg_bakery_category"
+            tools:text="건대역" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_station_2"
+            style="@style/Style.Material3.Chip.Station.Category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:backgroundTint="@color/main_3"
+            android:text="@{bakery.secondNearStation}"
+            app:layout_constraintStart_toEndOf="@+id/chip_station_1"
+            app:layout_constraintTop_toTopOf="@+id/chip_station_1"
+            tools:text="건대역" />
+
+        <LinearLayout
+            android:id="@+id/linear_bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/chip_station_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_bakery">
+
+            <ImageView
+                android:id="@+id/iv_bookmark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@{bakery.isBooked == true? @drawable/ic_bookmark_selected:@drawable/ic_bookmark_unselected}"
+                tools:src="@drawable/ic_bookmark_unselected" />
+
+            <TextView
+                android:id="@+id/tv_bookmark_count"
+                visibility="@{bakery.bookmarkCount != 0}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp"
+                android:text="@{@string/bookmark_count(bakery.bookmarkCount)}"
+                android:textAppearance="@style/TextAppearance.BodyB2"
+                android:textColor="@{bakery.isBooked == true ? @color/point_1 : @color/gray_300}"
+                tools:text="5명" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
