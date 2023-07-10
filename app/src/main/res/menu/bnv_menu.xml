@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_home"
+        android:enabled="true"
+        android:icon="@drawable/selector_menu_home_icon"
+        android:title="홈" />
+    <item
+        android:id="@+id/menu_sotrelist"
+        android:enabled="true"
+        android:icon="@drawable/selector_menu_storelist_icon"
+        android:title="빵집리스트" />
+    <item
+        android:id="@+id/menu_mypage"
+        android:enabled="true"
+        android:icon="@drawable/selector_menu_mypage_icon"
+        android:title="마이페이지" />
+</menu>

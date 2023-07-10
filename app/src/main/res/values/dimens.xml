@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--  Spacing  -->
+    <dimen name="spacing4">4dp</dimen>
+    <dimen name="spacing10">10dp</dimen>
+    <dimen name="spacing12">12dp</dimen>
+    <dimen name="spacing14">14dp</dimen>
+    <dimen name="spacing16">16dp</dimen>
+    <dimen name="spacing17">17dp</dimen>
     <dimen name="spacing24">24dp</dimen>
+
+    <!-- Widget Size -->
+    <dimen name="button_height">56dp</dimen>
 </resources>
