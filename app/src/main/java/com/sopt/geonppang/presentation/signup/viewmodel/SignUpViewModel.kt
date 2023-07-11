@@ -69,23 +69,10 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         return isValidNickname.value == true
     }
 
-
     companion object {
         const val EMAIL_PATTERN = "^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+\$"
         const val NICKNAME_PATTERN = "[가-힣]*[A-Za-z[0-9]]{2,10}\$"
         const val PASSWORD_PATTERN =
             "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&.])[A-Za-z[0-9]\$@\$!%*#?&.]{6,12}\$"
-
     }
-
-
-    /*fun uploadDummy() {
-        viewModelScope.launch {
-            dummyRepository.uploadDummy("name", "dummy")
-                .onSuccess {
-                }
-                .onFailure {
-                }
-        }
-    }*/
 }
