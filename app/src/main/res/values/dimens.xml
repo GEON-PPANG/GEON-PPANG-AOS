@@ -10,4 +10,9 @@
 
     <!-- Widget Size -->
     <dimen name="button_height">56dp</dimen>
+
+    <dimen name="custom_top_start_radius">10dp</dimen>
+    <dimen name="custom_top_end_radius">10dp</dimen>
+    <dimen name="custom_bottom_start_radius">10dp</dimen>
+    <dimen name="custom_bottom_end_radius">10dp</dimen>
 </resources>

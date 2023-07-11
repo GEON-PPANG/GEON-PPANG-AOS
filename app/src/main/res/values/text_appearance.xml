@@ -76,4 +76,16 @@
         <item name="android:fontFamily">@font/pretendard_m</item>
         <item name="android:lineHeight">17dp</item>
     </style>
+
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintAnimationEnabled">false</item>
+        <item name="android:textColorHint">@color/gray_300</item>
+        <item name="boxStrokeColor">@null</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <!--        <item name="boxStrokeWidthFocused">0dp</item>-->
+        <item name="boxCornerRadiusTopStart">@dimen/custom_top_start_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/custom_top_end_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/custom_bottom_start_radius</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/custom_bottom_end_radius</item>
+    </style>
 </resources>
