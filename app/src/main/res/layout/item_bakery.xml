@@ -13,9 +13,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="24dp"
-        android:paddingVertical="22dp">
+        android:paddingTop="22dp">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="24dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="24dp" />
 
         <ImageView
             android:id="@+id/iv_bakery"
@@ -23,7 +35,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_border_radius_5"
             android:src="@{context.getDrawable(bakery.bakeryPicture)}"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/bbang1" />
 
@@ -66,7 +78,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginEnd="39dp"
+            android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{bakery.bakeryName}"
@@ -153,7 +165,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/chip_station_2"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintTop_toTopOf="@+id/tv_bakery">
 
             <ImageView
@@ -175,5 +187,13 @@
                 android:textColor="@{bakery.isBooked == true ? @color/point_1 : @color/gray_300}"
                 tools:text="5명" />
         </LinearLayout>
+
+        <View
+            android:id="@+id/view_line_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="22dp"
+            android:background="@color/gray_200"
+            app:layout_constraintTop_toBottomOf="@id/chip_station_1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
