@@ -84,7 +84,7 @@
         <item name="chipCornerRadius">20dp</item>
         <item name="textStartPadding">8dp</item>
         <item name="textEndPadding">8dp</item>
-        <item name="android:paddingVertical">7dp</item>
+        <item name="android:paddingVertical">6dp</item>
         <item name="android:textAppearance">@style/TextAppearance.CaptionM1</item>
         <item name="android:textColor">@color/gray_100</item>
     </style>
