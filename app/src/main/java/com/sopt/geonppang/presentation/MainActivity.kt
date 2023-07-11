@@ -17,8 +17,8 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     }
 
     private fun initView() {
-//        supportFragmentManager.findFragmentById(R.id.fcv_home_container)
-//            ?: navigateTo<HomeFragment>()
+        supportFragmentManager.findFragmentById(R.id.fcv_home_container)
+            ?: navigateTo<MyPageFragment>()
 
         binding.bnvHome.setOnItemSelectedListener { menu ->
             when (menu.itemId) {
