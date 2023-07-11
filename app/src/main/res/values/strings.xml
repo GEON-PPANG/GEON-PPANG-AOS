@@ -12,4 +12,13 @@
     <string name="search_empty_description2">다른 키워드로 검색해보세요!</string>
 
     <string name="bookmark_count">%s명</string>
+
+    <!--  bakery list view  -->
+    <string name="bakery_list_sort">정렬</string>
+    <string name="bakery_list_sort_type_default">기본순</string>
+    <string name="bakery_list_sort_type_review">리뷰 많은 순</string>
+    <string name="bakery_list_title">건빵집 리스트</string>
+    <string name="bakery_bread_type_hard">하드빵류</string>
+    <string name="bakery_bread_type_dessert">디저트류</string>
+    <string name="bakery_bread_type_branch">브런치류</string>
 </resources>
