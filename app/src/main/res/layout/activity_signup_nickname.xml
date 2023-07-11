@@ -48,12 +48,12 @@
             android:layout_marginTop="34dp"
             android:layout_marginRight="24dp"
             android:padding="12dp"
+            android:text="3/6"
             android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.Subhead"
             android:textColor="#CBC8C5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="1/6" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_input_email_phrase"
@@ -98,9 +98,9 @@
                 android:layout_marginBottom="16dp"
                 android:background="@null"
                 android:hint="@string/nickname_hint"
-                android:text="@={viewModel.nickname}"
                 android:inputType="text"
                 android:paddingVertical="5dp"
+                android:text="@={viewModel.nickname}"
                 android:textAppearance="@style/TextAppearance.Subhead"
                 android:textColorHint="@color/gray_300" />
 
@@ -143,8 +143,8 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginBottom="48dp"
             android:background="@drawable/background_btn_next"
-            android:paddingVertical="18dp"
             android:enabled="@{viewModel.completeNickname}"
+            android:paddingVertical="18dp"
             android:text="@string/txt_next_btn"
             android:textAppearance="@style/TextAppearance.BodyM1"
             android:textColor="@drawable/btn_next_txt_color"
