@@ -1,4 +1,4 @@
-package com.sopt.geonppang.util
+package com.sopt.geonppang.util.binding
 
 import android.view.View
 import android.widget.ImageView
@@ -12,7 +12,7 @@ fun ImageView.setImage(imageUrl: String) {
 }
 
 @BindingAdapter("visibility")
-fun View.setVisibility(isVisible: Boolean?){
-    if(isVisible == null) return
+fun View.setVisibility(isVisible: Boolean?) {
+    if (isVisible == null) return
     this.isVisible = isVisible
 }

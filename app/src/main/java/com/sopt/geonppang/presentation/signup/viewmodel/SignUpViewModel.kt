@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import dagger.hilt.android.lifecycle.HiltViewModel
-import okhttp3.internal.notify
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,11 +30,9 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     val isValidPasswordCheck: LiveData<Boolean> = password_check.map { password_check ->
         password_check.matches(Regex(PASSWORD_PATTERN))
     }
-
     val doubleCheckEmail = MediatorLiveData<Boolean>().apply {
         //Todo 중복 확인 구현 예정
     }
-
     val doubleCheckNickname = MediatorLiveData<Boolean>().apply {
         //Todo 닉네임 중복 확인 구현 예정
     }
@@ -62,12 +59,12 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
                 && !password_check.value.isNullOrBlank()
     }
 
-    /*이메일 조건*/
+    //TODO 이메일 조건
     private fun checkEmailCondition(): Boolean {
         return isValidEmail.value == true
     }
 
-    /*닉네임 조건ㅁㄴ*/
+    //TODO 닉네임 조건
     private fun checkNicknameCondition(): Boolean {
         return isValidNickname.value == true
     }
