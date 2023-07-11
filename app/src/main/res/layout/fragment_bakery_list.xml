@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModle"
+            type="com.sopt.geonppang.presentation.bakeryList.BakeryListViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing24" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing24" />
+
+        <TextView
+            android:id="@+id/tv_bakery_list_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="43dp"
+            android:text="@string/bakery_list_title"
+            android:textAppearance="@style/TextAppearance.Title1"
+            android:textColor="@color/gray_700"
+            app:layout_constraintStart_toEndOf="@id/gl_start"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_bakery_list_title"
+            app:layout_constraintStart_toEndOf="@+id/tv_bakery_list_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_bakery_list_title" />
+
+
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing10"
+            android:padding="@dimen/spacing12"
+            android:src="@drawable/ic_search"
+            app:layout_constraintBottom_toBottomOf="@id/tv_bakery_list_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_bakery_list_title" />
+
+        <View
+            android:id="@+id/view_line_top"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/spacing17"
+            android:background="@color/gray_200"
+            app:layout_constraintTop_toBottomOf="@id/tv_bakery_list_title" />
+
+        <!--    구현 고민 필요    -->
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_bread_list_filter"
+            style="@style/Widget.Material3.Chip.Style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="@{viewModle.bakerySort.sortType}"
+            android:textAppearance="@style/TextAppearance.CaptionB1"
+            app:chipBackgroundColor="@color/white"
+            app:chipIcon="@drawable/ic_swap"
+            app:chipIconSize="@dimen/spacing16"
+            app:chipStrokeColor="@color/gray_200"
+            app:chipStrokeWidth="1dp"
+            app:iconStartPadding="8dp"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/view_line_top"
+            app:textEndPadding="12dp" />
+
+        <View
+            android:id="@+id/view_vertical_line"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/spacing12"
+            android:background="@color/gray_200"
+            app:layout_constraintBottom_toBottomOf="@+id/chip_bread_list_filter"
+            app:layout_constraintStart_toEndOf="@id/chip_bread_list_filter"
+            app:layout_constraintTop_toTopOf="@+id/chip_bread_list_filter" />
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing10"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="@+id/chip_bread_list_filter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/view_vertical_line"
+            app:layout_constraintTop_toTopOf="@+id/chip_bread_list_filter"
+            app:layout_constraintVertical_bias="0.0">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_bread_filter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:chipSpacing="10dp"
+                app:singleLine="true"
+                app:singleSelection="false">
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Style.Material3.Chip.BreadFilter.Category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bakery_bread_type_hard"
+                    android:textAppearance="@style/TextAppearance.CaptionM1"
+                    app:chipIcon="@drawable/ic_hard_bread" />
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Style.Material3.Chip.BreadFilter.Category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bakery_bread_type_dessert"
+                    android:textAppearance="@style/TextAppearance.CaptionM1"
+                    app:chipIcon="@drawable/ic_dessert" />
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Style.Material3.Chip.BreadFilter.Category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bakery_bread_type_branch"
+                    android:textAppearance="@style/TextAppearance.CaptionM1"
+                    app:chipIcon="@drawable/ic_sandwich" />
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <View
+            android:id="@+id/view_line_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="18dp"
+            android:background="@color/gray_200"
+            app:layout_constraintTop_toBottomOf="@+id/chip_bread_list_filter" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_bakery_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:paddingTop="2dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line_bottom"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_bakery" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
