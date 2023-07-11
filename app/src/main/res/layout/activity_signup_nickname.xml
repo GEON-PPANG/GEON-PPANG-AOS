@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.sopt.geonppang.presentation.dummy.DummyViewModel" />
+            type="com.sopt.geonppang.presentation.signup.viewmodel.SignUpViewModel" />
 
     </data>
 
@@ -125,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="40dp"
-            android:background="@drawable/background_btn_double_check_enable"
+            android:background="@drawable/background_btn_double_check_status"
             android:enabled="@{viewModel.isValidNickname()}"
             android:paddingVertical="18dp"
             android:text="@string/double_check"

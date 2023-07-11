@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.sopt.geonppang.presentation.dummy.DummyViewModel" />
+            type="com.sopt.geonppang.presentation.signup.viewmodel.SignUpViewModel" />
 
     </data>
 
