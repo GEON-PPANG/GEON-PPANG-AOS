@@ -31,10 +31,10 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         password_check.matches(Regex(PASSWORD_PATTERN))
     }
     val doubleCheckEmail = MediatorLiveData<Boolean>().apply {
-        //Todo 중복 확인 구현 예정
+        // Todo 중복 확인 구현 예정
     }
     val doubleCheckNickname = MediatorLiveData<Boolean>().apply {
-        //Todo 닉네임 중복 확인 구현 예정
+        // Todo 닉네임 중복 확인 구현 예정
     }
 
     /*다음 버튼 활성화*/
@@ -54,17 +54,15 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun isPasswordSame(): Boolean {
-        return password.value.toString() == password_check.value.toString()
-                && !password.value.isNullOrBlank()
-                && !password_check.value.isNullOrBlank()
+        return password.value.toString() == password_check.value.toString() && !password.value.isNullOrBlank() && !password_check.value.isNullOrBlank()
     }
 
-    //TODO 이메일 조건
+    // TODO 이메일 조건
     private fun checkEmailCondition(): Boolean {
         return isValidEmail.value == true
     }
 
-    //TODO 닉네임 조건
+    // TODO 닉네임 조건
     private fun checkNicknameCondition(): Boolean {
         return isValidNickname.value == true
     }
