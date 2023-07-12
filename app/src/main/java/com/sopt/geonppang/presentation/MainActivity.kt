@@ -6,6 +6,8 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityMainBinding
+import com.sopt.geonppang.presentation.home.HomeFragment
+import com.sopt.geonppang.presentation.mypage.MyPageFragment
 import com.sopt.geonppang.util.binding.BindingActivity
 
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
