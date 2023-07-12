@@ -29,8 +29,7 @@
     <style name="Widget.FullButton.Basic" parent="Widget.Material.Button.Basic">
         <item name="android:layout_height">@dimen/button_height</item>
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_marginHorizontal">24dp</item>
-        <item name="cornerRadius">11dp</item>
+        <item name="cornerRadius">12dp</item>
     </style>
 
     <style name="Style.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
@@ -64,9 +63,6 @@
     </style>
 
     <style name="Widget.Material3.Chip.Style.Radius3" parent="Widget.Material3.Chip.Style">
-        <item name="chipMinTouchTargetSize">0dp</item>
-        <item name="chipEndPadding">0dp</item>
-        <item name="chipStartPadding">0dp</item>
         <item name="android:checked">false</item>
         <item name="android:clickable">false</item>
         <item name="chipCornerRadius">3dp</item>
@@ -87,8 +83,19 @@
         <item name="chipCornerRadius">20dp</item>
         <item name="textStartPadding">8dp</item>
         <item name="textEndPadding">8dp</item>
-        <item name="android:paddingVertical">7dp</item>
+        <item name="android:paddingVertical">6dp</item>
         <item name="android:textAppearance">@style/TextAppearance.CaptionM1</item>
         <item name="android:textColor">@color/gray_100</item>
+    </style>
+
+    <style name="Style.Material3.Chip.Purpose.Category" parent="Widget.Material3.Chip.Style">
+        <item name="chipCornerRadius">14dp</item>
+        <item name="android:paddingVertical">4dp</item>
+        <item name="textStartPadding">10dp</item>
+        <item name="textEndPadding">10dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.CaptionM1</item>
+        <item name="android:textColor">@color/point_1</item>
+        <item name="chipStrokeColor">@color/point_1</item>
+        <item name="chipStrokeWidth">0.5dp</item>
     </style>
 </resources>

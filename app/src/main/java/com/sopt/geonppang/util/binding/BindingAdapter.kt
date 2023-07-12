@@ -1,8 +1,6 @@
 package com.sopt.geonppang.util
 
-import android.view.View
 import android.widget.ImageView
-import androidx.core.view.isGone
 import androidx.databinding.BindingAdapter
 import coil.load
 
@@ -14,5 +12,5 @@ fun ImageView.setImage(imageUrl: String) {
 @BindingAdapter("visibility")
 fun View.setVisibility(isVisible: Boolean?) {
     if (isVisible == null) return
-    this.isGone = isVisible
+    this.visibility = if (isVisible) View.VISIBLE else View.GONE
 }
