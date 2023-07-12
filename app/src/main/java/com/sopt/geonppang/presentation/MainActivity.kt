@@ -17,17 +17,15 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     }
 
     private fun initView() {
-        supportFragmentManager.findFragmentById(R.id.fcv_home_container)
-            ?: navigateTo<MyPageFragment>()
+        //supportFragmentManager.findFragmentById(R.id.fcv_home_container)
+        //    ?: navigateTo<HomeFragment>()
 
         binding.bnvHome.setOnItemSelectedListener { menu ->
             when (menu.itemId) {
                 // TODO 해당하는 Fragment 연결
                 R.id.menu_home -> {}
                 R.id.menu_sotrelist -> {}
-                R.id.menu_mypage -> {
-                    navigateTo<MyPageFragment>()
-                }
+                R.id.menu_mypage -> navigateTo<MyPageFragment>()
             }
             true
         }
