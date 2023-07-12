@@ -99,4 +99,15 @@
         <item name="chipStrokeColor">@color/point_1</item>
         <item name="chipStrokeWidth">0.5dp</item>
     </style>
+
+    <style name="Style.Material3.Chip.Review.Category" parent="Widget.Material3.Chip.Style">
+        <item name="android:paddingVertical">8dp</item>
+        <item name="chipCornerRadius">20dp</item>
+        <item name="textStartPadding">16dp</item>
+        <item name="textEndPadding">16dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.CaptionB1</item>
+        <item name="android:textColor">@color/gray_300</item>
+        <item name="chipStrokeColor">@color/gray_300</item>
+        <item name="chipStrokeWidth">1.5dp</item>
+    </style>
 </resources>
