@@ -10,4 +10,7 @@ data class BestBakery(
     // TODO image type -> String 으로 수정
     val bakeryImage: Int,
     val reviewCount: Int,
+    val isHACCP: Boolean,
+    val isVegan: Boolean,
+    val isNonGMO: Boolean,
 )

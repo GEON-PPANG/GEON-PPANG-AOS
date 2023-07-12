@@ -16,6 +16,9 @@ class HomeViewModel : ViewModel() {
             bookmarkCount = 5,
             bakeryImage = R.drawable.bread1,
             reviewCount = 5,
+            isHACCP = true,
+            isVegan = true,
+            isNonGMO = true
         ),
         BestBakery(
             bakeryId = 2,
@@ -26,6 +29,9 @@ class HomeViewModel : ViewModel() {
             bookmarkCount = 0,
             bakeryImage = R.drawable.bread1,
             reviewCount = 5,
+            isHACCP = false,
+            isVegan = true,
+            isNonGMO = true
         ),
         BestBakery(
             bakeryId = 3,
@@ -36,6 +42,9 @@ class HomeViewModel : ViewModel() {
             bookmarkCount = 5,
             bakeryImage = R.drawable.bread1,
             reviewCount = 5,
+            isHACCP = false,
+            isVegan = false,
+            isNonGMO = true
         ),
         BestBakery(
             bakeryId = 4,
@@ -46,6 +55,9 @@ class HomeViewModel : ViewModel() {
             bookmarkCount = 5,
             bakeryImage = R.drawable.bread1,
             reviewCount = 5,
+            isHACCP = true,
+            isVegan = false,
+            isNonGMO = true
         ),
     )
 
