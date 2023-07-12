@@ -45,11 +45,45 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/bread1" />
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            app:layout_constraintEnd_toEndOf="@id/iv_best_bakery"
+            app:layout_constraintStart_toStartOf="@id/iv_best_bakery"
+            app:layout_constraintTop_toTopOf="@id/iv_best_bakery">
+
+            <ImageView
+                android:id="@+id/iv_haccp_mark"
+                visibility="@{bakery.isHACCP}"
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="-8dp"
+                android:src="@drawable/ic_haccp_mark" />
+
+            <ImageView
+                android:id="@+id/iv_vegan_mark"
+                visibility="@{bakery.isVegan}"
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="-8dp"
+                android:src="@drawable/ic_vegan_mark" />
+
+            <ImageView
+                android:id="@+id/iv_gmo_mark"
+                visibility="@{bakery.isNonGMO}"
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_gmo_mark" />
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/tv_best_bakery_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing16"
+            android:layout_marginTop="17dp"
             android:layout_marginEnd="@dimen/spacing12"
             android:ellipsize="end"
             android:maxLines="1"
@@ -63,10 +97,10 @@
 
         <TextView
             android:id="@+id/tv_best_bakery_review_count"
+            highlightNumbers="@{@string/home_review_count(bakery.reviewCount)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:text="@{@string/home_review_count(bakery.reviewCount)}"
+            android:layout_marginTop="3dp"
             android:textAppearance="@style/TextAppearance.CaptionB1"
             android:textColor="@color/gray_700"
             app:layout_constraintStart_toStartOf="@id/gl_start"
@@ -108,7 +142,7 @@
             style="@style/Style.Material3.Chip.Station.Category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="11dp"
             android:layout_marginBottom="14dp"
             android:backgroundTint="@color/main_3"
             android:text="@{bakery.firstNearStation}"

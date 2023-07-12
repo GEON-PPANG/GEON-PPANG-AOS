@@ -36,7 +36,7 @@
 
         <ImageView
             android:id="@+id/iv_best_review_image"
-            android:layout_width="wrap_content"
+            android:layout_width="204dp"
             android:layout_height="164dp"
             android:foreground="@drawable/foreground_shadow"
             android:scaleType="centerCrop"
@@ -114,11 +114,11 @@
 
         <TextView
             android:id="@+id/tv_best_review_count"
+            highlightNumbers="@{@string/home_review_count(review.reviewCount)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="18dp"
-            android:text="@{@string/home_review_count(review.reviewCount)}"
             android:textAppearance="@style/TextAppearance.CaptionB1"
             android:textColor="@color/gray_700"
             app:layout_constraintBottom_toBottomOf="parent"
