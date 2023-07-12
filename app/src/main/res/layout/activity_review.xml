@@ -6,28 +6,14 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.sopt.geonppang.presentation.dummy.DummyViewModel" />
+            name="viewmodel"
+            type="com.sopt.geonppang.presentation.review.viewmodel.ReviewViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gl_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="@dimen/spacing24" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gl_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="@dimen/spacing24" />
 
         <ImageButton
             android:id="@+id/img_back_arrow"
@@ -47,10 +33,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="44dp"
-            android:text="건대 초코빵"
             android:textAppearance="@style/TextAppearance.Title2"
             app:layout_constraintLeft_toRightOf="@+id/img_back_arrow"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="건대초코빵" />
 
         <View
             android:id="@+id/line1"
@@ -59,5 +45,311 @@
             android:layout_marginTop="@dimen/spacing20"
             android:background="@color/gray_200"
             app:layout_constraintTop_toBottomOf="@id/tv_store_name" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/spacing24" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/spacing24" />
+
+                <ImageView
+                    android:id="@+id/iv_bakery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/shape_border_radius_5"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/bbang1" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="6dp"
+                    app:layout_constraintEnd_toEndOf="@id/iv_bakery"
+                    app:layout_constraintStart_toStartOf="@id/iv_bakery"
+                    app:layout_constraintTop_toTopOf="@id/iv_bakery">
+
+                    <ImageView
+                        android:id="@+id/iv_haccp_mark"
+                        visibility=""
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="-8dp"
+                        android:src="@drawable/ic_haccp_mark" />
+
+                    <ImageView
+                        android:id="@+id/iv_vegan_mark"
+                        visibility=""
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="-8dp"
+                        android:src="@drawable/ic_vegan_mark" />
+
+                    <ImageView
+                        android:id="@+id/iv_gmo_mark"
+                        visibility=""
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_gmo_mark" />
+
+                </LinearLayout>
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/cg_bakery_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="62dp"
+                    app:chipSpacingHorizontal="4dp"
+                    app:chipSpacingVertical="5dp"
+                    app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintStart_toEndOf="@+id/iv_bakery"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth="0dp">
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="글루텐프리" />
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="비건빵" />
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="넛프리" />
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="저당,무설탕" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_station_1"
+                    style="@style/Style.Material3.Chip.Station.Category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/main_3"
+                    app:layout_constraintStart_toEndOf="@id/iv_bakery"
+                    app:layout_constraintTop_toBottomOf="@id/cg_bakery_category"
+                    tools:text="건대역" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_station_2"
+                    style="@style/Style.Material3.Chip.Station.Category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:backgroundTint="@color/main_3"
+                    app:layout_constraintStart_toEndOf="@id/chip_station_1"
+                    app:layout_constraintTop_toTopOf="@id/chip_station_1"
+                    tools:text="건대역" />
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/gray_200"
+                    app:layout_constraintTop_toBottomOf="@id/chip_station_1" />
+
+                <!--분기처리 필요 1. 선택 전, 2. 선택 활성화, 3. 선택 후-->
+                <TextView
+                    android:id="@+id/tv_how_was_the_store"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    android:text="@string/how_was_the_store"
+                    android:textAppearance="@style/TextAppearance.BodyB1"
+                    android:textColor="@color/gray_300"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/line2" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_like"
+                    style="@style/Style.Material3.Chip.Review.Category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/white"
+                    android:text="@string/chip_like"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_how_was_the_store" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_soso"
+                    style="@style/Style.Material3.Chip.Review.Category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/white"
+                    android:text="@string/chip_soso"
+                    app:layout_constraintStart_toEndOf="@id/chip_like"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_how_was_the_store" />
+
+                <TextView
+                    android:id="@+id/tv_what_do_you_recommend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/what_do_you_recommend"
+                    android:textAppearance="@style/TextAppearance.BodyB1"
+                    android:textColor="@color/gray_300"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/chip_like" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/cg_review_recommend_chip_select"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="61dp"
+                    app:chipSpacingHorizontal="8dp"
+                    app:chipSpacingVertical="12dp"
+                    app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/tv_what_do_you_recommend"
+                    app:layout_constraintWidth="0dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_tasty"
+                        style="@style/Style.Material3.Chip.Review.Category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="@string/chip_tasty" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_kind"
+                        style="@style/Style.Material3.Chip.Review.Category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="@string/chip_kind" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_special_menu"
+                        style="@style/Style.Material3.Chip.Review.Category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="@string/chip_special_menu" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_zero_waste"
+                        style="@style/Style.Material3.Chip.Review.Category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="제로 웨이스트" />
+                </com.google.android.material.chip.ChipGroup>
+
+                <EditText
+                    android:id="@+id/et_write_your_review"
+                    android:layout_width="0dp"
+                    android:layout_height="196dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/background_review_edit_text"
+                    android:gravity="top"
+                    android:hint="자유롭게 의견을 말씀해주세요!"
+                    android:paddingLeft="24dp"
+                    android:paddingTop="20dp"
+                    android:textColorHint="@color/gray_300"
+                    app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/cg_review_recommend_chip_select" />
+
+                <TextView
+                    android:id="@+id/tv_review_text_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="0/500 (최소 10 자)"
+                    android:textAppearance="@style/TextAppearance.CaptionM1"
+                    android:textColor="@color/gray_500"
+                    app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintTop_toBottomOf="@id/et_write_your_review" />
+
+                <TextView
+                    android:id="@+id/tv_review_caption"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="@color/gray_100"
+                    android:paddingHorizontal="@dimen/spacing24"
+                    android:paddingVertical="@dimen/spacing16"
+                    android:text="@string/review_caption"
+                    android:textAppearance="@style/TextAppearance.CaptionM2"
+                    android:textColor="@color/gray_300"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_review_text_count" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_review_bottom_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_review_edit_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="48dp"
+                android:background="@drawable/background_review_bottom_btn"
+                android:paddingHorizontal="128dp"
+                android:text="작성하기"
+                android:textAppearance="@style/TextAppearance.Headline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
