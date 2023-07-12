@@ -7,4 +7,11 @@
     <string name="filter_duplicate_selection">중복선택이 가능해요!</string>
     <string name="filter_ask_nutrient_type">어떤 성분을 원하시나요?</string>
     <string name="start_geon_ppang">시작하기</string>
+
+    <string name="main_purpose_type_health_title">건강 · 체질</string>
+    <string name="main_purpose_type_health_des">아토피 , 알레르기 , 암 , 당뇨 , 소화문제</string>
+    <string name="main_purpose_type_diet_title">맛 · 다이어트</string>
+    <string name="main_purpose_type_diet_des">그냥 맛있어서! 식이 관리를 위해</string>
+    <string name="main_purpose_type_vegan_title">비건 · 채식지향</string>
+    <string name="main_purpose_type_vegan_des">종교 , 환경 , 동물 , 노동권을 위한 비거니즘</string>
 </resources>
