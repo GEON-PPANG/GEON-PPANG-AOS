@@ -30,7 +30,7 @@
             app:layout_constraintGuide_end="@dimen/spacing24" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_my_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="43dp"
@@ -40,109 +40,96 @@
             app:layout_constraintStart_toStartOf="@+id/gl_start"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_my_page_profile"
-            android:layout_width="0dp"
+        <ImageView
+            android:id="@+id/iv_my_page_profile_img"
+            style="Style.CircleImageView.Half"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="39dp"
-            android:layout_marginEnd="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@+id/textView">
+            android:src="@drawable/ic_my_page_default_profile"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_my_page_title" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_my_page_profile_img"
-                style="Style.CircleImageView.Half"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_my_page_default_profile"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_my_page_profile_purpose"
+            style="@style/Style.Material3.Chip.Purpose.Category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:backgroundTint="@color/point_2"
+            android:text="@{viewModel.profile.mainPurpose}"
+            app:layout_constraintStart_toEndOf="@+id/iv_my_page_profile_img"
+            app:layout_constraintTop_toTopOf="@+id/iv_my_page_profile_img"
+            tools:text="맛 . 다이어트" />
+
+        <TextView
+            android:id="@+id/tv_my_page_profile_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{viewModel.profile.memberNickname}"
+            android:textAppearance="@style/TextAppearance.Title2"
+            android:textColor="@color/gray_600"
+            app:layout_constraintStart_toStartOf="@+id/chip_my_page_profile_purpose"
+            app:layout_constraintTop_toBottomOf="@+id/chip_my_page_profile_purpose"
+            tools:text="닉네임 입력" />
+
+        <ImageView
+            android:id="@+id/iv_my_page_profile_right_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:padding="12dp"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@+id/chip_group_my_page_profile_bread"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/chip_my_page_profile_purpose" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_my_page_profile_bread"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="26dp"
+            app:chipSpacing="4dp"
+            app:chipSpacingHorizontal="4dp"
+            app:layout_constraintEnd_toStartOf="@+id/iv_my_page_profile_right_arrow"
+            app:layout_constraintStart_toStartOf="@+id/tv_my_page_profile_nickname"
+            app:layout_constraintTop_toBottomOf="@+id/tv_my_page_profile_nickname">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_my_page_profile_purpose"
-                style="@style/Style.Material3.Chip.Purpose.Category"
+                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                visibility="@{viewModel.profile.breadType.isGlutenFree}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="17dp"
-                android:backgroundTint="@color/point_2"
-                android:text="@{viewModel.profile.mainPurpose}"
-                app:layout_constraintStart_toEndOf="@+id/iv_my_page_profile_img"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="맛 . 다이어트" />
+                android:backgroundTint="@android:color/transparent"
+                android:text="@string/my_page_gluten_free" />
 
-            <TextView
-                android:id="@+id/tv_my_page_profile_nickname"
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                visibility="@{viewModel.profile.breadType.isNutFree}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@{viewModel.profile.memberNickname}"
-                android:textAppearance="@style/TextAppearance.Title2"
-                android:textColor="@color/gray_600"
-                app:layout_constraintStart_toStartOf="@+id/chip_my_page_profile_purpose"
-                app:layout_constraintTop_toBottomOf="@+id/chip_my_page_profile_purpose"
-                tools:text="닉네임 입력" />
+                android:backgroundTint="@android:color/transparent"
+                android:text="@string/my_page_nut_free" />
 
-            <ImageView
-                android:id="@+id/iv_my_page_profile_right_arrow"
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                visibility="@{viewModel.profile.breadType.isVegan}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:src="@drawable/ic_arrow_right"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:backgroundTint="@android:color/transparent"
+                android:text="@string/my_page_vegan" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chip_group_my_page_profile_bread"
-                android:layout_width="0dp"
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                visibility="@{viewModel.profile.breadType.isSugarFree}"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="26dp"
-                app:chipSpacing="4dp"
-                app:chipSpacingHorizontal="4dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/iv_my_page_profile_right_arrow"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/tv_my_page_profile_nickname"
-                app:layout_constraintTop_toBottomOf="@+id/tv_my_page_profile_nickname"
-                app:layout_constraintVertical_bias="1.0">
+                android:backgroundTint="@android:color/transparent"
+                android:text="@string/my_page_low_suger" />
 
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
-                    visibility="@{viewModel.profile.breadType.isGlutenFree}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/transparent"
-                    android:text="@string/my_page_gluten_free" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
-                    visibility="@{viewModel.profile.breadType.isNutFree}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/transparent"
-                    android:text="@string/my_page_nut_free" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
-                    visibility="@{viewModel.profile.breadType.isVegan}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/transparent"
-                    android:text="@string/my_page_vegan" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
-                    visibility="@{viewModel.profile.breadType.isSugarFree}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/transparent"
-                    android:text="@string/my_page_low_suger" />
-
-            </com.google.android.material.chip.ChipGroup>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.chip.ChipGroup>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_my_page_buttons"
@@ -152,7 +139,7 @@
             android:background="@drawable/background_my_page_buttons"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@+id/layout_my_page_profile">
+            app:layout_constraintTop_toBottomOf="@+id/chip_group_my_page_profile_bread">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_my_page_bookmark"
