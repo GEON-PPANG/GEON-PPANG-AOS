@@ -64,127 +64,44 @@
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@id/iv_main_purpose_filter_arrow_left" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_main_purpose_health"
-            style="@style/Widget.FullButton.Basic"
+        <include
+            android:id="@+id/include_main_purpose_health"
+            layout="@layout/view_main_purpose_button"
             selected="@{viewModel.mainPurpose == mainPurpose.HEALTH}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:background="@drawable/selector_item_3_division_filter_button"
             android:onClick="@{() -> viewModel.setMainPurpose(mainPurpose.HEALTH)}"
-            android:paddingVertical="25dp"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@+id/tv_main_purpose_filter_title">
+            app:layout_constraintTop_toBottomOf="@+id/tv_main_purpose_filter_title"
+            app:mainPurposeType="@{mainPurpose.HEALTH}" />
 
-            <TextView
-                android:id="@+id/tv_main_purpose_health_title"
-                selected="@{viewModel.mainPurpose == mainPurpose.HEALTH}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{mainPurpose.HEALTH.titleRes}"
-                android:textAppearance="@style/TextAppearance.Title2"
-                android:textColor="@drawable/selector_item_filter_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="건강 · 체질" />
-
-            <TextView
-                selected="@{viewModel.mainPurpose == mainPurpose.HEALTH}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@{mainPurpose.HEALTH.desRes}"
-                android:textAppearance="@style/TextAppearance.BodyM1"
-                android:textColor="@drawable/selector_item_filter_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_main_purpose_health_title"
-                tools:text="아토피 , 알레르기 , 암 , 당뇨 , 소화문제" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_main_purpose_diet"
-            style="@style/Widget.FullButton.Basic"
+        <include
+            android:id="@+id/include_main_purpose_diet"
+            layout="@layout/view_main_purpose_button"
             selected="@{viewModel.mainPurpose == mainPurpose.DIET}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/selector_item_3_division_filter_button"
             android:onClick="@{() -> viewModel.setMainPurpose(mainPurpose.DIET)}"
-            android:paddingVertical="25dp"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@+id/layout_main_purpose_health">
+            app:layout_constraintTop_toBottomOf="@+id/include_main_purpose_health"
+            app:mainPurposeType="@{mainPurpose.DIET}" />
 
-            <TextView
-                android:id="@+id/tv_main_purpose_diet_title"
-                selected="@{viewModel.mainPurpose == mainPurpose.DIET}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{mainPurpose.DIET.titleRes}"
-                android:textAppearance="@style/TextAppearance.Title2"
-                android:textColor="@drawable/selector_item_filter_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="건강 · 체질" />
-
-            <TextView
-                selected="@{viewModel.mainPurpose == mainPurpose.DIET}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@{mainPurpose.DIET.desRes}"
-                android:textAppearance="@style/TextAppearance.BodyM1"
-                android:textColor="@drawable/selector_item_filter_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_main_purpose_diet_title"
-                tools:text="아토피 , 알레르기 , 암 , 당뇨 , 소화문제" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            style="@style/Widget.FullButton.Basic"
+        <include
+            android:id="@+id/include_main_purpose_vegan"
+            layout="@layout/view_main_purpose_button"
             selected="@{viewModel.mainPurpose == mainPurpose.VEGAN}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/selector_item_3_division_filter_button"
             android:onClick="@{() -> viewModel.setMainPurpose(mainPurpose.VEGAN)}"
-            android:paddingVertical="25dp"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@+id/layout_main_purpose_diet">
-
-            <TextView
-                android:id="@+id/tv_main_purpose_vegan_title"
-                selected="@{viewModel.mainPurpose == mainPurpose.VEGAN}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{mainPurpose.VEGAN.titleRes}"
-                android:textAppearance="@style/TextAppearance.Title2"
-                android:textColor="@drawable/selector_item_filter_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="건강 · 체질" />
-
-            <TextView
-                selected="@{viewModel.mainPurpose == mainPurpose.VEGAN}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@{mainPurpose.VEGAN.desRes}"
-                android:textAppearance="@style/TextAppearance.BodyM1"
-                android:textColor="@drawable/selector_item_filter_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_main_purpose_vegan_title"
-                tools:text="아토피 , 알레르기 , 암 , 당뇨 , 소화문제" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@+id/include_main_purpose_diet"
+            app:mainPurposeType="@{mainPurpose.VEGAN}" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_main_purpose_filter_next"
