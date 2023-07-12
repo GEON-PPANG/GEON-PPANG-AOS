@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">GeonPpang</string>
+
+    <!--    bread type    -->
+    <string name="gluten_free">글루텐프리</string>
+    <string name="nut_free">넛프리</string>
+    <string name="vegan">비건빵</string>
+    <string name="low_sugar">저당,무설탕</string>
+
+    <!--    detail    -->
+    <string name="detail_create_review">리뷰 작성하기</string>
+    <string name="detail_more_info">가게 상세정보</string>
+    <string name="detail_notice">홈페이지에 성분정보가 있어요!</string>
+    <string name="detail_menu">가게 메뉴</string>
+    <string name="detail_menu_notice">가게 상세정보 및 메뉴는 업체에서 제공된 정보를 기반으로 합니다. 건빵집 방문 시 한번 더 확인하시기를 추천드립니다.</string>
+    <string name="detail_review">건빵 리뷰</string>
 </resources>
