@@ -1,4 +1,4 @@
-package com.sopt.geonppang.util
+package com.sopt.geonppang.util.binding
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
