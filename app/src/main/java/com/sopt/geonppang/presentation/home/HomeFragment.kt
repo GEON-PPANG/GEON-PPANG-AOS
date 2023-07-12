@@ -21,11 +21,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private fun initLayout() {
         bestBakeryAdapter = BestBakeryAdapter()
-        binding.layoutHomeBestBakeryList.adapter = bestBakeryAdapter
+        binding.rvHomeBestBakeryList.adapter = bestBakeryAdapter
         bestBakeryAdapter.submitList(viewModel.mockBestBakeryList)
 
         bestReviewAdapter = BestReviewAdapter()
-        binding.layoutHomeBestReviewList.adapter = bestReviewAdapter
+        binding.rvHomeBestReviewList.adapter = bestReviewAdapter
         bestReviewAdapter.submitList(viewModel.mockBestReviewList)
     }
 }

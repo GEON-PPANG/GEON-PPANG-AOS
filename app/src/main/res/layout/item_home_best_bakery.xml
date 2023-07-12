@@ -112,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/home_second_near_station"
+            app:layout_constraintBottom_toBottomOf="@+id/chip_home_second_near_station"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintTop_toTopOf="@+id/tv_best_bakery_title">
 
@@ -138,7 +138,7 @@
         </LinearLayout>
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/home_first_near_station"
+            android:id="@+id/chip_home_first_near_station"
             style="@style/Style.Material3.Chip.Station.Category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -152,16 +152,16 @@
             tools:text="건대역" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/home_second_near_station"
+            android:id="@+id/chip_home_second_near_station"
             style="@style/Style.Material3.Chip.Station.Category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing4"
             android:backgroundTint="@color/main_3"
             android:text="@{bakery.secondNearStation == null ? `` : bakery.secondNearStation}"
-            app:layout_constraintBottom_toBottomOf="@+id/home_first_near_station"
-            app:layout_constraintStart_toEndOf="@id/home_first_near_station"
-            app:layout_constraintTop_toTopOf="@+id/home_first_near_station"
+            app:layout_constraintBottom_toBottomOf="@+id/chip_home_first_near_station"
+            app:layout_constraintStart_toEndOf="@id/chip_home_first_near_station"
+            app:layout_constraintTop_toTopOf="@+id/chip_home_first_near_station"
             tools:text="건대역" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
