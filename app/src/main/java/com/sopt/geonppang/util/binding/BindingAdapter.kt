@@ -43,4 +43,3 @@ fun TextView.highlightNumbers(text: CharSequence?) {
 
     this.text = spannableString
 }
-
