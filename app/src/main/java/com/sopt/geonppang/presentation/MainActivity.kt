@@ -6,6 +6,7 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityMainBinding
+import com.sopt.geonppang.presentation.mypage.MyPageFragment
 import com.sopt.geonppang.util.binding.BindingActivity
 
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -24,7 +25,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
                 // TODO 해당하는 Fragment 연결
                 R.id.menu_home -> {}
                 R.id.menu_sotrelist -> {}
-                R.id.menu_mypage -> {}
+                R.id.menu_mypage -> navigateTo<MyPageFragment>()
             }
             true
         }
