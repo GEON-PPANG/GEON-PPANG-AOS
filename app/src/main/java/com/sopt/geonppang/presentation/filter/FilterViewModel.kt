@@ -5,25 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sopt.geonppang.domain.model.Filter
 import com.sopt.geonppang.domain.model.NutrientFilter
+import com.sopt.geonppang.presentation.type.MainPurposeType
 import timber.log.Timber
 
 class FilterViewModel : ViewModel() {
-    private val _mainPurposeFilterList = listOf(
-        Filter(
-            title = "건강 · 체질",
-            detail = "아토피 , 알레르기 , 암 , 당뇨 , 소화문제"
-        ),
-        Filter(
-            title = "맛 · 다이어트",
-            detail = "그냥 맛있어서! 식이 관리를 위해"
-        ),
-        Filter(
-            title = "비건 · 채식지향",
-            detail = "종교 , 환경 , 동물 , 노동권을 위한 비거니즘"
-        )
-    )
-    val mainPurposeFilterList = _mainPurposeFilterList
-
     private val _breadTypeFilterList = listOf(
         Filter(
             title = "글루텐프리",
@@ -55,6 +40,15 @@ class FilterViewModel : ViewModel() {
             title = "비공개"
         )
     )
+
+    // 현재 선택한 mainPurpose를 가지고 있는 LiveeData
+    private val _mainPurpose: MutableLiveData<MainPurposeType?> = MutableLiveData()
+    val mainPurpose: LiveData<MainPurposeType?> = _mainPurpose
+
+    fun setMainPurpose(mainPurposeType: MainPurposeType) {
+        _mainPurpose.value = mainPurposeType
+    }
+
     val nutrientTypeFilterList = _nutrientTypeFilterList
 
     private val _mainPurposeFilterSelectedItemIndex: MutableLiveData<Int> = MutableLiveData()
