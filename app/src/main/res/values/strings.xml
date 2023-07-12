@@ -14,4 +14,11 @@
     <string name="detail_menu">가게 메뉴</string>
     <string name="detail_menu_notice">가게 상세정보 및 메뉴는 업체에서 제공된 정보를 기반으로 합니다. 건빵집 방문 시 한번 더 확인하시기를 추천드립니다.</string>
     <string name="detail_review">건빵 리뷰</string>
+    <string name="detail_taste">맛있어요</string>
+    <string name="detail_special">특별한 메뉴</string>
+    <string name="detail_kind">친절해요</string>
+    <string name="detail_zero">제로웨이스트</string>
+    <string name="detail_written_reviews">작성된 리뷰</string>
+    <string name="detail_declare">신고</string>
+    <string name="detail_no_review">작성된 리뷰가 없어요!</string>
 </resources>
