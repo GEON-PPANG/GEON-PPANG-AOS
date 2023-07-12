@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="review"
+            type="com.sopt.geonppang.domain.model.BestReview" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/spacing4"
+        android:layout_marginStart="@dimen/spacing4"
+        android:layout_marginEnd="14dp"
+        android:background="@drawable/background_home_bakery_box"
+        android:clipToOutline="true"
+        android:elevation="4dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing17" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing17" />
+
+        <ImageView
+            android:id="@+id/iv_best_review_image"
+            android:layout_width="204dp"
+            android:layout_height="164dp"
+            android:foreground="@drawable/foreground_shadow"
+            android:scaleType="centerCrop"
+            android:src="@{context.getDrawable(review.bakeryImage)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/bread1" />
+
+        <ImageView
+            android:id="@+id/iv_bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing14"
+            android:layout_marginEnd="@dimen/spacing12"
+            android:src="@{review.isBooked == true? @drawable/ic_bookmark_selected:@drawable/ic_bookmark_unselected}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_bookmark_unselected" />
+
+        <TextView
+            android:id="@+id/tv_best_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing14"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{review.reviewText}"
+            android:textAppearance="@style/TextAppearance.BodyB2"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_best_review_image"
+            app:layout_constraintEnd_toEndOf="@+id/gl_end"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintWidth="0dp"
+            tools:text="“정말 너무 맛있었어요! 갓 구운빵이 예술이었어요용요요요" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_home_review_first"
+            style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/white"
+            android:text="@{review.firstReviewChip}"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/iv_best_review_image"
+            tools:text="친절해요" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_home_review_second"
+            style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:backgroundTint="@color/white"
+            android:text="@{review.secondReviewChip}"
+            app:layout_constraintBottom_toBottomOf="@+id/chip_home_review_first"
+            app:layout_constraintStart_toEndOf="@id/chip_home_review_first"
+            app:layout_constraintTop_toTopOf="@+id/chip_home_review_first"
+            tools:text="친절해요" />
+
+        <TextView
+            android:id="@+id/tv_best_review_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{review.bakeryName}"
+            android:textAppearance="@style/TextAppearance.BodyB1"
+            android:textColor="@color/gray_700"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/chip_home_review_first"
+            tools:text="건대대대대대대대대대대대대대" />
+
+        <TextView
+            android:id="@+id/tv_best_review_count"
+            highlightNumbers="@{@string/home_review_count(review.reviewCount)}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="18dp"
+            android:textAppearance="@style/TextAppearance.CaptionB1"
+            android:textColor="@color/gray_700"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_best_review_title"
+            tools:text="리뷰(6)" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
