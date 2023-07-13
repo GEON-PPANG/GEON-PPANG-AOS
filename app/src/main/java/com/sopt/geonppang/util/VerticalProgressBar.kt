@@ -48,4 +48,9 @@ class VerticalProgressBar @JvmOverloads constructor(
             progressDrawable?.draw(canvas)
         }
     }
+
+    fun setProgress(progress: Int) {
+        this.progress = progress
+        invalidate()
+    }
 }
