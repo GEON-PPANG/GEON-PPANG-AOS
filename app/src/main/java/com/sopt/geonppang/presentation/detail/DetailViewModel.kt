@@ -17,6 +17,8 @@ class DetailViewModel : ViewModel() {
             isVegan = false,
             isNonGMO = true,
             breadType = BreadType(
+                breadTypeName = "글루텐프리",
+                breadTypeId = 1,
                 isGlutenFree = true,
                 isVegan = true,
                 isNutFree = false,
@@ -55,7 +57,7 @@ class DetailViewModel : ViewModel() {
             special = 50,
             kind = 10,
             zero = 90,
-            reviewCount = 4
+            reviewCount = 3
         )
     )
 
