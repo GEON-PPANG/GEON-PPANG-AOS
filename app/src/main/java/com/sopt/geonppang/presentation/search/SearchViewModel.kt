@@ -22,6 +22,7 @@ class SearchViewModel : ViewModel() {
             isVegan = true,
             breadType = BreadType(
                 breadTypeId = 1,
+                breadTypeName = "글루텐프리",
                 isGlutenFree = true,
                 isVegan = true,
                 isNutFree = true,
@@ -41,6 +42,7 @@ class SearchViewModel : ViewModel() {
             isVegan = true,
             breadType = BreadType(
                 breadTypeId = 2,
+                breadTypeName = "글루텐프리",
                 isGlutenFree = false,
                 isVegan = true,
                 isNutFree = true,
@@ -60,6 +62,7 @@ class SearchViewModel : ViewModel() {
             isVegan = false,
             breadType = BreadType(
                 breadTypeId = 3,
+                breadTypeName = "글루텐프리",
                 isGlutenFree = true,
                 isVegan = true,
                 isNutFree = true,
@@ -79,6 +82,7 @@ class SearchViewModel : ViewModel() {
             isVegan = false,
             breadType = BreadType(
                 breadTypeId = 4,
+                breadTypeName = "글루텐프리",
                 isGlutenFree = false,
                 isVegan = true,
                 isNutFree = false,
@@ -98,6 +102,7 @@ class SearchViewModel : ViewModel() {
             isVegan = true,
             breadType = BreadType(
                 breadTypeId = 5,
+                breadTypeName = "글루텐프리",
                 isGlutenFree = true,
                 isVegan = false,
                 isNutFree = false,
@@ -117,6 +122,7 @@ class SearchViewModel : ViewModel() {
             isVegan = false,
             breadType = BreadType(
                 breadTypeId = 6,
+                breadTypeName = "글루텐프리",
                 isGlutenFree = true,
                 isVegan = true,
                 isNutFree = true,
