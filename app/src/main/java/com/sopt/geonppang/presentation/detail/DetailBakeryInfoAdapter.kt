@@ -9,12 +9,13 @@ import com.sopt.geonppang.databinding.ItemDetailBakeryInfoBinding
 import com.sopt.geonppang.domain.model.BakeryInfo
 import com.sopt.geonppang.util.ItemDiffCallback
 
-class DetailBakeryInfoAdapter(context: Context) : ListAdapter<BakeryInfo, RecyclerView.ViewHolder>(
-    ItemDiffCallback<BakeryInfo>(
-        onContentsTheSame = { old, new -> old == new },
-        onItemsTheSame = { old, new -> old.phoneNumber == new.phoneNumber }
-    )
-) {
+class DetailBakeryInfoAdapter(context: Context) :
+    ListAdapter<BakeryInfo, DetailBakeryInfoAdapter.DetailBakeryInfoViewHolder>(
+        ItemDiffCallback<BakeryInfo>(
+            onContentsTheSame = { old, new -> old == new },
+            onItemsTheSame = { old, new -> old.phoneNumber == new.phoneNumber }
+        )
+    ) {
     private val inflater by lazy { LayoutInflater.from(context) }
 
     class DetailBakeryInfoViewHolder(private val binding: ItemDetailBakeryInfoBinding) :
@@ -24,16 +25,12 @@ class DetailBakeryInfoAdapter(context: Context) : ListAdapter<BakeryInfo, Recycl
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailBakeryInfoViewHolder {
         val binding = ItemDetailBakeryInfoBinding.inflate(inflater, parent, false)
         return DetailBakeryInfoViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is DetailBakeryInfoViewHolder -> {
-                holder.onBind((currentList[position]))
-            }
-        }
+    override fun onBindViewHolder(holder: DetailBakeryInfoViewHolder, position: Int) {
+        holder.onBind(getItem(position))
     }
 }

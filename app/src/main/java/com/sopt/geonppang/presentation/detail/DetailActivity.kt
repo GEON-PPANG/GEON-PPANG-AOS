@@ -2,6 +2,7 @@ package com.sopt.geonppang.presentation.detail
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.ConcatAdapter
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityDetailBinding
 import com.sopt.geonppang.util.binding.BindingActivity
@@ -19,9 +20,22 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun initLayout() {
         val detailBakeryInfoAdapter = DetailBakeryInfoAdapter(this)
-        detailBakeryInfoAdapter.submitList(viewModel.mockBakeryInfo)
+        val detailMenuAdapter = DetailMenuAdapter(this)
+        val detailReviewDataAdapter = DetailReviewDataAdapter(this)
+        val detailReviewAdapter = DetailReviewAdapter(this)
+        val concatAdapter = ConcatAdapter(
+            detailBakeryInfoAdapter,
+            detailMenuAdapter,
+            detailReviewDataAdapter,
+            detailReviewAdapter
+        )
 
-        binding.rvDetail.adapter = detailBakeryInfoAdapter
+        detailBakeryInfoAdapter.submitList(viewModel.mockBakeryInfo)
+        detailMenuAdapter.submitList(viewModel.mockMenuList)
+        detailReviewDataAdapter.submitList(viewModel.mockReviewData)
+        detailReviewAdapter.submitList(viewModel.mockReview)
+
+        binding.rvDetail.adapter = concatAdapter
         binding.bakeryInfo = viewModel.mockBakeryInfo[0]
     }
 }
