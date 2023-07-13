@@ -18,7 +18,7 @@ class ReviewViewModel @Inject constructor(
     val review_text = MutableLiveData("")
     val reveiw_text_count = MutableLiveData("")
 
-    val countReviewText : LiveData<Int> = review_text.map { review_text->
+    val countReviewText: LiveData<Int> = review_text.map { review_text ->
         review_text.length
         /*글자 수 세기*/
     }
