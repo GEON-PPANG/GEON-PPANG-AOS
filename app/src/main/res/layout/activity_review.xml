@@ -292,13 +292,13 @@
                     android:layout_width="0dp"
                     android:layout_height="196dp"
                     android:layout_marginTop="32dp"
-                    android:textColor="@{viewModel.countReviewTextTrue == true? @color/gray_500 : @color/error}"
-                    android:text="@{viewModel.review_text}"
                     android:background="@drawable/background_review_disable_status"
                     android:gravity="top"
                     android:hint="자유롭게 의견을 말씀해주세요!"
                     android:paddingLeft="24dp"
                     android:paddingTop="20dp"
+                    android:text="@{viewModel.review_text}"
+                    android:textColor="@{viewModel.countReviewTextTrue == true? @color/gray_500 : @color/error}"
                     android:textColorHint="@color/gray_300"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
@@ -312,9 +312,9 @@
                     android:text="@{@string/review_text_count(viewModel.countReviewText)}"
                     android:textAppearance="@style/TextAppearance.CaptionM1"
                     android:textColor="@{viewModel.countReviewTextTrue == true? @color/gray_500 : @color/error}"
-                    tools:text="0/500 (최소 10자)"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
-                    app:layout_constraintTop_toBottomOf="@id/et_write_your_review" />
+                    app:layout_constraintTop_toBottomOf="@id/et_write_your_review"
+                    tools:text="0/500 (최소 10자)" />
 
                 <TextView
                     android:id="@+id/tv_review_caption"
