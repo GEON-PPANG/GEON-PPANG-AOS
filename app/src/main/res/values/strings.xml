@@ -26,4 +26,14 @@
     <string name="main_purpose_type_diet_des">그냥 맛있어서! 식이 관리를 위해</string>
     <string name="main_purpose_type_vegan_title">비건 · 채식지향</string>
     <string name="main_purpose_type_vegan_des">종교 , 환경 , 동물 , 노동권을 위한 비거니즘</string>
+
+    <string name="bread_type_gluten_free_title">글루텐프리</string>
+    <string name="bread_type_gluten_free_des">NO 글루텐 포함\n밀 , 곡물류</string>
+    <string name="bread_type_vegan_title">비건빵</string>
+    <string name="bread_type_vegan_des">NO 동물성재료\n(유제품 , 계란)</string>
+    <string name="bread_type_nut_free_title">넛프리</string>
+    <string name="bread_type_nut_free_des">NO 견과류</string>
+    <string name="bread_type_sugar_free_title">저당, 무설탕</string>
+    <string name="bread_type_sugar_free_des">대체당 사용</string>
+
 </resources>
