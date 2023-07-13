@@ -20,11 +20,8 @@ class SignUpPasswordActivity :
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-
         addListeners()
     }
-
-
     private fun addListeners() {
         binding.root.setOnClickListener {
             hideKeyboard(it)
@@ -33,7 +30,6 @@ class SignUpPasswordActivity :
             moveToNickname()
         }
     }
-
 
     private fun moveToNickname() {
         startActivity(Intent(this, SignUpNicknameActivity::class.java))

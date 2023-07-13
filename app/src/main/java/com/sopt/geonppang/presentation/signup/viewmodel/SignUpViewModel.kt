@@ -51,18 +51,15 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     /*다음 버튼 활성화 -> 중복 확인이 되면 활성화 되어야 함*/
     val completeNickname = MediatorLiveData<Boolean>().apply {
         addSource(nickname) { value = checkNicknameCondition() }
-
     }
 
     private fun isPasswordDoubleCheck(): Boolean {
         return password.value.toString() == password_check.value.toString() && !password.value.isNullOrBlank() && !password_check.value.isNullOrBlank()
     }
 
-
     private fun checkEmailCondition(): Boolean {
         return isValidEmail.value == true
     }
-
 
     private fun checkNicknameCondition(): Boolean {
         return isValidNickname.value == true
