@@ -228,7 +228,7 @@
             android:layout_marginTop="16dp"
             android:src="@drawable/ic_store"
             app:layout_constraintStart_toStartOf="@+id/gl_start"
-            app:layout_constraintTop_toBottomOf="@+id/iv_item_detail_bakery_info_link" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_detail_bakery_info_link" />
 
         <TextView
             android:id="@+id/tv_item_detail_bakery_info_store"

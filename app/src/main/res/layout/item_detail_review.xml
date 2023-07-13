@@ -1,121 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/spacing24"
-    android:background="@drawable/background_detail_review"
-    android:paddingVertical="25dp"
-    android:paddingBottom="@dimen/spacing14">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_start"
-        android:layout_width="wrap_content"
+    <data>
+
+        <variable
+            name="review"
+            type="com.sopt.geonppang.domain.model.Review" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/spacing27" />
+        android:layout_marginHorizontal="@dimen/spacing24"
+        android:layout_marginBottom="@dimen/spacing14"
+        android:background="@drawable/background_detail_review"
+        android:paddingVertical="25dp">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/spacing27" />
-
-    <ImageView
-        android:id="@+id/iv_item_detail_review_profile_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_logo"
-        app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_item_detail_review_nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:textAppearance="@style/TextAppearance.BodyB2"
-        android:textColor="@color/main_1"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_item_detail_review_profile_img"
-        app:layout_constraintStart_toEndOf="@+id/iv_item_detail_review_profile_img"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="보연티비" />
-
-    <TextView
-        android:id="@+id/tv_item_detail_review_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="11dp"
-        android:textAppearance="@style/TextAppearance.CaptionM1"
-        android:textColor="@color/gray_400"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_item_detail_review_profile_img"
-        app:layout_constraintEnd_toStartOf="@+id/tv_item_detail_review_declare"
-        app:layout_constraintTop_toTopOf="@+id/iv_item_detail_review_profile_img"
-        tools:text="22.08.09" />
-
-    <TextView
-        android:id="@+id/tv_item_detail_review_declare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/detail_declare"
-        android:textAppearance="@style/TextAppearance.CaptionM1"
-        android:textColor="@color/gray_300"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_item_detail_review_profile_img"
-        app:layout_constraintEnd_toStartOf="@+id/gl_end"
-        app:layout_constraintTop_toTopOf="@+id/iv_item_detail_review_profile_img" />
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chip_group_item_detail_review"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:chipSpacing="5dp"
-        app:chipSpacingHorizontal="5dp"
-        app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toBottomOf="@+id/iv_item_detail_review_profile_img">
-
-        <com.google.android.material.chip.Chip
-            style="@style/Style.Material3.Chip.Review.Category"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/point_2"
-            android:text="@string/detail_taste" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing27" />
 
-        <com.google.android.material.chip.Chip
-            style="@style/Style.Material3.Chip.Review.Category"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/point_2"
-            android:text="@string/detail_special" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing27" />
 
-        <com.google.android.material.chip.Chip
-            style="@style/Style.Material3.Chip.Review.Category"
+        <ImageView
+            android:id="@+id/iv_item_detail_review_profile_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/point_2"
-            android:text="@string/detail_kind" />
+            android:src="@drawable/ic_logo"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.chip.Chip
-            style="@style/Style.Material3.Chip.Review.Category"
+        <TextView
+            android:id="@+id/tv_item_detail_review_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/point_2"
-            android:text="@string/detail_zero" />
+            android:layout_marginStart="6dp"
+            android:text="@{review.memberNickname}"
+            android:textAppearance="@style/TextAppearance.BodyB2"
+            android:textColor="@color/main_1"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_item_detail_review_profile_img"
+            app:layout_constraintStart_toEndOf="@+id/iv_item_detail_review_profile_img"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="보연티비" />
 
-    </com.google.android.material.chip.ChipGroup>
+        <TextView
+            android:id="@+id/tv_item_detail_review_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="11dp"
+            android:text="@{review.createdAt}"
+            android:textAppearance="@style/TextAppearance.CaptionM1"
+            android:textColor="@color/gray_400"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_item_detail_review_profile_img"
+            app:layout_constraintEnd_toStartOf="@+id/tv_item_detail_review_declare"
+            app:layout_constraintTop_toTopOf="@+id/iv_item_detail_review_profile_img"
+            tools:text="22.08.09" />
 
-    <TextView
-        android:id="@+id/tv_item_detail_review_content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:textAppearance="@style/TextAppearance.Subhead"
-        android:textColor="@color/gray_400"
-        app:layout_constraintEnd_toStartOf="@+id/gl_end"
-        app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toBottomOf="@+id/chip_group_item_detail_review"
-        tools:text="여기 소금빵 미친 존맛탱임 우리 건빵 가족들에게도 알려주고싶은 맛이에용앙아아아아아아아아아아아ㅏㅇ아ㅏ아아아아아아아아아ㅏ아아" />
+        <TextView
+            android:id="@+id/tv_item_detail_review_declare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_declare"
+            android:textAppearance="@style/TextAppearance.CaptionM1"
+            android:textColor="@color/gray_300"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_item_detail_review_profile_img"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:layout_constraintTop_toTopOf="@+id/iv_item_detail_review_profile_img" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_item_detail_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:chipSpacing="5dp"
+            app:chipSpacingHorizontal="5dp"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/iv_item_detail_review_profile_img">
+
+            <com.google.android.material.chip.Chip
+                style="@style/Style.Material3.Chip.Review.Category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/point_2"
+                android:text="@string/detail_taste" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Style.Material3.Chip.Review.Category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/point_2"
+                android:text="@string/detail_special" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Style.Material3.Chip.Review.Category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/point_2"
+                android:text="@string/detail_kind" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Style.Material3.Chip.Review.Category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/point_2"
+                android:text="@string/detail_zero" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/tv_item_detail_review_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="@{review.reviewText}"
+            android:textAppearance="@style/TextAppearance.Subhead"
+            android:textColor="@color/gray_400"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/chip_group_item_detail_review"
+            tools:text="여기 소금빵 미친 존맛탱임 우리 건빵 가족들에게도 알려주고싶은 맛이에용앙아아아아아아아아아아아ㅏㅇ아ㅏ아아아아아아아아아ㅏ아아" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
