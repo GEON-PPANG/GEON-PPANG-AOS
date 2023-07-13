@@ -5,6 +5,13 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.sopt.geonppang.presentation.detail.DetailViewModel" />
+
+        <variable
+            name="bakeryInfo"
+            type="com.sopt.geonppang.domain.model.BakeryInfo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,6 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/view_detail_bottom_app_bar_shadow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,15 +82,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="56dp"
-            android:src="@drawable/ic_bookmark_unselected"
+            android:src="@{bakeryInfo.isBooked == true? @drawable/ic_bookmark_selected : @drawable/ic_bookmark_unselected}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/gl_start" />
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            tools:src="@drawable/ic_bookmark_unselected" />
 
         <TextView
             android:id="@+id/tv_detail_bottom_app_bar_bookmark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
+            android:text="@{@string/home_bookmark_count(bakeryInfo.bookmarkCount)}"
             android:textAppearance="@style/TextAppearance.BodyB1"
             android:textColor="@color/gray_300"
             app:layout_constraintBottom_toBottomOf="@+id/iv_detail_bottom_app_bar_bookmark"
@@ -137,7 +147,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
