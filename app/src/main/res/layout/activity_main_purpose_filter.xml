@@ -9,9 +9,7 @@
             name="viewModel"
             type="com.sopt.geonppang.presentation.filter.FilterViewModel" />
 
-        <variable
-            name="mainPurpose"
-            type="com.sopt.geonppang.presentation.type.MainPurposeType" />
+        <import type="com.sopt.geonppang.presentation.type.MainPurposeType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,41 +65,41 @@
         <include
             android:id="@+id/include_main_purpose_health"
             layout="@layout/view_main_purpose_button"
-            selected="@{viewModel.mainPurpose == mainPurpose.HEALTH}"
+            selected="@{viewModel.mainPurpose == MainPurposeType.HEALTH}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:onClick="@{() -> viewModel.setMainPurpose(mainPurpose.HEALTH)}"
+            android:onClick="@{() -> viewModel.setMainPurpose(MainPurposeType.HEALTH)}"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@+id/tv_main_purpose_filter_title"
-            app:mainPurposeType="@{mainPurpose.HEALTH}" />
+            app:mainPurposeType="@{MainPurposeType.HEALTH}" />
 
         <include
             android:id="@+id/include_main_purpose_diet"
             layout="@layout/view_main_purpose_button"
-            selected="@{viewModel.mainPurpose == mainPurpose.DIET}"
+            selected="@{viewModel.mainPurpose == MainPurposeType.DIET}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:onClick="@{() -> viewModel.setMainPurpose(mainPurpose.DIET)}"
+            android:onClick="@{() -> viewModel.setMainPurpose(MainPurposeType.DIET)}"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@+id/include_main_purpose_health"
-            app:mainPurposeType="@{mainPurpose.DIET}" />
+            app:mainPurposeType="@{MainPurposeType.DIET}" />
 
         <include
             android:id="@+id/include_main_purpose_vegan"
             layout="@layout/view_main_purpose_button"
-            selected="@{viewModel.mainPurpose == mainPurpose.VEGAN}"
+            selected="@{viewModel.mainPurpose == MainPurposeType.VEGAN}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:onClick="@{() -> viewModel.setMainPurpose(mainPurpose.VEGAN)}"
+            android:onClick="@{() -> viewModel.setMainPurpose(MainPurposeType.VEGAN)}"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@+id/include_main_purpose_diet"
-            app:mainPurposeType="@{mainPurpose.VEGAN}" />
+            app:mainPurposeType="@{MainPurposeType.VEGAN}" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_main_purpose_filter_next"

@@ -12,8 +12,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_main_purpose"
-        style="@style/Widget.FullButton.Basic"
         android:layout_width="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_item_3_division_filter_button"
         android:paddingVertical="25dp">
