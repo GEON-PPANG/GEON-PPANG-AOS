@@ -43,4 +43,6 @@
     <string name="detail_written_reviews">작성된 리뷰</string>
     <string name="detail_declare">신고</string>
     <string name="detail_no_review">작성된 리뷰가 없어요!</string>
+    <string name="detail_review_count">%d개</string>
+    <string name="detail_basic">기본순</string>
 </resources>
