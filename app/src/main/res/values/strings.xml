@@ -10,19 +10,6 @@
     <string name="home_review_count">리뷰(%d)</string>
     <string name="home_bookmark_count">%d명</string>
 
-    <!--    mypage    -->
-    <string name="my_page_title">마이페이지</string>
-    <string name="my_page_gluten_free">글루텐프리</string>
-    <string name="my_page_nut_free">넛프리</string>
-    <string name="my_page_vegan">비건빵</string>
-    <string name="my_page_low_suger">저당,무설탕</string>
-    <string name="my_page_bookmark">저장 목록</string>
-    <string name="my_page_review">내가 쓴 리뷰</string>
-    <string name="my_page_terms_of_use">이용약관</string>
-    <string name="my_page_question">자주 묻는 질문</string>
-    <string name="my_page_inquiry">문의하기</string>
-    <string name="my_page_app_version">앱버전</string>
-
     <!--  search view  -->
     <string name="search_hint">궁금한 건빵집을 입력해주세요!</string>
     <string name="search_recent_search">최근 검색어</string>
@@ -44,5 +31,18 @@
     <string name="bakery_bread_type_dessert">디저트류</string>
     <string name="bakery_bread_type_branch">브런치류</string>
 
+    <!--    mypage    -->
+    <string name="my_page_title">마이페이지</string>
+    <string name="my_page_gluten_free">글루텐프리</string>
+    <string name="my_page_nut_free">넛프리</string>
+    <string name="my_page_vegan">비건빵</string>
+    <string name="my_page_low_suger">저당,무설탕</string>
+    <string name="my_page_bookmark">저장 목록</string>
+    <string name="my_page_review">내가 쓴 리뷰</string>
+    <string name="my_page_terms_of_use">이용약관</string>
+    <string name="my_page_question">자주 묻는 질문</string>
+    <string name="my_page_inquiry">문의하기</string>
+    <string name="my_page_app_version">앱버전</string>
     <string name="my_page_store_list_title">저장 목록</string>
+    <string name="my_store_list_empty_view_description">저장된 건빵집이 없어요!</string>
 </resources>
