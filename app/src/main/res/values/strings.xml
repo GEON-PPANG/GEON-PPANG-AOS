@@ -57,4 +57,8 @@
     <string name="detail_no_review">작성된 리뷰가 없어요!</string>
     <string name="detail_review_count">%d개</string>
     <string name="detail_basic">기본순</string>
+
+    <!--    snackbar    -->
+    <string name="snackbar_copy">복사되었습니다 !</string>
+    <string name="snackbar_save">저장되었습니다 !</string>
 </resources>
