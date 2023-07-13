@@ -11,7 +11,8 @@ fun ImageView.setImage(imageUrl: String) {
 }
 
 @BindingAdapter("selected")
-fun View.setSelected(isSelected: Boolean) {
+fun View.setSelected(isSelected: Boolean?) {
+    if (isSelected == null) return
     this.isSelected = isSelected
 }
 
