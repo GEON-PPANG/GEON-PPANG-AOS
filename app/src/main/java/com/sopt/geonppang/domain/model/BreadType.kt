@@ -1,9 +1,8 @@
 package com.sopt.geonppang.domain.model
 
 data class BreadType(
-    val breadTypeId: Int,
     val isGlutenFree: Boolean,
     val isVegan: Boolean,
     val isNutFree: Boolean,
-    val isSugarFree: Boolean,
+    val isSugarFree: Boolean
 )
