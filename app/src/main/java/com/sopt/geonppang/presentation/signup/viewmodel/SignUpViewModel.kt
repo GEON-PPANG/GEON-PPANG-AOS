@@ -17,19 +17,19 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
 
     val isValidEmail: LiveData<Boolean> = email.map { email ->
         email.matches(Regex(EMAIL_PATTERN))
+        /*조건에 만족하는 이메일인지 확인*/
     }
 
     val isValidNickname: LiveData<Boolean> = nickname.map { nickname ->
         nickname.matches(Regex(NICKNAME_PATTERN))
+        /*조건에 맞는 닉네임인지 확인*/
     }
 
     val isValidPassword: LiveData<Boolean> = password.map { password ->
         password.matches(Regex(PASSWORD_PATTERN))
+        /*조건에 맞는 비밀번호인지 확인*/
     }
 
-    val isValidPasswordCheck: LiveData<Boolean> = password_check.map { password_check ->
-        password_check.matches(Regex(PASSWORD_PATTERN))
-    }
     val doubleCheckEmail = MediatorLiveData<Boolean>().apply {
         // Todo 중복 확인 구현 예정
     }
@@ -37,32 +37,33 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         // Todo 닉네임 중복 확인 구현 예정
     }
 
-    /*다음 버튼 활성화*/
+    /*다음 버튼 활성화 -> 중복확인이 true 이면 활성화 되어야 함*/
     val completeEmail = MediatorLiveData<Boolean>().apply {
         addSource(email) { value = checkEmailCondition() }
     }
 
-    /*다음 버튼 활성화*/
+    /*비밀번호 다음 버튼 활성화*/
     val completePassword = MediatorLiveData<Boolean>().apply {
-        addSource(password) { value = isPasswordSame() }
-        addSource(password_check) { value = isPasswordSame() }
+        addSource(password) { value = isPasswordDoubleCheck() }
+        addSource(password_check) { value = isPasswordDoubleCheck() }
     }
 
+    /*다음 버튼 활성화 -> 중복 확인이 되면 활성화 되어야 함*/
     val completeNickname = MediatorLiveData<Boolean>().apply {
         addSource(nickname) { value = checkNicknameCondition() }
-        /*다음 버튼 활성화*/
+
     }
 
-    private fun isPasswordSame(): Boolean {
+    private fun isPasswordDoubleCheck(): Boolean {
         return password.value.toString() == password_check.value.toString() && !password.value.isNullOrBlank() && !password_check.value.isNullOrBlank()
     }
 
-    // TODO 이메일 조건
+
     private fun checkEmailCondition(): Boolean {
         return isValidEmail.value == true
     }
 
-    // TODO 닉네임 조건
+
     private fun checkNicknameCondition(): Boolean {
         return isValidNickname.value == true
     }

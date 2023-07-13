@@ -8,7 +8,7 @@ import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DummyActivity : BindingActivity<ActivityDummyBinding>(R.layout.activity_signup_email) {
+class DummyActivity : BindingActivity<ActivityDummyBinding>(R.layout.activity_dummy) {
     private val viewModel: DummyViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -19,13 +19,8 @@ class SignUpEmailActivity :
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        // binding에서 LiveData를 사용할 경우 해당 코드 필요
 
         addListeners()
-    }
-
-    private fun initLayout() {
-        TODO("Not yet implemented")
     }
 
     private fun addListeners() {
@@ -35,10 +30,6 @@ class SignUpEmailActivity :
         binding.btnNext.setOnClickListener {
             moveToPassword()
         }
-    }
-
-    private fun addObservers() {
-        TODO("Not yet implemented")
     }
 
     private fun moveToPassword() {

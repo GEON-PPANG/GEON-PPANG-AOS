@@ -29,13 +29,13 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="@dimen/spacing24" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/img_back_arrow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
             android:layout_marginTop="34dp"
             android:background="@null"
+            android:layout_marginLeft="17dp"
             android:padding="12dp"
             android:src="@drawable/ic_arrow_left"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,37 +45,33 @@
             android:id="@+id/tv_sign_up_page_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
-            android:layout_marginRight="24dp"
             android:padding="12dp"
             android:text="3/6"
-            android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.Subhead"
-            android:textColor="#CBC8C5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="@color/gray_300"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintBottom_toBottomOf="@id/img_back_arrow"
+            app:layout_constraintTop_toTopOf="@id/img_back_arrow" />
 
         <TextView
             android:id="@+id/tv_input_email_phrase"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
             android:text="@string/welcome_nickname"
             android:textAppearance="@style/TextAppearance.Title1"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@+id/img_back_arrow" />
 
         <LinearLayout
-            android:id="@+id/linear_email"
+            android:id="@+id/linear_nickname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
             android:layout_marginTop="40dp"
             android:background="@{!viewModel.nickname.empty &amp; !viewModel.isValidNickname()? @drawable/background_need_change_status : @drawable/background_normal_status }"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@id/tv_input_email_phrase">
 
             <TextView
@@ -115,42 +111,41 @@
             android:layout_marginRight="24dp"
             android:text="@string/nickname_error"
             android:textAppearance="@style/TextAppearance.CaptionM1"
-            android:textColor="#FF2633"
+            android:textColor="@color/error"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linear_email" /><!--visibility viewModel 만든 후 구현 예정-->
+            app:layout_constraintTop_toBottomOf="@+id/linear_nickname" /><!--visibility viewModel 만든 후 구현 예정-->
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_double_check"
+            style="@style/Widget.OutlinedButton.Basic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
             android:layout_marginTop="40dp"
-            android:background="@drawable/background_btn_double_check_status"
             android:enabled="@{viewModel.isValidNickname()}"
             android:paddingVertical="18dp"
             android:text="@string/double_check"
             android:textAppearance="@style/TextAppearance.BodyB1"
-            android:textColor="@drawable/btn_double_check_txt_color"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.52"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linear_email" />
+            android:textColor="@{viewModel.isValidNickname() == true ? @color/main_2 : @color/gray_400}"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/linear_nickname"
+            app:strokeColor="@{viewModel.isValidNickname() == true ? @color/main_2 : @color/gray_300}" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_next"
+            style="@style/Widget.FullButton.Basic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
             android:layout_marginBottom="48dp"
-            android:background="@drawable/background_btn_next"
+            android:backgroundTint="@{viewModel.isValidNickname() == true ? @color/main_2 : @color/gray_200}"
             android:enabled="@{viewModel.completeNickname}"
             android:paddingVertical="18dp"
             android:text="@string/txt_next_btn"
             android:textAppearance="@style/TextAppearance.BodyM1"
-            android:textColor="@drawable/btn_next_txt_color"
+            android:textColor="@{viewModel.isValidNickname() == true ? @color/white : @color/gray_400}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

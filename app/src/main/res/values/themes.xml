@@ -32,6 +32,12 @@
         <item name="cornerRadius">12dp</item>
     </style>
 
+    <style name="Widget.OutlinedButton.Basic" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:width">0dp</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
     <style name="Style.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/Style.BottomSheet</item>
     </style>
@@ -97,5 +103,17 @@
         <item name="android:textColor">@color/point_1</item>
         <item name="chipStrokeColor">@color/point_1</item>
         <item name="chipStrokeWidth">0.5dp</item>
+    </style>
+
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintAnimationEnabled">false</item>
+        <item name="android:textColorHint">@color/gray_300</item>
+        <item name="boxStrokeColor">@null</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <!--        <item name="boxStrokeWidthFocused">0dp</item>-->
+        <item name="boxCornerRadiusTopStart">@dimen/spacing10</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/spacing10</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/spacing10</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/spacing10</item>
     </style>
 </resources>
