@@ -22,4 +22,6 @@
     <string name="my_page_question">자주 묻는 질문</string>
     <string name="my_page_inquiry">문의하기</string>
     <string name="my_page_app_version">앱버전</string>
+
+    <string name="my_page_store_list_title">저장 목록</string>
 </resources>
