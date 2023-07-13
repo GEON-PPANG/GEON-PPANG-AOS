@@ -1,6 +1,7 @@
 package com.sopt.geonppang.presentation.search
 
 import android.os.Bundle
+import android.view.MotionEvent
 import androidx.activity.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySearchBinding
@@ -28,11 +29,13 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
     }
 
     private fun addListeners() {
-        binding.root.setOnClickListener {
-            hideKeyboard(it)
-        }
         binding.ivSearchDelete.setOnClickListener {
             binding.etSearch.text = null
         }
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        hideKeyboard(binding.root)
+        return super.dispatchTouchEvent(ev)
     }
 }
