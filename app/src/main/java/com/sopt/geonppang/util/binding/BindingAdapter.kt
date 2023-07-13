@@ -16,6 +16,11 @@ fun ImageView.setImage(imageUrl: String) {
     this.load(imageUrl)
 }
 
+@BindingAdapter("selected")
+fun View.setSelected(isSelected: Boolean) {
+    this.isSelected = isSelected
+}
+
 @BindingAdapter("visibility")
 fun View.setVisibility(isVisible: Boolean?) {
     if (isVisible == null) return
