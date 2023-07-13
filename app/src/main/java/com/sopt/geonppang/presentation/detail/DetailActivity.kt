@@ -8,22 +8,24 @@ import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityDetailBinding
 import com.sopt.geonppang.util.ChipFactory
+import com.sopt.geonppang.util.CustomSnackbar
 import com.sopt.geonppang.util.binding.BindingActivity
 
 class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_detail) {
     private val viewModel by viewModels<DetailViewModel>()
+    private val String.toChip: Chip
+        get() = ChipFactory.create(layoutInflater).also {
+            it.text = this
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
         initLayout()
+        addListeners()
     }
-
-    private val String.toChip: Chip
-        get() = ChipFactory.create(layoutInflater).also {
-            it.text = this
-        }
 
     private fun initLayout() {
         val detailBakeryInfoAdapter = DetailBakeryInfoAdapter(this)
@@ -44,6 +46,12 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
         binding.rvDetail.adapter = concatAdapter
         binding.bakeryInfo = viewModel.mockBakeryInfo[0]
+    }
+
+    private fun addListeners() {
+        binding.ivDetailBottomAppBarBookmark.setOnClickListener {
+            CustomSnackbar.makeSnackbar(binding.root, getString(R.string.snackbar_save), 138)
+        }
     }
 
     private fun initChip(chipGroup: ChipGroup, position: Int) {
