@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import coil.load
 import com.sopt.geonppang.R
+import java.text.DecimalFormat
 
 @BindingAdapter("image")
 fun ImageView.setImage(imageUrl: String) {
@@ -42,4 +43,10 @@ fun TextView.highlightNumbers(text: CharSequence?) {
     }
 
     this.text = spannableString
+}
+
+@BindingAdapter("priceAmount")
+fun applyPriceFormat(view: TextView, price: Int) {
+    val decimalFormat = DecimalFormat("#,###")
+    view.text = decimalFormat.format(price) + "원"
 }
