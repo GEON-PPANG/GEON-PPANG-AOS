@@ -70,7 +70,6 @@
             android:background="@color/gray_200"
             app:layout_constraintTop_toBottomOf="@id/tv_bakery_list_title" />
 
-        <!--    구현 고민 필요    -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_bread_list_filter"
             style="@style/Widget.Material3.Chip.Style"
@@ -87,6 +86,7 @@
             app:iconStartPadding="8dp"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@id/view_line_top"
+            app:rippleColor="#00FFFFFF"
             app:textEndPadding="12dp" />
 
         <View
