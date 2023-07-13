@@ -1,333 +1,357 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/spacing24" />
+    <data>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/spacing24" />
+        <variable
+            name="bakeryInfo"
+            type="com.sopt.geonppang.domain.model.BakeryInfo" />
+    </data>
 
-    <ImageView
-        android:id="@+id/iv_item_detail_bakery_info"
-        android:layout_width="0dp"
-        android:layout_height="320dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/bakery" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/linear_item_detail_bakery_info_mark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toBottomOf="@+id/iv_item_detail_bakery_info">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing24" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing24" />
 
         <ImageView
-            android:id="@+id/iv_item_detail_bakery_info_haccp_mark"
+            android:id="@+id/iv_item_detail_bakery_info"
+            android:layout_width="0dp"
+            android:layout_height="320dp"
+            android:scaleType="centerCrop"
+            android:src="@{context.getDrawable(bakeryInfo.bakeryPicture)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/bakery" />
+
+        <LinearLayout
+            android:id="@+id/linear_item_detail_bakery_info_mark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="6dp"
-            android:src="@drawable/ic_haccp_mark"
-            app:layout_constraintStart_toEndOf="@+id/gl_start"
-            app:layout_constraintTop_toBottomOf="@+id/iv_item_detail_bakery_info" />
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/iv_item_detail_bakery_info">
+
+            <ImageView
+                android:id="@+id/iv_item_detail_bakery_info_haccp_mark"
+                visibility="@{bakeryInfo.isHACCP}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:src="@drawable/ic_haccp_mark"
+                app:layout_constraintStart_toEndOf="@+id/gl_start"
+                app:layout_constraintTop_toBottomOf="@+id/iv_item_detail_bakery_info" />
+
+            <ImageView
+                android:id="@+id/iv_item_detail_bakery_info_vegan_mark"
+                visibility="@{bakeryInfo.isVegan}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:src="@drawable/ic_vegan_mark"
+                app:layout_constraintStart_toEndOf="@+id/iv_item_detail_bakery_info_haccp_mark"
+                app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_haccp_mark" />
+
+            <ImageView
+                android:id="@+id/iv_item_detail_bakery_info_nongmo_mark"
+                visibility="@{bakeryInfo.isNonGMO}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_nongmo_mark"
+                app:layout_constraintStart_toEndOf="@+id/iv_item_detail_bakery_info_vegan_mark"
+                app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_vegan_mark" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_item_detail_bakery_info_bakery_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="32dp"
+            android:text="@{bakeryInfo.bakeryName}"
+            android:textAppearance="@style/TextAppearance.Title1"
+            android:textColor="@color/gray_700"
+            app:layout_constraintEnd_toStartOf="@+id/iv_item_detail_bakery_info_bookmark"
+            app:layout_constraintStart_toEndOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/linear_item_detail_bakery_info_mark"
+            tools:text="모니모니해도비건" />
 
         <ImageView
-            android:id="@+id/iv_item_detail_bakery_info_vegan_mark"
+            android:id="@+id/iv_item_detail_bakery_info_bookmark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="6dp"
-            android:src="@drawable/ic_vegan_mark"
-            app:layout_constraintStart_toEndOf="@+id/iv_item_detail_bakery_info_haccp_mark"
-            app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_haccp_mark" />
+            android:layout_marginEnd="26dp"
+            android:src="@{bakeryInfo.isBooked == true? @drawable/ic_bookmark_selected:@drawable/ic_bookmark_unselected}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_item_detail_bakery_info_bakery_name"
+            tools:src="@drawable/ic_bookmark_unselected" />
+
+        <TextView
+            android:id="@+id/tv_item_detail_bakery_info_bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{@string/home_bookmark_count(bakeryInfo.bookmarkCount)}"
+            android:textAppearance="@style/TextAppearance.BodyB2"
+            android:textColor="@color/gray_300"
+            app:layout_constraintEnd_toEndOf="@id/iv_item_detail_bakery_info_bookmark"
+            app:layout_constraintStart_toStartOf="@+id/iv_item_detail_bakery_info_bookmark"
+            app:layout_constraintTop_toBottomOf="@+id/iv_item_detail_bakery_info_bookmark"
+            tools:text="10명" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_item_detail_bakery_info_bread_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_item_detail_bakery_info_bakery_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_item_detail_bakery_info_bakery_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_detail_bakery_info_bakery_name">
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                visibility="@{bakeryInfo.breadType.isGlutenFree}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                android:text="@string/gluten_free" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                visibility="@{bakeryInfo.breadType.isNutFree}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                android:text="@string/nut_free" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                visibility="@{bakeryInfo.breadType.isVegan}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                android:text="@string/vegan" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                visibility="@{bakeryInfo.breadType.isSugarFree}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                android:text="@string/low_sugar" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <View
+            android:id="@+id/view_item_detail_bakery_info_first_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="28dp"
+            android:background="@color/gray_200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chip_group_item_detail_bakery_info_bread_type" />
+
+        <TextView
+            android:id="@+id/tv_item_detail_bakery_info_more_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/detail_more_info"
+            android:textAppearance="@style/TextAppearance.BodyB1"
+            android:textColor="@color/gray_700"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/view_item_detail_bakery_info_first_line" />
 
         <ImageView
-            android:id="@+id/iv_item_detail_bakery_info_nongmo_mark"
+            android:id="@+id/iv_item_detail_bakery_info_notice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_nongmo_mark"
-            app:layout_constraintStart_toEndOf="@+id/iv_item_detail_bakery_info_vegan_mark"
-            app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_vegan_mark" />
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_notice"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_detail_bakery_info_more_info" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tv_item_detail_bakery_info_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/detail_notice"
+            android:textAppearance="@style/TextAppearance.CaptionM1"
+            android:textColor="@color/gray_300"
+            app:layout_constraintStart_toEndOf="@+id/iv_item_detail_bakery_info_notice"
+            app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_notice" />
 
-    <TextView
-        android:id="@+id/tv_item_detail_bakery_info_bakery_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="32dp"
-        android:textAppearance="@style/TextAppearance.Title1"
-        android:textColor="@color/gray_700"
-        app:layout_constraintEnd_toStartOf="@+id/iv_item_detail_bakery_info_bookmark"
-        app:layout_constraintStart_toEndOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/linear_item_detail_bakery_info_mark"
-        tools:text="모니모니해도비건" />
+        <ImageView
+            android:id="@+id/iv_item_detail_bakery_info_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_link"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/iv_item_detail_bakery_info_notice" />
 
-    <ImageView
-        android:id="@+id/iv_item_detail_bakery_info_bookmark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="26dp"
-        android:src="@drawable/ic_bookmark_unselected"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_item_detail_bakery_info_bakery_name" />
+        <TextView
+            android:id="@+id/tv_item_detail_bakery_info_link"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@{bakeryInfo.homepage}"
+            android:textAppearance="@style/TextAppearance.Subhead"
+            android:textColor="@color/gray_400"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:layout_constraintStart_toEndOf="@+id/iv_item_detail_bakery_info_link"
+            app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_link"
+            tools:text="https://www.naver.com/mmv_vegan_bake _shop/" />
 
-    <TextView
-        android:id="@+id/tv_item_detail_bakery_info_bookmark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textAppearance="@style/TextAppearance.BodyB2"
-        android:textColor="@color/gray_300"
-        app:layout_constraintEnd_toEndOf="@id/iv_item_detail_bakery_info_bookmark"
-        app:layout_constraintStart_toStartOf="@+id/iv_item_detail_bakery_info_bookmark"
-        app:layout_constraintTop_toBottomOf="@+id/iv_item_detail_bakery_info_bookmark"
-        tools:text="10명" />
+        <ImageView
+            android:id="@+id/iv_item_detail_bakery_info_store"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_store"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/iv_item_detail_bakery_info_link" />
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chip_group_item_detail_bakery_info_bread_type"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_item_detail_bakery_info_bakery_name"
-        app:layout_constraintStart_toStartOf="@+id/tv_item_detail_bakery_info_bakery_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_item_detail_bakery_info_bakery_name">
+        <TextView
+            android:id="@+id/tv_item_detail_bakery_info_store"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@{bakeryInfo.address}"
+            android:textAppearance="@style/TextAppearance.Subhead"
+            android:textColor="@color/gray_400"
+            app:layout_constraintEnd_toStartOf="@+id/iv_item_detail_bakery_info_copy"
+            app:layout_constraintStart_toStartOf="@+id/tv_item_detail_bakery_info_link"
+            app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_store"
+            tools:text="경기 의왕시 신장승길 29 퍼스트힐5차 111호" />
+
+        <ImageView
+            android:id="@+id/iv_item_detail_bakery_info_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_copy"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:layout_constraintTop_toTopOf="@+id/tv_item_detail_bakery_info_store" />
 
         <com.google.android.material.chip.Chip
-            style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
-            visibility="@{viewModel.profile.breadType.isGlutenFree}"
+            android:id="@+id/chip_item_detail_bakery_info_first_near_station"
+            style="@style/Style.Material3.Chip.Station.Category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
-            android:text="@string/gluten_free" />
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/main_3"
+            android:text="@{bakeryInfo.firstNearStation}"
+            app:layout_constraintStart_toStartOf="@+id/tv_item_detail_bakery_info_store"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_detail_bakery_info_store"
+            tools:text="의왕역" />
 
         <com.google.android.material.chip.Chip
-            style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
-            visibility="@{viewModel.profile.breadType.isNutFree}"
+            android:id="@+id/chip_item_detail_bakery_info_second_near_station"
+            style="@style/Style.Material3.Chip.Station.Category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
-            android:text="@string/nut_free" />
+            android:layout_marginStart="6dp"
+            android:backgroundTint="@color/main_3"
+            android:text="@{bakeryInfo.secondNearStation == null ? `` : bakeryInfo.secondNearStation}"
+            app:layout_constraintStart_toEndOf="@+id/chip_item_detail_bakery_info_first_near_station"
+            app:layout_constraintTop_toTopOf="@+id/chip_item_detail_bakery_info_first_near_station"
+            tools:text="의왕역 5번 출구" />
 
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
-            visibility="@{viewModel.profile.breadType.isVegan}"
+        <ImageView
+            android:id="@+id/iv_item_detail_bakery_info_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
-            android:text="@string/vegan" />
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_time"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/chip_item_detail_bakery_info_first_near_station" />
 
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
-            visibility="@{viewModel.profile.breadType.isSugarFree}"
+        <TextView
+            android:id="@+id/tv_item_detail_bakery_info_time_holiday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
-            android:text="@string/low_sugar" />
+            android:text="@{bakeryInfo.closedTime}"
+            android:textAppearance="@style/TextAppearance.Subhead"
+            android:textColor="@color/error"
+            app:layout_constraintStart_toStartOf="@+id/chip_item_detail_bakery_info_first_near_station"
+            app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_time"
+            tools:text="월,화 휴무" />
 
-    </com.google.android.material.chip.ChipGroup>
+        <TextView
+            android:id="@+id/tv_item_detail_bakery_info_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="21dp"
+            android:text="@{bakeryInfo.openingTime}"
+            android:textAppearance="@style/TextAppearance.Subhead"
+            android:textColor="@color/gray_400"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:layout_constraintStart_toStartOf="@+id/tv_item_detail_bakery_info_time_holiday"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_detail_bakery_info_time_holiday"
+            tools:text="수-금 12:00 ~ 19:00 / 토-일 13:00 ~ 19:00 " />
 
-    <View
-        android:id="@+id/view_item_detail_bakery_info_first_line"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="28dp"
-        android:background="@color/gray_200"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chip_group_item_detail_bakery_info_bread_type" />
+        <ImageView
+            android:id="@+id/iv_item_detail_bakery_info_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_call"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_detail_bakery_info_time" />
 
-    <TextView
-        android:id="@+id/tv_item_detail_bakery_info_more_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/detail_more_info"
-        android:textAppearance="@style/TextAppearance.BodyB1"
-        android:textColor="@color/gray_700"
-        app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toBottomOf="@+id/view_item_detail_bakery_info_first_line" />
+        <TextView
+            android:id="@+id/tv_item_detail_bakery_info_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{bakeryInfo.phoneNumber}"
+            android:textAppearance="@style/TextAppearance.Subhead"
+            android:textColor="@color/gray_400"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_item_detail_bakery_info_call"
+            app:layout_constraintStart_toStartOf="@+id/tv_item_detail_bakery_info_time"
+            app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_call"
+            tools:text="02-033-3333" />
 
-    <ImageView
-        android:id="@+id/iv_item_detail_bakery_info_notice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_notice"
-        app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toBottomOf="@+id/tv_item_detail_bakery_info_more_info" />
+        <View
+            android:id="@+id/view_item_detail_bakery_info_second_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/gray_200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_item_detail_bakery_info_call" />
 
-    <TextView
-        android:id="@+id/tv_item_detail_bakery_info_notice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="@string/detail_notice"
-        android:textAppearance="@style/TextAppearance.CaptionM1"
-        android:textColor="@color/gray_300"
-        app:layout_constraintStart_toEndOf="@+id/iv_item_detail_bakery_info_notice"
-        app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_notice" />
+        <TextView
+            android:id="@+id/tv_item_detail_bakery_info_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/detail_menu"
+            android:textAppearance="@style/TextAppearance.BodyB1"
+            android:textColor="@color/gray_700"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/view_item_detail_bakery_info_second_line" />
 
-    <ImageView
-        android:id="@+id/iv_item_detail_bakery_info_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/ic_link"
-        app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toBottomOf="@+id/iv_item_detail_bakery_info_notice" />
-
-    <TextView
-        android:id="@+id/tv_item_detail_bakery_info_link"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:textAppearance="@style/TextAppearance.Subhead"
-        android:textColor="@color/gray_400"
-        app:layout_constraintEnd_toStartOf="@+id/gl_end"
-        app:layout_constraintStart_toEndOf="@+id/iv_item_detail_bakery_info_link"
-        app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_link"
-        tools:text="https://www.naver.com/mmv_vegan_bake _shop/" />
-
-    <ImageView
-        android:id="@+id/iv_item_detail_bakery_info_store"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_store"
-        app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toBottomOf="@+id/iv_item_detail_bakery_info_link" />
-
-    <TextView
-        android:id="@+id/tv_item_detail_bakery_info_store"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:textAppearance="@style/TextAppearance.Subhead"
-        android:textColor="@color/gray_400"
-        app:layout_constraintEnd_toStartOf="@+id/iv_item_detail_bakery_info_copy"
-        app:layout_constraintStart_toStartOf="@+id/tv_item_detail_bakery_info_link"
-        app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_store"
-        tools:text="경기 의왕시 신장승길 29 퍼스트힐5차 111호" />
-
-    <ImageView
-        android:id="@+id/iv_item_detail_bakery_info_copy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_copy"
-        app:layout_constraintEnd_toStartOf="@+id/gl_end"
-        app:layout_constraintTop_toTopOf="@+id/tv_item_detail_bakery_info_store" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_item_detail_bakery_info_first_near_station"
-        style="@style/Style.Material3.Chip.Station.Category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/main_3"
-        app:layout_constraintStart_toStartOf="@+id/tv_item_detail_bakery_info_store"
-        app:layout_constraintTop_toBottomOf="@+id/tv_item_detail_bakery_info_store"
-        tools:text="의왕역" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_item_detail_bakery_info_second_near_station"
-        style="@style/Style.Material3.Chip.Station.Category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:backgroundTint="@color/main_3"
-        app:layout_constraintStart_toEndOf="@+id/chip_item_detail_bakery_info_first_near_station"
-        app:layout_constraintTop_toTopOf="@+id/chip_item_detail_bakery_info_first_near_station"
-        tools:text="의왕역 5번 출구" />
-
-    <ImageView
-        android:id="@+id/iv_item_detail_bakery_info_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_time"
-        app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toBottomOf="@+id/chip_item_detail_bakery_info_first_near_station" />
-
-    <TextView
-        android:id="@+id/tv_item_detail_bakery_info_time_holiday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.Subhead"
-        android:textColor="@color/error"
-        app:layout_constraintStart_toStartOf="@+id/chip_item_detail_bakery_info_first_near_station"
-        app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_time"
-        tools:text="월,화 휴무" />
-
-    <TextView
-        android:id="@+id/tv_item_detail_bakery_info_time"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="21dp"
-        android:textAppearance="@style/TextAppearance.Subhead"
-        android:textColor="@color/gray_400"
-        app:layout_constraintEnd_toStartOf="@+id/gl_end"
-        app:layout_constraintStart_toStartOf="@+id/tv_item_detail_bakery_info_time_holiday"
-        app:layout_constraintTop_toBottomOf="@+id/tv_item_detail_bakery_info_time_holiday"
-        tools:text="수-금 12:00 ~ 19:00 / 토-일 13:00 ~ 19:00 " />
-
-    <ImageView
-        android:id="@+id/iv_item_detail_bakery_info_call"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_call"
-        app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toBottomOf="@+id/tv_item_detail_bakery_info_time" />
-
-    <TextView
-        android:id="@+id/tv_item_detail_bakery_info_call"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.Subhead"
-        android:textColor="@color/gray_400"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_item_detail_bakery_info_call"
-        app:layout_constraintStart_toStartOf="@+id/tv_item_detail_bakery_info_time"
-        app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_call"
-        tools:text="02-033-3333" />
-
-    <View
-        android:id="@+id/view_item_detail_bakery_info_second_line"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/gray_200"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_item_detail_bakery_info_call" />
-
-    <TextView
-        android:id="@+id/tv_item_detail_bakery_info_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/detail_menu"
-        android:textAppearance="@style/TextAppearance.BodyB1"
-        android:textColor="@color/gray_700"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/view_item_detail_bakery_info_second_line" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
