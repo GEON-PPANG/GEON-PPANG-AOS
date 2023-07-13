@@ -9,6 +9,8 @@ class MyPageViewModel : ViewModel() {
         memberNickname = "안빵이들",
         mainPurpose = "맛 . 다이어트",
         breadType = BreadType(
+            breadTypeId = 1,
+            breadTypeName = "글루텐프리",
             isGlutenFree = true,
             isVegan = true,
             isNutFree = false,
