@@ -1,5 +1,6 @@
 package com.sopt.geonppang.util
 
+import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.view.View
