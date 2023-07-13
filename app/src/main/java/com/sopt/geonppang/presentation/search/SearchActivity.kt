@@ -24,7 +24,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
 
     private fun initLayout() {
         bakeryAdapter = BakeryAdapter()
-        binding.layoutBakeryList.adapter = bakeryAdapter
+        binding.rvSearchBakeryList.adapter = bakeryAdapter
         bakeryAdapter.submitList(viewModel.mockBakeryList)
     }
 
