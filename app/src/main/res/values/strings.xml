@@ -9,6 +9,7 @@
     <string name="chip_tasty">맛있어요</string>
     <string name="chip_kind">친절해요</string>
     <string name="chip_special_menu">특별한 메뉴</string>
+    <string name="review_text_count">%d/500(최소 10자)</string>
     <string name="review_caption">• 솔직하게 작성해주신 리뷰는 건빵 소비자에게 도움이 됩니다!\n   하지만 선량한 업주나 제3자의 권리를 침해하는 게시물(허위 리뷰, 명예훼손, \n   욕설, 타임 비방글 등)은 안내 없이 삭제되며, 관련 법률에 따라 제재를 받을\n   수 있습니다. 또한, 건빵은 이에 대한 책임을 지지 않습니다. </string>
 
     <!--  home  -->
