@@ -1,6 +1,5 @@
 package com.sopt.geonppang.presentation.detail
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -11,8 +10,7 @@ import com.sopt.geonppang.domain.model.Review
 import com.sopt.geonppang.util.ItemDiffCallback
 
 class DetailReviewAdapter(
-    private val initChip: (ChipGroup, Int) -> Unit,
-    context: Context
+    private val initChip: (ChipGroup, Int) -> Unit
 ) :
     ListAdapter<Review, DetailReviewAdapter.DetailReviewViewHolder>(
         ItemDiffCallback<Review>(
@@ -20,8 +18,6 @@ class DetailReviewAdapter(
             onItemsTheSame = { old, new -> old == new }
         )
     ) {
-    private val inflater by lazy { LayoutInflater.from(context) }
-
     class DetailReviewViewHolder(private val binding: ItemDetailReviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(
@@ -39,7 +35,8 @@ class DetailReviewAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailReviewViewHolder {
-        val binding = ItemDetailReviewBinding.inflate(inflater, parent, false)
+        val binding =
+            ItemDetailReviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DetailReviewViewHolder(binding)
     }
 

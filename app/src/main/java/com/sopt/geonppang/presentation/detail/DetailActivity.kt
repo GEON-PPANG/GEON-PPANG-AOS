@@ -29,9 +29,9 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun initLayout() {
         val detailBakeryInfoAdapter = DetailBakeryInfoAdapter()
-        val detailMenuAdapter = DetailMenuAdapter(this)
+        val detailMenuAdapter = DetailMenuAdapter()
         val detailReviewDataAdapter = DetailReviewDataAdapter()
-        val detailReviewAdapter = DetailReviewAdapter(::initChip, this)
+        val detailReviewAdapter = DetailReviewAdapter(::initChip)
         val detailNoReviewAdapter = DetailNoReviewAdapter()
         var concatAdapter = ConcatAdapter()
 

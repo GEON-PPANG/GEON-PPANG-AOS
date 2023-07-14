@@ -13,7 +13,25 @@ class DetailBakeryInfoAdapter :
     private var bakeryInfo: BakeryInfo? = null
 
     class DetailBakeryInfoViewHolder(val binding: ItemDetailBakeryInfoBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root) {
+        fun onBind() {
+            with(binding) {
+                ivItemDetailBakeryInfoBookmark.setOnClickListener {
+                    CustomSnackbar.makeSnackbar(
+                        it,
+                        it.context.getString(R.string.snackbar_save)
+                    )
+                }
+
+                ivItemDetailBakeryInfoCopy.setOnClickListener {
+                    CustomSnackbar.makeSnackbar(
+                        it,
+                        it.context.getString(R.string.snackbar_copy)
+                    )
+                }
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailBakeryInfoViewHolder {
         val binding =
@@ -24,23 +42,8 @@ class DetailBakeryInfoAdapter :
     override fun getItemCount(): Int = 1
 
     override fun onBindViewHolder(holder: DetailBakeryInfoViewHolder, position: Int) {
-        with(holder.binding) {
-            bakeryInfo = bakeryInfo
-
-            ivItemDetailBakeryInfoBookmark.setOnClickListener { bookmark ->
-                CustomSnackbar.makeSnackbar(
-                    bookmark,
-                    bookmark.context.getString(R.string.snackbar_save)
-                )
-            }
-
-            ivItemDetailBakeryInfoCopy.setOnClickListener { bookmark ->
-                CustomSnackbar.makeSnackbar(
-                    bookmark,
-                    bookmark.context.getString(R.string.snackbar_copy)
-                )
-            }
-        }
+        holder.binding.bakeryInfo = bakeryInfo
+        holder.onBind()
     }
 
     fun setBakeryInfo(bakeryInfo: BakeryInfo) {
