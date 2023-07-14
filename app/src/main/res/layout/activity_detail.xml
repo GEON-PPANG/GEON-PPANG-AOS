@@ -103,7 +103,7 @@
             android:layout_marginStart="11dp"
             android:text="@{@string/home_bookmark_count(bakeryInfo.bookmarkCount)}"
             android:textAppearance="@style/TextAppearance.BodyB1"
-            android:textColor="@color/gray_300"
+            android:textColor="@{bakeryInfo.isBooked == true ? @color/point_1 : @color/gray_300}"
             app:layout_constraintBottom_toBottomOf="@+id/iv_detail_bottom_app_bar_bookmark"
             app:layout_constraintStart_toEndOf="@+id/iv_detail_bottom_app_bar_bookmark"
             app:layout_constraintTop_toTopOf="@+id/iv_detail_bottom_app_bar_bookmark"
