@@ -120,7 +120,7 @@
             style="@style/Widget.OutlinedButton.Basic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="36dp"
             android:enabled="@{viewModel.isValidNickname()}"
             android:paddingVertical="18dp"
             android:text="@string/double_check"

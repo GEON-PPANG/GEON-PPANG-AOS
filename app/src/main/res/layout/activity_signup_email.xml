@@ -33,9 +33,9 @@
             android:id="@+id/img_back_arrow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
             android:layout_marginTop="34dp"
             android:background="@null"
-            android:layout_marginLeft="17dp"
             android:padding="12dp"
             android:src="@drawable/ic_arrow_left"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,8 +49,8 @@
             android:text="1/6"
             android:textAppearance="@style/TextAppearance.Subhead"
             android:textColor="@color/gray_300"
-            app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintBottom_toBottomOf="@id/img_back_arrow"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintTop_toTopOf="@id/img_back_arrow" />
 
         <TextView
@@ -121,7 +121,7 @@
             style="@style/Widget.OutlinedButton.Basic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="36dp"
             android:enabled="@{viewModel.isValidEmail()}"
             android:paddingVertical="18dp"
             android:text="@string/double_check"
