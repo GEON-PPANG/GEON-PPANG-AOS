@@ -2,7 +2,6 @@ package com.sopt.geonppang.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
@@ -29,8 +28,7 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
     }
 
     private fun moveToNext() {
-        Log.e("this", "이것은 되는가?")
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, ServiceStartActivity::class.java))
         finish()
     }
 }
