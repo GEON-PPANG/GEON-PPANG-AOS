@@ -3,11 +3,11 @@ package com.sopt.geonppang.presentation
 import android.content.Intent
 import android.os.Bundle
 import com.sopt.geonppang.R
-import com.sopt.geonppang.databinding.ActivityServiceStartBinding
+import com.sopt.geonppang.databinding.ActivitySignBinding
 import com.sopt.geonppang.util.binding.BindingActivity
 
 class SignActivity :
-    BindingActivity<ActivityServiceStartBinding>(R.layout.activity_service_start) {
+    BindingActivity<ActivitySignBinding>(R.layout.activity_sign) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //addListeners()
