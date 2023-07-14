@@ -28,7 +28,7 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
     }
 
     private fun moveToNext() {
-        startActivity(Intent(this, ServiceStartActivity::class.java))
+        startActivity(Intent(this, SignActivity::class.java))
         finish()
     }
 }
