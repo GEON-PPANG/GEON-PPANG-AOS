@@ -16,9 +16,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name="com.sopt.geonppang.presentation.MainActivity"
+            android:name=".presentation.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.GeonPpang.Splash"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
