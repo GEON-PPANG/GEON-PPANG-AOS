@@ -5,5 +5,6 @@ data class ReviewData(
     val special: Int,
     val kind: Int,
     val zero: Int,
-    val reviewCount: Int
+    val reviewCount: Int,
+    val reviewList: List<Review>
 )

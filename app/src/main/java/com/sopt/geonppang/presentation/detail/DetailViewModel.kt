@@ -9,31 +9,29 @@ import com.sopt.geonppang.domain.model.Review
 import com.sopt.geonppang.domain.model.ReviewData
 
 class DetailViewModel : ViewModel() {
-    val mockBakeryInfo = listOf(
-        BakeryInfo(
-            bakeryName = "모니모니해도비건",
-            bakeryPicture = R.drawable.bakery,
-            isHACCP = true,
-            isVegan = false,
-            isNonGMO = true,
-            breadType = BreadType(
-                breadTypeName = "글루텐프리",
-                breadTypeId = 1,
-                isGlutenFree = true,
-                isVegan = true,
-                isNutFree = false,
-                isSugarFree = false
-            ),
-            firstNearStation = "의왕역",
-            secondNearStation = null,
-            isBooked = true,
-            bookmarkCount = 7,
-            homepage = "https://www.naver.com/mmv_vegan_bake_shop/",
-            address = "경기 의왕시 신장승길 29 퍼스트힐5차 111호",
-            openingTime = "수-금 12:00 ~ 19:00 / 토-일 13:00 ~ 19:00",
-            closedTime = "월,화 휴무",
-            phoneNumber = "02-033-3333"
-        )
+    val mockBakeryInfo = BakeryInfo(
+        bakeryName = "모니모니해도비건",
+        bakeryPicture = R.drawable.bakery,
+        isHACCP = true,
+        isVegan = false,
+        isNonGMO = true,
+        breadType = BreadType(
+            breadTypeName = "글루텐프리",
+            breadTypeId = 1,
+            isGlutenFree = true,
+            isVegan = true,
+            isNutFree = false,
+            isSugarFree = false
+        ),
+        firstNearStation = "의왕역",
+        secondNearStation = null,
+        isBooked = true,
+        bookmarkCount = 7,
+        homepage = "https://www.naver.com/mmv_vegan_bake_shop/",
+        address = "경기 의왕시 신장승길 29 퍼스트힐5차 111호",
+        openingTime = "수-금 12:00 ~ 19:00 / 토-일 13:00 ~ 19:00",
+        closedTime = "월,화 휴무",
+        phoneNumber = "02-033-3333"
     )
 
     val mockMenuList = listOf(
@@ -51,69 +49,66 @@ class DetailViewModel : ViewModel() {
         )
     )
 
-    val mockReview = listOf(
-        Review(
-            reviewText = "맛있어서 좋았어요",
-            memberNickname = "건빵죽빵빵빵빵",
-            createdAt = "23.07.13",
-            recommendKeywordList = listOf(
-                Review.RecommendKeyword(
-                    recommendKeywordId = 1,
-                    recommendKeywordName = "맛있어요"
-                ),
-                Review.RecommendKeyword(
-                    recommendKeywordId = 4,
-                    recommendKeywordName = "제로웨이스트"
+    val mockReviewData = ReviewData(
+        taste = 20,
+        special = 50,
+        kind = 10,
+        zero = 90,
+        reviewCount = 3,
+        reviewList = listOf(
+            Review(
+                reviewText = "맛있어서 좋았어요",
+                memberNickname = "건빵죽빵빵빵빵",
+                createdAt = "23.07.13",
+                recommendKeywordList = listOf(
+                    Review.RecommendKeyword(
+                        recommendKeywordId = 1,
+                        recommendKeywordName = "맛있어요"
+                    ),
+                    Review.RecommendKeyword(
+                        recommendKeywordId = 4,
+                        recommendKeywordName = "제로웨이스트"
+                    )
+                )
+            ),
+            Review(
+                reviewText = "여기 소금빵 미친 존맛탱임 우리 건빵 가족들에게도 알려주고싶은 맛이에용앙아아아아아아아아아아아ㅏㅇ아ㅏ아아아아아아아아아ㅏ아아",
+                memberNickname = "보연티비",
+                createdAt = "23.08.09",
+                recommendKeywordList = listOf(
+                    Review.RecommendKeyword(
+                        recommendKeywordId = 1,
+                        recommendKeywordName = "맛있어요"
+                    ),
+                    Review.RecommendKeyword(
+                        recommendKeywordId = 3,
+                        recommendKeywordName = "친절해요"
+                    ),
+                    Review.RecommendKeyword(
+                        recommendKeywordId = 4,
+                        recommendKeywordName = "제로웨이스트"
+                    )
+                )
+            ),
+            Review(
+                reviewText = "안빵이들아 사랑행",
+                memberNickname = "안빵빵",
+                createdAt = "23.07.13",
+                recommendKeywordList = listOf(
+                    Review.RecommendKeyword(
+                        recommendKeywordId = 2,
+                        recommendKeywordName = "특별한 메뉴"
+                    ),
+                    Review.RecommendKeyword(
+                        recommendKeywordId = 3,
+                        recommendKeywordName = "친절해요"
+                    ),
+                    Review.RecommendKeyword(
+                        recommendKeywordId = 4,
+                        recommendKeywordName = "제로웨이스트"
+                    )
                 )
             )
-        ),
-        Review(
-            reviewText = "여기 소금빵 미친 존맛탱임 우리 건빵 가족들에게도 알려주고싶은 맛이에용앙아아아아아아아아아아아ㅏㅇ아ㅏ아아아아아아아아아ㅏ아아",
-            memberNickname = "보연티비",
-            createdAt = "23.08.09",
-            recommendKeywordList = listOf(
-                Review.RecommendKeyword(
-                    recommendKeywordId = 1,
-                    recommendKeywordName = "맛있어요"
-                ),
-                Review.RecommendKeyword(
-                    recommendKeywordId = 3,
-                    recommendKeywordName = "친절해요"
-                ),
-                Review.RecommendKeyword(
-                    recommendKeywordId = 4,
-                    recommendKeywordName = "제로웨이스트"
-                )
-            )
-        ),
-        Review(
-            reviewText = "안빵이들아 사랑행",
-            memberNickname = "안빵빵",
-            createdAt = "23.07.13",
-            recommendKeywordList = listOf(
-                Review.RecommendKeyword(
-                    recommendKeywordId = 2,
-                    recommendKeywordName = "특별한 메뉴"
-                ),
-                Review.RecommendKeyword(
-                    recommendKeywordId = 3,
-                    recommendKeywordName = "친절해요"
-                ),
-                Review.RecommendKeyword(
-                    recommendKeywordId = 4,
-                    recommendKeywordName = "제로웨이스트"
-                )
-            )
-        )
-    )
-
-    val mockReviewData = listOf(
-        ReviewData(
-            taste = 20,
-            special = 50,
-            kind = 10,
-            zero = 90,
-            reviewCount = mockReview.size ?: 0
         )
     )
 }

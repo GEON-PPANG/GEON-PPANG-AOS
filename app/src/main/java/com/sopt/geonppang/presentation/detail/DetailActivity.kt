@@ -28,14 +28,14 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initLayout() {
-        val detailBakeryInfoAdapter = DetailBakeryInfoAdapter(this)
+        val detailBakeryInfoAdapter = DetailBakeryInfoAdapter()
         val detailMenuAdapter = DetailMenuAdapter(this)
-        val detailReviewDataAdapter = DetailReviewDataAdapter(this)
+        val detailReviewDataAdapter = DetailReviewDataAdapter()
         val detailReviewAdapter = DetailReviewAdapter(::initChip, this)
-        val detailNoReviewAdapter = DetailNoReviewAdapter(this)
+        val detailNoReviewAdapter = DetailNoReviewAdapter()
         var concatAdapter = ConcatAdapter()
 
-        if (viewModel.mockReviewData[0].reviewCount == 0) {
+        if (viewModel.mockReviewData.reviewCount == 0) {
             concatAdapter = ConcatAdapter(
                 detailBakeryInfoAdapter,
                 detailMenuAdapter,
@@ -51,13 +51,13 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
             )
         }
 
-        detailBakeryInfoAdapter.submitList(viewModel.mockBakeryInfo)
+        detailBakeryInfoAdapter.setBakeryInfo(viewModel.mockBakeryInfo)
         detailMenuAdapter.submitList(viewModel.mockMenuList)
-        detailReviewDataAdapter.submitList(viewModel.mockReviewData)
-        detailReviewAdapter.submitList(viewModel.mockReview)
+        detailReviewDataAdapter.setReviewData(viewModel.mockReviewData)
+        detailReviewAdapter.submitList(viewModel.mockReviewData.reviewList)
 
         binding.rvDetail.adapter = concatAdapter
-        binding.bakeryInfo = viewModel.mockBakeryInfo[0]
+        binding.bakeryInfo = viewModel.mockBakeryInfo
     }
 
     private fun addListeners() {
@@ -67,7 +67,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initChip(chipGroup: ChipGroup, position: Int) {
-        for (recommendKeyword in viewModel.mockReview[position].recommendKeywordList) {
+        for (recommendKeyword in viewModel.mockReviewData.reviewList[position].recommendKeywordList) {
             chipGroup.addView(
                 recommendKeyword.recommendKeywordName.toChip
             )
