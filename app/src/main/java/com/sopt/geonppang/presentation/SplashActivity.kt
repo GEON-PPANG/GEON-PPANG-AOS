@@ -22,12 +22,12 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
     private fun loadSplashScreen() {
         lifecycleScope.launch {
             delay(1500L)
-            moveToNext()
+            moveToSign()
             finish()
         }
     }
 
-    private fun moveToNext() {
+    private fun moveToSign() {
         startActivity(Intent(this, SignActivity::class.java))
         finish()
     }
