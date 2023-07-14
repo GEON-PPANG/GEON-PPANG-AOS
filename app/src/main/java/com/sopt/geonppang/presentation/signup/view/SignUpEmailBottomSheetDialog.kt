@@ -22,8 +22,7 @@ class SignUpEmailBottomSheetDialog :
         addListener()
     }
 
-    private fun addListener(){
+    private fun addListener() {
         binding.btnCheck.setOnClickListener { dismiss() }
     }
-
 }

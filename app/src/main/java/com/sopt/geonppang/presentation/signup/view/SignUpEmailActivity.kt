@@ -3,7 +3,6 @@ package com.sopt.geonppang.presentation.signup.view
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySignupEmailBinding
 import com.sopt.geonppang.presentation.signup.viewmodel.SignUpViewModel
