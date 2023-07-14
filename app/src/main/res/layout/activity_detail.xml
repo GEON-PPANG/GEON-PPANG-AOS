@@ -89,6 +89,7 @@
 
         <TextView
             android:id="@+id/tv_detail_bottom_app_bar_bookmark"
+            invisibility="@{bakeryInfo.bookmarkCount > 0}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
@@ -104,15 +105,14 @@
             android:id="@+id/layout_detail_bottom_app_bar_create_review"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginStart="97dp"
             android:layout_marginEnd="26dp"
             android:layout_marginBottom="48dp"
             android:background="@drawable/background_detail_bottom_app_bar_review_create"
             android:paddingVertical="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_detail_bottom_app_bar_bookmark">
+            app:layout_constraintStart_toStartOf="@+id/gl_start">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_detail_bottom_app_bar_create_review_content"
