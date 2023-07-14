@@ -18,7 +18,6 @@ class BreadTypeFilterActivity :
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        viewModel.setIsNextBtnEnabled(false)
 
         addListeners()
     }
