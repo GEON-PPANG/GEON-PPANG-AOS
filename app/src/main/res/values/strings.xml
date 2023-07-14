@@ -45,4 +45,5 @@
     <string name="my_page_app_version">앱버전</string>
     <string name="my_page_store_list_title">저장 목록</string>
     <string name="my_store_list_empty_view_description">저장된 건빵집이 없어요!</string>
+    <string name="my_review_title">내가 쓴 리뷰</string>
 </resources>
