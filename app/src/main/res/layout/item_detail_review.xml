@@ -36,7 +36,7 @@
             android:id="@+id/iv_item_detail_review_profile_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_logo"
+            android:src="@drawable/ic_detail_logo_profile"
             app:layout_constraintStart_toStartOf="@+id/gl_start"
             app:layout_constraintTop_toTopOf="parent" />
 
