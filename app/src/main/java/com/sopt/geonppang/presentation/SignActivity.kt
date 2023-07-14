@@ -10,7 +10,7 @@ class SignActivity :
     BindingActivity<ActivitySignBinding>(R.layout.activity_sign) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //addListeners()
+        // addListeners()
     }
 
     // TODO 회원가입으로 넘어가도록 구현 예정
