@@ -16,7 +16,6 @@ class ReviewWritingActivity :
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
