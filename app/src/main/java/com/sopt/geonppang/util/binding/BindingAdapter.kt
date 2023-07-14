@@ -28,6 +28,12 @@ fun View.setVisibility(isVisible: Boolean?) {
     this.visibility = if (isVisible) View.VISIBLE else View.GONE
 }
 
+@BindingAdapter("invisibility")
+fun View.setInvisibility(isInvisible: Boolean?) {
+    if (isInvisible == null) return
+    this.visibility = if (isInvisible) View.VISIBLE else View.INVISIBLE
+}
+
 @BindingAdapter("highlightNumbers")
 fun TextView.highlightNumbers(text: CharSequence?) {
     if (text.isNullOrEmpty()) {
