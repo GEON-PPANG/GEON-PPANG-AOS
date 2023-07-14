@@ -36,4 +36,8 @@
     <string name="bread_type_sugar_free_title">저당, 무설탕</string>
     <string name="bread_type_sugar_free_des">대체당 사용</string>
 
+    <string name="nutrient_type_nutrient_open">영양성분 공개</string>
+    <string name="nutrient_type_ingredient_open">원재료 공개</string>
+    <string name="nutrient_type_not_open">비공개</string>
+
 </resources>
