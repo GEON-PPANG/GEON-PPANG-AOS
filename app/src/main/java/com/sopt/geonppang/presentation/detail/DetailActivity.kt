@@ -62,7 +62,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun addListeners() {
         binding.ivDetailBottomAppBarBookmark.setOnClickListener {
-            CustomSnackbar.makeSnackbar(binding.root, getString(R.string.snackbar_save), 138)
+            CustomSnackbar.makeSnackbar(binding.root, getString(R.string.snackbar_save))
         }
     }
 

@@ -9,7 +9,7 @@ import com.google.android.material.snackbar.Snackbar.SnackbarLayout
 import com.sopt.geonppang.databinding.ViewSnackbarBinding
 
 object CustomSnackbar {
-    fun makeSnackbar(view: View, message: String, bottomMargin: Int) {
+    fun makeSnackbar(view: View, message: String) {
         val inflater = LayoutInflater.from(view.context)
         val binding = ViewSnackbarBinding.inflate(inflater, null, false)
 
@@ -20,7 +20,7 @@ object CustomSnackbar {
 
         with(snackbarLayout) {
             removeAllViews()
-            setPadding(0, 0, 0, bottomMargin.toPx())
+            setPadding(0, 0, 0, 138.toPx())
             setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
             addView(binding.root)
         }
