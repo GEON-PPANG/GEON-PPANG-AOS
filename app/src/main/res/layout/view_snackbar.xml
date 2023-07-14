@@ -12,7 +12,7 @@
         android:background="@drawable/background_snackbar"
         android:elevation="5dp"
         android:paddingHorizontal="@dimen/spacing24"
-        android:paddingVertical="@dimen/spacing14"
+        android:paddingVertical="13dp"
         android:textAppearance="@style/TextAppearance.BodyB2"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
