@@ -32,12 +32,24 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         val detailMenuAdapter = DetailMenuAdapter(this)
         val detailReviewDataAdapter = DetailReviewDataAdapter(this)
         val detailReviewAdapter = DetailReviewAdapter(::initChip, this)
-        val concatAdapter = ConcatAdapter(
-            detailBakeryInfoAdapter,
-            detailMenuAdapter,
-            detailReviewDataAdapter,
-            detailReviewAdapter
-        )
+        val detailNoReviewAdapter = DetailNoReviewAdapter(this)
+        var concatAdapter = ConcatAdapter()
+
+        if (viewModel.mockReviewData[0].reviewCount == 0) {
+            concatAdapter = ConcatAdapter(
+                detailBakeryInfoAdapter,
+                detailMenuAdapter,
+                detailReviewDataAdapter,
+                detailNoReviewAdapter
+            )
+        } else {
+            concatAdapter = ConcatAdapter(
+                detailBakeryInfoAdapter,
+                detailMenuAdapter,
+                detailReviewDataAdapter,
+                detailReviewAdapter
+            )
+        }
 
         detailBakeryInfoAdapter.submitList(viewModel.mockBakeryInfo)
         detailMenuAdapter.submitList(viewModel.mockMenuList)

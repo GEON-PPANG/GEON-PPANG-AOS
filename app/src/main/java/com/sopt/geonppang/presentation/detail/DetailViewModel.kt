@@ -51,16 +51,6 @@ class DetailViewModel : ViewModel() {
         )
     )
 
-    val mockReviewData = listOf(
-        ReviewData(
-            taste = 20,
-            special = 50,
-            kind = 10,
-            zero = 90,
-            reviewCount = 3
-        )
-    )
-
     val mockReview = listOf(
         Review(
             reviewText = "맛있어서 좋았어요",
@@ -114,6 +104,16 @@ class DetailViewModel : ViewModel() {
                     recommendKeywordName = "제로웨이스트"
                 )
             )
+        )
+    )
+
+    val mockReviewData = listOf(
+        ReviewData(
+            taste = 20,
+            special = 50,
+            kind = 10,
+            zero = 90,
+            reviewCount = mockReview.size ?: 0
         )
     )
 }
