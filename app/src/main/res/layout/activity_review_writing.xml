@@ -5,9 +5,13 @@
 
     <data>
 
+        <import type="com.sopt.geonppang.presentation.type.LikeType" />
+
+        <import type="com.sopt.geonppang.presentation.type.KeyWordType" />
+
         <variable
             name="viewModel"
-            type="com.sopt.geonppang.presentation.review.viewmodel.ReviewViewModel" />
+            type="com.sopt.geonppang.presentation.review.ReviewViewModel" />
 
     </data>
 
@@ -33,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="44dp"
-            android:text="건대 초코빵"
+            android:text="@string/review_writing_title"
             android:textAppearance="@style/TextAppearance.Title2"
             app:layout_constraintLeft_toRightOf="@+id/img_back_arrow"
             app:layout_constraintTop_toTopOf="parent" />
@@ -49,12 +53,11 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/button"
+            app:layout_constraintBottom_toBottomOf="@id/view_line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line1">
 
-            <!-- NestedScrollView 내부에 스크롤 가능한 컨텐츠를 배치 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -96,24 +99,24 @@
                     <ImageView
                         android:id="@+id/iv_haccp_mark"
                         visibility=""
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
                         android:layout_marginEnd="-8dp"
                         android:src="@drawable/ic_haccp_mark" />
 
                     <ImageView
                         android:id="@+id/iv_vegan_mark"
                         visibility=""
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
                         android:layout_marginEnd="-8dp"
                         android:src="@drawable/ic_vegan_mark" />
 
                     <ImageView
                         android:id="@+id/iv_gmo_mark"
                         visibility=""
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
                         android:src="@drawable/ic_gmo_mark" />
 
                 </LinearLayout>
@@ -193,7 +196,6 @@
                     android:background="@color/gray_200"
                     app:layout_constraintTop_toBottomOf="@id/chip_station_1" />
 
-                <!--분기처리 필요 1. 선택 전, 2. 선택 활성화, 3. 선택 후-->
                 <TextView
                     android:id="@+id/tv_how_was_the_store"
                     android:layout_width="wrap_content"
@@ -201,41 +203,51 @@
                     android:layout_marginTop="36dp"
                     android:text="@string/how_was_the_store"
                     android:textAppearance="@style/TextAppearance.BodyB1"
-                    android:textColor="@color/gray_700"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/line2" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_like"
-                    style="@style/Style.Material3.Chip.Review.Category_enable"
+                    style="@style/Style.Material3.Chip.Review"
+                    selected="@{viewModel.isLike == LikeType.LIKE}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:backgroundTint="@color/white"
+                    android:onClick="@{() -> viewModel.setLikeType(LikeType.LIKE)}"
                     android:text="@string/chip_like"
+                    android:textColor="@color/selector_bread_sort_color"
+                    app:chipStrokeColor="@color/selector_bread_sort_color"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_how_was_the_store" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_how_was_the_store"
+                    app:rippleColor="@android:color/transparent" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_soso"
-                    style="@style/Style.Material3.Chip.Review.Category_enable"
+                    style="@style/Style.Material3.Chip.Review"
+                    selected="@{viewModel.isLike == LikeType.BAD}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:backgroundTint="@color/white"
+                    android:onClick="@{() -> viewModel.setLikeType(LikeType.BAD)}"
                     android:text="@string/chip_soso"
+                    android:textColor="@color/selector_bread_sort_color"
+                    app:chipStrokeColor="@color/selector_bread_sort_color"
                     app:layout_constraintStart_toEndOf="@id/chip_like"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_how_was_the_store" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_how_was_the_store"
+                    app:rippleColor="@android:color/transparent" />
 
                 <TextView
                     android:id="@+id/tv_what_do_you_recommend"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
+                    android:enabled="@{viewModel.isLike == LikeType.LIKE}"
                     android:text="@string/what_do_you_recommend"
                     android:textAppearance="@style/TextAppearance.BodyB1"
-                    android:textColor="@color/gray_300"
+                    android:textColor="@color/enable_review_writing_color"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/chip_like" />
 
@@ -248,73 +260,100 @@
                     app:chipSpacingHorizontal="8dp"
                     app:chipSpacingVertical="12dp"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/tv_what_do_you_recommend"
                     app:layout_constraintWidth="0dp">
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip_tasty"
-                        style="@style/Style.Material3.Chip.Review.Category_disable"
+                        style="@style/Style.Material3.Chip.Review"
+                        selected="@{viewModel.userKeyWordType.get(KeyWordType.TASTE)}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
-                        android:text="@string/chip_tasty" />
+                        android:enabled="@{viewModel.isLike == LikeType.LIKE}"
+                        android:onClick="@{() -> viewModel.setKeyWordType(KeyWordType.TASTE)}"
+                        android:text="@{KeyWordType.TASTE.keyWordType}"
+                        android:textColor="@color/enable_review_writing_chip_color"
+                        app:chipStrokeColor="@color/enable_review_writing_chip_color"
+                        app:rippleColor="@android:color/transparent"
+                        tools:text="맛있어요" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip_kind"
-                        style="@style/Style.Material3.Chip.Review.Category_disable"
+                        style="@style/Style.Material3.Chip.Review"
+                        selected="@{viewModel.userKeyWordType.get(KeyWordType.KIND)}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
-                        android:text="@string/chip_kind" />
+                        android:enabled="@{viewModel.isLike == LikeType.LIKE}"
+                        android:onClick="@{() -> viewModel.setKeyWordType(KeyWordType.KIND)}"
+                        android:text="@{KeyWordType.KIND.keyWordType}"
+                        android:textColor="@color/enable_review_writing_chip_color"
+                        app:chipStrokeColor="@color/enable_review_writing_chip_color"
+                        app:rippleColor="@android:color/transparent"
+                        tools:text="@string/chip_kind" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip_special_menu"
-                        style="@style/Style.Material3.Chip.Review.Category_disable"
+                        style="@style/Style.Material3.Chip.Review"
+                        selected="@{viewModel.userKeyWordType.get(KeyWordType.SPECIAL_MENU)}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
-                        android:text="@string/chip_special_menu" />
+                        android:enabled="@{viewModel.isLike == LikeType.LIKE}"
+                        android:onClick="@{() -> viewModel.setKeyWordType(KeyWordType.SPECIAL_MENU)}"
+                        android:text="@{KeyWordType.SPECIAL_MENU.keyWordType}"
+                        android:textColor="@color/enable_review_writing_chip_color"
+                        app:chipStrokeColor="@color/enable_review_writing_chip_color"
+                        tools:text="@string/chip_special_menu" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip_zero_waste"
-                        style="@style/Style.Material3.Chip.Review.Category_disable"
+                        style="@style/Style.Material3.Chip.Review"
+                        selected="@{viewModel.userKeyWordType.get(KeyWordType.ZERO_WASTE)}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
-                        android:text="제로 웨이스트" />
+                        android:enabled="@{viewModel.isLike == LikeType.LIKE}"
+                        android:onClick="@{() -> viewModel.setKeyWordType(KeyWordType.ZERO_WASTE)}"
+                        android:text="@{KeyWordType.ZERO_WASTE.keyWordType}"
+                        android:textColor="@color/enable_review_writing_chip_color"
+                        app:chipStrokeColor="@color/enable_review_writing_chip_color"
+                        tools:text="제로 웨이스트" />
                 </com.google.android.material.chip.ChipGroup>
 
-                <!--활성화, 비활성화, 오류 로직 필요-->
                 <EditText
                     android:id="@+id/et_write_your_review"
                     android:layout_width="0dp"
                     android:layout_height="196dp"
                     android:layout_marginTop="32dp"
-                    android:background="@drawable/background_review_disable_status"
+                    android:background="@{viewModel.reviewText.length >=10 | viewModel.reviewText.empty? @drawable/background_review_box : @drawable/background_review_error_box}"
+                    android:enabled="@{viewModel.isLike == LikeType.BAD | viewModel.isUserKeyWordTypeSelected}"
                     android:gravity="top"
-                    android:hint="자유롭게 의견을 말씀해주세요!"
-                    android:paddingLeft="24dp"
-                    android:paddingTop="20dp"
-                    android:text="@{viewModel.review_text}"
-                    android:textColor="@{viewModel.countReviewTextTrue == true? @color/gray_500 : @color/error}"
-                    android:textColorHint="@color/gray_300"
+                    android:hint="@{viewModel.isLike == LikeType.BAD? @string/review_text_bad_hint : @string/review_text_good_hint}"
+                    android:paddingHorizontal="@dimen/spacing24"
+                    android:paddingVertical="20dp"
+                    android:text="@={viewModel.reviewText}"
+                    android:textAppearance="@style/TextAppearance.Subhead"
+                    android:textColor="@{viewModel.reviewText.length >=10? @color/gray_700 : @color/error}"
+                    android:textColorHint="@color/enable_review_writing_color"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/cg_review_recommend_chip_select" />
+                    app:layout_constraintTop_toBottomOf="@id/cg_review_recommend_chip_select"
+                    tools:hint="추가로 좋았던 점이 있다면 말씀해주세요!" />
 
                 <TextView
                     android:id="@+id/tv_review_text_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@{@string/review_text_count(viewModel.countReviewText)}"
+                    android:text="@{@string/review_text_count(viewModel.reviewText.length)}"
                     android:textAppearance="@style/TextAppearance.CaptionM1"
-                    android:textColor="@{viewModel.countReviewTextTrue == true? @color/gray_500 : @color/error}"
+                    android:textColor="@{viewModel.reviewText.empty | viewModel.reviewText.length >=10 ? @color/gray_500 : @color/error}"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintTop_toBottomOf="@id/et_write_your_review"
-                    tools:text="0/500 (최소 10자)" />
+                    tools:text="0/70 (최소 10자)" />
 
                 <TextView
                     android:id="@+id/tv_review_caption"
@@ -333,41 +372,46 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_review_text_count" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
         </androidx.core.widget.NestedScrollView>
 
         <View
+            android:id="@+id/view_line"
             android:layout_width="0dp"
             android:layout_height="5dp"
             android:background="@drawable/review_page_bottom_app_bar_shadow"
-            app:layout_constraintBottom_toTopOf="@id/button"
+            app:layout_constraintBottom_toTopOf="@id/layout_bottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <FrameLayout
-            android:id="@+id/button"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:paddingBottom="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="match_parent"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_review_success"
+                style="@style/Widget.FullButton.Basic"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
+                android:layout_marginHorizontal="@dimen/spacing24"
                 android:layout_marginTop="18dp"
-                android:layout_marginBottom="48dp"
                 android:background="@drawable/background_review_bottom_btn"
-                android:paddingHorizontal="128dp"
+                android:backgroundTint="@{viewModel.reviewText.length >= 10? @color/gray_700 : @color/gray_200}"
+                android:enabled="@{viewModel.reviewText.length >= 10}"
                 android:paddingVertical="18dp"
                 android:text="작성하기"
                 android:textAppearance="@style/TextAppearance.Headline"
-                android:textColor="@color/gray_400" />
-        </FrameLayout>
-
+                android:textColor="@{viewModel.reviewText.length >=10? @color/gray_100 : @color/gray_400}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/layout_bottom" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
