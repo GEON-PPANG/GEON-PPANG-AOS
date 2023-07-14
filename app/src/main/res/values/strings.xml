@@ -23,6 +23,8 @@
     <string name="my_page_inquiry">문의하기</string>
     <string name="my_page_app_version">앱버전</string>
 
+    <string name="my_review_title">내가 쓴 리뷰</string>
+
     <!--  search view  -->
     <string name="search_hint">궁금한 건빵집을 입력해주세요!</string>
     <string name="search_recent_search">최근 검색어</string>
