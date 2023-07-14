@@ -16,7 +16,12 @@
         <item name="android:includeFontPadding">false</item>
         <item name="bottomSheetDialogTheme">@style/Style.BottomSheetDialog</item>
     </style>
-
+    <!--splash-->
+    <style name="Theme.GeonPpang.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@android:color/transparent</item>
+        <item name="postSplashScreenTheme">@style/Theme.GeonPpang</item>
+    </style>
     <!--  Widget  -->
     <style name="Widget.Material.Button.Basic" parent="">
         <item name="android:insetTop">0dp</item>
@@ -29,6 +34,12 @@
     <style name="Widget.FullButton.Basic" parent="Widget.Material.Button.Basic">
         <item name="android:layout_height">@dimen/button_height</item>
         <item name="android:layout_width">0dp</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <style name="Widget.OutlinedButton.Basic" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:width">0dp</item>
         <item name="cornerRadius">12dp</item>
     </style>
 
