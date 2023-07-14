@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.sopt.geonppang.presentation.search.SearchViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing24" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing24" />
+
+        <ImageView
+            android:id="@+id/iv_search_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:padding="12dp"
+            android:src="@drawable/ic_arrow_left"
+            app:layout_constraintBottom_toBottomOf="@+id/et_search"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/et_search" />
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/background_search_box"
+            android:hint="@string/search_hint"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            android:text="@={viewModel.inputSearch}"
+            android:textAppearance="@style/TextAppearance.BodyM1"
+            android:textColor="@color/gray_700"
+            android:textColorHint="@color/gray_300"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toEndOf="@+id/iv_search_back"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--   TODO naming 수정     -->
+        <ImageView
+            android:id="@+id/iv_search_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@{viewModel.inputSearch.empty ? @drawable/ic_search : @drawable/ic_delete}"
+            app:layout_constraintBottom_toBottomOf="@+id/et_search"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:layout_constraintTop_toTopOf="@+id/et_search"
+            tools:src="@drawable/ic_search" />
+
+        <View
+            android:id="@+id/line1"
+            visibility="@{viewModel.searchCount == null}"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/spacing12"
+            android:background="@color/gray_200"
+            app:layout_constraintTop_toBottomOf="@id/et_search"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_search_recent_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="38dp"
+            android:text="@{viewModel.searchCount == null ? @string/search_recent_search : @string/search_result}"
+            android:textAppearance="@style/TextAppearance.Headline"
+            android:textColor="@color/gray_600"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/et_search"
+            tools:text="@string/search_recent_search" />
+
+        <TextView
+            visibility="@{viewModel.searchCount != null}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{@string/search_count(viewModel.searchCount)}"
+            android:textAppearance="@style/TextAppearance.Headline"
+            android:textColor="@color/point_1"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_search_recent_search"
+            app:layout_constraintStart_toEndOf="@+id/tv_search_recent_search"
+            tools:text="4개" />
+
+        <TextView
+            android:id="@+id/tv_search_delete_all"
+            visibility="@{viewModel.searchCount == null}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_delete_all"
+            android:textAppearance="@style/TextAppearance.BodyB2"
+            android:textColor="@color/gray_300"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_search_recent_search"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintTop_toTopOf="@+id/tv_search_recent_search" />
+
+        <View
+            android:id="@+id/view_line_top"
+            visibility="@{viewModel.searchCount != null}"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="19dp"
+            android:background="@color/gray_200"
+            app:layout_constraintTop_toBottomOf="@+id/tv_search_recent_search" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_search_init"
+            visibility="@{viewModel.searchCount == null}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_search_recent_search"
+            tools:visibility="gone">
+
+            <!--     image 수정       -->
+            <ImageView
+                android:id="@+id/iv_search_init"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="116dp"
+                android:src="@drawable/img_search_init"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_search_init_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/search_init_description"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Title2"
+                android:textColor="@color/gray_300"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_search_init" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_search_empty"
+            visibility="@{viewModel.searchCount == 0 &amp; viewModel.searchCount != null}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_search_recent_search">
+
+            <!--     image 수정       -->
+            <ImageView
+                android:id="@+id/iv_search_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:src="@drawable/img_search_empty"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_search_empty_description1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/search_empty_description1"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Title2"
+                android:textColor="@color/gray_300"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_search_empty" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/search_empty_description2"
+                android:textAppearance="@style/TextAppearance.Subhead"
+                android:textColor="@color/gray_300"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_search_empty_description1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_search_bakery_list"
+            visibility="@{viewModel.searchCount > 0}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_line_top"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_bakery" />
+
+        <!--        <View-->
+        <!--            android:id="@+id/view_line_bottom"-->
+        <!--            visibility="@{viewModel.searchCount >0}"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="1dp"-->
+        <!--            android:background="@color/gray_200"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/layout_bakery_list" />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
