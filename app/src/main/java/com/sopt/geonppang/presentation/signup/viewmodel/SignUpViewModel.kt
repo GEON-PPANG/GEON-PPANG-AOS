@@ -30,9 +30,10 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         /*조건에 맞는 비밀번호인지 확인*/
     }
 
-    val doubleCheckEmail = MediatorLiveData<Boolean>().apply {
-        // Todo 중복 확인 구현 예정
-    }
+    // TODO 이메일 중복확인 구현 예정
+    /*val doubleCheckEmail: LiveData<Boolean> = email.map {
+
+    }*/
     val doubleCheckNickname = MediatorLiveData<Boolean>().apply {
         // Todo 닉네임 중복 확인 구현 예정
     }

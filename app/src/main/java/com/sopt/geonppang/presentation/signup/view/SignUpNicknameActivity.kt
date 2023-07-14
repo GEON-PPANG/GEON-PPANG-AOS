@@ -26,5 +26,10 @@ class SignUpNicknameActivity :
         binding.root.setOnClickListener {
             hideKeyboard(it)
         }
+
+        binding.btnDoubleCheck.setOnClickListener {
+            val bottomSheetDialog = SignUpNicknameBottomSheetDialog()
+            bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
+        }
     }
 }
