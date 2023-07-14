@@ -19,7 +19,7 @@ class DetailNoReviewAdapter(context: Context) :
     private val inflater by lazy { LayoutInflater.from(context) }
 
     class DetailNoReviewDataViewHolder(private val binding: ItemDetailNoReviewBinding) :
-        RecyclerView.ViewHolder(binding.root) {}
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -30,13 +30,13 @@ class DetailNoReviewAdapter(context: Context) :
     }
 
     override fun onBindViewHolder(
-        holder: DetailNoReviewDataViewHolder, position: Int
+        holder: DetailNoReviewDataViewHolder,
+        position: Int
     ) {
-
+        // Bind 할 내용 없음
     }
 
     override fun getItemCount(): Int {
         return 1
     }
-
 }
