@@ -61,4 +61,13 @@
     <!--    snackbar    -->
     <string name="snackbar_copy">복사되었습니다 !</string>
     <string name="snackbar_save">저장되었습니다 !</string>
+
+    <!--  bakery list view  -->
+    <string name="bakery_list_sort">정렬</string>
+    <string name="bakery_list_sort_type_default">기본순</string>
+    <string name="bakery_list_sort_type_review">리뷰 많은 순</string>
+    <string name="bakery_list_title">건빵집 리스트</string>
+    <string name="bakery_bread_type_hard">하드빵류</string>
+    <string name="bakery_bread_type_dessert">디저트류</string>
+    <string name="bakery_bread_type_branch">브런치류</string>
 </resources>
