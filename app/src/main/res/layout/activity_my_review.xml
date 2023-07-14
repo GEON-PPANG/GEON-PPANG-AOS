@@ -15,9 +15,16 @@
         android:layout_height="match_parent">
 
         <include
-            android:id="@+id/include"
+            android:id="@+id/toolbar"
             layout="@layout/view_toolbar"
             app:title="@{@string/my_review_title}" />
+
+        <View
+            android:id="@id/view_top"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_200"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_my_review_list"
@@ -27,7 +34,7 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include" />
+            app:layout_constraintTop_toBottomOf="@+id/view_top" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             visibility="@{viewModel.mockMyReviewList.size() == 0}"
