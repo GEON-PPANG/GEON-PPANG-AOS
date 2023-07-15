@@ -34,16 +34,18 @@
             android:id="@+id/iv_bread_type_filter_arrow_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="38dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="34dp"
+            android:padding="12dp"
             android:src="@drawable/ic_arrow_left"
-            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_bread_type_filter_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="41dp"
+            android:layout_marginTop="49dp"
             android:textAppearance="@style/TextAppearance.Subhead"
             android:textColor="@color/gray_300"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
