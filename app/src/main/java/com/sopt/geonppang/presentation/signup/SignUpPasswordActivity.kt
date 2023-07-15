@@ -1,17 +1,17 @@
-package com.sopt.geonppang.presentation.signup.view
+package com.sopt.geonppang.presentation.signup
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.geonppang.R
-import com.sopt.geonppang.databinding.ActivitySignupNicknameBinding
-import com.sopt.geonppang.presentation.signup.viewmodel.SignUpViewModel
+import com.sopt.geonppang.databinding.ActivitySignupPasswordBinding
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignUpNicknameActivity :
-    BindingActivity<ActivitySignupNicknameBinding>(R.layout.activity_signup_nickname) {
+class SignUpPasswordActivity :
+    BindingActivity<ActivitySignupPasswordBinding>(R.layout.activity_signup_password) {
     private val viewModel: SignUpViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,15 +21,17 @@ class SignUpNicknameActivity :
 
         addListeners()
     }
-
     private fun addListeners() {
         binding.root.setOnClickListener {
             hideKeyboard(it)
         }
-
-        binding.btnDoubleCheck.setOnClickListener {
-            val bottomSheetDialog = SignUpNicknameBottomSheetDialog()
-            bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
+        binding.btnNext.setOnClickListener {
+            moveToNickname()
         }
+    }
+
+    private fun moveToNickname() {
+        startActivity(Intent(this, SignUpNicknameActivity::class.java))
+        finish()
     }
 }

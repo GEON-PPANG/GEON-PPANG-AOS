@@ -1,11 +1,10 @@
-package com.sopt.geonppang.presentation.signup.view
+package com.sopt.geonppang.presentation.signup
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.DialogBottomSignupNicknameBinding
-import com.sopt.geonppang.presentation.signup.viewmodel.SignUpViewModel
 import com.sopt.geonppang.util.binding.BindingBottomSheetDialogFragment
 
 class SignUpNicknameBottomSheetDialog :
