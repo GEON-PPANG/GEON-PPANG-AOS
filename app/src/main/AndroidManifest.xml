@@ -38,19 +38,22 @@
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name=".presentation.signup.view.SignUpEmailActivity"
+            android:name=".presentation.signup.SignUpEmailActivity"
             android:exported="false"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".presentation.signup.view.SignUpPasswordActivity"
+            android:name=".presentation.signup.SignUpPasswordActivity"
             android:exported="false"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".presentation.signup.view.SignUpNicknameActivity"
+            android:name=".presentation.signup.SignUpNicknameActivity"
             android:exported="false"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />
     </application>
 
