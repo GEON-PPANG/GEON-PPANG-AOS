@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="bakery"
+            type="com.sopt.geonppang.domain.model.BestBakery" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/spacing4"
+        android:layout_marginStart="@dimen/spacing4"
+        android:layout_marginEnd="14dp"
+        android:background="@drawable/background_home_bakery_box"
+        android:clipToOutline="true"
+        android:elevation="4dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing12" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing12" />
+
+        <ImageView
+            android:id="@+id/iv_best_bakery"
+            android:layout_width="wrap_content"
+            android:layout_height="122dp"
+            android:scaleType="centerCrop"
+            android:src="@{context.getDrawable(bakery.bakeryImage)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/bread1" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            app:layout_constraintEnd_toEndOf="@id/iv_best_bakery"
+            app:layout_constraintStart_toStartOf="@id/iv_best_bakery"
+            app:layout_constraintTop_toTopOf="@id/iv_best_bakery">
+
+            <ImageView
+                android:id="@+id/iv_haccp_mark"
+                visibility="@{bakery.isHACCP}"
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="-8dp"
+                android:src="@drawable/ic_haccp_mark" />
+
+            <ImageView
+                android:id="@+id/iv_vegan_mark"
+                visibility="@{bakery.isVegan}"
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="-8dp"
+                android:src="@drawable/ic_vegan_mark" />
+
+            <ImageView
+                android:id="@+id/iv_gmo_mark"
+                visibility="@{bakery.isNonGMO}"
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_gmo_mark" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_best_bakery_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="@dimen/spacing12"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{bakery.bakeryName}"
+            android:textAppearance="@style/TextAppearance.BodyB2"
+            android:textColor="@color/gray_700"
+            app:layout_constraintEnd_toStartOf="@id/linear_bookmark"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/iv_best_bakery"
+            tools:text="건대대대대대대대대대대대대" />
+
+        <TextView
+            android:id="@+id/tv_best_bakery_review_count"
+            highlightNumbers="@{@string/home_review_count(bakery.reviewCount)}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:textAppearance="@style/TextAppearance.CaptionB1"
+            android:textColor="@color/gray_700"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_best_bakery_title"
+            tools:text="리뷰(6)" />
+
+        <LinearLayout
+            android:id="@+id/linear_bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/chip_home_second_near_station"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintTop_toTopOf="@+id/tv_best_bakery_title">
+
+            <ImageView
+                android:id="@+id/iv_bookmark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@{bakery.isBooked == true? @drawable/ic_bookmark_selected:@drawable/ic_bookmark_unselected}"
+                tools:src="@drawable/ic_bookmark_unselected" />
+
+            <TextView
+                android:id="@+id/tv_bookmark_count"
+                visibility="@{bakery.bookmarkCount > 0}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp"
+                android:text="@{@string/home_bookmark_count(bakery.bookmarkCount)}"
+                android:textAppearance="@style/TextAppearance.CaptionB1"
+                android:textColor="@{bakery.isBooked == true ? @color/point_1 : @color/gray_300}"
+                tools:text="5명" />
+
+        </LinearLayout>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_home_first_near_station"
+            style="@style/Style.Material3.Chip.Station.Category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:layout_marginBottom="14dp"
+            android:backgroundTint="@color/main_3"
+            android:text="@{bakery.firstNearStation}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_best_bakery_review_count"
+            tools:text="건대역" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_home_second_near_station"
+            style="@style/Style.Material3.Chip.Station.Category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing4"
+            android:backgroundTint="@color/main_3"
+            android:text="@{bakery.secondNearStation == null ? `` : bakery.secondNearStation}"
+            app:layout_constraintBottom_toBottomOf="@+id/chip_home_first_near_station"
+            app:layout_constraintStart_toEndOf="@id/chip_home_first_near_station"
+            app:layout_constraintTop_toTopOf="@+id/chip_home_first_near_station"
+            tools:text="건대역" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

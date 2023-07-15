@@ -6,6 +6,8 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityMainBinding
+import com.sopt.geonppang.presentation.bakeryList.BakeryListFragment
+import com.sopt.geonppang.presentation.home.HomeFragment
 import com.sopt.geonppang.presentation.mypage.MyPageFragment
 import com.sopt.geonppang.util.binding.BindingActivity
 
@@ -13,18 +15,17 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initView()
+        initLayout()
     }
 
-    private fun initView() {
-//        supportFragmentManager.findFragmentById(R.id.fcv_home_container)
-//            ?: navigateTo<HomeFragment>()
+    private fun initLayout() {
+        supportFragmentManager.findFragmentById(R.id.fcv_home_container)
+            ?: navigateTo<HomeFragment>()
 
         binding.bnvHome.setOnItemSelectedListener { menu ->
             when (menu.itemId) {
-                // TODO 해당하는 Fragment 연결
-                R.id.menu_home -> {}
-                R.id.menu_sotrelist -> {}
+                R.id.menu_home -> navigateTo<HomeFragment>()
+                R.id.menu_sotrelist -> navigateTo<BakeryListFragment>()
                 R.id.menu_mypage -> navigateTo<MyPageFragment>()
             }
             true
