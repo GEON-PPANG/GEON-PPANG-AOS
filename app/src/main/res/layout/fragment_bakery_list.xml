@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:src="@drawable/ic_logo"
+            android:src="@drawable/ic_gunbbang_text_logo"
             app:layout_constraintBottom_toBottomOf="@+id/tv_bakery_list_title"
             app:layout_constraintStart_toEndOf="@+id/tv_bakery_list_title"
             app:layout_constraintTop_toTopOf="@+id/tv_bakery_list_title" />

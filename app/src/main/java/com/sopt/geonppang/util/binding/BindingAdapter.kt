@@ -1,18 +1,16 @@
-package com.sopt.geonppang.util.binding
+package com.sopt.geonppang.util
 
-import android.app.Activity
-import android.content.Context
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import coil.load
 import com.sopt.geonppang.R
+import java.text.DecimalFormat
 
 @BindingAdapter("image")
 fun ImageView.setImage(imageUrl: String) {
@@ -30,10 +28,12 @@ fun View.setVisibility(isVisible: Boolean?) {
     this.visibility = if (isVisible) View.VISIBLE else View.GONE
 }
 
-fun Context.hideKeyboard(view: View) {
-    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+@BindingAdapter("invisibility")
+fun View.setInvisibility(isInvisible: Boolean?) {
+    if (isInvisible == null) return
+    this.visibility = if (isInvisible) View.VISIBLE else View.INVISIBLE
 }
+
 @BindingAdapter("highlightNumbers")
 fun TextView.highlightNumbers(text: CharSequence?) {
     if (text.isNullOrEmpty()) {
@@ -54,4 +54,10 @@ fun TextView.highlightNumbers(text: CharSequence?) {
     }
 
     this.text = spannableString
+}
+
+@BindingAdapter("priceAmount")
+fun applyPriceFormat(view: TextView, price: Int) {
+    val decimalFormat = DecimalFormat("#,###")
+    view.text = decimalFormat.format(price) + "원"
 }

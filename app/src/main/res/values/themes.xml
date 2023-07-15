@@ -15,8 +15,14 @@
         <!-- Customize your theme here. -->
         <item name="android:includeFontPadding">false</item>
         <item name="bottomSheetDialogTheme">@style/Style.BottomSheetDialog</item>
+        <item name="android:overScrollMode">never</item>
     </style>
-
+    <!--splash-->
+    <style name="Theme.GeonPpang.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@android:color/transparent</item>
+        <item name="postSplashScreenTheme">@style/Theme.GeonPpang</item>
+    </style>
     <!--  Widget  -->
     <style name="Widget.Material.Button.Basic" parent="">
         <item name="android:insetTop">0dp</item>
@@ -123,6 +129,14 @@
         <item name="android:textColor">@color/point_1</item>
         <item name="chipStrokeColor">@color/point_1</item>
         <item name="chipStrokeWidth">0.5dp</item>
+    </style>
+
+    <style name="Style.Material3.Chip.Review.Category" parent="Widget.Material3.Chip.Style.Radius3">
+        <item name="android:paddingVertical">4dp</item>
+        <item name="textStartPadding">5dp</item>
+        <item name="textEndPadding">5dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.CaptionM1</item>
+        <item name="android:textColor">@color/point_1</item>
     </style>
 
     <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
