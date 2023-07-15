@@ -7,7 +7,7 @@
 
         <variable
             name="review"
-            type="com.sopt.geonppang.domain.model.Review" />
+            type="com.sopt.geonppang.domain.model.DetailReview" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

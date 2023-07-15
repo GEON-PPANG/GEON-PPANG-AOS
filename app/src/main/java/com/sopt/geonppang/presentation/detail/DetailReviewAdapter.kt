@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.databinding.ItemDetailReviewBinding
-import com.sopt.geonppang.domain.model.Review
+import com.sopt.geonppang.domain.model.DetailReview
 import com.sopt.geonppang.util.ItemDiffCallback
 
 class DetailReviewAdapter(
     private val initChip: (ChipGroup, Int) -> Unit
 ) :
-    ListAdapter<Review, DetailReviewAdapter.DetailReviewViewHolder>(
-        ItemDiffCallback<Review>(
+    ListAdapter<DetailReview, DetailReviewAdapter.DetailReviewViewHolder>(
+        ItemDiffCallback<DetailReview>(
             onContentsTheSame = { old, new -> old == new },
             onItemsTheSame = { old, new -> old == new }
         )
@@ -21,11 +21,11 @@ class DetailReviewAdapter(
     class DetailReviewViewHolder(private val binding: ItemDetailReviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(
-            review: Review,
+            detailReview: DetailReview,
             initChip: (ChipGroup, Int) -> Unit,
             position: Int
         ) {
-            binding.review = review
+            binding.review = detailReview
 
             with(binding.chipGroupItemDetailReview) {
                 this.removeAllViews()

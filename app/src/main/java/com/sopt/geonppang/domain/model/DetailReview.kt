@@ -1,6 +1,6 @@
 package com.sopt.geonppang.domain.model
 
-data class Review(
+data class DetailReview(
     val reviewText: String,
     val memberNickname: String,
     val createdAt: String,
@@ -11,3 +11,4 @@ data class Review(
         val recommendKeywordName: String
     )
 }
+

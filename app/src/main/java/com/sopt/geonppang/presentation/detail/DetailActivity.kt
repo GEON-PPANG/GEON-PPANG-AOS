@@ -35,7 +35,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         val detailNoReviewAdapter = DetailNoReviewAdapter()
         var concatAdapter = ConcatAdapter()
 
-        if (viewModel.mockReviewData.reviewCount == 0) {
+        if (viewModel.mockDetailReviewData.reviewCount == 0) {
             concatAdapter = ConcatAdapter(
                 detailBakeryInfoAdapter,
                 detailMenuAdapter,
@@ -53,8 +53,8 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
         detailBakeryInfoAdapter.setBakeryInfo(viewModel.mockBakeryInfo)
         detailMenuAdapter.submitList(viewModel.mockMenuList)
-        detailReviewDataAdapter.setReviewData(viewModel.mockReviewData)
-        detailReviewAdapter.submitList(viewModel.mockReviewData.reviewList)
+        detailReviewDataAdapter.setReviewData(viewModel.mockDetailReviewData)
+        detailReviewAdapter.submitList(viewModel.mockDetailReviewData.detailReviewList)
 
         binding.rvDetail.adapter = concatAdapter
         binding.bakeryInfo = viewModel.mockBakeryInfo
@@ -67,7 +67,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initChip(chipGroup: ChipGroup, position: Int) {
-        for (recommendKeyword in viewModel.mockReviewData.reviewList[position].recommendKeywordList) {
+        for (recommendKeyword in viewModel.mockDetailReviewData.detailReviewList[position].recommendKeywordList) {
             chipGroup.addView(
                 recommendKeyword.recommendKeywordName.toChip
             )

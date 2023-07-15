@@ -5,7 +5,7 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.domain.model.BakeryInfo
 import com.sopt.geonppang.domain.model.BreadType
 import com.sopt.geonppang.domain.model.Menu
-import com.sopt.geonppang.domain.model.Review
+import com.sopt.geonppang.domain.model.DetailReview
 import com.sopt.geonppang.domain.model.ReviewData
 
 class DetailViewModel : ViewModel() {
@@ -49,61 +49,61 @@ class DetailViewModel : ViewModel() {
         )
     )
 
-    val mockReviewData = ReviewData(
+    val mockDetailReviewData = ReviewData(
         taste = 20,
         special = 50,
         kind = 10,
         zero = 90,
         reviewCount = 3,
-        reviewList = listOf(
-            Review(
+        detailReviewList = listOf(
+            DetailReview(
                 reviewText = "맛있어서 좋았어요",
                 memberNickname = "건빵죽빵빵빵빵",
                 createdAt = "23.07.13",
                 recommendKeywordList = listOf(
-                    Review.RecommendKeyword(
+                    DetailReview.RecommendKeyword(
                         recommendKeywordId = 1,
                         recommendKeywordName = "맛있어요"
                     ),
-                    Review.RecommendKeyword(
+                    DetailReview.RecommendKeyword(
                         recommendKeywordId = 4,
                         recommendKeywordName = "제로웨이스트"
                     )
                 )
             ),
-            Review(
+            DetailReview(
                 reviewText = "여기 소금빵 미친 존맛탱임 우리 건빵 가족들에게도 알려주고싶은 맛이에용앙아아아아아아아아아아아ㅏㅇ아ㅏ아아아아아아아아아ㅏ아아",
                 memberNickname = "보연티비",
                 createdAt = "23.08.09",
                 recommendKeywordList = listOf(
-                    Review.RecommendKeyword(
+                    DetailReview.RecommendKeyword(
                         recommendKeywordId = 1,
                         recommendKeywordName = "맛있어요"
                     ),
-                    Review.RecommendKeyword(
+                    DetailReview.RecommendKeyword(
                         recommendKeywordId = 3,
                         recommendKeywordName = "친절해요"
                     ),
-                    Review.RecommendKeyword(
+                    DetailReview.RecommendKeyword(
                         recommendKeywordId = 4,
                         recommendKeywordName = "제로웨이스트"
                     )
                 )
             ),
-            Review(
+            DetailReview(
                 reviewText = "안빵이들아 사랑행",
                 memberNickname = "안빵빵",
                 createdAt = "23.07.13",
                 recommendKeywordList = listOf(
-                    Review.RecommendKeyword(
+                    DetailReview.RecommendKeyword(
                         recommendKeywordId = 2,
                         recommendKeywordName = "특별한 메뉴"
                     ),
-                    Review.RecommendKeyword(
+                    DetailReview.RecommendKeyword(
                         recommendKeywordId = 3,
                         recommendKeywordName = "친절해요"
                     ),
-                    Review.RecommendKeyword(
+                    DetailReview.RecommendKeyword(
                         recommendKeywordId = 4,
                         recommendKeywordName = "제로웨이스트"
                     )

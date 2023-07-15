@@ -1,7 +1,10 @@
 package com.sopt.geonppang.presentation.mypage
 
 import androidx.lifecycle.ViewModel
+import com.sopt.geonppang.R
+import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.domain.model.BreadType
+import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.domain.model.Profile
 
 class MyPageViewModel : ViewModel() {
@@ -18,4 +21,143 @@ class MyPageViewModel : ViewModel() {
         )
     )
     val profile = _profile
+
+    // 마이페이지 북마크 더미데이터
+    val mockStoreList = listOf(
+        Bakery(
+            bakeryId = 1,
+            bakeryName = "건대 비건빵아아아아아아아아아",
+            firstNearStation = "건대역",
+            secondNearStation = null,
+            isBooked = true,
+            bookmarkCount = 5,
+            bakeryPicture = R.drawable.bbang1,
+            isHACCP = true,
+            isNonGMO = true,
+            isVegan = true,
+            breadType = BreadType(
+                breadTypeId = 1,
+                breadTypeName = "글루텐프리",
+                isGlutenFree = true,
+                isVegan = true,
+                isNutFree = true,
+                isSugarFree = true,
+            )
+        ),
+        Bakery(
+            bakeryId = 2,
+            bakeryName = "건대 비건빵아아아아아아",
+            firstNearStation = "덕소역",
+            secondNearStation = "구리역",
+            isBooked = false,
+            bookmarkCount = 7,
+            bakeryPicture = R.drawable.bbang1,
+            isHACCP = false,
+            isNonGMO = true,
+            isVegan = true,
+            breadType = BreadType(
+                breadTypeId = 2,
+                breadTypeName = "글루텐프리",
+                isGlutenFree = false,
+                isVegan = true,
+                isNutFree = true,
+                isSugarFree = true,
+            )
+        ),
+        Bakery(
+            bakeryId = 3,
+            bakeryName = "건대 비건빵아아아아아아",
+            firstNearStation = "덕소역",
+            secondNearStation = "구리역",
+            isBooked = false,
+            bookmarkCount = 0,
+            bakeryPicture = R.drawable.bbang1,
+            isHACCP = false,
+            isNonGMO = true,
+            isVegan = false,
+            breadType = BreadType(
+                breadTypeId = 3,
+                breadTypeName = "글루텐프리",
+                isGlutenFree = true,
+                isVegan = true,
+                isNutFree = true,
+                isSugarFree = false,
+            )
+        ),
+    )
+
+    val mockMyReviewList = listOf(
+        MyReview(
+            reviewId = 1,
+            date = "23.07.14",
+            bakery = Bakery(
+                bakeryId = 1,
+                bakeryName = "건대 비건빵아아아아아아아아아",
+                firstNearStation = "건대역",
+                secondNearStation = "성수역",
+                isBooked = true,
+                bookmarkCount = 5,
+                bakeryPicture = R.drawable.bbang1,
+                isHACCP = true,
+                isNonGMO = true,
+                isVegan = true,
+                breadType = BreadType(
+                    breadTypeId = 1,
+                    breadTypeName = "글루텐프리",
+                    isGlutenFree = true,
+                    isVegan = true,
+                    isNutFree = true,
+                    isSugarFree = true,
+                )
+            )
+        ),
+        MyReview(
+            reviewId = 2,
+            date = "23.07.15",
+            bakery = Bakery(
+                bakeryId = 1,
+                bakeryName = "건대 비건빵아아아아아아아아아",
+                firstNearStation = "동대문역사공원역",
+                secondNearStation = null,
+                isBooked = false,
+                bookmarkCount = 6,
+                bakeryPicture = R.drawable.bbang1,
+                isHACCP = false,
+                isNonGMO = true,
+                isVegan = true,
+                breadType = BreadType(
+                    breadTypeId = 1,
+                    breadTypeName = "글루텐프리",
+                    isGlutenFree = true,
+                    isVegan = false,
+                    isNutFree = false,
+                    isSugarFree = true,
+                )
+            )
+        ),
+        MyReview(
+            reviewId = 3,
+            date = "23.07.16",
+            bakery = Bakery(
+                bakeryId = 1,
+                bakeryName = "건대 비건빵아아아아아아아아아",
+                firstNearStation = "건대역",
+                secondNearStation = null,
+                isBooked = false,
+                bookmarkCount = 0,
+                bakeryPicture = R.drawable.bbang1,
+                isHACCP = false,
+                isNonGMO = true,
+                isVegan = true,
+                breadType = BreadType(
+                    breadTypeId = 1,
+                    breadTypeName = "글루텐프리",
+                    isGlutenFree = true,
+                    isVegan = false,
+                    isNutFree = true,
+                    isSugarFree = true,
+                )
+            )
+        ),
+    )
 }
