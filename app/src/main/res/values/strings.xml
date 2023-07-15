@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GeonPpang</string>
+    <string name="app_name">건빵</string>
 
     <!--  home  -->
     <string name="home_best_title1">바이블님 맞춤\t</string>
@@ -9,27 +9,6 @@
     <string name="home_caption">건빵은 건강한 빵집의 위치와 성분 정보를 제공하여 소비자의 선택을 돕는 용도의 서비스입니다. 건빵의 모든 정보는 제조사에서 제공한 정보입니다. 이는 소비자의 구매를 돕기 위한 참고 사항이며, 제공 정보의 오류에 대한 책임을 지지 않습니다.</string>
     <string name="home_review_count">리뷰(%d)</string>
     <string name="home_bookmark_count">%d명</string>
-
-    <!--  search view  -->
-    <string name="search_hint">궁금한 건빵집을 입력해주세요!</string>
-    <string name="search_recent_search">최근 검색어</string>
-    <string name="search_delete_all">전체삭제</string>
-    <string name="search_result">건빵집 결과</string>
-    <string name="search_init_description">궁금하신 건빵집을\n검색해보세요!</string>
-    <string name="search_count">%d개</string>
-    <string name="search_empty_description1">검색결과가 없어요</string>
-    <string name="search_empty_description2">다른 키워드로 검색해보세요!</string>
-
-    <string name="bookmark_count">%s명</string>
-
-    <!--  bakery list view  -->
-    <string name="bakery_list_sort">정렬</string>
-    <string name="bakery_list_sort_type_default">기본순</string>
-    <string name="bakery_list_sort_type_review">리뷰 많은 순</string>
-    <string name="bakery_list_title">건빵집 리스트</string>
-    <string name="bakery_bread_type_hard">하드빵류</string>
-    <string name="bakery_bread_type_dessert">디저트류</string>
-    <string name="bakery_bread_type_branch">브런치류</string>
 
     <!--    mypage    -->
     <string name="my_page_title">마이페이지</string>
@@ -46,4 +25,56 @@
     <string name="my_page_store_list_title">저장 목록</string>
     <string name="my_store_list_empty_view_description">저장된 건빵집이 없어요!</string>
     <string name="my_review_title">내가 쓴 리뷰</string>
+
+    <!--  search view  -->
+    <string name="search_hint">궁금한 건빵집을 입력해주세요!</string>
+    <string name="search_recent_search">최근 검색어</string>
+    <string name="search_delete_all">전체삭제</string>
+    <string name="search_result">건빵집 결과</string>
+    <string name="search_init_description">궁금하신 건빵집을\n검색해보세요!</string>
+    <string name="search_count">%d개</string>
+    <string name="search_empty_description1">검색결과가 없어요</string>
+    <string name="search_empty_description2">다른 키워드로 검색해보세요!</string>
+
+    <string name="bookmark_count">%s명</string>
+
+    <!--    bread type    -->
+    <string name="gluten_free">글루텐프리</string>
+    <string name="nut_free">넛프리</string>
+    <string name="vegan">비건빵</string>
+    <string name="low_sugar">저당,무설탕</string>
+
+    <!--    detail    -->
+    <string name="detail_create_review">리뷰 작성하기</string>
+    <string name="detail_more_info">가게 상세정보</string>
+    <string name="detail_notice">홈페이지에 성분정보가 있어요!</string>
+    <string name="detail_menu">가게 메뉴</string>
+    <string name="detail_menu_notice">가게 상세정보 및 메뉴는 업체에서 제공된 정보를 기반으로 합니다. 건빵집 방문 시 한번 더 확인하시기를 추천드립니다.</string>
+    <string name="detail_review">건빵 리뷰</string>
+    <string name="detail_taste">맛있어요</string>
+    <string name="detail_special">특별한 메뉴</string>
+    <string name="detail_kind">친절해요</string>
+    <string name="detail_zero">제로웨이스트</string>
+    <string name="detail_written_reviews">작성된 리뷰</string>
+    <string name="detail_declare">신고</string>
+    <string name="detail_no_review">작성된 리뷰가 없어요!</string>
+    <string name="detail_review_count">%d개</string>
+    <string name="detail_basic">기본순</string>
+
+    <!--    snackbar    -->
+    <string name="snackbar_copy">복사되었습니다 !</string>
+    <string name="snackbar_save">저장되었습니다 !</string>
+
+    <!--  bakery list view  -->
+    <string name="bakery_list_sort">정렬</string>
+    <string name="bakery_list_sort_type_default">기본순</string>
+    <string name="bakery_list_sort_type_review">리뷰 많은 순</string>
+    <string name="bakery_list_title">건빵집 리스트</string>
+    <string name="bakery_bread_type_hard">하드빵류</string>
+    <string name="bakery_bread_type_dessert">디저트류</string>
+    <string name="bakery_bread_type_branch">브런치류</string>
+
+    <!-- sign view -->
+    <string name="btn_login_text">로그인</string>
+    <string name="btn_signup_text">회원가입</string>
 </resources>

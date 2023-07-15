@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="reviewData"
+            type="com.sopt.geonppang.domain.model.ReviewData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing24" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing24" />
+
+        <TextView
+            android:id="@+id/tv_item_detail_review_graph_menu_notice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_detail_menu_notice"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="16dp"
+            android:text="@string/detail_menu_notice"
+            android:textAppearance="@style/TextAppearance.CaptionM2"
+            android:textColor="@color/gray_400"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:layout_constraintStart_toEndOf="@id/gl_start"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_item_detail_review_graph_first_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/gray_200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_detail_review_graph_menu_notice" />
+
+        <TextView
+            android:id="@+id/tv_item_detail_review_graph_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/detail_review"
+            android:textAppearance="@style/TextAppearance.BodyB1"
+            android:textColor="@color/gray_700"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/view_item_detail_review_graph_first_line" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_item_detail_review_graph_progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="12dp"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_detail_review_graph_review">
+
+            <com.sopt.geonppang.util.VerticalProgressBar
+                android:id="@+id/progress_item_detail_review_graph_taste"
+                android:layout_width="8dp"
+                android:layout_height="102dp"
+                app:backgroundDrawable="@drawable/background_detail_progress_bar_background"
+                app:layout_constraintEnd_toEndOf="@+id/tv_item_detail_review_graph_taste"
+                app:layout_constraintStart_toStartOf="@+id/tv_item_detail_review_graph_taste"
+                app:layout_constraintTop_toTopOf="@id/layout_item_detail_review_graph_progressBar"
+                app:progress="@{reviewData.taste}"
+                app:progressDrawable="@drawable/background_detail_progress_bar_progress" />
+
+            <TextView
+                android:id="@+id/tv_item_detail_review_graph_taste"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/detail_taste"
+                android:textAppearance="@style/TextAppearance.CaptionB1"
+                android:textColor="@color/main_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progress_item_detail_review_graph_taste" />
+
+            <com.sopt.geonppang.util.VerticalProgressBar
+                android:id="@+id/progress_item_detail_review_graph_special"
+                android:layout_width="8dp"
+                android:layout_height="0dp"
+                app:backgroundDrawable="@drawable/background_detail_progress_bar_background"
+                app:layout_constraintBottom_toBottomOf="@+id/progress_item_detail_review_graph_taste"
+                app:layout_constraintEnd_toEndOf="@+id/tv_item_detail_review_graph_special"
+                app:layout_constraintStart_toEndOf="@+id/tv_item_detail_review_graph_taste"
+                app:layout_constraintStart_toStartOf="@+id/tv_item_detail_review_graph_special"
+                app:layout_constraintTop_toTopOf="@+id/progress_item_detail_review_graph_taste"
+                app:progress="@{reviewData.special}"
+                app:progressDrawable="@drawable/background_detail_progress_bar_progress" />
+
+            <TextView
+                android:id="@+id/tv_item_detail_review_graph_special"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text="@string/detail_special"
+                android:textAppearance="@style/TextAppearance.CaptionB1"
+                android:textColor="@color/main_2"
+                app:layout_constraintStart_toEndOf="@+id/tv_item_detail_review_graph_taste"
+                app:layout_constraintTop_toTopOf="@+id/tv_item_detail_review_graph_taste" />
+
+            <com.sopt.geonppang.util.VerticalProgressBar
+                android:id="@+id/progress_item_detail_review_graph_kind"
+                android:layout_width="8dp"
+                android:layout_height="0dp"
+                app:backgroundDrawable="@drawable/background_detail_progress_bar_background"
+                app:layout_constraintBottom_toBottomOf="@+id/progress_item_detail_review_graph_special"
+                app:layout_constraintEnd_toEndOf="@+id/tv_item_detail_review_graph_kind"
+                app:layout_constraintStart_toStartOf="@+id/tv_item_detail_review_graph_kind"
+                app:layout_constraintTop_toTopOf="@+id/progress_item_detail_review_graph_special"
+                app:progress="@{reviewData.kind}"
+                app:progressDrawable="@drawable/background_detail_progress_bar_progress" />
+
+            <TextView
+                android:id="@+id/tv_item_detail_review_graph_kind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text="@string/detail_kind"
+                android:textAppearance="@style/TextAppearance.CaptionB1"
+                android:textColor="@color/main_2"
+                app:layout_constraintStart_toEndOf="@+id/tv_item_detail_review_graph_special"
+                app:layout_constraintTop_toTopOf="@+id/tv_item_detail_review_graph_special" />
+
+            <com.sopt.geonppang.util.VerticalProgressBar
+                android:id="@+id/progress_item_detail_review_graph_zero"
+                android:layout_width="8dp"
+                android:layout_height="0dp"
+                app:backgroundDrawable="@drawable/background_detail_progress_bar_background"
+                app:layout_constraintBottom_toBottomOf="@+id/progress_item_detail_review_graph_kind"
+                app:layout_constraintEnd_toEndOf="@+id/tv_item_detail_review_graph_zero"
+                app:layout_constraintStart_toStartOf="@+id/tv_item_detail_review_graph_zero"
+                app:layout_constraintTop_toTopOf="@+id/progress_item_detail_review_graph_kind"
+                app:progress="@{reviewData.zero}"
+                app:progressDrawable="@drawable/background_detail_progress_bar_progress" />
+
+            <TextView
+                android:id="@+id/tv_item_detail_review_graph_zero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text="@string/detail_zero"
+                android:textAppearance="@style/TextAppearance.CaptionB1"
+                android:textColor="@color/main_2"
+                app:layout_constraintStart_toEndOf="@+id/tv_item_detail_review_graph_kind"
+                app:layout_constraintTop_toTopOf="@+id/tv_item_detail_review_graph_kind" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_item_detail_review_graph_written_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:text="@string/detail_written_reviews"
+            android:textAppearance="@style/TextAppearance.BodyB1"
+            android:textColor="@color/gray_700"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/layout_item_detail_review_graph_progressBar" />
+
+        <TextView
+            android:id="@+id/tv_item_detail_review_graph_written_reviews_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="@{@string/detail_review_count(reviewData.reviewCount)}"
+            android:textAppearance="@style/TextAppearance.BodyB1"
+            android:textColor="@color/point_1"
+            app:layout_constraintStart_toEndOf="@+id/tv_item_detail_review_graph_written_review"
+            app:layout_constraintTop_toTopOf="@+id/tv_item_detail_review_graph_written_review"
+            tools:text="30개" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_item_detail_review_graph_review_filter"
+            style="@style/Widget.Material3.Chip.Style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/detail_basic"
+            android:textAppearance="@style/TextAppearance.CaptionB1"
+            android:textColor="@color/gray_700"
+            app:chipBackgroundColor="@color/white"
+            app:chipIcon="@drawable/ic_swap"
+            app:chipIconSize="@dimen/spacing16"
+            app:chipStrokeColor="@color/gray_200"
+            app:chipStrokeWidth="1dp"
+            app:iconStartPadding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:layout_constraintTop_toTopOf="@+id/tv_item_detail_review_graph_written_reviews_num"
+            app:textEndPadding="12dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

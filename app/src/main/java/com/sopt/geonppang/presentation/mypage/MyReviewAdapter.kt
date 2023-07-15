@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.geonppang.databinding.ItemMyReviewBinding
-import com.sopt.geonppang.domain.model.Review
+import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.util.ItemDiffCallback
 
 class MyReviewAdapter :
-    androidx.recyclerview.widget.ListAdapter<Review, MyReviewAdapter.MyReviewViewHolder>(
-        ItemDiffCallback<Review>(
+    androidx.recyclerview.widget.ListAdapter<MyReview, MyReviewAdapter.MyReviewViewHolder>(
+        ItemDiffCallback<MyReview>(
             onItemsTheSame = { old, new -> old.reviewId == new.reviewId },
             onContentsTheSame = { old, new -> old == new }
         )
@@ -18,7 +18,7 @@ class MyReviewAdapter :
     class MyReviewViewHolder(
         private val binding: ItemMyReviewBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(review: Review) {
+        fun onBind(review: MyReview) {
             binding.review = review
             binding.executePendingBindings()
         }

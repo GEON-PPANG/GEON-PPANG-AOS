@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import com.sopt.geonppang.R
 import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.domain.model.BreadType
+import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.domain.model.Profile
-import com.sopt.geonppang.domain.model.Review
 
 class MyPageViewModel : ViewModel() {
     private val _profile = Profile(
@@ -87,7 +87,7 @@ class MyPageViewModel : ViewModel() {
     )
 
     val mockMyReviewList = listOf(
-        Review(
+        MyReview(
             reviewId = 1,
             date = "23.07.14",
             bakery = Bakery(
@@ -111,7 +111,7 @@ class MyPageViewModel : ViewModel() {
                 )
             )
         ),
-        Review(
+        MyReview(
             reviewId = 2,
             date = "23.07.15",
             bakery = Bakery(
@@ -135,7 +135,7 @@ class MyPageViewModel : ViewModel() {
                 )
             )
         ),
-        Review(
+        MyReview(
             reviewId = 3,
             date = "23.07.16",
             bakery = Bakery(
