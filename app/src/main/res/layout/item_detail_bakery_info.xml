@@ -340,7 +340,6 @@
             android:text="@{bakeryInfo.phoneNumber}"
             android:textAppearance="@style/TextAppearance.Subhead"
             android:textColor="@color/gray_400"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_item_detail_bakery_info_call"
             app:layout_constraintStart_toStartOf="@+id/tv_item_detail_bakery_info_time"
             app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_call"
             tools:text="02-033-3333" />
