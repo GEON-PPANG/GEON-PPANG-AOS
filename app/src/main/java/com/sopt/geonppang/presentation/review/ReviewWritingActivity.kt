@@ -16,6 +16,26 @@ class ReviewWritingActivity :
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        addListeners()
+    }
+
+    private fun addListeners() {
+        binding.btnReviewSuccess.setOnClickListener {
+            showReviewSuccessDialog()
+        }
+
+        binding.imgBackArrow.setOnClickListener {
+            showReviewCancelDialog()
+        }
+    }
+
+    private fun showReviewSuccessDialog() {
+        ReviewSuccessBottomDialogFragment().show(supportFragmentManager, "reviewSuccessDialog")
+    }
+
+    private fun showReviewCancelDialog() {
+        ReviewCancelBottomDialogFragment().show(supportFragmentManager, "reviewCancelDialog")
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
