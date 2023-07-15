@@ -11,4 +11,3 @@ data class DetailReview(
         val recommendKeywordName: String
     )
 }
-
