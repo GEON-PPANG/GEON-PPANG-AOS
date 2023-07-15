@@ -10,4 +10,7 @@
 
     <!-- Widget Size -->
     <dimen name="button_height">56dp</dimen>
+
+    <!-- Splash -->
+    <dimen name="spacing121">121dp</dimen>
 </resources>
