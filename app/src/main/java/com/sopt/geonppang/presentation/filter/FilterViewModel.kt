@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.presentation.type.MainPurposeType
 import com.sopt.geonppang.presentation.type.NutrientFilterType
-import timber.log.Timber
 
 class FilterViewModel : ViewModel() {
     // 현재 선택한 mainPurpose를 가지고 있는 LiveeData
@@ -32,7 +31,6 @@ class FilterViewModel : ViewModel() {
         breadFilterType.value = breadFilterType.value?.toMutableMap()?.apply {
             this[breadType] = !isSelected
         }
-        Timber.e(breadFilterType.value.toString())
     }
 
     val isUserBreadTypeSelected: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
@@ -53,6 +51,12 @@ class FilterViewModel : ViewModel() {
         val isSelected = nutrientFilterType.value?.get(nutrientType) ?: return
         nutrientFilterType.value = nutrientFilterType.value?.toMutableMap()?.apply {
             this[nutrientType] = !isSelected
+        }
+    }
+
+    val isUserNutrientFilterTypeSelected: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
+        addSource(nutrientFilterType) { nutrientMap ->
+            value = nutrientMap.any { it.value }
         }
     }
 }

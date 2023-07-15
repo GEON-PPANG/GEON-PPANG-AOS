@@ -41,11 +41,11 @@
             android:id="@+id/iv_start_geon_ppang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="139dp"
+            android:layout_marginTop="104dp"
+            android:src="@drawable/ic_welcome"
             app:layout_constraintEnd_toStartOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@id/tv_start_geon_ppang_title"
-            tools:src="@drawable/ic_launcher_background" />
+            app:layout_constraintTop_toBottomOf="@id/tv_start_geon_ppang_title" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_start_geon_ppang"
