@@ -25,7 +25,7 @@ class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activ
         myReviewAdapter.submitList(viewModel.mockMyReviewList)
     }
 
-    private fun addListeners(){
+    private fun addListeners() {
         binding.toolbar.ivBack.setOnClickListener {
             finish()
         }

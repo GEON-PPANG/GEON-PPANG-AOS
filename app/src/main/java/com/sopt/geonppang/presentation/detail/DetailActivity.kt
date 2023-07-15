@@ -64,6 +64,10 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         binding.ivDetailBottomAppBarBookmark.setOnClickListener {
             CustomSnackbar.makeSnackbar(binding.root, getString(R.string.snackbar_save))
         }
+
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initChip(chipGroup: ChipGroup, position: Int) {

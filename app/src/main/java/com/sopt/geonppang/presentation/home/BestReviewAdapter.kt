@@ -8,7 +8,9 @@ import com.sopt.geonppang.databinding.ItemHomeBestReviewBinding
 import com.sopt.geonppang.domain.model.BestReview
 import com.sopt.geonppang.util.ItemDiffCallback
 
-class BestReviewAdapter : ListAdapter<BestReview, BestReviewAdapter.ReviewViewHolder>(
+class BestReviewAdapter(
+    private val moveToDetail: () -> Unit,
+) : ListAdapter<BestReview, BestReviewAdapter.ReviewViewHolder>(
     ItemDiffCallback<BestReview>(
         onItemsTheSame = { old, new -> old.bakeryId == new.bakeryId },
         onContentsTheSame = { old, new -> old == new }
@@ -18,9 +20,16 @@ class BestReviewAdapter : ListAdapter<BestReview, BestReviewAdapter.ReviewViewHo
     class ReviewViewHolder(
         private val binding: ItemHomeBestReviewBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(review: BestReview) {
+        fun onBind(
+            review: BestReview,
+            moveToDetail: () -> Unit,
+        ) {
             binding.review = review
             binding.executePendingBindings()
+
+            binding.root.setOnClickListener {
+                moveToDetail()
+            }
         }
     }
 
@@ -31,6 +40,6 @@ class BestReviewAdapter : ListAdapter<BestReview, BestReviewAdapter.ReviewViewHo
     }
 
     override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {
-        holder.onBind(getItem(position))
+        holder.onBind(getItem(position), moveToDetail)
     }
 }
