@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import coil.load
 import com.sopt.geonppang.R
+import java.text.DecimalFormat
 
 @BindingAdapter("image")
 fun ImageView.setImage(imageUrl: String) {
@@ -25,6 +26,12 @@ fun View.setSelected(isSelected: Boolean) {
 fun View.setVisibility(isVisible: Boolean?) {
     if (isVisible == null) return
     this.visibility = if (isVisible) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("invisibility")
+fun View.setInvisibility(isInvisible: Boolean?) {
+    if (isInvisible == null) return
+    this.visibility = if (isInvisible) View.VISIBLE else View.INVISIBLE
 }
 
 @BindingAdapter("highlightNumbers")
@@ -47,4 +54,10 @@ fun TextView.highlightNumbers(text: CharSequence?) {
     }
 
     this.text = spannableString
+}
+
+@BindingAdapter("priceAmount")
+fun applyPriceFormat(view: TextView, price: Int) {
+    val decimalFormat = DecimalFormat("#,###")
+    view.text = decimalFormat.format(price) + "원"
 }

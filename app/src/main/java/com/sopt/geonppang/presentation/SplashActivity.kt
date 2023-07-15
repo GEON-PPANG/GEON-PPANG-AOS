@@ -28,7 +28,8 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
     }
 
     private fun moveToSign() {
-        startActivity(Intent(this, SignActivity::class.java))
+        // TODO SignActivity로 이동 되도록 변경
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 }

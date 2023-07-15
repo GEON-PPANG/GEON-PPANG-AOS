@@ -7,6 +7,7 @@
     <dimen name="spacing16">16dp</dimen>
     <dimen name="spacing17">17dp</dimen>
     <dimen name="spacing24">24dp</dimen>
+    <dimen name="spacing27">27dp</dimen>
 
     <!-- Widget Size -->
     <dimen name="button_height">56dp</dimen>
