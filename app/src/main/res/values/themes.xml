@@ -136,4 +136,13 @@
         <item name="boxCornerRadiusBottomStart">@dimen/spacing10</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/spacing10</item>
     </style>
+
+    <style name="Style.Material3.Chip.Review" parent="Widget.Material3.Chip.Style">
+        <item name="android:paddingVertical">8dp</item>
+        <item name="chipCornerRadius">20dp</item>
+        <item name="textStartPadding">16dp</item>
+        <item name="textEndPadding">16dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.CaptionB1</item>
+        <item name="chipStrokeWidth">1.5dp</item>
+    </style>
 </resources>

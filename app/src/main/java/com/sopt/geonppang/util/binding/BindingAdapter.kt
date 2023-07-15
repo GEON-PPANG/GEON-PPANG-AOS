@@ -1,9 +1,12 @@
-package com.sopt.geonppang.util
+package com.sopt.geonppang.util.binding
 
+import android.app.Activity
+import android.content.Context
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -27,6 +30,10 @@ fun View.setVisibility(isVisible: Boolean?) {
     this.visibility = if (isVisible) View.VISIBLE else View.GONE
 }
 
+fun Context.hideKeyboard(view: View) {
+    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+}
 @BindingAdapter("highlightNumbers")
 fun TextView.highlightNumbers(text: CharSequence?) {
     if (text.isNullOrEmpty()) {
