@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityReviewWritingBinding
 import com.sopt.geonppang.util.binding.BindingActivity
-import com.sopt.geonppang.util.binding.hideKeyboard
+import com.sopt.geonppang.util.extension.hideKeyboard
 
 class ReviewWritingActivity :
     BindingActivity<ActivityReviewWritingBinding>(R.layout.activity_review_writing) {
