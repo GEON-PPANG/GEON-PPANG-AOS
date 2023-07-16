@@ -8,7 +8,6 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentBreadTypeFilterBinding
 import com.sopt.geonppang.util.binding.BindingFragment
 
-
 class BreadTypeFilterFragment :
     BindingFragment<FragmentBreadTypeFilterBinding>(R.layout.fragment_bread_type_filter) {
     private lateinit var viewModel: FilterViewModel
