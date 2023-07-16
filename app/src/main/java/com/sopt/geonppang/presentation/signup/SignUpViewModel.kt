@@ -68,7 +68,7 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
 
     companion object {
         const val EMAIL_PATTERN = "^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+\$"
-        const val NICKNAME_PATTERN = "[가-힣]*[A-Za-z[0-9]]{1,10}\$"
+        const val NICKNAME_PATTERN = "^[ㄱ-ㅎ가-힣0-9a-zA-Z]{1,10}$"
         const val PASSWORD_PATTERN = "^[A-Za-z0-9]{8,25}$"
     }
 }
