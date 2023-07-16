@@ -59,10 +59,9 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name="com.sopt.geonppang.presentation.review.ReviewWritingActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-
         <activity
             android:name=".presentation.signup.SignUpEmailActivity"
             android:exported="false"

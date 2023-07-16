@@ -118,4 +118,10 @@
     <string name="review_key_word_type_kind">친절해요</string>
     <string name="review_key_word_type_special_menu">특별한 메뉴</string>
     <string name="review_key_word_type_zero_waste">제로 웨이스트</string>
+    <string name="review_writing_success_title">작성이 완료되었어요!</string>
+    <string name="review_writing_cancel_title">정말 리뷰 작성을 그만하시겠어요?</string>
+    <string name="review_writing_cancel_description">고객님의 리뷰가 다른 고객님들에게\n도움이 될 수 있어요</string>
+    <string name="review_writing_confirm">확인</string>
+    <string name="review_writing_stop">그만하기</string>
+    <string name="review_writing_continue">계속쓰기</string>
 </resources>
