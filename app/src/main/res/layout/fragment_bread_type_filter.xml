@@ -55,7 +55,7 @@
             android:id="@+id/view_center"
             android:layout_width="2dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_bread_type_filter_next"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toTopOf="@id/tv_bread_type_filter_duplicate_selection" />
@@ -116,22 +116,6 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/view_center"
             app:layout_constraintTop_toTopOf="@+id/include_braed_type_nut_free" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_bread_type_filter_next"
-            style="@style/Widget.FullButton.Basic"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="48dp"
-            android:backgroundTint="@{viewModel.isUserBreadTypeSelected ? @color/main_2 : @color/gray_200}"
-            android:enabled="@{viewModel.isUserBreadTypeSelected}"
-            android:paddingVertical="18dp"
-            android:text="@string/filter_next"
-            android:textAppearance="@style/TextAppearance.Headline"
-            android:textColor="@{viewModel.isUserBreadTypeSelected ? @color/gray_100 : @color/gray_400}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/gl_end"
-            app:layout_constraintStart_toStartOf="@id/gl_start" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
