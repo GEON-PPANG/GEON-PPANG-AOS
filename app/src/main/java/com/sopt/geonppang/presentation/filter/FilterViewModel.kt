@@ -9,7 +9,6 @@ import com.sopt.geonppang.presentation.type.MainPurposeType
 import com.sopt.geonppang.presentation.type.NutrientFilterType
 
 class FilterViewModel : ViewModel() {
-    // 현재 선택한 mainPurpose를 가지고 있는 LiveeData
     private val _mainPurpose: MutableLiveData<MainPurposeType?> = MutableLiveData()
     val mainPurpose: LiveData<MainPurposeType?> = _mainPurpose
 
