@@ -1,5 +1,6 @@
 package com.sopt.geonppang.presentation.signup
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.geonppang.R
@@ -7,6 +8,7 @@ import com.sopt.geonppang.databinding.ActivitySignupNicknameBinding
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
+import java.net.PasswordAuthentication
 
 @AndroidEntryPoint
 class SignUpNicknameActivity :
@@ -30,5 +32,13 @@ class SignUpNicknameActivity :
             val bottomSheetDialog = SignUpNicknameBottomSheetDialog()
             bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
         }
+        binding.imgBackArrow.setOnClickListener {
+            moveToPassword()
+        }
+    }
+
+    private fun moveToPassword() {
+        startActivity(Intent(this, SignUpPasswordActivity::class.java))
+        finish()
     }
 }
