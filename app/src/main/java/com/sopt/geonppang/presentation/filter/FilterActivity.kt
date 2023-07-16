@@ -27,6 +27,19 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
     }
 
     private fun addListeners() {
+        binding.includeFilterToolbar.ivBack.setOnClickListener {
+            when (binding.vpFilterContainer.currentItem) {
+                0 -> {
+                    finish()
+                }
+
+                else -> {
+                    binding.vpFilterContainer.currentItem--
+                    binding.btnFilterNext.isEnabled = true
+                }
+            }
+        }
+
         binding.btnFilterNext.setOnClickListener {
             when (binding.vpFilterContainer.currentItem) {
                 2 -> {
