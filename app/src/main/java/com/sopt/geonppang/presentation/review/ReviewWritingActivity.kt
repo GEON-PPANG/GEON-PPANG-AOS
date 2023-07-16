@@ -1,12 +1,10 @@
 package com.sopt.geonppang.presentation.review
 
 import android.os.Bundle
-import android.view.MotionEvent
 import androidx.activity.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityReviewWritingBinding
 import com.sopt.geonppang.util.binding.BindingActivity
-import com.sopt.geonppang.util.binding.hideKeyboard
 
 class ReviewWritingActivity :
     BindingActivity<ActivityReviewWritingBinding>(R.layout.activity_review_writing) {
@@ -21,6 +19,16 @@ class ReviewWritingActivity :
     }
 
     private fun addListeners() {
+        binding.etWriteYourReview.setOnClickListener {
+            binding.layoutScrollView.smoothScrollTo(0, binding.etWriteYourReview.top)
+        }
+
+        binding.etWriteYourReview.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.layoutScrollView.smoothScrollTo(0, binding.etWriteYourReview.top)
+            }
+        }
+
         binding.btnReviewSuccess.setOnClickListener {
             showReviewSuccessDialog()
         }
@@ -36,10 +44,5 @@ class ReviewWritingActivity :
 
     private fun showReviewCancelDialog() {
         ReviewCancelBottomDialogFragment().show(supportFragmentManager, "reviewCancelDialog")
-    }
-
-    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        hideKeyboard(binding.root)
-        return super.dispatchTouchEvent(ev)
     }
 }
