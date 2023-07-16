@@ -50,12 +50,11 @@
             android:background="@color/gray_200"
             app:layout_constraintTop_toBottomOf="@id/tv_store_name" />
 
-        <androidx.core.widget.NestedScrollView
+        <ScrollView
+            android:id="@+id/layout_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="@id/view_line"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line1">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -86,40 +85,6 @@
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@drawable/bbang1" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginTop="6dp"
-                    app:layout_constraintEnd_toEndOf="@id/iv_bakery"
-                    app:layout_constraintStart_toStartOf="@id/iv_bakery"
-                    app:layout_constraintTop_toTopOf="@id/iv_bakery">
-
-                    <ImageView
-                        android:id="@+id/iv_haccp_mark"
-                        visibility=""
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:layout_marginEnd="-8dp"
-                        android:src="@drawable/ic_haccp_mark" />
-
-                    <ImageView
-                        android:id="@+id/iv_vegan_mark"
-                        visibility=""
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:layout_marginEnd="-8dp"
-                        android:src="@drawable/ic_vegan_mark" />
-
-                    <ImageView
-                        android:id="@+id/iv_gmo_mark"
-                        visibility=""
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:src="@drawable/ic_gmo_mark" />
-
-                </LinearLayout>
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/cg_bakery_category"
@@ -219,8 +184,7 @@
                     android:textColor="@color/selector_bread_sort_color"
                     app:chipStrokeColor="@color/selector_bread_sort_color"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_how_was_the_store"
-                    app:rippleColor="@android:color/transparent" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_how_was_the_store" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_soso"
@@ -236,8 +200,7 @@
                     android:textColor="@color/selector_bread_sort_color"
                     app:chipStrokeColor="@color/selector_bread_sort_color"
                     app:layout_constraintStart_toEndOf="@id/chip_like"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_how_was_the_store"
-                    app:rippleColor="@android:color/transparent" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_how_was_the_store" />
 
                 <TextView
                     android:id="@+id/tv_what_do_you_recommend"
@@ -276,7 +239,6 @@
                         android:text="@{KeyWordType.TASTE.keyWordType}"
                         android:textColor="@color/enable_review_writing_chip_color"
                         app:chipStrokeColor="@color/enable_review_writing_chip_color"
-                        app:rippleColor="@android:color/transparent"
                         tools:text="맛있어요" />
 
                     <com.google.android.material.chip.Chip
@@ -291,7 +253,6 @@
                         android:text="@{KeyWordType.KIND.keyWordType}"
                         android:textColor="@color/enable_review_writing_chip_color"
                         app:chipStrokeColor="@color/enable_review_writing_chip_color"
-                        app:rippleColor="@android:color/transparent"
                         tools:text="@string/chip_kind" />
 
                     <com.google.android.material.chip.Chip
@@ -325,21 +286,23 @@
 
                 <EditText
                     android:id="@+id/et_write_your_review"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="196dp"
+                    android:layout_marginHorizontal="@dimen/spacing24"
                     android:layout_marginTop="32dp"
                     android:background="@{viewModel.reviewText.length >=10 | viewModel.reviewText.empty? @drawable/background_review_box : @drawable/background_review_error_box}"
                     android:enabled="@{viewModel.isLike == LikeType.BAD | viewModel.isUserKeyWordTypeSelected}"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:gravity="top"
                     android:hint="@{viewModel.isLike == LikeType.BAD? @string/review_text_bad_hint : @string/review_text_good_hint}"
+                    android:maxLength="70"
                     android:paddingHorizontal="@dimen/spacing24"
                     android:paddingVertical="20dp"
                     android:text="@={viewModel.reviewText}"
                     android:textAppearance="@style/TextAppearance.Subhead"
                     android:textColor="@{viewModel.reviewText.length >=10? @color/gray_700 : @color/error}"
                     android:textColorHint="@color/enable_review_writing_color"
-                    app:layout_constraintEnd_toEndOf="@id/gl_end"
-                    app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/cg_review_recommend_chip_select"
                     tools:hint="추가로 좋았던 점이 있다면 말씀해주세요!" />
 
@@ -348,11 +311,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="@dimen/spacing12"
                     android:text="@{@string/review_text_count(viewModel.reviewText.length)}"
                     android:textAppearance="@style/TextAppearance.CaptionM1"
                     android:textColor="@{viewModel.reviewText.empty | viewModel.reviewText.length >=10 ? @color/gray_500 : @color/error}"
+                    app:layout_constraintBottom_toBottomOf="@+id/et_write_your_review"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
-                    app:layout_constraintTop_toBottomOf="@id/et_write_your_review"
                     tools:text="0/70 (최소 10자)" />
 
                 <TextView
@@ -372,7 +337,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_review_text_count" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
+        </ScrollView>
 
         <View
             android:id="@+id/view_line"
@@ -389,7 +354,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:paddingBottom="48dp"
+            android:paddingBottom="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
