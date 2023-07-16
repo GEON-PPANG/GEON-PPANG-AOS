@@ -24,6 +24,7 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
     private fun initLayout() {
         adapter = FilterViewPagerAdapter(this)
         binding.vpFilterContainer.adapter = adapter
+        binding.vpFilterContainer.isUserInputEnabled = false
     }
 
     private fun addListeners() {
