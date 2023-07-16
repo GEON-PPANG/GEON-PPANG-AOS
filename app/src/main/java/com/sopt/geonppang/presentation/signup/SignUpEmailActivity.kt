@@ -14,7 +14,6 @@ class SignUpEmailActivity :
     BindingActivity<ActivitySignupEmailBinding>(R.layout.activity_signup_email) {
     private val viewModel: SignUpViewModel by viewModels()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel

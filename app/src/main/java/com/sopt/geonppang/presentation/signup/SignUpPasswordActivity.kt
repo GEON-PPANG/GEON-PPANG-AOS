@@ -41,7 +41,6 @@ class SignUpPasswordActivity :
         binding.topbar.ivBack.setOnClickListener {
             moveToEmail()
         }
-
     }
 
     private fun moveToNickname() {

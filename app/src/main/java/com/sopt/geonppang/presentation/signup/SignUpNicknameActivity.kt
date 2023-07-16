@@ -8,7 +8,6 @@ import com.sopt.geonppang.databinding.ActivitySignupNicknameBinding
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
-import java.net.PasswordAuthentication
 
 @AndroidEntryPoint
 class SignUpNicknameActivity :
