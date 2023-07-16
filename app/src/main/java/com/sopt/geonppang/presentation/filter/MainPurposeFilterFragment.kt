@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentMainPurposeFilterBinding
 import com.sopt.geonppang.util.binding.BindingFragment
-import timber.log.Timber
 
 class MainPurposeFilterFragment :
     BindingFragment<FragmentMainPurposeFilterBinding>(R.layout.fragment_main_purpose_filter) {
