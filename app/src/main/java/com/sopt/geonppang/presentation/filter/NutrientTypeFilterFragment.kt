@@ -1,6 +1,5 @@
 package com.sopt.geonppang.presentation.filter
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -17,15 +16,5 @@ class NutrientTypeFilterFragment :
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
-        addListeners()
-    }
-
-    private fun addListeners() {
-        binding.btnNutrientTypeFilterNext.setOnClickListener {
-            val intent = Intent(requireContext(), WelcomeActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
-        }
     }
 }

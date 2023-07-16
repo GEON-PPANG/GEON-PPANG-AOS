@@ -1,9 +1,7 @@
 package com.sopt.geonppang.presentation.filter
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import androidx.lifecycle.ViewModelProvider
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
@@ -11,24 +9,49 @@ import com.sopt.geonppang.util.binding.BindingActivity
 
 class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_filter) {
     private lateinit var viewModel: FilterViewModel
+    private lateinit var adapter: FilterViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_filter)
 
         viewModel = ViewModelProvider(this).get(FilterViewModel::class.java)
 
         initLayout()
+        addListeners()
+        addObservers()
     }
 
     private fun initLayout() {
-        supportFragmentManager.findFragmentById(R.id.fcv_filter_container)
-            ?: navigateTo<MainPurposeFilterFragment>()
+        adapter = FilterViewPagerAdapter(this)
+        binding.vpFilterContainer.adapter = adapter
     }
 
-    private inline fun <reified T : Fragment> navigateTo() {
-        supportFragmentManager.commit {
-            replace<T>(R.id.fcv_filter_container, T::class.java.canonicalName)
+    private fun addListeners() {
+        binding.btnFilterNext.setOnClickListener {
+            when (binding.vpFilterContainer.currentItem) {
+                2 -> {
+                    startActivity(Intent(this, WelcomeActivity::class.java))
+                }
+
+                else -> {
+                    binding.vpFilterContainer.currentItem++
+                    binding.btnFilterNext.isEnabled = false
+                }
+            }
+        }
+    }
+
+    private fun addObservers() {
+        viewModel.mainPurpose.observe(this) { mainPurposeType ->
+            binding.btnFilterNext.isEnabled = mainPurposeType != null
+        }
+
+        viewModel.isUserBreadTypeSelected.observe(this) { isUserBreadTypeSelected ->
+            binding.btnFilterNext.isEnabled = isUserBreadTypeSelected
+        }
+
+        viewModel.isUserNutrientFilterTypeSelected.observe(this) { isUserNutrientFilterTypeSelected ->
+            binding.btnFilterNext.isEnabled = isUserNutrientFilterTypeSelected
         }
     }
 }
