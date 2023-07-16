@@ -15,8 +15,14 @@
         <!-- Customize your theme here. -->
         <item name="android:includeFontPadding">false</item>
         <item name="bottomSheetDialogTheme">@style/Style.BottomSheetDialog</item>
+        <item name="android:overScrollMode">never</item>
     </style>
-
+    <!--splash-->
+    <style name="Theme.GeonPpang.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@android:color/transparent</item>
+        <item name="postSplashScreenTheme">@style/Theme.GeonPpang</item>
+    </style>
     <!--  Widget  -->
     <style name="Widget.Material.Button.Basic" parent="">
         <item name="android:insetTop">0dp</item>
@@ -29,6 +35,12 @@
     <style name="Widget.FullButton.Basic" parent="Widget.Material.Button.Basic">
         <item name="android:layout_height">@dimen/button_height</item>
         <item name="android:layout_width">0dp</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <style name="Widget.OutlinedButton.Basic" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:width">0dp</item>
         <item name="cornerRadius">12dp</item>
     </style>
 
@@ -127,5 +139,13 @@
         <item name="textEndPadding">16dp</item>
         <item name="android:textAppearance">@style/TextAppearance.CaptionB1</item>
         <item name="chipStrokeWidth">1.5dp</item>
+    </style>
+
+    <style name="Style.Material3.Chip.Review.Category" parent="Widget.Material3.Chip.Style.Radius3">
+        <item name="android:paddingVertical">4dp</item>
+        <item name="textStartPadding">5dp</item>
+        <item name="textEndPadding">5dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.CaptionM1</item>
+        <item name="android:textColor">@color/point_1</item>
     </style>
 </resources>

@@ -27,4 +27,6 @@
     <color name="gray_600">#3D3A3A</color>
     <color name="gray_700">#262525</color>
     <color name="black">#000000</color>
+
+    <color name="snackbar_1">#E53D3A3A</color>
 </resources>
