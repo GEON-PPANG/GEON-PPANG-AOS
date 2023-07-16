@@ -136,7 +136,7 @@
             style="@style/Widget.FullButton.Basic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="48dp"
+            android:layout_marginBottom="24dp"
             android:backgroundTint="@{viewModel.isValidEmail() == true ? @color/main_2 : @color/gray_200}"
             android:enabled="@{viewModel.completeEmail}"
             android:paddingVertical="18dp"
