@@ -12,6 +12,11 @@
         android:layout_height="match_parent"
         tools:context=".presentation.filter.FilterActivity">
 
+        <include
+            android:id="@+id/include_filter_toolbar"
+            layout="@layout/view_toolbar"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fcv_filter_container"
             android:layout_width="0dp"
@@ -19,7 +24,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/include_filter_toolbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
