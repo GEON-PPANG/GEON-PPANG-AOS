@@ -24,6 +24,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "GP_BASE_URL", properties["GP_BASE_URL"]
+        buildConfigField "String", "ACCESS_TOKEN", properties["ACCESS_TOKEN"]
     }
 
     buildTypes {
