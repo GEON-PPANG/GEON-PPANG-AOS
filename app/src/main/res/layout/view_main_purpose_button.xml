@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="mainPurposeType"
+            type="com.sopt.geonppang.presentation.type.MainPurposeType" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_main_purpose"
+        android:layout_width="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_item_3_division_filter_button"
+        android:paddingVertical="25dp">
+
+        <TextView
+            android:id="@+id/tv_main_purpose_health_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{mainPurposeType.titleRes}"
+            android:textAppearance="@style/TextAppearance.Title2"
+            android:textColor="@drawable/selector_item_filter_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="건강 · 체질" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{mainPurposeType.desRes}"
+            android:textAppearance="@style/TextAppearance.BodyM1"
+            android:textColor="@drawable/selector_item_filter_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_main_purpose_health_title"
+            tools:text="아토피 , 알레르기 , 암 , 당뇨 , 소화문제" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

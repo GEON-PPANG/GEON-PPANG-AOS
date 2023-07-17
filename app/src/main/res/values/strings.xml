@@ -101,6 +101,33 @@
     <string name="btn_login_text">로그인</string>
     <string name="btn_signup_text">회원가입</string>
 
+    <!--    filter    -->
+    <string name="filter_next">다음</string>
+    <string name="filter_ask_bread_type">어떤 빵을 원하시나요?</string>
+    <string name="filter_duplicate_selection">중복선택이 가능해요!</string>
+    <string name="filter_ask_nutrient_type">어떤 성분을 원하시나요?</string>
+    <string name="start_geon_ppang">시작하기</string>
+
+    <string name="main_purpose_type_health_title">건강 · 체질</string>
+    <string name="main_purpose_type_health_des">아토피 , 알레르기 , 암 , 당뇨 , 소화문제</string>
+    <string name="main_purpose_type_diet_title">맛 · 다이어트</string>
+    <string name="main_purpose_type_diet_des">그냥 맛있어서! 식이 관리를 위해</string>
+    <string name="main_purpose_type_vegan_title">비건 · 채식지향</string>
+    <string name="main_purpose_type_vegan_des">종교 , 환경 , 동물 , 노동권을 위한 비거니즘</string>
+
+    <string name="bread_type_gluten_free_title">글루텐프리</string>
+    <string name="bread_type_gluten_free_des">NO 글루텐 포함\n밀 , 곡물류</string>
+    <string name="bread_type_vegan_title">비건빵</string>
+    <string name="bread_type_vegan_des">NO 동물성재료\n(유제품 , 계란)</string>
+    <string name="bread_type_nut_free_title">넛프리</string>
+    <string name="bread_type_nut_free_des">NO 견과류</string>
+    <string name="bread_type_sugar_free_title">저당, 무설탕</string>
+    <string name="bread_type_sugar_free_des">대체당 사용</string>
+
+    <string name="nutrient_type_nutrient_open">영양성분 공개</string>
+    <string name="nutrient_type_ingredient_open">원재료 공개</string>
+    <string name="nutrient_type_not_open">비공개</string>
+
     <!--review-->
     <string name="how_was_the_store">건빵집은 어떠셨나요?</string>
     <string name="chip_like">좋아요</string>
