@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="breadType"
+            type="com.sopt.geonppang.presentation.type.BreadFilterType" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_bread_typee"
+        android:layout_width="wrap_content"
+        android:layout_height="162dp"
+        android:background="@drawable/selector_item_4_division_filter_button">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_bread_type__text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_bread_type_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{breadType.titleRes}"
+                android:textAppearance="@style/TextAppearance.Title2"
+                android:textColor="@drawable/selector_item_filter_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="글루텐프리" />
+
+            <TextView
+                android:id="@+id/tv_bread_type_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{breadType.desRes}"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Subhead"
+                android:textColor="@drawable/selector_item_filter_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_bread_type_title"
+                tools:text="NO 글루텐 포함\n밀 , 곡물류" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
