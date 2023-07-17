@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.sopt.geonppang.presentation.filter.FilterViewModel" />
+
+        <import type="com.sopt.geonppang.presentation.type.NutrientFilterType" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.filter.NutrientTypeFilterActivity">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing24" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing24" />
+
+        <TextView
+            android:id="@+id/tv_nutrient_type_filter_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/filter_ask_nutrient_type"
+            android:textAppearance="@style/TextAppearance.Title1"
+            android:textColor="@color/gray_700"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_nutrient_type_filter_duplicate_selection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/filter_duplicate_selection"
+            android:textAppearance="@style/TextAppearance.Subhead"
+            android:textColor="@color/gray_400"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_nutrient_type_filter_title" />
+
+        <TextView
+            android:id="@+id/tv_nutrient_type_nutrient"
+            selected="@{viewModel.nutrientFilterType.get(NutrientFilterType.NUTRIENT)}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
+            android:background="@drawable/selector_item_3_division_filter_button"
+            android:onClick="@{()->viewModel.setNutrientType(NutrientFilterType.NUTRIENT)}"
+            android:paddingVertical="39dp"
+            android:text="@{NutrientFilterType.NUTRIENT.titleRes}"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Title2"
+            android:textColor="@drawable/selector_item_filter_text"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nutrient_type_filter_duplicate_selection"
+            tools:text="영양성분 공개" />
+
+        <TextView
+            android:id="@+id/tv_nutrient_type_ingredient"
+            selected="@{viewModel.nutrientFilterType.get(NutrientFilterType.INGREDIENT)}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/selector_item_3_division_filter_button"
+            android:onClick="@{()->viewModel.setNutrientType(NutrientFilterType.INGREDIENT)}"
+            android:paddingVertical="39dp"
+            android:text="@{NutrientFilterType.INGREDIENT.titleRes}"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Title2"
+            android:textColor="@drawable/selector_item_filter_text"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nutrient_type_nutrient"
+            tools:text="원재료 공개" />
+
+        <TextView
+            android:id="@+id/tv_nutrient_type_not"
+            selected="@{viewModel.nutrientFilterType.get(NutrientFilterType.NOT)}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/selector_item_3_division_filter_button"
+            android:onClick="@{()->viewModel.setNutrientType(NutrientFilterType.NOT)}"
+            android:paddingVertical="39dp"
+            android:text="@{NutrientFilterType.NOT.titleRes}"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Title2"
+            android:textColor="@drawable/selector_item_filter_text"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:layout_constraintStart_toStartOf="@+id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nutrient_type_ingredient"
+            tools:text="비공개" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
