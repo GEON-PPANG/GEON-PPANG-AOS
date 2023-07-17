@@ -34,7 +34,17 @@ jobs:
         env:
           FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
         run: echo $FIREBASE_SECRET > app/google-services.json
-
+    
+      - name: Access GP_BASE_URL
+        env:
+          HFM_BASE_URL: ${{ secrets.GP_BASE_URL }}
+        run: echo "GP_BASE_URL=\"$GP_BASE_URL\"" >> local.properties
+        
+      - name: Access ACCESS_TOKEN
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: echo "ACCESS_TOKEN=\"$ACCESS_TOKEN\"" >> local.properties
+        
       - name: Touch local properties
         run: touch local.properties
         
