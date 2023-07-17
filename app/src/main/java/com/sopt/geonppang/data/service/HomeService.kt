@@ -7,4 +7,7 @@ import retrofit2.http.GET
 interface HomeService {
     @GET("bakeries/best")
     suspend fun fetchBestBakery(): ResponseBestBakery
+
+    @GET("reviews/best")
+    suspend fun fetchBestReview(): ResponseBestReview
 }

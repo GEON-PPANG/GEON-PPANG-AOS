@@ -54,6 +54,15 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                 else -> {}
             }
         }.launchIn(lifecycleScope)
+
+        viewModel.bestReviewListState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
+                    bestReviewAdapter.submitList(it.data)
+                }
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun moveToSearch() {

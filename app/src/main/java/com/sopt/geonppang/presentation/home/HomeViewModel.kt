@@ -19,8 +19,12 @@ class HomeViewModel @Inject constructor(
     private var _bestBakeryListState = MutableStateFlow<UiState<List<BestBakery>>>(UiState.Loading)
     val bestBakeryListState get() = _bestBakeryListState.asStateFlow()
 
+    private var _bestReviewListState = MutableStateFlow<UiState<List<BestReview>>>(UiState.Loading)
+    val bestReviewListState get() = _bestReviewListState.asStateFlow()
+
     init {
         fetchBestBakeryList()
+        fetchBestReviewList()
     }
 
     private fun fetchBestBakeryList() {
@@ -31,6 +35,18 @@ class HomeViewModel @Inject constructor(
                 }
                 .onFailure { throwable ->
                     _bestBakeryListState.value = UiState.Error(throwable.message)
+                }
+        }
+    }
+
+    private fun fetchBestReviewList() {
+        viewModelScope.launch {
+            homeRepository.fetchBestReview()
+                .onSuccess { bestReviewList ->
+                    _bestReviewListState.value = UiState.Success(bestReviewList)
+                }
+                .onFailure { throwable ->
+                    _bestReviewListState.value = UiState.Error(throwable.message)
                 }
         }
     }

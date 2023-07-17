@@ -10,4 +10,7 @@ class HomeDataSource @Inject constructor(
 ) {
     suspend fun fetchBestBakery(): ResponseBestBakery =
         homeService.fetchBestBakery()
+
+    suspend fun fetchBestReview(): ResponseBestReview =
+        homeService.fetchBestReview()
 }
