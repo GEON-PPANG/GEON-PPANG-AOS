@@ -1,4 +1,4 @@
-package com.sopt.geonppang.util.binding
+package com.sopt.geonppang.util
 
 import android.text.Spannable
 import android.text.SpannableString

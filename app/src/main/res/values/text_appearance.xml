@@ -76,4 +76,6 @@
         <item name="android:fontFamily">@font/pretendard_m</item>
         <item name="android:lineHeight">17dp</item>
     </style>
+
+
 </resources>

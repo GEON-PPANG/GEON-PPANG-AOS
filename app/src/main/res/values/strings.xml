@@ -1,6 +1,29 @@
 <resources>
     <string name="app_name">건빵</string>
 
+    <!--signup-->
+    <string name="tv_email_notice_phrase">회원가입을 위한\n이메일을 알려주세요!</string>
+    <string name="tv_email">이메일</string>
+    <string name="email_hint">이메일을 입력해주세요</string>
+    <string name="email_error_msg">올바른 이메일을 입력해주세요</string>
+    <string name="double_check">중복확인</string>
+    <string name="txt_next_btn">다음</string>
+    <string name="tv_password_notice_phrase">회원가입을 위한\n비밀번호를 입력해주세요!</string>
+    <string name="tv_password">비밀번호</string>
+    <string name="password_hint">영문, 숫자 포함 8자리 이상</string>
+    <string name="tv_double_check_password">비밀번호 재확인</string>
+    <string name="double_check_hint">비밀번호를 재입력해주세요</string>
+    <string name="password_error_msg">영문, 숫자 포함 8자리 이상</string>
+    <string name="password_double_check_error_msg">비밀번호를 확인해주세요</string>
+    <string name="welcome_nickname">건빵에 오신 걸 환영해요!\n어떻게 불러드릴까요?</string>
+    <string name="tv_nickname">닉네임</string>
+    <string name="nickname_hint">닉네임 10자 이내, 특수문자 금지</string>
+    <string name="nickname_error">10자 이내, 특수문자 금지</string>
+    <string name="available_email">사용 가능한 이메일입니다</string>
+    <string name="unavailable_email">이미 존재하는 이메일입니다</string>
+    <string name="available_nickname">사용 가능한 닉네임입니다</string>
+    <string name="unavailable_nickname">이미 존재하는 닉네임입니다</string>
+
     <!--  home  -->
     <string name="home_best_title1">바이블님 맞춤\t</string>
     <string name="home_best_bakery_title2">BEST 건빵집</string>
