@@ -32,6 +32,10 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         binding.ivSearchDelete.setOnClickListener {
             binding.etSearch.text = null
         }
+
+        binding.ivSearchBack.setOnClickListener {
+            finish()
+        }
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {

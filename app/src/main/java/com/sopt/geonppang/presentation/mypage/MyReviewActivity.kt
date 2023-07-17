@@ -16,11 +16,18 @@ class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activ
         binding.viewModel = viewModel
 
         initLayout()
+        addListeners()
     }
 
     private fun initLayout() {
         myReviewAdapter = MyReviewAdapter()
         binding.rvMyReviewList.adapter = myReviewAdapter
         myReviewAdapter.submitList(viewModel.mockMyReviewList)
+    }
+
+    private fun addListeners() {
+        binding.toolbar.ivBack.setOnClickListener {
+            finish()
+        }
     }
 }
