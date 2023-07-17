@@ -69,7 +69,6 @@
     </style>
 
     <style name="Widget.Material3.Chip.Style" parent="">
-        <item name="rippleColor">@android:color/transparent</item>
         <item name="chipMinTouchTargetSize">0dp</item>
         <item name="chipEndPadding">0dp</item>
         <item name="chipStartPadding">0dp</item>
