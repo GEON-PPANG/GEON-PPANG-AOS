@@ -1,6 +1,7 @@
 package com.sopt.geonppang.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.sopt.geonppang.BuildConfig
 import com.sopt.geonppang.BuildConfig.DEBUG
 import dagger.Module
 import dagger.Provides
@@ -32,7 +33,7 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(client: OkHttpClient, json: Json): Retrofit = Retrofit.Builder()
-        .baseUrl("https://reqres.in/") // TODO BaseUrl 변경 및 BuildConfig 변수 사용
+        .baseUrl(BuildConfig.GP_BASE_URL)
         .client(client)
         .addConverterFactory(json.asConverterFactory(requireNotNull("application/json".toMediaTypeOrNull())))
         .build()
