@@ -6,9 +6,7 @@ data class BestReview(
     val reviewText: String,
     val firstReviewChip: String,
     val secondReviewChip: String,
-    val isBooked: Boolean,
     val bookmarkCount: Int,
-    // TODO image type -> String 으로 수정
-    val bakeryImage: Int,
+    val bakeryImage: String,
     val reviewCount: Int,
 )
