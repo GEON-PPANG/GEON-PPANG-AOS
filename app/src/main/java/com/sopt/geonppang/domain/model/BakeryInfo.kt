@@ -11,6 +11,7 @@ data class BakeryInfo(
     val secondNearStation: String?,
     val isBooked: Boolean,
     val bookmarkCount: Int,
+    val reviewCount: Int,
     val homepage: String?,
     val address: String,
     val openingTime: String,

@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import com.sopt.geonppang.R
 import com.sopt.geonppang.domain.model.BakeryInfo
 import com.sopt.geonppang.domain.model.BreadType
-import com.sopt.geonppang.domain.model.Menu
 import com.sopt.geonppang.domain.model.DetailReview
+import com.sopt.geonppang.domain.model.Menu
 import com.sopt.geonppang.domain.model.ReviewData
 
 class DetailViewModel : ViewModel() {
@@ -27,6 +27,7 @@ class DetailViewModel : ViewModel() {
         secondNearStation = null,
         isBooked = true,
         bookmarkCount = 7,
+        reviewCount = 10,
         homepage = "https://www.naver.com/mmv_vegan_bake_shop/",
         address = "경기 의왕시 신장승길 29 퍼스트힐5차 111호",
         openingTime = "수-금 12:00 ~ 19:00 / 토-일 13:00 ~ 19:00",
