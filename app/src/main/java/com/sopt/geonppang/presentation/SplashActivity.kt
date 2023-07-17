@@ -6,6 +6,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySplashBinding
+import com.sopt.geonppang.presentation.filter.FilterActivity
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -29,7 +30,7 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
 
     private fun moveToSign() {
         // TODO SignActivity로 이동 되도록 변경
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, FilterActivity::class.java))
         finish()
     }
 }

@@ -34,7 +34,7 @@
             app:layout_constraintGuide_end="@dimen/spacing24" />
 
         <ImageView
-            android:id="@+id/iv_detail_arrow_left"
+            android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -62,7 +62,7 @@
             android:layout_marginTop="10dp"
             android:background="@color/gray_200"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_detail_arrow_left" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_back" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_detail"

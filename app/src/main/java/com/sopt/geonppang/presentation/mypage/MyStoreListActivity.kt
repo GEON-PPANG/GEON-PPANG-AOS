@@ -14,12 +14,20 @@ class MyStoreListActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = myPageViewModel
+
         initLayout()
+        addListeners()
     }
 
     private fun initLayout() {
         bakeryAdapter = BakeryAdapter()
         binding.rvStoreList.adapter = bakeryAdapter
         bakeryAdapter.submitList(myPageViewModel.mockStoreList)
+    }
+
+    private fun addListeners() {
+        binding.toolbar.ivBack.setOnClickListener {
+            finish()
+        }
     }
 }
