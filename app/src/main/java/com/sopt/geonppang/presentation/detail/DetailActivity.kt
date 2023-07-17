@@ -1,5 +1,6 @@
 package com.sopt.geonppang.presentation.detail
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.ConcatAdapter
@@ -7,6 +8,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityDetailBinding
+import com.sopt.geonppang.presentation.review.ReviewWritingActivity
 import com.sopt.geonppang.util.ChipFactory
 import com.sopt.geonppang.util.CustomSnackbar
 import com.sopt.geonppang.util.binding.BindingActivity
@@ -63,6 +65,14 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     private fun addListeners() {
         binding.ivDetailBottomAppBarBookmark.setOnClickListener {
             CustomSnackbar.makeSnackbar(binding.root, getString(R.string.snackbar_save))
+        }
+
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
+
+        binding.layoutDetailBottomAppBarCreateReview.setOnClickListener {
+            startActivity(Intent(this, ReviewWritingActivity::class.java))
         }
     }
 

@@ -1,5 +1,6 @@
 package com.sopt.geonppang.presentation.mypage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -15,5 +16,25 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        addListeners()
+    }
+
+    private fun addListeners() {
+        binding.layoutMyPageBookmark.setOnClickListener {
+            moveToStoreBakeryList()
+        }
+
+        binding.layoutMyPageReview.setOnClickListener {
+            moveToMyReview()
+        }
+    }
+
+    private fun moveToStoreBakeryList() {
+        startActivity(Intent(requireContext(), MyStoreListActivity::class.java))
+    }
+
+    private fun moveToMyReview() {
+        startActivity(Intent(requireContext(), MyReviewActivity::class.java))
     }
 }

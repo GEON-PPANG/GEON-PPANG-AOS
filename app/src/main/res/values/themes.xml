@@ -69,17 +69,15 @@
     </style>
 
     <style name="Widget.Material3.Chip.Style" parent="">
-        <item name="rippleColor">@android:color/transparent</item>
         <item name="chipMinTouchTargetSize">0dp</item>
         <item name="chipEndPadding">0dp</item>
         <item name="chipStartPadding">0dp</item>
         <item name="android:checked">false</item>
+        <item name="rippleColor">@android:color/transparent</item>
         <item name="android:clickable">false</item>
     </style>
 
     <style name="Widget.Material3.Chip.Style.Radius3" parent="Widget.Material3.Chip.Style">
-        <item name="android:checked">false</item>
-        <item name="android:clickable">false</item>
         <item name="chipCornerRadius">3dp</item>
     </style>
 
