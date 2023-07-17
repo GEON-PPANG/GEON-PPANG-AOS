@@ -1,4 +1,4 @@
-package com.sopt.geonppang.data
+package com.sopt.geonppang.data.interceptor
 
 import com.sopt.geonppang.BuildConfig
 import okhttp3.Interceptor

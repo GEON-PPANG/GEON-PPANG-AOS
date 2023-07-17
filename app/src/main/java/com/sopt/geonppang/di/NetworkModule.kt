@@ -3,7 +3,7 @@ package com.sopt.geonppang.di
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.sopt.geonppang.BuildConfig
 import com.sopt.geonppang.BuildConfig.DEBUG
-import com.sopt.geonppang.data.AuthInterceptor
+import com.sopt.geonppang.data.interceptor.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
