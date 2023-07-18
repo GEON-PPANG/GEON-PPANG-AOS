@@ -6,6 +6,7 @@ import com.sopt.geonppang.data.repository.DummyRepositoryImpl
 import com.sopt.geonppang.data.repository.HomeRepositoryImpl
 import com.sopt.geonppang.data.repository.SearchRepositoryImpl
 import com.sopt.geonppang.domain.repository.BakeryRepository
+import com.sopt.geonppang.domain.repository.DetailRepository
 import com.sopt.geonppang.domain.repository.DummyRepository
 import com.sopt.geonppang.domain.repository.HomeRepository
 import com.sopt.geonppang.domain.repository.SearchRepository

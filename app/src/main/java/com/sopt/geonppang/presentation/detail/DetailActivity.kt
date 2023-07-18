@@ -24,6 +24,8 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     private val viewModel by viewModels<DetailViewModel>()
 
     lateinit var detailBakeryInfoAdapter: DetailBakeryInfoAdapter
+    lateinit var detailMenuAdapter: DetailMenuAdapter
+
     private val String.toChip: Chip
         get() = ChipFactory.create(layoutInflater).also {
             it.text = this
@@ -34,14 +36,14 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        initLayout()
         addListeners()
         collectData()
+        initLayout()
     }
 
     private fun initLayout() {
         detailBakeryInfoAdapter = DetailBakeryInfoAdapter()
-        val detailMenuAdapter = DetailMenuAdapter()
+        detailMenuAdapter = DetailMenuAdapter()
         val detailReviewDataAdapter = DetailReviewDataAdapter()
         val detailReviewAdapter = DetailReviewAdapter(::initChip)
         val detailNoReviewAdapter = DetailNoReviewAdapter()
@@ -89,6 +91,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
             when (it) {
                 is UiState.Success -> {
                     detailBakeryInfoAdapter.setBakeryInfo(it.data)
+                    detailMenuAdapter.submitList(it.data.menuList)
                     binding.bakeryInfo = it.data
                 }
 

@@ -17,5 +17,6 @@ data class BakeryInfo(
     val address: String,
     val openingTime: String,
     val closedDay: String,
-    val phoneNumber: String
+    val phoneNumber: String,
+    val menuList: List<Menu>
 )

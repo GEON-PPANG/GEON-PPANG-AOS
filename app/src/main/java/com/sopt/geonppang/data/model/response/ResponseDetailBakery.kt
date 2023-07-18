@@ -1,6 +1,7 @@
 package com.sopt.geonppang.data.model.response
 
 import com.sopt.geonppang.domain.model.BakeryInfo
+import com.sopt.geonppang.domain.model.Menu
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -64,7 +65,8 @@ data class ResponseDetailBakery(
             address = address,
             openingTime = openingTime,
             closedDay = closedDay,
-            phoneNumber = phoneNumber
+            phoneNumber = phoneNumber,
+            menuList = toMenuList()
         )
 
         fun toBreadType() = com.sopt.geonppang.domain.model.BreadType(
@@ -75,5 +77,12 @@ data class ResponseDetailBakery(
             isNutFree = breadType.isNutFree,
             isSugarFree = breadType.isSugarFree
         )
-    }l
+
+        fun toMenuList() = menuList.map { menu ->
+            Menu(
+                menuName = menu.menuName,
+                menuPrice = menu.menuPrice
+            )
+        }
+    }
 }
