@@ -46,7 +46,6 @@ class BakeryListViewModel @Inject constructor(
         _bakerySort.value = bakerySortType
     }
 
-
     fun fetchBakeryList() {
         viewModelScope.launch {
             bakeryRepository.fetchBakeryList(
@@ -63,5 +62,4 @@ class BakeryListViewModel @Inject constructor(
                 }
         }
     }
-
 }
