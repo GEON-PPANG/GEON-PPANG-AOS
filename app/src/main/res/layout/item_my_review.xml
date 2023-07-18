@@ -51,11 +51,11 @@
 
         <ImageView
             android:id="@+id/iv_bakery"
+            image="@{review.bakery.bakeryPicture}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing10"
             android:background="@drawable/shape_border_radius_5"
-            android:src="@{context.getDrawable(review.bakery.bakeryPicture)}"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@id/tv_my_review_date"
             tools:src="@drawable/bbang1" />

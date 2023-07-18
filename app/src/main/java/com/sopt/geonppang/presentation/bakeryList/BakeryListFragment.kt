@@ -4,22 +4,25 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentBakeryListBinding
-import com.sopt.geonppang.presentation.search.BakeryAdapter
 import com.sopt.geonppang.presentation.search.SearchActivity
-import com.sopt.geonppang.presentation.search.SearchViewModel
 import com.sopt.geonppang.presentation.type.BakerySortType
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingFragment
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
+@AndroidEntryPoint
 class BakeryListFragment :
     BindingFragment<FragmentBakeryListBinding>(R.layout.fragment_bakery_list),
     BakerySortTypeListener {
-    // TODO 서버 붙일때 수정
-    private val searchViewModel: SearchViewModel by viewModels()
     private val viewModel: BakeryListViewModel by viewModels()
 
-    lateinit var bakeryAdapter: BakeryAdapter
+    lateinit var bakeryAdapter: BakeryRecyclerViewAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,12 +31,12 @@ class BakeryListFragment :
 
         initLayout()
         addListeners()
+        collectData()
     }
 
     private fun initLayout() {
-        bakeryAdapter = BakeryAdapter()
+        bakeryAdapter = BakeryRecyclerViewAdapter()
         binding.rvBakeryList.adapter = bakeryAdapter
-        bakeryAdapter.submitList(searchViewModel.mockBakeryList)
     }
 
     private fun addListeners() {
@@ -44,6 +47,20 @@ class BakeryListFragment :
         binding.ivSearch.setOnClickListener {
             startActivity(Intent(requireActivity(), SearchActivity::class.java))
         }
+    }
+
+    private fun collectData() {
+        viewModel.bakeryListState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
+                    bakeryAdapter.setGoalList(it.data.toMutableList())
+                }
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
+        viewModel.bakeryCategoryType.flowWithLifecycle(lifecycle).onEach {
+            viewModel.fetchBakeryList()
+        }.launchIn(lifecycleScope)
     }
 
     private fun showBakeryListSortDialog() {
@@ -60,6 +77,6 @@ class BakeryListFragment :
     // BakeryListDialog에서 부터 받아온 데이터를 처리
     override fun onBakerySortTypeSelected(bakerySortType: BakerySortType) {
         viewModel.setBakerySortType(bakerySortType)
-        // TODO 건빵집 리스트 조회 서버 붙이기
+        viewModel.fetchBakeryList()
     }
 }
