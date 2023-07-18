@@ -115,7 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="@dimen/spacing20"
-            android:text="@{@string/home_best_review_and_bookmark_count(review.reviewCount, review.bookmarkCount)}"
+            android:text="@{@string/review_and_bookmark_count(review.reviewCount, review.bookmarkCount)}"
             android:textAppearance="@style/TextAppearance.CaptionB1"
             android:textColor="@color/gray_400"
             app:layout_constraintBottom_toBottomOf="parent"

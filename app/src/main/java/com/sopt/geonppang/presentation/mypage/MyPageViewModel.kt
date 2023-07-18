@@ -1,7 +1,6 @@
 package com.sopt.geonppang.presentation.mypage
 
 import androidx.lifecycle.ViewModel
-import com.sopt.geonppang.R
 import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.domain.model.BreadType
 import com.sopt.geonppang.domain.model.MyReview
@@ -29,9 +28,8 @@ class MyPageViewModel : ViewModel() {
             bakeryName = "건대 비건빵아아아아아아아아아",
             firstNearStation = "건대역",
             secondNearStation = null,
-            isBooked = true,
             bookmarkCount = 5,
-            bakeryPicture = R.drawable.bbang1,
+            bakeryPicture = "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220526_91%2F1653554529250qdOYp_JPEG%2F0E35EAC3-F936-41C7-BEE4-645B83AED8B1.jpeg",
             isHACCP = true,
             isNonGMO = true,
             isVegan = true,
@@ -49,9 +47,8 @@ class MyPageViewModel : ViewModel() {
             bakeryName = "건대 비건빵아아아아아아",
             firstNearStation = "덕소역",
             secondNearStation = "구리역",
-            isBooked = false,
             bookmarkCount = 7,
-            bakeryPicture = R.drawable.bbang1,
+            bakeryPicture = "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220526_91%2F1653554529250qdOYp_JPEG%2F0E35EAC3-F936-41C7-BEE4-645B83AED8B1.jpeg",
             isHACCP = false,
             isNonGMO = true,
             isVegan = true,
@@ -69,9 +66,8 @@ class MyPageViewModel : ViewModel() {
             bakeryName = "건대 비건빵아아아아아아",
             firstNearStation = "덕소역",
             secondNearStation = "구리역",
-            isBooked = false,
             bookmarkCount = 0,
-            bakeryPicture = R.drawable.bbang1,
+            bakeryPicture = "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220526_91%2F1653554529250qdOYp_JPEG%2F0E35EAC3-F936-41C7-BEE4-645B83AED8B1.jpeg",
             isHACCP = false,
             isNonGMO = true,
             isVegan = false,
@@ -95,9 +91,8 @@ class MyPageViewModel : ViewModel() {
                 bakeryName = "건대 비건빵아아아아아아아아아",
                 firstNearStation = "건대역",
                 secondNearStation = "성수역",
-                isBooked = true,
                 bookmarkCount = 5,
-                bakeryPicture = R.drawable.bbang1,
+                bakeryPicture = "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220526_91%2F1653554529250qdOYp_JPEG%2F0E35EAC3-F936-41C7-BEE4-645B83AED8B1.jpeg",
                 isHACCP = true,
                 isNonGMO = true,
                 isVegan = true,
@@ -119,9 +114,8 @@ class MyPageViewModel : ViewModel() {
                 bakeryName = "건대 비건빵아아아아아아아아아",
                 firstNearStation = "동대문역사공원역",
                 secondNearStation = null,
-                isBooked = false,
                 bookmarkCount = 6,
-                bakeryPicture = R.drawable.bbang1,
+                bakeryPicture = "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220526_91%2F1653554529250qdOYp_JPEG%2F0E35EAC3-F936-41C7-BEE4-645B83AED8B1.jpeg",
                 isHACCP = false,
                 isNonGMO = true,
                 isVegan = true,
@@ -143,9 +137,8 @@ class MyPageViewModel : ViewModel() {
                 bakeryName = "건대 비건빵아아아아아아아아아",
                 firstNearStation = "건대역",
                 secondNearStation = null,
-                isBooked = false,
                 bookmarkCount = 0,
-                bakeryPicture = R.drawable.bbang1,
+                bakeryPicture = "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220526_91%2F1653554529250qdOYp_JPEG%2F0E35EAC3-F936-41C7-BEE4-645B83AED8B1.jpeg",
                 isHACCP = false,
                 isNonGMO = true,
                 isVegan = true,

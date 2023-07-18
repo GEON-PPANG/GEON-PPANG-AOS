@@ -2,8 +2,10 @@ package com.sopt.geonppang.di
 
 import com.sopt.geonppang.data.repository.DummyRepositoryImpl
 import com.sopt.geonppang.data.repository.HomeRepositoryImpl
+import com.sopt.geonppang.data.repository.SearchRepositoryImpl
 import com.sopt.geonppang.domain.repository.DummyRepository
 import com.sopt.geonppang.domain.repository.HomeRepository
+import com.sopt.geonppang.domain.repository.SearchRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -24,4 +26,10 @@ interface RepositoryModule {
     fun bindHomeRepository(
         homeRepositoryImpl: HomeRepositoryImpl,
     ): HomeRepository
+
+    @Binds
+    @Singleton
+    fun bindSearchRepository(
+        searchRepositoryImpl: SearchRepositoryImpl
+    ): SearchRepository
 }

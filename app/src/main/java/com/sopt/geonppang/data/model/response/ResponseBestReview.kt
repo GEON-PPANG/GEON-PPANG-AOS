@@ -17,7 +17,7 @@ data class ResponseBestReview(
         val bookMarkCount: Int,
         val firstMaxRecommendKeyword: String,
         val firstNearStation: String,
-        val isBooked: Boolean,
+        val isBookMarked: Boolean,
         val isHACCP: Boolean,
         val isNonGMO: Boolean,
         val isVegan: Boolean,
