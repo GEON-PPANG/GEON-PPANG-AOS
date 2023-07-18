@@ -7,7 +7,9 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.DialogBottomBakeryListSortBinding
 import com.sopt.geonppang.presentation.type.BakerySortType
 import com.sopt.geonppang.util.binding.BindingBottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BakeryListSortBottomSheetDialog :
     BindingBottomSheetDialogFragment<DialogBottomBakeryListSortBinding>(R.layout.dialog_bottom_bakery_list_sort) {
     private val viewModel: BakeryListViewModel by viewModels()
