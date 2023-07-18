@@ -99,7 +99,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{@string/home_best_review_and_bookmark_count(bakery.reviewCount, bakery.bookmarkCount)}"
+            android:text="@{@string/review_and_bookmark_count(bakery.reviewCount, bakery.bookmarkCount)}"
             android:textAppearance="@style/TextAppearance.CaptionB1"
             android:textColor="@color/gray_400"
             app:layout_constraintEnd_toStartOf="@+id/gl_end"
