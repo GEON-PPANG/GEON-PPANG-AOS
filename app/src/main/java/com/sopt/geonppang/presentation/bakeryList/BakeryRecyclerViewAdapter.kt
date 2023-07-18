@@ -23,7 +23,6 @@ class BakeryRecyclerViewAdapter(
                 moveToDetail(bakery.bakeryId)
             }
             binding.executePendingBindings()
-
         }
     }
 
