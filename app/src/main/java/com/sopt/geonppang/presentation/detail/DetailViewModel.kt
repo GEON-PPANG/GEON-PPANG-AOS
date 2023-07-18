@@ -26,12 +26,7 @@ class DetailViewModel @Inject constructor(
     private val _reviewListState = MutableStateFlow<UiState<ReviewData>>(UiState.Loading)
     val reviewListState get() = _reviewListState.asStateFlow()
 
-    init {
-        fetchDetailBakeryInfo(2)
-        fetchDetailReview(2)
-    }
-
-    private fun fetchDetailBakeryInfo(bakeryId: Int) {
+    fun fetchDetailBakeryInfo(bakeryId: Int) {
         viewModelScope.launch {
             detailRepository.fetchDetailBakery(bakeryId)
                 .onSuccess { bakeryInfo ->
@@ -43,7 +38,7 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    private fun fetchDetailReview(bakeryId: Int) {
+    fun fetchDetailReview(bakeryId: Int) {
         viewModelScope.launch {
             detailRepository.fetchDetailReview(bakeryId)
                 .onSuccess { reviewData ->

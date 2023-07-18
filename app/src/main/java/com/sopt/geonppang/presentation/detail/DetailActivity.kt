@@ -46,6 +46,10 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initLayout() {
+        val bakeryId = intent.getIntExtra(BAKERY_ID, -1)
+        viewModel.fetchDetailBakeryInfo(bakeryId)
+        viewModel.fetchDetailReview(bakeryId)
+
         detailBakeryInfoAdapter = DetailBakeryInfoAdapter()
         detailMenuAdapter = DetailMenuAdapter()
         detailReviewDataAdapter = DetailReviewDataAdapter()
@@ -120,5 +124,9 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                 )
             }
         }
+    }
+
+    companion object {
+        const val BAKERY_ID = "bakeryId"
     }
 }
