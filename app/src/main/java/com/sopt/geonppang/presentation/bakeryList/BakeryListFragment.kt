@@ -33,7 +33,7 @@ class BakeryListFragment :
     private fun initLayout() {
         bakeryAdapter = BakeryAdapter()
         binding.rvBakeryList.adapter = bakeryAdapter
-        bakeryAdapter.submitList(searchViewModel.mockBakeryList)
+//        bakeryAdapter.submitList(searchViewModel.mockBakeryList)
     }
 
     private fun addListeners() {
