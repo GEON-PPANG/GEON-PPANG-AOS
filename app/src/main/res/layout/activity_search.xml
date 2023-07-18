@@ -47,7 +47,7 @@
             android:layout_marginTop="36dp"
             android:background="@drawable/background_search_box"
             android:hint="@string/search_hint"
-            android:inputType="text"
+            android:imeOptions="actionDone"
             android:maxLines="1"
             android:paddingHorizontal="16dp"
             android:paddingVertical="10dp"
@@ -219,13 +219,5 @@
             app:layout_constraintTop_toBottomOf="@id/view_line_top"
             tools:itemCount="5"
             tools:listitem="@layout/item_bakery" />
-
-        <!--        <View-->
-        <!--            android:id="@+id/view_line_bottom"-->
-        <!--            visibility="@{viewModel.searchCount >0}"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="1dp"-->
-        <!--            android:background="@color/gray_200"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/layout_bakery_list" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

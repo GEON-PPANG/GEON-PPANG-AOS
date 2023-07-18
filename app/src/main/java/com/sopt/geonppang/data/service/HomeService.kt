@@ -5,9 +5,9 @@ import com.sopt.geonppang.data.model.response.ResponseBestReview
 import retrofit2.http.GET
 
 interface HomeService {
-    @GET("bakeries/best")
+    @GET("best/bakeries")
     suspend fun fetchBestBakery(): ResponseBestBakery
 
-    @GET("reviews/best")
+    @GET("best/reviews")
     suspend fun fetchBestReview(): ResponseBestReview
 }
