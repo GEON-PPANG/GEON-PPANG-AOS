@@ -1,6 +1,7 @@
 package com.sopt.geonppang.data.model.response
 
 import com.sopt.geonppang.domain.model.BakeryInfo
+import com.sopt.geonppang.domain.model.BreadType
 import com.sopt.geonppang.domain.model.Menu
 import kotlinx.serialization.Serializable
 
@@ -47,42 +48,39 @@ data class ResponseDetailBakery(
             val menuName: String,
             val menuPrice: Int
         )
+    }
 
-        fun toBakeryInfo() = BakeryInfo(
-            bakeryId = bakeryId,
-            bakeryName = bakeryName,
-            bakeryPicture = bakeryPicture,
-            isHACCP = isHACCP,
-            isVegan = isVegan,
-            isNonGMO = isNonGMO,
-            breadType = toBreadType(),
-            firstNearStation = firstNearStation,
-            secondNearStation = secondNearStation,
-            isBooked = isBookMarked,
-            bookMarkCount = bookMarkCount,
-            reviewCount = reviewCount,
-            homepage = homepage,
-            address = address,
-            openingTime = openingTime,
-            closedDay = closedDay,
-            phoneNumber = phoneNumber,
-            menuList = toMenuList()
-        )
-
-        fun toBreadType() = com.sopt.geonppang.domain.model.BreadType(
-            breadTypeId = breadType.breadTypeId,
-            breadTypeName = breadType.breadTypeName,
-            isGlutenFree = breadType.isGlutenFree,
-            isVegan = breadType.isVegan,
-            isNutFree = breadType.isNutFree,
-            isSugarFree = breadType.isSugarFree
-        )
-
-        fun toMenuList() = menuList.map { menu ->
+    fun toBakeryInfo() = BakeryInfo(
+        bakeryId = data.bakeryId,
+        bakeryName = data.bakeryName,
+        bakeryPicture = data.bakeryPicture,
+        isHACCP = data.isHACCP,
+        isVegan = data.isVegan,
+        isNonGMO = data.isNonGMO,
+        firstNearStation = data.firstNearStation,
+        secondNearStation = data.secondNearStation,
+        isBooked = data.isBookMarked,
+        bookMarkCount = data.bookMarkCount,
+        reviewCount = data.reviewCount,
+        homepage = data.homepage,
+        address = data.address,
+        openingTime = data.openingTime,
+        closedDay = data.closedDay,
+        phoneNumber = data.phoneNumber,
+        menuList = data.menuList.map { menu ->
             Menu(
+                menuId = menu.menuId,
                 menuName = menu.menuName,
                 menuPrice = menu.menuPrice
             )
-        }
-    }
+        },
+        breadType = BreadType(
+            breadTypeId = data.breadType.breadTypeId,
+            breadTypeName = data.breadType.breadTypeName,
+            isGlutenFree = data.breadType.isGlutenFree,
+            isVegan = data.breadType.isVegan,
+            isNutFree = data.breadType.isNutFree,
+            isSugarFree = data.breadType.isSugarFree
+        )
+    )
 }
