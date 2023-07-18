@@ -1,5 +1,6 @@
 package com.sopt.geonppang.di
 
+import com.sopt.geonppang.data.service.DetailService
 import com.sopt.geonppang.data.service.DummyService
 import dagger.Module
 import dagger.Provides
@@ -15,4 +16,9 @@ object ServiceModule {
     @Provides
     fun provideDummyService(retrofit: Retrofit): DummyService =
         retrofit.create(DummyService::class.java)
+
+    @Singleton
+    @Provides
+    fun detailService(retrofit: Retrofit): DetailService =
+        retrofit.create(DetailService::class.java)
 }
