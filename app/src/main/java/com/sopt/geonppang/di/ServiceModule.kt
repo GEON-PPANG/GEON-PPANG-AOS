@@ -1,7 +1,9 @@
 package com.sopt.geonppang.di
 
+import androidx.annotation.RestrictTo
 import com.sopt.geonppang.data.service.BakeryService
 import com.sopt.geonppang.data.service.DummyService
+import com.sopt.geonppang.data.service.MypageInfoService
 import com.sopt.geonppang.data.service.HomeService
 import com.sopt.geonppang.data.service.SearchService
 import dagger.Module
@@ -9,6 +11,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -18,6 +21,11 @@ object ServiceModule {
     @Provides
     fun provideDummyService(retrofit: Retrofit): DummyService =
         retrofit.create(DummyService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideMypageInfoService(retrofit: Retrofit): MypageInfoService =
+        retrofit.create(MypageInfoService::class.java)
 
     @Singleton
     @Provides

@@ -1,12 +1,37 @@
 package com.sopt.geonppang.presentation.mypage
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.sopt.geonppang.R
 import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.domain.model.BreadType
 import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.domain.model.Profile
+import com.sopt.geonppang.domain.repository.MypageInfoRepository
+import com.sopt.geonppang.util.UiState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MyPageViewModel : ViewModel() {
+@HiltViewModel
+class MyPageViewModel @Inject constructor(private val mypageInfoRepository: MypageInfoRepository) :
+    ViewModel() {
+    private val _mypageInfoState = MutableStateFlow<UiState<Profile>>(UiState.Loading)
+    val mypageInfoState get() = _mypageInfoState.asStateFlow()
+    fun fetchMypageInfo() {
+        viewModelScope.launch {
+            mypageInfoRepository.fetchMypageInfo()
+                .onSuccess { myInfo ->
+                    _mypageInfoState.value = UiState.Success(myInfo)
+                }
+                .onFailure { throwable ->
+                    _mypageInfoState.value = UiState.Error(throwable.message)
+                }
+        }
+    }
+
     private val _profile = Profile(
         memberNickname = "안빵이들",
         mainPurpose = "맛 . 다이어트",
@@ -19,7 +44,7 @@ class MyPageViewModel : ViewModel() {
             isSugarFree = true
         )
     )
-    val profile = _profile
+    var profile = _profile
 
     // 마이페이지 북마크 더미데이터
     val mockStoreList = listOf(
