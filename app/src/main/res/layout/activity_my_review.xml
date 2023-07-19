@@ -28,7 +28,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_my_review_list"
-            visibility="@{viewModel.mockMyReviewList.size() > 0}"
+            visibility="@{viewModel.myReviewCount > 0}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
@@ -37,7 +37,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view_top" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            visibility="@{viewModel.mockMyReviewList.size() == 0}"
+            visibility="@{viewModel.myReviewCount == 0}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
