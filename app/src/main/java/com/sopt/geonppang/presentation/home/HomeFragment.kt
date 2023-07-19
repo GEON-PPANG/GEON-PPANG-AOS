@@ -51,6 +51,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                 is UiState.Success -> {
                     bestBakeryAdapter.submitList(it.data)
                 }
+
                 else -> {}
             }
         }.launchIn(lifecycleScope)
@@ -60,6 +61,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
                 is UiState.Success -> {
                     bestReviewAdapter.submitList(it.data)
                 }
+
                 else -> {}
             }
         }.launchIn(lifecycleScope)
@@ -69,7 +71,13 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         startActivity(Intent(requireContext(), SearchActivity::class.java))
     }
 
-    private fun moveToDetail() {
-        startActivity(Intent(requireContext(), DetailActivity::class.java))
+    private fun moveToDetail(bakeryId: Int) {
+        val intent = Intent(requireContext(), DetailActivity::class.java)
+        intent.putExtra(BAKERY_ID, bakeryId)
+        startActivity(intent)
+    }
+
+    companion object {
+        const val BAKERY_ID = "bakeryId"
     }
 }

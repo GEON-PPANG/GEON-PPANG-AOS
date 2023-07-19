@@ -15,7 +15,7 @@ class DetailReviewAdapter(
     ListAdapter<DetailReview, DetailReviewAdapter.DetailReviewViewHolder>(
         ItemDiffCallback<DetailReview>(
             onContentsTheSame = { old, new -> old == new },
-            onItemsTheSame = { old, new -> old == new }
+            onItemsTheSame = { old, new -> old.reviewId == new.reviewId }
         )
     ) {
     class DetailReviewViewHolder(private val binding: ItemDetailReviewBinding) :

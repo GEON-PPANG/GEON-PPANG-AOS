@@ -6,14 +6,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sopt.geonppang.databinding.ItemBakeryBinding
 import com.sopt.geonppang.domain.model.Bakery
 
-class BakeryRecyclerViewAdapter : RecyclerView.Adapter<BakeryRecyclerViewAdapter.BakeryViewHolder>() {
+class BakeryRecyclerViewAdapter(
+    private val moveToDetail: (Int) -> Unit
+) : RecyclerView.Adapter<BakeryRecyclerViewAdapter.BakeryViewHolder>() {
     private val bakeryList: MutableList<Bakery> = mutableListOf()
 
     class BakeryViewHolder(
         private val binding: ItemBakeryBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(bakery: Bakery) {
+        fun onBind(
+            bakery: Bakery,
+            moveToDetail: (Int) -> Unit
+        ) {
             binding.bakery = bakery
+            binding.root.setOnClickListener {
+                moveToDetail(bakery.bakeryId)
+            }
             binding.executePendingBindings()
         }
     }
@@ -27,7 +35,7 @@ class BakeryRecyclerViewAdapter : RecyclerView.Adapter<BakeryRecyclerViewAdapter
     override fun getItemCount() = bakeryList.size
 
     override fun onBindViewHolder(holder: BakeryViewHolder, position: Int) {
-        holder.onBind(bakeryList[position])
+        holder.onBind(bakeryList[position], moveToDetail)
     }
 
     fun setGoalList(bakeries: MutableList<Bakery>) {

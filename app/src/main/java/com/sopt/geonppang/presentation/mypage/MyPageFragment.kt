@@ -12,7 +12,9 @@ import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingFragment
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     private val viewModel by viewModels<MyPageViewModel>()
 
