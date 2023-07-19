@@ -7,5 +7,5 @@ import com.sopt.geonppang.domain.model.ReviewData
 interface DetailRepository {
     suspend fun fetchDetailBakery(bakeryId: Int): Result<BakeryInfo>
     suspend fun fetchDetailReview(bakeryId: Int): Result<ReviewData>
-    suspend fun doBookMark(bakeryId: Int,  isAddingBookMark: Boolean): Result<BookMark>
+    suspend fun doBookMark(bakeryId: Int, isAddingBookMark: Boolean): Result<BookMark>
 }
