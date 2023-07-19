@@ -171,7 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
-            android:text="@{@string/detail_num(bakeryInfo.bookMarkCount)}"
+            android:text="@{@string/detail_num(bakeryInfo.reviewCount)}"
             android:textAppearance="@style/TextAppearance.CaptionB1"
             android:textColor="@color/gray_300"
             app:layout_constraintStart_toEndOf="@+id/iv_item_detail_bakery_info_review"
