@@ -10,8 +10,8 @@
             type="com.sopt.geonppang.presentation.detail.DetailViewModel" />
 
         <variable
-            name="bakeryInfo"
-            type="com.sopt.geonppang.domain.model.BakeryInfo" />
+            name="bookMark"
+            type="com.sopt.geonppang.domain.model.BookMark" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="27dp"
-            android:src="@{bakeryInfo.isBooked == true? @drawable/ic_bookmark_selected : @drawable/ic_bookmark_unselected}"
+            android:src="@{viewModel.bookMarkState.bookMarked == true? @drawable/ic_bookmark_selected : @drawable/ic_bookmark_unselected}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/gl_start"
             tools:src="@drawable/ic_bookmark_unselected" />

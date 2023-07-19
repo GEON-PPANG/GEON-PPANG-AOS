@@ -29,6 +29,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     lateinit var detailReviewAdapter: DetailReviewAdapter
     lateinit var detailNoReviewAdapter: DetailNoReviewAdapter
     lateinit var concatAdapter: ConcatAdapter
+    var bakeryId = -1
 
     private val String.toChip: Chip
         get() = ChipFactory.create(layoutInflater).also {
@@ -40,13 +41,14 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        bakeryId = intent.getIntExtra(BAKERY_ID, -1)
+
         addListeners()
         collectData()
         initLayout()
     }
 
     private fun initLayout() {
-        val bakeryId = intent.getIntExtra(BAKERY_ID, -1)
         viewModel.fetchDetailBakeryInfo(bakeryId)
         viewModel.fetchDetailReview(bakeryId)
 
@@ -67,10 +69,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun addListeners() {
-        binding.ivDetailBottomAppBarBookmark.setOnClickListener {
-            CustomSnackbar.makeSnackbar(binding.root, getString(R.string.snackbar_save))
-        }
-
         binding.ivBack.setOnClickListener {
             finish()
         }
@@ -86,7 +84,18 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                 is UiState.Success -> {
                     detailBakeryInfoAdapter.setBakeryInfo(it.data)
                     detailMenuAdapter.submitList(it.data.menuList)
-                    binding.bakeryInfo = it.data
+
+                    binding.ivDetailBottomAppBarBookmark.setOnClickListener {
+                        if (viewModel.bookMarkState.value?.isBookMarked == false) {
+                            CustomSnackbar.makeSnackbar(
+                                binding.root,
+                                getString(R.string.snackbar_save)
+                            )
+                        }
+                        viewModel.bookMarkState.value?.isBookMarked?.let { isBookMarked ->
+                            viewModel.doBookMark(bakeryId, !isBookMarked)
+                        }
+                    }
                 }
 
                 else -> {}
@@ -113,6 +122,10 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
                 else -> {}
             }
+        }.launchIn(lifecycleScope)
+
+        viewModel.bookMarkState.flowWithLifecycle(lifecycle).onEach {
+            viewModel.fetchDetailBakeryInfo(bakeryId)
         }.launchIn(lifecycleScope)
     }
 

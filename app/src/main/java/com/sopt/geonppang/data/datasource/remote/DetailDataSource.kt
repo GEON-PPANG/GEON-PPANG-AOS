@@ -1,5 +1,7 @@
 package com.sopt.geonppang.data.datasource.remote
 
+import com.sopt.geonppang.data.model.request.RequestBookMark
+import com.sopt.geonppang.data.model.response.ResponseBookMark
 import com.sopt.geonppang.data.model.response.ResponseDetailBakery
 import com.sopt.geonppang.data.model.response.ResponseDetailReview
 import com.sopt.geonppang.data.service.DetailService
@@ -13,4 +15,7 @@ class DetailDataSource @Inject constructor(
 
     suspend fun fetchDetailReview(bakeryId: Int): ResponseDetailReview =
         detailService.fetchDetailReview(bakeryId)
+
+    suspend fun doBookMark(bakeryId: Int, isAddingBookMark: Boolean): ResponseBookMark =
+        detailService.doBookMark(bakeryId, RequestBookMark(isAddingBookMark))
 }
