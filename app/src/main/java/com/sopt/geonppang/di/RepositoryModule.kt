@@ -2,13 +2,13 @@ package com.sopt.geonppang.di
 
 import com.sopt.geonppang.data.repository.BakeryRepositoryImpl
 import com.sopt.geonppang.data.repository.DummyRepositoryImpl
-import com.sopt.geonppang.data.repository.MypageReviewRepositoryImpl
 import com.sopt.geonppang.data.repository.HomeRepositoryImpl
+import com.sopt.geonppang.data.repository.MypageRepositoryImpl
 import com.sopt.geonppang.data.repository.SearchRepositoryImpl
 import com.sopt.geonppang.domain.repository.BakeryRepository
 import com.sopt.geonppang.domain.repository.DummyRepository
 import com.sopt.geonppang.domain.repository.HomeRepository
-import com.sopt.geonppang.domain.repository.MypageReviewRepository
+import com.sopt.geonppang.domain.repository.MypageRepository
 import com.sopt.geonppang.domain.repository.SearchRepository
 import dagger.Binds
 import dagger.Module
@@ -45,7 +45,7 @@ interface RepositoryModule {
 
     @Binds
     @Singleton
-    fun bindMypageReviewRepository(
-        mypageReviewRepositoryImpl: MypageReviewRepositoryImpl,
-    ): MypageReviewRepository
+    fun bindMypageRepository(
+        mypageRepositoryImpl: MypageRepositoryImpl,
+    ): MypageRepository
 }
