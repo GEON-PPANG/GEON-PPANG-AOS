@@ -61,7 +61,6 @@ class MyPageViewModel @Inject constructor(
         }
     }
 
-
     private fun fetchMypageBookmarkList() {
         viewModelScope.launch {
             mypageRepository.fetchMyBookmark().onSuccess { myBookmarkList ->
