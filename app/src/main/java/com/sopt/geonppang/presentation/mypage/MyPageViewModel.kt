@@ -20,7 +20,9 @@ class MyPageViewModel @Inject constructor(
     private val mypageRepository: MypageRepository,
 ) : ViewModel() {
     private val _profile = Profile(
-        memberNickname = "안빵이들", mainPurpose = "맛 . 다이어트", breadType = BreadType(
+        memberNickname = "안빵이들",
+        mainPurpose = "맛 . 다이어트",
+        breadType = BreadType(
             breadTypeId = 1,
             breadTypeName = "글루텐프리",
             isGlutenFree = true,

@@ -40,16 +40,18 @@ class MyStoreListActivity :
         }
     }
 
-    private fun collectData(){
+    private fun collectData() {
         myPageViewModel.mypageBookmarkListState.flowWithLifecycle(lifecycle).onEach {
-            when(it){
+            when (it) {
                 is UiState.Success -> {
                     bakeryAdapter.submitList(it.data)
                 }
-                is UiState.Error ->{
+
+                is UiState.Error -> {
                     Timber.e(it.message)
                 }
-                else ->{}
+
+                else -> {}
             }
         }.launchIn(lifecycleScope)
     }

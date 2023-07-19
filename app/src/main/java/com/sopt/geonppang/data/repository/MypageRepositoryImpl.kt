@@ -9,9 +9,10 @@ import javax.inject.Inject
 class MypageRepositoryImpl @Inject constructor(
     private val mypageDataSource: MypageDataSource,
 ) : MypageRepository {
-    override suspend fun fetchMyBookmark(): Result<List<Bakery>> = runCatching{
+    override suspend fun fetchMyBookmark(): Result<List<Bakery>> = runCatching {
         mypageDataSource.fetchMyBookmarkList().toMypageBookmark()
     }
+
     override suspend fun fetchMyReview(): Result<List<MyReview>> = runCatching {
         mypageDataSource.fetchMyReviewList().toMyReview()
     }
