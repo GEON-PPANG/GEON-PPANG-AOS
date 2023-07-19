@@ -3,6 +3,7 @@ package com.sopt.geonppang.di
 import com.sopt.geonppang.data.service.BakeryService
 import com.sopt.geonppang.data.service.DummyService
 import com.sopt.geonppang.data.service.HomeService
+import com.sopt.geonppang.data.service.MypageBookmarkService
 import com.sopt.geonppang.data.service.SearchService
 import dagger.Module
 import dagger.Provides
@@ -33,4 +34,9 @@ object ServiceModule {
     @Provides
     fun provideBakeryService(retrofit: Retrofit): BakeryService =
         retrofit.create(BakeryService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideMypageBookmarkService(retrofit: Retrofit): MypageBookmarkService =
+        retrofit.create(MypageBookmarkService::class.java)
 }

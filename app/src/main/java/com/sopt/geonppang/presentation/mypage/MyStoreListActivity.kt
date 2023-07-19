@@ -2,10 +2,16 @@ package com.sopt.geonppang.presentation.mypage
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityMyStoreListBinding
 import com.sopt.geonppang.presentation.search.BakeryAdapter
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import timber.log.Timber
 
 class MyStoreListActivity :
     BindingActivity<ActivityMyStoreListBinding>(R.layout.activity_my_store_list) {
@@ -17,17 +23,31 @@ class MyStoreListActivity :
 
         initLayout()
         addListeners()
+        collectData()
     }
 
     private fun initLayout() {
         bakeryAdapter = BakeryAdapter()
         binding.rvStoreList.adapter = bakeryAdapter
-        bakeryAdapter.submitList(myPageViewModel.mockStoreList)
     }
 
     private fun addListeners() {
         binding.toolbar.ivBack.setOnClickListener {
             finish()
         }
+    }
+
+    private fun collectData(){
+        myPageViewModel.mypageBookmarkListState.flowWithLifecycle(lifecycle).onEach {
+            when(it){
+                is UiState.Success -> {
+                    bakeryAdapter.submitList(it.data)
+                }
+                is UiState.Error ->{
+                    Timber.e(it.message)
+                }
+                else ->{}
+            }
+        }.launchIn(lifecycleScope)
     }
 }
