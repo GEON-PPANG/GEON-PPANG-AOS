@@ -75,7 +75,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         val intent = Intent(requireContext(), DetailActivity::class.java)
         intent.putExtra(BAKERY_ID, bakeryId)
         startActivity(intent)
-
     }
 
     companion object {
