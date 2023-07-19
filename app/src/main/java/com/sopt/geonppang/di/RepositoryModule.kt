@@ -2,7 +2,6 @@ package com.sopt.geonppang.di
 
 import com.sopt.geonppang.data.repository.BakeryRepositoryImpl
 import com.sopt.geonppang.data.repository.DummyRepositoryImpl
-import com.sopt.geonppang.data.repository.MypageInfoRepsitoryImpl
 import com.sopt.geonppang.data.repository.MypageReviewRepositoryImpl
 import com.sopt.geonppang.data.repository.HomeRepositoryImpl
 import com.sopt.geonppang.data.repository.SearchRepositoryImpl

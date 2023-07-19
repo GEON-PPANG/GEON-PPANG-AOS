@@ -4,7 +4,6 @@ import com.sopt.geonppang.data.service.BakeryService
 import com.sopt.geonppang.data.service.DummyService
 import com.sopt.geonppang.data.service.HomeService
 import com.sopt.geonppang.data.service.SearchService
-import com.sopt.geonppang.data.service.MypageInfoService
 import com.sopt.geonppang.data.service.MypageReviewService
 import dagger.Module
 import dagger.Provides

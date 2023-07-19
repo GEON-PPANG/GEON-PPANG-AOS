@@ -27,12 +27,12 @@ data class ResponseMypageReview(
         val secondNearStation: String,
         val isBookMarked: String?,
         val bookMarkCount: Int?,
-        val breadTypeResponseDto: BreadTypeResponseDto,
+        val breadType: BreadType,
         val reviewId: Int,
         val createdAt: String,
         ) {
         @Serializable
-        data class BreadTypeResponseDto(
+        data class BreadType(
             val breadTypeId: Int,
             val breadTypeName: String,
             val isGlutenFree: Boolean,
@@ -55,12 +55,12 @@ data class ResponseMypageReview(
                 myReview.bookMarkCount,
                 myReview.bakeryPicture,
                 breadType = BreadType(
-                    myReview.breadTypeResponseDto.breadTypeId,
-                    myReview.breadTypeResponseDto.breadTypeName,
-                    myReview.breadTypeResponseDto.isGlutenFree,
-                    myReview.breadTypeResponseDto.isVegan,
-                    myReview.breadTypeResponseDto.isNutFree,
-                    myReview.breadTypeResponseDto.isSugarFree
+                    myReview.breadType.breadTypeId,
+                    myReview.breadType.breadTypeName,
+                    myReview.breadType.isGlutenFree,
+                    myReview.breadType.isVegan,
+                    myReview.breadType.isNutFree,
+                    myReview.breadType.isSugarFree
                 )
             ),
             reviewId = myReview.reviewId,
