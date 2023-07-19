@@ -12,7 +12,7 @@ class DetailMenuAdapter() :
     ListAdapter<Menu, DetailMenuAdapter.DetailMenuViewHolder>(
         ItemDiffCallback<Menu>(
             onContentsTheSame = { old, new -> old == new },
-            onItemsTheSame = { old, new -> old == new }
+            onItemsTheSame = { old, new -> old.menuId == new.menuId }
         )
     ) {
     class DetailMenuViewHolder(private val binding: ItemDetailMenuBinding) :

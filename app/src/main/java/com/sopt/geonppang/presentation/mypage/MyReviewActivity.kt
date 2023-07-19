@@ -46,9 +46,11 @@ class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activ
                 is UiState.Success -> {
                     myReviewAdapter.submitList(it.data)
                 }
+
                 is UiState.Error -> {
                     Timber.e(it.message)
                 }
+
                 else -> {}
             }
         }.launchIn(lifecycleScope)

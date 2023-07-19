@@ -8,6 +8,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentBakeryListBinding
+import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.search.SearchActivity
 import com.sopt.geonppang.presentation.type.BakerySortType
 import com.sopt.geonppang.util.UiState
@@ -35,7 +36,7 @@ class BakeryListFragment :
     }
 
     private fun initLayout() {
-        bakeryAdapter = BakeryRecyclerViewAdapter()
+        bakeryAdapter = BakeryRecyclerViewAdapter(::moveToDetail)
         binding.rvBakeryList.adapter = bakeryAdapter
     }
 
@@ -55,12 +56,19 @@ class BakeryListFragment :
                 is UiState.Success -> {
                     bakeryAdapter.setGoalList(it.data.toMutableList())
                 }
+
                 else -> {}
             }
         }.launchIn(lifecycleScope)
         viewModel.bakeryCategoryType.flowWithLifecycle(lifecycle).onEach {
             viewModel.fetchBakeryList()
         }.launchIn(lifecycleScope)
+    }
+
+    private fun moveToDetail(bakeryId: Int) {
+        val intent = Intent(requireContext(), DetailActivity::class.java)
+        intent.putExtra(BAKERY_ID, bakeryId)
+        startActivity(intent)
     }
 
     private fun showBakeryListSortDialog() {
@@ -78,5 +86,9 @@ class BakeryListFragment :
     override fun onBakerySortTypeSelected(bakerySortType: BakerySortType) {
         viewModel.setBakerySortType(bakerySortType)
         viewModel.fetchBakeryList()
+    }
+
+    companion object {
+        const val BAKERY_ID = "bakeryId"
     }
 }

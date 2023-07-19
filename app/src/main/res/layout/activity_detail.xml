@@ -10,8 +10,8 @@
             type="com.sopt.geonppang.presentation.detail.DetailViewModel" />
 
         <variable
-            name="bakeryInfo"
-            type="com.sopt.geonppang.domain.model.BakeryInfo" />
+            name="bookMark"
+            type="com.sopt.geonppang.domain.model.BookMark" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -78,7 +78,7 @@
             android:id="@+id/view_detail_bottom_app_bar_shadow"
             android:layout_width="0dp"
             android:layout_height="5dp"
-            android:layout_marginBottom="36dp"
+            android:layout_marginBottom="27dp"
             android:background="@drawable/detail_page_bottom_app_bar_shadow"
             app:layout_constraintBottom_toTopOf="@id/iv_detail_bottom_app_bar_bookmark"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,38 +89,24 @@
             android:id="@+id/iv_detail_bottom_app_bar_bookmark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="56dp"
-            android:src="@{bakeryInfo.isBooked == true? @drawable/ic_bookmark_selected : @drawable/ic_bookmark_unselected}"
+            android:layout_marginBottom="27dp"
+            android:src="@{viewModel.bookMarkState.bookMarked == true? @drawable/ic_bookmark_selected : @drawable/ic_bookmark_unselected}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/gl_start"
             tools:src="@drawable/ic_bookmark_unselected" />
-
-        <TextView
-            android:id="@+id/tv_detail_bottom_app_bar_bookmark"
-            invisibility="@{bakeryInfo.bookmarkCount > 0}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="11dp"
-            android:text="@{@string/home_bookmark_count(bakeryInfo.bookmarkCount)}"
-            android:textAppearance="@style/TextAppearance.BodyB1"
-            android:textColor="@{bakeryInfo.isBooked == true ? @color/point_1 : @color/gray_300}"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_detail_bottom_app_bar_bookmark"
-            app:layout_constraintStart_toEndOf="@+id/iv_detail_bottom_app_bar_bookmark"
-            app:layout_constraintTop_toTopOf="@+id/iv_detail_bottom_app_bar_bookmark"
-            tools:text="7명" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_detail_bottom_app_bar_create_review"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="97dp"
+            android:layout_marginStart="24dp"
             android:layout_marginEnd="26dp"
-            android:layout_marginBottom="48dp"
+            android:layout_marginBottom="27dp"
             android:background="@drawable/background_detail_bottom_app_bar_review_create"
-            android:paddingVertical="14dp"
+            android:paddingVertical="13dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/gl_start">
+            app:layout_constraintStart_toEndOf="@+id/iv_detail_bottom_app_bar_bookmark">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_detail_bottom_app_bar_create_review_content"

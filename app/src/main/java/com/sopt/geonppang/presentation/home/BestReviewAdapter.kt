@@ -9,7 +9,7 @@ import com.sopt.geonppang.domain.model.BestReview
 import com.sopt.geonppang.util.ItemDiffCallback
 
 class BestReviewAdapter(
-    private val moveToDetail: () -> Unit,
+    private val moveToDetail: (Int) -> Unit,
 ) : ListAdapter<BestReview, BestReviewAdapter.ReviewViewHolder>(
     ItemDiffCallback<BestReview>(
         onItemsTheSame = { old, new -> old.bakeryId == new.bakeryId },
@@ -22,13 +22,13 @@ class BestReviewAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(
             review: BestReview,
-            moveToDetail: () -> Unit,
+            moveToDetail: (Int) -> Unit,
         ) {
             binding.review = review
             binding.executePendingBindings()
 
             binding.root.setOnClickListener {
-                moveToDetail()
+                moveToDetail(review.bakeryId)
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.sopt.geonppang.di
 
 import com.sopt.geonppang.data.service.BakeryService
+import com.sopt.geonppang.data.service.DetailService
 import com.sopt.geonppang.data.service.DummyService
 import com.sopt.geonppang.data.service.HomeService
 import com.sopt.geonppang.data.service.MypageService
@@ -39,4 +40,9 @@ object ServiceModule {
     @Provides
     fun provideMypageService(retrofit: Retrofit): MypageService =
         retrofit.create(MypageService::class.java)
+
+    @Singleton
+    @Provides
+    fun detailService(retrofit: Retrofit): DetailService =
+        retrofit.create(DetailService::class.java)
 }
