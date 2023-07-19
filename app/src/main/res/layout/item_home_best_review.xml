@@ -34,7 +34,7 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="@dimen/spacing17" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_best_review_image"
             image="@{review.bakeryImage}"
             android:layout_width="204dp"
@@ -43,6 +43,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/Radius5.Top"
             tools:src="@drawable/bread1" />
 
         <View
