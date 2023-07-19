@@ -230,13 +230,13 @@
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip_tasty"
                         style="@style/Style.Material3.Chip.Review"
-                        selected="@{viewModel.userKeyWordType.get(KeyWordType.TASTE)}"
+                        selected="@{viewModel.userKeyWordType.get(KeyWordType.DELICIOUS)}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
                         android:enabled="@{viewModel.isLike == LikeType.LIKE}"
-                        android:onClick="@{() -> viewModel.setKeyWordType(KeyWordType.TASTE)}"
-                        android:text="@{KeyWordType.TASTE.keyWordType}"
+                        android:onClick="@{() -> viewModel.setKeyWordType(KeyWordType.DELICIOUS)}"
+                        android:text="@{KeyWordType.DELICIOUS.keywordNameRes}"
                         android:textColor="@color/enable_review_writing_chip_color"
                         app:chipStrokeColor="@color/enable_review_writing_chip_color"
                         tools:text="맛있어요" />
@@ -250,7 +250,7 @@
                         android:backgroundTint="@color/white"
                         android:enabled="@{viewModel.isLike == LikeType.LIKE}"
                         android:onClick="@{() -> viewModel.setKeyWordType(KeyWordType.KIND)}"
-                        android:text="@{KeyWordType.KIND.keyWordType}"
+                        android:text="@{KeyWordType.KIND.keywordNameRes}"
                         android:textColor="@color/enable_review_writing_chip_color"
                         app:chipStrokeColor="@color/enable_review_writing_chip_color"
                         tools:text="@string/chip_kind" />
@@ -264,7 +264,7 @@
                         android:backgroundTint="@color/white"
                         android:enabled="@{viewModel.isLike == LikeType.LIKE}"
                         android:onClick="@{() -> viewModel.setKeyWordType(KeyWordType.SPECIAL_MENU)}"
-                        android:text="@{KeyWordType.SPECIAL_MENU.keyWordType}"
+                        android:text="@{KeyWordType.SPECIAL_MENU.keywordNameRes}"
                         android:textColor="@color/enable_review_writing_chip_color"
                         app:chipStrokeColor="@color/enable_review_writing_chip_color"
                         tools:text="@string/chip_special_menu" />
@@ -278,7 +278,7 @@
                         android:backgroundTint="@color/white"
                         android:enabled="@{viewModel.isLike == LikeType.LIKE}"
                         android:onClick="@{() -> viewModel.setKeyWordType(KeyWordType.ZERO_WASTE)}"
-                        android:text="@{KeyWordType.ZERO_WASTE.keyWordType}"
+                        android:text="@{KeyWordType.ZERO_WASTE.keywordNameRes}"
                         android:textColor="@color/enable_review_writing_chip_color"
                         app:chipStrokeColor="@color/enable_review_writing_chip_color"
                         tools:text="제로 웨이스트" />
