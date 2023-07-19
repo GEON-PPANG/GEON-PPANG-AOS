@@ -4,11 +4,13 @@ import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.domain.model.BreadType
 import kotlinx.serialization.Serializable
 
+@Serializable
 data class ResponseMypageBookmark(
     val code: Int,
-    val data: List<Data>,
-    val message: String
+    val message: String,
+    val data: List<Data>
 ) {
+    @Serializable
     data class Data(
         val bakeryId: Int,
         val bakeryName: String,
@@ -28,9 +30,9 @@ data class ResponseMypageBookmark(
             val breadTypeId: Int,
             val breadTypeName: String,
             val isGlutenFree: Boolean,
+            val isVegan: Boolean,
             val isNutFree: Boolean,
             val isSugarFree: Boolean,
-            val isVegan: Boolean,
         )
     }
 

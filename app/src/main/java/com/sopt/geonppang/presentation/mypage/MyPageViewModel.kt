@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,7 +40,7 @@ class MyPageViewModel @Inject constructor(
     val myBookmarkCount get() = _myBookmarkCount.asStateFlow()
 
     init {
-
+        fetchMypageBookmarkList()
     }
 
     private fun fetchMypageBookmarkList() {
@@ -48,6 +49,7 @@ class MyPageViewModel @Inject constructor(
                 .onSuccess { myBookmarkList ->
                     _mypageBookmarkListState.value = UiState.Success(myBookmarkList)
                     _myBookmarkCount.value = myBookmarkList.size
+                    Timber.e(_myBookmarkCount.value.toString())
                 }
                 .onFailure { throwable ->
                     _mypageBookmarkListState.value = UiState.Error(throwable.message)
