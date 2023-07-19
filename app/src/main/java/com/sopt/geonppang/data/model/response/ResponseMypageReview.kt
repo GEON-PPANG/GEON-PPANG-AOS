@@ -30,7 +30,7 @@ data class ResponseMypageReview(
         val breadType: BreadType,
         val reviewId: Int,
         val createdAt: String,
-        ) {
+    ) {
         @Serializable
         data class BreadType(
             val breadTypeId: Int,

@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface MypageReviewService {
     @GET("member/reviews")
-    suspend fun fethcMypageReveiw() : ResponseMypageReview
+    suspend fun fethcMypageReveiw(): ResponseMypageReview
 }

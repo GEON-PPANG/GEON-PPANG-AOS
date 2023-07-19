@@ -9,6 +9,6 @@ class MypageReviewRepositoryImpl @Inject constructor(
     private val myPageReviewDataSource: MypageReviewDataSource,
 ) : MypageReviewRepository {
     override suspend fun fetchMyReview(): Result<List<MyReview>> = runCatching {
-            myPageReviewDataSource.fetchMyReviewList().toMyReview()
-        }
+        myPageReviewDataSource.fetchMyReviewList().toMyReview()
+    }
 }
