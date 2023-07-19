@@ -31,10 +31,11 @@
 
         <ImageView
             android:id="@+id/iv_bakery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            image="@{bakery.bakeryPicture}"
+            android:layout_width="82dp"
+            android:layout_height="0dp"
             android:background="@drawable/shape_border_radius_5"
-            android:src="@{context.getDrawable(bakery.bakeryPicture)}"
+            app:layout_constraintDimensionRatio="1"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/bbang1" />
@@ -78,26 +79,46 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="6dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{bakery.bakeryName}"
             android:textAppearance="@style/TextAppearance.Title2"
             android:textColor="@color/gray_700"
-            app:layout_constraintEnd_toStartOf="@+id/linear_bookmark"
+            app:layout_constraintEnd_toStartOf="@+id/iv_bookmark"
             app:layout_constraintStart_toEndOf="@+id/iv_bakery"
             app:layout_constraintTop_toTopOf="@+id/iv_bakery"
             tools:text="건대 초코빵" />
+
+        <ImageView
+            android:id="@+id/iv_bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_bookmark_small"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_bookmark_count"
+            app:layout_constraintEnd_toStartOf="@id/tv_bookmark_count"
+            app:layout_constraintTop_toTopOf="@+id/tv_bookmark_count" />
+
+        <TextView
+            android:id="@+id/tv_bookmark_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/bookmark_count(bakery.bookmarkCount)}"
+            android:textAppearance="@style/TextAppearance.CaptionB1"
+            android:textColor="@color/gray_400"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_bakery"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintTop_toTopOf="@+id/tv_bakery"
+            tools:text="(10)" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/cg_bakery_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="39dp"
             app:chipSpacingHorizontal="4dp"
             app:chipSpacingVertical="5dp"
-            app:layout_constraintEnd_toStartOf="@+id/linear_bookmark"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/tv_bakery"
             app:layout_constraintTop_toBottomOf="@id/tv_bakery"
             app:layout_constraintWidth="0dp">
@@ -159,41 +180,13 @@
             app:layout_constraintTop_toTopOf="@+id/chip_station_1"
             tools:text="건대역" />
 
-        <LinearLayout
-            android:id="@+id/linear_bookmark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/chip_station_2"
-            app:layout_constraintEnd_toEndOf="@id/gl_end"
-            app:layout_constraintTop_toTopOf="@+id/tv_bakery">
-
-            <ImageView
-                android:id="@+id/iv_bookmark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@{bakery.isBooked == true? @drawable/ic_bookmark_selected:@drawable/ic_bookmark_unselected}"
-                tools:src="@drawable/ic_bookmark_unselected" />
-
-            <TextView
-                android:id="@+id/tv_bookmark_count"
-                visibility="@{bakery.bookmarkCount > 0}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="3dp"
-                android:text="@{@string/bookmark_count(bakery.bookmarkCount)}"
-                android:textAppearance="@style/TextAppearance.BodyB2"
-                android:textColor="@{bakery.isBooked == true ? @color/point_1 : @color/gray_300}"
-                tools:text="5명" />
-        </LinearLayout>
-
         <View
             android:id="@+id/view_line_bottom"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="20dp"
             android:background="@color/gray_200"
-            app:layout_constraintTop_toBottomOf="@id/chip_station_1" />
+            app:layout_constraintTop_toBottomOf="@id/chip_station_1"
+            tools:layout_editor_absoluteX="-16dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

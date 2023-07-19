@@ -10,7 +10,9 @@ import com.sopt.geonppang.presentation.bakeryList.BakeryListFragment
 import com.sopt.geonppang.presentation.home.HomeFragment
 import com.sopt.geonppang.presentation.mypage.MyPageFragment
 import com.sopt.geonppang.util.binding.BindingActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

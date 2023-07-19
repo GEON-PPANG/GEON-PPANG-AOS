@@ -36,30 +36,26 @@
 
         <ImageView
             android:id="@+id/iv_best_review_image"
+            image="@{review.bakeryImage}"
             android:layout_width="204dp"
             android:layout_height="164dp"
-            android:foreground="@drawable/foreground_shadow"
             android:scaleType="centerCrop"
-            android:src="@{context.getDrawable(review.bakeryImage)}"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/bread1" />
 
-        <ImageView
-            android:id="@+id/iv_bookmark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing14"
-            android:layout_marginEnd="@dimen/spacing12"
-            android:src="@{review.isBooked == true? @drawable/ic_bookmark_selected:@drawable/ic_bookmark_unselected}"
+        <View
+            android:layout_width="0dp"
+            android:layout_height="117dp"
+            android:background="@drawable/foreground_shadow"
+            app:layout_constraintBottom_toBottomOf="@id/iv_best_review_image"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_bookmark_unselected" />
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <!--    TODO width, height 조정    -->
         <TextView
             android:id="@+id/tv_best_review"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
             android:layout_height="38dp"
             android:layout_marginBottom="@dimen/spacing14"
             android:ellipsize="end"
@@ -102,7 +98,7 @@
             android:id="@+id/tv_best_review_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="6dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{review.bakeryName}"
@@ -114,18 +110,19 @@
             tools:text="건대대대대대대대대대대대대대" />
 
         <TextView
-            android:id="@+id/tv_best_review_count"
-            highlightNumbers="@{@string/home_review_count(review.reviewCount)}"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_home_review_bookmark_count"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="18dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="@dimen/spacing20"
+            android:text="@{@string/review_and_bookmark_count(review.reviewCount, review.bookmarkCount)}"
             android:textAppearance="@style/TextAppearance.CaptionB1"
-            android:textColor="@color/gray_700"
+            android:textColor="@color/gray_400"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@+id/tv_best_review_title"
-            tools:text="리뷰(6)" />
+            app:layout_constraintTop_toBottomOf="@id/tv_best_review_title"
+            tools:text="리뷰(10)・저장(20)" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

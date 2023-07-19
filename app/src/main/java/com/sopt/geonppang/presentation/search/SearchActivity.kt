@@ -1,13 +1,21 @@
 package com.sopt.geonppang.presentation.search
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.MotionEvent
 import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySearchBinding
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
+@AndroidEntryPoint
 class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_search) {
     private val viewModel: SearchViewModel by viewModels()
 
@@ -20,12 +28,12 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
 
         initLayout()
         addListeners()
+        collectData()
     }
 
     private fun initLayout() {
         bakeryAdapter = BakeryAdapter()
         binding.rvSearchBakeryList.adapter = bakeryAdapter
-        bakeryAdapter.submitList(viewModel.mockBakeryList)
     }
 
     private fun addListeners() {
@@ -36,6 +44,27 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         binding.ivSearchBack.setOnClickListener {
             finish()
         }
+
+        binding.etSearch.setOnKeyListener { _, keyCode, event ->
+            if ((event.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                viewModel.searchBakeryList()
+                hideKeyboard(binding.root)
+                true
+            } else {
+                false
+            }
+        }
+    }
+
+    private fun collectData() {
+        viewModel.searchBakeryListState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
+                    bakeryAdapter.submitList(it.data)
+                }
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {

@@ -1,110 +1,53 @@
 package com.sopt.geonppang.presentation.home
 
 import androidx.lifecycle.ViewModel
-import com.sopt.geonppang.R
+import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.domain.model.BestBakery
 import com.sopt.geonppang.domain.model.BestReview
+import com.sopt.geonppang.domain.repository.HomeRepository
+import com.sopt.geonppang.util.UiState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
-    val mockBestBakeryList = listOf(
-        BestBakery(
-            bakeryId = 1,
-            bakeryName = "건대 비건빵아아아아아아",
-            firstNearStation = "건대역",
-            secondNearStation = null,
-            isBooked = true,
-            bookmarkCount = 5,
-            bakeryImage = R.drawable.bread1,
-            reviewCount = 5,
-            isHACCP = true,
-            isVegan = true,
-            isNonGMO = true
-        ),
-        BestBakery(
-            bakeryId = 2,
-            bakeryName = "건대 비건빵아아아아아아",
-            firstNearStation = "덕소역",
-            secondNearStation = "구리역",
-            isBooked = false,
-            bookmarkCount = 0,
-            bakeryImage = R.drawable.bread1,
-            reviewCount = 5,
-            isHACCP = false,
-            isVegan = true,
-            isNonGMO = true
-        ),
-        BestBakery(
-            bakeryId = 3,
-            bakeryName = "건대 비건빵아아아아아아",
-            firstNearStation = "양정역",
-            secondNearStation = "하암역",
-            isBooked = false,
-            bookmarkCount = 5,
-            bakeryImage = R.drawable.bread1,
-            reviewCount = 5,
-            isHACCP = false,
-            isVegan = false,
-            isNonGMO = true
-        ),
-        BestBakery(
-            bakeryId = 4,
-            bakeryName = "건대 비건빵아아아아아아",
-            firstNearStation = "양원역",
-            secondNearStation = "후앙역",
-            isBooked = true,
-            bookmarkCount = 5,
-            bakeryImage = R.drawable.bread1,
-            reviewCount = 5,
-            isHACCP = true,
-            isVegan = false,
-            isNonGMO = true
-        ),
-    )
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val homeRepository: HomeRepository,
+) : ViewModel() {
+    private var _bestBakeryListState = MutableStateFlow<UiState<List<BestBakery>>>(UiState.Loading)
+    val bestBakeryListState get() = _bestBakeryListState.asStateFlow()
 
-    val mockBestReviewList = listOf(
-        BestReview(
-            bakeryId = 1,
-            bakeryName = "건대 비건빵아아아아아아",
-            isBooked = true,
-            bookmarkCount = 5,
-            bakeryImage = R.drawable.bread1,
-            reviewCount = 4,
-            reviewText = "정말 너무 맛있었어요! 갓 구운빵이 예술이었던 것 같아요오오오오오",
-            firstReviewChip = "친절해요",
-            secondReviewChip = "제로웨이스트"
-        ),
-        BestReview(
-            bakeryId = 2,
-            bakeryName = "건대 비건빵아아아아아아",
-            isBooked = true,
-            bookmarkCount = 5,
-            bakeryImage = R.drawable.bread1,
-            reviewCount = 4,
-            reviewText = "정말 너무 맛있었어요! 갓 구운빵이 예술이었던 것 같아요오오오오오",
-            firstReviewChip = "친절해요",
-            secondReviewChip = "제로웨이스트"
-        ),
-        BestReview(
-            bakeryId = 3,
-            bakeryName = "건대 비건빵아아아아아아",
-            isBooked = true,
-            bookmarkCount = 5,
-            bakeryImage = R.drawable.bread1,
-            reviewCount = 4,
-            reviewText = "정말 너무 맛있었어요! 갓 구운빵이 예술이었던 것 같아요오오오오오",
-            firstReviewChip = "친절해요",
-            secondReviewChip = "제로웨이스트"
-        ),
-        BestReview(
-            bakeryId = 4,
-            bakeryName = "건대 비건빵아아아아아아",
-            isBooked = true,
-            bookmarkCount = 5,
-            bakeryImage = R.drawable.bread1,
-            reviewCount = 4,
-            reviewText = "정말 너무 맛있었어요! 갓 구운빵이 예술이었던 것 같아요오오오오오",
-            firstReviewChip = "친절해요",
-            secondReviewChip = "제로웨이스트"
-        ),
-    )
+    private var _bestReviewListState = MutableStateFlow<UiState<List<BestReview>>>(UiState.Loading)
+    val bestReviewListState get() = _bestReviewListState.asStateFlow()
+
+    init {
+        fetchBestBakeryList()
+        fetchBestReviewList()
+    }
+
+    private fun fetchBestBakeryList() {
+        viewModelScope.launch {
+            homeRepository.fetchBestBakery()
+                .onSuccess { bestBakeryList ->
+                    _bestBakeryListState.value = UiState.Success(bestBakeryList)
+                }
+                .onFailure { throwable ->
+                    _bestBakeryListState.value = UiState.Error(throwable.message)
+                }
+        }
+    }
+
+    private fun fetchBestReviewList() {
+        viewModelScope.launch {
+            homeRepository.fetchBestReview()
+                .onSuccess { bestReviewList ->
+                    _bestReviewListState.value = UiState.Success(bestReviewList)
+                }
+                .onFailure { throwable ->
+                    _bestReviewListState.value = UiState.Error(throwable.message)
+                }
+        }
+    }
 }
