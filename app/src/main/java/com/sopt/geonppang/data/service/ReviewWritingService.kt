@@ -6,10 +6,10 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Path
 
-interface ReviewWritingService  {
+interface ReviewWritingService {
     @POST("reviews/{bakeryId}")
     suspend fun writeReview(
-        @Path("bakeryId") bakeryId:Int,
-        @Body requestReviewWriting: RequestReviewWriting
-    ):ResponseReviewWriting
+        @Path("bakeryId") bakeryId: Int,
+        @Body requestReviewWriting: RequestReviewWriting,
+    ): ResponseReviewWriting
 }

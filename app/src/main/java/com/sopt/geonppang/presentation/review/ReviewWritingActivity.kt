@@ -2,7 +2,6 @@ package com.sopt.geonppang.presentation.review
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityReviewWritingBinding
@@ -30,12 +29,9 @@ class ReviewWritingActivity :
         viewModel.setBakeryId(bakeryId)
     }
 
-
     private fun initLayout() {
         val bakeryReviewWritingInfo =
             intent.getParcelableExtra<BakeryReviewWritingInfo>(BAKERY_INFO)
-        Log.d("aaaa", bakeryReviewWritingInfo.toString())
-
         bakeryReviewWritingInfo?.let { viewModel.setBakeryInfo(it) }
     }
 

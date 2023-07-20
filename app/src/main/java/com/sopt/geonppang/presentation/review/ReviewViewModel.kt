@@ -73,7 +73,6 @@ class ReviewViewModel @Inject constructor(private val reviewWritingRepository: R
         return trueKeyWordTypes
     }
 
-
     fun writeReview() {
         viewModelScope.launch {
             reviewText.value?.let { reviewText ->
