@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
+import com.sopt.geonppang.presentation.MainActivity
+import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +23,7 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
         initLayout()
         addListeners()
         addObservers()
+        setPreviousActivity()
     }
 
     private fun initLayout() {
@@ -47,7 +50,11 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
             when (binding.vpFilterContainer.currentItem) {
                 2 -> {
                     viewModel.setFilter()
-                    startActivity(Intent(this, WelcomeActivity::class.java))
+                    if (viewModel.previousState.value == FilterInfoType.HOME.activityName) {
+                        startActivity(Intent(this, MainActivity::class.java))
+                    } else if (viewModel.previousState.value == FilterInfoType.ONBOARDING.activityName) {
+                        startActivity(Intent(this, WelcomeActivity::class.java))
+                    }
                 }
 
                 else -> {
@@ -70,5 +77,16 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
         viewModel.isUserNutrientFilterTypeSelected.observe(this) { isUserNutrientFilterTypeSelected ->
             binding.btnFilterNext.isEnabled = isUserNutrientFilterTypeSelected
         }
+    }
+
+    private fun setPreviousActivity() {
+        val filterInfoType = intent.getStringExtra(FILTER_INFO)
+        filterInfoType?.let { filterInfoType ->
+            viewModel.setPreviousActivity(filterInfoType)
+        }
+    }
+
+    companion object {
+        const val FILTER_INFO = "filterInfo"
     }
 }
