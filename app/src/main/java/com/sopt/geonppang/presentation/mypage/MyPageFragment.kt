@@ -19,9 +19,12 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.fetchMypageInfo()
-
+        initLayout()
         addListeners()
+    }
+
+    private fun initLayout() {
+        viewModel.fetchMypageInfo()
     }
 
     private fun addListeners() {

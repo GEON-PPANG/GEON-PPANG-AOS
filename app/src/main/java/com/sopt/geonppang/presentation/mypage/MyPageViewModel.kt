@@ -18,7 +18,7 @@ import javax.inject.Inject
 class MyPageViewModel @Inject constructor(
     private val mypageRepository: MypageRepository,
 ) : ViewModel() {
-    private var _mypageInfoState = MutableStateFlow(Profile())
+    private var _mypageInfoState = MutableStateFlow<Profile?>(null)
     val mypageInfoState get() = _mypageInfoState.asStateFlow()
 
     private var _mypageReviewListState =
