@@ -3,6 +3,7 @@ package com.sopt.geonppang.di
 import com.sopt.geonppang.data.service.BakeryService
 import com.sopt.geonppang.data.service.DetailService
 import com.sopt.geonppang.data.service.DummyService
+import com.sopt.geonppang.data.service.FilterService
 import com.sopt.geonppang.data.service.HomeService
 import com.sopt.geonppang.data.service.MypageService
 import com.sopt.geonppang.data.service.SearchService
@@ -45,4 +46,9 @@ object ServiceModule {
     @Provides
     fun provideDetailService(retrofit: Retrofit): DetailService =
         retrofit.create(DetailService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideFilterService(retrofit: Retrofit): FilterService =
+        retrofit.create(FilterService::class.java)
 }

@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.util.binding.BindingActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_filter) {
     private lateinit var viewModel: FilterViewModel
     private lateinit var adapter: FilterViewPagerAdapter
@@ -44,6 +46,7 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
         binding.btnFilterNext.setOnClickListener {
             when (binding.vpFilterContainer.currentItem) {
                 2 -> {
+                    viewModel.setFilter()
                     startActivity(Intent(this, WelcomeActivity::class.java))
                 }
 
