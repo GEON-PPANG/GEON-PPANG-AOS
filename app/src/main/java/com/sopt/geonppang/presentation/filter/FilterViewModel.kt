@@ -82,7 +82,7 @@ class FilterViewModel @Inject constructor(
         _previousState.value = filterInfoTypeName
     }
 
-    fun setFilter() {
+    fun setUserFilter() {
         viewModelScope.launch {
             _mainPurpose.value?.let {
                 RequestFilter(
@@ -100,7 +100,7 @@ class FilterViewModel @Inject constructor(
                     )
                 )
             }?.let {
-                filterRepository.setFilter(
+                filterRepository.setUserFilter(
                     it
                 )
                     .onSuccess { selectedFilter ->

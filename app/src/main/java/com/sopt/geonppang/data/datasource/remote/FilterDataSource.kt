@@ -8,7 +8,7 @@ import javax.inject.Inject
 class FilterDataSource @Inject constructor(
     private val filterService: FilterService,
 ) {
-    suspend fun setFilter(
+    suspend fun setUserFilter(
         requestFilter: RequestFilter
-    ): ResponseFilter = filterService.setFilter(requestFilter)
+    ): ResponseFilter = filterService.setUserFilter(requestFilter)
 }

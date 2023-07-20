@@ -53,7 +53,7 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
         binding.btnFilterNext.setOnClickListener {
             when (binding.vpFilterContainer.currentItem) {
                 2 -> {
-                    viewModel.setFilter()
+                    viewModel.setUserFilter()
                     if (viewModel.previousState.value == FilterInfoType.HOME.activityName) {
                         startActivity(Intent(this, MainActivity::class.java))
                     } else if (viewModel.previousState.value == FilterInfoType.ONBOARDING.activityName) {

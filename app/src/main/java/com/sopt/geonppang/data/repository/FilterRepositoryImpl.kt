@@ -9,8 +9,8 @@ import javax.inject.Inject
 class FilterRepositoryImpl @Inject constructor(
     private val filterDataSource: FilterDataSource
 ) : FilterRepository {
-    override suspend fun setFilter(requestFilter: RequestFilter): Result<SelectedFilter> =
+    override suspend fun setUserFilter(requestFilter: RequestFilter): Result<SelectedFilter> =
         runCatching {
-            filterDataSource.setFilter(requestFilter).toSelectedFilter()
+            filterDataSource.setUserFilter(requestFilter).toSelectedFilter()
         }
 }

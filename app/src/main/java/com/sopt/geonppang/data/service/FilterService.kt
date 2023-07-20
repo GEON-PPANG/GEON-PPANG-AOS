@@ -7,7 +7,7 @@ import retrofit2.http.POST
 
 interface FilterService {
     @POST("member/types")
-    suspend fun setFilter(
+    suspend fun setUserFilter(
         @Body requestFilter: RequestFilter
     ): ResponseFilter
 }

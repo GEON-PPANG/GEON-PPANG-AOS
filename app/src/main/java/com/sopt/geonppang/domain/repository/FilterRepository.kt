@@ -4,7 +4,7 @@ import com.sopt.geonppang.data.model.request.RequestFilter
 import com.sopt.geonppang.domain.model.SelectedFilter
 
 interface FilterRepository {
-    suspend fun setFilter(
+    suspend fun setUserFilter(
         requestFilter: RequestFilter
     ): Result<SelectedFilter>
 }
