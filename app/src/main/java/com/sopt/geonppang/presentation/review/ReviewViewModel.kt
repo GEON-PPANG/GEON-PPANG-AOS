@@ -78,7 +78,8 @@ class ReviewViewModel @Inject constructor(private val reviewWritingRepository: R
             reviewText.value?.let { reviewText ->
                 _bakeryId.value?.let {
                     reviewWritingRepository.writeReview(
-                        it, RequestReviewWriting(
+                        it,
+                        RequestReviewWriting(
                             _isLike.value == LikeType.LIKE,
                             getKeyWordTypeList(),
                             reviewText
