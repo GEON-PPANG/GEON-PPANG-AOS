@@ -6,7 +6,9 @@ import androidx.fragment.app.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.DialogBottomSignupNicknameBinding
 import com.sopt.geonppang.util.binding.BindingBottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpNicknameBottomSheetDialog :
     BindingBottomSheetDialogFragment<DialogBottomSignupNicknameBinding>(
         R.layout.dialog_bottom_signup_nickname
