@@ -4,7 +4,7 @@ data class BestBakery(
     val bakeryId: Int,
     val bakeryName: String,
     val firstNearStation: String,
-    val secondNearStation: String?,
+    val secondNearStation: String,
     val bookmarkCount: Int,
     val bakeryImage: String,
     val reviewCount: Int,
