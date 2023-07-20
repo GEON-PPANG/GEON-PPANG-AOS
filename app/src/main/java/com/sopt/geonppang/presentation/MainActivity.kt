@@ -24,7 +24,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         supportFragmentManager.findFragmentById(R.id.fcv_home_container)
             ?: navigateTo<HomeFragment>()
 
-        if (intent.getStringExtra(FRAGMENT) == FRAGMENT) {
+        if (intent.getStringExtra(MYPAGE_FRAGMENT) == MYPAGE_FRAGMENT) {
             supportFragmentManager.findFragmentById(R.id.fcv_home_container)
                 ?: navigateTo<MyPageFragment>()
         }
@@ -46,6 +46,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     }
 
     companion object {
-        const val FRAGMENT = "fragment"
+        const val MYPAGE_FRAGMENT = "MyPageFragment"
     }
 }

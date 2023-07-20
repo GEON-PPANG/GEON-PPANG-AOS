@@ -60,7 +60,7 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
                         startActivity(Intent(this, WelcomeActivity::class.java))
                     } else {
                         val intent = Intent(this, MainActivity::class.java)
-                        intent.putExtra(FRAGMENT, FRAGMENT)
+                        intent.putExtra(MYPAGE_FRAGMENT, MYPAGE_FRAGMENT)
                         startActivity(intent)
                     }
                 }
@@ -102,7 +102,7 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
 
     companion object {
         const val FILTER_INFO = "filterInfo"
-        const val FRAGMENT = "fragment"
+        const val MYPAGE_FRAGMENT = "MyPageFragment"
         const val MAX_PAGE = "maxPage"
         const val PAGE_FORMAT = "%d/%d"
     }
