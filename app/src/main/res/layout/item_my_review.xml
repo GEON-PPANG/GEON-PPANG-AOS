@@ -49,16 +49,16 @@
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_bakery"
             image="@{review.bakery.bakeryPicture}"
             android:layout_width="82dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/spacing10"
-            android:background="@drawable/shape_border_radius_5"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@id/tv_my_review_date"
+            app:shapeAppearanceOverlay="@style/Radius5"
             tools:src="@drawable/bbang1" />
 
         <LinearLayout
@@ -147,20 +147,14 @@
                 android:backgroundTint="@color/white"
                 android:text="넛프리" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
-                    visibility="@{review.bakery.breadType.isSugarFree}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:text="저당,무설탕"
-                    app:layout_constraintEnd_toStartOf="@+id/iv" />
-
-            </com.google.android.material.chip.ChipGroup>
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                visibility="@{review.bakery.breadType.isSugarFree}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:text="저당,무설탕"
+                app:layout_constraintEnd_toStartOf="@+id/iv" />
 
         </com.google.android.material.chip.ChipGroup>
 
