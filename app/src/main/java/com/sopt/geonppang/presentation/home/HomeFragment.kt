@@ -27,6 +27,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         initLayout()
         addListeners()
@@ -39,6 +41,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
         bestReviewAdapter = BestReviewAdapter(::moveToDetail)
         binding.rvHomeBestReviewList.adapter = bestReviewAdapter
+
+        viewModel.setUserNickName()
     }
 
     private fun addListeners() {

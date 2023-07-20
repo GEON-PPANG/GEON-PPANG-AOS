@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="반가워요 바이블님 :)\n건빵을 찾은 이유를 알려주세요!"
+            android:text="@{@string/main_purpose_title(viewModel.nickName)}"
             android:textAppearance="@style/TextAppearance.Title1"
             android:textColor="@color/gray_700"
             app:layout_constraintStart_toStartOf="@id/gl_start"

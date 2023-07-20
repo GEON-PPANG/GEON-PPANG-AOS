@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.sopt.geonppang.presentation.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
-            android:text="바이블님\n건빵에 오신걸 환영해요!"
+            android:text="@{@string/home_title(viewModel.nickName)}"
             android:textAppearance="@style/TextAppearance.Title1"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toTopOf="parent"
@@ -92,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing24"
                     android:layout_marginTop="22dp"
-                    android:text="@string/home_best_title1"
+                    android:text="@{@string/home_best_title1(viewModel.nickName)}"
                     android:textAppearance="@style/TextAppearance.Title2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -127,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing24"
                     android:layout_marginTop="28dp"
-                    android:text="@string/home_best_title1"
+                    android:text="@{@string/home_best_title1(viewModel.nickName)}"
                     android:textAppearance="@style/TextAppearance.Title2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rv_home_best_bakery_list"

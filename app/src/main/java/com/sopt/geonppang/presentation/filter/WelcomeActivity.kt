@@ -11,7 +11,13 @@ class WelcomeActivity : BindingActivity<ActivityWelcomeBinding>(R.layout.activit
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initLayout()
         addListeners()
+    }
+
+    private fun initLayout() {
+        val nickName = intent.getStringExtra(NICKNAME)
+        binding.tvStartWelcomeTitle.text = this.getString(R.string.welcome_to_geonppang, nickName)
     }
 
     private fun addListeners() {
@@ -20,5 +26,9 @@ class WelcomeActivity : BindingActivity<ActivityWelcomeBinding>(R.layout.activit
             startActivity(intent)
             finish()
         }
+    }
+
+    companion object {
+        const val NICKNAME = "nickName"
     }
 }

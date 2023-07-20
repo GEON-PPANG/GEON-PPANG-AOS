@@ -5,7 +5,7 @@ data class BestReview(
     val bakeryName: String,
     val reviewText: String,
     val firstReviewChip: String,
-    val secondReviewChip: String,
+    val secondReviewChip: String?,
     val bookmarkCount: Int,
     val bakeryImage: String,
     val reviewCount: Int,

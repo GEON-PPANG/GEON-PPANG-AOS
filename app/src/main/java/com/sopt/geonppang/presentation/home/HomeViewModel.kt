@@ -2,6 +2,7 @@ package com.sopt.geonppang.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sopt.geonppang.data.datasource.local.GPDataStore
 import com.sopt.geonppang.domain.model.BestBakery
 import com.sopt.geonppang.domain.model.BestReview
 import com.sopt.geonppang.domain.repository.HomeRepository
@@ -14,6 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+    private val gpDataStore: GPDataStore,
     private val homeRepository: HomeRepository,
 ) : ViewModel() {
     private var _bestBakeryListState = MutableStateFlow<UiState<List<BestBakery>>>(UiState.Loading)
@@ -22,9 +24,16 @@ class HomeViewModel @Inject constructor(
     private var _bestReviewListState = MutableStateFlow<UiState<List<BestReview>>>(UiState.Loading)
     val bestReviewListState get() = _bestReviewListState.asStateFlow()
 
+    private val _nickName = MutableStateFlow<String?>(null)
+    val nickName get() = _nickName.asStateFlow()
+
     init {
         fetchBestBakeryList()
         fetchBestReviewList()
+    }
+
+    fun setUserNickName() {
+        _nickName.value = gpDataStore.userNickname
     }
 
     private fun fetchBestBakeryList() {

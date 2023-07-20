@@ -34,6 +34,8 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
 
         maxPage = intent.getIntExtra(MAX_PAGE, -1)
         binding.tvFilterPageNumber.text = setPageText(maxPage - 2, maxPage)
+
+        viewModel.setUserNickName()
     }
 
     private fun addListeners() {
@@ -57,7 +59,7 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
                     if (viewModel.previousActivityName.value == FilterInfoType.HOME.activityName) {
                         startActivity(Intent(this, MainActivity::class.java))
                     } else if (viewModel.previousActivityName.value == FilterInfoType.ONBOARDING.activityName) {
-                        startActivity(Intent(this, WelcomeActivity::class.java))
+                        moveToWelcomActivity()
                     } else {
                         val intent = Intent(this, MainActivity::class.java)
                         intent.putExtra(MYPAGE_FRAGMENT, MYPAGE_FRAGMENT)
@@ -89,6 +91,12 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
         }
     }
 
+    private fun moveToWelcomActivity() {
+        val intent = Intent(this, WelcomeActivity::class.java)
+        intent.putExtra(NICKNAME, viewModel.nickName.value)
+        startActivity(intent)
+    }
+
     private fun setPreviousActivity() {
         val filterInfoType = intent.getStringExtra(FILTER_INFO)
         filterInfoType?.let { filterInfoType ->
@@ -103,6 +111,7 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
     companion object {
         const val FILTER_INFO = "filterInfo"
         const val MYPAGE_FRAGMENT = "MyPageFragment"
+        const val NICKNAME = "nickName"
         const val MAX_PAGE = "maxPage"
         const val PAGE_FORMAT = "%d/%d"
     }
