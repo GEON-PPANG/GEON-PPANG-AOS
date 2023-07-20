@@ -94,7 +94,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@null"
                 android:hint="@string/email_hint"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:paddingVertical="5dp"
                 android:text="@={viewModel.email}"
                 android:textAppearance="@style/TextAppearance.Headline"
@@ -146,7 +146,8 @@
             android:textColor="@{viewModel.isValidEmail() == true ? @color/white : @color/gray_400}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
-            app:layout_constraintStart_toStartOf="@id/gl_start" />
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:rippleColor="@color/main_3 " />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

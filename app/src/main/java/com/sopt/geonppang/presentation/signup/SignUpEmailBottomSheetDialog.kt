@@ -6,7 +6,9 @@ import androidx.fragment.app.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.DialogBottomSignupEmailBinding
 import com.sopt.geonppang.util.binding.BindingBottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpEmailBottomSheetDialog :
     BindingBottomSheetDialogFragment<DialogBottomSignupEmailBinding>(
         R.layout.dialog_bottom_signup_email

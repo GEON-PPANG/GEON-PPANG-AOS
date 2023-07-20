@@ -27,6 +27,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun initLayout() {
         viewModel.fetchMypageInfo()
+        viewModel.setUserNickName()
     }
 
     private fun addListeners() {

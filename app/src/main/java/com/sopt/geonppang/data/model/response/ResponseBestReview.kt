@@ -23,7 +23,7 @@ data class ResponseBestReview(
         val isVegan: Boolean,
         val reviewCount: Int,
         val reviewText: String,
-        val secondMaxRecommendKeyword: String,
+        val secondMaxRecommendKeyword: String?,
         val secondNearStation: String,
     )
 

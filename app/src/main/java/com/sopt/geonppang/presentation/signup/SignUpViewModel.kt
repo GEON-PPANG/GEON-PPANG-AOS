@@ -5,11 +5,12 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
+import com.sopt.geonppang.data.datasource.local.GPDataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor() : ViewModel() {
+class SignUpViewModel @Inject constructor(private val gpDataStore: GPDataStore) : ViewModel() {
     val email = MutableLiveData("")
     val password = MutableLiveData("")
     val password_check = MutableLiveData("")
@@ -66,9 +67,15 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         return isValidNickname.value == true
     }
 
+    fun saveUserNickname() {
+        nickname.value?.let { nickName ->
+            gpDataStore.userNickname = nickName
+        }
+    }
+
     companion object {
         const val EMAIL_PATTERN = "^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+\$"
-        const val NICKNAME_PATTERN = "^[ㄱ-ㅎ가-힣0-9a-zA-Z]{1,10}$"
+        const val NICKNAME_PATTERN = "^[\\sㄱ-ㅎ가-힣0-9a-zA-Z]{1,10}\$"
         const val PASSWORD_PATTERN = "^[A-Za-z0-9]{8,25}$"
     }
 }
