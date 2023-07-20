@@ -30,6 +30,7 @@
 
         <ImageView
             android:id="@+id/iv_item_detail_bakery_info"
+            image="@{bakeryInfo.bakeryPicture}"
             android:layout_width="0dp"
             android:layout_height="320dp"
             android:scaleType="centerCrop"

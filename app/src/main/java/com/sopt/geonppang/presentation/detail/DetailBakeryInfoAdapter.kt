@@ -10,12 +10,15 @@ import com.sopt.geonppang.util.CustomSnackbar
 
 class DetailBakeryInfoAdapter :
     RecyclerView.Adapter<DetailBakeryInfoAdapter.DetailBakeryInfoViewHolder>() {
-    private var bakeryInfo: BakeryInfo? = null
+    private val bakeryInfoList: MutableList<BakeryInfo> = mutableListOf()
 
     class DetailBakeryInfoViewHolder(val binding: ItemDetailBakeryInfoBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind() {
+        fun onBind(
+            bakeryInfo: BakeryInfo
+        ) {
             with(binding) {
+                binding.bakeryInfo = bakeryInfo
                 ivItemDetailBakeryInfoBookmark.setOnClickListener {
                     CustomSnackbar.makeSnackbar(
                         it,
@@ -39,15 +42,15 @@ class DetailBakeryInfoAdapter :
         return DetailBakeryInfoViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = 1
+    override fun getItemCount(): Int = bakeryInfoList.size
 
     override fun onBindViewHolder(holder: DetailBakeryInfoViewHolder, position: Int) {
-        holder.binding.bakeryInfo = bakeryInfo
-        holder.onBind()
+        holder.onBind(bakeryInfoList[position])
     }
 
     fun setBakeryInfo(bakeryInfo: BakeryInfo) {
-        this.bakeryInfo = bakeryInfo
+        bakeryInfoList.clear()
+        bakeryInfoList.add(bakeryInfo)
         notifyDataSetChanged()
     }
 }
