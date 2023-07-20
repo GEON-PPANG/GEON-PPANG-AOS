@@ -25,9 +25,9 @@ class FilterViewModel @Inject constructor(
     private val _selectedFilterState = MutableStateFlow<UiState<SelectedFilter>>(UiState.Loading)
     val selectedFilterState get() = _selectedFilterState.asStateFlow()
 
-    private val _previousState = MutableStateFlow<String?>(null)
-    val previousState get() = _previousState.asStateFlow()
-
+    private val _previousActivityName = MutableStateFlow<String?>(null)
+    val previousActivityName get() = _previousActivityName.asStateFlow()
+    
     private val _mainPurpose: MutableLiveData<MainPurposeType?> = MutableLiveData()
     val mainPurpose: LiveData<MainPurposeType?> = _mainPurpose
 
@@ -79,7 +79,7 @@ class FilterViewModel @Inject constructor(
     }
 
     fun setPreviousActivity(filterInfoTypeName: String) {
-        _previousState.value = filterInfoTypeName
+        _previousActivityName.value = filterInfoTypeName
     }
 
     fun setUserFilter() {

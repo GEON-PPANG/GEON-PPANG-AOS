@@ -54,9 +54,9 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
             when (binding.vpFilterContainer.currentItem) {
                 2 -> {
                     viewModel.setUserFilter()
-                    if (viewModel.previousState.value == FilterInfoType.HOME.activityName) {
+                    if (viewModel.previousActivityName.value == FilterInfoType.HOME.activityName) {
                         startActivity(Intent(this, MainActivity::class.java))
-                    } else if (viewModel.previousState.value == FilterInfoType.ONBOARDING.activityName) {
+                    } else if (viewModel.previousActivityName.value == FilterInfoType.ONBOARDING.activityName) {
                         startActivity(Intent(this, WelcomeActivity::class.java))
                     } else {
                         val intent = Intent(this, MainActivity::class.java)

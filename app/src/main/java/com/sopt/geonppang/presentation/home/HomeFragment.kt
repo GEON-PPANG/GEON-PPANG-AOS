@@ -86,7 +86,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     private fun moveToFilter() {
         val intent = Intent(requireContext(), FilterActivity::class.java)
         intent.putExtra(FILTER_INFO, FilterInfoType.HOME.activityName)
-        intent.putExtra(MAX_PAGE, FilterInfoType.HOME.maxPageRes)
+        intent.putExtra(MAX_PAGE, FilterInfoType.HOME.maxPage)
         startActivity(intent)
     }
 
