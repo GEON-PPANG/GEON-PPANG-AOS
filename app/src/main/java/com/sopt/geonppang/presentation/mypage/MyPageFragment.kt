@@ -7,7 +7,9 @@ import androidx.fragment.app.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentMyPageBinding
 import com.sopt.geonppang.util.binding.BindingFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     private val viewModel by viewModels<MyPageViewModel>()
 

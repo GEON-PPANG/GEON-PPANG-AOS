@@ -4,18 +4,23 @@ import androidx.annotation.StringRes
 import com.sopt.geonppang.R
 
 enum class KeyWordType(
-    @StringRes val keyWordType: Int,
+    val keywordType: String,
+    @StringRes val keywordNameRes: Int,
 ) {
-    TASTE(
+    DELICIOUS(
+        "DELICIOUS",
         R.string.review_key_word_type_taste
     ),
     KIND(
+        "KIND",
         R.string.review_key_word_type_kind
     ),
     SPECIAL_MENU(
+        "SPECIAL_MENU",
         R.string.review_key_word_type_special_menu
     ),
     ZERO_WASTE(
+        "ZERO_WASTE",
         R.string.review_key_word_type_zero_waste
     ),
 }

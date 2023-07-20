@@ -1,5 +1,6 @@
 package com.sopt.geonppang.presentation.search
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.MotionEvent
@@ -8,6 +9,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySearchBinding
+import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
@@ -32,7 +34,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
     }
 
     private fun initLayout() {
-        bakeryAdapter = BakeryAdapter()
+        bakeryAdapter = BakeryAdapter(::moveToDetail)
         binding.rvSearchBakeryList.adapter = bakeryAdapter
     }
 
@@ -60,15 +62,27 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         viewModel.searchBakeryListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    viewModel.searchBakeryList()
                     bakeryAdapter.submitList(it.data)
                 }
+
                 else -> {}
             }
         }.launchIn(lifecycleScope)
     }
 
+    private fun moveToDetail(bakeryId: Int) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra(BAKERY_ID, bakeryId)
+        startActivity(intent)
+    }
+
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         hideKeyboard(binding.root)
         return super.dispatchTouchEvent(ev)
+    }
+
+    companion object {
+        const val BAKERY_ID = "bakeryId"
     }
 }

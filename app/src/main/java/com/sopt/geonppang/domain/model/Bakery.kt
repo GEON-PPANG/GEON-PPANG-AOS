@@ -8,7 +8,7 @@ data class Bakery(
     val isNonGMO: Boolean,
     val firstNearStation: String,
     val secondNearStation: String?,
-    val bookmarkCount: Int,
+    val bookmarkCount: Int?,
     val bakeryPicture: String,
     val breadType: BreadType,
 )

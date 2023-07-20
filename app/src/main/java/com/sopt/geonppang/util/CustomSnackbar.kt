@@ -20,7 +20,7 @@ object CustomSnackbar {
 
         with(snackbarLayout) {
             removeAllViews()
-            setPadding(0, 0, 0, 138.toPx())
+            setPadding(0, 0, 0, 111.toPx())
             setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
             addView(binding.root)
         }

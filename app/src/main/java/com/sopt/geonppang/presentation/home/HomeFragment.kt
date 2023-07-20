@@ -49,8 +49,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         viewModel.bestBakeryListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    viewModel.fetchBestBakeryList()
                     bestBakeryAdapter.submitList(it.data)
                 }
+
                 else -> {}
             }
         }.launchIn(lifecycleScope)
@@ -58,8 +60,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         viewModel.bestReviewListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    viewModel.fetchBestReviewList()
                     bestReviewAdapter.submitList(it.data)
                 }
+
                 else -> {}
             }
         }.launchIn(lifecycleScope)
@@ -69,7 +73,13 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         startActivity(Intent(requireContext(), SearchActivity::class.java))
     }
 
-    private fun moveToDetail() {
-        startActivity(Intent(requireContext(), DetailActivity::class.java))
+    private fun moveToDetail(bakeryId: Int) {
+        val intent = Intent(requireContext(), DetailActivity::class.java)
+        intent.putExtra(BAKERY_ID, bakeryId)
+        startActivity(intent)
+    }
+
+    companion object {
+        const val BAKERY_ID = "bakeryId"
     }
 }
