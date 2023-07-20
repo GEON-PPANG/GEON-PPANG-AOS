@@ -5,4 +5,3 @@ data class Profile(
     val mainPurpose: String,
     val breadType: BreadType
 )
-
