@@ -36,6 +36,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tv_filter_page_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="49dp"
+            android:textAppearance="@style/TextAppearance.Subhead"
+            android:textColor="@color/gray_300"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1/6" />
+
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_filter_container"
             android:layout_width="0dp"

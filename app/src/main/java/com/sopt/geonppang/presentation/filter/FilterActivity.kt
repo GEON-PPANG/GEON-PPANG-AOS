@@ -14,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_filter) {
     private lateinit var viewModel: FilterViewModel
     private lateinit var adapter: FilterViewPagerAdapter
+    private var maxPage: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +31,9 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
         adapter = FilterViewPagerAdapter(this)
         binding.vpFilterContainer.adapter = adapter
         binding.vpFilterContainer.isUserInputEnabled = false
+
+        maxPage = intent.getIntExtra(MAX_PAGE, -1)
+        binding.tvFilterPageNumber.text = setPageText(maxPage - 2, maxPage)
     }
 
     private fun addListeners() {
@@ -64,6 +68,8 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
                 else -> {
                     binding.vpFilterContainer.currentItem++
                     binding.btnFilterNext.isEnabled = false
+                    val currentPage = maxPage - 2 + binding.vpFilterContainer.currentItem
+                    binding.tvFilterPageNumber.text = setPageText(currentPage, maxPage)
                 }
             }
         }
@@ -90,8 +96,14 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
         }
     }
 
+    private fun setPageText(currentPage: Int, maxPage: Int): String {
+        return String.format(PAGE_FORMAT, currentPage, maxPage)
+    }
+
     companion object {
         const val FILTER_INFO = "filterInfo"
         const val FRAGMENT = "fragment"
+        const val MAX_PAGE = "maxPage"
+        const val PAGE_FORMAT = "%d/%d"
     }
 }

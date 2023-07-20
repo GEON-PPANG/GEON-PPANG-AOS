@@ -41,6 +41,7 @@ class SignUpNicknameActivity :
         binding.btnNext.setOnClickListener {
             val intent = Intent(this, FilterActivity::class.java)
             intent.putExtra(FILTER_INFO, FilterInfoType.ONBOARDING.activityName)
+            intent.putExtra(MAX_PAGE, FilterInfoType.ONBOARDING.maxPageRes)
             startActivity(intent)
         }
     }
@@ -52,5 +53,6 @@ class SignUpNicknameActivity :
 
     companion object {
         const val FILTER_INFO = "filterInfo"
+        const val MAX_PAGE = "maxPage"
     }
 }

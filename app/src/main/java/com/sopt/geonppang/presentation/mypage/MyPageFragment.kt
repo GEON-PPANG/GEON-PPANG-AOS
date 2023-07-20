@@ -48,7 +48,13 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun moveToFilter() {
         val intent = Intent(requireContext(), FilterActivity::class.java)
-        intent.putExtra("filterInfo", FilterInfoType.MYPAGE.activityName)
+        intent.putExtra(FILTER_INFO, FilterInfoType.MYPAGE.activityName)
+        intent.putExtra(MAX_PAGE, FilterInfoType.MYPAGE.maxPageRes)
         startActivity(intent)
+    }
+
+    companion object {
+        const val FILTER_INFO = "filterInfo"
+        const val MAX_PAGE = "maxPage"
     }
 }
