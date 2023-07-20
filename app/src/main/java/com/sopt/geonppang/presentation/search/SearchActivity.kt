@@ -62,6 +62,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         viewModel.searchBakeryListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    viewModel.searchBakeryList()
                     bakeryAdapter.submitList(it.data)
                 }
 
