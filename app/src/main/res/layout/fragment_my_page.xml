@@ -53,11 +53,11 @@
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_my_page_profile_purpose"
             style="@style/Style.Material3.Chip.Purpose.Category"
+            android:text="@{viewModel.toMainPurposeTitleRes()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="17dp"
             android:backgroundTint="@color/point_2"
-            android:text="@{viewModel.mypageInfoState.mainPurpose}"
             app:layout_constraintStart_toEndOf="@+id/iv_my_page_profile_img"
             app:layout_constraintTop_toTopOf="@+id/iv_my_page_profile_img"
             tools:text="맛 . 다이어트" />
@@ -178,7 +178,7 @@
                 android:id="@+id/view_my_page_buttons_middle_line"
                 android:layout_width="1dp"
                 android:layout_height="0dp"
-                android:layout_marginVertical="3dp"
+                android:layout_marginVertical="19dp"
                 android:background="@color/point_1"
                 app:layout_constraintBottom_toBottomOf="@id/layout_my_page_bookmark"
                 app:layout_constraintEnd_toEndOf="parent"
