@@ -24,6 +24,11 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         supportFragmentManager.findFragmentById(R.id.fcv_home_container)
             ?: navigateTo<HomeFragment>()
 
+        if (intent.getStringExtra(FRAGMENT) == FRAGMENT) {
+            supportFragmentManager.findFragmentById(R.id.fcv_home_container)
+                ?: navigateTo<MyPageFragment>()
+        }
+
         binding.bnvHome.setOnItemSelectedListener { menu ->
             when (menu.itemId) {
                 R.id.menu_home -> navigateTo<HomeFragment>()
@@ -38,5 +43,9 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         supportFragmentManager.commit {
             replace<T>(R.id.fcv_home_container, T::class.java.canonicalName)
         }
+    }
+
+    companion object {
+        const val FRAGMENT = "fragment"
     }
 }

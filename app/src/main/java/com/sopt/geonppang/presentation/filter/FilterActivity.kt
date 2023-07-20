@@ -54,6 +54,10 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
                         startActivity(Intent(this, MainActivity::class.java))
                     } else if (viewModel.previousState.value == FilterInfoType.ONBOARDING.activityName) {
                         startActivity(Intent(this, WelcomeActivity::class.java))
+                    } else {
+                        val intent = Intent(this, MainActivity::class.java)
+                        intent.putExtra(FRAGMENT, FRAGMENT)
+                        startActivity(intent)
                     }
                 }
 
@@ -88,5 +92,6 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
 
     companion object {
         const val FILTER_INFO = "filterInfo"
+        const val FRAGMENT = "fragment"
     }
 }
