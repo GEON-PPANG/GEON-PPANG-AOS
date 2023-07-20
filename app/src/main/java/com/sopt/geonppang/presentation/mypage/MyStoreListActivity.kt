@@ -46,6 +46,7 @@ class MyStoreListActivity :
         myPageViewModel.mypageBookmarkListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    myPageViewModel.fetchMypageBookmarkList()
                     bakeryAdapter.submitList(it.data)
                 }
 

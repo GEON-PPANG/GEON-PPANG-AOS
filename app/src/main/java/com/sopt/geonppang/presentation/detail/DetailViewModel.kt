@@ -1,5 +1,7 @@
 package com.sopt.geonppang.presentation.detail
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.domain.model.BakeryInfo
@@ -17,24 +19,27 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val detailRepository: DetailRepository
+    private val detailRepository: DetailRepository,
 ) : ViewModel() {
+    private val _bakeryId: MutableLiveData<Int> = MutableLiveData()
+    val bakeryId: LiveData<Int> = _bakeryId
     private val _reviewList = MutableStateFlow<List<DetailReview>?>(null)
     val reviewList get() = _reviewList.asStateFlow()
-
+    private val _bakeryList = MutableStateFlow<BakeryInfo?>(null)
+    val bakeryList get() = _bakeryList.asStateFlow()
     private val _bakeryListState = MutableStateFlow<UiState<BakeryInfo>>(UiState.Loading)
     val bakeryListState get() = _bakeryListState.asStateFlow()
-
     private val _reviewListState = MutableStateFlow<UiState<ReviewData>>(UiState.Loading)
     val reviewListState get() = _reviewListState.asStateFlow()
-
     private val _bookMarkState = MutableStateFlow<BookMark?>(null)
     val bookMarkState get() = _bookMarkState.asStateFlow()
 
     fun fetchDetailBakeryInfo(bakeryId: Int) {
         viewModelScope.launch {
+            _bakeryId.value = bakeryId
             detailRepository.fetchDetailBakery(bakeryId)
                 .onSuccess { bakeryInfo ->
+                    _bakeryList.value = bakeryInfo
                     _bakeryListState.value = UiState.Success(bakeryInfo)
                     _bookMarkState.value = BookMark(bakeryInfo.bookMarkCount, bakeryInfo.isBooked)
                 }
@@ -67,5 +72,22 @@ class DetailViewModel @Inject constructor(
                     Timber.e(throwable.message)
                 }
         }
+    }
+
+    fun getBakeryInfo(): com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo {
+        return _bakeryList.value?.let { _bakeryInfo ->
+            com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo(
+                _bakeryInfo.bakeryName,
+                _bakeryInfo.bakeryPicture,
+                com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo.BreadType(
+                    _bakeryInfo.breadType.isGlutenFree,
+                    _bakeryInfo.breadType.isVegan,
+                    _bakeryInfo.breadType.isNutFree,
+                    _bakeryInfo.breadType.isSugarFree,
+                ),
+                _bakeryInfo.firstNearStation,
+                _bakeryInfo.secondNearStation
+            )
+        } ?: com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo("", "", null, "", "")
     }
 }
