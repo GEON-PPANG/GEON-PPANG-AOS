@@ -4,14 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentMyPageBinding
-import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingFragment
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,9 +19,9 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        viewModel.fetchMypageInfo()
+
         addListeners()
-        initLayout()
-        collectData()
     }
 
     private fun addListeners() {
@@ -37,22 +32,6 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         binding.layoutMyPageReview.setOnClickListener {
             moveToMyReview()
         }
-    }
-
-    private fun initLayout() {
-        viewModel.fetchMypageInfo()
-    }
-
-    private fun collectData() {
-        viewModel.mypageInfoState.flowWithLifecycle(lifecycle).onEach {
-            when (it) {
-                is UiState.Success -> {
-                    binding.viewModel?.profile = it.data
-                }
-
-                else -> {}
-            }
-        }.launchIn(lifecycleScope)
     }
 
     private fun moveToStoreBakeryList() {

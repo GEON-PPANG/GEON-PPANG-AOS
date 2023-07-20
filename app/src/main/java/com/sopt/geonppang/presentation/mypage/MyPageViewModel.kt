@@ -3,7 +3,6 @@ package com.sopt.geonppang.presentation.mypage
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.domain.model.Bakery
-import com.sopt.geonppang.domain.model.BreadType
 import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.domain.model.Profile
 import com.sopt.geonppang.domain.repository.MypageRepository
@@ -19,31 +18,18 @@ import javax.inject.Inject
 class MyPageViewModel @Inject constructor(
     private val mypageRepository: MypageRepository,
 ) : ViewModel() {
-@HiltViewModel
-class MyPageViewModel @Inject constructor(private val mypageInfoRepository: MypageInfoRepository) :
-    ViewModel() {
-    private val _mypageInfoState = MutableStateFlow<UiState<Profile>>(UiState.Loading)
+    private var _mypageInfoState = MutableStateFlow(Profile())
     val mypageInfoState get() = _mypageInfoState.asStateFlow()
-    fun fetchMypageInfo() {
-        viewModelScope.launch {
-            mypageInfoRepository.fetchMypageInfo()
-                .onSuccess { myInfo ->
-                    _mypageInfoState.value = UiState.Success(myInfo)
-                }
-                .onFailure { throwable ->
-                    _mypageInfoState.value = UiState.Error(throwable.message)
-                }
-        }
-    }
 
-
-    private var _mypageReviewListState = MutableStateFlow<UiState<List<MyReview>>>(UiState.Loading)
+    private var _mypageReviewListState =
+        MutableStateFlow<UiState<List<MyReview>>>(UiState.Loading)
     val mypageReviewListState get() = _mypageReviewListState.asStateFlow()
 
     private var _myReviewCount = MutableStateFlow<Int?>(null)
     val myReviewCount get() = _myReviewCount.asStateFlow()
 
-    private var _mypageBookmarkListState = MutableStateFlow<UiState<List<Bakery>>>(UiState.Loading)
+    private var _mypageBookmarkListState =
+        MutableStateFlow<UiState<List<Bakery>>>(UiState.Loading)
     val mypageBookmarkListState get() = _mypageBookmarkListState.asStateFlow()
 
     private var _myBookmarkCount = MutableStateFlow<Int?>(null)
@@ -52,6 +38,17 @@ class MyPageViewModel @Inject constructor(private val mypageInfoRepository: Mypa
     init {
         fetchMypageReviewList()
         fetchMypageBookmarkList()
+    }
+
+    fun fetchMypageInfo() {
+        viewModelScope.launch {
+            mypageRepository.fetchMypageInfo()
+                .onSuccess { myInfo ->
+                    myInfo.let {
+                        _mypageInfoState.value = myInfo
+                    }
+                }
+        }
     }
 
     private fun fetchMypageReviewList() {
