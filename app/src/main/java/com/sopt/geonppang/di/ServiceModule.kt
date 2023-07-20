@@ -43,6 +43,6 @@ object ServiceModule {
 
     @Singleton
     @Provides
-    fun detailService(retrofit: Retrofit): DetailService =
+    fun provideDetailService(retrofit: Retrofit): DetailService =
         retrofit.create(DetailService::class.java)
 }
