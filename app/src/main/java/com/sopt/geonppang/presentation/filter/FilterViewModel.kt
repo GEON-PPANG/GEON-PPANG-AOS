@@ -87,7 +87,7 @@ class FilterViewModel @Inject constructor(
         _previousActivityName.value = filterInfoTypeName
     }
 
-    fun setUserNickName(){
+    fun setUserNickName() {
         _nickName.value = gpDataStore.userNickname
     }
 
