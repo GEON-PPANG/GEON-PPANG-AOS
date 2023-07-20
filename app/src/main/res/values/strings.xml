@@ -17,8 +17,8 @@
     <string name="password_double_check_error_msg">비밀번호를 확인해주세요</string>
     <string name="welcome_nickname">건빵에 오신 걸 환영해요!\n어떻게 불러드릴까요?</string>
     <string name="tv_nickname">닉네임</string>
-    <string name="nickname_hint">닉네임 10자 이내, 특수문자 금지</string>
-    <string name="nickname_error">10자 이내, 특수문자 금지</string>
+    <string name="nickname_hint">닉네임 8자 이내, 특수문자 금지</string>
+    <string name="nickname_error">8자 이내, 특수문자 금지</string>
     <string name="available_email">사용 가능한 이메일입니다</string>
     <string name="unavailable_email">이미 존재하는 이메일입니다</string>
     <string name="available_nickname">사용 가능한 닉네임입니다</string>
