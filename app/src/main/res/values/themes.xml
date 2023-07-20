@@ -18,6 +18,12 @@
         <item name="colorControlHighlight">#A9FAF7F2</item>
         <item name="android:overScrollMode">never</item>
     </style>
+
+    <!--  ImageView Style  -->
+    <style name="Radius5">
+        <item name="cornerSize">5dp</item>
+    </style>
+
     <!--splash-->
     <style name="Theme.GeonPpang.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/white</item>

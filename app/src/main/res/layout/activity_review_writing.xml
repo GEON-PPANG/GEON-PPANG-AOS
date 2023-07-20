@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="44dp"
-            android:text="@string/review_writing_title"
+            android:text="@{viewModel.bakeryInfo.bakeryName}"
             android:textAppearance="@style/TextAppearance.Title2"
             app:layout_constraintLeft_toRightOf="@+id/img_back_arrow"
             app:layout_constraintTop_toTopOf="parent" />
@@ -75,91 +75,109 @@
                     android:orientation="vertical"
                     app:layout_constraintGuide_end="@dimen/spacing24" />
 
-                <ImageView
-                    android:id="@+id/iv_bakery"
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_bakery_info"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/shape_border_radius_5"
-                    android:src="@drawable/bbang1"
-                    app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/bbang1" />
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/cg_bakery_category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="62dp"
-                    app:chipSpacingHorizontal="4dp"
-                    app:chipSpacingVertical="5dp"
+                    android:layout_marginTop="@dimen/spacing20"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
-                    app:layout_constraintStart_toEndOf="@+id/iv_bakery"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth="0dp">
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/iv_bakery"
+                        image="@{viewModel.bakeryInfo.bakeryPicture}"
+                        android:layout_width="82dp"
+                        android:layout_height="0dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bbang1"
+                        app:layout_constraintDimensionRatio="1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/Radius5"
+                        tools:src="@drawable/bbang1" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/cg_bakery_category"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/white"
-                        android:text="글루텐프리" />
+                        android:layout_marginStart="14dp"
+                        app:chipSpacingHorizontal="4dp"
+                        app:chipSpacingVertical="5dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/iv_bakery"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth="0dp">
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                            visibility="@{viewModel.bakeryInfo.breadType.glutenFree}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/white"
+                            android:text="글루텐프리" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                            visibility="@{viewModel.bakeryInfo.breadType.vegan}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/white"
+                            android:text="비건빵" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                            visibility="@{viewModel.bakeryInfo.breadType.nutFree}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/white"
+                            android:text="넛프리" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                            visibility="@{viewModel.bakeryInfo.breadType.sugarFree}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/white"
+                            android:text="저당,무설탕" />
+
+                    </com.google.android.material.chip.ChipGroup>
 
                     <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                        android:id="@+id/chip_station_1"
+                        style="@style/Style.Material3.Chip.Station.Category"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/white"
-                        android:text="비건빵" />
+                        android:layout_marginStart="14dp"
+                        android:layout_marginTop="12dp"
+                        android:backgroundTint="@color/main_3"
+                        android:text="@{viewModel.bakeryInfo.firstNearestStation}"
+                        app:layout_constraintStart_toEndOf="@id/iv_bakery"
+                        app:layout_constraintTop_toBottomOf="@id/cg_bakery_category"
+                        tools:text="건대역" />
 
                     <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                        android:id="@+id/chip_station_2"
+                        style="@style/Style.Material3.Chip.Station.Category"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/white"
-                        android:text="넛프리" />
+                        android:layout_marginStart="4dp"
+                        android:backgroundTint="@color/main_3"
+                        android:text="@{viewModel.bakeryInfo.secondNearestStation}"
+                        app:layout_constraintStart_toEndOf="@id/chip_station_1"
+                        app:layout_constraintTop_toTopOf="@id/chip_station_1"
+                        tools:text="건대역" />
 
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/white"
-                        android:text="저당,무설탕" />
 
-                </com.google.android.material.chip.ChipGroup>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_station_1"
-                    style="@style/Style.Material3.Chip.Station.Category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="12dp"
-                    android:backgroundTint="@color/main_3"
-                    app:layout_constraintStart_toEndOf="@id/iv_bakery"
-                    app:layout_constraintTop_toBottomOf="@id/cg_bakery_category"
-                    tools:text="건대역" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_station_2"
-                    style="@style/Style.Material3.Chip.Station.Category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:backgroundTint="@color/main_3"
-                    app:layout_constraintStart_toEndOf="@id/chip_station_1"
-                    app:layout_constraintTop_toTopOf="@id/chip_station_1"
-                    tools:text="건대역" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
                     android:id="@+id/line2"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="14dp"
                     android:background="@color/gray_200"
-                    app:layout_constraintTop_toBottomOf="@id/chip_station_1" />
+                    app:layout_constraintTop_toBottomOf="@id/layout_bakery_info" />
 
                 <TextView
                     android:id="@+id/tv_how_was_the_store"
