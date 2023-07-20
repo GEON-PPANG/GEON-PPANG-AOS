@@ -6,7 +6,7 @@ import com.sopt.geonppang.data.service.DummyService
 import com.sopt.geonppang.data.service.HomeService
 import com.sopt.geonppang.data.service.MypageService
 import com.sopt.geonppang.data.service.SearchService
-import com.sopt.geonppang.data.service.WriteReviewService
+import com.sopt.geonppang.data.service.ReviewWritingService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -49,6 +49,6 @@ object ServiceModule {
 
     @Singleton
     @Provides
-    fun provideWriteReviewService(retrofit: Retrofit): WriteReviewService =
-        retrofit.create(WriteReviewService::class.java)
+    fun provideWriteReviewService(retrofit: Retrofit): ReviewWritingService =
+        retrofit.create(ReviewWritingService::class.java)
 }

@@ -6,14 +6,14 @@ import com.sopt.geonppang.data.repository.DummyRepositoryImpl
 import com.sopt.geonppang.data.repository.HomeRepositoryImpl
 import com.sopt.geonppang.data.repository.MypageRepositoryImpl
 import com.sopt.geonppang.data.repository.SearchRepositoryImpl
-import com.sopt.geonppang.data.repository.WriteReviewRepositoryImpl
+import com.sopt.geonppang.data.repository.ReviewWritingWritingRepositoryImpl
 import com.sopt.geonppang.domain.repository.BakeryRepository
 import com.sopt.geonppang.domain.repository.DetailRepository
 import com.sopt.geonppang.domain.repository.DummyRepository
 import com.sopt.geonppang.domain.repository.HomeRepository
 import com.sopt.geonppang.domain.repository.MypageRepository
 import com.sopt.geonppang.domain.repository.SearchRepository
-import com.sopt.geonppang.domain.repository.WriteReviewRepository
+import com.sopt.geonppang.domain.repository.ReviewWritingRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -61,7 +61,7 @@ interface RepositoryModule {
 
     @Binds
     @Singleton
-    fun bindReviewWriteRepository(
-        writeReviewRepositoryImpl: WriteReviewRepositoryImpl
-    ): WriteReviewRepository
+    fun bindReviewWritingRepository(
+        reviewWritingRepositoryImpl: ReviewWritingWritingRepositoryImpl
+    ): ReviewWritingRepository
 }
