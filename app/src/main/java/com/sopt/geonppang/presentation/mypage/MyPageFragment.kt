@@ -6,6 +6,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentMyPageBinding
+import com.sopt.geonppang.presentation.filter.FilterActivity
+import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,6 +37,10 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         binding.layoutMyPageReview.setOnClickListener {
             moveToMyReview()
         }
+
+        binding.ivMyPageProfileRightArrow.setOnClickListener {
+            moveToFilter()
+        }
     }
 
     private fun moveToStoreBakeryList() {
@@ -43,5 +49,17 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun moveToMyReview() {
         startActivity(Intent(requireContext(), MyReviewActivity::class.java))
+    }
+
+    private fun moveToFilter() {
+        val intent = Intent(requireContext(), FilterActivity::class.java)
+        intent.putExtra(FILTER_INFO, FilterInfoType.MYPAGE.activityName)
+        intent.putExtra(MAX_PAGE, FilterInfoType.MYPAGE.maxPage)
+        startActivity(intent)
+    }
+
+    companion object {
+        const val FILTER_INFO = "filterInfo"
+        const val MAX_PAGE = "maxPage"
     }
 }

@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySignupNicknameBinding
+import com.sopt.geonppang.presentation.filter.FilterActivity
+import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,13 +33,26 @@ class SignUpNicknameActivity :
             val bottomSheetDialog = SignUpNicknameBottomSheetDialog()
             bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
         }
+
         binding.imgBackArrow.setOnClickListener {
             moveToPassword()
+        }
+
+        binding.btnNext.setOnClickListener {
+            val intent = Intent(this, FilterActivity::class.java)
+            intent.putExtra(FILTER_INFO, FilterInfoType.ONBOARDING.activityName)
+            intent.putExtra(MAX_PAGE, FilterInfoType.ONBOARDING.maxPage)
+            startActivity(intent)
         }
     }
 
     private fun moveToPassword() {
         startActivity(Intent(this, SignUpPasswordActivity::class.java))
         finish()
+    }
+
+    companion object {
+        const val FILTER_INFO = "filterInfo"
+        const val MAX_PAGE = "maxPage"
     }
 }
