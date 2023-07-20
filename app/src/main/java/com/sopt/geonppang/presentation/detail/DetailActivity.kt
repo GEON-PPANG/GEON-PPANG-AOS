@@ -10,7 +10,6 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityDetailBinding
-import com.sopt.geonppang.presentation.home.HomeFragment
 import com.sopt.geonppang.presentation.review.ReviewWritingActivity
 import com.sopt.geonppang.util.ChipFactory
 import com.sopt.geonppang.util.CustomSnackbar
@@ -44,9 +43,9 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
         bakeryId = intent.getIntExtra(BAKERY_ID, -1)
 
+        initLayout()
         addListeners()
         collectData()
-        initLayout()
     }
 
     private fun initLayout() {
@@ -65,7 +64,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
             detailReviewDataAdapter,
             detailReviewAdapter
         )
-
         binding.rvDetail.adapter = concatAdapter
     }
 
@@ -76,8 +74,10 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
         binding.layoutDetailBottomAppBarCreateReview.setOnClickListener {
             val intent = Intent(this, ReviewWritingActivity::class.java)
-            intent.putExtra(HomeFragment.BAKERY_ID, bakeryId)
+            intent.putExtra(BAKERY_ID, bakeryId)
+            intent.putExtra(BAKERY_INFO, viewModel.getBakeryInfo())
             startActivity(intent)
+            finish()
         }
     }
 
@@ -144,5 +144,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     companion object {
         const val BAKERY_ID = "bakeryId"
+        const val BAKERY_INFO = "bakeryInfo"
     }
 }

@@ -1,9 +1,14 @@
 package com.sopt.geonppang.presentation.review
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityReviewWritingBinding
+import com.sopt.geonppang.presentation.detail.DetailActivity
+import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,7 +22,21 @@ class ReviewWritingActivity :
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        initLayout()
         addListeners()
+        addObservers()
+
+        val bakeryId = intent.getIntExtra(BAKERY_ID, -1)
+        viewModel.setBakeryId(bakeryId)
+    }
+
+
+    private fun initLayout() {
+        val bakeryReviewWritingInfo =
+            intent.getParcelableExtra<BakeryReviewWritingInfo>(BAKERY_INFO)
+        Log.d("aaaa", bakeryReviewWritingInfo.toString())
+
+        bakeryReviewWritingInfo?.let { viewModel.setBakeryInfo(it) }
     }
 
     private fun addListeners() {
@@ -40,23 +59,41 @@ class ReviewWritingActivity :
         }
     }
 
-    private fun showReviewSuccessDialog() {
-        val bakeryId = intent.getIntExtra(BAKERY_ID, -1)
-        val reviewSuccessDialogFragment = ReviewSuccessBottomDialogFragment().apply {
-            arguments = Bundle().apply {
-                bakeryId?.let { bakeryId ->
-                    putInt(BAKERY_ID, bakeryId)
+    private fun addObservers() {
+        viewModel.reviewSuccessState.observe(this) {
+            when (it) {
+                is UiState.Success -> {
+                    moveToDetail()
                 }
+                else -> {}
             }
         }
-        reviewSuccessDialogFragment.show(supportFragmentManager, "reviewSuccessDialog")
+        viewModel.reviewCancelState.observe(this) { reviewCancelState ->
+            if (!reviewCancelState) {
+                moveToDetail()
+            }
+        }
+    }
+
+    private fun showReviewSuccessDialog() {
+        ReviewSuccessBottomDialogFragment().show(supportFragmentManager, "reviewSuccessDialog")
     }
 
     private fun showReviewCancelDialog() {
         ReviewCancelBottomDialogFragment().show(supportFragmentManager, "reviewCancelDialog")
     }
 
+    private fun moveToDetail() {
+        val intent = Intent(this, DetailActivity::class.java)
+        viewModel.bakeryId.value?.let { id ->
+            intent.putExtra(BAKERY_ID, id)
+        }
+        startActivity(intent)
+        finish()
+    }
+
     companion object {
         const val BAKERY_ID = "bakeryId"
+        const val BAKERY_INFO = "bakeryInfo"
     }
 }
