@@ -6,8 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import com.sopt.geonppang.data.datasource.local.GPDataStore
-import com.sopt.geonppang.domain.model.Profile
-import com.sopt.geonppang.domain.model.UserInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -18,7 +16,6 @@ class SignUpViewModel @Inject constructor(private val gpDataStore: GPDataStore) 
     val password_check = MutableLiveData("")
     val nickname = MutableLiveData("")
 
-    var userNickname: UserInfo? = null
     val isValidEmail: LiveData<Boolean> = email.map { email ->
         email.matches(Regex(EMAIL_PATTERN))
         /*조건에 만족하는 이메일인지 확인*/
@@ -71,15 +68,9 @@ class SignUpViewModel @Inject constructor(private val gpDataStore: GPDataStore) 
     }
 
     fun saveUserNickname() {
-        gpDataStore.userNickname = nickname.value.toString()
-    }
-    fun setUserNickname(userNickname : UserInfo){
-        this.userNickname = userNickname
-    }
-    fun getUserNickname(): UserInfo {
-        return UserInfo(
-            nickname = nickname.value.toString(),
-        )
+        nickname.value?.let { nickName ->
+            gpDataStore.userNickname = nickName
+        }
     }
 
     companion object {

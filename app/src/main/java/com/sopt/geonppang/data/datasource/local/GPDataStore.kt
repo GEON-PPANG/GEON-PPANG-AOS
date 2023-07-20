@@ -30,13 +30,6 @@ class GPDataStore @Inject constructor(@ApplicationContext context: Context) {
         set(value) = dataStore.edit { putString(NICKNAME, value) }
         get() = dataStore.getString(NICKNAME, "") ?: ""
 
-    fun clear(){
-        dataStore.edit{
-            clear()
-            commit()
-        }
-    }
-
     companion object {
         const val FILE_NAME = "GunppangSharedPreferences"
         const val NICKNAME = "nickname"

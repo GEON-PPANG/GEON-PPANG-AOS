@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{viewModel.mypageInfoState.memberNickname}"
+            android:text="@{viewModel.nickName}"
             android:textAppearance="@style/TextAppearance.Title2"
             android:textColor="@color/gray_600"
             app:layout_constraintStart_toStartOf="@+id/chip_my_page_profile_purpose"

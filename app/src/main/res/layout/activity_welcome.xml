@@ -34,11 +34,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="112dp"
-            android:text="건빵화이팅님\n건빵에 오신 걸 환영해요!"
             android:textAppearance="@style/TextAppearance.Title1"
             android:textColor="@color/gray_700"
             app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="건빵화이팅님\n건빵에 오신 걸 환영해요!" />
 
         <ImageView
             android:id="@+id/iv_welcome"

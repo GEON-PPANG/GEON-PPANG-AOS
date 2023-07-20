@@ -43,6 +43,7 @@ class SignUpNicknameActivity :
             intent.putExtra(FILTER_INFO, FilterInfoType.ONBOARDING.activityName)
             intent.putExtra(MAX_PAGE, FilterInfoType.ONBOARDING.maxPage)
             startActivity(intent)
+            viewModel.saveUserNickname()
         }
     }
 
