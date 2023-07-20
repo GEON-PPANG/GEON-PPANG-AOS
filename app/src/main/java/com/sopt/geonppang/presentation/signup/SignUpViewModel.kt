@@ -5,16 +5,20 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
+import com.sopt.geonppang.data.datasource.local.GPDataStore
+import com.sopt.geonppang.domain.model.Profile
+import com.sopt.geonppang.domain.model.UserInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor() : ViewModel() {
+class SignUpViewModel @Inject constructor(private val gpDataStore: GPDataStore) : ViewModel() {
     val email = MutableLiveData("")
     val password = MutableLiveData("")
     val password_check = MutableLiveData("")
     val nickname = MutableLiveData("")
 
+    var userNickname: UserInfo? = null
     val isValidEmail: LiveData<Boolean> = email.map { email ->
         email.matches(Regex(EMAIL_PATTERN))
         /*조건에 만족하는 이메일인지 확인*/
@@ -66,9 +70,21 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         return isValidNickname.value == true
     }
 
+    fun saveUserNickname() {
+        gpDataStore.userNickname = nickname.value.toString()
+    }
+    fun setUserNickname(userNickname : UserInfo){
+        this.userNickname = userNickname
+    }
+    fun getUserNickname(): UserInfo {
+        return UserInfo(
+            nickname = nickname.value.toString(),
+        )
+    }
+
     companion object {
         const val EMAIL_PATTERN = "^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+\$"
-        const val NICKNAME_PATTERN = "^[ㄱ-ㅎ가-힣0-9a-zA-Z]{1,10}$"
+        const val NICKNAME_PATTERN = "^[\\sㄱ-ㅎ가-힣0-9a-zA-Z]{1,10}\$"
         const val PASSWORD_PATTERN = "^[A-Za-z0-9]{8,25}$"
     }
 }
