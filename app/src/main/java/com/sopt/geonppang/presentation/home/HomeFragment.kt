@@ -49,6 +49,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         viewModel.bestBakeryListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    viewModel.fetchBestBakeryList()
                     bestBakeryAdapter.submitList(it.data)
                 }
 
@@ -59,6 +60,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         viewModel.bestReviewListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    viewModel.fetchBestReviewList()
                     bestReviewAdapter.submitList(it.data)
                 }
 

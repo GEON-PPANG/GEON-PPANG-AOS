@@ -62,7 +62,7 @@ class MyPageViewModel @Inject constructor(
         }
     }
 
-    private fun fetchMypageBookmarkList() {
+    fun fetchMypageBookmarkList() {
         viewModelScope.launch {
             mypageRepository.fetchMyBookmark().onSuccess { myBookmarkList ->
                 _mypageBookmarkListState.value = UiState.Success(myBookmarkList)
