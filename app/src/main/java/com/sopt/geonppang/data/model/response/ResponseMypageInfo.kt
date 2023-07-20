@@ -3,6 +3,7 @@ package com.sopt.geonppang.data.model.response
 import com.sopt.geonppang.domain.model.BreadType
 import com.sopt.geonppang.domain.model.Profile
 import kotlinx.serialization.Serializable
+
 @Serializable
 data class ResponseMypageInfo(
     val code: Int,

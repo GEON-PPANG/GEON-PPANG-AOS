@@ -9,8 +9,9 @@ import javax.inject.Inject
 class MypageDataSource @Inject constructor(
     private val mypageService: MypageService,
 ) {
-    suspend fun fetchMypageInfo():
-            ResponseMypageInfo = mypageService.fetchMypageInfo()
+    suspend fun fetchMypageInfo(): ResponseMypageInfo =
+        mypageService.fetchMypageInfo()
+
     suspend fun fetchMyBookmarkList(): ResponseMypageBookmark =
         mypageService.fetchMypageBookmark()
 
