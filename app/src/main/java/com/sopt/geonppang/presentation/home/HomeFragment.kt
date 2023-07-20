@@ -77,8 +77,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         startActivity(Intent(requireContext(), SearchActivity::class.java))
     }
 
-    private fun moveToDetail(bakeryId: Int) {
+    private fun moveToDetail(activityName: String, bakeryId: Int) {
         val intent = Intent(requireContext(), DetailActivity::class.java)
+        intent.putExtra(ACTIVITY_NAME, activityName)
         intent.putExtra(BAKERY_ID, bakeryId)
         startActivity(intent)
     }
@@ -92,6 +93,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     companion object {
         const val BAKERY_ID = "bakeryId"
+        const val ACTIVITY_NAME = "activityName"
         const val FILTER_INFO = "filterInfo"
         const val MAX_PAGE = "maxPage"
     }

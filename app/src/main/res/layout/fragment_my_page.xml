@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="17dp"
             android:backgroundTint="@color/point_2"
-            android:text="@{viewModel.profile.mainPurpose}"
+            android:text="@{viewModel.mypageInfoState.mainPurpose}"
             app:layout_constraintStart_toEndOf="@+id/iv_my_page_profile_img"
             app:layout_constraintTop_toTopOf="@+id/iv_my_page_profile_img"
             tools:text="맛 . 다이어트" />
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{viewModel.profile.memberNickname}"
+            android:text="@{viewModel.mypageInfoState.memberNickname}"
             android:textAppearance="@style/TextAppearance.Title2"
             android:textColor="@color/gray_600"
             app:layout_constraintStart_toStartOf="@+id/chip_my_page_profile_purpose"
@@ -99,7 +99,7 @@
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
-                visibility="@{viewModel.profile.breadType.isGlutenFree}"
+                visibility="@{viewModel.mypageInfoState.breadType.component3()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/transparent"
@@ -107,7 +107,7 @@
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
-                visibility="@{viewModel.profile.breadType.isNutFree}"
+                visibility="@{viewModel.mypageInfoState.breadType.component4()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/transparent"
@@ -115,7 +115,7 @@
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
-                visibility="@{viewModel.profile.breadType.isVegan}"
+                visibility="@{viewModel.mypageInfoState.breadType.component5()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/transparent"
@@ -123,7 +123,7 @@
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
-                visibility="@{viewModel.profile.breadType.isSugarFree}"
+                visibility="@{viewModel.mypageInfoState.breadType.component6()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/transparent"
