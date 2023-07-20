@@ -10,6 +10,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityDetailBinding
+import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.review.ReviewWritingActivity
 import com.sopt.geonppang.util.ChipFactory
 import com.sopt.geonppang.util.CustomSnackbar
@@ -69,7 +70,16 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun addListeners() {
         binding.ivBack.setOnClickListener {
-            finish()
+            val previousActivityName = intent.getStringExtra(ACTIVITY_NAME)
+
+            when (previousActivityName) {
+                MAIN -> {
+                    moveToMain()
+                }
+                else -> {
+                    finish()
+                }
+            }
         }
 
         binding.layoutDetailBottomAppBarCreateReview.setOnClickListener {
@@ -132,6 +142,12 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }.launchIn(lifecycleScope)
     }
 
+    private fun moveToMain() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
     private fun initChip(chipGroup: ChipGroup, position: Int) {
         viewModel.reviewList.value?.get(position)?.recommendKeywordList?.let { recommendKeywordList ->
             for (recommendKeyword in recommendKeywordList) {
@@ -145,5 +161,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     companion object {
         const val BAKERY_ID = "bakeryId"
         const val BAKERY_INFO = "bakeryInfo"
+        const val ACTIVITY_NAME = "activityName"
+        const val MAIN = "mainActivity"
     }
 }

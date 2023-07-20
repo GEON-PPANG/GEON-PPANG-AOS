@@ -9,7 +9,7 @@ import com.sopt.geonppang.domain.model.BestBakery
 import com.sopt.geonppang.util.ItemDiffCallback
 
 class BestBakeryAdapter(
-    private val moveToDetail: (Int) -> Unit,
+    private val moveToDetail: (String, Int) -> Unit,
 ) : ListAdapter<BestBakery, BestBakeryAdapter.BakeryViewHolder>(
     ItemDiffCallback<BestBakery>(
         onItemsTheSame = { old, new -> old.bakeryId == new.bakeryId },
@@ -22,13 +22,13 @@ class BestBakeryAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(
             bakery: BestBakery,
-            moveToDetail: (Int) -> Unit,
+            moveToDetail: (String, Int) -> Unit,
         ) {
             binding.bakery = bakery
             binding.executePendingBindings()
 
             binding.root.setOnClickListener {
-                moveToDetail(bakery.bakeryId)
+                moveToDetail(MAIN, bakery.bakeryId)
             }
         }
     }
@@ -41,5 +41,9 @@ class BestBakeryAdapter(
 
     override fun onBindViewHolder(holder: BakeryViewHolder, position: Int) {
         holder.onBind(getItem(position), moveToDetail)
+    }
+
+    companion object {
+        const val MAIN = "mainActivity"
     }
 }
