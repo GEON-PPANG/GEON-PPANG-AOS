@@ -82,23 +82,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@{viewModel.mypageInfoState.memberNickname}"
+                    android:text="@{viewModel.nickName}"
                     android:textAppearance="@style/TextAppearance.Title2"
                     android:textColor="@color/gray_600"
                     app:layout_constraintStart_toStartOf="@+id/chip_my_page_profile_purpose"
                     app:layout_constraintTop_toBottomOf="@+id/chip_my_page_profile_purpose"
                     tools:text="닉네임 입력" />
-        <TextView
-            android:id="@+id/tv_my_page_profile_nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{viewModel.nickName}"
-            android:textAppearance="@style/TextAppearance.Title2"
-            android:textColor="@color/gray_600"
-            app:layout_constraintStart_toStartOf="@+id/chip_my_page_profile_purpose"
-            app:layout_constraintTop_toBottomOf="@+id/chip_my_page_profile_purpose"
-            tools:text="닉네임 입력" />
 
                 <ImageView
                     android:id="@+id/iv_my_page_profile_right_arrow"
