@@ -129,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing4"
             android:backgroundTint="@color/main_3"
-            android:text="@{bakery.secondNearStation == null ? `` : bakery.secondNearStation}"
+            android:text="@{bakery.secondNearStation}"
             app:layout_constraintBottom_toBottomOf="@+id/chip_home_first_near_station"
             app:layout_constraintStart_toEndOf="@id/chip_home_first_near_station"
             app:layout_constraintTop_toTopOf="@+id/chip_home_first_near_station"

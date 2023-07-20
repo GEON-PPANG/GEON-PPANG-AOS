@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="17dp"
                     android:backgroundTint="@color/point_2"
-                    android:text="@{viewModel.mypageInfoState.mainPurpose}"
+                    android:text="@{viewModel.toMainPurposeTitleRes()}"
                     app:layout_constraintStart_toEndOf="@+id/iv_my_page_profile_img"
                     app:layout_constraintTop_toTopOf="@+id/iv_my_page_profile_img"
                     tools:text="맛 . 다이어트" />

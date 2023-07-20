@@ -119,9 +119,9 @@
         <item name="chipStartPadding">0dp</item>
         <item name="chipCornerRadius">20dp</item>
         <item name="textStartPadding">0dp</item>
-        <item name="iconStartPadding">8dp</item>
+        <item name="iconStartPadding">@dimen/spacing12</item>
         <item name="rippleColor">#00FFFFFF</item>
-        <item name="android:paddingVertical">8dp</item>
+        <item name="android:paddingVertical">@dimen/spacing10</item>
         <item name="chipBackgroundColor">@color/selector_bread_lost_filter_background</item>
         <item name="iconEndPadding">4dp</item>
         <item name="chipIconVisible">true</item>
