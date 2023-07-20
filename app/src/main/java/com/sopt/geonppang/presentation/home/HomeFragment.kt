@@ -9,7 +9,9 @@ import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentHomeBinding
 import com.sopt.geonppang.presentation.detail.DetailActivity
+import com.sopt.geonppang.presentation.filter.FilterActivity
 import com.sopt.geonppang.presentation.search.SearchActivity
+import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +44,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     private fun addListeners() {
         binding.tvHomeSearch.setOnClickListener {
             moveToSearch()
+        }
+
+        binding.ivHomeFilter.setOnClickListener {
+            moveToFilter()
         }
     }
 
@@ -78,8 +84,17 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         startActivity(intent)
     }
 
+    private fun moveToFilter() {
+        val intent = Intent(requireContext(), FilterActivity::class.java)
+        intent.putExtra(FILTER_INFO, FilterInfoType.HOME.activityName)
+        intent.putExtra(MAX_PAGE, FilterInfoType.HOME.maxPage)
+        startActivity(intent)
+    }
+
     companion object {
         const val BAKERY_ID = "bakeryId"
         const val ACTIVITY_NAME = "activityName"
+        const val FILTER_INFO = "filterInfo"
+        const val MAX_PAGE = "maxPage"
     }
 }
