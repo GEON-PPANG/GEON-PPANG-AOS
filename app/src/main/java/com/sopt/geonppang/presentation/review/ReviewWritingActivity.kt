@@ -51,7 +51,7 @@ class ReviewWritingActivity :
             showReviewSuccessDialog()
         }
 
-        binding.imgBackArrow.setOnClickListener {
+        binding.toolbar.ivBack.setOnClickListener {
             showReviewCancelDialog()
         }
 
