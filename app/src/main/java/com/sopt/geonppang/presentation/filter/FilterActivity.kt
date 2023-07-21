@@ -39,7 +39,7 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
     }
 
     private fun addListeners() {
-        binding.includeFilterToolbar.ivBack.setOnClickListener {
+        binding.ivFilterArrowLeft.setOnClickListener {
             when (binding.vpFilterContainer.currentItem) {
                 0 -> {
                     finish()
