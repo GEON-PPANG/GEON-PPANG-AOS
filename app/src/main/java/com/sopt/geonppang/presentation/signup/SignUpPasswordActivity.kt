@@ -38,7 +38,7 @@ class SignUpPasswordActivity :
         binding.btnNext.setOnClickListener {
             moveToNickname()
         }
-        binding.topbar.ivBack.setOnClickListener {
+        binding.ivSignupPasswordArrowLeft.setOnClickListener {
             moveToEmail()
         }
     }
