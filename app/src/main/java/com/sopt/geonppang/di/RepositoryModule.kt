@@ -1,21 +1,7 @@
 package com.sopt.geonppang.di
 
-import com.sopt.geonppang.data.repository.BakeryRepositoryImpl
-import com.sopt.geonppang.data.repository.DetailRepositoryImpl
-import com.sopt.geonppang.data.repository.DummyRepositoryImpl
-import com.sopt.geonppang.data.repository.FilterRepositoryImpl
-import com.sopt.geonppang.data.repository.HomeRepositoryImpl
-import com.sopt.geonppang.data.repository.MypageRepositoryImpl
-import com.sopt.geonppang.data.repository.SearchRepositoryImpl
-import com.sopt.geonppang.data.repository.ReviewWritingWritingRepositoryImpl
-import com.sopt.geonppang.domain.repository.BakeryRepository
-import com.sopt.geonppang.domain.repository.DetailRepository
-import com.sopt.geonppang.domain.repository.DummyRepository
-import com.sopt.geonppang.domain.repository.FilterRepository
-import com.sopt.geonppang.domain.repository.HomeRepository
-import com.sopt.geonppang.domain.repository.MypageRepository
-import com.sopt.geonppang.domain.repository.SearchRepository
-import com.sopt.geonppang.domain.repository.ReviewWritingRepository
+import com.sopt.geonppang.data.repository.*
+import com.sopt.geonppang.domain.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -25,12 +11,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 interface RepositoryModule {
-    @Binds
-    @Singleton
-    fun bindDummyRepository(
-        dummyRepositoryImpl: DummyRepositoryImpl,
-    ): DummyRepository
-
     @Binds
     @Singleton
     fun bindHomeRepository(
@@ -64,7 +44,7 @@ interface RepositoryModule {
     @Binds
     @Singleton
     fun bindReviewWritingRepository(
-        reviewWritingRepositoryImpl: ReviewWritingWritingRepositoryImpl
+        reviewWritingRepositoryImpl: ReviewWritingWritingRepositoryImpl,
     ): ReviewWritingRepository
 
     @Binds

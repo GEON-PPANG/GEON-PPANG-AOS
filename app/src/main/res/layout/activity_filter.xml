@@ -29,10 +29,14 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="@dimen/spacing24" />
 
-        <include
-            android:id="@+id/include_filter_toolbar"
-            layout="@layout/view_toolbar"
-            app:layout_constraintEnd_toEndOf="parent"
+        <ImageView
+            android:id="@+id/iv_filter_arrow_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="34dp"
+            android:padding="12dp"
+            android:src="@drawable/ic_arrow_left"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,21 +44,22 @@
             android:id="@+id/tv_filter_page_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="49dp"
             android:textAppearance="@style/TextAppearance.Subhead"
             android:textColor="@color/gray_300"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_filter_arrow_left"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_filter_arrow_left"
             tools:text="1/6" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_filter_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toTopOf="@+id/btn_filter_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include_filter_toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_filter_arrow_left" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_filter_next"

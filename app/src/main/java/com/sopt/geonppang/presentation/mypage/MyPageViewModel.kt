@@ -50,22 +50,20 @@ class MyPageViewModel @Inject constructor(
         _nickName.value = gpDataStore.userNickname
     }
 
-    fun fetchMypageInfo() {
-        viewModelScope.launch {
-            mypageRepository.fetchMypageInfo()
-                .onSuccess { myInfo ->
-                    myInfo.let {
-                        _mypageInfoState.value = myInfo
-                    }
-                }
-        }
-    }
-
     fun toMainPurposeTitleRes(): Int {
         return when (mypageInfoState.value?.mainPurpose) {
             MainPurposeType.DIET.name -> MainPurposeType.DIET.titleRes
             MainPurposeType.HEALTH.name -> MainPurposeType.HEALTH.titleRes
             else -> MainPurposeType.VEGAN.titleRes
+        }
+    }
+
+    fun fetchMypageInfo() {
+        viewModelScope.launch {
+            mypageRepository.fetchMypageInfo()
+                .onSuccess { myInfo ->
+                    _mypageInfoState.value = myInfo
+                }
         }
     }
 

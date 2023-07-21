@@ -1,23 +1,29 @@
-package com.sopt.geonppang.presentation.bakeryList
+package com.sopt.geonppang.presentation.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.geonppang.databinding.ItemBakeryBinding
 import com.sopt.geonppang.domain.model.Bakery
+import com.sopt.geonppang.util.ItemDiffCallback
 import com.sopt.geonppang.util.setVisibility
 
-class BakeryRecyclerViewAdapter(
-    private val moveToDetail: (Int) -> Unit
-) : RecyclerView.Adapter<BakeryRecyclerViewAdapter.BakeryViewHolder>() {
-    private val bakeryList: MutableList<Bakery> = mutableListOf()
+class BakeryAdapter(
+    private val moveToDetail: (Int) -> Unit,
+) : ListAdapter<Bakery, BakeryAdapter.BakeryViewHolder>(
+    ItemDiffCallback<Bakery>(
+        onItemsTheSame = { old, new -> old.bakeryId == new.bakeryId },
+        onContentsTheSame = { old, new -> old == new }
+    )
+) {
 
     class BakeryViewHolder(
         private val binding: ItemBakeryBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(
             bakery: Bakery,
-            moveToDetail: (Int) -> Unit
+            moveToDetail: (Int) -> Unit,
         ) {
             binding.bakery = bakery
             binding.root.setOnClickListener {
@@ -34,15 +40,7 @@ class BakeryRecyclerViewAdapter(
         return BakeryViewHolder(binding)
     }
 
-    override fun getItemCount() = bakeryList.size
-
     override fun onBindViewHolder(holder: BakeryViewHolder, position: Int) {
-        holder.onBind(bakeryList[position], moveToDetail)
-    }
-
-    fun setGoalList(bakeries: MutableList<Bakery>) {
-        bakeryList.clear()
-        bakeryList.addAll(bakeries)
-        notifyDataSetChanged()
+        holder.onBind(getItem(position), moveToDetail)
     }
 }

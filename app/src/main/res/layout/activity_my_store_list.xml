@@ -19,13 +19,6 @@
             layout="@layout/view_toolbar"
             app:title="@{@string/my_page_store_list_title}" />
 
-        <View
-            android:id="@id/view_top"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_200"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_store_list"
             visibility="@{viewModel.myBookmarkCount > 0}"
@@ -34,7 +27,7 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_top"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             tools:itemCount="7"
             tools:listitem="@layout/item_bakery" />
 
