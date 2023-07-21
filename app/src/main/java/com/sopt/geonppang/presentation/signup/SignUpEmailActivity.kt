@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySignupEmailBinding
+import com.sopt.geonppang.presentation.SignActivity
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,10 +34,18 @@ class SignUpEmailActivity :
             val bottomSheetDialog = SignUpEmailBottomSheetDialog()
             bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
         }
+        binding.imgBackArrow.setOnClickListener {
+            moveToSign()
+        }
     }
 
     private fun moveToPassword() {
         startActivity(Intent(this, SignUpPasswordActivity::class.java))
+        finish()
+    }
+
+    private fun moveToSign() {
+        startActivity(Intent(this, SignActivity::class.java))
         finish()
     }
 }
