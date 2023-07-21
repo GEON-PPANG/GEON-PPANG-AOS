@@ -9,6 +9,7 @@ import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
+import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,6 +54,14 @@ class ReviewWritingActivity :
         binding.imgBackArrow.setOnClickListener {
             showReviewCancelDialog()
         }
+
+        binding.layoutParent.setOnClickListener {
+            hideKeyboard(it)
+        }
+
+        binding.layoutScrollViewConstraint.setOnClickListener {
+            hideKeyboard(it)
+        }
     }
 
     private fun addObservers() {
@@ -61,6 +70,7 @@ class ReviewWritingActivity :
                 is UiState.Success -> {
                     moveToDetail()
                 }
+
                 else -> {}
             }
         }
