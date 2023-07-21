@@ -2,6 +2,7 @@ package com.sopt.geonppang.data.model.response
 
 import com.sopt.geonppang.domain.model.BreadType
 import com.sopt.geonppang.domain.model.Profile
+import com.sopt.geonppang.presentation.type.MainPurposeType
 import kotlinx.serialization.Serializable
 
 @Serializable
