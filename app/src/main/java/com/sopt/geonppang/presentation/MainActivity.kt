@@ -21,12 +21,13 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     }
 
     private fun initLayout() {
-        supportFragmentManager.findFragmentById(R.id.fcv_home_container)
-            ?: navigateTo<HomeFragment>()
-
-        if (intent.getStringExtra(MYPAGE_FRAGMENT) == MYPAGE_FRAGMENT) {
-            supportFragmentManager.findFragmentById(R.id.fcv_home_container)
-                ?: navigateTo<MyPageFragment>()
+        val isMyPageRequested = intent.getStringExtra(MYPAGE_FRAGMENT) == MYPAGE_FRAGMENT
+        val initialFragment = if (isMyPageRequested) {
+            navigateTo<MyPageFragment>()
+            R.id.menu_mypage
+        } else {
+            navigateTo<HomeFragment>()
+            R.id.menu_home
         }
 
         binding.bnvHome.setOnItemSelectedListener { menu ->
@@ -37,7 +38,13 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             }
             true
         }
+
+        binding.bnvHome.apply {
+            menu.findItem(initialFragment)?.isChecked = true
+            itemIconTintList = null
+        }
     }
+
 
     private inline fun <reified T : Fragment> navigateTo() {
         supportFragmentManager.commit {
