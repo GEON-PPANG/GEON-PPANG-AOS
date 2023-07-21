@@ -23,7 +23,7 @@ class BakeryListFragment :
     BakerySortTypeListener {
     private val viewModel: BakeryListViewModel by viewModels()
 
-    lateinit var bakeryAdapter: BakeryRecyclerViewAdapter
+    lateinit var bakeryAdapter: BakeryListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,7 +36,7 @@ class BakeryListFragment :
     }
 
     private fun initLayout() {
-        bakeryAdapter = BakeryRecyclerViewAdapter(::moveToDetail)
+        bakeryAdapter = BakeryListAdapter(::moveToDetail)
         binding.rvBakeryList.adapter = bakeryAdapter
     }
 
