@@ -45,7 +45,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         }
     }
 
-
     private inline fun <reified T : Fragment> navigateTo() {
         supportFragmentManager.commit {
             replace<T>(R.id.fcv_home_container, T::class.java.canonicalName)
