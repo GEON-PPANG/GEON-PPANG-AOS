@@ -90,12 +90,10 @@
                         android:layout_width="82dp"
                         android:layout_height="0dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/bbang1"
                         app:layout_constraintDimensionRatio="1"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:shapeAppearanceOverlay="@style/Radius5"
-                        tools:src="@drawable/bbang1" />
+                        app:shapeAppearanceOverlay="@style/Radius5" />
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/cg_bakery_category"
