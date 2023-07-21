@@ -1,5 +1,5 @@
 # *🥐 건빵 - AOS 🥐*
-![image](https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/77060011/fb2c50da-3a48-43ed-93fe-52c1f7bc5812)
+<img width="500" src="https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/77060011/fb2c50da-3a48-43ed-93fe-52c1f7bc5812"/>
 
 
 ## 🥖 *****건빵(Geon Ppang)*****
@@ -11,13 +11,23 @@
 
 |                                         [@jihyunniiii](https://github.com/jihyunniiii)                                         | [@jooyyoo](https://github.com/jooyyoo) | [@Dani43](https://github.com/Dan2dani) |
 |:------------------------------------------------------------------------------------------------------------------------------:| :---: | :---: |
-| <img width="250" src="https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/77060011/f5f78657-49d2-4da0-bcbb-9d372f9c41bb"/> |<img width="250" src="https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/77060011/0dafb0d1-e817-460a-ac2d-2825df246c7e"/>|<img width="250" src="https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/77060011/12af280a-606d-4544-9ae7-4f15a04b89c2"/>|
+| <img width="250" src="https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/77060011/1d7c499a-cd4c-4a0a-a692-c29f9867ac9a"/> |<img width="250" src="https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/77060011/1c98b57f-a752-47de-81d4-b0a305127c26"/>|<img width="250" src="https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/77060011/73ddf82a-4f27-4abb-9664-15ede1ee4108"/>|
 |                                                    `DetailView`, `FilterView`, <br>`MypageView`                                                |`SignUpView`, `ReviewView`|`HomeView`, `SearchView`, <br>`MypageView`|
+
+
 
 
 
 <br>
 
+## 📷 *****ScreenShot*****
+| <img width="200" src=""/> | <img width="200" src=""/> | <img width="200" src=""/> | <img width="200" src=""/> | 
+| :---: | :---: | :---: |:------------------------------------------------------------------------------------------------------------------------------:|
+|`SignUpView`|`FilterView`|`HomeView`|                                                        `BakeryListView`                                                        |
+| <img width="200" src=""/> | <img width="200" src=""/> | <img width="200" src=""/> |<img width="200" src="">
+|`SearchView`|`DetailView`|`ReviewWritingView`|`MyPageView`|
+
+<br>
 
 ## 📘 *****Convention*****
 
@@ -34,6 +44,21 @@
 
 <br>
 
+## 👩🏻‍💻 ***Specification***
+
+| Architecture | Clean Architecture, MVVM |
+| --- | --- |
+| Design Pattern | Repository Pattern, Adapter Pattern,  Delegation Pattern, Observer Pattern |
+| Jetpack Components | encryptedsharedpreferences, LiveData, Lifecycle, ViewModel, DataBinding |
+| Dependency Injection | Hilt |
+| Network | Retrofit, OkHttp |
+| Asynchronous Processing | Coroutine(+ Flow) |
+| Third Party Library | Coil, Firebase, Timber, kotlinSerialization |
+| Strategy | Git Flow |
+| CI | GitHub Action(KtLint, Complie Check) |
+| Other Tool | Slack, Notion, Figma, Postman |
+<br>
+
 ## 📁 *****Foldering*****
 
 ```
@@ -48,6 +73,17 @@
 ┃ ┣ 📂 model
 ┃ ┣ 📂 repository
 ┣ 📂 presentation
+┃ ┣ 📂 bakeryList
+┃ ┣ 📂 detail
+┃ ┣ 📂 common
+┃ ┣ 📂 filter
+┃ ┣ 📂 home
+┃ ┣ 📂 model
+┃ ┣ 📂 mypage
+┃ ┣ 📂 review
+┃ ┣ 📂 search
+┃ ┣ 📂 signUp
+┃ ┣ 📂 type
 ┣ 📂 util
 ┃ ┣ 📂 binding
 ┃ ┣ 📂 extension
