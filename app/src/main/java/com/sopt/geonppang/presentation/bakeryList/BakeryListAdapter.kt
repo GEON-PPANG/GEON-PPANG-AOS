@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.geonppang.databinding.ItemBakeryBinding
 import com.sopt.geonppang.domain.model.Bakery
+import com.sopt.geonppang.util.setVisibility
 
 class BakeryListAdapter(
     private val moveToDetail: (Int) -> Unit
@@ -22,6 +23,7 @@ class BakeryListAdapter(
             binding.root.setOnClickListener {
                 moveToDetail(bakery.bakeryId)
             }
+            binding.chipStation2.setVisibility(bakery.secondNearStation != "")
             binding.executePendingBindings()
         }
     }

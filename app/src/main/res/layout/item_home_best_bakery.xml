@@ -58,7 +58,8 @@
                 android:id="@+id/iv_haccp_mark"
                 visibility="@{bakery.isHACCP}"
                 android:layout_width="24dp"
-                android:layout_height="wrap_content"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
                 android:layout_marginEnd="-8dp"
                 android:src="@drawable/ic_haccp_mark" />
 
@@ -124,11 +125,12 @@
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_home_second_near_station"
             style="@style/Style.Material3.Chip.Station.Category"
+            visibility="@{bakery.secondNearStation != null}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing4"
             android:backgroundTint="@color/main_3"
-            android:text="@{bakery.secondNearStation == null ? `` : bakery.secondNearStation}"
+            android:text="@{bakery.secondNearStation}"
             app:layout_constraintBottom_toBottomOf="@+id/chip_home_first_near_station"
             app:layout_constraintStart_toEndOf="@id/chip_home_first_near_station"
             app:layout_constraintTop_toTopOf="@+id/chip_home_first_near_station"

@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sopt.geonppang.databinding.ItemBakeryBinding
 import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.util.ItemDiffCallback
+import com.sopt.geonppang.util.setVisibility
 
 class BakeryAdapter(
-    private val moveToDetail: (Int) -> Unit
+    private val moveToDetail: (Int) -> Unit,
 ) : ListAdapter<Bakery, BakeryAdapter.BakeryViewHolder>(
     ItemDiffCallback<Bakery>(
         onItemsTheSame = { old, new -> old.bakeryId == new.bakeryId },
@@ -22,12 +23,13 @@ class BakeryAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(
             bakery: Bakery,
-            moveToDetail: (Int) -> Unit
+            moveToDetail: (Int) -> Unit,
         ) {
             binding.bakery = bakery
             binding.root.setOnClickListener {
                 moveToDetail(bakery.bakeryId)
             }
+            binding.chipStation2.setVisibility(bakery.secondNearStation != "")
             binding.executePendingBindings()
         }
     }
