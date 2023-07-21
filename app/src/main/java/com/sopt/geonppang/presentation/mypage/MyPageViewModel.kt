@@ -7,6 +7,7 @@ import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.domain.model.Profile
 import com.sopt.geonppang.domain.repository.MypageRepository
+import com.sopt.geonppang.presentation.type.MainPurposeType
 import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -57,6 +58,14 @@ class MyPageViewModel @Inject constructor(
                         _mypageInfoState.value = myInfo
                     }
                 }
+        }
+    }
+
+    fun toMainPurposeTitleRes(): Int {
+        return when (mypageInfoState.value?.mainPurpose) {
+            MainPurposeType.DIET.name -> MainPurposeType.DIET.titleRes
+            MainPurposeType.HEALTH.name -> MainPurposeType.HEALTH.titleRes
+            else -> MainPurposeType.VEGAN.titleRes
         }
     }
 

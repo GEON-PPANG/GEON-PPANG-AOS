@@ -45,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="@id/iv_bakery"
             app:layout_constraintStart_toStartOf="@id/iv_bakery"
             app:layout_constraintTop_toTopOf="@id/iv_bakery">
@@ -54,7 +54,8 @@
                 android:id="@+id/iv_haccp_mark"
                 visibility="@{bakery.isHACCP}"
                 android:layout_width="20dp"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
                 android:layout_marginEnd="-8dp"
                 android:src="@drawable/ic_haccp_mark" />
 
