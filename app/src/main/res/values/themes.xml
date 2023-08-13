@@ -92,8 +92,7 @@
         <item name="chipCornerRadius">3dp</item>
     </style>
 
-    <!--  TODO naming 고민  -->
-    <style name="Widget.Material3.Chip.Style.Radius3.Stroke" parent="Widget.Material3.Chip.Style.Radius3">
+    <style name="Widget.Material3.Chip.Style.Bread.Filter.Category.Gray" parent="Widget.Material3.Chip.Style.Radius3">
         <item name="android:paddingVertical">4dp</item>
         <item name="chipStrokeColor">@color/gray_300</item>
         <item name="textStartPadding">8dp</item>
@@ -103,16 +102,27 @@
         <item name="android:textColor">@color/gray_400</item>
     </style>
 
+    <style name="Widget.Material3.Chip.Style.Bread.Filter.Category.Point" parent="Widget.Material3.Chip.Style">
+        <item name="android:paddingVertical">2dp</item>
+        <item name="chipCornerRadius">4dp</item>
+        <item name="chipStrokeColor">@color/point_1</item>
+        <item name="textStartPadding">6dp</item>
+        <item name="textEndPadding">6dp</item>
+        <item name="chipStrokeWidth">0.5dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.CaptionM2</item>
+        <item name="android:textColor">@color/point_1</item>
+    </style>
+
     <style name="Style.Material3.Chip.Station.Category" parent="Widget.Material3.Chip.Style">
-        <item name="chipCornerRadius">20dp</item>
+        <item name="chipCornerRadius">8dp</item>
         <item name="textStartPadding">8dp</item>
         <item name="textEndPadding">8dp</item>
         <item name="android:paddingVertical">7dp</item>
         <item name="android:textAppearance">@style/TextAppearance.CaptionM1</item>
-        <item name="android:textColor">@color/gray_100</item>
+        <item name="android:textColor">@color/gray_400</item>
     </style>
 
-    <style name="Style.Material3.Chip.BreadFilter.Category" parent="Widget.MaterialComponents.Chip.Choice">
+    <style name="Style.Material3.Chip.Bakery.Filter.Category" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="android:stateListAnimator">@null</item>
         <item name="chipMinTouchTargetSize">0dp</item>
         <item name="chipEndPadding">0dp</item>
@@ -132,6 +142,7 @@
         <item name="android:textColor">@color/selector_bread_list_filter_color</item>
     </style>
 
+    <!--    TODO style에서 제외시키기, 한 곳에서만 사용됨으로-->
     <style name="Style.Material3.Chip.Purpose.Category" parent="Widget.Material3.Chip.Style">
         <item name="chipCornerRadius">14dp</item>
         <item name="android:paddingVertical">4dp</item>
