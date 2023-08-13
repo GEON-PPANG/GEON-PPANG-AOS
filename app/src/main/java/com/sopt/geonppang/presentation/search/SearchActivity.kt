@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ConcatAdapter
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySearchBinding
 import com.sopt.geonppang.presentation.common.BakeryAdapter
@@ -22,7 +23,7 @@ import kotlinx.coroutines.flow.onEach
 class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_search) {
     private val viewModel: SearchViewModel by viewModels()
 
-    lateinit var bakeryAdapter: BakeryAdapter
+    private lateinit var bakeryAdapter: BakeryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +36,9 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
     }
 
     private fun initLayout() {
+        val searchCountAdapter = SearchCountAdapter()
         bakeryAdapter = BakeryAdapter(::moveToDetail)
-        binding.rvSearchBakeryList.adapter = bakeryAdapter
+        binding.rvSearchBakeryList.adapter = ConcatAdapter(searchCountAdapter, bakeryAdapter)
     }
 
     private fun addListeners() {
