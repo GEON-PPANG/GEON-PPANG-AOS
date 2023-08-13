@@ -12,8 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="22dp">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_start"
@@ -34,12 +33,13 @@
             image="@{bakery.bakeryPicture}"
             android:layout_width="82dp"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/spacing20"
             android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/Radius5"
-            tools:src="@drawable/bbang1" />
+            tools:src="@drawable/ic_launcher_background" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -158,37 +158,36 @@
                 android:text="저당,무설탕" />
         </com.google.android.material.chip.ChipGroup>
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_station_1"
-            style="@style/Style.Material3.Chip.Station.Category"
+        <ImageView
+            android:id="@+id/iv_bakery_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="@color/main_3"
-            android:text="@{bakery.firstNearStation}"
-            app:layout_constraintStart_toStartOf="@+id/tv_bakery"
-            app:layout_constraintTop_toBottomOf="@id/cg_bakery_category"
-            tools:text="건대역" />
+            android:layout_marginTop="@dimen/spacing10"
+            android:src="@drawable/ic_map"
+            app:layout_constraintStart_toStartOf="@id/tv_bakery"
+            app:layout_constraintTop_toBottomOf="@id/cg_bakery_category" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_station_2"
-            style="@style/Style.Material3.Chip.Station.Category"
+        <TextView
+            android:id="@+id/tv_nearest_station"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:backgroundTint="@color/main_3"
-            android:text="@{bakery.secondNearStation}"
-            app:layout_constraintStart_toEndOf="@+id/chip_station_1"
-            app:layout_constraintTop_toTopOf="@+id/chip_station_1"
-            tools:text="건대역" />
+            android:text="@{@string/nearest_station(bakery.firstNearStation, bakery.secondNearStation)}"
+            android:textAppearance="@style/TextAppearance.CaptionM1"
+            android:textColor="@color/gray_400"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_bakery_map"
+            app:layout_constraintStart_toEndOf="@+id/iv_bakery_map"
+            app:layout_constraintTop_toTopOf="@+id/iv_bakery_map"
+            tools:text="건대역∙강남역" />
 
         <View
             android:id="@+id/view_line_bottom"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/spacing10"
             android:layout_marginTop="20dp"
             android:background="@color/gray_200"
-            app:layout_constraintTop_toBottomOf="@id/chip_station_1"
+            app:layout_constraintTop_toBottomOf="@id/iv_bakery"
             tools:layout_editor_absoluteX="-16dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
