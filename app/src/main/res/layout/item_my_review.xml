@@ -45,7 +45,7 @@
             image="@{review.bakery.bakeryPicture}"
             android:layout_width="82dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/spacing10"
+            android:layout_marginTop="4dp"
             android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintStart_toStartOf="@id/gl_start"
@@ -121,23 +121,23 @@
                 visibility="@{review.bakery.breadType.isGlutenFree}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/background_1"
                 android:text="글루텐프리" />
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point"
-            visibility="@{review.bakery.breadType.isVegan}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:text="비건빵" />
+                visibility="@{review.bakery.breadType.isVegan}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/background_1"
+                android:text="비건빵" />
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point"
                 visibility="@{review.bakery.breadType.isNutFree}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/background_1"
                 android:text="넛프리" />
 
             <com.google.android.material.chip.Chip
@@ -145,7 +145,7 @@
                 visibility="@{review.bakery.breadType.isSugarFree}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/background_1"
                 android:text="저당,무설탕"
                 app:layout_constraintEnd_toStartOf="@+id/iv" />
 
