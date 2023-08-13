@@ -112,35 +112,35 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_my_page_profile_nickname">
 
                     <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                        style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
                         visibility="@{viewModel.mypageInfoState.breadType.glutenFree}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@android:color/transparent"
+                        android:backgroundTint="@color/background_1"
                         android:text="@string/my_page_gluten_free" />
 
                     <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                        style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
                         visibility="@{viewModel.mypageInfoState.breadType.nutFree}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@android:color/transparent"
+                        android:backgroundTint="@color/background_1"
                         android:text="@string/my_page_nut_free" />
 
                     <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                        style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
                         visibility="@{viewModel.mypageInfoState.breadType.vegan}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@android:color/transparent"
+                        android:backgroundTint="@color/background_1"
                         android:text="@string/my_page_vegan" />
 
                     <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                        style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
                         visibility="@{viewModel.mypageInfoState.breadType.sugarFree}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@android:color/transparent"
+                        android:backgroundTint="@color/background_1"
                         android:text="@string/my_page_low_suger" />
 
                 </com.google.android.material.chip.ChipGroup>

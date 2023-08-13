@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sopt.geonppang.databinding.ItemBakeryBinding
 import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.util.ItemDiffCallback
-import com.sopt.geonppang.util.setVisibility
 
 class BakeryAdapter(
     private val moveToDetail: (Int) -> Unit,
@@ -29,7 +28,8 @@ class BakeryAdapter(
             binding.root.setOnClickListener {
                 moveToDetail(bakery.bakeryId)
             }
-            binding.chipStation2.setVisibility(bakery.secondNearStation != "")
+            // TODO 가까운 전철역 하나 일 경우 수정 필요
+//            binding.chipStation2.setVisibility(bakery.secondNearStation != "")
             binding.executePendingBindings()
         }
     }

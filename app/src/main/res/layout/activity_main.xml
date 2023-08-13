@@ -16,16 +16,15 @@
             android:id="@+id/fcv_home_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/view_top_shadow"
+            app:layout_constraintBottom_toTopOf="@id/bnv_top_line"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:id="@+id/view_top_shadow"
+            android:id="@+id/bnv_top_line"
             android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_marginBottom="74dp"
-            android:background="@drawable/bottom_navigation_top_shadow"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_200"
+            app:layout_constraintBottom_toTopOf="@id/bnv_home"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -33,7 +32,6 @@
             android:id="@+id/bnv_home"
             android:layout_width="0dp"
             android:layout_height="86dp"
-            android:background="@drawable/background_bottom_navigation"
             android:paddingBottom="28dp"
             app:itemIconTint="@drawable/menu_selector_color"
             app:itemPaddingBottom="4dp"

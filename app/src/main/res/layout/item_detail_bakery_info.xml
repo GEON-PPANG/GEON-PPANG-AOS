@@ -103,7 +103,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_item_detail_bakery_info_bakery_name">
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point"
                 visibility="@{bakeryInfo.breadType.isGlutenFree}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
                 android:text="@string/gluten_free" />
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point"
                 visibility="@{bakeryInfo.breadType.isNutFree}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
                 android:text="@string/nut_free" />
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point"
                 visibility="@{bakeryInfo.breadType.isVegan}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                 android:text="@string/vegan" />
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point"
                 visibility="@{bakeryInfo.breadType.isSugarFree}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
