@@ -124,7 +124,7 @@
                 app:singleSelection="false">
 
                 <com.google.android.material.chip.Chip
-                    style="@style/Style.Material3.Chip.BreadFilter.Category"
+                    style="@style/Style.Material3.Chip.Bakery.Filter.Category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{() -> viewModle.setBakeryCategoryType(BakeryCategoryType.HARD)}"
@@ -133,7 +133,7 @@
                     app:chipIcon="@drawable/ic_hard_bread" />
 
                 <com.google.android.material.chip.Chip
-                    style="@style/Style.Material3.Chip.BreadFilter.Category"
+                    style="@style/Style.Material3.Chip.Bakery.Filter.Category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{() -> viewModle.setBakeryCategoryType(BakeryCategoryType.DESSERT)}"
@@ -142,7 +142,7 @@
                     app:chipIcon="@drawable/ic_dessert" />
 
                 <com.google.android.material.chip.Chip
-                    style="@style/Style.Material3.Chip.BreadFilter.Category"
+                    style="@style/Style.Material3.Chip.Bakery.Filter.Category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{() -> viewModle.setBakeryCategoryType(BakeryCategoryType.BRUNCH)}"
