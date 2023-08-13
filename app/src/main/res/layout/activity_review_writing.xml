@@ -84,7 +84,7 @@
                         app:layout_constraintWidth="0dp">
 
                         <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                            style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point"
                             visibility="@{viewModel.bakeryInfo.breadType.glutenFree}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
                             android:text="글루텐프리" />
 
                         <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                            style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point"
                             visibility="@{viewModel.bakeryInfo.breadType.vegan}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                             android:text="비건빵" />
 
                         <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                            style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point"
                             visibility="@{viewModel.bakeryInfo.breadType.nutFree}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
                             android:text="넛프리" />
 
                         <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Style.Radius3.Stroke"
+                            style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point"
                             visibility="@{viewModel.bakeryInfo.breadType.sugarFree}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
