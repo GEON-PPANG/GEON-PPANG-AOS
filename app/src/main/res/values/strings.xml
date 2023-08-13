@@ -59,6 +59,7 @@
     <string name="search_count">%d개</string>
     <string name="search_empty_description1">검색결과가 없어요</string>
     <string name="search_empty_description2">다른 키워드로 검색해보세요!</string>
+    <string name="nearest_station">%s∙%s</string>
 
     <!--    bread type    -->
     <string name="gluten_free">글루텐프리</string>
