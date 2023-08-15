@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.geonppang.R
-import com.sopt.geonppang.databinding.ActivitySignupPasswordBinding
+import com.sopt.geonppang.databinding.ActivitySignupBinding
 import com.sopt.geonppang.util.KeyboardVIsibilityUtils
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignUpPasswordActivity :
-    BindingActivity<ActivitySignupPasswordBinding>(R.layout.activity_signup_password) {
+    BindingActivity<ActivitySignupBinding>(R.layout.activity_signup) {
     private val viewModel: SignUpViewModel by viewModels()
     private lateinit var keyboardVIsibilityUtils: KeyboardVIsibilityUtils
 
@@ -32,13 +32,13 @@ class SignUpPasswordActivity :
         binding.layoutSignupPassword.setOnClickListener {
             hideKeyboard(it)
         }
-        binding.svSignupPasswordContainer.setOnClickListener {
+        binding.svSignupContainer.setOnClickListener {
             hideKeyboard(it)
         }
         binding.btnNext.setOnClickListener {
             moveToNickname()
         }
-        binding.ivSignupPasswordArrowLeft.setOnClickListener {
+        binding.toolbar.ivBack.setOnClickListener {
             moveToEmail()
         }
     }
@@ -56,7 +56,7 @@ class SignUpPasswordActivity :
     private fun requestFocus() {
         keyboardVIsibilityUtils =
             KeyboardVIsibilityUtils(window, onShowKeyboard = { keyboardHeight ->
-                binding.svSignupPassword.run {
+                binding.svSignup.run {
                     smoothScrollTo(scrollX, scrollY + keyboardHeight)
                 }
             })
