@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.sopt.geonppang.presentation.signup.SignUpViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_signup_password"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/view_toolbar" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/sv_signup"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_next"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/sv_signup_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <TextView
+                    android:id="@+id/tv_input_phrase"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/tv_password_notice_phrase"
+                    android:textAppearance="@style/TextAppearance.Title1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/linear_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    android:background="@{!viewModel.email.empty &amp; !viewModel.isValidEmail()? @drawable/background_need_change_status : @drawable/background_normal_status   }"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="@id/tv_input_phrase"
+                    app:layout_constraintStart_toStartOf="@id/tv_input_phrase"
+                    app:layout_constraintTop_toBottomOf="@id/tv_input_phrase">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_email_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="18dp"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/tv_email"
+                            android:textAppearance="@style/TextAppearance.BodyB2"
+                            android:textColor="@{!viewModel.email.empty &amp; !viewModel.isValidEmail() ? @color/error : @color/gray_400}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:id="@+id/et_write_your_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="18dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="16dp"
+                            android:background="@null"
+                            android:hint="@string/email_hint"
+                            android:inputType="textEmailAddress"
+                            android:paddingVertical="5dp"
+                            android:paddingEnd="95dp"
+                            android:text="@={viewModel.email}"
+                            android:textAppearance="@style/TextAppearance.Headline"
+                            android:textColorHint="@color/gray_300"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_email_text" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_double_check_email"
+                            style="@style/Widget.FullButton.Basic"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="36dp"
+                            android:backgroundTint="@color/main_3"
+                            android:paddingHorizontal="4dp"
+                            android:paddingVertical="10dp"
+                            android:layout_marginEnd="18dp"
+                            android:text="중복확인"
+                            android:textAppearance="@style/TextAppearance.CaptionM1"
+                            app:cornerRadius="24dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/et_write_your_email"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:rippleColor="@color/main_3" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_email_error_msg"
+                    visibility="@{!viewModel.email.empty &amp; !viewModel.isValidEmail()}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="24dp"
+                    android:text="@string/email_error_msg"
+                    android:textAppearance="@style/TextAppearance.CaptionM1"
+                    android:textColor="@color/error"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_email" />
+
+                <LinearLayout
+                    android:id="@+id/linear_password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:background="@{!viewModel.password.empty &amp; !viewModel.isValidPassword()? @drawable/background_need_change_status : @drawable/background_normal_status }"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="@id/linear_email"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@id/linear_email"
+                    app:layout_constraintTop_toBottomOf="@id/linear_email">
+
+                    <TextView
+                        android:id="@+id/tv_password_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/tv_password"
+                        android:textAppearance="@style/TextAppearance.BodyB2"
+                        android:textColor="@{!viewModel.password.empty &amp; !viewModel.isValidPassword() ? @color/error : @color/gray_400}" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/CustomTextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:errorEnabled="false"
+                        app:hintEnabled="false"
+                        app:passwordToggleDrawable="@drawable/toggle_icon_selector"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@null">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_write_your_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="2dp"
+                            android:hint="@string/password_hint"
+                            android:inputType="textPassword"
+                            android:text="@={viewModel.password}"
+                            android:textAppearance="@style/TextAppearance.Headline"
+                            android:textColorHint="@color/gray_300" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_password1_error_msg"
+                    visibility="@{!viewModel.password.empty &amp; !viewModel.isValidPassword()}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/password_error_msg"
+                    android:textAppearance="@style/TextAppearance.CaptionM1"
+                    android:textColor="@color/error"
+                    app:layout_constraintEnd_toEndOf="@id/linear_password"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_password" /><!--visibility viewModel 만든 후 구현 예정-->
+
+                <LinearLayout
+                    android:id="@+id/linear_password_double_check"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:background="@{!viewModel.password_check.empty &amp; !viewModel.completePassword? @drawable/background_need_change_status : @drawable/background_normal_status }"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="@id/linear_password"
+                    app:layout_constraintStart_toStartOf="@id/linear_password"
+                    app:layout_constraintTop_toBottomOf="@id/linear_password">
+
+                    <TextView
+                        android:id="@+id/tv_password_double_check_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/tv_double_check_password"
+                        android:textAppearance="@style/TextAppearance.BodyB2"
+                        android:textColor="@{!viewModel.password_check.empty &amp; !viewModel.completePassword ? @color/error : @color/gray_400}" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/CustomTextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:errorEnabled="false"
+                        app:hintEnabled="false"
+                        app:passwordToggleDrawable="@drawable/toggle_icon_selector"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@null">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_write_your_password_check"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="2dp"
+                            android:hint="@string/password_hint"
+                            android:inputType="textPassword"
+                            android:text="@={viewModel.password_check}"
+                            android:textAppearance="@style/TextAppearance.Headline"
+                            android:textColorHint="@color/gray_300" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_password2_error_msg"
+                    visibility="@{!viewModel.password_check.empty &amp; !viewModel.completePassword}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/password_double_check_error_msg"
+                    android:textAppearance="@style/TextAppearance.CaptionM1"
+                    android:textColor="@color/error"
+                    app:layout_constraintEnd_toEndOf="@id/linear_password_double_check"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_password_double_check" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_next"
+            style="@style/Widget.FullButton.Basic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="@dimen/spacing20"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="@{viewModel.completePassword == true ? @color/main_2 : @color/gray_200}"
+            android:enabled="@{viewModel.completePassword}"
+            android:paddingVertical="18dp"
+            android:text="@string/txt_next_btn"
+            android:textAppearance="@style/TextAppearance.BodyM1"
+            android:textColor="@{viewModel.completePassword == true ? @color/white : @color/gray_400}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sv_signup"
+            app:rippleColor="@color/main_3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
