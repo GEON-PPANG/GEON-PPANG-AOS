@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">건빵</string>
 
+    <!--login-->
+    <string name="login_text_phrase">로그인</string>
+    <string name="login_email_hint">이메일을 입력해주세요</string>
+    <string name="login_password_hint">비밀번호를 입력해주세요</string>
+    <string name="login_have_no_account">계정이 없으신가요?</string>
+    <string name="login_goto_signup"><u>회원가입하기</u></string>
+
     <!--signup-->
     <string name="tv_email_notice_phrase">회원가입을 위한\n이메일을 알려주세요!</string>
     <string name="tv_email">이메일</string>
