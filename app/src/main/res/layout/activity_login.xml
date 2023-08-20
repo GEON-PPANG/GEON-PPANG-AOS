@@ -19,119 +19,112 @@
             android:id="@+id/toolbar"
             layout="@layout/view_toolbar" />
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/sv_signup"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/sv_signup_container"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+            android:layout_height="0dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/sv_signup_container"
-                android:layout_width="match_parent"
-                android:layout_height="0dp">
+            <TextView
+                android:id="@+id/tv_input_phrase"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/login_text_phrase"
+                android:textAppearance="@style/TextAppearance.Title1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linear_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:background="@drawable/background_normal_status"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@id/tv_input_phrase"
+                app:layout_constraintStart_toStartOf="@id/tv_input_phrase"
+                app:layout_constraintTop_toBottomOf="@id/tv_input_phrase">
+
 
                 <TextView
-                    android:id="@+id/tv_input_phrase"
-                    android:layout_width="0dp"
+                    android:id="@+id/tv_email_text"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="24dp"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/login_text_phrase"
-                    android:textAppearance="@style/TextAppearance.Title1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/tv_email"
+                    android:textAppearance="@style/TextAppearance.BodyB2"
+                    android:textColor="@color/gray_400" />
 
-                <LinearLayout
-                    android:id="@+id/linear_email"
-                    android:layout_width="0dp"
+                <EditText
+                    android:id="@+id/et_write_your_email"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="36dp"
-                    android:background="@drawable/background_normal_status"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="@id/tv_input_phrase"
-                    app:layout_constraintStart_toStartOf="@id/tv_input_phrase"
-                    app:layout_constraintTop_toBottomOf="@id/tv_input_phrase">
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@null"
+                    android:hint="@string/email_hint"
+                    android:inputType="textEmailAddress"
+                    android:paddingVertical="5dp"
+                    android:paddingEnd="95dp"
+                    android:text="@={viewModel.email}"
+                    android:textAppearance="@style/TextAppearance.Headline"
+                    android:textColorHint="@color/gray_300" />
 
 
-                    <TextView
-                        android:id="@+id/tv_email_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="18dp"
-                        android:layout_marginTop="16dp"
-                        android:text="@string/tv_email"
-                        android:textAppearance="@style/TextAppearance.BodyB2"
-                        android:textColor="@color/gray_400" />
+            </LinearLayout>
 
-                    <EditText
-                        android:id="@+id/et_write_your_email"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="18dp"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="16dp"
-                        android:background="@null"
-                        android:hint="@string/email_hint"
-                        android:inputType="textEmailAddress"
-                        android:paddingVertical="5dp"
-                        android:paddingEnd="95dp"
-                        android:text="@={viewModel.email}"
+            <LinearLayout
+                android:id="@+id/linear_password_double_check"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/background_normal_status"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@id/linear_email"
+                app:layout_constraintStart_toStartOf="@id/linear_email"
+                app:layout_constraintTop_toBottomOf="@id/linear_email">
+
+                <TextView
+                    android:id="@+id/tv_password_double_check_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/tv_password"
+                    android:textAppearance="@style/TextAppearance.BodyB2"
+                    android:textColor="@color/gray_400" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/CustomTextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="false"
+                    app:hintEnabled="false"
+                    app:passwordToggleDrawable="@drawable/toggle_icon_selector"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@null">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_write_your_password_check"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="2dp"
+                        android:hint="@string/login_password_hint"
+                        android:inputType="textPassword"
+                        android:text="@={viewModel.password_check}"
                         android:textAppearance="@style/TextAppearance.Headline"
                         android:textColorHint="@color/gray_300" />
+                </com.google.android.material.textfield.TextInputLayout>
 
+            </LinearLayout>
 
-                </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
-                    android:id="@+id/linear_password_double_check"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/background_normal_status"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="@id/linear_email"
-                    app:layout_constraintStart_toStartOf="@id/linear_email"
-                    app:layout_constraintTop_toBottomOf="@id/linear_email">
-
-                    <TextView
-                        android:id="@+id/tv_password_double_check_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="18dp"
-                        android:layout_marginTop="16dp"
-                        android:text="@string/tv_password"
-                        android:textAppearance="@style/TextAppearance.BodyB2"
-                        android:textColor="@color/gray_400" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/CustomTextInputLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:errorEnabled="false"
-                        app:hintEnabled="false"
-                        app:passwordToggleDrawable="@drawable/toggle_icon_selector"
-                        app:passwordToggleEnabled="true"
-                        app:passwordToggleTint="@null">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_write_your_password_check"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="2dp"
-                            android:hint="@string/login_password_hint"
-                            android:inputType="textPassword"
-                            android:text="@={viewModel.password_check}"
-                            android:textAppearance="@style/TextAppearance.Headline"
-                            android:textColorHint="@color/gray_300" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </androidx.core.widget.NestedScrollView>
 
         <TextView
             android:id="@+id/tv_no_account_text"
