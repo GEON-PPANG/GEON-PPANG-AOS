@@ -36,7 +36,7 @@ class SignUpActivity :
             moveToNickname()
         }
         binding.toolbar.ivBack.setOnClickListener {
-            //TODO 다시 로그인 페이지로 이동
+            // TODO 다시 로그인 페이지로 이동
         }
     }
 
@@ -44,5 +44,4 @@ class SignUpActivity :
         startActivity(Intent(this, SignUpNicknameActivity::class.java))
         finish()
     }
-
 }
