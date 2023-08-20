@@ -36,8 +36,7 @@
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/bakery" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/linear_item_detail_bakery_info_mark"
@@ -267,12 +266,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginEnd="16dp"
             android:text="@{bakeryInfo.address}"
             android:textAppearance="@style/TextAppearance.Subhead"
             android:textColor="@color/gray_400"
             app:layout_constraintBottom_toBottomOf="@+id/iv_item_detail_bakery_info_store"
-            app:layout_constraintEnd_toStartOf="@+id/iv_item_detail_bakery_info_copy"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
             app:layout_constraintStart_toEndOf="@+id/iv_item_detail_bakery_info_store"
             app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_store"
             tools:text="경기 의왕시 신장승길 29 퍼스트힐5차 111호" />
@@ -291,7 +289,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@color/main_3"
+            android:backgroundTint="@color/background_2"
             android:text="@{bakeryInfo.firstNearStation}"
             app:layout_constraintStart_toStartOf="@+id/tv_item_detail_bakery_info_store"
             app:layout_constraintTop_toBottomOf="@+id/tv_item_detail_bakery_info_store"
@@ -300,11 +298,12 @@
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_item_detail_bakery_info_second_near_station"
             style="@style/Style.Material3.Chip.Station.Category"
+            visibility="@{bakeryInfo.secondNearStation != null}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:backgroundTint="@color/main_3"
-            android:text="@{bakeryInfo.secondNearStation == null ? `` : bakeryInfo.secondNearStation}"
+            android:backgroundTint="@color/background_2"
+            android:text="@{bakeryInfo.secondNearStation}"
             app:layout_constraintStart_toEndOf="@+id/chip_item_detail_bakery_info_first_near_station"
             app:layout_constraintTop_toTopOf="@+id/chip_item_detail_bakery_info_first_near_station"
             tools:text="의왕역 5번 출구" />
