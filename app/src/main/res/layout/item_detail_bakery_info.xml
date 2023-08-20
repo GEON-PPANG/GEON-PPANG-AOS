@@ -275,14 +275,6 @@
             app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_store"
             tools:text="경기 의왕시 신장승길 29 퍼스트힐5차 111호" />
 
-        <ImageView
-            android:id="@+id/iv_item_detail_bakery_info_copy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_copy"
-            app:layout_constraintEnd_toStartOf="@+id/gl_end"
-            app:layout_constraintTop_toTopOf="@+id/tv_item_detail_bakery_info_store" />
-
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_item_detail_bakery_info_first_near_station"
             style="@style/Style.Material3.Chip.Station.Category"
