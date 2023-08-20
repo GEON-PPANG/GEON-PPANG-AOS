@@ -2,6 +2,7 @@ package com.sopt.geonppang.data.model.response
 
 import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.domain.model.BreadType
+import com.sopt.geonppang.domain.model.Search
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -23,7 +24,6 @@ data class ResponseSearch(
             val bookMarkCount: Int,
             val breadType: BreadType,
             val firstNearStation: String,
-            val isBookMarked: Boolean,
             val isHACCP: Boolean,
             val isNonGMO: Boolean,
             val isVegan: Boolean,
@@ -41,26 +41,29 @@ data class ResponseSearch(
             )
         }
 
-        fun toSearchBakery() = bakeryList.map { searchBakery ->
-            Bakery(
-                bakeryId = searchBakery.bakeryId,
-                bakeryName = searchBakery.bakeryName,
-                bakeryPicture = searchBakery.bakeryPicture,
-                bookmarkCount = searchBakery.bookMarkCount,
-                firstNearStation = searchBakery.firstNearStation,
-                secondNearStation = searchBakery.secondNearStation,
-                isNonGMO = searchBakery.isNonGMO,
-                isVegan = searchBakery.isVegan,
-                isHACCP = searchBakery.isHACCP,
-                breadType = BreadType(
-                    searchBakery.breadType.breadTypeId,
-                    searchBakery.breadType.breadTypeName,
-                    searchBakery.breadType.isGlutenFree,
-                    searchBakery.breadType.isVegan,
-                    searchBakery.breadType.isNutFree,
-                    searchBakery.breadType.isSugarFree,
+        fun toSearch() = Search(
+            resultCount = resultCount,
+            bakeryList = bakeryList.map { searchBakery ->
+                Bakery(
+                    bakeryId = searchBakery.bakeryId,
+                    bakeryName = searchBakery.bakeryName,
+                    bakeryPicture = searchBakery.bakeryPicture,
+                    bookmarkCount = searchBakery.bookMarkCount,
+                    firstNearStation = searchBakery.firstNearStation,
+                    secondNearStation = searchBakery.secondNearStation,
+                    isNonGMO = searchBakery.isNonGMO,
+                    isVegan = searchBakery.isVegan,
+                    isHACCP = searchBakery.isHACCP,
+                    breadType = BreadType(
+                        searchBakery.breadType.breadTypeId,
+                        searchBakery.breadType.breadTypeName,
+                        searchBakery.breadType.isGlutenFree,
+                        searchBakery.breadType.isVegan,
+                        searchBakery.breadType.isNutFree,
+                        searchBakery.breadType.isSugarFree,
+                    )
                 )
-            )
-        }
+            }
+        )
     }
 }
