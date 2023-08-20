@@ -9,7 +9,7 @@
         android:id="@+id/menu_sotrelist"
         android:enabled="true"
         android:icon="@drawable/selector_menu_storelist_icon"
-        android:title="빵집리스트" />
+        android:title="건빵집리스트" />
     <item
         android:id="@+id/menu_mypage"
         android:enabled="true"
