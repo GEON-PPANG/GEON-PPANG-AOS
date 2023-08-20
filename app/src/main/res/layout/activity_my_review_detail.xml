@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.sopt.geonppang.presentation.myReviewDetail.MyReviewDetailViewModel" />
+
         <import type="com.sopt.geonppang.presentation.type.KeyWordType" />
     </data>
 
@@ -49,6 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing24"
+                    android:text="@{viewModel.bakeryInfo.createdAt}"
                     android:textAppearance="@style/TextAppearance.CaptionM1"
                     android:textColor="@color/gray_400"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
@@ -80,6 +85,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="14dp"
+                        android:text="@{viewModel.bakeryInfo.bakeryName}"
                         android:textAppearance="@style/TextAppearance.Title2"
                         android:textColor="@color/gray_700"
                         app:layout_constraintStart_toEndOf="@id/iv_bakery"
@@ -102,7 +108,7 @@
                             visibility="@{viewModel.bakeryInfo.breadType.glutenFree}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
+                            android:backgroundTint="@color/background_1"
                             android:text="글루텐프리" />
 
                         <com.google.android.material.chip.Chip
@@ -110,7 +116,7 @@
                             visibility="@{viewModel.bakeryInfo.breadType.vegan}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
+                            android:backgroundTint="@color/background_1"
                             android:text="비건빵" />
 
                         <com.google.android.material.chip.Chip
@@ -118,7 +124,7 @@
                             visibility="@{viewModel.bakeryInfo.breadType.nutFree}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
+                            android:backgroundTint="@color/background_1"
                             android:text="넛프리" />
 
                         <com.google.android.material.chip.Chip
@@ -126,7 +132,7 @@
                             visibility="@{viewModel.bakeryInfo.breadType.sugarFree}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
+                            android:backgroundTint="@color/background_1"
                             android:text="저당,무설탕" />
                     </com.google.android.material.chip.ChipGroup>
 
@@ -144,7 +150,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
-                        android:text="@{@string/nearest_station(bakery.firstNearStation, bakery.secondNearStation)}"
+                        android:text="@{viewModel.bakeryInfo.secondNearStation.empty ? viewModel.bakeryInfo.firstNearStation : @string/nearest_station(viewModel.bakeryInfo.firstNearStation, viewModel.bakeryInfo.secondNearStation)}"
                         android:textAppearance="@style/TextAppearance.CaptionM1"
                         android:textColor="@color/gray_400"
                         app:layout_constraintBottom_toBottomOf="@+id/iv_bakery_map"
@@ -155,10 +161,13 @@
 
                 <View
                     android:id="@+id/line2"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="1dp"
+                    android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="14dp"
                     android:background="@color/gray_200"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_bakery_info" />
 
                 <TextView
@@ -175,6 +184,7 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_like"
                     style="@style/Style.Material3.Chip.Review"
+                    selected="@{viewModel.isLikeType == true}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -189,6 +199,7 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_soso"
                     style="@style/Style.Material3.Chip.Review"
+                    selected="@{viewModel.isLikeType == false}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -228,68 +239,70 @@
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip_tasty"
                         style="@style/Style.Material3.Chip.Review"
+                        selected="@{viewModel.isRecommendKeywordSelected[1] == true}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
                         android:clickable="false"
                         android:text="@{KeyWordType.DELICIOUS.keywordNameRes}"
-                        android:textColor="@color/enable_review_writing_chip_color"
-                        app:chipStrokeColor="@color/enable_review_writing_chip_color"
+                        android:textColor="@color/selector_bread_sort_color"
+                        app:chipStrokeColor="@color/selector_bread_sort_color"
                         tools:text="맛있어요" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip_kind"
                         style="@style/Style.Material3.Chip.Review"
+                        selected="@{viewModel.isRecommendKeywordSelected[2] == true}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
                         android:clickable="false"
                         android:text="@{KeyWordType.KIND.keywordNameRes}"
-                        android:textColor="@color/enable_review_writing_chip_color"
-                        app:chipStrokeColor="@color/enable_review_writing_chip_color"
+                        android:textColor="@color/selector_bread_sort_color"
+                        app:chipStrokeColor="@color/selector_bread_sort_color"
                         tools:text="@string/chip_kind" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip_special_menu"
                         style="@style/Style.Material3.Chip.Review"
+                        selected="@{viewModel.isRecommendKeywordSelected[3] == true}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
                         android:clickable="false"
                         android:text="@{KeyWordType.SPECIAL_MENU.keywordNameRes}"
-                        android:textColor="@color/enable_review_writing_chip_color"
-                        app:chipStrokeColor="@color/enable_review_writing_chip_color"
+                        android:textColor="@color/selector_bread_sort_color"
+                        app:chipStrokeColor="@color/selector_bread_sort_color"
                         tools:text="@string/chip_special_menu" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip_zero_waste"
                         style="@style/Style.Material3.Chip.Review"
+                        selected="@{viewModel.isRecommendKeywordSelected[4] == true}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
                         android:clickable="false"
                         android:text="@{KeyWordType.ZERO_WASTE.keywordNameRes}"
-                        android:textColor="@color/enable_review_writing_chip_color"
-                        app:chipStrokeColor="@color/enable_review_writing_chip_color"
+                        android:textColor="@color/selector_bread_sort_color"
+                        app:chipStrokeColor="@color/selector_bread_sort_color"
                         tools:text="제로 웨이스트" />
                 </com.google.android.material.chip.ChipGroup>
 
-                <EditText
+                <TextView
                     android:id="@+id/et_write_your_review"
                     android:layout_width="match_parent"
                     android:layout_height="196dp"
                     android:layout_marginHorizontal="@dimen/spacing24"
                     android:layout_marginTop="32dp"
                     android:background="@drawable/background_review_box"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:gravity="top"
-                    android:maxLength="70"
                     android:paddingHorizontal="@dimen/spacing24"
                     android:paddingVertical="20dp"
+                    android:text="@{viewModel.myReviewText}"
                     android:textAppearance="@style/TextAppearance.Subhead"
                     android:textColor="@color/gray_700"
-                    app:layout_constraintTop_toBottomOf="@id/cg_review_recommend_chip_select" />
+                    app:layout_constraintTop_toBottomOf="@id/cg_review_recommend_chip_select"
+                    tools:text="하하" />
 
                 <TextView
                     android:id="@+id/tv_review_text_count"
@@ -298,11 +311,12 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="@dimen/spacing12"
+                    android:text="@{@string/review_text_count(viewModel.myReviewText.length())}"
                     android:textAppearance="@style/TextAppearance.CaptionM1"
                     android:textColor="@color/gray_500"
                     app:layout_constraintBottom_toBottomOf="@+id/et_write_your_review"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
-                    tools:text="0/70 (최소 10자)" />
+                    tools:text="0/70자" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

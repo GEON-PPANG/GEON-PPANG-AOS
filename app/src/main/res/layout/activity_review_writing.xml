@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.sopt.geonppang.presentation.review.ReviewViewModel" />
+            type="com.sopt.geonppang.presentation.reviewWriting.ReviewWritingViewModel" />
 
     </data>
 
