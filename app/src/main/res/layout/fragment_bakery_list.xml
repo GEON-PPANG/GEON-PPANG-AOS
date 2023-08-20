@@ -154,7 +154,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing24"
-                android:checked="true"
+                android:checked="@{viewModel.personalFilter}"
+                android:onClick="@{() -> viewModel.setPersonalFilter()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
