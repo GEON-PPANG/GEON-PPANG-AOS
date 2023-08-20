@@ -15,9 +15,9 @@ data class ResponseDetailReview(
         val kindPercent: Double,
         val reviewList: List<Review>,
         val specialPercent: Double,
-        val tastePercent: Double,
+        val deliciousPercent: Double,
         val totalReviewCount: Int,
-        val zeroPercent: Double
+        val zeroWastePercent: Double
     ) {
         @Serializable
         data class Review(
@@ -42,10 +42,10 @@ data class ResponseDetailReview(
         }
 
         fun toReviewData() = ReviewData(
-            tastePercent = (tastePercent * 100).toInt(),
+            deliciousPercent = (deliciousPercent * 100).toInt(),
             specialPercent = (specialPercent * 100).toInt(),
             kindPercent = (kindPercent * 100).toInt(),
-            zeroPercent = (zeroPercent * 100).toInt(),
+            zeroWastePercent = (zeroWastePercent * 100).toInt(),
             totalReviewCount = totalReviewCount,
             detailReviewList = reviewList.map { review ->
                 DetailReview(
