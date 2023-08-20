@@ -100,7 +100,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/et_write_your_email"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:rippleColor="@color/main_3" />
+                        app:rippleColor="@color/main_2" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
