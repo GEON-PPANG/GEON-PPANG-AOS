@@ -87,8 +87,7 @@
     <string name="detail_num">(%d)</string>
 
     <!--    snackbar    -->
-    <string name="snackbar_copy">복사되었습니다 !</string>
-    <string name="snackbar_save">저장되었습니다 !</string>
+    <string name="snackbar_save">저장되었어요 !</string>
 
     <!--  bakery list view  -->
     <string name="bakery_list_sort">정렬</string>
