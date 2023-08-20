@@ -58,5 +58,4 @@ interface RepositoryModule {
     fun bindMyReviewDetailRepository(
         myReviewDetailRepositoryImpl: MyReviewDetailRepositoryImpl
     ): MyReviewDetailRepository
-
 }

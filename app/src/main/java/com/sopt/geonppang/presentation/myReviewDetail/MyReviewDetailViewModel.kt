@@ -31,7 +31,6 @@ class MyReviewDetailViewModel @Inject constructor(
     private val _bakeryInfo = MutableStateFlow<MyReviewBakeryInfo?>(null)
     val bakeryInfo get() = _bakeryInfo.asStateFlow()
 
-
     fun fetchMyReviewDetail(reviewId: Int) {
         viewModelScope.launch {
             myReviewDetailRepository.fetchMyReviewDetail(reviewId)
