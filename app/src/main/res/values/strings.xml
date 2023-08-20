@@ -98,6 +98,7 @@
     <string name="bakery_bread_type_hard">하드빵류</string>
     <string name="bakery_bread_type_dessert">디저트류</string>
     <string name="bakery_bread_type_branch">브런치류</string>
+    <string name="bakery_list_my_filter_apply">내 필터 적용</string>
 
     <!-- sign view -->
     <string name="btn_login_text">로그인</string>
