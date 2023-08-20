@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
@@ -76,6 +77,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                 MAIN -> {
                     moveToMain()
                 }
+
                 else -> {
                     finish()
                 }
@@ -88,6 +90,10 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
             intent.putExtra(BAKERY_INFO, viewModel.getBakeryInfo())
             startActivity(intent)
             finish()
+        }
+
+        binding.fabDetail.setOnClickListener {
+            moveToTop(binding.rvDetail)
         }
     }
 
@@ -148,6 +154,10 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         finish()
     }
 
+    private fun moveToTop(recyclerView: RecyclerView) {
+        recyclerView.smoothScrollToPosition(FIRST_POSITION)
+    }
+
     private fun initChip(chipGroup: ChipGroup, position: Int) {
         viewModel.reviewList.value?.get(position)?.recommendKeywordList?.let { recommendKeywordList ->
             for (recommendKeyword in recommendKeywordList) {
@@ -163,5 +173,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         const val BAKERY_INFO = "bakeryInfo"
         const val ACTIVITY_NAME = "activityName"
         const val MAIN = "mainActivity"
+        const val FIRST_POSITION = 0
     }
 }
