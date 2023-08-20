@@ -21,16 +21,18 @@ data class ResponseDetailBakery(
         val breadType: BreadType,
         val closedDay: String,
         val firstNearStation: String,
-        val homepage: String,
+        val mapUrl: String,
+        val homepageUrl: String,
+        val instagramUrl: String,
         val isBookMarked: Boolean,
         val isHACCP: Boolean,
         val isNonGMO: Boolean,
         val isVegan: Boolean,
         val menuList: List<Menu>,
-        val openingTime: String,
+        val openingHours: String,
         val phoneNumber: String,
         val reviewCount: Int,
-        val secondNearStation: String
+        val secondNearStation: String,
     ) {
         @Serializable
         data class BreadType(
@@ -62,9 +64,11 @@ data class ResponseDetailBakery(
         isBooked = data.isBookMarked,
         bookMarkCount = data.bookMarkCount,
         reviewCount = data.reviewCount,
-        homepage = data.homepage,
+        mapUrl = data.mapUrl,
+        homepageUrl = data.homepageUrl,
+        instagramUrl = data.instagramUrl,
         address = data.address,
-        openingTime = data.openingTime,
+        openingHours = data.openingHours,
         closedDay = data.closedDay,
         phoneNumber = data.phoneNumber,
         menuList = data.menuList.map { menu ->

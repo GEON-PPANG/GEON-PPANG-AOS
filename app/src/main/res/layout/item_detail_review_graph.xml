@@ -83,7 +83,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/tv_item_detail_review_graph_taste"
                 app:layout_constraintStart_toStartOf="@+id/tv_item_detail_review_graph_taste"
                 app:layout_constraintTop_toTopOf="@id/layout_item_detail_review_graph_progressBar"
-                app:progress="@{reviewData.tastePercent}"
+                app:progress="@{reviewData.deliciousPercent}"
                 app:progressDrawable="@drawable/background_detail_progress_bar_progress" />
 
             <TextView
@@ -153,7 +153,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/tv_item_detail_review_graph_zero"
                 app:layout_constraintStart_toStartOf="@+id/tv_item_detail_review_graph_zero"
                 app:layout_constraintTop_toTopOf="@+id/progress_item_detail_review_graph_kind"
-                app:progress="@{reviewData.zeroPercent}"
+                app:progress="@{reviewData.zeroWastePercent}"
                 app:progressDrawable="@drawable/background_detail_progress_bar_progress" />
 
             <TextView

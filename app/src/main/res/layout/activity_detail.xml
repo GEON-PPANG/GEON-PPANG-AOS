@@ -74,6 +74,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_detail_line" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="27dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_arrow_up"
+            app:backgroundTint="@color/gray_200"
+            app:borderWidth="1dp"
+            app:elevation="0dp"
+            app:fabCustomSize="48dp"
+            app:layout_constraintBottom_toBottomOf="@+id/rv_detail"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:rippleColor="@android:color/transparent"
+            app:tint="@null" />
+
+
         <View
             android:id="@+id/view_detail_bottom_app_bar_shadow"
             android:layout_width="0dp"
