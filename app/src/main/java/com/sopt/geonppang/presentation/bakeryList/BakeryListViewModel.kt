@@ -1,6 +1,5 @@
 package com.sopt.geonppang.presentation.bakeryList
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.domain.model.Bakery
@@ -64,20 +63,6 @@ class BakeryListViewModel @Inject constructor(
             )
                 .onSuccess { bakeryList ->
                     _bakeryListState.value = UiState.Success(bakeryList)
-                    Log.d("aaaa", bakerySort.value.sortType)
-                    Log.d("aaaa", personalFilter.value.toString())
-                    Log.d(
-                        "aaaa",
-                        (bakeryCategoryType.value[BakeryCategoryType.HARD] == true).toString()
-                    )
-                    Log.d(
-                        "aaaa",
-                        (bakeryCategoryType.value[BakeryCategoryType.DESSERT] == true).toString()
-                    )
-                    Log.d(
-                        "aaaa",
-                        (bakeryCategoryType.value[BakeryCategoryType.BRUNCH] == true).toString()
-                    )
                 }
                 .onFailure { throwable ->
                     _bakeryListState.value = UiState.Error(throwable.message)
