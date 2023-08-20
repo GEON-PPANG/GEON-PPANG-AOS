@@ -48,7 +48,7 @@ class SignUpNicknameActivity :
     }
 
     private fun moveToPassword() {
-        startActivity(Intent(this, SignUpPasswordActivity::class.java))
+        startActivity(Intent(this, SignUpActivity::class.java))
         finish()
     }
 

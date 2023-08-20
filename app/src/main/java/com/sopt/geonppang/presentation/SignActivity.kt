@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySignBinding
-import com.sopt.geonppang.presentation.signup.SignUpEmailActivity
+import com.sopt.geonppang.presentation.signup.SignUpActivity
 import com.sopt.geonppang.util.binding.BindingActivity
 
 class SignActivity :
@@ -21,6 +21,6 @@ class SignActivity :
     }
 
     private fun moveToSignUp() {
-        startActivity(Intent(this, SignUpEmailActivity::class.java))
+        startActivity(Intent(this, SignUpActivity::class.java))
     }
 }
