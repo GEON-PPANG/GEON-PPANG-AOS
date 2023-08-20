@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ReviewWritingActivity :
     BindingActivity<ActivityReviewWritingBinding>(R.layout.activity_review_writing) {
-    private val viewModel: ReviewViewModel by viewModels()
+    private val viewModel: ReviewWritingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -13,7 +13,7 @@ import javax.inject.Inject
 import kotlin.collections.set
 
 @HiltViewModel
-class ReviewViewModel @Inject constructor(private val reviewWritingRepository: ReviewWritingRepository) :
+class ReviewWritingViewModel @Inject constructor(private val reviewWritingRepository: ReviewWritingRepository) :
     ViewModel() {
 
     val reviewText = MutableLiveData("")
