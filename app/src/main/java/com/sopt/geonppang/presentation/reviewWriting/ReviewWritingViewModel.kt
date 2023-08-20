@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.review
+package com.sopt.geonppang.presentation.reviewWriting
 
 import androidx.lifecycle.*
 import com.sopt.geonppang.data.model.request.RequestReviewWriting

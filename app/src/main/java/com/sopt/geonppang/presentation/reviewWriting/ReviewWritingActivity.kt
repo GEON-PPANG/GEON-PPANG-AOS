@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.review
+package com.sopt.geonppang.presentation.reviewWriting
 
 import android.content.Intent
 import android.os.Bundle
