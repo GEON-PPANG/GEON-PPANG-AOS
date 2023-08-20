@@ -9,11 +9,13 @@ class BakeryRepositoryImpl @Inject constructor(
     private val bakeryDataSource: BakeryDataSource,
 ) : BakeryRepository {
     override suspend fun fetchBakeryList(
-        sortType: String,
+        sortOption: String,
+        personalFilter: Boolean,
         isHard: Boolean,
         isDessert: Boolean,
         isBrunch: Boolean,
     ): Result<List<Bakery>> = runCatching {
-        bakeryDataSource.fetchBakeryList(sortType, isHard, isDessert, isBrunch).toBakery()
+        bakeryDataSource.fetchBakeryList(sortOption, personalFilter, isHard, isDessert, isBrunch)
+            .toBakery()
     }
 }

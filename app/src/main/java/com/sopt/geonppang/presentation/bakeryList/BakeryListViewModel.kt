@@ -1,5 +1,6 @@
 package com.sopt.geonppang.presentation.bakeryList
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.domain.model.Bakery
@@ -19,6 +20,8 @@ class BakeryListViewModel @Inject constructor(
 ) : ViewModel() {
     private var _bakerySort = MutableStateFlow(BakerySortType.DEFAULT)
     val bakerySort get() = _bakerySort.asStateFlow()
+    private val _personalFilter = MutableStateFlow(true)
+    val personalFilter get() = _personalFilter.asStateFlow()
 
     private var _bakeryListState = MutableStateFlow<UiState<List<Bakery>>>(UiState.Loading)
     val bakeryListState get() = _bakeryListState.asStateFlow()
@@ -46,16 +49,35 @@ class BakeryListViewModel @Inject constructor(
         _bakerySort.value = bakerySortType
     }
 
+    fun setPersonalFilter() {
+        _personalFilter.value = !_personalFilter.value
+    }
+
     fun fetchBakeryList() {
         viewModelScope.launch {
             bakeryRepository.fetchBakeryList(
                 bakerySort.value.sortType,
+                personalFilter.value,
                 bakeryCategoryType.value[BakeryCategoryType.HARD] == true,
                 bakeryCategoryType.value[BakeryCategoryType.DESSERT] == true,
                 bakeryCategoryType.value.get(BakeryCategoryType.BRUNCH) == true
             )
                 .onSuccess { bakeryList ->
                     _bakeryListState.value = UiState.Success(bakeryList)
+                    Log.d("aaaa", bakerySort.value.sortType)
+                    Log.d("aaaa", personalFilter.value.toString())
+                    Log.d(
+                        "aaaa",
+                        (bakeryCategoryType.value[BakeryCategoryType.HARD] == true).toString()
+                    )
+                    Log.d(
+                        "aaaa",
+                        (bakeryCategoryType.value[BakeryCategoryType.DESSERT] == true).toString()
+                    )
+                    Log.d(
+                        "aaaa",
+                        (bakeryCategoryType.value[BakeryCategoryType.BRUNCH] == true).toString()
+                    )
                 }
                 .onFailure { throwable ->
                     _bakeryListState.value = UiState.Error(throwable.message)
