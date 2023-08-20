@@ -1,7 +1,7 @@
 package com.sopt.geonppang.domain.repository
 
-import com.sopt.geonppang.domain.model.Bakery
+import com.sopt.geonppang.domain.model.Search
 
 interface SearchRepository {
-    suspend fun searchBakery(bakeryName: String): Result<List<Bakery>>
+    suspend fun searchBakery(bakeryTerm: String): Result<Search>
 }

@@ -2,7 +2,7 @@ package com.sopt.geonppang.presentation.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.geonppang.domain.model.Bakery
+import com.sopt.geonppang.domain.model.Search
 import com.sopt.geonppang.domain.repository.SearchRepository
 import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,18 +20,18 @@ class SearchViewModel @Inject constructor(
     private var _searchCount = MutableStateFlow<Int?>(null)
     val searchCount get() = _searchCount.asStateFlow()
 
-    private var _searchBakeryListState = MutableStateFlow<UiState<List<Bakery>>>(UiState.Loading)
-    val searchBakeryListState get() = _searchBakeryListState.asStateFlow()
+    private var _searchState = MutableStateFlow<UiState<Search>>(UiState.Loading)
+    val searchState get() = _searchState.asStateFlow()
 
     fun searchBakeryList() {
         viewModelScope.launch {
             searchRepository.searchBakery(inputSearch.value)
-                .onSuccess { searchBakeryList ->
-                    _searchCount.value = searchBakeryList.size
-                    _searchBakeryListState.value = UiState.Success(searchBakeryList)
+                .onSuccess { searchBakery ->
+                    _searchCount.value = searchBakery.bakeryList.size
+                    _searchState.value = UiState.Success(searchBakery)
                 }
                 .onFailure { throwable ->
-                    _searchBakeryListState.value = UiState.Error(throwable.message)
+                    _searchState.value = UiState.Error(throwable.message)
                 }
         }
     }
