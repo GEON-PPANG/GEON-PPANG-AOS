@@ -7,6 +7,6 @@ import retrofit2.http.Query
 interface SearchService {
     @GET("search/bakeries")
     suspend fun searchBakery(
-        @Query("bakeryName") bakeryName: String,
+        @Query("searchTerm") bakeryName: String,
     ): ResponseSearch
 }

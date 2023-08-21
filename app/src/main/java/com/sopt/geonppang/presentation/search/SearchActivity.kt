@@ -24,6 +24,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
     private val viewModel: SearchViewModel by viewModels()
 
     private lateinit var bakeryAdapter: BakeryAdapter
+    private lateinit var searchCountAdapter: SearchCountAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +37,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
     }
 
     private fun initLayout() {
-        val searchCountAdapter = SearchCountAdapter()
+        searchCountAdapter = SearchCountAdapter()
         bakeryAdapter = BakeryAdapter(::moveToDetail)
         binding.rvSearchBakeryList.adapter = ConcatAdapter(searchCountAdapter, bakeryAdapter)
     }
@@ -62,11 +63,12 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
     }
 
     private fun collectData() {
-        viewModel.searchBakeryListState.flowWithLifecycle(lifecycle).onEach {
+        viewModel.searchState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
                     viewModel.searchBakeryList()
-                    bakeryAdapter.submitList(it.data)
+                    searchCountAdapter.setSearchData(it.data)
+                    bakeryAdapter.submitList(it.data.bakeryList)
                 }
 
                 else -> {}

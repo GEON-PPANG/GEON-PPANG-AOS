@@ -182,4 +182,11 @@
         <item name="android:textAppearance">@style/TextAppearance.CaptionM1</item>
         <item name="android:textColor">@color/point_1</item>
     </style>
+
+    <style name="Style.CheckBox" parent="">
+        <item name="android:background">@drawable/selector_my_filter_checked</item>
+        <item name="android:button">@null</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+    </style>
 </resources>
