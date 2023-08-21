@@ -29,7 +29,7 @@ class SignUpActivity :
         binding.layoutSignupPassword.setOnClickListener {
             hideKeyboard(it)
         }
-        binding.svSignupContainer.setOnClickListener {
+        binding.layoutSignupContainer.setOnClickListener {
             hideKeyboard(it)
         }
         binding.btnNext.setOnClickListener {
