@@ -6,9 +6,9 @@ import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
-import com.sopt.geonppang.databinding.ActivityMyStoreListBinding
-import com.sopt.geonppang.presentation.detail.DetailActivity
+import com.sopt.geonppang.databinding.ActivityMyBookmarksBinding
 import com.sopt.geonppang.presentation.common.BakeryAdapter
+import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,8 +17,8 @@ import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
 
 @AndroidEntryPoint
-class MyStoreListActivity :
-    BindingActivity<ActivityMyStoreListBinding>(R.layout.activity_my_store_list) {
+class MyBookMarksActivity :
+    BindingActivity<ActivityMyBookmarksBinding>(R.layout.activity_my_bookmarks) {
     private val myPageViewModel: MyPageViewModel by viewModels()
     lateinit var bakeryAdapter: BakeryAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
