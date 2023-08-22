@@ -45,11 +45,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
-            android:src="@drawable/ic_smile"
+            android:src="@drawable/ic_sad"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_bottom_sheet_top"
-            tools:src="@drawable/ic_smile" />
+            tools:src="@drawable/ic_sad" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_default"
@@ -61,24 +61,25 @@
             app:layout_constraintTop_toBottomOf="@id/img_smile">
 
             <TextView
-                android:id="@+id/tv_email_status"
+                android:id="@+id/tv_nickname_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/available_email"
+                android:text="@string/unavailable_nickname"
                 android:textAppearance="@style/TextAppearance.Title2"
                 android:textColor="@color/gray_500"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/available_email" />
+                tools:text="@string/unavailable_nickname" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_check"
                 style="@style/Widget.FullButton.Basic"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="48dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="24dp"
                 android:backgroundTint="@color/gray_700"
                 android:paddingVertical="18dp"
                 android:text="확인"
@@ -87,7 +88,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_email_status" />
+                app:layout_constraintTop_toBottomOf="@id/tv_nickname_status" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
