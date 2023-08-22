@@ -6,7 +6,7 @@
     <string name="tv_email">이메일</string>
     <string name="email_hint">이메일을 입력해주세요</string>
     <string name="email_error_msg">올바른 이메일을 입력해주세요</string>
-    <string name="double_check">중복확인</string>
+    <string name="txt_double_check_btn">중복확인</string>
     <string name="txt_next_btn">다음</string>
     <string name="tv_password">비밀번호</string>
     <string name="password_hint">영문, 숫자 포함 8자리 이상</string>
