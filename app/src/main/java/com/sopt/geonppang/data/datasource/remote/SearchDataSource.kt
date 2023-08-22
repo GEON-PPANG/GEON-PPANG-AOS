@@ -7,6 +7,6 @@ import javax.inject.Inject
 class SearchDataSource @Inject constructor(
     private val searchService: SearchService,
 ) {
-    suspend fun searchBakery(bakeryName: String): ResponseSearch =
-        searchService.searchBakery(bakeryName)
+    suspend fun searchBakery(bakeryTerm: String): ResponseSearch =
+        searchService.searchBakery(bakeryTerm)
 }

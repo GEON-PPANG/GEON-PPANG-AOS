@@ -223,7 +223,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_item_detail_bakery_info_link"
-            visibility="@{bakeryInfo.homepage != null}"
+            visibility="@{bakeryInfo.homepageUrl != null}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingBottom="16dp"
@@ -334,7 +334,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{bakeryInfo.openingTime}"
+            android:text="@{bakeryInfo.openingHours}"
             android:textAppearance="@style/TextAppearance.Subhead"
             android:textColor="@color/gray_400"
             app:layout_constraintEnd_toStartOf="@+id/gl_end"

@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.sopt.geonppang.presentation.search.SearchViewModel" />
+            name="search"
+            type="com.sopt.geonppang.domain.model.Search" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,10 +30,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tv_search_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="@{@string/search_count(viewModel.searchCount)}"
+            android:text="@{@string/search_count(search.resultCount)}"
             android:textAppearance="@style/TextAppearance.Headline"
             android:textColor="@color/point_1"
             app:layout_constraintBottom_toBottomOf="@+id/tv_search_recent_search"

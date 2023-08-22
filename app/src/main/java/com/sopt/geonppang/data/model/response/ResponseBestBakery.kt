@@ -16,7 +16,6 @@ data class ResponseBestBakery(
         val bakeryPicture: String,
         val bookMarkCount: Int,
         val firstNearStation: String,
-        val isBookMarked: Boolean,
         val isHACCP: Boolean,
         val isNonGMO: Boolean,
         val isVegan: Boolean,

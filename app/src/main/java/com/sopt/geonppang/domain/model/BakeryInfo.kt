@@ -13,9 +13,11 @@ data class BakeryInfo(
     val isBooked: Boolean,
     val bookMarkCount: Int,
     val reviewCount: Int,
-    val homepage: String?,
+    val mapUrl: String,
+    val homepageUrl: String?,
+    val instagramUrl: String?,
     val address: String,
-    val openingTime: String,
+    val openingHours: String,
     val closedDay: String,
     val phoneNumber: String,
     val menuList: List<Menu>

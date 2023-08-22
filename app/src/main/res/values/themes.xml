@@ -159,6 +159,7 @@
         <item name="android:textColorHint">@color/gray_300</item>
         <item name="boxStrokeColor">@null</item>
         <item name="boxStrokeWidth">0dp</item>
+        <item name="android:textCursorDrawable">@color/main_3</item>
         <item name="boxCornerRadiusTopStart">@dimen/spacing10</item>
         <item name="boxCornerRadiusTopEnd">@dimen/spacing10</item>
         <item name="boxCornerRadiusBottomStart">@dimen/spacing10</item>
@@ -180,5 +181,12 @@
         <item name="textEndPadding">5dp</item>
         <item name="android:textAppearance">@style/TextAppearance.CaptionM1</item>
         <item name="android:textColor">@color/point_1</item>
+    </style>
+
+    <style name="Style.CheckBox" parent="">
+        <item name="android:background">@drawable/selector_my_filter_checked</item>
+        <item name="android:button">@null</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
     </style>
 </resources>

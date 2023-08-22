@@ -27,7 +27,7 @@ class BakeryListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewModle = viewModel
+        binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
         initLayout()
@@ -41,7 +41,7 @@ class BakeryListFragment :
     }
 
     private fun addListeners() {
-        binding.chipBreadListFilter.setOnClickListener {
+        binding.layoutBakeryListFilter.setOnClickListener {
             showBakeryListSortDialog()
         }
 

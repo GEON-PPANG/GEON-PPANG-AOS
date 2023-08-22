@@ -4,10 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.geonppang.databinding.LayoutSearchCountBinding
+import com.sopt.geonppang.domain.model.Search
 
 class SearchCountAdapter : RecyclerView.Adapter<SearchCountAdapter.SearchCountViewHolder>() {
+    private var searchData: Search? = null
+
     class SearchCountViewHolder(
-        binding: LayoutSearchCountBinding
+        val binding: LayoutSearchCountBinding
     ) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchCountViewHolder {
@@ -19,6 +22,11 @@ class SearchCountAdapter : RecyclerView.Adapter<SearchCountAdapter.SearchCountVi
     override fun getItemCount(): Int = 1
 
     override fun onBindViewHolder(holder: SearchCountViewHolder, position: Int) {
-        return
+        holder.binding.search = searchData
+    }
+
+    fun setSearchData(search: Search) {
+        this.searchData = search
+        notifyDataSetChanged()
     }
 }
