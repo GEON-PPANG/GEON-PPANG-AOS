@@ -28,8 +28,8 @@
     <string name="nickname_error">8자 이내, 특수문자 금지</string>
     <string name="available_email">사용 가능한 이메일입니다</string>
     <string name="unavailable_email">이미 존재하는 이메일입니다</string>
-    <string name="available_nickname">사용 가능한 닉네임이에요!</string>
-    <string name="unavailable_nickname">이미 존재하는 닉네임이에요</string>
+    <string name="available_nickname">사용 가능한 닉네임입니다</string>
+    <string name="unavailable_nickname">이미 존재하는 닉네임입니다</string>
 
     <!--  home  -->
     <string name="home_title">%s님\n건빵에 오신걸 환영해요!</string>
