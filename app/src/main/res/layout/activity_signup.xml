@@ -22,7 +22,11 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/sv_signup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -243,27 +247,31 @@
                     android:textColor="@color/error"
                     app:layout_constraintEnd_toEndOf="@id/linear_password_double_check"
                     app:layout_constraintTop_toBottomOf="@+id/linear_password_double_check" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_next"
+                    style="@style/Widget.FullButton.Basic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="202dp"
+                    android:layout_marginBottom="24dp"
+                    android:backgroundTint="@{viewModel.completePassword == true ? @color/main_2 : @color/gray_200}"
+                    android:enabled="@{viewModel.completePassword}"
+                    android:paddingVertical="18dp"
+                    android:text="@string/txt_next_btn"
+                    android:textAppearance="@style/TextAppearance.BodyM1"
+                    android:textColor="@{viewModel.completePassword == true ? @color/white : @color/gray_400}"
+                    app:layout_constraintEnd_toEndOf="@id/linear_password_double_check"
+                    app:layout_constraintStart_toStartOf="@id/linear_password_double_check"
+                    app:layout_constraintTop_toBottomOf="@id/linear_password_double_check"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:rippleColor="@color/main_3" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.core.widget.NestedScrollView>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_next"
-            style="@style/Widget.FullButton.Basic"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginBottom="24dp"
-            android:backgroundTint="@{viewModel.completePassword == true ? @color/main_2 : @color/gray_200}"
-            android:enabled="@{viewModel.completePassword}"
-            android:paddingVertical="18dp"
-            android:text="@string/txt_next_btn"
-            android:textAppearance="@style/TextAppearance.BodyM1"
-            android:textColor="@{viewModel.completePassword == true ? @color/white : @color/gray_400}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:rippleColor="@color/main_3" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
