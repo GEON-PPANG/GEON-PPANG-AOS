@@ -71,16 +71,31 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:shapeAppearanceOverlay="@style/Radius5" />
 
+                    <TextView
+                        android:id="@+id/tv_bakery"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing14"
+                        android:layout_marginEnd="9dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textAppearance="@style/TextAppearance.Title2"
+                        android:textColor="@color/gray_700"
+                        app:layout_constraintStart_toEndOf="@+id/iv_bakery"
+                        app:layout_constraintTop_toTopOf="@+id/iv_bakery"
+                        tools:text="건대 초코빵" /><!--android:text="@{review.bakery.bakeryName}"-->
+
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/cg_bakery_category"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
+                        android:layout_marginStart="12dp"
                         app:chipSpacingHorizontal="4dp"
+                        android:layout_marginTop="8dp"
                         app:chipSpacingVertical="5dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/iv_bakery"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/gl_end"
+                        app:layout_constraintStart_toEndOf="@id/iv_bakery"
+                        app:layout_constraintTop_toBottomOf="@id/tv_bakery"
                         app:layout_constraintWidth="0dp">
 
                         <com.google.android.material.chip.Chip
@@ -117,31 +132,27 @@
 
                     </com.google.android.material.chip.ChipGroup>
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_station_1"
-                        style="@style/Style.Material3.Chip.Station.Category"
+                    <ImageView
+                        android:id="@+id/iv_bakery_map"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginTop="12dp"
-                        android:backgroundTint="@color/main_3"
-                        android:text="@{viewModel.bakeryInfo.firstNearestStation}"
-                        app:layout_constraintStart_toEndOf="@id/iv_bakery"
-                        app:layout_constraintTop_toBottomOf="@id/cg_bakery_category"
-                        tools:text="건대역" />
+                        android:layout_marginTop="@dimen/spacing10"
+                        android:src="@drawable/ic_map"
+                        app:layout_constraintStart_toStartOf="@id/tv_bakery"
+                        app:layout_constraintTop_toBottomOf="@id/cg_bakery_category" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_station_2"
-                        style="@style/Style.Material3.Chip.Station.Category"
+                    <TextView
+                        android:id="@+id/tv_nearest_station"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
-                        android:backgroundTint="@color/main_3"
-                        android:text="@{viewModel.bakeryInfo.secondNearestStation}"
-                        app:layout_constraintStart_toEndOf="@id/chip_station_1"
-                        app:layout_constraintTop_toTopOf="@id/chip_station_1"
-                        tools:text="건대역" />
-
+                        android:text="@{@string/nearest_station(review.bakery.firstNearStation, review.bakery.secondNearStation)}"
+                        android:textAppearance="@style/TextAppearance.CaptionM1"
+                        android:textColor="@color/gray_400"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_bakery_map"
+                        app:layout_constraintStart_toEndOf="@+id/iv_bakery_map"
+                        app:layout_constraintTop_toTopOf="@+id/iv_bakery_map"
+                        tools:text="건대역∙강남역" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -310,7 +321,7 @@
                     android:textColor="@{viewModel.reviewText.empty | viewModel.reviewText.length >=10 ? @color/gray_500 : @color/error}"
                     app:layout_constraintBottom_toBottomOf="@+id/et_write_your_review"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
-                    tools:text="0/70 (최소 10자)" />
+                    tools:text="0/120자" />
 
                 <TextView
                     android:id="@+id/tv_review_caption"
