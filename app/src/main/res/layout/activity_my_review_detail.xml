@@ -174,7 +174,7 @@
                     android:id="@+id/tv_how_was_the_store"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="36dp"
+                    android:layout_marginTop="24dp"
                     android:text="@string/how_was_the_store"
                     android:textAppearance="@style/TextAppearance.BodyB1"
                     android:textColor="@color/gray_300"
@@ -295,28 +295,16 @@
                     android:layout_height="196dp"
                     android:layout_marginHorizontal="@dimen/spacing24"
                     android:layout_marginTop="32dp"
-                    android:background="@drawable/background_review_box"
+                    android:layout_marginBottom="50dp"
+                    android:background="@{viewModel.myReviewText.empty ? @drawable/background_my_review_empty_box : @drawable/background_my_review_box}"
                     android:paddingHorizontal="@dimen/spacing24"
                     android:paddingVertical="20dp"
-                    android:text="@{viewModel.myReviewText}"
+                    android:text="@{viewModel.myReviewText.empty ? @string/my_review_detail_empty : viewModel.myReviewText}"
                     android:textAppearance="@style/TextAppearance.Subhead"
-                    android:textColor="@color/gray_700"
+                    android:textColor="@{viewModel.myReviewText.empty ? @color/gray_300 : @color/gray_700}"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cg_review_recommend_chip_select"
                     tools:text="하하" />
-
-                <TextView
-                    android:id="@+id/tv_review_text_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="@dimen/spacing12"
-                    android:text="@{@string/review_text_count(viewModel.myReviewText.length())}"
-                    android:textAppearance="@style/TextAppearance.CaptionM1"
-                    android:textColor="@color/gray_500"
-                    app:layout_constraintBottom_toBottomOf="@+id/et_write_your_review"
-                    app:layout_constraintEnd_toEndOf="@id/gl_end"
-                    tools:text="0/70자" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

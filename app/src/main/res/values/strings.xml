@@ -157,4 +157,6 @@
     <string name="review_writing_confirm">확인</string>
     <string name="review_writing_stop">그만하기</string>
     <string name="review_writing_continue">계속쓰기</string>
+
+    <string name="my_review_detail_empty">작성한 리뷰가 없어요</string>
 </resources>
