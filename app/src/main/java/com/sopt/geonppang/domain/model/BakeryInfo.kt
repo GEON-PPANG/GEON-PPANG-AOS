@@ -9,7 +9,7 @@ data class BakeryInfo(
     val isNonGMO: Boolean,
     val breadType: BreadType,
     val firstNearStation: String,
-    val secondNearStation: String?,
+    val secondNearStation: String,
     val isBooked: Boolean,
     val bookMarkCount: Int,
     val reviewCount: Int,
