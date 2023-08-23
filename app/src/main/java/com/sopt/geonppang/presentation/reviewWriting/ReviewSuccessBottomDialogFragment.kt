@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.review
+package com.sopt.geonppang.presentation.reviewWriting
 
 import android.os.Bundle
 import android.view.View
@@ -11,7 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ReviewSuccessBottomDialogFragment :
     BindingBottomSheetDialogFragment<DialogBottomReviewWritingSuccessBinding>(R.layout.dialog_bottom_review_writing_success) {
-    private val viewModel: ReviewViewModel by activityViewModels()
+    private val viewModel: ReviewWritingViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
