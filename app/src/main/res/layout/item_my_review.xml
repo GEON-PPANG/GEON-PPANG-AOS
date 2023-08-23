@@ -117,7 +117,7 @@
             app:layout_constraintWidth="0dp">
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point"
+                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M2"
                 visibility="@{review.bakery.breadType.isGlutenFree}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                 android:text="글루텐프리" />
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point"
+                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M2"
                 visibility="@{review.bakery.breadType.isVegan}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
                 android:text="비건빵" />
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point"
+                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M2"
                 visibility="@{review.bakery.breadType.isNutFree}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
                 android:text="넛프리" />
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point"
+                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M2"
                 visibility="@{review.bakery.breadType.isSugarFree}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -156,7 +156,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing10"
-            android:src="@drawable/ic_map"
+            android:src="@drawable/ic_station"
             app:layout_constraintStart_toStartOf="@id/tv_bakery"
             app:layout_constraintTop_toBottomOf="@id/cg_bakery_category" />
 
