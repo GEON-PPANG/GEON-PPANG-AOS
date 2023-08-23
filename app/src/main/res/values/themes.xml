@@ -113,14 +113,14 @@
         <item name="android:paddingVertical">4dp</item>
         <item name="textStartPadding">8dp</item>
         <item name="textEndPadding">8dp</item>
-        <item name="android:textAppearance">@style/TextAppearance.BodyM1</item>
+        <item name="android:textAppearance">@style/TextAppearance.CaptionM1</item>
     </style>
 
     <style name="Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M2" parent="Widget.Material3.Chip.Style.Bread.Filter.Category.Point">
         <item name="android:paddingVertical">2dp</item>
         <item name="textStartPadding">6dp</item>
         <item name="textEndPadding">6dp</item>
-        <item name="android:textAppearance">@style/TextAppearance.BodyM2</item>
+        <item name="android:textAppearance">@style/TextAppearance.CaptionM2</item>
     </style>
 
 
