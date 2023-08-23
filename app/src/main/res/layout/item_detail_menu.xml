@@ -33,7 +33,7 @@
             android:id="@+id/tv_item_detail_menu_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
+            android:paddingRight="32dp"
             android:text="@{menu.menuName}"
             android:textAppearance="@style/TextAppearance.Subhead"
             android:textColor="@color/gray_500"
