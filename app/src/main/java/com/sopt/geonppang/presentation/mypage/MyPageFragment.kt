@@ -57,7 +57,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun moveToStoreBakeryList() {
-        startActivity(Intent(requireContext(), MyStoreListActivity::class.java))
+        startActivity(Intent(requireContext(), MyBookMarksActivity::class.java))
     }
 
     private fun moveToMyReview() {

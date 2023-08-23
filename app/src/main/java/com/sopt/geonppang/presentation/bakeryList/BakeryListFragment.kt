@@ -54,11 +54,14 @@ class BakeryListFragment :
         viewModel.bakeryListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    bakeryAdapter.setGoalList(it.data.toMutableList())
+                    bakeryAdapter.setBakeryList(it.data.toMutableList())
                 }
 
                 else -> {}
             }
+        }.launchIn(lifecycleScope)
+        viewModel.personalFilter.flowWithLifecycle(lifecycle).onEach {
+            viewModel.fetchBakeryList()
         }.launchIn(lifecycleScope)
         viewModel.bakeryCategoryType.flowWithLifecycle(lifecycle).onEach {
             viewModel.fetchBakeryList()

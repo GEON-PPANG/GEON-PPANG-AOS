@@ -40,7 +40,7 @@ class BakeryListAdapter(
         holder.onBind(bakeryList[position], moveToDetail)
     }
 
-    fun setGoalList(bakeries: MutableList<Bakery>) {
+    fun setBakeryList(bakeries: MutableList<Bakery>) {
         bakeryList.clear()
         bakeryList.addAll(bakeries)
         notifyDataSetChanged()

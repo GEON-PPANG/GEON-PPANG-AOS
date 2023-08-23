@@ -84,7 +84,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
             }
         }
 
-        binding.layoutDetailBottomAppBarCreateReview.setOnClickListener {
+        binding.btnCrateReview.setOnClickListener {
             val intent = Intent(this, ReviewWritingActivity::class.java)
             intent.putExtra(BAKERY_ID, bakeryId)
             intent.putExtra(BAKERY_INFO, viewModel.getBakeryInfo())
