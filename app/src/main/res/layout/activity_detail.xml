@@ -112,52 +112,25 @@
             app:layout_constraintStart_toStartOf="@+id/gl_start"
             tools:src="@drawable/ic_bookmark_unselected" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_detail_bottom_app_bar_create_review"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_crate_review"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="26dp"
-            android:layout_marginBottom="27dp"
-            android:background="@drawable/background_detail_bottom_app_bar_review_create"
-            android:paddingVertical="13dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="26dp"
+            android:height="46dp"
+            android:background="@drawable/background_detail_review_button"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minHeight="0dp"
+            android:paddingVertical="14dp"
+            android:text="@string/detail_create_review"
+            android:textAppearance="@style/TextAppearance.BodyB2"
+            app:backgroundTint="@color/main_2"
+            app:cornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_detail_bottom_app_bar_bookmark">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_detail_bottom_app_bar_create_review_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/iv_detail_bottom_app_bar_create_review"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_white_logo"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_detail_bottom_app_bar_create_bookmark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:text="@string/detail_create_review"
-                    android:textAppearance="@style/TextAppearance.BodyB2"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/iv_detail_bottom_app_bar_create_review"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:layout_constraintStart_toEndOf="@+id/iv_detail_bottom_app_bar_bookmark" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
