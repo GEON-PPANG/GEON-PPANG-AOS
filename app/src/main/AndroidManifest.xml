@@ -75,8 +75,8 @@
         <activity
             android:name=".presentation.signup.SignUpActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.signup.SignUpNicknameActivity"
