@@ -212,7 +212,7 @@
 
             <ImageView
                 android:id="@+id/iv_item_detail_bakery_info_notice"
-                visibility="@{bakeryInfo.homepageUrl != null}"
+                visibility="@{!bakeryInfo.homepageUrl.isEmpty()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -222,7 +222,7 @@
 
             <TextView
                 android:id="@+id/tv_item_detail_bakery_info_notice"
-                visibility="@{bakeryInfo.homepageUrl != null}"
+                visibility="@{!bakeryInfo.homepageUrl.isEmpty()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -235,7 +235,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_item_detail_bakery_info_link"
-            visibility="@{bakeryInfo.homepageUrl != null || bakeryInfo.instagramUrl != null}"
+            visibility="@{!bakeryInfo.homepageUrl.isEmpty() || !bakeryInfo.instagramUrl.isEmpty()}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingBottom="16dp"
@@ -253,7 +253,7 @@
 
             <TextView
                 android:id="@+id/tv_item_detail_bakery_info_homepage"
-                visibility="@{bakeryInfo.homepageUrl != null}"
+                visibility="@{!bakeryInfo.homepageUrl.isEmpty()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -266,7 +266,7 @@
 
             <TextView
                 android:id="@+id/tv_item_detail_bakery_info_instagram"
-                visibility="@{bakeryInfo.instagramUrl != null}"
+                visibility="@{!bakeryInfo.instagramUrl.isEmpty()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
