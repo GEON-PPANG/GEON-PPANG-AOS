@@ -22,10 +22,10 @@ class MyReviewDetailViewModel @Inject constructor(
     val myReviewText get() = _myReviewText.asStateFlow()
     val isRecommendKeywordSelected = MutableStateFlow(
         mapOf(
-            1 to false,
-            2 to false,
-            3 to false,
-            4 to false
+            TASTY to false,
+            KIND to false,
+            SPECIAL_MENU to false,
+            ZERO_WASTE to false
         )
     )
     private val _bakeryInfo = MutableStateFlow<MyReviewBakeryInfo?>(null)
@@ -55,5 +55,12 @@ class MyReviewDetailViewModel @Inject constructor(
 
     fun setUserInfo(bakeryInfo: MyReviewBakeryInfo) {
         _bakeryInfo.value = bakeryInfo
+    }
+
+    companion object {
+        const val TASTY = 1
+        const val KIND = 2
+        const val SPECIAL_MENU = 3
+        const val ZERO_WASTE = 4
     }
 }
