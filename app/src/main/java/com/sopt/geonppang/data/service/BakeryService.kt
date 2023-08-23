@@ -7,7 +7,8 @@ import retrofit2.http.Query
 interface BakeryService {
     @GET("bakeries")
     suspend fun fetchBakeryList(
-        @Query("sort") sort: String,
+        @Query("sortingOption") sort: String,
+        @Query("personalFilter") personal: Boolean,
         @Query("isHard") isHard: Boolean,
         @Query("isDessert") isDessert: Boolean,
         @Query("isBrunch") isBrunch: Boolean,

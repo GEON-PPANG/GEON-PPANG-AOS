@@ -8,10 +8,11 @@ class BakeryDataSource @Inject constructor(
     private val bakeryService: BakeryService,
 ) {
     suspend fun fetchBakeryList(
-        sortType: String,
+        sortOption: String,
+        personalFilter: Boolean,
         isHard: Boolean,
         isDessert: Boolean,
         isBrunch: Boolean,
     ): ResponseBakeryList =
-        bakeryService.fetchBakeryList(sortType, isHard, isDessert, isBrunch)
+        bakeryService.fetchBakeryList(sortOption, personalFilter, isHard, isDessert, isBrunch)
 }

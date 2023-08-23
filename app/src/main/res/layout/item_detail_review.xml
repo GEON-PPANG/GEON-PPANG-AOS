@@ -36,7 +36,7 @@
             android:id="@+id/iv_item_detail_review_profile_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_detail_logo_profile"
+            android:src="@drawable/ic_smile"
             app:layout_constraintStart_toStartOf="@+id/gl_start"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -81,7 +81,7 @@
             android:id="@+id/chip_group_item_detail_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             app:chipSpacing="5dp"
             app:chipSpacingHorizontal="5dp"
             app:layout_constraintStart_toStartOf="@+id/gl_start"
@@ -93,7 +93,7 @@
             android:id="@+id/tv_item_detail_review_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="12dp"
             android:text="@{review.reviewText}"
             android:textAppearance="@style/TextAppearance.Subhead"
             android:textColor="@color/gray_400"
