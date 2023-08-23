@@ -135,8 +135,8 @@
 
     <!--review-->
     <string name="how_was_the_store">건빵집은 어떠셨나요?</string>
-    <string name="chip_like">좋아요</string>
-    <string name="chip_soso">별로예요</string>
+    <string name="chip_like">좋았어요</string>
+    <string name="chip_soso">아쉬웠어요</string>
     <string name="what_do_you_recommend">어떤 것을 추천하나요?</string>
     <string name="chip_tasty">맛있어요</string>
     <string name="chip_kind">친절해요</string>
@@ -151,9 +151,9 @@
     <string name="review_key_word_type_special_menu">특별한 메뉴</string>
     <string name="review_key_word_type_zero_waste">제로 웨이스트</string>
     <string name="review_writing_success_title">작성이 완료되었어요!</string>
-    <string name="review_writing_cancel_title">정말 리뷰 작성을 그만하시겠어요?</string>
-    <string name="review_writing_cancel_description">고객님의 리뷰가 다른 고객님들에게\n도움이 될 수 있어요</string>
+    <string name="review_writing_cancel_title">정말 리뷰 작성을 그만 하실건가요?</string>
+    <string name="review_writing_cancel_description">여러분이 작성해주신 리뷰가\n다른 유저의 건빵생활을 도울 수 있어요</string>
     <string name="review_writing_confirm">확인</string>
-    <string name="review_writing_stop">그만하기</string>
-    <string name="review_writing_continue">계속쓰기</string>
+    <string name="review_writing_stop">네, 그만 쓸래요</string>
+    <string name="review_writing_continue">아니요, 계속 쓸래요</string>
 </resources>
