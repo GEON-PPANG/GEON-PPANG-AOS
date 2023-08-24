@@ -85,7 +85,7 @@
                             android:hint="@string/email_hint"
                             android:inputType="textEmailAddress"
                             android:paddingVertical="5dp"
-                            android:paddingEnd="95dp"
+                            android:paddingEnd="120dp"
                             android:text="@={viewModel.email}"
                             android:textAppearance="@style/TextAppearance.Headline"
                             android:textColorHint="@color/gray_300"
