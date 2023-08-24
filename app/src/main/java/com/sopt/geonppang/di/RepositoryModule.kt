@@ -58,4 +58,10 @@ interface RepositoryModule {
     fun bindMyReviewDetailRepository(
         myReviewDetailRepositoryImpl: MyReviewDetailRepositoryImpl
     ): MyReviewDetailRepository
+
+    @Binds
+    @Singleton
+    fun bindGetUserFilterRepository(
+        getUserFilterRepositoryImpl: GetUserFilterRepositoryImpl
+    ): GetUserFilterRepository
 }
