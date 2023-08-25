@@ -108,7 +108,7 @@
     <string name="bakery_list_my_filter_apply">내 필터 적용</string>
 
     <!-- sign view -->
-    <string name="btn_login_text">로그인</string>
+    <string name="btn_kakao_sign">카카오로 계속하기</string>
     <string name="btn_signup_text">회원가입</string>
 
     <!--    filter    -->
