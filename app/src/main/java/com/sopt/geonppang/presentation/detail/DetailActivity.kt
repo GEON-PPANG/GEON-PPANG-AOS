@@ -12,7 +12,7 @@ import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityDetailBinding
 import com.sopt.geonppang.presentation.MainActivity
-import com.sopt.geonppang.presentation.review.ReviewWritingActivity
+import com.sopt.geonppang.presentation.reviewWriting.ReviewWritingActivity
 import com.sopt.geonppang.util.ChipFactory
 import com.sopt.geonppang.util.CustomSnackbar
 import com.sopt.geonppang.util.UiState
@@ -84,7 +84,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
             }
         }
 
-        binding.layoutDetailBottomAppBarCreateReview.setOnClickListener {
+        binding.btnCrateReview.setOnClickListener {
             val intent = Intent(this, ReviewWritingActivity::class.java)
             intent.putExtra(BAKERY_ID, bakeryId)
             intent.putExtra(BAKERY_INFO, viewModel.getBakeryInfo())

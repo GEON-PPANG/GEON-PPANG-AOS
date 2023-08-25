@@ -18,7 +18,6 @@ data class ResponseBakeryList(
         val bookMarkCount: Int,
         val breadType: BreadType,
         val firstNearStation: String,
-        val isBookMarked: Boolean,
         val isHACCP: Boolean,
         val isNonGMO: Boolean,
         val isVegan: Boolean,

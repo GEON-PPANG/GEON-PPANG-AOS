@@ -17,6 +17,7 @@ import com.sopt.geonppang.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
@@ -41,8 +42,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
         bestReviewAdapter = BestReviewAdapter(::moveToDetail)
         binding.rvHomeBestReviewList.adapter = bestReviewAdapter
-
-        viewModel.setUserNickName()
     }
 
     private fun addListeners() {
@@ -74,6 +73,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
                 else -> {}
             }
+        }.launchIn(lifecycleScope)
+
+        viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach {
+            Timber.d(it.toString())
         }.launchIn(lifecycleScope)
     }
 

@@ -25,13 +25,6 @@ class DetailBakeryInfoAdapter :
                         it.context.getString(R.string.snackbar_save)
                     )
                 }
-
-                ivItemDetailBakeryInfoCopy.setOnClickListener {
-                    CustomSnackbar.makeSnackbar(
-                        it,
-                        it.context.getString(R.string.snackbar_copy)
-                    )
-                }
             }
         }
     }

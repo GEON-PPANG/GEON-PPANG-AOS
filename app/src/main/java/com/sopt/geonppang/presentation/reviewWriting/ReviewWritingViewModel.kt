@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.review
+package com.sopt.geonppang.presentation.reviewWriting
 
 import androidx.lifecycle.*
 import com.sopt.geonppang.data.model.request.RequestReviewWriting
@@ -13,7 +13,7 @@ import javax.inject.Inject
 import kotlin.collections.set
 
 @HiltViewModel
-class ReviewViewModel @Inject constructor(private val reviewWritingRepository: ReviewWritingRepository) :
+class ReviewWritingViewModel @Inject constructor(private val reviewWritingRepository: ReviewWritingRepository) :
     ViewModel() {
 
     val reviewText = MutableLiveData("")

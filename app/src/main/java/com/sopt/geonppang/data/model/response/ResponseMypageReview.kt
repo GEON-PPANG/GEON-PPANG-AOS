@@ -25,8 +25,6 @@ data class ResponseMypageReview(
         val isNonGmo: Boolean,
         val firstNearStation: String,
         val secondNearStation: String,
-        val isBookMarked: String?,
-        val bookMarkCount: Int?,
         val breadType: BreadType,
         val reviewId: Int,
         val createdAt: String,
@@ -52,7 +50,7 @@ data class ResponseMypageReview(
                 myReview.isNonGmo,
                 myReview.firstNearStation,
                 myReview.secondNearStation,
-                myReview.bookMarkCount,
+                null,
                 myReview.bakeryPicture,
                 breadType = BreadType(
                     myReview.breadType.breadTypeId,

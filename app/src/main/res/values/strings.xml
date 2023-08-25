@@ -77,7 +77,8 @@
     <!--    detail    -->
     <string name="detail_create_review">리뷰 작성하기</string>
     <string name="detail_more_info">가게 상세정보</string>
-    <string name="detail_move_homepage"><u>홈페이지로 이동</u></string>
+    <string name="detail_homepage"><u>웹사이트</u></string>
+    <string name="detail_instagram"><u>인스타그램</u></string>
     <string name="detail_notice">홈페이지에 성분정보가 있어요!</string>
     <string name="detail_menu">가게 메뉴</string>
     <string name="detail_menu_notice">가게 상세정보 및 메뉴는 업체에서 제공된 정보를 기반으로 합니다. 건빵집 방문 시 한번 더 확인하시기를 추천드립니다.</string>
@@ -94,8 +95,7 @@
     <string name="detail_num">(%d)</string>
 
     <!--    snackbar    -->
-    <string name="snackbar_copy">복사되었습니다 !</string>
-    <string name="snackbar_save">저장되었습니다 !</string>
+    <string name="snackbar_save">저장되었어요 !</string>
 
     <!--  bakery list view  -->
     <string name="bakery_list_sort">정렬</string>
@@ -149,7 +149,7 @@
     <string name="chip_tasty">맛있어요</string>
     <string name="chip_kind">친절해요</string>
     <string name="chip_special_menu">특별한 메뉴</string>
-    <string name="review_text_count">%d/70(최소 10자)</string>
+    <string name="review_text_count">%d/120자</string>
     <string name="review_caption">• 솔직하게 작성해주신 리뷰는 건빵 소비자에게 도움이 됩니다! 하지만 선량한 업주나 제3자의 권리를 침해하는 게시물(허위 리뷰, 명예훼손, 욕설, 타임 비방글 등)은 안내 없이 삭제되며, 관련 법률에 따라 제재를 받을 수 있습니다. 또한, 건빵은 이에 대한 책임을 지지 않습니다. </string>
     <string name="review_text_good_hint">추가로 좋았던 점이 있다면 말씀해주세요!</string>
     <string name="review_text_bad_hint">자유롭게 의견을 말씀해주세요!</string>
@@ -164,4 +164,6 @@
     <string name="review_writing_confirm">확인</string>
     <string name="review_writing_stop">그만하기</string>
     <string name="review_writing_continue">계속쓰기</string>
+
+    <string name="my_review_detail_empty">작성한 리뷰가 없어요</string>
 </resources>

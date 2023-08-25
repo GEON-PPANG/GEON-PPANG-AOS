@@ -20,7 +20,6 @@ data class ResponseMypageBookmark(
         val isNonGMO: Boolean,
         val firstNearStation: String,
         val secondNearStation: String,
-        val isBookMarked: Boolean,
         val bookMarkCount: Int,
         val reviewCount: Int,
         val breadType: BreadType
