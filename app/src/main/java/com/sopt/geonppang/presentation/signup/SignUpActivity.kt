@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySignupBinding
+import com.sopt.geonppang.presentation.login.LoginActivity
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +37,7 @@ class SignUpActivity :
             moveToNickname()
         }
         binding.toolbar.ivBack.setOnClickListener {
-            // TODO 다시 로그인 페이지로 이동
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 

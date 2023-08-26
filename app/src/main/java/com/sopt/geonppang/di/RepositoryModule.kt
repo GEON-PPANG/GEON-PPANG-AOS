@@ -52,4 +52,16 @@ interface RepositoryModule {
     fun bindFilterRepository(
         filterRepositoryImpl: FilterRepositoryImpl,
     ): FilterRepository
+
+    @Binds
+    @Singleton
+    fun bindMyReviewDetailRepository(
+        myReviewDetailRepositoryImpl: MyReviewDetailRepositoryImpl
+    ): MyReviewDetailRepository
+
+    @Binds
+    @Singleton
+    fun bindGetUserFilterRepository(
+        getUserFilterRepositoryImpl: GetUserFilterRepositoryImpl
+    ): GetUserFilterRepository
 }

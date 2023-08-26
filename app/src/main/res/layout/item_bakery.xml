@@ -164,7 +164,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing10"
-            android:src="@drawable/ic_map"
+            android:src="@drawable/ic_station"
             app:layout_constraintStart_toStartOf="@id/tv_bakery"
             app:layout_constraintTop_toBottomOf="@id/cg_bakery_category" />
 
@@ -173,7 +173,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="@{@string/nearest_station(bakery.firstNearStation, bakery.secondNearStation)}"
+            android:text="@{bakery.secondNearStation.empty ? bakery.firstNearStation : @string/nearest_station(bakery.firstNearStation, bakery.secondNearStation)}"
             android:textAppearance="@style/TextAppearance.CaptionM1"
             android:textColor="@color/gray_400"
             app:layout_constraintBottom_toBottomOf="@+id/iv_bakery_map"
