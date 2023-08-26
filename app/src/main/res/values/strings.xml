@@ -47,6 +47,7 @@
     <string name="my_page_terms_of_use">이용약관</string>
     <string name="my_page_inquiry">문의하기</string>
     <string name="my_page_version_info">버전 정보</string>
+    <string name="tv_my_page_app_version">v%s</string>
     <string name="my_page_logout">로그아웃</string>
     <string name="my_page_withdrawal">회원탈퇴</string>
 
