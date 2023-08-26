@@ -35,19 +35,22 @@
 
     <!--    my page    -->
     <string name="my_page_title">마이페이지</string>
+
     <string name="my_page_gluten_free">글루텐프리</string>
     <string name="my_page_nut_free">넛프리</string>
     <string name="my_page_vegan">비건빵</string>
     <string name="my_page_low_suger">저당,무설탕</string>
+
     <string name="my_page_bookmark">저장 목록</string>
     <string name="my_page_review">내가 쓴 리뷰</string>
+
     <string name="my_page_terms_of_use">이용약관</string>
-    <string name="my_page_question">자주 묻는 질문</string>
     <string name="my_page_inquiry">문의하기</string>
-    <string name="my_page_app_version">앱버전</string>
-    <string name="my_page_store_list_title">저장 목록</string>
+    <string name="my_page_version_info">버전 정보</string>
+    <string name="my_page_logout">로그아웃</string>
+    <string name="my_page_withdrawal">회원탈퇴</string>
+
     <string name="my_store_list_empty_view_description">저장된 건빵집이 없어요!</string>
-    <string name="my_review_title">내가 쓴 리뷰</string>
 
     <!--  search view  -->
     <string name="search_hint">빵집·지역·역 명을 검색해 보세요!</string>
