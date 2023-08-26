@@ -111,7 +111,7 @@
     <string name="filter_ask_nutrient_type">어떤 성분을 원하시나요?</string>
     <string name="start_geon_ppang">시작하기</string>
 
-    <string name="main_purpose_title">반가워요 %s님 :)\n건빵을 찾은 이유를 알려주세요!</string>
+    <string name="main_purpose_title">맞춤 빵집 추천을 위해\n건빵을 찾은 이유를 알려주세요!</string>
     <string name="main_purpose_type_health_title">건강 · 체질</string>
     <string name="main_purpose_type_health_des">아토피 , 알레르기 , 암 , 당뇨 , 소화문제</string>
     <string name="main_purpose_type_diet_title">맛 · 다이어트</string>
@@ -120,17 +120,17 @@
     <string name="main_purpose_type_vegan_des">종교 , 환경 , 동물 , 노동권을 위한 비거니즘</string>
 
     <string name="bread_type_gluten_free_title">글루텐프리</string>
-    <string name="bread_type_gluten_free_des">NO 글루텐 포함\n밀 , 곡물류</string>
+    <string name="bread_type_gluten_free_des">NO 글루텐\nLOW 글루텐</string>
     <string name="bread_type_vegan_title">비건빵</string>
-    <string name="bread_type_vegan_des">NO 동물성재료\n(유제품 , 계란)</string>
+    <string name="bread_type_vegan_des">NO 동물성재료\n(유제품 , 계란 등)</string>
     <string name="bread_type_nut_free_title">넛프리</string>
     <string name="bread_type_nut_free_des">NO 견과류</string>
     <string name="bread_type_sugar_free_title">저당, 무설탕</string>
     <string name="bread_type_sugar_free_des">대체당 사용</string>
 
-    <string name="nutrient_type_nutrient_open">영양성분 공개</string>
-    <string name="nutrient_type_ingredient_open">원재료 공개</string>
-    <string name="nutrient_type_not_open">비공개</string>
+    <string name="nutrient_type_nutrient_open">영양성분까지 꼼꼼히 볼래요!</string>
+    <string name="nutrient_type_ingredient_open">어떤 재료가 들어갔는지 볼래요!</string>
+    <string name="nutrient_type_not_open">성분 정보는 괜찮아요!</string>
 
     <string name="welcome_to_geonppang">%s님\n건빵에 오신 걸 환영해요!</string>
 
