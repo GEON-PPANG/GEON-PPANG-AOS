@@ -33,12 +33,13 @@
 
         <TextView
             android:id="@+id/tv_main_purpose_filter_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@{@string/main_purpose_title}"
+            android:text="@string/main_purpose_title"
             android:textAppearance="@style/TextAppearance.Title1"
             android:textColor="@color/gray_700"
+            app:layout_constraintEnd_toStartOf="@+id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toTopOf="parent" />
 
