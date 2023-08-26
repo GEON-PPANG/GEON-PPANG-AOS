@@ -19,7 +19,7 @@
         <include
             android:id="@+id/toolbar"
             layout="@layout/view_toolbar"
-            app:title="@{@string/my_review_title}" />
+            app:title="@{@string/my_page_review}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_my_review_list"
