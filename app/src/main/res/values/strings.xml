@@ -105,6 +105,7 @@
     <string name="btn_signup_text">회원가입</string>
 
     <!--    filter    -->
+    <string name="filter_skip">건너뛰기</string>
     <string name="filter_next">다음</string>
     <string name="filter_ask_bread_type">어떤 빵을 원하시나요?</string>
     <string name="filter_duplicate_selection">중복선택이 가능해요!</string>
