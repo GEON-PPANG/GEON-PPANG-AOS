@@ -1,11 +1,14 @@
 package com.sopt.geonppang.presentation.mypage
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityMyReviewBinding
+import com.sopt.geonppang.presentation.model.MyReviewBakeryInfo
+import com.sopt.geonppang.presentation.myReviewDetail.MyReviewDetailActivity
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,7 +33,7 @@ class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activ
     }
 
     private fun initLayout() {
-        myReviewAdapter = MyReviewAdapter()
+        myReviewAdapter = MyReviewAdapter(::moveToReviewDetail)
         binding.rvMyReviewList.adapter = myReviewAdapter
     }
 
@@ -54,5 +57,17 @@ class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activ
                 else -> {}
             }
         }.launchIn(lifecycleScope)
+    }
+
+    private fun moveToReviewDetail(reviewId: Int, myReviewDetailInfo: MyReviewBakeryInfo) {
+        val intent = Intent(this, MyReviewDetailActivity::class.java)
+        intent.putExtra(REVIEW_ID, reviewId)
+        intent.putExtra(BAKERY_INFO, myReviewDetailInfo)
+        startActivity(intent)
+    }
+
+    companion object {
+        const val REVIEW_ID = "reviewId"
+        const val BAKERY_INFO = "bakeryInfo"
     }
 }

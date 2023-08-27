@@ -14,6 +14,7 @@ import com.sopt.geonppang.presentation.search.SearchActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingFragment
+import com.sopt.geonppang.util.setVisibility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -41,8 +42,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
         bestReviewAdapter = BestReviewAdapter(::moveToDetail)
         binding.rvHomeBestReviewList.adapter = bestReviewAdapter
-
-        viewModel.setUserNickName()
     }
 
     private fun addListeners() {
@@ -52,6 +51,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
         binding.ivHomeFilter.setOnClickListener {
             moveToFilter()
+        }
+        binding.ivHomeSpeechBubbleClose.setOnClickListener {
+            binding.ivHomeSpeechBubble.visibility = View.GONE
+            binding.ivHomeSpeechBubbleClose.visibility = View.GONE
+            binding.tvHomeSpeechBubbleTitle.visibility = View.GONE
         }
     }
 
@@ -74,6 +78,14 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
                 else -> {}
             }
+        }.launchIn(lifecycleScope)
+
+        viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
+            binding.tvHomeBestBakeryTitle1.setVisibility(isFilterSelected)
+            binding.tvHomeBestReviewTitle1.setVisibility(isFilterSelected)
+            binding.ivHomeSpeechBubble.setVisibility(!isFilterSelected)
+            binding.ivHomeSpeechBubbleClose.setVisibility(!isFilterSelected)
+            binding.tvHomeSpeechBubbleTitle.setVisibility(!isFilterSelected)
         }.launchIn(lifecycleScope)
     }
 

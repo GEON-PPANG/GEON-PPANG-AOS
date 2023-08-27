@@ -113,14 +113,14 @@
         <item name="android:paddingVertical">4dp</item>
         <item name="textStartPadding">8dp</item>
         <item name="textEndPadding">8dp</item>
-        <item name="android:textAppearance">@style/TextAppearance.BodyM1</item>
+        <item name="android:textAppearance">@style/TextAppearance.CaptionM1</item>
     </style>
 
     <style name="Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M2" parent="Widget.Material3.Chip.Style.Bread.Filter.Category.Point">
         <item name="android:paddingVertical">2dp</item>
         <item name="textStartPadding">6dp</item>
         <item name="textEndPadding">6dp</item>
-        <item name="android:textAppearance">@style/TextAppearance.BodyM2</item>
+        <item name="android:textAppearance">@style/TextAppearance.CaptionM2</item>
     </style>
 
 
@@ -151,18 +151,6 @@
         <item name="chipStrokeColor">@color/selector_bread_list_filter_stroke_color</item>
         <item name="chipStrokeWidth">1dp</item>
         <item name="android:textColor">@color/selector_bread_list_filter_color</item>
-    </style>
-
-    <!--    TODO style에서 제외시키기, 한 곳에서만 사용됨으로-->
-    <style name="Style.Material3.Chip.Purpose.Category" parent="Widget.Material3.Chip.Style">
-        <item name="chipCornerRadius">14dp</item>
-        <item name="android:paddingVertical">4dp</item>
-        <item name="textStartPadding">10dp</item>
-        <item name="textEndPadding">10dp</item>
-        <item name="android:textAppearance">@style/TextAppearance.CaptionM1</item>
-        <item name="android:textColor">@color/point_1</item>
-        <item name="chipStrokeColor">@color/point_1</item>
-        <item name="chipStrokeWidth">0.5dp</item>
     </style>
 
     <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

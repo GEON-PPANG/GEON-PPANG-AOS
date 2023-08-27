@@ -12,12 +12,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/background_1">
 
         <include
             android:id="@+id/toolbar"
             layout="@layout/view_toolbar"
-            app:title="@{@string/my_page_store_list_title}" />
+            app:title="@{@string/my_page_bookmark}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_store_list"

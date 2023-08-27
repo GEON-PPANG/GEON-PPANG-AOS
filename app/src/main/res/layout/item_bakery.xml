@@ -164,7 +164,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing10"
-            android:src="@drawable/ic_map"
+            android:src="@drawable/ic_station"
             app:layout_constraintStart_toStartOf="@id/tv_bakery"
             app:layout_constraintTop_toBottomOf="@id/cg_bakery_category" />
 

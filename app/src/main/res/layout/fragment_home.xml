@@ -32,7 +32,7 @@
             android:id="@+id/tv_home_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="43dp"
             android:text="@{@string/home_title(viewModel.nickName)}"
             android:textAppearance="@style/TextAppearance.Title1"
             app:layout_constraintStart_toStartOf="@id/gl_start"
@@ -71,7 +71,7 @@
             android:id="@+id/view_home_line"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="20dp"
             android:background="@color/gray_200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,6 +80,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@color/background_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,27 +90,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/tv_home_best_bakery_title1"
+                <LinearLayout
+                    android:id="@+id/layout_home_best_bakery_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing24"
                     android:layout_marginTop="22dp"
-                    android:text="@{@string/home_best_title1(viewModel.nickName)}"
-                    android:textAppearance="@style/TextAppearance.Title2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="바이블님 맞춤 " />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/tv_home_best_bakery_title2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home_best_bakery_title2"
-                    android:textAppearance="@style/TextAppearance.Title2"
-                    android:textColor="@color/point_1"
-                    app:layout_constraintStart_toEndOf="@id/tv_home_best_bakery_title1"
-                    app:layout_constraintTop_toTopOf="@+id/tv_home_best_bakery_title1" />
+                    <TextView
+                        android:id="@+id/tv_home_best_bakery_title1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/home_best_title1(viewModel.nickName)}"
+                        android:textAppearance="@style/TextAppearance.Title2"
+                        tools:text="바이블님 맞춤 " />
+
+                    <TextView
+                        android:id="@+id/tv_home_best_bakery_title2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_best_bakery_title2"
+                        android:textAppearance="@style/TextAppearance.Title2"
+                        android:textColor="@color/point_1" />
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_home_best_bakery_list"
@@ -121,30 +126,36 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_home_best_bakery_title2"
+                    app:layout_constraintTop_toBottomOf="@id/layout_home_best_bakery_title"
                     tools:listitem="@layout/item_home_best_bakery" />
 
-                <TextView
-                    android:id="@+id/tv_home_best_review_title1"
+                <LinearLayout
+                    android:id="@+id/layout_home_best_review_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing24"
                     android:layout_marginTop="28dp"
-                    android:text="@{@string/home_best_title1(viewModel.nickName)}"
-                    android:textAppearance="@style/TextAppearance.Title2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rv_home_best_bakery_list"
-                    tools:text="바이블님 맞춤 " />
+                    app:layout_constraintTop_toBottomOf="@id/rv_home_best_bakery_list">
 
-                <TextView
-                    android:id="@+id/tv_home_best_review_title2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home_best_review_title2"
-                    android:textAppearance="@style/TextAppearance.Title2"
-                    android:textColor="@color/point_1"
-                    app:layout_constraintStart_toEndOf="@id/tv_home_best_review_title1"
-                    app:layout_constraintTop_toTopOf="@+id/tv_home_best_review_title1" />
+                    <TextView
+                        android:id="@+id/tv_home_best_review_title1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/home_best_title1(viewModel.nickName)}"
+                        android:textAppearance="@style/TextAppearance.Title2"
+                        tools:text="바이블님 맞춤 " />
+
+                    <TextView
+                        android:id="@+id/tv_home_best_review_title2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_best_review_title2"
+                        android:textAppearance="@style/TextAppearance.Title2"
+                        android:textColor="@color/point_1"
+                        app:layout_constraintStart_toEndOf="@id/tv_home_best_review_title1"
+                        app:layout_constraintTop_toTopOf="@+id/tv_home_best_review_title1" />
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_home_best_review_list"
@@ -156,16 +167,16 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_home_best_review_title2"
+                    app:layout_constraintTop_toBottomOf="@id/layout_home_best_review_title"
                     tools:listitem="@layout/item_home_best_review" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:background="@color/gray_100"
+                    android:background="@color/background_2"
                     android:paddingHorizontal="@dimen/spacing24"
-                    android:paddingVertical="@dimen/spacing16"
+                    android:paddingVertical="@dimen/spacing20"
                     android:text="@string/home_caption"
                     android:textAppearance="@style/TextAppearance.CaptionM2"
                     android:textColor="@color/gray_300"
@@ -174,5 +185,37 @@
                     app:layout_constraintTop_toBottomOf="@id/rv_home_best_review_list" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <ImageView
+            android:id="@+id/iv_home_speech_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/background_speech_bubble"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintTop_toBottomOf="@id/iv_home_filter" />
+
+        <TextView
+            android:id="@+id/tv_home_speech_bubble_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing12"
+            android:text="@string/home_bubble_speech_title"
+            android:textAppearance="@style/TextAppearance.CaptionM2"
+            android:textColor="@color/gray_400"
+            app:layout_constraintBottom_toBottomOf="@id/iv_home_speech_bubble_close"
+            app:layout_constraintStart_toStartOf="@id/iv_home_speech_bubble"
+            app:layout_constraintTop_toTopOf="@id/iv_home_speech_bubble_close" />
+
+        <ImageView
+            android:id="@+id/iv_home_speech_bubble_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing12"
+            android:layout_marginEnd="@dimen/spacing12"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="@id/iv_home_speech_bubble"
+            app:layout_constraintTop_toTopOf="@id/iv_home_speech_bubble" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
