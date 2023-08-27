@@ -82,7 +82,7 @@
                 android:layout_marginBottom="24dp"
                 android:backgroundTint="@color/gray_700"
                 android:paddingVertical="18dp"
-                android:text="확인"
+                android:text="@string/bottom_sheet_ok"
                 android:textAppearance="@style/TextAppearance.Headline"
                 android:textColor="@color/gray_100"
                 app:layout_constraintBottom_toBottomOf="parent"

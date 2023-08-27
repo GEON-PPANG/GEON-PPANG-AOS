@@ -30,6 +30,7 @@
     <string name="unavailable_email">이미 존재하는 이메일입니다</string>
     <string name="available_nickname">사용 가능한 닉네임이에요!</string>
     <string name="unavailable_nickname">이미 존재하는 닉네임이에요</string>
+    <string name="bottom_sheet_ok">확인</string>
 
     <!--  home  -->
     <string name="home_title">%s님\n건빵에 오신걸 환영해요!</string>
@@ -170,6 +171,5 @@
     <string name="review_writing_confirm">확인</string>
     <string name="review_writing_stop">그만하기</string>
     <string name="review_writing_continue">계속쓰기</string>
-
     <string name="my_review_detail_empty">작성한 리뷰가 없어요</string>
 </resources>
