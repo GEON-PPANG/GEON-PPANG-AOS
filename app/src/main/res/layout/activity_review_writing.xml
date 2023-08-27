@@ -23,7 +23,7 @@
         <include
             android:id="@+id/toolbar"
             layout="@layout/view_toolbar"
-            app:title="@{@string/my_review_title}" />
+            app:title="@{@string/review_writing}" />
 
         <ScrollView
             android:id="@+id/layout_scroll_view"
