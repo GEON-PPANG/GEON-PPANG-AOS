@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityLoginBinding
+import com.sopt.geonppang.presentation.SignActivity
 import com.sopt.geonppang.presentation.signup.SignUpActivity
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
@@ -28,6 +29,9 @@ class LoginActivity :
         }
         binding.tvGotoSignup.setOnClickListener {
             moveToSignup()
+        }
+        binding.toolbar.ivBack.setOnClickListener {
+            startActivity(Intent(this, SignActivity::class.java))
         }
     }
 
