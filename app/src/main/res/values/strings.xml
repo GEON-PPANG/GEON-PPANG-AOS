@@ -37,25 +37,30 @@
     <string name="home_best_bakery_title2">BEST 건빵집</string>
     <string name="home_search_hint">궁금한 건빵집을 입력해주세요!</string>
     <string name="home_best_review_title2">BEST 리뷰</string>
+    <string name="home_bubble_speech_title">맞춤 빵집을 위한 필터를 설정해 보세요!</string>
     <string name="home_caption">건빵은 건강한 빵집의 위치와 성분 정보를 제공하여 소비자의 선택을 돕는 용도의 서비스입니다. 건빵의 모든 정보는 제조사에서 제공한 정보입니다. 이는 소비자의 구매를 돕기 위한 참고 사항이며, 제공 정보의 오류에 대한 책임을 지지 않습니다.</string>
     <string name="review_and_bookmark_count">리뷰(%d)・저장(%d)</string>
     <string name="bookmark_count">(%d)</string>
 
     <!--    my page    -->
     <string name="my_page_title">마이페이지</string>
+
     <string name="my_page_gluten_free">글루텐프리</string>
     <string name="my_page_nut_free">넛프리</string>
     <string name="my_page_vegan">비건빵</string>
     <string name="my_page_low_suger">저당,무설탕</string>
+
     <string name="my_page_bookmark">저장 목록</string>
     <string name="my_page_review">내가 쓴 리뷰</string>
+
     <string name="my_page_terms_of_use">이용약관</string>
-    <string name="my_page_question">자주 묻는 질문</string>
     <string name="my_page_inquiry">문의하기</string>
-    <string name="my_page_app_version">앱버전</string>
-    <string name="my_page_store_list_title">저장 목록</string>
+    <string name="my_page_version_info">버전 정보</string>
+    <string name="tv_my_page_app_version">v%s</string>
+    <string name="my_page_logout">로그아웃</string>
+    <string name="my_page_withdrawal">회원탈퇴</string>
+
     <string name="my_store_list_empty_view_description">저장된 건빵집이 없어요!</string>
-    <string name="my_review_title">내가 쓴 리뷰</string>
 
     <!--  search view  -->
     <string name="search_hint">빵집·지역·역 명을 검색해 보세요!</string>
@@ -142,6 +147,7 @@
     <string name="welcome_to_geonppang">%s님\n건빵에 오신 걸 환영해요!</string>
 
     <!--review-->
+    <string name="review_writing">리뷰 쓰기</string>
     <string name="how_was_the_store">건빵집은 어떠셨나요?</string>
     <string name="chip_like">좋아요</string>
     <string name="chip_soso">별로예요</string>

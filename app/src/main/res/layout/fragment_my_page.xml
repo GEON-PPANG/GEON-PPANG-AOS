@@ -40,15 +40,25 @@
             app:layout_constraintStart_toStartOf="@+id/gl_start"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <View
+            android:id="@+id/view_my_page_top_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="19dp"
+            android:background="@color/gray_200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_page_title" />
+
+
         <ScrollView
             android:id="@+id/sv_my_page"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="19dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_my_page_title">
+            app:layout_constraintTop_toBottomOf="@+id/view_my_page_top_line">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -61,26 +71,34 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing24"
                     android:layout_marginTop="20dp"
-                    android:src="@drawable/ic_my_page_default_profile"
+                    android:src="@drawable/ic_default_profile"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_my_page_profile_purpose"
-                    style="@style/Style.Material3.Chip.Purpose.Category"
+                    style="@style/Widget.Material3.Chip.Style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="17dp"
+                    android:layout_marginStart="20dp"
                     android:backgroundTint="@color/point_2"
+                    android:paddingVertical="4dp"
+                    android:textAppearance="@style/TextAppearance.CaptionM1"
+                    android:textColor="@color/point_1"
+                    app:chipCornerRadius="14dp"
+                    app:chipStrokeColor="@color/point_1"
+                    app:chipStrokeWidth="0.5dp"
                     app:layout_constraintStart_toEndOf="@+id/iv_my_page_profile_img"
                     app:layout_constraintTop_toTopOf="@+id/iv_my_page_profile_img"
+                    app:textEndPadding="10dp"
+                    app:textStartPadding="10dp"
                     tools:text="맛 . 다이어트" />
 
                 <TextView
                     android:id="@+id/tv_my_page_profile_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:text="@{viewModel.nickName}"
                     android:textAppearance="@style/TextAppearance.Title2"
                     android:textColor="@color/gray_600"
@@ -92,10 +110,10 @@
                     android:id="@+id/iv_my_page_profile_right_arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="21dp"
                     android:layout_marginEnd="5dp"
                     android:padding="12dp"
                     android:src="@drawable/ic_arrow_right"
-                    app:layout_constraintBottom_toBottomOf="@+id/chip_group_my_page_profile_bread"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/chip_my_page_profile_purpose" />
 
@@ -104,7 +122,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="26dp"
+                    android:layout_marginEnd="17dp"
                     app:chipSpacing="4dp"
                     app:chipSpacingHorizontal="4dp"
                     app:layout_constraintEnd_toStartOf="@+id/iv_my_page_profile_right_arrow"
@@ -150,7 +168,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/spacing24"
-                    android:layout_marginTop="34dp"
+                    android:layout_marginTop="36dp"
                     android:background="@drawable/background_my_page_buttons"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -192,8 +210,8 @@
                     <View
                         android:id="@+id/view_my_page_buttons_middle_line"
                         android:layout_width="1dp"
-                        android:layout_height="42dp"
-                        android:layout_marginVertical="3dp"
+                        android:layout_height="0dp"
+                        android:layout_marginVertical="19dp"
                         android:background="@color/point_1"
                         app:layout_constraintBottom_toBottomOf="@id/layout_my_page_bookmark"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -238,124 +256,113 @@
                 <View
                     android:id="@+id/view_my_page_first_line"
                     android:layout_width="0dp"
-                    android:layout_height="6dp"
+                    android:layout_height="12dp"
                     android:layout_marginTop="32dp"
-                    android:background="@color/gray_200"
-
+                    android:background="@color/gray_100"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layout_my_page_buttons" />
 
                 <TextView
                     android:id="@+id/tv_my_page_terms_of_use"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="26dp"
+                    android:layout_marginHorizontal="@dimen/spacing24"
+                    android:layout_marginTop="8dp"
+                    android:paddingVertical="@dimen/spacing12"
                     android:text="@string/my_page_terms_of_use"
                     android:textAppearance="@style/TextAppearance.BodyM1"
-                    android:textColor="@color/black"
+                    android:textColor="@color/gray_700"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view_my_page_first_line" />
 
-                <ImageView
-                    android:id="@+id/iv_my_page_terms_or_use"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="5dp"
-                    android:padding="12dp"
-                    android:src="@drawable/ic_arrow_right"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view_my_page_first_line" />
-
-                <View
-                    android:id="@+id/view_my_page_second_line"
+                <TextView
+                    android:id="@+id/tv_my_page_inquiry"
                     android:layout_width="0dp"
-                    android:layout_height="6dp"
-                    android:layout_marginTop="26dp"
-                    android:background="@color/gray_200"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing24"
+                    android:layout_marginTop="4dp"
+                    android:paddingVertical="@dimen/spacing12"
+                    android:text="@string/my_page_inquiry"
+                    android:textAppearance="@style/TextAppearance.BodyM1"
+                    android:textColor="@color/gray_700"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_my_page_terms_of_use" />
 
-                <TextView
-                    android:id="@+id/tv_my_page_question"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing24"
-                    android:layout_marginTop="26dp"
-                    android:text="@string/my_page_question"
-                    android:textAppearance="@style/TextAppearance.BodyM1"
-                    android:textColor="@color/black"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view_my_page_second_line" />
-
-                <ImageView
-                    android:id="@+id/iv_my_page_question"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:padding="12dp"
-                    android:src="@drawable/ic_arrow_right"
-                    app:layout_constraintEnd_toEndOf="@+id/iv_my_page_terms_or_use"
-                    app:layout_constraintTop_toBottomOf="@+id/view_my_page_second_line" />
-
                 <View
-                    android:id="@+id/view_my_page_third_line"
+                    android:id="@+id/view_my_page_second_line"
                     android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="26dp"
-                    android:background="@color/gray_300"
+                    android:layout_height="4dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/gray_100"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_question" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_inquiry" />
 
                 <TextView
-                    android:id="@+id/tv_my_page_inquiry"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="26dp"
-                    android:text="@string/my_page_inquiry"
-                    android:textAppearance="@style/TextAppearance.BodyM1"
-                    android:textColor="@color/black"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view_my_page_third_line" />
-
-                <ImageView
-                    android:id="@+id/iv_my_page_inquiry"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:padding="12dp"
-                    android:src="@drawable/ic_arrow_right"
-                    app:layout_constraintEnd_toEndOf="@+id/iv_my_page_question"
-                    app:layout_constraintTop_toBottomOf="@+id/view_my_page_third_line" />
-
-                <TextView
-                    android:id="@+id/tv_my_page_app_version_title"
+                    android:id="@+id/tv_my_page_version_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing24"
-                    android:layout_marginTop="30dp"
-                    android:paddingBottom="30dp"
-                    android:text="@string/my_page_app_version"
-                    android:textAppearance="@style/TextAppearance.CaptionM2"
-                    android:textColor="@color/main_1"
+                    android:layout_marginTop="8dp"
+                    android:paddingVertical="@dimen/spacing12"
+                    android:text="@string/my_page_version_info"
+                    android:textAppearance="@style/TextAppearance.BodyM1"
+                    android:textColor="@color/gray_700"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_inquiry" />
+                    app:layout_constraintTop_toBottomOf="@+id/view_my_page_second_line" />
 
                 <TextView
                     android:id="@+id/tv_my_page_app_version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/spacing24"
-                    android:textAppearance="@style/TextAppearance.CaptionM2"
+                    android:textAppearance="@style/TextAppearance.BodyB2"
                     android:textColor="@color/main_1"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_my_page_version_info"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tv_my_page_app_version_title"
-                    tools:text="v 0.0.1" />
+                    app:layout_constraintTop_toTopOf="@+id/tv_my_page_version_info"
+                    tools:text="v0.0.1" />
+
+                <View
+                    android:id="@+id/view_my_page_third_line"
+                    android:layout_width="0dp"
+                    android:layout_height="12dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/gray_100"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_my_page_version_info" />
+
+                <TextView
+                    android:id="@+id/tv_my_page_logout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing24"
+                    android:layout_marginTop="8dp"
+                    android:paddingVertical="@dimen/spacing12"
+                    android:text="@string/my_page_logout"
+                    android:textAppearance="@style/TextAppearance.BodyM1"
+                    android:textColor="@color/gray_700"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view_my_page_third_line" />
+
+                <TextView
+                    android:id="@+id/tv_my_page_withdrawal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing24"
+                    android:layout_marginTop="8dp"
+                    android:paddingVertical="13dp"
+                    android:text="@string/my_page_withdrawal"
+                    android:textAppearance="@style/TextAppearance.BodyM2"
+                    android:textColor="@color/gray_400"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_my_page_logout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

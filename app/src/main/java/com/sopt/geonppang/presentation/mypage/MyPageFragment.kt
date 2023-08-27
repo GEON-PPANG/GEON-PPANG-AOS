@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import com.sopt.geonppang.BuildConfig
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentMyPageBinding
 import com.sopt.geonppang.presentation.filter.FilterActivity
@@ -54,6 +55,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
             binding.chipMyPageProfilePurpose.text =
                 this.context?.getString(viewModel.toMainPurposeTitleRes()) ?: ""
         }.launchIn(lifecycleScope)
+        binding.tvMyPageAppVersion.text = getString(R.string.tv_my_page_app_version, APP_VERSION)
     }
 
     private fun moveToStoreBakeryList() {
@@ -74,5 +76,6 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     companion object {
         const val FILTER_INFO = "filterInfo"
         const val MAX_PAGE = "maxPage"
+        const val APP_VERSION = BuildConfig.VERSION_NAME
     }
 }
