@@ -2,7 +2,7 @@ package com.sopt.geonppang.presentation.filter
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
@@ -12,13 +12,14 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_filter) {
-    private lateinit var viewModel: FilterViewModel
+    private val viewModel by viewModels<FilterViewModel>()
     private lateinit var adapter: FilterViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(FilterViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         initLayout()
         addListeners()
@@ -31,8 +32,6 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
         binding.vpFilterContainer.adapter = adapter
         binding.vpFilterContainer.isUserInputEnabled = false
         binding.tvFilterPageNumber.text = setPageText(PAGE)
-
-        viewModel.setUserNickName()
     }
 
     private fun addListeners() {
@@ -67,6 +66,10 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
                 }
 
                 else -> {
+                    if (binding.vpFilterContainer.currentItem == 1) {
+                        viewModel.setIsLastPage(true)
+                    }
+
                     binding.vpFilterContainer.currentItem++
                     binding.btnFilterNext.isEnabled = false
                     binding.tvFilterPageNumber.text =

@@ -80,7 +80,7 @@
             android:backgroundTint="@color/selector_filter_button_color"
             android:enabled="false"
             android:paddingVertical="18dp"
-            android:text="@string/filter_next"
+            android:text="@{viewModel.isLastPage ? @string/filter_apply : @string/filter_next}"
             android:textAppearance="@style/TextAppearance.Headline"
             android:textColor="@drawable/selector_filter_button_text"
             app:cornerRadius="8dp"

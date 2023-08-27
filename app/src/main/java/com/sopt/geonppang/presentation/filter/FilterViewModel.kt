@@ -5,7 +5,6 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.geonppang.data.datasource.local.GPDataStore
 import com.sopt.geonppang.data.model.request.RequestFilter
 import com.sopt.geonppang.domain.model.SelectedFilter
 import com.sopt.geonppang.domain.repository.FilterRepository
@@ -21,8 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FilterViewModel @Inject constructor(
-    private val filterRepository: FilterRepository,
-    private val gpDataStore: GPDataStore
+    private val filterRepository: FilterRepository
 ) : ViewModel() {
     private val _selectedFilterState = MutableStateFlow<UiState<SelectedFilter>>(UiState.Loading)
     val selectedFilterState get() = _selectedFilterState.asStateFlow()
@@ -30,11 +28,15 @@ class FilterViewModel @Inject constructor(
     private val _nextActivityName = MutableStateFlow<String?>(null)
     val nextActivityName get() = _nextActivityName.asStateFlow()
 
+    private val _isLastPage = MutableStateFlow<Boolean>(false)
+    val isLastPage get() = _isLastPage.asStateFlow()
+
+    fun setIsLastPage(boolean: Boolean) {
+        _isLastPage.value = boolean
+    }
+
     private val _mainPurpose: MutableLiveData<MainPurposeType?> = MutableLiveData()
     val mainPurpose: LiveData<MainPurposeType?> = _mainPurpose
-
-    private val _nickName: MutableLiveData<String> = MutableLiveData()
-    val nickName: LiveData<String> = _nickName
 
     fun setMainPurpose(mainPurposeType: MainPurposeType) {
         _mainPurpose.value = mainPurposeType
@@ -85,10 +87,6 @@ class FilterViewModel @Inject constructor(
 
     fun setNextActivity(filterInfoTypeName: String) {
         _nextActivityName.value = filterInfoTypeName
-    }
-
-    fun setUserNickName() {
-        _nickName.value = gpDataStore.userNickname
     }
 
     fun setUserFilter() {
