@@ -153,18 +153,6 @@
         <item name="android:textColor">@color/selector_bread_list_filter_color</item>
     </style>
 
-    <!--    TODO style에서 제외시키기, 한 곳에서만 사용됨으로-->
-    <style name="Style.Material3.Chip.Purpose.Category" parent="Widget.Material3.Chip.Style">
-        <item name="chipCornerRadius">14dp</item>
-        <item name="android:paddingVertical">4dp</item>
-        <item name="textStartPadding">10dp</item>
-        <item name="textEndPadding">10dp</item>
-        <item name="android:textAppearance">@style/TextAppearance.CaptionM1</item>
-        <item name="android:textColor">@color/point_1</item>
-        <item name="chipStrokeColor">@color/point_1</item>
-        <item name="chipStrokeWidth">0.5dp</item>
-    </style>
-
     <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintAnimationEnabled">false</item>
         <item name="android:textColorHint">@color/gray_300</item>
