@@ -162,4 +162,6 @@
     <string name="review_writing_confirm">확인</string>
     <string name="review_writing_stop">네, 그만 쓸래요</string>
     <string name="review_writing_continue">아니요, 계속 쓸래요</string>
+
+    <string name="my_review_detail_empty">작성한 리뷰가 없어요</string>
 </resources>

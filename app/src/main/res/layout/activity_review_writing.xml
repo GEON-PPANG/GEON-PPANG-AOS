@@ -79,21 +79,22 @@
                         android:layout_marginEnd="9dp"
                         android:ellipsize="end"
                         android:maxLines="1"
+                        android:text="@{viewModel.bakeryInfo.bakeryName}"
                         android:textAppearance="@style/TextAppearance.Title2"
                         android:textColor="@color/gray_700"
                         app:layout_constraintStart_toEndOf="@+id/iv_bakery"
                         app:layout_constraintTop_toTopOf="@+id/iv_bakery"
-                        tools:text="건대 초코빵" /><!--android:text="@{review.bakery.bakeryName}"-->
+                        tools:text="건대 초코빵" />
 
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/cg_bakery_category"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        app:chipSpacingHorizontal="4dp"
                         android:layout_marginTop="8dp"
+                        app:chipSpacingHorizontal="4dp"
                         app:chipSpacingVertical="5dp"
-                        app:layout_constraintEnd_toEndOf="@id/gl_end"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/iv_bakery"
                         app:layout_constraintTop_toBottomOf="@id/tv_bakery"
                         app:layout_constraintWidth="0dp">
@@ -137,7 +138,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing10"
-                        android:src="@drawable/ic_map"
+                        android:src="@drawable/ic_station"
                         app:layout_constraintStart_toStartOf="@id/tv_bakery"
                         app:layout_constraintTop_toBottomOf="@id/cg_bakery_category" />
 
@@ -146,7 +147,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
-                        android:text="@{@string/nearest_station(review.bakery.firstNearStation, review.bakery.secondNearStation)}"
+                        android:text="@{viewModel.bakeryInfo.secondNearestStation.empty ? viewModel.bakeryInfo.firstNearestStation : @string/nearest_station(viewModel.bakeryInfo.firstNearestStation, viewModel.bakeryInfo.secondNearestStation)}"
                         android:textAppearance="@style/TextAppearance.CaptionM1"
                         android:textColor="@color/gray_400"
                         app:layout_constraintBottom_toBottomOf="@+id/iv_bakery_map"
