@@ -52,10 +52,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         binding.ivHomeFilter.setOnClickListener {
             moveToFilter()
         }
-        binding.ivHomeSpeechBubbleClose.setOnClickListener {
-            binding.ivHomeSpeechBubble.visibility = View.GONE
-            binding.ivHomeSpeechBubbleClose.visibility = View.GONE
-            binding.tvHomeSpeechBubbleTitle.visibility = View.GONE
+
+        binding.includeSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
+            binding.includeSpeechBubble.root.visibility = View.GONE
         }
     }
 
@@ -83,9 +82,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
             binding.tvHomeBestBakeryTitle1.setVisibility(isFilterSelected)
             binding.tvHomeBestReviewTitle1.setVisibility(isFilterSelected)
-            binding.ivHomeSpeechBubble.setVisibility(!isFilterSelected)
-            binding.ivHomeSpeechBubbleClose.setVisibility(!isFilterSelected)
-            binding.tvHomeSpeechBubbleTitle.setVisibility(!isFilterSelected)
+            binding.includeSpeechBubble.root.setVisibility(!isFilterSelected)
         }.launchIn(lifecycleScope)
     }
 
