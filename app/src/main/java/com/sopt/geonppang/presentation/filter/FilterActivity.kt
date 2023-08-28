@@ -52,16 +52,23 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
             when (binding.vpFilterContainer.currentItem) {
                 2 -> {
                     viewModel.setUserFilter()
-                    if (viewModel.nextActivityName.value == FilterInfoType.HOME.activityName) {
-                        startActivity(Intent(this, MainActivity::class.java))
-                    } else if (viewModel.nextActivityName.value == FilterInfoType.BAKERYLIST.activityName) {
-                        val intent = Intent(this, MainActivity::class.java)
-                        intent.putExtra(BAKERY_LIST_FRAGMENT, BAKERY_LIST_FRAGMENT)
-                        startActivity(intent)
-                    } else {
-                        val intent = Intent(this, MainActivity::class.java)
-                        intent.putExtra(MYPAGE_FRAGMENT, MYPAGE_FRAGMENT)
-                        startActivity(intent)
+
+                    when (viewModel.previousActivity.value) {
+                        FilterInfoType.BAKERYLIST -> {
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.putExtra(BAKERY_LIST_FRAGMENT, BAKERY_LIST_FRAGMENT)
+                            startActivity(intent)
+                        }
+
+                        FilterInfoType.MYPAGE -> {
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.putExtra(MYPAGE_FRAGMENT, MYPAGE_FRAGMENT)
+                            startActivity(intent)
+                        }
+
+                        else -> {
+                            startActivity(Intent(this, MainActivity::class.java))
+                        }
                     }
                 }
 
@@ -94,9 +101,8 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
     }
 
     private fun setNextActivity() {
-        val filterInfoType = intent.getStringExtra(FILTER_INFO)
-        filterInfoType?.let { filterInfoType ->
-            viewModel.setNextActivity(filterInfoType)
+        intent.getStringExtra(FILTER_INFO)?.let { filterInfoType ->
+            viewModel.setPreviousActivity(FilterInfoType.valueOf(filterInfoType))
         }
     }
 

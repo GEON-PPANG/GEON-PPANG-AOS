@@ -9,6 +9,7 @@ import com.sopt.geonppang.data.model.request.RequestFilter
 import com.sopt.geonppang.domain.model.SelectedFilter
 import com.sopt.geonppang.domain.repository.FilterRepository
 import com.sopt.geonppang.presentation.type.BreadFilterType
+import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.presentation.type.MainPurposeType
 import com.sopt.geonppang.presentation.type.NutrientFilterType
 import com.sopt.geonppang.util.UiState
@@ -25,10 +26,10 @@ class FilterViewModel @Inject constructor(
     private val _selectedFilterState = MutableStateFlow<UiState<SelectedFilter>>(UiState.Loading)
     val selectedFilterState get() = _selectedFilterState.asStateFlow()
 
-    private val _nextActivityName = MutableStateFlow<String?>(null)
-    val nextActivityName get() = _nextActivityName.asStateFlow()
+    private val _previousActivity = MutableStateFlow<FilterInfoType?>(null)
+    val previousActivity get() = _previousActivity.asStateFlow()
 
-    private val _isLastPage = MutableStateFlow<Boolean>(false)
+    private val _isLastPage = MutableStateFlow(false)
     val isLastPage get() = _isLastPage.asStateFlow()
 
     fun setIsLastPage(boolean: Boolean) {
@@ -85,8 +86,8 @@ class FilterViewModel @Inject constructor(
         }
     }
 
-    fun setNextActivity(filterInfoTypeName: String) {
-        _nextActivityName.value = filterInfoTypeName
+    fun setPreviousActivity(filterInfoType: FilterInfoType) {
+        _previousActivity.value = filterInfoType
     }
 
     fun setUserFilter() {
