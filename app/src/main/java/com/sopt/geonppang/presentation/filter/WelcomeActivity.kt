@@ -33,7 +33,7 @@ class WelcomeActivity : BindingActivity<ActivityWelcomeBinding>(R.layout.activit
 
     private fun moveToFilter() {
         val intent = Intent(this, FilterActivity::class.java)
-        intent.putExtra(FILTER_INFO, FilterInfoType.ONBOARDING)
+        intent.putExtra(FILTER_INFO, FilterInfoType.ONBOARDING.name)
         startActivity(intent)
         finish()
     }

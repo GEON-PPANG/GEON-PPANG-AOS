@@ -102,7 +102,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private fun moveToFilter() {
         val intent = Intent(requireContext(), FilterActivity::class.java)
-        intent.putExtra(FILTER_INFO, FilterInfoType.HOME)
+        intent.putExtra(FILTER_INFO, FilterInfoType.HOME.name)
         startActivity(intent)
     }
 

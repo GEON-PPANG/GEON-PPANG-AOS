@@ -66,7 +66,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun moveToFilter() {
         val intent = Intent(requireContext(), FilterActivity::class.java)
-        intent.putExtra(FILTER_INFO, FilterInfoType.MYPAGE)
+        intent.putExtra(FILTER_INFO, FilterInfoType.MYPAGE.name)
         startActivity(intent)
     }
 
