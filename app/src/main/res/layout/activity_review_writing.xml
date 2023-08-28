@@ -294,7 +294,7 @@
                     android:layout_height="196dp"
                     android:layout_marginHorizontal="@dimen/spacing24"
                     android:layout_marginTop="32dp"
-                    android:background="@{viewModel.reviewText.length >=10 | viewModel.reviewText.empty? @drawable/background_review_box : @drawable/background_review_error_box}"
+                    android:background="@drawable/background_review_box"
                     android:enabled="@{viewModel.isLike == LikeType.BAD | viewModel.isUserKeyWordTypeSelected}"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
@@ -305,7 +305,7 @@
                     android:paddingVertical="20dp"
                     android:text="@={viewModel.reviewText}"
                     android:textAppearance="@style/TextAppearance.Subhead"
-                    android:textColor="@{viewModel.reviewText.length >=10? @color/gray_700 : @color/error}"
+                    android:textColor="@color/gray_700"
                     android:textColorHint="@color/enable_review_writing_color"
                     app:layout_constraintTop_toBottomOf="@id/cg_review_recommend_chip_select"
                     tools:hint="추가로 좋았던 점이 있다면 말씀해주세요!" />
@@ -319,7 +319,7 @@
                     android:layout_marginBottom="@dimen/spacing12"
                     android:text="@{@string/review_text_count(viewModel.reviewText.length)}"
                     android:textAppearance="@style/TextAppearance.CaptionM1"
-                    android:textColor="@{viewModel.reviewText.empty | viewModel.reviewText.length >=10 ? @color/gray_500 : @color/error}"
+                    android:textColor="@color/gray_500"
                     app:layout_constraintBottom_toBottomOf="@+id/et_write_your_review"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     tools:text="0/120자" />
