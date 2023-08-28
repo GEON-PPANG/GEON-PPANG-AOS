@@ -8,7 +8,7 @@
         android:id="@+id/iv_speech_bubble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_speech_bubble"
+        android:background="@drawable/background_right_speech_bubble"
         android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

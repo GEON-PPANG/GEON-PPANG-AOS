@@ -187,7 +187,7 @@
         </androidx.core.widget.NestedScrollView>
 
         <include
-            android:id="@+id/include_speech_bubble"
+            android:id="@+id/include_home_speech_bubble"
             layout="@layout/view_speech_bubble"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
