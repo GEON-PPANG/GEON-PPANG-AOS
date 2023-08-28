@@ -12,6 +12,8 @@ import com.sopt.geonppang.databinding.FragmentMyPageBinding
 import com.sopt.geonppang.presentation.filter.FilterActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.binding.BindingFragment
+import com.sopt.geonppang.util.setInvisibility
+import com.sopt.geonppang.util.setVisibility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -33,6 +35,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun initLayout() {
         viewModel.fetchMypageInfo()
+        binding.includeMyPageSpeechBubble.ivSpeechBubble.setImageResource(R.drawable.background_left_speech_bubble)
     }
 
     private fun addListeners() {
@@ -47,6 +50,10 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         binding.ivMyPageProfileRightArrow.setOnClickListener {
             moveToFilter()
         }
+
+        binding.includeMyPageSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
+            binding.includeMyPageSpeechBubble.root.setVisibility(false)
+        }
     }
 
     private fun collectData() {
@@ -54,6 +61,13 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
             binding.chipMyPageProfilePurpose.text =
                 this.context?.getString(viewModel.toMainPurposeTitleRes()) ?: ""
         }.launchIn(lifecycleScope)
+
+        viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
+            binding.includeMyPageSpeechBubble.root.setVisibility(!isFilterSelected)
+            binding.chipMyPageProfilePurpose.setInvisibility(isFilterSelected)
+            binding.chipGroupMyPageProfileBread.setInvisibility(isFilterSelected)
+        }.launchIn(lifecycleScope)
+
         binding.tvMyPageAppVersion.text = getString(R.string.tv_my_page_app_version, APP_VERSION)
     }
 

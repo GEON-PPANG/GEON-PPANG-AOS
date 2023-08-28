@@ -36,8 +36,8 @@ class MyPageViewModel @Inject constructor(
     private var _myBookmarkCount = MutableStateFlow<Int?>(null)
     val myBookmarkCount get() = _myBookmarkCount.asStateFlow()
 
-    private val _nickName = MutableStateFlow<String?>(null)
-    val nickName get() = _nickName.asStateFlow()
+    private var _isFilterSelected = MutableStateFlow(false)
+    val isFilterSelected = _isFilterSelected.asStateFlow()
 
     init {
         fetchMypageReviewList()
@@ -57,6 +57,7 @@ class MyPageViewModel @Inject constructor(
             mypageRepository.fetchMypageInfo()
                 .onSuccess { myInfo ->
                     _mypageInfoState.value = myInfo
+                    _isFilterSelected.value = (myInfo.mainPurpose != NONE)
                 }
         }
     }
@@ -82,5 +83,9 @@ class MyPageViewModel @Inject constructor(
                 _mypageBookmarkListState.value = UiState.Error(throwable.message)
             }
         }
+    }
+
+    companion object {
+        const val NONE = "NONE"
     }
 }
