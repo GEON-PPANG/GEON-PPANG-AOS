@@ -52,7 +52,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         }
 
         binding.includeMyPageSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
-            binding.includeMyPageSpeechBubble.root.setVisibility(false)
+            binding.includeMyPageSpeechBubble.root.setInvisibility(false)
         }
     }
 
@@ -65,7 +65,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
             binding.includeMyPageSpeechBubble.root.setVisibility(!isFilterSelected)
             binding.chipMyPageProfilePurpose.setInvisibility(isFilterSelected)
-            binding.chipGroupMyPageProfileBread.setInvisibility(isFilterSelected)
+            binding.chipGroupMyPageProfileBread.setVisibility(isFilterSelected)
         }.launchIn(lifecycleScope)
 
         binding.tvMyPageAppVersion.text = getString(R.string.tv_my_page_app_version, APP_VERSION)
