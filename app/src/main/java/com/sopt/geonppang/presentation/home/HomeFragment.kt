@@ -54,7 +54,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         }
 
         binding.includeHomeSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
-            binding.includeHomeSpeechBubble.root.visibility = View.GONE
+            binding.includeHomeSpeechBubble.root.setVisibility(false)
         }
     }
 
