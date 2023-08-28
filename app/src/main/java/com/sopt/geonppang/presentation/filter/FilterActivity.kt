@@ -2,6 +2,7 @@ package com.sopt.geonppang.presentation.filter
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
@@ -24,7 +25,6 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
         initLayout()
         addListeners()
         addObservers()
-        setNextActivity()
     }
 
     private fun initLayout() {
@@ -32,6 +32,11 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
         binding.vpFilterContainer.adapter = adapter
         binding.vpFilterContainer.isUserInputEnabled = false
         binding.tvFilterPageNumber.text = setPageText(PAGE)
+        setPreviousActivity()
+
+        if (binding.vpFilterContainer.currentItem == 0 && viewModel.previousActivity.value == FilterInfoType.ONBOARDING) {
+            binding.ivFilterArrowLeft.visibility = View.INVISIBLE
+        }
     }
 
     private fun addListeners() {
@@ -100,7 +105,7 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
         }
     }
 
-    private fun setNextActivity() {
+    private fun setPreviousActivity() {
         intent.getStringExtra(FILTER_INFO)?.let { filterInfoType ->
             viewModel.setPreviousActivity(FilterInfoType.valueOf(filterInfoType))
         }
