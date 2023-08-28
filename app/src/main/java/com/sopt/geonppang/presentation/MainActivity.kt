@@ -30,7 +30,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             R.id.menu_mypage
         } else if (isBakeryListRequested) {
             navigateTo<BakeryListFragment>()
-            R.id.menu_sotrelist
+            R.id.menu_bakery_list
         } else {
             navigateTo<HomeFragment>()
             R.id.menu_home
@@ -39,7 +39,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         binding.bnvHome.setOnItemSelectedListener { menu ->
             when (menu.itemId) {
                 R.id.menu_home -> navigateTo<HomeFragment>()
-                R.id.menu_sotrelist -> navigateTo<BakeryListFragment>()
+                R.id.menu_bakery_list -> navigateTo<BakeryListFragment>()
                 R.id.menu_mypage -> navigateTo<MyPageFragment>()
             }
             true
