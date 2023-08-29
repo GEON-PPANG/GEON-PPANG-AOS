@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.signup
+package com.sopt.geonppang.presentation.auth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -10,7 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor(private val gpDataStore: GPDataStore) : ViewModel() {
+class AuthViewModel @Inject constructor(private val gpDataStore: GPDataStore) : ViewModel() {
     val email = MutableLiveData("")
     val password = MutableLiveData("")
     val password_check = MutableLiveData("")

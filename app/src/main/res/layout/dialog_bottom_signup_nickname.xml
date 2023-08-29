@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.sopt.geonppang.presentation.signup.SignUpViewModel" />
+            type="com.sopt.geonppang.presentation.auth.AuthViewModel" />
 
     </data>
 

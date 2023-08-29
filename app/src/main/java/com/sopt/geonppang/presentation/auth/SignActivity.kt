@@ -1,10 +1,9 @@
-package com.sopt.geonppang.presentation
+package com.sopt.geonppang.presentation.auth
 
 import android.content.Intent
 import android.os.Bundle
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySignBinding
-import com.sopt.geonppang.presentation.signup.SignUpActivity
 import com.sopt.geonppang.util.binding.BindingActivity
 
 class SignActivity :
