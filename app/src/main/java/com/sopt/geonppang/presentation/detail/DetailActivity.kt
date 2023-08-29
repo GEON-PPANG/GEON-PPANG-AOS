@@ -168,6 +168,12 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }
     }
 
+    private fun moveToWebPage(link: String) {
+        Intent(this, WebViewActivity::class.java).apply {
+            putExtra(WebViewActivity.WEB_VIEW_LINK, link)
+        }.also { startActivity(it) }
+    }
+
     companion object {
         const val BAKERY_ID = "bakeryId"
         const val BAKERY_INFO = "bakeryInfo"
