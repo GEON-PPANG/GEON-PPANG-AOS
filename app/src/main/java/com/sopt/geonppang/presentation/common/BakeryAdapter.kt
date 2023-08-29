@@ -28,8 +28,6 @@ class BakeryAdapter(
             binding.root.setOnClickListener {
                 moveToDetail(bakery.bakeryId)
             }
-            // TODO 가까운 전철역 하나 일 경우 수정 필요
-//            binding.chipStation2.setVisibility(bakery.secondNearStation != "")
             binding.executePendingBindings()
         }
     }

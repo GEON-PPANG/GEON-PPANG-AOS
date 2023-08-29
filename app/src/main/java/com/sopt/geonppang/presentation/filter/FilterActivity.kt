@@ -2,7 +2,7 @@ package com.sopt.geonppang.presentation.filter
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
@@ -12,14 +12,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_filter) {
-    private lateinit var viewModel: FilterViewModel
+    private val viewModel: FilterViewModel by viewModels()
     private lateinit var adapter: FilterViewPagerAdapter
     private var maxPage: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProvider(this).get(FilterViewModel::class.java)
 
         initLayout()
         addListeners()
