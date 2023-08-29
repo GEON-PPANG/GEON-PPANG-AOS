@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.filter
+package com.sopt.geonppang.presentation.filterSetting
 
 import android.os.Bundle
 import android.view.View
@@ -9,7 +9,7 @@ import com.sopt.geonppang.util.binding.BindingFragment
 
 class BreadTypeFilterFragment :
     BindingFragment<FragmentBreadTypeFilterBinding>(R.layout.fragment_bread_type_filter) {
-    private val viewModel: FilterViewModel by activityViewModels()
+    private val viewModel: FilterSettingViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

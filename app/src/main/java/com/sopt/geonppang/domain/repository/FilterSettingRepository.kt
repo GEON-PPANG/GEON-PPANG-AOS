@@ -1,10 +1,10 @@
 package com.sopt.geonppang.domain.repository
 
-import com.sopt.geonppang.data.model.request.RequestFilter
+import com.sopt.geonppang.data.model.request.RequestSettingFilter
 import com.sopt.geonppang.domain.model.SelectedFilter
 
-interface FilterRepository {
+interface FilterSettingRepository {
     suspend fun setUserFilter(
-        requestFilter: RequestFilter
+        requestSettingFilter: RequestSettingFilter
     ): Result<SelectedFilter>
 }

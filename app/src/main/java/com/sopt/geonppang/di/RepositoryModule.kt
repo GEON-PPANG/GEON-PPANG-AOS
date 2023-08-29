@@ -50,8 +50,8 @@ interface RepositoryModule {
     @Binds
     @Singleton
     fun bindFilterRepository(
-        filterRepositoryImpl: FilterRepositoryImpl,
-    ): FilterRepository
+        filterRepositoryImpl: FilterSettingRepositoryImpl,
+    ): FilterSettingRepository
 
     @Binds
     @Singleton

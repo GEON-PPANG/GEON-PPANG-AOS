@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.filter
+package com.sopt.geonppang.presentation.filterSetting
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.datasource.local.GPDataStore
-import com.sopt.geonppang.data.model.request.RequestFilter
+import com.sopt.geonppang.data.model.request.RequestSettingFilter
 import com.sopt.geonppang.domain.model.SelectedFilter
-import com.sopt.geonppang.domain.repository.FilterRepository
+import com.sopt.geonppang.domain.repository.FilterSettingRepository
 import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.presentation.type.MainPurposeType
 import com.sopt.geonppang.presentation.type.NutrientFilterType
@@ -20,8 +20,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FilterViewModel @Inject constructor(
-    private val filterRepository: FilterRepository,
+class FilterSettingViewModel @Inject constructor(
+    private val filterRepository: FilterSettingRepository,
     private val gpDataStore: GPDataStore
 ) : ViewModel() {
     private val _selectedFilterState = MutableStateFlow<UiState<SelectedFilter>>(UiState.Loading)
@@ -94,15 +94,15 @@ class FilterViewModel @Inject constructor(
     fun setUserFilter() {
         viewModelScope.launch {
             _mainPurpose.value?.let {
-                RequestFilter(
+                RequestSettingFilter(
                     it.name,
-                    RequestFilter.BreadType(
+                    RequestSettingFilter.BreadType(
                         breadFilterType.value?.get(BreadFilterType.GLUTENFREE) == true,
                         breadFilterType.value?.get(BreadFilterType.VEGAN) == true,
                         breadFilterType.value?.get(BreadFilterType.NUTFREE) == true,
                         breadFilterType.value?.get(BreadFilterType.SUGARFREE) == true,
                     ),
-                    RequestFilter.NutrientType(
+                    RequestSettingFilter.NutrientType(
                         nutrientFilterType.value?.get(NutrientFilterType.NUTRIENT) == true,
                         nutrientFilterType.value?.get(NutrientFilterType.INGREDIENT) == true,
                         nutrientFilterType.value?.get(NutrientFilterType.NOT) == true,

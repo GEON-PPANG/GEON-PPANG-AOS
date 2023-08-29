@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.BuildConfig
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentMyPageBinding
-import com.sopt.geonppang.presentation.filter.FilterActivity
+import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -67,7 +67,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun moveToFilter() {
-        val intent = Intent(requireContext(), FilterActivity::class.java)
+        val intent = Intent(requireContext(), FilterSettingActivity::class.java)
         intent.putExtra(FILTER_INFO, FilterInfoType.MYPAGE.activityName)
         intent.putExtra(MAX_PAGE, FilterInfoType.MYPAGE.maxPage)
         startActivity(intent)
