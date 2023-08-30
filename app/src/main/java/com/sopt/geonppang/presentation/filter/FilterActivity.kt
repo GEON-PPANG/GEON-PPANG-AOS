@@ -57,7 +57,6 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
 
                 else -> {
                     binding.vpFilterContainer.currentItem--
-                    binding.btnFilterNext.isEnabled = true
                 }
             }
         }
@@ -92,7 +91,6 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
                     }
 
                     binding.vpFilterContainer.currentItem++
-                    binding.btnFilterNext.isEnabled = false
                 }
             }
         }
@@ -113,6 +111,10 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
 
         viewModel.currentItem.observe(this) { currentItem ->
             binding.tvFilterPageNumber.text = setPageText(currentItem + 1)
+        }
+
+        viewModel.currentItemFilterSelected.observe(this) { currentItemFilterSelected ->
+            binding.btnFilterNext.isEnabled = currentItemFilterSelected
         }
     }
 

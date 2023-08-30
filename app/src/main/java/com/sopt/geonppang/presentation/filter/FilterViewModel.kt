@@ -93,6 +93,17 @@ class FilterViewModel @Inject constructor(
         }
     }
 
+    val currentItemFilterSelected: MediatorLiveData<Boolean> = MediatorLiveData<Boolean>().apply {
+        addSource(currentItem) { currentItemValue ->
+            value = when (currentItemValue) {
+                0 -> mainPurpose.value != null
+                1 -> breadFilterType.value?.any { it.value } ?: false
+                2 -> nutrientFilterType.value?.any { it.value } ?: false
+                else -> false
+            }
+        }
+    }
+
     fun setPreviousActivity(filterInfoType: FilterInfoType) {
         _previousActivity.value = filterInfoType
     }
