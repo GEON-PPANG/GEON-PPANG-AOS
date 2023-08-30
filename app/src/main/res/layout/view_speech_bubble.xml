@@ -31,7 +31,7 @@
         android:id="@+id/iv_speech_bubble_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing12"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="@dimen/spacing12"
         android:src="@drawable/ic_close"
         app:layout_constraintEnd_toEndOf="@id/iv_speech_bubble"

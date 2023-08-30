@@ -35,7 +35,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun initLayout() {
         viewModel.fetchMypageInfo()
-        binding.includeMyPageSpeechBubble.ivSpeechBubble.setImageResource(R.drawable.background_left_speech_bubble)
+        binding.includeMyPageSpeechBubble.ivSpeechBubble.setBackgroundResource(R.drawable.background_left_speech_bubble)
     }
 
     private fun addListeners() {
