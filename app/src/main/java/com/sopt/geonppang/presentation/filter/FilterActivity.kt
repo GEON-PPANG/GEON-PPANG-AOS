@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.viewpager2.widget.ViewPager2
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
@@ -29,9 +30,17 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
 
     private fun initLayout() {
         adapter = FilterViewPagerAdapter(this)
+
         binding.vpFilterContainer.adapter = adapter
         binding.vpFilterContainer.isUserInputEnabled = false
-        binding.tvFilterPageNumber.text = setPageText(PAGE)
+        binding.vpFilterContainer.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                viewModel.setCurrentItem(position)
+            }
+        })
+
         setPreviousActivity()
 
         if (binding.vpFilterContainer.currentItem == 0 && viewModel.previousActivity.value == FilterInfoType.ONBOARDING) {
@@ -84,8 +93,6 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
 
                     binding.vpFilterContainer.currentItem++
                     binding.btnFilterNext.isEnabled = false
-                    binding.tvFilterPageNumber.text =
-                        setPageText(binding.vpFilterContainer.currentItem + 1)
                 }
             }
         }
@@ -103,6 +110,10 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
         viewModel.isUserNutrientFilterTypeSelected.observe(this) { isUserNutrientFilterTypeSelected ->
             binding.btnFilterNext.isEnabled = isUserNutrientFilterTypeSelected
         }
+
+        viewModel.currentItem.observe(this) { currentItem ->
+            binding.tvFilterPageNumber.text = setPageText(currentItem + 1)
+        }
     }
 
     private fun setPreviousActivity() {
@@ -119,7 +130,6 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
         const val FILTER_INFO = "filterInfo"
         const val MYPAGE_FRAGMENT = "MyPageFragment"
         const val BAKERY_LIST_FRAGMENT = "BakeryListFragment"
-        const val PAGE = 1
         const val PAGE_FORMAT = "%d/3"
     }
 }

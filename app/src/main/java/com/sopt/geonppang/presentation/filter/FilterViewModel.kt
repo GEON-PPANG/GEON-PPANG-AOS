@@ -36,6 +36,13 @@ class FilterViewModel @Inject constructor(
         _isLastPage.value = boolean
     }
 
+    private val _currentItem: MutableLiveData<Int> = MutableLiveData()
+    val currentItem: LiveData<Int> = _currentItem
+
+    fun setCurrentItem(position: Int) {
+        _currentItem.value = position
+    }
+
     private val _mainPurpose: MutableLiveData<MainPurposeType?> = MutableLiveData()
     val mainPurpose: LiveData<MainPurposeType?> = _mainPurpose
 
