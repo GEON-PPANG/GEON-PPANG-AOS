@@ -96,17 +96,18 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun showLogoutDialog() {
-        logoutDialog = LogoutDialog(requireContext())
-        logoutDialog.show()
+        logoutDialog = LogoutDialog()
+        logoutDialog.show(childFragmentManager, DIALOG)
     }
 
     private fun showDeletionDialog() {
-        deletionDialog = DeletionDialog(requireContext())
-        deletionDialog.show()
+        deletionDialog = DeletionDialog()
+        deletionDialog.show(childFragmentManager, DIALOG)
     }
 
     companion object {
         const val FILTER_INFO = "filterInfo"
         const val APP_VERSION = BuildConfig.VERSION_NAME
+        const val DIALOG = "dialog"
     }
 }
