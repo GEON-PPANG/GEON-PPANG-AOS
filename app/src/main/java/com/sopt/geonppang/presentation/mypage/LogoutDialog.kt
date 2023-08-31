@@ -8,7 +8,6 @@ import android.view.WindowManager
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.DialogLogoutBinding
 import com.sopt.geonppang.presentation.SignActivity
-import com.sopt.geonppang.presentation.type.DialogType
 
 class LogoutDialog(context: Context) : Dialog(context) {
     private lateinit var binding: DialogLogoutBinding
@@ -22,10 +21,11 @@ class LogoutDialog(context: Context) : Dialog(context) {
     }
 
     private fun initLayout() {
-        window!!.setLayout(
+        window?.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.WRAP_CONTENT
+            WindowManager.LayoutParams.MATCH_PARENT,
         )
+        window?.setBackgroundDrawableResource(R.color.dialog_background)
         setCancelable(false)
         setCanceledOnTouchOutside(true)
     }
