@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     private val viewModel by viewModels<MyPageViewModel>()
+    private lateinit var logoutDialog: LogoutDialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,6 +49,10 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         binding.ivMyPageProfileRightArrow.setOnClickListener {
             moveToFilter()
         }
+
+        binding.tvMyPageLogout.setOnClickListener {
+            showLogoutDialog()
+        }
     }
 
     private fun collectData() {
@@ -71,6 +76,11 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         intent.putExtra(FILTER_INFO, FilterInfoType.MYPAGE.activityName)
         intent.putExtra(MAX_PAGE, FilterInfoType.MYPAGE.maxPage)
         startActivity(intent)
+    }
+
+    private fun showLogoutDialog() {
+        logoutDialog = LogoutDialog(requireContext())
+        logoutDialog.show()
     }
 
     companion object {
