@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.onEach
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     private val viewModel by viewModels<MyPageViewModel>()
     private lateinit var logoutDialog: LogoutDialog
-    private lateinit var deletionDialog: DeletionDialog
+    private lateinit var withdrawDialog: WithdrawDialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,8 +57,8 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
             showLogoutDialog()
         }
 
-        binding.tvMyPageDeletion.setOnClickListener {
-            showDeletionDialog()
+        binding.tvMyPageWithdraw.setOnClickListener {
+            showWithdrawDialog()
         }
 
         binding.includeMyPageSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
@@ -100,9 +100,9 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         logoutDialog.show(childFragmentManager, DIALOG)
     }
 
-    private fun showDeletionDialog() {
-        deletionDialog = DeletionDialog()
-        deletionDialog.show(childFragmentManager, DIALOG)
+    private fun showWithdrawDialog() {
+        withdrawDialog = WithdrawDialog()
+        withdrawDialog.show(childFragmentManager, DIALOG)
     }
 
     companion object {

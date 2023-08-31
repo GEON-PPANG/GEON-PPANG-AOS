@@ -50,7 +50,7 @@
     <string name="my_page_version_info">버전 정보</string>
     <string name="tv_my_page_app_version">v%s</string>
     <string name="my_page_logout">로그아웃</string>
-    <string name="my_page_deletion">회원탈퇴</string>
+    <string name="my_page_withdraw">회원탈퇴</string>
 
     <string name="my_store_list_empty_view_description">저장된 건빵집이 없어요!</string>
 
@@ -173,8 +173,8 @@
     <string name="dialog_type_logout_left_btn">아니요</string>
     <string name="dialog_type_logout_right_btn">네</string>
 
-    <!--deletion dialog-->
-    <string name="dialog_type_deletion_context">회원님의 정보가 사라집니다.\n정말로 떠나실건가요?</string>
-    <string name="dialog_type_deletion_left_btn">더 써볼래요</string>
-    <string name="dialog_type_deletion_right_btn">떠날래요</string>
+    <!--withdraw dialog-->
+    <string name="dialog_type_withdraw_context">회원님의 정보가 사라집니다.\n정말로 떠나실건가요?</string>
+    <string name="dialog_type_withdraw_left_btn">더 써볼래요</string>
+    <string name="dialog_type_withdraw_right_btn">떠날래요</string>
 </resources>
