@@ -2,7 +2,6 @@ package com.sopt.geonppang.presentation.mypage
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.geonppang.data.datasource.local.GPDataStore
 import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.domain.model.Profile
@@ -18,7 +17,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyPageViewModel @Inject constructor(
-    private val gpDataStore: GPDataStore,
     private val mypageRepository: MypageRepository,
 ) : ViewModel() {
     private var _mypageInfoState = MutableStateFlow<Profile?>(null)
@@ -38,16 +36,12 @@ class MyPageViewModel @Inject constructor(
     private var _myBookmarkCount = MutableStateFlow<Int?>(null)
     val myBookmarkCount get() = _myBookmarkCount.asStateFlow()
 
-    private val _nickName = MutableStateFlow<String?>(null)
-    val nickName get() = _nickName.asStateFlow()
+    private var _isFilterSelected = MutableStateFlow(false)
+    val isFilterSelected = _isFilterSelected.asStateFlow()
 
     init {
         fetchMypageReviewList()
         fetchMypageBookmarkList()
-    }
-
-    fun setUserNickName() {
-        _nickName.value = gpDataStore.userNickname
     }
 
     fun toMainPurposeTitleRes(): Int {
@@ -63,6 +57,7 @@ class MyPageViewModel @Inject constructor(
             mypageRepository.fetchMypageInfo()
                 .onSuccess { myInfo ->
                     _mypageInfoState.value = myInfo
+                    _isFilterSelected.value = (myInfo.mainPurpose != NONE)
                 }
         }
     }
@@ -88,5 +83,9 @@ class MyPageViewModel @Inject constructor(
                 _mypageBookmarkListState.value = UiState.Error(throwable.message)
             }
         }
+    }
+
+    companion object {
+        const val NONE = "NONE"
     }
 }
