@@ -13,14 +13,14 @@ enum class DialogType(
 ) {
     LOGOUT(
         R.drawable.ic_sad,
-        R.string.dialog_type_logout_title,
+        R.string.my_page_logout,
         R.string.dialog_type_logout_context,
         R.string.dialog_type_logout_left_btn,
         R.string.dialog_type_logout_right_btn
     ),
     DELETION(
         R.drawable.ic_crying,
-        R.string.dialog_type_deletion_title,
+        R.string.my_page_deletion,
         R.string.dialog_type_deletion_context,
         R.string.dialog_type_deletion_left_btn,
         R.string.dialog_type_deletion_right_btn
