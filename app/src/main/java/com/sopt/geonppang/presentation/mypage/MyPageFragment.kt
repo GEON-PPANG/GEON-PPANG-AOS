@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.onEach
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     private val viewModel by viewModels<MyPageViewModel>()
     private lateinit var logoutDialog: LogoutDialog
+    private lateinit var deletionDialog: DeletionDialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,6 +54,10 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         binding.tvMyPageLogout.setOnClickListener {
             showLogoutDialog()
         }
+
+        binding.tvMyPageDeletion.setOnClickListener {
+            showDeletionDialog()
+        }
     }
 
     private fun collectData() {
@@ -81,6 +86,11 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     private fun showLogoutDialog() {
         logoutDialog = LogoutDialog(requireContext())
         logoutDialog.show()
+    }
+
+    private fun showDeletionDialog() {
+        deletionDialog = DeletionDialog(requireContext())
+        deletionDialog.show()
     }
 
     companion object {
