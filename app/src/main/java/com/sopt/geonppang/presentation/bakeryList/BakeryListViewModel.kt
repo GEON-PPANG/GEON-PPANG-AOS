@@ -37,13 +37,6 @@ class BakeryListViewModel @Inject constructor(
         fetchBakeryList()
     }
 
-    fun setBakeryCategoryType(bakeryCategory: BakeryCategoryType) {
-        val isChecked = bakeryCategoryType.value[bakeryCategory] ?: return
-        bakeryCategoryType.value = bakeryCategoryType.value.toMutableMap().apply {
-            this[bakeryCategory] = !isChecked
-        }
-    }
-
     fun setBakerySortType(bakerySortType: BakerySortType) {
         _bakerySort.value = bakerySortType
     }
@@ -67,6 +60,13 @@ class BakeryListViewModel @Inject constructor(
                 .onFailure { throwable ->
                     _bakeryListState.value = UiState.Error(throwable.message)
                 }
+        }
+    }
+
+    fun setBakeryCategoryType(bakeryCategory: BakeryCategoryType) {
+        val isChecked = bakeryCategoryType.value[bakeryCategory] ?: return
+        bakeryCategoryType.value = bakeryCategoryType.value.toMutableMap().apply {
+            this[bakeryCategory] = !isChecked
         }
     }
 }

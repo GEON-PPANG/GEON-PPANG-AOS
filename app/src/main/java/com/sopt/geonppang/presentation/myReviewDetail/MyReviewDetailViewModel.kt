@@ -16,10 +16,11 @@ import javax.inject.Inject
 class MyReviewDetailViewModel @Inject constructor(
     private val myReviewDetailRepository: MyReviewDetailRepository
 ) : ViewModel() {
+    private val _bakeryInfo = MutableStateFlow<MyReviewBakeryInfo?>(null)
+    val bakeryInfo get() = _bakeryInfo.asStateFlow()
+
     private val _isLikeType = MutableStateFlow(true)
     val isLikeType get() = _isLikeType.asStateFlow()
-    private val _myReviewText = MutableStateFlow("")
-    val myReviewText get() = _myReviewText.asStateFlow()
     val isRecommendKeywordSelected = MutableStateFlow(
         mapOf(
             TASTY to false,
@@ -28,8 +29,12 @@ class MyReviewDetailViewModel @Inject constructor(
             ZERO_WASTE to false
         )
     )
-    private val _bakeryInfo = MutableStateFlow<MyReviewBakeryInfo?>(null)
-    val bakeryInfo get() = _bakeryInfo.asStateFlow()
+    private val _myReviewText = MutableStateFlow("")
+    val myReviewText get() = _myReviewText.asStateFlow()
+
+    fun setUserInfo(bakeryInfo: MyReviewBakeryInfo) {
+        _bakeryInfo.value = bakeryInfo
+    }
 
     fun fetchMyReviewDetail(reviewId: Int) {
         viewModelScope.launch {
@@ -51,10 +56,6 @@ class MyReviewDetailViewModel @Inject constructor(
             selectedKeyWord[recommendKeyword.recommendKeywordId] = true
         }
         isRecommendKeywordSelected.value = selectedKeyWord
-    }
-
-    fun setUserInfo(bakeryInfo: MyReviewBakeryInfo) {
-        _bakeryInfo.value = bakeryInfo
     }
 
     companion object {
