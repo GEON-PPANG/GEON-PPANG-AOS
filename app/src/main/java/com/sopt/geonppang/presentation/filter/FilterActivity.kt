@@ -2,7 +2,6 @@ package com.sopt.geonppang.presentation.filter
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.sopt.geonppang.R
@@ -10,6 +9,7 @@ import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.binding.BindingActivity
+import com.sopt.geonppang.util.setInvisibility
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,18 +34,14 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
         binding.vpFilterContainer.adapter = adapter
         binding.vpFilterContainer.isUserInputEnabled = false
         binding.vpFilterContainer.registerOnPageChangeCallback(object :
-                ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    viewModel.setCurrentItem(position)
-                }
-            })
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                viewModel.setCurrentItem(position)
+            }
+        })
 
         setPreviousActivity()
-
-        if (binding.vpFilterContainer.currentItem == 0 && viewModel.previousActivity.value == FilterInfoType.ONBOARDING) {
-            binding.ivFilterArrowLeft.visibility = View.INVISIBLE
-        }
     }
 
     private fun addListeners() {
@@ -111,6 +107,18 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
 
         viewModel.currentItem.observe(this) { currentItem ->
             binding.tvFilterPageNumber.text = setPageText(currentItem + 1)
+
+            when (currentItem) {
+                0 -> {
+                    if (viewModel.previousActivity.value == FilterInfoType.ONBOARDING) {
+                        binding.ivFilterArrowLeft.setInvisibility(false)
+                    }
+                }
+
+                else -> {
+                    binding.ivFilterArrowLeft.setInvisibility(true)
+                }
+            }
         }
 
         viewModel.currentItemFilterSelected.observe(this) { currentItemFilterSelected ->
