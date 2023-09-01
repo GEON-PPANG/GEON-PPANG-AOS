@@ -13,6 +13,7 @@ import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.binding.BindingFragment
 import com.sopt.geonppang.util.setInvisibility
+import com.sopt.geonppang.util.setVisibility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -70,6 +71,12 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         viewModel.mypageInfoState.flowWithLifecycle(lifecycle).onEach {
             binding.chipMyPageProfilePurpose.text =
                 this.context?.getString(viewModel.toMainPurposeTitleRes()) ?: ""
+        }.launchIn(lifecycleScope)
+
+        viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
+            binding.includeMyPageSpeechBubble.root.setVisibility(!isFilterSelected)
+            binding.chipMyPageProfilePurpose.setInvisibility(isFilterSelected)
+            binding.chipGroupMyPageProfileBread.setVisibility(isFilterSelected)
         }.launchIn(lifecycleScope)
     }
 
