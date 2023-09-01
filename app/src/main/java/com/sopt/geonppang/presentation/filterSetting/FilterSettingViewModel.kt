@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.filter
+package com.sopt.geonppang.presentation.filterSetting
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.datasource.local.GPDataStore
 import com.sopt.geonppang.data.model.request.RequestSettingFilter
-import com.sopt.geonppang.data.model.request.RequestFilter
 import com.sopt.geonppang.domain.model.SelectedFilter
 import com.sopt.geonppang.domain.repository.FilterSettingRepository
 import com.sopt.geonppang.presentation.type.BreadFilterType

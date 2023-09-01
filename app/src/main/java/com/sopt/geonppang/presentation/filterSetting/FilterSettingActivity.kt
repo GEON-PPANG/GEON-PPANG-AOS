@@ -15,8 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_filter) {
     private val viewModel: FilterSettingViewModel by viewModels()
-class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_filter) {
-    private val viewModel by viewModels<FilterViewModel>()
     private lateinit var adapter: FilterViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,12 +34,12 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
         binding.vpFilterContainer.adapter = adapter
         binding.vpFilterContainer.isUserInputEnabled = false
         binding.vpFilterContainer.registerOnPageChangeCallback(object :
-                ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    viewModel.setCurrentItem(position)
-                }
-            })
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                viewModel.setCurrentItem(position)
+            }
+        })
 
         setPreviousActivity()
 

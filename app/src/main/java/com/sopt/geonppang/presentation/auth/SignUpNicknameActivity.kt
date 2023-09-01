@@ -1,13 +1,10 @@
-package com.sopt.geonppang.presentation.signup
+package com.sopt.geonppang.presentation.auth
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySignupNicknameBinding
-import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
-import com.sopt.geonppang.presentation.type.FilterInfoType
-import com.sopt.geonppang.presentation.filter.WelcomeActivity
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint

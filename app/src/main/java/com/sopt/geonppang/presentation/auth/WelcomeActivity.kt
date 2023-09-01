@@ -1,10 +1,11 @@
-package com.sopt.geonppang.presentation.filterSetting
+package com.sopt.geonppang.presentation.auth
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityWelcomeBinding
+import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.binding.BindingActivity
 import kotlinx.coroutines.delay
@@ -32,7 +33,7 @@ class WelcomeActivity : BindingActivity<ActivityWelcomeBinding>(R.layout.activit
     }
 
     private fun moveToFilter() {
-        val intent = Intent(this, FilterActivity::class.java)
+        val intent = Intent(this, FilterSettingActivity::class.java)
         intent.putExtra(FILTER_INFO, FilterInfoType.ONBOARDING.name)
         startActivity(intent)
         finish()
