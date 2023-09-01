@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.onEach
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     private val viewModel by viewModels<MyPageViewModel>()
     private lateinit var logoutDialog: LogoutDialog
-    private lateinit var deletionDialog: DeletionDialog
+    private lateinit var withdrawDialog: WithdrawDialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,8 +57,8 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
             showLogoutDialog()
         }
 
-        binding.tvMyPageDeletion.setOnClickListener {
-            showDeletionDialog()
+        binding.tvMyPageWithdraw.setOnClickListener {
+            showWithdrawDialog()
         }
 
         binding.includeMyPageSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
@@ -91,24 +91,23 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun moveToFilter() {
         val intent = Intent(requireContext(), FilterActivity::class.java)
-        intent.putExtra(FILTER_INFO, FilterInfoType.MYPAGE.activityName)
-        intent.putExtra(MAX_PAGE, FilterInfoType.MYPAGE.maxPage)
+        intent.putExtra(FILTER_INFO, FilterInfoType.MYPAGE.name)
         startActivity(intent)
     }
 
     private fun showLogoutDialog() {
-        logoutDialog = LogoutDialog(requireContext())
-        logoutDialog.show()
+        logoutDialog = LogoutDialog()
+        logoutDialog.show(childFragmentManager, DIALOG)
     }
 
-    private fun showDeletionDialog() {
-        deletionDialog = DeletionDialog(requireContext())
-        deletionDialog.show()
+    private fun showWithdrawDialog() {
+        withdrawDialog = WithdrawDialog()
+        withdrawDialog.show(childFragmentManager, DIALOG)
     }
 
     companion object {
         const val FILTER_INFO = "filterInfo"
-        const val MAX_PAGE = "maxPage"
         const val APP_VERSION = BuildConfig.VERSION_NAME
+        const val DIALOG = "dialog"
     }
 }

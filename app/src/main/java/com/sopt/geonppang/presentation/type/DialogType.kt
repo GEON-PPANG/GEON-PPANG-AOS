@@ -18,11 +18,11 @@ enum class DialogType(
         R.string.dialog_type_logout_left_btn,
         R.string.dialog_type_logout_right_btn
     ),
-    DELETION(
+    WITHDRAW(
         R.drawable.ic_crying,
-        R.string.my_page_deletion,
-        R.string.dialog_type_deletion_context,
-        R.string.dialog_type_deletion_left_btn,
-        R.string.dialog_type_deletion_right_btn
+        R.string.my_page_withdraw,
+        R.string.dialog_type_withdraw_context,
+        R.string.dialog_type_withdraw_left_btn,
+        R.string.dialog_type_withdraw_right_btn
     )
 }
