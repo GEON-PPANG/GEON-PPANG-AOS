@@ -29,7 +29,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this.viewLifecycleOwner
+        binding.lifecycleOwner = this
 
         initLayout()
         addListeners()
@@ -52,10 +52,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         binding.ivHomeFilter.setOnClickListener {
             moveToFilter()
         }
-        binding.ivHomeSpeechBubbleClose.setOnClickListener {
-            binding.ivHomeSpeechBubble.visibility = View.GONE
-            binding.ivHomeSpeechBubbleClose.visibility = View.GONE
-            binding.tvHomeSpeechBubbleTitle.visibility = View.GONE
+
+        binding.includeHomeSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
+            binding.includeHomeSpeechBubble.root.setVisibility(false)
         }
     }
 
@@ -83,9 +82,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
             binding.tvHomeBestBakeryTitle1.setVisibility(isFilterSelected)
             binding.tvHomeBestReviewTitle1.setVisibility(isFilterSelected)
-            binding.ivHomeSpeechBubble.setVisibility(!isFilterSelected)
-            binding.ivHomeSpeechBubbleClose.setVisibility(!isFilterSelected)
-            binding.tvHomeSpeechBubbleTitle.setVisibility(!isFilterSelected)
+            binding.includeHomeSpeechBubble.root.setVisibility(!isFilterSelected)
         }.launchIn(lifecycleScope)
     }
 
@@ -102,8 +99,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private fun moveToFilter() {
         val intent = Intent(requireContext(), FilterSettingActivity::class.java)
-        intent.putExtra(FILTER_INFO, FilterInfoType.HOME.activityName)
-        intent.putExtra(MAX_PAGE, FilterInfoType.HOME.maxPage)
+        intent.putExtra(FILTER_INFO, FilterInfoType.HOME.name)
         startActivity(intent)
     }
 

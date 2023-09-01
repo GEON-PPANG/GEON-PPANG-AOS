@@ -67,12 +67,6 @@ class AuthViewModel @Inject constructor(private val gpDataStore: GPDataStore) : 
         return isValidNickname.value == true
     }
 
-    fun saveUserNickname() {
-        nickname.value?.let { nickName ->
-            gpDataStore.userNickname = nickName
-        }
-    }
-
     companion object {
         const val EMAIL_PATTERN = "^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+\$"
         const val NICKNAME_PATTERN = "^[\\sㄱ-ㅎ가-힣0-9a-zA-Z]{1,8}\$"

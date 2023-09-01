@@ -9,8 +9,10 @@ import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentBakeryListBinding
 import com.sopt.geonppang.presentation.detail.DetailActivity
+import com.sopt.geonppang.presentation.filter.FilterActivity
 import com.sopt.geonppang.presentation.search.SearchActivity
 import com.sopt.geonppang.presentation.type.BakerySortType
+import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,6 +50,10 @@ class BakeryListFragment :
         binding.ivSearch.setOnClickListener {
             startActivity(Intent(requireActivity(), SearchActivity::class.java))
         }
+
+        binding.ivBakeryListFilter.setOnClickListener {
+            moveToFilter()
+        }
     }
 
     private fun collectData() {
@@ -74,6 +80,12 @@ class BakeryListFragment :
         startActivity(intent)
     }
 
+    private fun moveToFilter() {
+        val intent = Intent(requireContext(), FilterActivity::class.java)
+        intent.putExtra(FILTER_INFO, FilterInfoType.BAKERYLIST.name)
+        startActivity(intent)
+    }
+
     private fun showBakeryListSortDialog() {
         val bakeryListSortBottomSheetDialog = BakeryListSortBottomSheetDialog()
 
@@ -93,5 +105,6 @@ class BakeryListFragment :
 
     companion object {
         const val BAKERY_ID = "bakeryId"
+        const val FILTER_INFO = "filterInfo"
     }
 }

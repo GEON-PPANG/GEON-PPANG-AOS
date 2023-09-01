@@ -6,7 +6,7 @@
         android:icon="@drawable/selector_menu_home_icon"
         android:title="홈" />
     <item
-        android:id="@+id/menu_sotrelist"
+        android:id="@+id/menu_bakery_list"
         android:enabled="true"
         android:icon="@drawable/selector_menu_storelist_icon"
         android:title="건빵집리스트" />

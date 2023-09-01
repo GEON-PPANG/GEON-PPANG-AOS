@@ -14,6 +14,7 @@ data class ResponseSettingFilter(
         val breadType: BreadType,
         val mainPurpose: String,
         val memberId: Int,
+        val nickname: String,
         val nutrientType: NutrientType
     )
 

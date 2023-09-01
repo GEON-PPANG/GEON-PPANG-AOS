@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.auth
+package com.sopt.geonppang.presentation.signup
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySignupNicknameBinding
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.presentation.filter.WelcomeActivity
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,11 +40,9 @@ class SignUpNicknameActivity :
         }
 
         binding.btnNext.setOnClickListener {
-            val intent = Intent(this, FilterSettingActivity::class.java)
-            intent.putExtra(FILTER_INFO, FilterInfoType.ONBOARDING.activityName)
-            intent.putExtra(MAX_PAGE, FilterInfoType.ONBOARDING.maxPage)
+            val intent = Intent(this, WelcomeActivity::class.java)
+            intent.putExtra(NICKNAME, viewModel.nickname.value.toString())
             startActivity(intent)
-            viewModel.saveUserNickname()
         }
     }
 
@@ -53,7 +52,6 @@ class SignUpNicknameActivity :
     }
 
     companion object {
-        const val FILTER_INFO = "filterInfo"
-        const val MAX_PAGE = "maxPage"
+        const val NICKNAME = "nickName"
     }
 }

@@ -51,6 +51,16 @@
             app:layout_constraintTop_toTopOf="@+id/iv_filter_arrow_left"
             tools:text="1/6" />
 
+        <View
+            android:id="@+id/view_filter_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/gray_200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_filter_arrow_left" />
+
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_filter_container"
             android:layout_width="0dp"
@@ -63,16 +73,17 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_filter_next"
-            style="@style/Widget.FullButton.Basic"
+            style="@style/Widget.Material.Button.Basic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="48dp"
+            android:layout_marginBottom="24dp"
             android:backgroundTint="@color/selector_filter_button_color"
             android:enabled="false"
             android:paddingVertical="18dp"
-            android:text="@string/filter_next"
+            android:text="@{viewModel.isLastPage ? @string/filter_apply : @string/filter_next}"
             android:textAppearance="@style/TextAppearance.Headline"
             android:textColor="@drawable/selector_filter_button_text"
+            app:cornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start" />
