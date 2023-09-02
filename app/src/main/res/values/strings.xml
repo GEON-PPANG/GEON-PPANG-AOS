@@ -59,7 +59,7 @@
     <string name="my_page_version_info">버전 정보</string>
     <string name="tv_my_page_app_version">v%s</string>
     <string name="my_page_logout">로그아웃</string>
-    <string name="my_page_withdrawal">회원탈퇴</string>
+    <string name="my_page_withdraw">회원탈퇴</string>
 
     <string name="my_store_list_empty_view_description">저장된 건빵집이 없어요!</string>
 
@@ -118,13 +118,16 @@
     <string name="btn_signup_text">회원가입</string>
 
     <!--    filter    -->
+    <string name="filter_skip">건너뛰기</string>
     <string name="filter_next">다음</string>
+    <string name="filter_apply">적용하기</string>
+
     <string name="filter_ask_bread_type">어떤 빵을 원하시나요?</string>
     <string name="filter_duplicate_selection">중복선택이 가능해요!</string>
     <string name="filter_ask_nutrient_type">어떤 성분을 원하시나요?</string>
     <string name="start_geon_ppang">시작하기</string>
 
-    <string name="main_purpose_title">반가워요 %s님 :)\n건빵을 찾은 이유를 알려주세요!</string>
+    <string name="main_purpose_title">맞춤 빵집 추천을 위해\n건빵을 찾은 이유를 알려주세요!</string>
     <string name="main_purpose_type_health_title">건강 · 체질</string>
     <string name="main_purpose_type_health_des">아토피 , 알레르기 , 암 , 당뇨 , 소화문제</string>
     <string name="main_purpose_type_diet_title">맛 · 다이어트</string>
@@ -133,17 +136,17 @@
     <string name="main_purpose_type_vegan_des">종교 , 환경 , 동물 , 노동권을 위한 비거니즘</string>
 
     <string name="bread_type_gluten_free_title">글루텐프리</string>
-    <string name="bread_type_gluten_free_des">NO 글루텐 포함\n밀 , 곡물류</string>
+    <string name="bread_type_gluten_free_des">NO 글루텐\nLOW 글루텐</string>
     <string name="bread_type_vegan_title">비건빵</string>
-    <string name="bread_type_vegan_des">NO 동물성재료\n(유제품 , 계란)</string>
+    <string name="bread_type_vegan_des">NO 동물성재료\n(유제품 , 계란 등)</string>
     <string name="bread_type_nut_free_title">넛프리</string>
     <string name="bread_type_nut_free_des">NO 견과류</string>
     <string name="bread_type_sugar_free_title">저당, 무설탕</string>
     <string name="bread_type_sugar_free_des">대체당 사용</string>
 
-    <string name="nutrient_type_nutrient_open">영양성분 공개</string>
-    <string name="nutrient_type_ingredient_open">원재료 공개</string>
-    <string name="nutrient_type_not_open">비공개</string>
+    <string name="nutrient_type_nutrient_open">영양성분까지 꼼꼼히 볼래요!</string>
+    <string name="nutrient_type_ingredient_open">어떤 재료가 들어갔는지 볼래요!</string>
+    <string name="nutrient_type_not_open">성분 정보는 괜찮아요!</string>
 
     <string name="welcome_to_geonppang">%s님\n건빵에 오신 걸 환영해요!</string>
 
@@ -172,4 +175,33 @@
     <string name="review_writing_stop">그만하기</string>
     <string name="review_writing_continue">계속쓰기</string>
     <string name="my_review_detail_empty">작성한 리뷰가 없어요</string>
+
+    <!--logout dialog-->
+    <string name="dialog_type_logout_context">정말로 로그아웃 하실건가요?</string>
+    <string name="dialog_type_logout_left_btn">아니요</string>
+    <string name="dialog_type_logout_right_btn">네</string>
+
+    <!--withdraw dialog-->
+    <string name="dialog_type_withdraw_context">회원님의 정보가 사라집니다.\n정말로 떠나실건가요?</string>
+    <string name="dialog_type_withdraw_left_btn">더 써볼래요</string>
+    <string name="dialog_type_withdraw_right_btn">떠날래요</string>
+
+    <!--report-->
+    <string name="report">리뷰 신고</string>
+
+    <string name="report_category">신고하려는 사유를 선택해주세요!</string>
+    <string name="report_category_advertising">홍보 및 신뢰할 수 없는 게시물</string>
+    <string name="report_category_hate">욕설, 음란어, 혐오 발언 사용</string>
+    <string name="report_category_copyright">명예훼손, 저작권 침해</string>
+    <string name="report_category_etc">그 외 다른 문제</string>
+
+    <string name="report_content">자세한 신고 사유는 아래 적어주세요!</string>
+    <string name="report_content_hint">신고 내용을 입력해주세요.</string>
+    <string name="report_content_count">%d/140자</string>
+
+    <string name="report_bottom_text">여러분의 신고를 바탕으로 깨끗한 리뷰를 제공해 드릴 수 있도록 노력하겠습니다.</string>
+
+    <string name="report_do_report">신고하기</string>
+
+    <string name="report_success_title">신고가 완료됐어요!</string>
 </resources>

@@ -99,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="@{viewModel.nickName}"
+                    android:text="@{viewModel.mypageInfoState.memberNickname}"
                     android:textAppearance="@style/TextAppearance.Title2"
                     android:textColor="@color/gray_600"
                     app:layout_constraintStart_toStartOf="@+id/chip_my_page_profile_purpose"
@@ -117,62 +117,82 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/chip_my_page_profile_purpose" />
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chip_group_my_page_profile_bread"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_my_page_profile_info"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="17dp"
-                    app:chipSpacing="4dp"
-                    app:chipSpacingHorizontal="4dp"
+                    android:paddingBottom="28dp"
                     app:layout_constraintEnd_toStartOf="@+id/iv_my_page_profile_right_arrow"
                     app:layout_constraintStart_toStartOf="@+id/tv_my_page_profile_nickname"
                     app:layout_constraintTop_toBottomOf="@+id/tv_my_page_profile_nickname">
 
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
-                        visibility="@{viewModel.mypageInfoState.breadType.glutenFree}"
+                    <include
+                        android:id="@+id/include_my_page_speech_bubble"
+                        layout="@layout/view_speech_bubble"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/background_1"
-                        android:text="@string/my_page_gluten_free" />
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
-                        visibility="@{viewModel.mypageInfoState.breadType.nutFree}"
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chip_group_my_page_profile_bread"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/background_1"
-                        android:text="@string/my_page_nut_free" />
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="17dp"
+                        android:paddingBottom="8dp"
+                        app:chipSpacing="4dp"
+                        app:chipSpacingHorizontal="4dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
-                        visibility="@{viewModel.mypageInfoState.breadType.vegan}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/background_1"
-                        android:text="@string/my_page_vegan" />
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
+                            visibility="@{viewModel.mypageInfoState.breadType.glutenFree}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/background_1"
+                            android:text="@string/my_page_gluten_free" />
 
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
-                        visibility="@{viewModel.mypageInfoState.breadType.sugarFree}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/background_1"
-                        android:text="@string/my_page_low_suger" />
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
+                            visibility="@{viewModel.mypageInfoState.breadType.nutFree}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/background_1"
+                            android:text="@string/my_page_nut_free" />
 
-                </com.google.android.material.chip.ChipGroup>
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
+                            visibility="@{viewModel.mypageInfoState.breadType.vegan}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/background_1"
+                            android:text="@string/my_page_vegan" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
+                            visibility="@{viewModel.mypageInfoState.breadType.sugarFree}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/background_1"
+                            android:text="@string/my_page_low_suger" />
+
+                    </com.google.android.material.chip.ChipGroup>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_my_page_buttons"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/spacing24"
-                    android:layout_marginTop="36dp"
                     android:background="@drawable/background_my_page_buttons"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/chip_group_my_page_profile_bread">
+                    app:layout_constraintTop_toBottomOf="@id/layout_my_page_profile_info">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layout_my_page_bookmark"
@@ -351,13 +371,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/view_my_page_third_line" />
 
                 <TextView
-                    android:id="@+id/tv_my_page_withdrawal"
+                    android:id="@+id/tv_my_page_withdraw"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/spacing24"
                     android:layout_marginTop="8dp"
                     android:paddingVertical="13dp"
-                    android:text="@string/my_page_withdrawal"
+                    android:text="@string/my_page_withdraw"
                     android:textAppearance="@style/TextAppearance.BodyM2"
                     android:textColor="@color/gray_400"
                     app:layout_constraintEnd_toEndOf="parent"

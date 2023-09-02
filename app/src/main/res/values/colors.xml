@@ -31,4 +31,5 @@
     <color name="kakao_point">#FEE500</color>
 
     <color name="snackbar_1">#E53D3A3A</color>
+    <color name="dialog_background">#80121212</color>
 </resources>

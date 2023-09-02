@@ -3,6 +3,7 @@ package com.sopt.geonppang.util
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import coil.load
 import java.text.DecimalFormat
@@ -33,4 +34,10 @@ fun View.setInvisibility(isInvisible: Boolean?) {
 fun applyPriceFormat(view: TextView, price: Int) {
     val decimalFormat = DecimalFormat("#,###")
     view.text = decimalFormat.format(price) + "원"
+}
+
+@BindingAdapter("srcCompat")
+fun setImageResource(imageView: ImageView, resId: Int) {
+    val drawable = ContextCompat.getDrawable(imageView.context, resId)
+    imageView.setImageDrawable(drawable)
 }
