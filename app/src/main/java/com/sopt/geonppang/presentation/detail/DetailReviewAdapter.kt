@@ -10,7 +10,8 @@ import com.sopt.geonppang.domain.model.DetailReview
 import com.sopt.geonppang.util.ItemDiffCallback
 
 class DetailReviewAdapter(
-    private val initChip: (ChipGroup, Int) -> Unit
+    private val initChip: (ChipGroup, Int) -> Unit,
+    private val moveToReport: (Int) -> Unit
 ) :
     ListAdapter<DetailReview, DetailReviewAdapter.DetailReviewViewHolder>(
         ItemDiffCallback<DetailReview>(
@@ -23,6 +24,7 @@ class DetailReviewAdapter(
         fun onBind(
             detailReview: DetailReview,
             initChip: (ChipGroup, Int) -> Unit,
+            moveToReport: (Int) -> Unit,
             position: Int
         ) {
             binding.review = detailReview
@@ -30,6 +32,10 @@ class DetailReviewAdapter(
             with(binding.chipGroupItemDetailReview) {
                 this.removeAllViews()
                 initChip(this, position)
+            }
+
+            binding.tvItemDetailReviewReport.setOnClickListener {
+                moveToReport(detailReview.reviewId)
             }
         }
     }
@@ -41,6 +47,6 @@ class DetailReviewAdapter(
     }
 
     override fun onBindViewHolder(holder: DetailReviewViewHolder, position: Int) {
-        holder.onBind(getItem(position), initChip, position)
+        holder.onBind(getItem(position), initChip, moveToReport, position)
     }
 }
