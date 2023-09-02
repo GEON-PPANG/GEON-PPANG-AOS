@@ -18,6 +18,7 @@ class ReportSuccessBottomDialogFragment :
     private fun addListeners() {
         binding.btnReportSuccess.setOnClickListener {
             dismiss()
+            requireActivity().finish()
         }
     }
 }

@@ -21,6 +21,10 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
         binding.btnReport.setOnClickListener {
             showReportSucessBottomDialog()
         }
+
+        binding.includeReportToolbar.ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun showReportSucessBottomDialog() {
