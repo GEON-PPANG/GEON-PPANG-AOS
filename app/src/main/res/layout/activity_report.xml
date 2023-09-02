@@ -6,6 +6,10 @@
     <data>
 
         <import type="com.sopt.geonppang.presentation.type.ReportCategoryType" />
+
+        <variable
+            name="viewModel"
+            type="com.sopt.geonppang.presentation.report.ReportViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,45 +63,107 @@
                     app:layout_constraintStart_toStartOf="@+id/gl_start"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <include
-                    android:id="@+id/include_report_category_advertising"
-                    layout="@layout/view_report_category"
+                <CheckBox
+                    android:id="@+id/check_report_category_advertising"
+                    style="@style/Style.CheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="@dimen/spacing24"
-                    app:layout_constraintStart_toStartOf="@+id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_report_category"
-                    app:reportType="@{ReportCategoryType.ADVERTISING}" />
+                    android:checked="@{viewModel.reportCategory == ReportCategoryType.ADVERTISING}"
+                    android:onClick="@{() -> viewModel.setReportCategory(ReportCategoryType.ADVERTISING)}"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/tv_report_category" />
 
-                <include
-                    android:id="@+id/include_report_category_hate"
-                    layout="@layout/view_report_category"
+                <TextView
+                    android:id="@+id/tv_report_category_advertising"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.setReportCategory(ReportCategoryType.ADVERTISING)}"
+                    android:paddingStart="6dp"
+                    android:text="@{ReportCategoryType.ADVERTISING.reasonRes}"
+                    android:textAppearance="@style/TextAppearance.CaptionB1"
+                    android:textColor="@color/gray_500"
+                    app:layout_constraintBottom_toBottomOf="@id/check_report_category_advertising"
+                    app:layout_constraintStart_toEndOf="@id/check_report_category_advertising"
+                    app:layout_constraintTop_toTopOf="@id/check_report_category_advertising"
+                    tools:text="@string/report_category_advertising" />
+
+                <CheckBox
+                    android:id="@+id/check_report_category_hate"
+                    style="@style/Style.CheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing20"
-                    app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/include_report_category_advertising"
-                    app:reportType="@{ReportCategoryType.HATE}" />
+                    android:checked="@{viewModel.reportCategory == ReportCategoryType.HATE}"
+                    android:onClick="@{() -> viewModel.setReportCategory(ReportCategoryType.HATE)}"
+                    app:layout_constraintStart_toStartOf="@id/check_report_category_advertising"
+                    app:layout_constraintTop_toBottomOf="@id/check_report_category_advertising" />
 
-                <include
-                    android:id="@+id/include_report_category_copyright"
-                    layout="@layout/view_report_category"
+                <TextView
+                    android:id="@+id/tv_report_category_hate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.setReportCategory(ReportCategoryType.HATE)}"
+                    android:paddingStart="6dp"
+                    android:text="@{ReportCategoryType.HATE.reasonRes}"
+                    android:textAppearance="@style/TextAppearance.CaptionB1"
+                    android:textColor="@color/gray_500"
+                    app:layout_constraintBottom_toBottomOf="@id/check_report_category_hate"
+                    app:layout_constraintStart_toEndOf="@id/check_report_category_hate"
+                    app:layout_constraintTop_toTopOf="@id/check_report_category_hate"
+                    tools:text="@string/report_category_hate" />
+
+                <CheckBox
+                    android:id="@+id/check_report_category_copyright"
+                    style="@style/Style.CheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing20"
-                    app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/include_report_category_hate"
-                    app:reportType="@{ReportCategoryType.COPYRIGHT}" />
+                    android:checked="@{viewModel.reportCategory == ReportCategoryType.COPYRIGHT}"
+                    android:onClick="@{() -> viewModel.setReportCategory(ReportCategoryType.COPYRIGHT)}"
+                    app:layout_constraintStart_toStartOf="@id/check_report_category_hate"
+                    app:layout_constraintTop_toBottomOf="@id/check_report_category_hate" />
 
-                <include
-                    android:id="@+id/include_report_category_etc"
-                    layout="@layout/view_report_category"
+                <TextView
+                    android:id="@+id/tv_report_category_copyright"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.setReportCategory(ReportCategoryType.COPYRIGHT)}"
+                    android:paddingStart="6dp"
+                    android:text="@{ReportCategoryType.COPYRIGHT.reasonRes}"
+                    android:textAppearance="@style/TextAppearance.CaptionB1"
+                    android:textColor="@color/gray_500"
+                    app:layout_constraintBottom_toBottomOf="@id/check_report_category_copyright"
+                    app:layout_constraintStart_toEndOf="@id/check_report_category_copyright"
+                    app:layout_constraintTop_toTopOf="@id/check_report_category_copyright"
+                    tools:text="@string/report_category_copyright" />
+
+                <CheckBox
+                    android:id="@+id/check_report_category_etc"
+                    style="@style/Style.CheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing20"
-                    app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/include_report_category_copyright"
-                    app:reportType="@{ReportCategoryType.ETC}" />
+                    android:checked="@{viewModel.reportCategory == ReportCategoryType.ETC}"
+                    android:onClick="@{() -> viewModel.setReportCategory(ReportCategoryType.ETC)}"
+                    app:layout_constraintStart_toStartOf="@id/check_report_category_copyright"
+                    app:layout_constraintTop_toBottomOf="@id/check_report_category_copyright" />
+
+                <TextView
+                    android:id="@+id/tv_report_category_etc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.setReportCategory(ReportCategoryType.ETC)}"
+                    android:paddingStart="6dp"
+                    android:text="@{ReportCategoryType.ETC.reasonRes}"
+                    android:textAppearance="@style/TextAppearance.CaptionB1"
+                    android:textColor="@color/gray_500"
+                    app:layout_constraintBottom_toBottomOf="@id/check_report_category_etc"
+                    app:layout_constraintStart_toEndOf="@id/check_report_category_etc"
+                    app:layout_constraintTop_toTopOf="@id/check_report_category_etc"
+                    tools:text="@string/report_category_etc" />
+
 
                 <TextView
                     android:id="@+id/tv_report_content"
@@ -107,20 +173,24 @@
                     android:text="@string/report_content"
                     android:textAppearance="@style/TextAppearance.BodyB1"
                     app:layout_constraintStart_toStartOf="@+id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@+id/include_report_category_etc" />
+                    app:layout_constraintTop_toBottomOf="@id/check_report_category_etc" />
 
                 <EditText
                     android:id="@+id/et_report_content"
                     android:layout_width="0dp"
                     android:layout_height="198dp"
                     android:layout_marginTop="@dimen/spacing16"
-                    android:background="@drawable/background_review_box"
+                    android:background="@drawable/background_report_box"
                     android:gravity="top"
                     android:hint="@string/report_content_hint"
+                    android:maxLength="140"
                     android:paddingHorizontal="@dimen/spacing24"
                     android:paddingTop="20dp"
                     android:paddingBottom="48dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:text="@={viewModel.reportContent}"
+                    android:textAppearance="@style/TextAppearance.Subhead"
+                    android:textColor="@color/gray_700"
+                    android:textColorHint="@color/gray_700"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/tv_report_content" />
@@ -131,6 +201,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/spacing16"
                     android:layout_marginBottom="@dimen/spacing20"
+                    android:text="@{@string/report_content_count(viewModel.reportContent.length)}"
                     android:textAppearance="@style/TextAppearance.CaptionM1"
                     app:layout_constraintBottom_toBottomOf="@id/et_report_content"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
@@ -175,11 +246,12 @@
             android:layout_marginStart="@dimen/spacing24"
             android:layout_marginEnd="@dimen/spacing24"
             android:layout_marginBottom="@dimen/spacing24"
-            android:backgroundTint="@color/gray_200"
+            android:backgroundTint="@{viewModel.reportCategory != null ? @color/gray_700 : @color/gray_200}"
+            android:enabled="@{viewModel.reportCategory != null}"
             android:paddingVertical="18dp"
             android:text="@string/report_do_report"
             android:textAppearance="@style/TextAppearance.Headline"
-            android:textColor="@color/gray_400"
+            android:textColor="@{viewModel.reportCategory != null ? @color/gray_100 : @color/gray_400}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
