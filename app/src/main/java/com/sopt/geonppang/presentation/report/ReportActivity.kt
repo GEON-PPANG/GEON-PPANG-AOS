@@ -13,5 +13,21 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        addListeners()
+    }
+
+    private fun addListeners() {
+        binding.btnReport.setOnClickListener {
+            showReportSucessBottomDialog()
+        }
+    }
+
+    private fun showReportSucessBottomDialog() {
+        ReportSuccessBottomDialogFragment().show(supportFragmentManager, REPORT_SUCCESS)
+    }
+
+    companion object {
+        const val REPORT_SUCCESS = "reportSuccessDialog"
     }
 }
