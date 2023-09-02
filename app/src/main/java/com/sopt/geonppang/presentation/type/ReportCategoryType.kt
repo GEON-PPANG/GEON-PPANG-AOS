@@ -3,19 +3,19 @@ package com.sopt.geonppang.presentation.type
 import androidx.annotation.StringRes
 import com.sopt.geonppang.R
 
-enum class ReportType(
+enum class ReportCategoryType(
     @StringRes val reasonRes: Int
 ) {
     ADVERTISING(
-        R.string.report_reason_advertising
+        R.string.report_category_advertising
     ),
     HATE(
-        R.string.report_reason_hate
+        R.string.report_category_hate
     ),
     COPYRIGHT(
-        R.string.report_reason_copyright
+        R.string.report_category_copyright
     ),
     ETC(
-        R.string.report_reason_etc
+        R.string.report_category_etc
     )
 }

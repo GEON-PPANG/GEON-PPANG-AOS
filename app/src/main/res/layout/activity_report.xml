@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.sopt.geonppang.presentation.type.ReportType" />
+        <import type="com.sopt.geonppang.presentation.type.ReportCategoryType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,94 +49,95 @@
                     app:layout_constraintGuide_end="@dimen/spacing24" />
 
                 <TextView
-                    android:id="@+id/tv_report_select_reason"
+                    android:id="@+id/tv_report_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing24"
-                    android:text="@string/report_select_reason"
+                    android:text="@string/report_category"
                     android:textAppearance="@style/TextAppearance.BodyB1"
                     android:textColor="@color/gray_700"
                     app:layout_constraintStart_toStartOf="@+id/gl_start"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <include
-                    android:id="@+id/include_report_reason_advertising"
-                    layout="@layout/view_report_reason"
+                    android:id="@+id/include_report_category_advertising"
+                    layout="@layout/view_report_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing24"
                     app:layout_constraintStart_toStartOf="@+id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_report_select_reason"
-                    app:reportType="@{ReportType.ADVERTISING}" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_report_category"
+                    app:reportType="@{ReportCategoryType.ADVERTISING}" />
 
                 <include
-                    android:id="@+id/include_report_reason_hate"
-                    layout="@layout/view_report_reason"
+                    android:id="@+id/include_report_category_hate"
+                    layout="@layout/view_report_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing20"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/include_report_reason_advertising"
-                    app:reportType="@{ReportType.HATE}" />
+                    app:layout_constraintTop_toBottomOf="@id/include_report_category_advertising"
+                    app:reportType="@{ReportCategoryType.HATE}" />
 
                 <include
-                    android:id="@+id/include_report_reason_copyright"
-                    layout="@layout/view_report_reason"
+                    android:id="@+id/include_report_category_copyright"
+                    layout="@layout/view_report_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing20"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/include_report_reason_hate"
-                    app:reportType="@{ReportType.COPYRIGHT}" />
+                    app:layout_constraintTop_toBottomOf="@id/include_report_category_hate"
+                    app:reportType="@{ReportCategoryType.COPYRIGHT}" />
 
                 <include
-                    android:id="@+id/include_report_reason_etc"
-                    layout="@layout/view_report_reason"
+                    android:id="@+id/include_report_category_etc"
+                    layout="@layout/view_report_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing20"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/include_report_reason_copyright"
-                    app:reportType="@{ReportType.ETC}" />
+                    app:layout_constraintTop_toBottomOf="@id/include_report_category_copyright"
+                    app:reportType="@{ReportCategoryType.ETC}" />
 
                 <TextView
-                    android:id="@+id/tv_report_write_reason"
+                    android:id="@+id/tv_report_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:text="@string/report_write_reason"
+                    android:text="@string/report_content"
                     android:textAppearance="@style/TextAppearance.BodyB1"
                     app:layout_constraintStart_toStartOf="@+id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@+id/include_report_reason_etc" />
+                    app:layout_constraintTop_toBottomOf="@+id/include_report_category_etc" />
 
                 <EditText
-                    android:id="@+id/et_report_write_reason"
+                    android:id="@+id/et_report_content"
                     android:layout_width="0dp"
                     android:layout_height="198dp"
                     android:layout_marginTop="@dimen/spacing16"
                     android:background="@drawable/background_review_box"
                     android:gravity="top"
-                    android:hint="@string/report_write_reason_hint"
+                    android:hint="@string/report_content_hint"
                     android:paddingHorizontal="@dimen/spacing24"
                     android:paddingTop="20dp"
                     android:paddingBottom="48dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/tv_report_write_reason" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_report_content" />
 
                 <TextView
-                    android:id="@+id/tv_report_write_reason_count"
+                    android:id="@+id/tv_report_content_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/spacing16"
                     android:layout_marginBottom="@dimen/spacing20"
                     android:textAppearance="@style/TextAppearance.CaptionM1"
-                    app:layout_constraintBottom_toBottomOf="@id/et_report_write_reason"
+                    app:layout_constraintBottom_toBottomOf="@id/et_report_content"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     tools:text="0/140자" />
 
                 <TextView
+                    android:id="@+id/tv_report_bottom"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="51dp"
@@ -149,7 +150,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/et_report_write_reason" />
+                    app:layout_constraintTop_toBottomOf="@id/et_report_content" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
