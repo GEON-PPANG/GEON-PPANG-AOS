@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.BuildConfig
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentMyPageBinding
+import com.sopt.geonppang.presentation.common.WebViewActivity
 import com.sopt.geonppang.presentation.filter.FilterActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.binding.BindingFragment
@@ -64,6 +65,14 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         binding.includeMyPageSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
             binding.includeMyPageSpeechBubble.root.setInvisibility(false)
         }
+
+        binding.tvMyPageTermsOfUse.setOnClickListener {
+            moveToWebPage(TERMS_OF_USE)
+        }
+
+        binding.tvMyPageInquiry.setOnClickListener {
+            moveToWebPage(INQUIRY)
+        }
     }
 
     private fun collectData() {
@@ -95,6 +104,12 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         startActivity(intent)
     }
 
+    private fun moveToWebPage(link: String) {
+        Intent(requireContext(), WebViewActivity::class.java).apply {
+            putExtra(WebViewActivity.WEB_VIEW_LINK, link)
+        }.also { startActivity(it) }
+    }
+
     private fun showLogoutDialog() {
         logoutDialog = LogoutDialog()
         logoutDialog.show(childFragmentManager, DIALOG)
@@ -109,5 +124,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         const val FILTER_INFO = "filterInfo"
         const val APP_VERSION = BuildConfig.VERSION_NAME
         const val DIALOG = "dialog"
+        const val TERMS_OF_USE = "https://sungah.notion.site/60361cdfe76a4ff0862eaaf0bdf72ab1?pvs=4"
+        const val INQUIRY = "https://sungah.notion.site/14fce5b6dffc4eee9eccad2d2e7c79ef?pvs=4"
     }
 }
