@@ -36,6 +36,10 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
         binding.includeReportToolbar.ivBack.setOnClickListener {
             finish()
         }
+
+        binding.layoutReport.setOnClickListener {
+            hideKeyboard(it)
+        }
     }
 
     private fun showReportSucessBottomDialog() {
