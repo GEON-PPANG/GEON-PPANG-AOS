@@ -12,6 +12,8 @@ import com.sopt.geonppang.databinding.FragmentMyPageBinding
 import com.sopt.geonppang.presentation.filter.FilterActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.binding.BindingFragment
+import com.sopt.geonppang.util.setInvisibility
+import com.sopt.geonppang.util.setVisibility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -19,6 +21,8 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     private val viewModel by viewModels<MyPageViewModel>()
+    private lateinit var logoutDialog: LogoutDialog
+    private lateinit var withdrawDialog: WithdrawDialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,7 +37,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun initLayout() {
         viewModel.fetchMypageInfo()
-        viewModel.setUserNickName()
+        binding.includeMyPageSpeechBubble.ivSpeechBubble.setBackgroundResource(R.drawable.background_left_speech_bubble)
     }
 
     private fun addListeners() {
@@ -48,6 +52,18 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         binding.ivMyPageProfileRightArrow.setOnClickListener {
             moveToFilter()
         }
+
+        binding.tvMyPageLogout.setOnClickListener {
+            showLogoutDialog()
+        }
+
+        binding.tvMyPageWithdraw.setOnClickListener {
+            showWithdrawDialog()
+        }
+
+        binding.includeMyPageSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
+            binding.includeMyPageSpeechBubble.root.setInvisibility(false)
+        }
     }
 
     private fun collectData() {
@@ -55,6 +71,13 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
             binding.chipMyPageProfilePurpose.text =
                 this.context?.getString(viewModel.toMainPurposeTitleRes()) ?: ""
         }.launchIn(lifecycleScope)
+
+        viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
+            binding.includeMyPageSpeechBubble.root.setVisibility(!isFilterSelected)
+            binding.chipMyPageProfilePurpose.setInvisibility(isFilterSelected)
+            binding.chipGroupMyPageProfileBread.setVisibility(isFilterSelected)
+        }.launchIn(lifecycleScope)
+
         binding.tvMyPageAppVersion.text = getString(R.string.tv_my_page_app_version, APP_VERSION)
     }
 
@@ -68,14 +91,23 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun moveToFilter() {
         val intent = Intent(requireContext(), FilterActivity::class.java)
-        intent.putExtra(FILTER_INFO, FilterInfoType.MYPAGE.activityName)
-        intent.putExtra(MAX_PAGE, FilterInfoType.MYPAGE.maxPage)
+        intent.putExtra(FILTER_INFO, FilterInfoType.MYPAGE.name)
         startActivity(intent)
+    }
+
+    private fun showLogoutDialog() {
+        logoutDialog = LogoutDialog()
+        logoutDialog.show(childFragmentManager, DIALOG)
+    }
+
+    private fun showWithdrawDialog() {
+        withdrawDialog = WithdrawDialog()
+        withdrawDialog.show(childFragmentManager, DIALOG)
     }
 
     companion object {
         const val FILTER_INFO = "filterInfo"
-        const val MAX_PAGE = "maxPage"
         const val APP_VERSION = BuildConfig.VERSION_NAME
+        const val DIALOG = "dialog"
     }
 }

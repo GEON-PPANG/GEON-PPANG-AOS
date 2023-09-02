@@ -22,9 +22,15 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
     private fun initLayout() {
         val isMyPageRequested = intent.getStringExtra(MYPAGE_FRAGMENT) == MYPAGE_FRAGMENT
+        val isBakeryListRequested =
+            intent.getStringExtra(BAKERT_LIST_FRAGMENT) == BAKERT_LIST_FRAGMENT
+
         val initialFragment = if (isMyPageRequested) {
             navigateTo<MyPageFragment>()
             R.id.menu_mypage
+        } else if (isBakeryListRequested) {
+            navigateTo<BakeryListFragment>()
+            R.id.menu_bakery_list
         } else {
             navigateTo<HomeFragment>()
             R.id.menu_home
@@ -33,7 +39,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         binding.bnvHome.setOnItemSelectedListener { menu ->
             when (menu.itemId) {
                 R.id.menu_home -> navigateTo<HomeFragment>()
-                R.id.menu_sotrelist -> navigateTo<BakeryListFragment>()
+                R.id.menu_bakery_list -> navigateTo<BakeryListFragment>()
                 R.id.menu_mypage -> navigateTo<MyPageFragment>()
             }
             true
@@ -53,5 +59,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
     companion object {
         const val MYPAGE_FRAGMENT = "MyPageFragment"
+        const val BAKERT_LIST_FRAGMENT = "BakeryListFragment"
     }
 }

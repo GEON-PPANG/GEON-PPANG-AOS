@@ -5,11 +5,11 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.geonppang.data.datasource.local.GPDataStore
 import com.sopt.geonppang.data.model.request.RequestFilter
 import com.sopt.geonppang.domain.model.SelectedFilter
 import com.sopt.geonppang.domain.repository.FilterRepository
 import com.sopt.geonppang.presentation.type.BreadFilterType
+import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.presentation.type.MainPurposeType
 import com.sopt.geonppang.presentation.type.NutrientFilterType
 import com.sopt.geonppang.util.UiState
@@ -21,20 +21,30 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FilterViewModel @Inject constructor(
-    private val filterRepository: FilterRepository,
-    private val gpDataStore: GPDataStore
+    private val filterRepository: FilterRepository
 ) : ViewModel() {
     private val _selectedFilterState = MutableStateFlow<UiState<SelectedFilter>>(UiState.Loading)
     val selectedFilterState get() = _selectedFilterState.asStateFlow()
 
-    private val _previousActivityName = MutableStateFlow<String?>(null)
-    val previousActivityName get() = _previousActivityName.asStateFlow()
+    private val _previousActivity = MutableStateFlow<FilterInfoType?>(null)
+    val previousActivity get() = _previousActivity.asStateFlow()
+
+    private val _isLastPage = MutableStateFlow(false)
+    val isLastPage get() = _isLastPage.asStateFlow()
+
+    fun setIsLastPage(boolean: Boolean) {
+        _isLastPage.value = boolean
+    }
+
+    private val _currentItem: MutableLiveData<Int> = MutableLiveData()
+    val currentItem: LiveData<Int> = _currentItem
+
+    fun setCurrentItem(position: Int) {
+        _currentItem.value = position
+    }
 
     private val _mainPurpose: MutableLiveData<MainPurposeType?> = MutableLiveData()
     val mainPurpose: LiveData<MainPurposeType?> = _mainPurpose
-
-    private val _nickName: MutableLiveData<String> = MutableLiveData()
-    val nickName: LiveData<String> = _nickName
 
     fun setMainPurpose(mainPurposeType: MainPurposeType) {
         _mainPurpose.value = mainPurposeType
@@ -83,12 +93,19 @@ class FilterViewModel @Inject constructor(
         }
     }
 
-    fun setPreviousActivity(filterInfoTypeName: String) {
-        _previousActivityName.value = filterInfoTypeName
+    val currentItemFilterSelected: MediatorLiveData<Boolean> = MediatorLiveData<Boolean>().apply {
+        addSource(currentItem) { currentItemValue ->
+            value = when (currentItemValue) {
+                0 -> mainPurpose.value != null
+                1 -> breadFilterType.value?.any { it.value } ?: false
+                2 -> nutrientFilterType.value?.any { it.value } ?: false
+                else -> false
+            }
+        }
     }
 
-    fun setUserNickName() {
-        _nickName.value = gpDataStore.userNickname
+    fun setPreviousActivity(filterInfoType: FilterInfoType) {
+        _previousActivity.value = filterInfoType
     }
 
     fun setUserFilter() {
