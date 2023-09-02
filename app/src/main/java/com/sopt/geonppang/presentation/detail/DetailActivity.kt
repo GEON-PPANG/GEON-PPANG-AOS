@@ -12,6 +12,7 @@ import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityDetailBinding
 import com.sopt.geonppang.presentation.MainActivity
+import com.sopt.geonppang.presentation.report.ReportActivity
 import com.sopt.geonppang.presentation.reviewWriting.ReviewWritingActivity
 import com.sopt.geonppang.util.ChipFactory
 import com.sopt.geonppang.util.CustomSnackbar
@@ -57,7 +58,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         detailBakeryInfoAdapter = DetailBakeryInfoAdapter()
         detailMenuAdapter = DetailMenuAdapter()
         detailReviewDataAdapter = DetailReviewDataAdapter()
-        detailReviewAdapter = DetailReviewAdapter(::initChip)
+        detailReviewAdapter = DetailReviewAdapter(::initChip, ::moveToReport)
         detailNoReviewAdapter = DetailNoReviewAdapter()
 
         concatAdapter = ConcatAdapter(
@@ -168,11 +169,18 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }
     }
 
+    private fun moveToReport(id: Int) {
+        val intent = Intent(this, ReportActivity::class.java)
+        intent.putExtra(REVIEW_ID, id)
+        startActivity(intent)
+    }
+
     companion object {
         const val BAKERY_ID = "bakeryId"
         const val BAKERY_INFO = "bakeryInfo"
         const val ACTIVITY_NAME = "activityName"
         const val MAIN = "mainActivity"
+        const val REVIEW_ID = "reviewId"
         const val FIRST_POSITION = 0
     }
 }
