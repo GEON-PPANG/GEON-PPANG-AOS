@@ -31,12 +31,11 @@ class LoginActivity :
             moveToSignup()
         }
         binding.toolbar.ivBack.setOnClickListener {
-            startActivity(Intent(this, SignActivity::class.java))
+            finish()
         }
     }
 
     private fun moveToSignup() {
         startActivity(Intent(this, SignUpActivity::class.java))
-        finish()
     }
 }

@@ -29,11 +29,9 @@ class SignActivity :
 
     private fun moveToSignUp() {
         startActivity(Intent(this, SignUpActivity::class.java))
-        finish()
     }
 
     private fun moveToLogin() {
         startActivity(Intent(this, LoginActivity::class.java))
-        finish()
     }
 }

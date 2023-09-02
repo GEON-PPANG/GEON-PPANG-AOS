@@ -37,12 +37,11 @@ class SignUpActivity :
             moveToNickname()
         }
         binding.toolbar.ivBack.setOnClickListener {
-            startActivity(Intent(this, SignActivity::class.java))
+            finish()
         }
     }
 
     private fun moveToNickname() {
         startActivity(Intent(this, SignUpNicknameActivity::class.java))
-        finish()
     }
 }
