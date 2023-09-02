@@ -8,14 +8,16 @@ import com.sopt.geonppang.databinding.ItemDetailBakeryInfoBinding
 import com.sopt.geonppang.domain.model.BakeryInfo
 import com.sopt.geonppang.util.CustomSnackbar
 
-class DetailBakeryInfoAdapter :
-    RecyclerView.Adapter<DetailBakeryInfoAdapter.DetailBakeryInfoViewHolder>() {
+class DetailBakeryInfoAdapter(
+    private val moveToWebPage: (String) -> Unit
+) : RecyclerView.Adapter<DetailBakeryInfoAdapter.DetailBakeryInfoViewHolder>() {
     private val bakeryInfoList: MutableList<BakeryInfo> = mutableListOf()
 
     class DetailBakeryInfoViewHolder(val binding: ItemDetailBakeryInfoBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(
-            bakeryInfo: BakeryInfo
+            bakeryInfo: BakeryInfo,
+            moveToWebPage: (String) -> Unit
         ) {
             with(binding) {
                 binding.bakeryInfo = bakeryInfo
@@ -24,6 +26,14 @@ class DetailBakeryInfoAdapter :
                         it,
                         it.context.getString(R.string.snackbar_save)
                     )
+                }
+
+                tvItemDetailBakeryInfoHomepage.setOnClickListener {
+                    moveToWebPage(bakeryInfo.homepageUrl)
+                }
+
+                tvItemDetailBakeryInfoInstagram.setOnClickListener {
+                    moveToWebPage(bakeryInfo.instagramUrl)
                 }
             }
         }
@@ -38,7 +48,7 @@ class DetailBakeryInfoAdapter :
     override fun getItemCount(): Int = bakeryInfoList.size
 
     override fun onBindViewHolder(holder: DetailBakeryInfoViewHolder, position: Int) {
-        holder.onBind(bakeryInfoList[position])
+        holder.onBind(bakeryInfoList[position], moveToWebPage)
     }
 
     fun setBakeryInfo(bakeryInfo: BakeryInfo) {

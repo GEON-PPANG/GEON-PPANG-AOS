@@ -12,6 +12,7 @@ import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityDetailBinding
 import com.sopt.geonppang.presentation.MainActivity
+import com.sopt.geonppang.presentation.common.WebViewActivity
 import com.sopt.geonppang.presentation.report.ReportActivity
 import com.sopt.geonppang.presentation.reviewWriting.ReviewWritingActivity
 import com.sopt.geonppang.util.ChipFactory
@@ -55,7 +56,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         viewModel.fetchDetailBakeryInfo(bakeryId)
         viewModel.fetchDetailReview(bakeryId)
 
-        detailBakeryInfoAdapter = DetailBakeryInfoAdapter()
+        detailBakeryInfoAdapter = DetailBakeryInfoAdapter(::moveToWebPage)
         detailMenuAdapter = DetailMenuAdapter()
         detailReviewDataAdapter = DetailReviewDataAdapter()
         detailReviewAdapter = DetailReviewAdapter(::initChip, ::moveToReport)
@@ -167,6 +168,12 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                 )
             }
         }
+    }
+
+    private fun moveToWebPage(link: String) {
+        Intent(this, WebViewActivity::class.java).apply {
+            putExtra(WebViewActivity.WEB_VIEW_LINK, link)
+        }.also { startActivity(it) }
     }
 
     private fun moveToReport(id: Int) {
