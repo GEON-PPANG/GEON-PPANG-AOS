@@ -23,7 +23,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     private fun initLayout() {
         val isMyPageRequested = intent.getStringExtra(MYPAGE_FRAGMENT) == MYPAGE_FRAGMENT
         val isBakeryListRequested =
-            intent.getStringExtra(BAKERT_LIST_FRAGMENT) == BAKERT_LIST_FRAGMENT
+            intent.getStringExtra(BAKERY_LIST_FRAGMENT) == BAKERY_LIST_FRAGMENT
 
         val initialFragment = if (isMyPageRequested) {
             navigateTo<MyPageFragment>()
@@ -59,6 +59,6 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
     companion object {
         const val MYPAGE_FRAGMENT = "MyPageFragment"
-        const val BAKERT_LIST_FRAGMENT = "BakeryListFragment"
+        const val BAKERY_LIST_FRAGMENT = "BakeryListFragment"
     }
 }

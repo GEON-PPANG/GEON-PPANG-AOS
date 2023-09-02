@@ -39,7 +39,7 @@ class SignUpNicknameActivity :
 
         binding.btnNext.setOnClickListener {
             val intent = Intent(this, WelcomeActivity::class.java)
-            intent.putExtra(NICKNAME, viewModel.nickname.value.toString())
+            intent.putExtra(NICKNAME, viewModel.nickname.value)
             startActivity(intent)
         }
     }

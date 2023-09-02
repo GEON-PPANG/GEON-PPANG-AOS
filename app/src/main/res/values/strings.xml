@@ -177,4 +177,23 @@
     <string name="dialog_type_withdraw_context">회원님의 정보가 사라집니다.\n정말로 떠나실건가요?</string>
     <string name="dialog_type_withdraw_left_btn">더 써볼래요</string>
     <string name="dialog_type_withdraw_right_btn">떠날래요</string>
+
+    <!--report-->
+    <string name="report">리뷰 신고</string>
+
+    <string name="report_category">신고하려는 사유를 선택해주세요!</string>
+    <string name="report_category_advertising">홍보 및 신뢰할 수 없는 게시물</string>
+    <string name="report_category_hate">욕설, 음란어, 혐오 발언 사용</string>
+    <string name="report_category_copyright">명예훼손, 저작권 침해</string>
+    <string name="report_category_etc">그 외 다른 문제</string>
+
+    <string name="report_content">자세한 신고 사유는 아래 적어주세요!</string>
+    <string name="report_content_hint">신고 내용을 입력해주세요.</string>
+    <string name="report_content_count">%d/140자</string>
+
+    <string name="report_bottom_text">여러분의 신고를 바탕으로 깨끗한 리뷰를 제공해 드릴 수 있도록 노력하겠습니다.</string>
+
+    <string name="report_do_report">신고하기</string>
+
+    <string name="report_success_title">신고가 완료됐어요!</string>
 </resources>
