@@ -62,12 +62,12 @@
             android:textAppearance="@style/TextAppearance.CaptionM1"
             android:textColor="@color/gray_400"
             app:layout_constraintBottom_toBottomOf="@+id/iv_item_detail_review_profile_img"
-            app:layout_constraintEnd_toStartOf="@+id/tv_item_detail_review_declare"
+            app:layout_constraintEnd_toStartOf="@+id/tv_item_detail_review_report"
             app:layout_constraintTop_toTopOf="@+id/iv_item_detail_review_profile_img"
             tools:text="22.08.09" />
 
         <TextView
-            android:id="@+id/tv_item_detail_review_declare"
+            android:id="@+id/tv_item_detail_review_report"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/detail_declare"
