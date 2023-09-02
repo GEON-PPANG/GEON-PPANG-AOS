@@ -12,11 +12,4 @@ import javax.inject.Inject
 class LogInViewModel @Inject constructor() : ViewModel() {
     val loginEmail = MutableLiveData("")
     val loginPassword = MutableLiveData("")
-
-    val isLoginEmail: LiveData<Boolean> = loginEmail.map { login_email ->
-        login_email.matches(Regex(SignUpViewModel.EMAIL_PATTERN))
-    }
-    val isLoginPassword: LiveData<Boolean> = loginPassword.map { login_password ->
-        login_password.matches(Regex(SignUpViewModel.PASSWORD_PATTERN))
-    }
 }
