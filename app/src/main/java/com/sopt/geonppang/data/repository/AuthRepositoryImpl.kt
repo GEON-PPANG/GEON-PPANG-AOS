@@ -10,5 +10,4 @@ class AuthRepositoryImpl @Inject constructor(
 ) : AuthRepository {
     override suspend fun withdraw(): Result<ResponseWithdraw> =
         runCatching { authDataSource.withdraw() }
-
 }
