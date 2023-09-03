@@ -104,7 +104,7 @@
                             visibility="@{viewModel.bakeryInfo.breadType.glutenFree}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
+                            android:backgroundTint="@color/background_1"
                             android:text="글루텐프리" />
 
                         <com.google.android.material.chip.Chip
@@ -112,7 +112,7 @@
                             visibility="@{viewModel.bakeryInfo.breadType.vegan}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
+                            android:backgroundTint="@color/background_1"
                             android:text="비건빵" />
 
                         <com.google.android.material.chip.Chip
@@ -120,7 +120,7 @@
                             visibility="@{viewModel.bakeryInfo.breadType.nutFree}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
+                            android:backgroundTint="@color/background_1"
                             android:text="넛프리" />
 
                         <com.google.android.material.chip.Chip
@@ -128,7 +128,7 @@
                             visibility="@{viewModel.bakeryInfo.breadType.sugarFree}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
+                            android:backgroundTint="@color/background_1"
                             android:text="저당,무설탕" />
 
                     </com.google.android.material.chip.ChipGroup>
@@ -371,12 +371,12 @@
                 android:layout_marginHorizontal="@dimen/spacing24"
                 android:layout_marginTop="18dp"
                 android:background="@drawable/background_review_bottom_btn"
-                android:backgroundTint="@{viewModel.isLike == LikeType.BAD | viewModel.isUserKeyWordTypeSelected? @color/gray_700 : @color/gray_200}"
-                android:enabled="@{viewModel.isLike == LikeType.BAD | viewModel.isUserKeyWordTypeSelected}"
+                android:backgroundTint="@{viewModel.reviewText.length >= 1 | viewModel.isUserKeyWordTypeSelected? @color/gray_700 : @color/gray_200}"
+                android:enabled="@{viewModel.reviewText.length >= 1 | viewModel.isUserKeyWordTypeSelected}"
                 android:paddingVertical="18dp"
                 android:text="작성하기"
                 android:textAppearance="@style/TextAppearance.Headline"
-                android:textColor="@{viewModel.isLike == LikeType.BAD | viewModel.isUserKeyWordTypeSelected? @color/gray_100 : @color/gray_400}"
+                android:textColor="@{viewModel.reviewText.length >= 1 | viewModel.isUserKeyWordTypeSelected? @color/gray_100 : @color/gray_400}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
