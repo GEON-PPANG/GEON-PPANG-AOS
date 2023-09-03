@@ -171,7 +171,7 @@
     <string name="review_key_word_type_special_menu">특별한 메뉴</string>
     <string name="review_key_word_type_zero_waste">제로 웨이스트</string>
     <string name="review_writing_success_title">작성이 완료되었어요!</string>
-    <string name="review_writing_cancel_title">정말 리뷰 작성을 그만 하실건가요?</string>
+    <string name="review_writing_cancel_title">정말 리뷰작성을 그만 하실건가요?</string>
     <string name="review_writing_cancel_description">여러분이 작성해주신 리뷰가\n다른 유저의 건빵생활을 도울 수 있어요</string>
     <string name="review_writing_confirm">확인</string>
     <string name="review_writing_stop">네, 그만 쓸래요</string>
