@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">건빵</string>
 
+    <!--sign-->
+    <string name="sign_login_with_email">이메일로 로그인</string>
+    <string name="sign_signup_with_email">이메일로 회원가입</string>
+    <string name="btn_kakao_sign">카카오로 계속하기</string>
+    <string name="btn_signup_text">회원가입</string>
+
     <!--login-->
     <string name="login_text_phrase">로그인</string>
     <string name="login_email_hint">이메일을 입력해주세요</string>
@@ -112,10 +118,6 @@
     <string name="bakery_bread_type_dessert">디저트류</string>
     <string name="bakery_bread_type_branch">브런치류</string>
     <string name="bakery_list_my_filter_apply">내 필터 적용</string>
-
-    <!-- sign view -->
-    <string name="btn_kakao_sign">카카오로 계속하기</string>
-    <string name="btn_signup_text">회원가입</string>
 
     <!--    filter    -->
     <string name="filter_skip">건너뛰기</string>
