@@ -69,5 +69,5 @@ interface RepositoryModule {
     @Singleton
     fun bindReportRepository(
         reportRepositoryImpl: ReportRepositoryImpl
-    ) : ReportRepository
+    ): ReportRepository
 }

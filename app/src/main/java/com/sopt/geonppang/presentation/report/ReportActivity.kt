@@ -51,9 +51,12 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
     }
 
     private fun addObservers() {
-        viewModel.showReportSuccessEvent.observe(this, Observer {
-            showReportSucessBottomDialog()
-        })
+        viewModel.showReportSuccessEvent.observe(
+            this,
+            Observer {
+                showReportSucessBottomDialog()
+            }
+        )
     }
 
     private fun showReportSucessBottomDialog() {

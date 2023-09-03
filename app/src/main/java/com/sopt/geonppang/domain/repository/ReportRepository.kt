@@ -6,4 +6,3 @@ import com.sopt.geonppang.data.model.response.ResponseReport
 interface ReportRepository {
     suspend fun reportReview(reviewId: Int, requestReport: RequestReport): Result<ResponseReport>
 }
-
