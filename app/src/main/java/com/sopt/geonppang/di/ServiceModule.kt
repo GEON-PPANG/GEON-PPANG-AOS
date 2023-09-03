@@ -50,4 +50,9 @@ object ServiceModule {
     @Provides
     fun provideMyReviewDetailService(retrofit: Retrofit): MyReviewDetailService =
         retrofit.create(MyReviewDetailService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideAuthService(retrofit: Retrofit): AuthService =
+        retrofit.create(AuthService::class.java)
 }

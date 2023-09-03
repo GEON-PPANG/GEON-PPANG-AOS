@@ -64,4 +64,10 @@ interface RepositoryModule {
     fun bindGetUserFilterRepository(
         getUserFilterRepositoryImpl: GetUserFilterRepositoryImpl
     ): GetUserFilterRepository
+
+    @Binds
+    @Singleton
+    fun bindAuthRepository(
+        authRepositoryImpl: AuthRepositoryImpl
+    ): AuthRepository
 }
