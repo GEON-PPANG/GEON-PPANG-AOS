@@ -90,6 +90,9 @@ dependencies {
 
     // Splash
     implementation 'androidx.core:core-splashscreen:1.0.0'
+
+    // kakao
+    implementation "com.kakao.sdk:v2-all:2.15.0"
 }
 
 ktlint {
