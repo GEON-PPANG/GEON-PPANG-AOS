@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:src="@drawable/ic_review_bread"
+            android:src="@drawable/ic_sad"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -51,7 +51,7 @@
             android:id="@+id/tv_review_writing_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing16"
+            android:layout_marginTop="@dimen/spacing20"
             android:text="@string/review_writing_cancel_description"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.BodyM2"
