@@ -76,7 +76,7 @@
 
                         <EditText
                             android:id="@+id/et_write_your_email"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="18dp"
                             android:layout_marginTop="4dp"
@@ -85,12 +85,12 @@
                             android:hint="@string/email_hint"
                             android:inputType="textEmailAddress"
                             android:paddingVertical="5dp"
-                            android:paddingEnd="120dp"
                             android:text="@={viewModel.email}"
                             android:textAppearance="@style/TextAppearance.Headline"
                             android:textColorHint="@color/gray_300"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/btn_double_check_email"
                             app:layout_constraintTop_toBottomOf="@id/tv_email_text" />
 
                         <com.google.android.material.button.MaterialButton
@@ -107,6 +107,7 @@
                             android:textAppearance="@style/TextAppearance.CaptionM1"
                             app:cornerRadius="24dp"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/et_write_your_email"
                             app:layout_constraintTop_toTopOf="parent"
                             app:rippleColor="@color/main_2" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
