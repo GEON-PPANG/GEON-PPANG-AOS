@@ -14,17 +14,17 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
-    private val _showWithdrawSuccessEvent = MutableLiveData<Unit>()
-    val showWithdrawSuccessEvent: LiveData<Unit> = _showWithdrawSuccessEvent
+    private val _isWithdrawCompleted = MutableLiveData(false)
+    val isWithdrawCompleted: LiveData<Boolean> = _isWithdrawCompleted
 
-    fun withdrawSuccess() {
-        _showWithdrawSuccessEvent.value = Unit
+    fun setIsWithdrawCompleted(value: Boolean) {
+        _isWithdrawCompleted.value = value
     }
 
     fun withdraw() {
         viewModelScope.launch {
             authRepository.withdraw().onSuccess {
-                withdrawSuccess()
+                setIsWithdrawCompleted(true)
             }.onFailure { throwable ->
                 Timber.e(throwable.message)
             }

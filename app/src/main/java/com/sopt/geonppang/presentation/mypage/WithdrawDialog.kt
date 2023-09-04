@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.DialogMiddleBinding
 import com.sopt.geonppang.presentation.SignActivity
@@ -47,13 +46,12 @@ class WithdrawDialog() : BindingDialogFragment<DialogMiddleBinding>(R.layout.dia
     }
 
     private fun addObservers() {
-        viewModel.showWithdrawSuccessEvent.observe(
-            this,
-            Observer {
+        viewModel.isWithdrawCompleted.observe(this) { isWithdrawCompleted ->
+            if (isWithdrawCompleted) {
                 moveToSign()
                 dismiss()
             }
-        )
+        }
     }
 
     private fun moveToSign() {
