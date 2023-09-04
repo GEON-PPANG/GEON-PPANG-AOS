@@ -71,16 +71,32 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:shapeAppearanceOverlay="@style/Radius5" />
 
+                    <TextView
+                        android:id="@+id/tv_bakery"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing14"
+                        android:layout_marginEnd="9dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@{viewModel.bakeryInfo.bakeryName}"
+                        android:textAppearance="@style/TextAppearance.Title2"
+                        android:textColor="@color/gray_700"
+                        app:layout_constraintStart_toEndOf="@+id/iv_bakery"
+                        app:layout_constraintTop_toTopOf="@+id/iv_bakery"
+                        tools:text="건대 초코빵" />
+
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/cg_bakery_category"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="8dp"
                         app:chipSpacingHorizontal="4dp"
                         app:chipSpacingVertical="5dp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/iv_bakery"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_bakery"
+                        app:layout_constraintTop_toBottomOf="@id/tv_bakery"
                         app:layout_constraintWidth="0dp">
 
                         <com.google.android.material.chip.Chip
@@ -88,7 +104,7 @@
                             visibility="@{viewModel.bakeryInfo.breadType.glutenFree}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
+                            android:backgroundTint="@color/background_1"
                             android:text="글루텐프리" />
 
                         <com.google.android.material.chip.Chip
@@ -96,7 +112,7 @@
                             visibility="@{viewModel.bakeryInfo.breadType.vegan}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
+                            android:backgroundTint="@color/background_1"
                             android:text="비건빵" />
 
                         <com.google.android.material.chip.Chip
@@ -104,7 +120,7 @@
                             visibility="@{viewModel.bakeryInfo.breadType.nutFree}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
+                            android:backgroundTint="@color/background_1"
                             android:text="넛프리" />
 
                         <com.google.android.material.chip.Chip
@@ -112,36 +128,32 @@
                             visibility="@{viewModel.bakeryInfo.breadType.sugarFree}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
+                            android:backgroundTint="@color/background_1"
                             android:text="저당,무설탕" />
 
                     </com.google.android.material.chip.ChipGroup>
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_station_1"
-                        style="@style/Style.Material3.Chip.Station.Category"
+                    <ImageView
+                        android:id="@+id/iv_bakery_map"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginTop="12dp"
-                        android:backgroundTint="@color/main_3"
-                        android:text="@{viewModel.bakeryInfo.firstNearestStation}"
-                        app:layout_constraintStart_toEndOf="@id/iv_bakery"
-                        app:layout_constraintTop_toBottomOf="@id/cg_bakery_category"
-                        tools:text="건대역" />
+                        android:layout_marginTop="@dimen/spacing10"
+                        android:src="@drawable/ic_station"
+                        app:layout_constraintStart_toStartOf="@id/tv_bakery"
+                        app:layout_constraintTop_toBottomOf="@id/cg_bakery_category" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_station_2"
-                        style="@style/Style.Material3.Chip.Station.Category"
+                    <TextView
+                        android:id="@+id/tv_nearest_station"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
-                        android:backgroundTint="@color/main_3"
-                        android:text="@{viewModel.bakeryInfo.secondNearestStation}"
-                        app:layout_constraintStart_toEndOf="@id/chip_station_1"
-                        app:layout_constraintTop_toTopOf="@id/chip_station_1"
-                        tools:text="건대역" />
-
+                        android:text="@{viewModel.bakeryInfo.secondNearestStation.empty ? viewModel.bakeryInfo.firstNearestStation : @string/nearest_station(viewModel.bakeryInfo.firstNearestStation, viewModel.bakeryInfo.secondNearestStation)}"
+                        android:textAppearance="@style/TextAppearance.CaptionM1"
+                        android:textColor="@color/gray_400"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_bakery_map"
+                        app:layout_constraintStart_toEndOf="@+id/iv_bakery_map"
+                        app:layout_constraintTop_toTopOf="@+id/iv_bakery_map"
+                        tools:text="건대역∙강남역" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -282,18 +294,18 @@
                     android:layout_height="196dp"
                     android:layout_marginHorizontal="@dimen/spacing24"
                     android:layout_marginTop="32dp"
-                    android:background="@{viewModel.reviewText.length >=10 | viewModel.reviewText.empty? @drawable/background_review_box : @drawable/background_review_error_box}"
+                    android:background="@drawable/background_review_box"
                     android:enabled="@{viewModel.isLike == LikeType.BAD | viewModel.isUserKeyWordTypeSelected}"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:gravity="top"
                     android:hint="@{viewModel.isLike == LikeType.BAD? @string/review_text_bad_hint : @string/review_text_good_hint}"
-                    android:maxLength="70"
+                    android:maxLength="120"
                     android:paddingHorizontal="@dimen/spacing24"
                     android:paddingVertical="20dp"
                     android:text="@={viewModel.reviewText}"
                     android:textAppearance="@style/TextAppearance.Subhead"
-                    android:textColor="@{viewModel.reviewText.length >=10? @color/gray_700 : @color/error}"
+                    android:textColor="@color/gray_700"
                     android:textColorHint="@color/enable_review_writing_color"
                     app:layout_constraintTop_toBottomOf="@id/cg_review_recommend_chip_select"
                     tools:hint="추가로 좋았던 점이 있다면 말씀해주세요!" />
@@ -307,10 +319,10 @@
                     android:layout_marginBottom="@dimen/spacing12"
                     android:text="@{@string/review_text_count(viewModel.reviewText.length)}"
                     android:textAppearance="@style/TextAppearance.CaptionM1"
-                    android:textColor="@{viewModel.reviewText.empty | viewModel.reviewText.length >=10 ? @color/gray_500 : @color/error}"
+                    android:textColor="@color/gray_500"
                     app:layout_constraintBottom_toBottomOf="@+id/et_write_your_review"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
-                    tools:text="0/70 (최소 10자)" />
+                    tools:text="0/120자" />
 
                 <TextView
                     android:id="@+id/tv_review_caption"
@@ -359,12 +371,12 @@
                 android:layout_marginHorizontal="@dimen/spacing24"
                 android:layout_marginTop="18dp"
                 android:background="@drawable/background_review_bottom_btn"
-                android:backgroundTint="@{viewModel.reviewText.length >= 10? @color/gray_700 : @color/gray_200}"
-                android:enabled="@{viewModel.reviewText.length >= 10}"
+                android:backgroundTint="@{viewModel.reviewText.length >= 1 | viewModel.isUserKeyWordTypeSelected? @color/gray_700 : @color/gray_200}"
+                android:enabled="@{viewModel.reviewText.length >= 1 | viewModel.isUserKeyWordTypeSelected}"
                 android:paddingVertical="18dp"
                 android:text="작성하기"
                 android:textAppearance="@style/TextAppearance.Headline"
-                android:textColor="@{viewModel.reviewText.length >=10? @color/gray_100 : @color/gray_400}"
+                android:textColor="@{viewModel.reviewText.length >= 1 | viewModel.isUserKeyWordTypeSelected? @color/gray_100 : @color/gray_400}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
