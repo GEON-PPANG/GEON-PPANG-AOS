@@ -65,18 +65,29 @@ class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_
                     when (viewModel.previousActivity.value) {
                         FilterInfoType.BAKERYLIST -> {
                             val intent = Intent(this, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                             intent.putExtra(BAKERY_LIST_FRAGMENT, BAKERY_LIST_FRAGMENT)
                             startActivity(intent)
                         }
 
                         FilterInfoType.MYPAGE -> {
                             val intent = Intent(this, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                             intent.putExtra(MYPAGE_FRAGMENT, MYPAGE_FRAGMENT)
                             startActivity(intent)
                         }
 
+                        FilterInfoType.HOME -> {
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                            startActivity(intent)
+                        }
+
                         else -> {
-                            startActivity(Intent(this, MainActivity::class.java))
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(intent)
                         }
                     }
                 }
