@@ -14,12 +14,12 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
-    private val _isWithdrawCompleted = MutableLiveData(false)
+    private val _isWithdrawCompleted = MutableLiveData<Boolean>()
     val isWithdrawCompleted: LiveData<Boolean> = _isWithdrawCompleted
     private val _isLogoutCompleted = MutableLiveData<Boolean>()
     val isLogoutCompleted: LiveData<Boolean> = _isLogoutCompleted
 
-    fun setIsWithdrawCompleted(value: Boolean) {
+    private fun setIsWithdrawCompleted(value: Boolean) {
         _isWithdrawCompleted.value = value
     }
 
