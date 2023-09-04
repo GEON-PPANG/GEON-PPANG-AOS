@@ -16,15 +16,31 @@ class AuthViewModel @Inject constructor(
 ) : ViewModel() {
     private val _isWithdrawCompleted = MutableLiveData(false)
     val isWithdrawCompleted: LiveData<Boolean> = _isWithdrawCompleted
+    private val _isLogoutCompleted = MutableLiveData<Boolean>()
+    val isLogoutCompleted: LiveData<Boolean> = _isLogoutCompleted
 
     fun setIsWithdrawCompleted(value: Boolean) {
         _isWithdrawCompleted.value = value
+    }
+
+    private fun setIsLogoutCompleted(value: Boolean) {
+        _isLogoutCompleted.value = value
     }
 
     fun withdraw() {
         viewModelScope.launch {
             authRepository.withdraw().onSuccess {
                 setIsWithdrawCompleted(true)
+            }.onFailure { throwable ->
+                Timber.e(throwable.message)
+            }
+        }
+    }
+
+    fun logout() {
+        viewModelScope.launch {
+            authRepository.logout().onSuccess {
+                setIsLogoutCompleted(true)
             }.onFailure { throwable ->
                 Timber.e(throwable.message)
             }
