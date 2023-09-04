@@ -34,7 +34,7 @@ class SignUpNicknameActivity :
         }
 
         binding.imgBackArrow.setOnClickListener {
-            moveToPassword()
+            finish()
         }
 
         binding.btnNext.setOnClickListener {
@@ -46,7 +46,6 @@ class SignUpNicknameActivity :
 
     private fun moveToPassword() {
         startActivity(Intent(this, SignUpActivity::class.java))
-        finish()
     }
 
     companion object {
