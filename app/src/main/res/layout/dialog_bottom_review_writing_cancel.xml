@@ -71,7 +71,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_review_writing_description">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/tv_stop"
+                android:id="@+id/btn_stop"
                 style="@style/Widget.FullButton.Basic"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -83,11 +83,11 @@
                 android:textAppearance="@style/TextAppearance.BodyM1"
                 android:textColor="@color/gray_300"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tv_continue"
+                app:layout_constraintEnd_toStartOf="@id/btn_continue"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/tv_continue"
+                android:id="@+id/btn_continue"
                 style="@style/Widget.FullButton.Basic"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                 android:textColor="@color/gray_100"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tv_stop" />
+                app:layout_constraintStart_toEndOf="@id/btn_stop" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
