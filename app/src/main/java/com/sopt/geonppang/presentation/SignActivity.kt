@@ -2,7 +2,6 @@ package com.sopt.geonppang.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import com.kakao.sdk.common.KakaoSdk
 import com.sopt.geonppang.R
 import com.sopt.geonppang.data.service.KakaoAuthService
@@ -17,7 +16,7 @@ import javax.inject.Inject
 class SignActivity :
     BindingActivity<ActivitySignBinding>(R.layout.activity_sign) {
     @Inject
-    lateinit var kakaoAuthService : KakaoAuthService
+    lateinit var kakaoAuthService: KakaoAuthService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         KakaoSdk.init(this, this.getString(R.string.kakao_app_key))
