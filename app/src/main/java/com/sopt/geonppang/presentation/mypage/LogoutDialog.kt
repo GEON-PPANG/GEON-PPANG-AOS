@@ -42,6 +42,9 @@ class LogoutDialog() : BindingDialogFragment<DialogMiddleBinding>(R.layout.dialo
     }
 
     private fun moveToSign() {
-        context?.startActivity(Intent(context, SignActivity::class.java))
+        val intent = Intent(requireContext(), SignActivity::class.java)
+        intent.flags =
+            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
     }
 }
