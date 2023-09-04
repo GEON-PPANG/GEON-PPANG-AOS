@@ -19,15 +19,15 @@ class ReportViewModel @Inject constructor(
     private val _reportCategory: MutableLiveData<ReportCategoryType?> = MutableLiveData()
     val reportCategory: LiveData<ReportCategoryType?> = _reportCategory
     val reportContent = MutableLiveData("")
-    private val _showReportSuccessEvent = MutableLiveData<Unit>()
-    val showReportSuccessEvent: LiveData<Unit> = _showReportSuccessEvent
+    private val _isReportCompleted = MutableLiveData(false)
+    val isReportCompleted: LiveData<Boolean> = _isReportCompleted
 
     fun setReportCategory(reportCategoryType: ReportCategoryType) {
         _reportCategory.value = reportCategoryType
     }
 
-    private fun reportReviewSuccess() {
-        _showReportSuccessEvent.value = Unit
+    private fun setIsReportCompleted(value: Boolean) {
+        _isReportCompleted.value = value
     }
 
     fun reportReview(reviewId: Int) {
@@ -38,7 +38,7 @@ class ReportViewModel @Inject constructor(
                         reviewId,
                         RequestReport(content = reportContent, reportCategory = reportCategory.name)
                     ).onSuccess { responseReport ->
-                        reportReviewSuccess()
+                        setIsReportCompleted(true)
                     }.onFailure { throwable ->
                         Timber.e(throwable.message)
                     }

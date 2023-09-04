@@ -2,7 +2,6 @@ package com.sopt.geonppang.presentation.report
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityReportBinding
 import com.sopt.geonppang.presentation.detail.DetailActivity
@@ -51,12 +50,11 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
     }
 
     private fun addObservers() {
-        viewModel.showReportSuccessEvent.observe(
-            this,
-            Observer {
+        viewModel.isReportCompleted.observe(this) { isReportCompleted ->
+            if (isReportCompleted) {
                 showReportSucessBottomDialog()
             }
-        )
+        }
     }
 
     private fun showReportSucessBottomDialog() {
