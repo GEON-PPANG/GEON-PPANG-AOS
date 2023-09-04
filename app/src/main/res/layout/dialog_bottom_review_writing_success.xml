@@ -24,12 +24,13 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="@dimen/spacing24" />
 
+
         <ImageView
             android:id="@+id/iv_review_writing_success"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:src="@drawable/ic_smile_big"
+            android:src="@drawable/ic_smile_review_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +39,7 @@
             android:id="@+id/tv_review_writing_success"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing20"
+            android:layout_marginTop="@dimen/spacing16"
             android:text="@string/review_writing_success_title"
             android:textAppearance="@style/TextAppearance.Title2"
             android:textColor="@color/gray_500"
@@ -51,7 +52,8 @@
             style="@style/Widget.FullButton.Basic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="48dp"
+            android:layout_marginTop="38dp"
+            android:layout_marginBottom="24dp"
             android:backgroundTint="@color/gray_700"
             android:paddingVertical="18dp"
             android:text="@string/review_writing_confirm"
