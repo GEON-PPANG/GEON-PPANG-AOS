@@ -52,11 +52,6 @@
     <!--    my page    -->
     <string name="my_page_title">마이페이지</string>
 
-    <string name="my_page_gluten_free">글루텐프리</string>
-    <string name="my_page_nut_free">넛프리</string>
-    <string name="my_page_vegan">비건빵</string>
-    <string name="my_page_low_suger">저당,무설탕</string>
-
     <string name="my_page_bookmark">저장 목록</string>
     <string name="my_page_review">내가 쓴 리뷰</string>
 
@@ -80,12 +75,6 @@
     <string name="search_empty_description1">검색결과가 없어요</string>
     <string name="search_empty_description2">다른 키워드로 검색해보세요!</string>
     <string name="nearest_station">%s∙%s</string>
-
-    <!--    bread type    -->
-    <string name="gluten_free">글루텐프리</string>
-    <string name="nut_free">넛프리</string>
-    <string name="vegan">비건빵</string>
-    <string name="low_sugar">저당,무설탕</string>
 
     <!--    detail    -->
     <string name="detail_create_review">리뷰 작성하기</string>
