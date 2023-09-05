@@ -3,7 +3,7 @@ package com.sopt.geonppang.data.model.request
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RequestFilter(
+data class RequestSettingFilter(
     val mainPurpose: String,
     val breadType: BreadType,
     val nutrientType: NutrientType

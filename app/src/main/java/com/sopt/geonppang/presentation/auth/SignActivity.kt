@@ -6,8 +6,8 @@ import com.kakao.sdk.common.KakaoSdk
 import com.sopt.geonppang.R
 import com.sopt.geonppang.data.service.KakaoAuthService
 import com.sopt.geonppang.databinding.ActivitySignBinding
+import com.sopt.geonppang.presentation.auth.SignUpActivity
 import com.sopt.geonppang.presentation.login.LoginActivity
-import com.sopt.geonppang.presentation.signup.SignUpActivity
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

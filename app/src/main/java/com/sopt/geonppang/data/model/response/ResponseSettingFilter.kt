@@ -4,7 +4,7 @@ import com.sopt.geonppang.domain.model.SelectedFilter
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ResponseFilter(
+data class ResponseSettingFilter(
     val code: Int,
     val data: Data,
     val message: String

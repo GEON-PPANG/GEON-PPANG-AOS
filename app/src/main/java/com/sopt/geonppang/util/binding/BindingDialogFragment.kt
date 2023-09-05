@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
+import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.DialogMiddleBinding
 
 abstract class BindingDialogFragment<B : ViewDataBinding>(@LayoutRes private val layoutRes: Int) :
@@ -21,6 +23,17 @@ abstract class BindingDialogFragment<B : ViewDataBinding>(@LayoutRes private val
     ): View? {
         _binding = DialogMiddleBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT,
+        )
+        dialog?.window?.setBackgroundDrawableResource(R.color.dialog_background)
+        dialog?.setCancelable(false)
+        dialog?.setCanceledOnTouchOutside(true)
     }
 
     override fun onDestroyView() {

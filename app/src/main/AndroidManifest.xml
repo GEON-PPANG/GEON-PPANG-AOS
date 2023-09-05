@@ -34,11 +34,11 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.MainActivity"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".presentation.SignActivity"
+            android:name=".presentation.auth.SignActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
@@ -58,12 +58,12 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".presentation.filter.FilterActivity"
+            android:name=".presentation.filterSetting.FilterSettingActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".presentation.filter.WelcomeActivity"
+            android:name=".presentation.auth.WelcomeActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
@@ -73,13 +73,13 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".presentation.signup.SignUpActivity"
+            android:name=".presentation.auth.SignUpActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".presentation.signup.SignUpNicknameActivity"
+            android:name=".presentation.auth.SignUpNicknameActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
@@ -118,5 +118,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
