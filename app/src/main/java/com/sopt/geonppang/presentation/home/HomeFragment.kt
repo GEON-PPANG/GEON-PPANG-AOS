@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentHomeBinding
 import com.sopt.geonppang.presentation.detail.DetailActivity
-import com.sopt.geonppang.presentation.filter.FilterActivity
+import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.search.SearchActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.UiState
@@ -98,7 +98,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     }
 
     private fun moveToFilter() {
-        val intent = Intent(requireContext(), FilterActivity::class.java)
+        val intent = Intent(requireContext(), FilterSettingActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
         intent.putExtra(FILTER_INFO, FilterInfoType.HOME.name)
         startActivity(intent)

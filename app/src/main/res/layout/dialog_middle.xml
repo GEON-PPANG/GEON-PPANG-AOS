@@ -78,7 +78,7 @@
                 tools:text="정말로 로그아웃 하실건가요?" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_dialog_left"
+                android:id="@+id/btn_dialog_no"
                 style="@style/Widget.Material.Button.Basic"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -92,13 +92,13 @@
                 app:backgroundTint="@color/gray_200"
                 app:cornerRadius="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btn_dialog_right"
+                app:layout_constraintEnd_toStartOf="@+id/btn_dialog_yes"
                 app:layout_constraintStart_toStartOf="@id/gl_start"
                 app:layout_constraintTop_toBottomOf="@id/tv_dialog_context"
                 tools:text="아니요" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_dialog_right"
+                android:id="@+id/btn_dialog_yes"
                 style="@style/Widget.Material.Button.Basic"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -110,11 +110,11 @@
                 android:textColor="@color/white"
                 app:backgroundTint="@color/main_2"
                 app:cornerRadius="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_dialog_left"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_dialog_no"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/gl_end"
-                app:layout_constraintStart_toEndOf="@+id/btn_dialog_left"
-                app:layout_constraintTop_toTopOf="@+id/btn_dialog_left"
+                app:layout_constraintStart_toEndOf="@+id/btn_dialog_no"
+                app:layout_constraintTop_toTopOf="@+id/btn_dialog_no"
                 tools:text="네" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

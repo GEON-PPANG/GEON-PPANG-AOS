@@ -1,11 +1,10 @@
-package com.sopt.geonppang.presentation.signup
+package com.sopt.geonppang.presentation.auth
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySignupNicknameBinding
-import com.sopt.geonppang.presentation.filter.WelcomeActivity
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -13,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SignUpNicknameActivity :
     BindingActivity<ActivitySignupNicknameBinding>(R.layout.activity_signup_nickname) {
-    private val viewModel: SignUpViewModel by viewModels()
+    private val viewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +41,6 @@ class SignUpNicknameActivity :
             intent.putExtra(NICKNAME, viewModel.nickname.value)
             startActivity(intent)
         }
-    }
-
-    private fun moveToPassword() {
-        startActivity(Intent(this, SignUpActivity::class.java))
     }
 
     companion object {

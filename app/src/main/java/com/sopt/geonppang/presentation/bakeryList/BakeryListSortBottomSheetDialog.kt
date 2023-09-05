@@ -18,7 +18,7 @@ class BakeryListSortBottomSheetDialog :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
         addListeners()
         setBakerySortTypeSelected()

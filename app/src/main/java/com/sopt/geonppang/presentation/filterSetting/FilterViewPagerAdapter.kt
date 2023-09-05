@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.filter
+package com.sopt.geonppang.presentation.filterSetting
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

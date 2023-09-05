@@ -10,7 +10,7 @@ import com.sopt.geonppang.BuildConfig
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentMyPageBinding
 import com.sopt.geonppang.presentation.common.WebViewActivity
-import com.sopt.geonppang.presentation.filter.FilterActivity
+import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.binding.BindingFragment
 import com.sopt.geonppang.util.setInvisibility
@@ -29,7 +29,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
         initLayout()
         addListeners()
@@ -39,6 +39,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     private fun initLayout() {
         viewModel.fetchMypageInfo()
         binding.includeMyPageSpeechBubble.ivSpeechBubble.setBackgroundResource(R.drawable.background_left_speech_bubble)
+        binding.tvMyPageAppVersion.text = getString(R.string.tv_my_page_app_version, APP_VERSION)
     }
 
     private fun addListeners() {
@@ -99,7 +100,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun moveToFilter() {
-        val intent = Intent(requireContext(), FilterActivity::class.java)
+        val intent = Intent(requireContext(), FilterSettingActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
         intent.putExtra(FILTER_INFO, FilterInfoType.MYPAGE.name)
         startActivity(intent)

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.sopt.geonppang.presentation.filter.FilterViewModel" />
+            type="com.sopt.geonppang.presentation.filterSetting.FilterSettingViewModel" />
 
         <import type="com.sopt.geonppang.presentation.type.MainPurposeType" />
 
@@ -17,7 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.filter.MainPurposeFilterActivity">
+        tools:context=".presentation.filterSetting.MainPurposeFilterActivity">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_start"

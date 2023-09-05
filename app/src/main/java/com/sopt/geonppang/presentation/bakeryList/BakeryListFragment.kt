@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentBakeryListBinding
 import com.sopt.geonppang.presentation.detail.DetailActivity
-import com.sopt.geonppang.presentation.filter.FilterActivity
+import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.search.SearchActivity
 import com.sopt.geonppang.presentation.type.BakerySortType
 import com.sopt.geonppang.presentation.type.FilterInfoType
@@ -30,7 +30,7 @@ class BakeryListFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
         initLayout()
         addListeners()
@@ -81,7 +81,7 @@ class BakeryListFragment :
     }
 
     private fun moveToFilter() {
-        val intent = Intent(requireContext(), FilterActivity::class.java)
+        val intent = Intent(requireContext(), FilterSettingActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
         intent.putExtra(FILTER_INFO, FilterInfoType.BAKERYLIST.name)
         startActivity(intent)

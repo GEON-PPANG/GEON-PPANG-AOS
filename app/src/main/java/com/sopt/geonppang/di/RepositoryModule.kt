@@ -50,8 +50,8 @@ interface RepositoryModule {
     @Binds
     @Singleton
     fun bindFilterRepository(
-        filterRepositoryImpl: FilterRepositoryImpl,
-    ): FilterRepository
+        filterRepositoryImpl: FilterSettingRepositoryImpl,
+    ): FilterSettingRepository
 
     @Binds
     @Singleton
@@ -64,6 +64,12 @@ interface RepositoryModule {
     fun bindGetUserFilterRepository(
         getUserFilterRepositoryImpl: GetUserFilterRepositoryImpl
     ): GetUserFilterRepository
+
+    @Binds
+    @Singleton
+    fun bindReportRepository(
+        reportRepositoryImpl: ReportRepositoryImpl
+    ): ReportRepository
 
     @Binds
     @Singleton
