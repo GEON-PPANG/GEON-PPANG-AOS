@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing16"
-                android:text="내가 쓴 리뷰가 없어요!"
+                android:text="@string/my_page_review_empty_view_description"
                 android:textAppearance="@style/TextAppearance.Title2"
                 android:textColor="@color/gray_300"
                 app:layout_constraintEnd_toEndOf="parent"
