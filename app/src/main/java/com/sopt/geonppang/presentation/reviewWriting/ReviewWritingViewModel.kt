@@ -1,6 +1,10 @@
 package com.sopt.geonppang.presentation.reviewWriting
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.model.request.RequestReviewWriting
 import com.sopt.geonppang.domain.repository.ReviewWritingRepository
 import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
@@ -27,6 +31,20 @@ class ReviewWritingViewModel @Inject constructor(private val reviewWritingReposi
     val reviewCancelState: LiveData<Boolean> = _reviewCancelState
     private val _bakeryInfo: MutableLiveData<BakeryReviewWritingInfo> = MutableLiveData()
     val bakeryInfo: LiveData<BakeryReviewWritingInfo> = _bakeryInfo
+    val userKeyWordType: MutableLiveData<Map<KeyWordType, Boolean>> =
+        MutableLiveData(
+            mapOf(
+                KeyWordType.DELICIOUS to false,
+                KeyWordType.KIND to false,
+                KeyWordType.SPECIAL_MENU to false,
+                KeyWordType.ZERO_WASTE to false
+            )
+        )
+    val isUserKeyWordTypeSelected: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
+        addSource(userKeyWordType) { keyWordMap ->
+            value = keyWordMap.any { it.value }
+        }
+    }
 
     fun setBakeryId(bakeryId: Int) {
         _bakeryId.value = bakeryId
@@ -40,16 +58,6 @@ class ReviewWritingViewModel @Inject constructor(private val reviewWritingReposi
         _isLike.value = isLike
     }
 
-    val userKeyWordType: MutableLiveData<Map<KeyWordType, Boolean>> =
-        MutableLiveData(
-            mapOf(
-                KeyWordType.DELICIOUS to false,
-                KeyWordType.KIND to false,
-                KeyWordType.SPECIAL_MENU to false,
-                KeyWordType.ZERO_WASTE to false
-            )
-        )
-
     fun setKeyWordType(keyWordType: KeyWordType) {
         val isSelected = userKeyWordType.value?.get(keyWordType) ?: return
         userKeyWordType.value = userKeyWordType.value?.toMutableMap()?.apply {
@@ -57,13 +65,7 @@ class ReviewWritingViewModel @Inject constructor(private val reviewWritingReposi
         }
     }
 
-    val isUserKeyWordTypeSelected: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
-        addSource(userKeyWordType) { keyWordMap ->
-            value = keyWordMap.any { it.value }
-        }
-    }
-
-    fun getKeyWordTypeList(): List<RequestReviewWriting.KeywordName> {
+    private fun getKeyWordTypeList(): List<RequestReviewWriting.KeywordName> {
         val trueKeyWordTypes = mutableListOf<RequestReviewWriting.KeywordName>()
         userKeyWordType.value?.forEach { (keyWordType, value) ->
             if (value) {
@@ -71,6 +73,10 @@ class ReviewWritingViewModel @Inject constructor(private val reviewWritingReposi
             }
         }
         return trueKeyWordTypes
+    }
+
+    fun setBakeryInfo(bakeryInfo: BakeryReviewWritingInfo) {
+        _bakeryInfo.value = bakeryInfo
     }
 
     fun writeReview() {
@@ -81,7 +87,7 @@ class ReviewWritingViewModel @Inject constructor(private val reviewWritingReposi
                         it,
                         RequestReviewWriting(
                             _isLike.value == LikeType.LIKE,
-                            getKeyWordTypeList(),
+                            if (_isLike.value == LikeType.LIKE) getKeyWordTypeList() else emptyList(),
                             reviewText
                         )
                     )
@@ -94,9 +100,5 @@ class ReviewWritingViewModel @Inject constructor(private val reviewWritingReposi
                 }
             }
         }
-    }
-
-    fun setBakeryInfo(bakeryInfo: BakeryReviewWritingInfo) {
-        _bakeryInfo.value = bakeryInfo
     }
 }
