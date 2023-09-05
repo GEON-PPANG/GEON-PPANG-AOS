@@ -14,12 +14,22 @@ class SignActivity :
     }
 
     private fun addListeners() {
-        binding.btnSignup.setOnClickListener {
+        binding.btnStartWithKakao.setOnClickListener {
+            moveToSignUp()
+        }
+        binding.tvLoginWithEmail.setOnClickListener {
+            moveToLogin()
+        }
+        binding.tvSignupWithEmail.setOnClickListener {
             moveToSignUp()
         }
     }
 
     private fun moveToSignUp() {
         startActivity(Intent(this, SignUpActivity::class.java))
+    }
+
+    private fun moveToLogin() {
+        startActivity(Intent(this, LoginActivity::class.java))
     }
 }

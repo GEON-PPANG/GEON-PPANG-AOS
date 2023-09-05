@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.sopt.geonppang.R
-import com.sopt.geonppang.databinding.DialogBottomSignupNicknameBinding
+import com.sopt.geonppang.databinding.DialogBottomSignupNicknameSuccessBinding
 import com.sopt.geonppang.util.binding.BindingBottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignUpNicknameBottomSheetDialog :
-    BindingBottomSheetDialogFragment<DialogBottomSignupNicknameBinding>(
-        R.layout.dialog_bottom_signup_nickname
+    BindingBottomSheetDialogFragment<DialogBottomSignupNicknameSuccessBinding>(
+        R.layout.dialog_bottom_signup_nickname_success
     ) {
     private val viewModel: AuthViewModel by viewModels()
 

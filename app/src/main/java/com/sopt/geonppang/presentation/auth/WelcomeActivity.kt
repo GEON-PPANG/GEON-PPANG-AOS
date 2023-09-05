@@ -34,6 +34,7 @@ class WelcomeActivity : BindingActivity<ActivityWelcomeBinding>(R.layout.activit
 
     private fun moveToFilter() {
         val intent = Intent(this, FilterSettingActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
         intent.putExtra(FILTER_INFO, FilterInfoType.ONBOARDING.name)
         startActivity(intent)
         finish()

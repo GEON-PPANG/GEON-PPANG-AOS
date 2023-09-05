@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="viewModel"
+            type="com.sopt.geonppang.presentation.signup.SignUpViewModel" />
 
     </data>
 
@@ -24,46 +29,48 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="@dimen/spacing24" />
 
-
         <ImageView
-            android:id="@+id/iv_review_writing_success"
+            android:id="@+id/img_smile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:src="@drawable/ic_smile_review_view"
+            android:src="@drawable/ic_sad"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_sad" />
+
 
         <TextView
-            android:id="@+id/tv_review_writing_success"
+            android:id="@+id/tv_nickname_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/spacing16"
-            android:text="@string/review_writing_success_title"
+            android:text="@string/unavailable_nickname"
             android:textAppearance="@style/TextAppearance.Title2"
             android:textColor="@color/gray_500"
-            app:layout_constraintEnd_toStartOf="@+id/gl_end"
-            app:layout_constraintStart_toStartOf="@+id/gl_start"
-            app:layout_constraintTop_toBottomOf="@id/iv_review_writing_success" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_smile"
+            tools:text="@string/unavailable_nickname" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_review_writing_success"
+            android:id="@+id/btn_check"
             style="@style/Widget.FullButton.Basic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="38dp"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="24dp"
             android:backgroundTint="@color/gray_700"
             android:paddingVertical="18dp"
-            android:text="@string/review_writing_confirm"
+            android:text="@string/bottom_sheet_ok"
             android:textAppearance="@style/TextAppearance.Headline"
             android:textColor="@color/gray_100"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/gl_end"
-            app:layout_constraintStart_toStartOf="@+id/gl_start"
-            app:layout_constraintTop_toBottomOf="@id/tv_review_writing_success" />
-
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_nickname_status" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

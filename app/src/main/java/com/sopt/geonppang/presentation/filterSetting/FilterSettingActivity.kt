@@ -2,7 +2,6 @@ package com.sopt.geonppang.presentation.filterSetting
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.sopt.geonppang.R
@@ -10,6 +9,7 @@ import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.binding.BindingActivity
+import com.sopt.geonppang.util.setInvisibility
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,10 +42,6 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
             })
 
         setPreviousActivity()
-
-        if (binding.vpFilterContainer.currentItem == 0 && viewModel.previousActivity.value == FilterInfoType.ONBOARDING) {
-            binding.ivFilterArrowLeft.visibility = View.INVISIBLE
-        }
     }
 
     private fun addListeners() {
@@ -69,18 +65,29 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                     when (viewModel.previousActivity.value) {
                         FilterInfoType.BAKERYLIST -> {
                             val intent = Intent(this, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                             intent.putExtra(BAKERY_LIST_FRAGMENT, BAKERY_LIST_FRAGMENT)
                             startActivity(intent)
                         }
 
                         FilterInfoType.MYPAGE -> {
                             val intent = Intent(this, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                             intent.putExtra(MYPAGE_FRAGMENT, MYPAGE_FRAGMENT)
                             startActivity(intent)
                         }
 
+                        FilterInfoType.HOME -> {
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                            startActivity(intent)
+                        }
+
                         else -> {
-                            startActivity(Intent(this, MainActivity::class.java))
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(intent)
                         }
                     }
                 }
@@ -111,6 +118,18 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
 
         viewModel.currentItem.observe(this) { currentItem ->
             binding.tvFilterPageNumber.text = setPageText(currentItem + 1)
+
+            when (currentItem) {
+                0 -> {
+                    if (viewModel.previousActivity.value == FilterInfoType.ONBOARDING) {
+                        binding.ivFilterArrowLeft.setInvisibility(false)
+                    }
+                }
+
+                else -> {
+                    binding.ivFilterArrowLeft.setInvisibility(true)
+                }
+            }
         }
 
         viewModel.currentItemFilterSelected.observe(this) { currentItemFilterSelected ->

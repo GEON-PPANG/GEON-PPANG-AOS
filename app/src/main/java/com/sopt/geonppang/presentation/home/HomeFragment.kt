@@ -99,6 +99,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private fun moveToFilter() {
         val intent = Intent(requireContext(), FilterSettingActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
         intent.putExtra(FILTER_INFO, FilterInfoType.HOME.name)
         startActivity(intent)
     }
@@ -107,6 +108,5 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         const val BAKERY_ID = "bakeryId"
         const val ACTIVITY_NAME = "activityName"
         const val FILTER_INFO = "filterInfo"
-        const val MAX_PAGE = "maxPage"
     }
 }

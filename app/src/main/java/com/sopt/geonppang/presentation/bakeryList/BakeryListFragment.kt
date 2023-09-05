@@ -82,6 +82,7 @@ class BakeryListFragment :
 
     private fun moveToFilter() {
         val intent = Intent(requireContext(), FilterSettingActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
         intent.putExtra(FILTER_INFO, FilterInfoType.BAKERYLIST.name)
         startActivity(intent)
     }

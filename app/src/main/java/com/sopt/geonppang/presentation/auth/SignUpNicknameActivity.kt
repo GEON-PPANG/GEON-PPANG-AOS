@@ -33,19 +33,18 @@ class SignUpNicknameActivity :
         }
 
         binding.imgBackArrow.setOnClickListener {
-            moveToPassword()
+            finish()
         }
 
         binding.btnNext.setOnClickListener {
             val intent = Intent(this, WelcomeActivity::class.java)
-            intent.putExtra(NICKNAME, viewModel.nickname.value.toString())
+            intent.putExtra(NICKNAME, viewModel.nickname.value)
             startActivity(intent)
         }
     }
 
     private fun moveToPassword() {
         startActivity(Intent(this, SignUpActivity::class.java))
-        finish()
     }
 
     companion object {

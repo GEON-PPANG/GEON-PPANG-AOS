@@ -1,6 +1,20 @@
 <resources>
     <string name="app_name">건빵</string>
 
+    <!--sign-->
+    <string name="sign_login_with_email">이메일로 로그인</string>
+    <string name="sign_signup_with_email">이메일로 회원가입</string>
+    <string name="btn_kakao_sign">카카오로 계속하기</string>
+    <string name="btn_signup_text">회원가입</string>
+
+    <!--login-->
+    <string name="login_text_phrase">로그인</string>
+    <string name="login_email_hint">이메일을 입력해주세요</string>
+    <string name="login_password_hint">비밀번호를 입력해주세요</string>
+    <string name="login_have_no_account">계정이 없으신가요?</string>
+    <string name="login_goto_signup"><u>회원가입하기</u></string>
+    <string name="login_bottom_message">이메일 및 비밀번호를\n확인해주세요</string>
+
     <!--signup-->
     <string name="tv_signup_notice_phrase">회원가입을 위한\n정보를 알려주세요!</string>
     <string name="tv_email">이메일</string>
@@ -20,8 +34,9 @@
     <string name="nickname_error">8자 이내, 특수문자 금지</string>
     <string name="available_email">사용 가능한 이메일입니다</string>
     <string name="unavailable_email">이미 존재하는 이메일입니다</string>
-    <string name="available_nickname">사용 가능한 닉네임입니다</string>
-    <string name="unavailable_nickname">이미 존재하는 닉네임입니다</string>
+    <string name="available_nickname">사용 가능한 닉네임이에요!</string>
+    <string name="unavailable_nickname">이미 존재하는 닉네임이에요</string>
+    <string name="bottom_sheet_ok">확인</string>
 
     <!--  home  -->
     <string name="home_title">%s님\n건빵에 오신걸 환영해요!</string>
@@ -104,10 +119,6 @@
     <string name="bakery_bread_type_branch">브런치류</string>
     <string name="bakery_list_my_filter_apply">내 필터 적용</string>
 
-    <!-- sign view -->
-    <string name="btn_login_text">로그인</string>
-    <string name="btn_signup_text">회원가입</string>
-
     <!--    filter    -->
     <string name="filter_skip">건너뛰기</string>
     <string name="filter_next">다음</string>
@@ -144,14 +155,14 @@
     <!--review-->
     <string name="review_writing">리뷰 쓰기</string>
     <string name="how_was_the_store">건빵집은 어떠셨나요?</string>
-    <string name="chip_like">좋아요</string>
-    <string name="chip_soso">별로예요</string>
+    <string name="chip_like">좋았어요</string>
+    <string name="chip_soso">아쉬웠어요</string>
     <string name="what_do_you_recommend">어떤 것을 추천하나요?</string>
     <string name="chip_tasty">맛있어요</string>
     <string name="chip_kind">친절해요</string>
     <string name="chip_special_menu">특별한 메뉴</string>
     <string name="review_text_count">%d/120자</string>
-    <string name="review_caption">• 솔직하게 작성해주신 리뷰는 건빵 소비자에게 도움이 됩니다! 하지만 선량한 업주나 제3자의 권리를 침해하는 게시물(허위 리뷰, 명예훼손, 욕설, 타임 비방글 등)은 안내 없이 삭제되며, 관련 법률에 따라 제재를 받을 수 있습니다. 또한, 건빵은 이에 대한 책임을 지지 않습니다. </string>
+    <string name="review_caption">솔직하게 작성해주신 리뷰는 건빵 소비자에게 도움이 됩니다! 하지만 선량한 업주나 제3자의 권리를 침해하는 게시물(허위 리뷰, 명예훼손, 욕설, 타임 비방글 등)은 안내 없이 삭제되며, 관련 법률에 따라 제재를 받을 수 있습니다. 또한, 건빵은 이에 대한 책임을 지지 않습니다. </string>
     <string name="review_text_good_hint">추가로 좋았던 점이 있다면 말씀해주세요!</string>
     <string name="review_text_bad_hint">자유롭게 의견을 말씀해주세요!</string>
     <string name="review_writing_title">건대 초코빵</string>
@@ -160,11 +171,11 @@
     <string name="review_key_word_type_special_menu">특별한 메뉴</string>
     <string name="review_key_word_type_zero_waste">제로 웨이스트</string>
     <string name="review_writing_success_title">작성이 완료되었어요!</string>
-    <string name="review_writing_cancel_title">정말 리뷰 작성을 그만하시겠어요?</string>
-    <string name="review_writing_cancel_description">고객님의 리뷰가 다른 고객님들에게\n도움이 될 수 있어요</string>
+    <string name="review_writing_cancel_title">정말 리뷰작성을 그만 하실건가요?</string>
+    <string name="review_writing_cancel_description">여러분이 작성해주신 리뷰가\n다른 유저의 건빵생활을 도울 수 있어요</string>
     <string name="review_writing_confirm">확인</string>
-    <string name="review_writing_stop">그만하기</string>
-    <string name="review_writing_continue">계속쓰기</string>
+    <string name="review_writing_stop">네, 그만 쓸래요</string>
+    <string name="review_writing_continue">아니요, 계속 쓸래요</string>
 
     <string name="my_review_detail_empty">작성한 리뷰가 없어요</string>
 
@@ -177,4 +188,23 @@
     <string name="dialog_type_withdraw_context">회원님의 정보가 사라집니다.\n정말로 떠나실건가요?</string>
     <string name="dialog_type_withdraw_left_btn">더 써볼래요</string>
     <string name="dialog_type_withdraw_right_btn">떠날래요</string>
+
+    <!--report-->
+    <string name="report">리뷰 신고</string>
+
+    <string name="report_category">신고하려는 사유를 선택해주세요!</string>
+    <string name="report_category_advertising">홍보 및 신뢰할 수 없는 게시물</string>
+    <string name="report_category_hate">욕설, 음란어, 혐오 발언 사용</string>
+    <string name="report_category_copyright">명예훼손, 저작권 침해</string>
+    <string name="report_category_etc">그 외 다른 문제</string>
+
+    <string name="report_content">자세한 신고 사유는 아래 적어주세요!</string>
+    <string name="report_content_hint">신고 내용을 입력해주세요.</string>
+    <string name="report_content_count">%d/140자</string>
+
+    <string name="report_bottom_text">여러분의 신고를 바탕으로 깨끗한 리뷰를 제공해 드릴 수 있도록 노력하겠습니다.</string>
+
+    <string name="report_do_report">신고하기</string>
+
+    <string name="report_success_title">신고가 완료됐어요!</string>
 </resources>

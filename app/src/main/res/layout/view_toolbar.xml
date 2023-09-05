@@ -43,7 +43,7 @@
             tools:text="저장 목록" />
 
         <View
-            android:id="@id/view_top"
+            android:id="@+id/view_top"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/spacing20"

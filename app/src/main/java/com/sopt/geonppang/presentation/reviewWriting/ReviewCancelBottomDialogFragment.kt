@@ -21,11 +21,11 @@ class ReviewCancelBottomDialogFragment :
     }
 
     private fun addListeners() {
-        binding.tvContinue.setOnClickListener {
+        binding.btnContinue.setOnClickListener {
             dismiss()
         }
 
-        binding.tvStop.setOnClickListener {
+        binding.btnStop.setOnClickListener {
             viewModel.setReviewCancelState(false)
         }
     }
