@@ -91,7 +91,7 @@
 
         <TextView
             android:id="@+id/tv_item_detail_review_content"
-            visibility="@{review.reviewText == null}"
+            visibility="@{!review.reviewText.isEmpty()}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingTop="12dp"
