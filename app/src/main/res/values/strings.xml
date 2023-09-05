@@ -176,8 +176,8 @@
     <string name="review_writing_confirm">확인</string>
     <string name="review_writing_stop">네, 그만 쓸래요</string>
     <string name="review_writing_continue">아니요, 계속 쓸래요</string>
-
     <string name="my_review_detail_empty">작성한 리뷰가 없어요</string>
+    <string name="review_writing_btn_text">작성하기</string>
 
     <!--logout dialog-->
     <string name="dialog_type_logout_context">정말로 로그아웃 하실건가요?</string>
