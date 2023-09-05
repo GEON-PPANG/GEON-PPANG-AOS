@@ -15,7 +15,7 @@ class SignActivity :
     }
 
     private fun addListeners() {
-        binding.btnStartWithKakao.setOnClickListener {
+        binding.layoutKakao.setOnClickListener {
             moveToSignUp()
         }
         binding.tvLoginWithEmail.setOnClickListener {
