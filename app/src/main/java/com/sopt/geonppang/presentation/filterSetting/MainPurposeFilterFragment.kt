@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.filter
+package com.sopt.geonppang.presentation.filterSetting
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,12 +11,13 @@ import com.sopt.geonppang.util.binding.BindingFragment
 
 class MainPurposeFilterFragment :
     BindingFragment<FragmentMainPurposeFilterBinding>(R.layout.fragment_main_purpose_filter) {
-    private val viewModel: FilterViewModel by activityViewModels()
+    private val viewModel: FilterSettingViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewModel = viewModel
+        binding.lifecycleOwner = this.viewLifecycleOwner
         binding.lifecycleOwner = this
 
         addListeners()

@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.filter
+package com.sopt.geonppang.presentation.filterSetting
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,8 +13,8 @@ import com.sopt.geonppang.util.setInvisibility
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FilterActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_filter) {
-    private val viewModel by viewModels<FilterViewModel>()
+class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_filter) {
+    private val viewModel: FilterSettingViewModel by viewModels()
     private lateinit var adapter: FilterViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {

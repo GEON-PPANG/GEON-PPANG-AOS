@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.signup
+package com.sopt.geonppang.presentation.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SignUpActivity :
     BindingActivity<ActivitySignupBinding>(R.layout.activity_signup) {
-    private val viewModel: SignUpViewModel by viewModels()
+    private val viewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

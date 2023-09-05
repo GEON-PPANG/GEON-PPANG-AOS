@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.signup
+package com.sopt.geonppang.presentation.auth
 
 import android.os.Bundle
 import android.view.View
@@ -13,7 +13,7 @@ class SignUpNicknameBottomSheetDialog :
     BindingBottomSheetDialogFragment<DialogBottomSignupNicknameSuccessBinding>(
         R.layout.dialog_bottom_signup_nickname_success
     ) {
-    private val viewModel: SignUpViewModel by viewModels()
+    private val viewModel: AuthViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
