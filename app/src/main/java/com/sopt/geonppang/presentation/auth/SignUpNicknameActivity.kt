@@ -43,10 +43,6 @@ class SignUpNicknameActivity :
         }
     }
 
-    private fun moveToPassword() {
-        startActivity(Intent(this, SignUpActivity::class.java))
-    }
-
     companion object {
         const val NICKNAME = "nickName"
     }

@@ -9,6 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.BuildConfig
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentMyPageBinding
+import com.sopt.geonppang.presentation.common.WebViewActivity
+import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.binding.BindingFragment
 import com.sopt.geonppang.util.setInvisibility

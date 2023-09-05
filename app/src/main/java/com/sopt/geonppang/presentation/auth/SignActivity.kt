@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySignBinding
+import com.sopt.geonppang.presentation.login.LoginActivity
 import com.sopt.geonppang.util.binding.BindingActivity
 
 class SignActivity :
