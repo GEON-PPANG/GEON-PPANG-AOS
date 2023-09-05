@@ -39,7 +39,7 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.auth.SignActivity"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
@@ -114,7 +114,7 @@
 
                 <data
                     android:host="oauth"
-                    android:scheme="@string/kakao_native_key" />
+                    android:scheme= "${KAKAO_NATIVE_APP_KEY}" />
             </intent-filter>
         </activity>
     </application>

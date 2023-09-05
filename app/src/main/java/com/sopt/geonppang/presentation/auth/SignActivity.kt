@@ -1,12 +1,12 @@
-package com.sopt.geonppang.presentation
+package com.sopt.geonppang.presentation.auth
 
 import android.content.Intent
+import com.sopt.geonppang.BuildConfig
 import android.os.Bundle
 import com.kakao.sdk.common.KakaoSdk
 import com.sopt.geonppang.R
 import com.sopt.geonppang.data.service.KakaoAuthService
 import com.sopt.geonppang.databinding.ActivitySignBinding
-import com.sopt.geonppang.presentation.auth.SignUpActivity
 import com.sopt.geonppang.presentation.login.LoginActivity
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +19,7 @@ class SignActivity :
     lateinit var kakaoAuthService: KakaoAuthService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        KakaoSdk.init(this, this.getString(R.string.kakao_app_key))
+        KakaoSdk.init(this, BuildConfig.KAKAO_APP_KEY)
         addListeners()
     }
 
