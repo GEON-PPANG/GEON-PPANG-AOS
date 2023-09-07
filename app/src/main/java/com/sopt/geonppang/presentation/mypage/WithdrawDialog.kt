@@ -18,6 +18,8 @@ class WithdrawDialog : BindingDialogFragment<DialogMiddleBinding>(R.layout.dialo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.lifecycleOwner = this.viewLifecycleOwner
+
         initLayout()
         addListeners()
         addObservers()
@@ -38,7 +40,7 @@ class WithdrawDialog : BindingDialogFragment<DialogMiddleBinding>(R.layout.dialo
     }
 
     private fun addObservers() {
-        viewModel.isWithdrawCompleted.observe(this) { isWithdrawCompleted ->
+        viewModel.isWithdrawCompleted.observe(viewLifecycleOwner) { isWithdrawCompleted ->
             if (isWithdrawCompleted) {
                 moveToSign()
                 dismiss()

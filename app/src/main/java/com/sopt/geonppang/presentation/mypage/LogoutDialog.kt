@@ -18,6 +18,8 @@ class LogoutDialog : BindingDialogFragment<DialogMiddleBinding>(R.layout.dialog_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.lifecycleOwner = this.viewLifecycleOwner
+
         initLayout()
         addListeners()
         addObservers()
@@ -38,7 +40,7 @@ class LogoutDialog : BindingDialogFragment<DialogMiddleBinding>(R.layout.dialog_
     }
 
     private fun addObservers() {
-        viewModel.isLogoutCompleted.observe(this) { isLogoutCompleted ->
+        viewModel.isLogoutCompleted.observe(viewLifecycleOwner) { isLogoutCompleted ->
             if (isLogoutCompleted) {
                 moveToSign()
                 dismiss()
