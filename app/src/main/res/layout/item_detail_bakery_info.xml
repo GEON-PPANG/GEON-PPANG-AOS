@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.sopt.geonppang.presentation.type.BreadFilterType" />
+
         <variable
             name="bakeryInfo"
             type="com.sopt.geonppang.domain.model.BakeryInfo" />
@@ -109,15 +111,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/background_1"
-                android:text="@string/gluten_free" />
-
-            <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M1"
-                visibility="@{bakeryInfo.breadType.isNutFree}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/background_1"
-                android:text="@string/nut_free" />
+                android:text="@{BreadFilterType.GLUTENFREE.titleRes}"
+                tools:text="글루텐프리" />
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M1"
@@ -125,7 +120,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/background_1"
-                android:text="@string/vegan" />
+                android:text="@{BreadFilterType.VEGAN.titleRes}"
+                tools:text="비건빵" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M1"
+                visibility="@{bakeryInfo.breadType.isNutFree}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/background_1"
+                android:text="@{BreadFilterType.NUTFREE.titleRes}"
+                tools:text="넛프리" />
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M1"
@@ -133,7 +138,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/background_1"
-                android:text="@string/low_sugar" />
+                android:text="@{BreadFilterType.SUGARFREE.titleRes}"
+                tools:text="대체당" />
 
         </com.google.android.material.chip.ChipGroup>
 

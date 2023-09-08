@@ -52,11 +52,6 @@
     <!--    my page    -->
     <string name="my_page_title">마이페이지</string>
 
-    <string name="my_page_gluten_free">글루텐프리</string>
-    <string name="my_page_nut_free">넛프리</string>
-    <string name="my_page_vegan">비건빵</string>
-    <string name="my_page_low_suger">저당,무설탕</string>
-
     <string name="my_page_bookmark">저장 목록</string>
     <string name="my_page_review">내가 쓴 리뷰</string>
 
@@ -68,6 +63,7 @@
     <string name="my_page_withdraw">회원탈퇴</string>
 
     <string name="my_store_list_empty_view_description">저장된 건빵집이 없어요!</string>
+    <string name="my_page_review_empty_view_description">내가 쓴 리뷰가 없어요!</string>
 
     <!--  search view  -->
     <string name="search_hint">빵집·지역·역 명을 검색해 보세요!</string>
@@ -79,12 +75,6 @@
     <string name="search_empty_description1">검색결과가 없어요</string>
     <string name="search_empty_description2">다른 키워드로 검색해보세요!</string>
     <string name="nearest_station">%s∙%s</string>
-
-    <!--    bread type    -->
-    <string name="gluten_free">글루텐프리</string>
-    <string name="nut_free">넛프리</string>
-    <string name="vegan">비건빵</string>
-    <string name="low_sugar">저당,무설탕</string>
 
     <!--    detail    -->
     <string name="detail_create_review">리뷰 작성하기</string>
@@ -143,8 +133,8 @@
     <string name="bread_type_vegan_des">NO 동물성재료\n(유제품 , 계란 등)</string>
     <string name="bread_type_nut_free_title">넛프리</string>
     <string name="bread_type_nut_free_des">NO 견과류</string>
-    <string name="bread_type_sugar_free_title">저당, 무설탕</string>
-    <string name="bread_type_sugar_free_des">대체당 사용</string>
+    <string name="bread_type_sugar_free_title">대체당</string>
+    <string name="bread_type_sugar_free_des">알룰로스, 스테비아,\n에리스리톨, 말티톨 등</string>
 
     <string name="nutrient_type_nutrient_open">영양성분까지 꼼꼼히 볼래요!</string>
     <string name="nutrient_type_ingredient_open">어떤 재료가 들어갔는지 볼래요!</string>
