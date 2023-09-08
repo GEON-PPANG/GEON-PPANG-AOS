@@ -56,4 +56,9 @@ object ServiceModule {
     @Provides
     fun provideReportService(retrofit: Retrofit): ReportService =
         retrofit.create(ReportService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideAuthService(retrofit: Retrofit): AuthService =
+        retrofit.create(AuthService::class.java)
 }
