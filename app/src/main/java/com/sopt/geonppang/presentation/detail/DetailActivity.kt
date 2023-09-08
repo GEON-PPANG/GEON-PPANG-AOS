@@ -1,6 +1,8 @@
 package com.sopt.geonppang.presentation.detail
 
 import android.content.Intent
+import android.content.Intent.ACTION_VIEW
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -97,6 +99,12 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         binding.fabDetail.setOnClickListener {
             moveToTop(binding.rvDetail)
         }
+
+        binding.ivDetailMap.setOnClickListener {
+            viewModel.bakeryList.value?.let { bakeryInfo ->
+                moveToWebBrowser(bakeryInfo.mapUrl)
+            }
+        }
     }
 
     private fun collectData() {
@@ -174,6 +182,11 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         Intent(this, WebViewActivity::class.java).apply {
             putExtra(WebViewActivity.WEB_VIEW_LINK, link)
         }.also { startActivity(it) }
+    }
+
+    private fun moveToWebBrowser(link: String) {
+        val intent = Intent(ACTION_VIEW, Uri.parse(link))
+        startActivity(intent)
     }
 
     private fun moveToReport(id: Int) {
