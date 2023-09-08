@@ -52,7 +52,6 @@ class KakaoAuthService @Inject constructor(
                 Log.i(TAG, "로그아웃 성공. SDK에서 토큰 삭제됨")
             }
         }
-
     }
 
     fun disconnectKakao() {
