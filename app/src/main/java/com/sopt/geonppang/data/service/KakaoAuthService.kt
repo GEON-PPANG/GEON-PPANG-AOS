@@ -2,11 +2,9 @@ package com.sopt.geonppang.data.service
 
 import android.content.ContentValues
 import android.content.Context
-import android.util.Log
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
-import com.kakao.sdk.user.Constants.TAG
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.qualifiers.ActivityContext
 import timber.log.Timber
@@ -41,27 +39,6 @@ class KakaoAuthService @Inject constructor(
             }
         } else {
             UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
-        }
-    }
-
-    fun logoutKakao() {
-        UserApiClient.instance.logout { error ->
-            if (error != null) {
-                Log.e(TAG, "로그아웃 실패. SDK에서 토큰 삭제됨", error)
-            } else {
-                Log.i(TAG, "로그아웃 성공. SDK에서 토큰 삭제됨")
-            }
-        }
-
-    }
-
-    fun disconnectKakao() {
-        UserApiClient.instance.unlink { error ->
-            if (error != null) {
-                Log.e(TAG, "연결 끊기 실패", error)
-            } else {
-                Log.i(TAG, "연결 끊기 성공. SDK에서 토큰 삭제 됨")
-            }
         }
     }
 }
