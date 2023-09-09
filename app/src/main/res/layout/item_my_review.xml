@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.sopt.geonppang.presentation.type.BreadFilterType" />
+
         <variable
             name="review"
             type="com.sopt.geonppang.domain.model.MyReview" />
@@ -123,7 +125,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/background_1"
-                android:text="글루텐프리" />
+                android:text="@{BreadFilterType.GLUTENFREE.titleRes}"
+                tools:text="글루텐프리" />
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M2"
@@ -131,7 +134,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/background_1"
-                android:text="비건빵" />
+                android:text="@{BreadFilterType.VEGAN.titleRes}"
+                tools:text="비건빵" />
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M2"
@@ -139,7 +143,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/background_1"
-                android:text="넛프리" />
+                android:text="@{BreadFilterType.NUTFREE.titleRes}"
+                tools:text="넛프리" />
 
             <com.google.android.material.chip.Chip
                 style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M2"
@@ -147,8 +152,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/background_1"
-                android:text="저당,무설탕"
-                app:layout_constraintEnd_toStartOf="@+id/iv" />
+                android:text="@{BreadFilterType.SUGARFREE.titleRes}"
+                tools:text="대체당" />
 
         </com.google.android.material.chip.ChipGroup>
 

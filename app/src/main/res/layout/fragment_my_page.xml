@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.sopt.geonppang.presentation.type.BreadFilterType" />
+
         <variable
             name="viewModel"
             type="com.sopt.geonppang.presentation.mypage.MyPageViewModel" />
@@ -154,15 +156,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/background_1"
-                            android:text="@string/my_page_gluten_free" />
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
-                            visibility="@{viewModel.mypageInfoState.breadType.nutFree}"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/background_1"
-                            android:text="@string/my_page_nut_free" />
+                            android:text="@{BreadFilterType.GLUTENFREE.titleRes}"
+                            tools:text="글루텐프리" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
@@ -170,7 +165,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/background_1"
-                            android:text="@string/my_page_vegan" />
+                            android:text="@{BreadFilterType.VEGAN.titleRes}"
+                            tools:text="비건빵" />
+
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
+                            visibility="@{viewModel.mypageInfoState.breadType.nutFree}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/background_1"
+                            android:text="@{BreadFilterType.NUTFREE.titleRes}"
+                            tools:text="넛프리" />
 
                         <com.google.android.material.chip.Chip
                             style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
@@ -178,7 +183,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/background_1"
-                            android:text="@string/my_page_low_suger" />
+                            android:text="@{BreadFilterType.SUGARFREE.titleRes}"
+                            tools:text="대체당" />
 
                     </com.google.android.material.chip.ChipGroup>
 

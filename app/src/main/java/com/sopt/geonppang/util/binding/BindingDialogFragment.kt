@@ -8,7 +8,6 @@ import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
-import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.DialogMiddleBinding
 
 abstract class BindingDialogFragment<B : ViewDataBinding>(@LayoutRes private val layoutRes: Int) :
@@ -29,9 +28,9 @@ abstract class BindingDialogFragment<B : ViewDataBinding>(@LayoutRes private val
         super.onStart()
         dialog?.window?.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT,
         )
-        dialog?.window?.setBackgroundDrawableResource(R.color.dialog_background)
+        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog?.setCancelable(false)
         dialog?.setCanceledOnTouchOutside(true)
     }
