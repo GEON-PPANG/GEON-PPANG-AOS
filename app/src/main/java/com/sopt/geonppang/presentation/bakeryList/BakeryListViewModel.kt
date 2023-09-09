@@ -39,7 +39,6 @@ class BakeryListViewModel @Inject constructor(
     val isFilterSelected get() = _isFilterSelected.asStateFlow()
 
     init {
-        fetchBakeryList()
         getUserFilter()
         setInitPersonalFilterState()
     }
