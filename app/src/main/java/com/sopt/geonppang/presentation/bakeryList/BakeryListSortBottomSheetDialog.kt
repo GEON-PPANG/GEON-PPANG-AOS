@@ -30,7 +30,7 @@ class BakeryListSortBottomSheetDialog :
             bakerySortTypeListener?.onBakerySortTypeSelected(BakerySortType.DEFAULT)
             dismiss()
         }
-        binding.layoutReviewNum.setOnClickListener {
+        binding.layoutHighlyReviewed.setOnClickListener {
             bakerySortTypeListener?.onBakerySortTypeSelected(BakerySortType.REVIEW)
             dismiss()
         }
