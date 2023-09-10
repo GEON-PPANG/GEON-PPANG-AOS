@@ -12,6 +12,7 @@ import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.search.SearchActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingFragment
 import com.sopt.geonppang.util.setVisibility
@@ -46,10 +47,12 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private fun addListeners() {
         binding.tvHomeSearch.setOnClickListener {
+            AmplitudeUtils.trackEvent(CLICK_SEARCH_HOME)
             moveToSearch()
         }
 
         binding.ivHomeFilter.setOnClickListener {
+            AmplitudeUtils.trackEvent(START_FILTER_HOME)
             moveToFilter()
         }
 
@@ -108,5 +111,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         const val BAKERY_ID = "bakeryId"
         const val ACTIVITY_NAME = "activityName"
         const val FILTER_INFO = "filterInfo"
+        const val CLICK_SEARCH_HOME = "click_search_home"
+        const val START_FILTER_HOME = "start_filter_home"
     }
 }
