@@ -18,7 +18,6 @@ class MainPurposeFilterFragment :
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this.viewLifecycleOwner
-        binding.lifecycleOwner = this
 
         addListeners()
     }
