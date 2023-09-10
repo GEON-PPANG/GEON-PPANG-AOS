@@ -44,7 +44,12 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: echo "ACCESS_TOKEN=\"$ACCESS_TOKEN\"" >> local.properties
-        
+
+      - name: Access AMPLITUDE_API_KEY
+        env:
+          AMPLITUDE_API_KEY: ${{ secrets.AMPLITUDE_API_KEY }}
+        run: echo "AMPLITUDE_API_KEY=\"AMPLITUDE_API_KEY\"" >> local.properties
+
       - name: Touch local properties
         run: touch local.properties
         
