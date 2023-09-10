@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.geonppang.databinding.ItemHomeBestBakeryBinding
 import com.sopt.geonppang.domain.model.BestBakery
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.ItemDiffCallback
 import com.sopt.geonppang.util.setVisibility
 
@@ -29,6 +30,7 @@ class BestBakeryAdapter(
             binding.executePendingBindings()
 
             binding.root.setOnClickListener {
+                AmplitudeUtils.trackEvent(CLICK_RECOMMEND_STORE)
                 moveToDetail(MAIN, bakery.bakeryId)
             }
 
@@ -48,5 +50,6 @@ class BestBakeryAdapter(
 
     companion object {
         const val MAIN = "mainActivity"
+        const val CLICK_RECOMMEND_STORE = "click_recommend_store"
     }
 }
