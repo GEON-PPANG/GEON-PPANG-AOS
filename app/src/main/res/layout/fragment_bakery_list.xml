@@ -172,7 +172,7 @@
                 app:layout_constraintTop_toTopOf="@id/check_bakery_list_my_filter" />
 
             <LinearLayout
-                android:id="@+id/layout_bakery_list_filter"
+                android:id="@+id/layout_bakery_list_sort_filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

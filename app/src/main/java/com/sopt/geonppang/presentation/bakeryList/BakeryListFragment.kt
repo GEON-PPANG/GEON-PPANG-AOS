@@ -13,6 +13,7 @@ import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.search.SearchActivity
 import com.sopt.geonppang.presentation.type.BakerySortType
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,15 +44,17 @@ class BakeryListFragment :
     }
 
     private fun addListeners() {
-        binding.layoutBakeryListFilter.setOnClickListener {
+        binding.layoutBakeryListSortFilter.setOnClickListener {
             showBakeryListSortDialog()
         }
 
         binding.ivSearch.setOnClickListener {
+            AmplitudeUtils.trackEvent(CLICK_SEARCH_LIST)
             startActivity(Intent(requireActivity(), SearchActivity::class.java))
         }
 
         binding.ivBakeryListFilter.setOnClickListener {
+            AmplitudeUtils.trackEvent(START_FILTER_LIST)
             moveToFilter()
         }
     }
@@ -107,5 +110,7 @@ class BakeryListFragment :
     companion object {
         const val BAKERY_ID = "bakeryId"
         const val FILTER_INFO = "filterInfo"
+        const val CLICK_SEARCH_LIST = "click_search_list"
+        const val START_FILTER_LIST = "start_filter_list"
     }
 }
