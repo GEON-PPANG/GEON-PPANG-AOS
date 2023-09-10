@@ -16,6 +16,7 @@ import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingFragment
+import com.sopt.geonppang.util.setVisibility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -57,6 +58,9 @@ class BakeryListFragment :
             AmplitudeUtils.trackEvent(START_FILTER_LIST)
             moveToFilter()
         }
+        binding.includeHomeSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
+            binding.includeHomeSpeechBubble.root.visibility = View.INVISIBLE
+        }
     }
 
     private fun collectData() {
@@ -69,11 +73,15 @@ class BakeryListFragment :
                 else -> {}
             }
         }.launchIn(lifecycleScope)
-        viewModel.personalFilter.flowWithLifecycle(lifecycle).onEach {
+        viewModel.isPersonalFilterApplied.flowWithLifecycle(lifecycle).onEach {
             viewModel.fetchBakeryList()
         }.launchIn(lifecycleScope)
         viewModel.bakeryCategoryType.flowWithLifecycle(lifecycle).onEach {
             viewModel.fetchBakeryList()
+        }.launchIn(lifecycleScope)
+        viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
+            binding.includeHomeSpeechBubble.root.setVisibility(!isFilterSelected)
+            binding.checkBakeryListMyFilter.isEnabled = isFilterSelected
         }.launchIn(lifecycleScope)
     }
 

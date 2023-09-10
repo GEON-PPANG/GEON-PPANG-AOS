@@ -154,7 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing24"
-                android:checked="@{viewModel.personalFilter}"
+                android:checked="@{viewModel.isPersonalFilterApplied}"
                 android:onClick="@{() -> viewModel.setPersonalFilter()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -211,5 +211,14 @@
             app:layout_constraintTop_toBottomOf="@+id/layout_filter"
             tools:itemCount="5"
             tools:listitem="@layout/item_bakery" />
+
+        <include
+            android:id="@+id/include_home_speech_bubble"
+            layout="@layout/view_speech_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintTop_toBottomOf="@id/iv_bakery_list_filter" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
