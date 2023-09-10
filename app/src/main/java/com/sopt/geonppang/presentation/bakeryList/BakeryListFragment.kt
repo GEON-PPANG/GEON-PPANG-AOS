@@ -73,9 +73,12 @@ class BakeryListFragment :
                 else -> {}
             }
         }.launchIn(lifecycleScope)
-        viewModel.isPersonalFilterApplied.flowWithLifecycle(lifecycle).onEach {
-            viewModel.fetchBakeryList()
-        }.launchIn(lifecycleScope)
+        viewModel.isPersonalFilterApplied.flowWithLifecycle(lifecycle)
+            .onEach { isPersonalFilterApplied ->
+                if (viewModel.isFilterSelected.value && isPersonalFilterApplied == false)
+                    AmplitudeUtils.trackEvent(CLICK_PERSONAL_FILTER_APPLY_OFF)
+                viewModel.fetchBakeryList()
+            }.launchIn(lifecycleScope)
         viewModel.bakeryCategoryType.flowWithLifecycle(lifecycle).onEach {
             viewModel.fetchBakeryList()
         }.launchIn(lifecycleScope)
@@ -120,5 +123,6 @@ class BakeryListFragment :
         const val FILTER_INFO = "filterInfo"
         const val CLICK_SEARCH_LIST = "click_search_list"
         const val START_FILTER_LIST = "start_filter_list"
+        const val CLICK_PERSONAL_FILTER_APPLY_OFF = "click_filteroff"
     }
 }
