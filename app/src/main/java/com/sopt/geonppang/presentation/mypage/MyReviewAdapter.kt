@@ -2,6 +2,7 @@ package com.sopt.geonppang.presentation.mypage
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.geonppang.databinding.ItemMyReviewBinding
 import com.sopt.geonppang.domain.model.MyReview
@@ -12,7 +13,7 @@ import com.sopt.geonppang.util.ItemDiffCallback
 class MyReviewAdapter(
     private val moveToReviewDetail: (Int, MyReviewBakeryInfo) -> Unit,
 ) :
-    androidx.recyclerview.widget.ListAdapter<MyReview, MyReviewAdapter.MyReviewViewHolder>(
+    ListAdapter<MyReview, MyReviewAdapter.MyReviewViewHolder>(
         ItemDiffCallback<MyReview>(
             onItemsTheSame = { old, new -> old.reviewId == new.reviewId },
             onContentsTheSame = { old, new -> old == new }
