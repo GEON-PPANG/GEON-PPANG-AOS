@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.DialogBottomBakeryListSortBinding
 import com.sopt.geonppang.presentation.type.BakerySortType
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingBottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,6 +32,7 @@ class BakeryListSortBottomSheetDialog :
             dismiss()
         }
         binding.layoutHighlyReviewed.setOnClickListener {
+            AmplitudeUtils.trackEvent(CLICK_REVIEW_ARRAY)
             bakerySortTypeListener?.onBakerySortTypeSelected(BakerySortType.REVIEW)
             dismiss()
         }
@@ -48,5 +50,9 @@ class BakeryListSortBottomSheetDialog :
 
     fun setDataListener(listener: BakerySortTypeListener) {
         bakerySortTypeListener = listener
+    }
+
+    companion object {
+        const val CLICK_REVIEW_ARRAY = "click_reviewarray"
     }
 }
