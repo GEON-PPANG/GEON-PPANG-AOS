@@ -8,6 +8,7 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.Constants.TAG
 import com.kakao.sdk.user.UserApiClient
+import com.sopt.geonppang.presentation.auth.AuthSharedPreferences
 import dagger.hilt.android.qualifiers.ActivityContext
 import timber.log.Timber
 import javax.inject.Inject
@@ -22,6 +23,8 @@ class KakaoAuthService @Inject constructor(
             } else if (token != null) {
                 UserApiClient.instance.me { user, error ->
                     Timber.i(ContentValues.TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
+                    AuthSharedPreferences(context).isLogin = true
+                    AuthSharedPreferences(context).accessToken = token.accessToken
                 }
             }
         }
@@ -37,6 +40,8 @@ class KakaoAuthService @Inject constructor(
                     UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
                 } else if (token != null) {
                     Timber.i(ContentValues.TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
+                    AuthSharedPreferences(context).isLogin = true
+                    AuthSharedPreferences(context).accessToken = token.accessToken
                 }
             }
         } else {
