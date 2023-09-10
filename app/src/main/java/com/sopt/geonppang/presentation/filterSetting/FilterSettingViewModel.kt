@@ -22,8 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FilterSettingViewModel @Inject constructor(
-    private val filterRepository: FilterSettingRepository,
-    private val gpDataStore: GPDataStore
+    private val filterRepository: FilterSettingRepository
 ) : ViewModel() {
     private val _selectedFilterState = MutableStateFlow<UiState<SelectedFilter>>(UiState.Loading)
     val selectedFilterState get() = _selectedFilterState.asStateFlow()

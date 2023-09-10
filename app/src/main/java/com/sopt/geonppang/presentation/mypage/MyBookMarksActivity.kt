@@ -20,7 +20,8 @@ import timber.log.Timber
 class MyBookMarksActivity :
     BindingActivity<ActivityMyBookmarksBinding>(R.layout.activity_my_bookmarks) {
     private val myPageViewModel: MyPageViewModel by viewModels()
-    lateinit var bakeryAdapter: BakeryAdapter
+    private lateinit var bakeryAdapter: BakeryAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = myPageViewModel

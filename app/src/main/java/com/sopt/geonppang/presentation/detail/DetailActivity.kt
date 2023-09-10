@@ -29,13 +29,13 @@ import kotlinx.coroutines.flow.onEach
 class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_detail) {
     private val viewModel by viewModels<DetailViewModel>()
 
-    lateinit var detailBakeryInfoAdapter: DetailBakeryInfoAdapter
-    lateinit var detailMenuAdapter: DetailMenuAdapter
-    lateinit var detailReviewDataAdapter: DetailReviewDataAdapter
-    lateinit var detailReviewAdapter: DetailReviewAdapter
-    lateinit var detailNoReviewAdapter: DetailNoReviewAdapter
-    lateinit var concatAdapter: ConcatAdapter
-    var bakeryId = -1
+    private lateinit var detailBakeryInfoAdapter: DetailBakeryInfoAdapter
+    private lateinit var detailMenuAdapter: DetailMenuAdapter
+    private lateinit var detailReviewDataAdapter: DetailReviewDataAdapter
+    private lateinit var detailReviewAdapter: DetailReviewAdapter
+    private lateinit var detailNoReviewAdapter: DetailNoReviewAdapter
+    private lateinit var concatAdapter: ConcatAdapter
+    private var bakeryId = -1
 
     private val String.toChip: Chip
         get() = ChipFactory.create(layoutInflater).also {

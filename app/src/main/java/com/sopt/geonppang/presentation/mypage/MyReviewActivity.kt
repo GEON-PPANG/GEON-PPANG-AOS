@@ -19,8 +19,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activity_my_review) {
     private val viewModel: MyPageViewModel by viewModels()
-
-    lateinit var myReviewAdapter: MyReviewAdapter
+    private lateinit var myReviewAdapter: MyReviewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
