@@ -27,6 +27,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "GP_BASE_URL", properties["GP_BASE_URL"]
         buildConfigField "String", "ACCESS_TOKEN", properties["ACCESS_TOKEN"]
+        buildConfigField "String", "AMPLITUDE_API_KEY", properties["AMPLITUDE_API_KEY"]
     }
 
     buildTypes {
@@ -90,6 +91,9 @@ dependencies {
 
     // Splash
     implementation 'androidx.core:core-splashscreen:1.0.1'
+
+    // Amplitude
+    implementation 'com.amplitude:analytics-android:1.+'
 }
 
 ktlint {
