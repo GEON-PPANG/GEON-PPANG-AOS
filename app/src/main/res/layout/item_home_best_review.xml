@@ -45,8 +45,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/Radius5.Top"
-            tools:src="@drawable/bread1" />
+            app:shapeAppearanceOverlay="@style/Radius5.Top" />
 
         <View
             android:id="@+id/view"
