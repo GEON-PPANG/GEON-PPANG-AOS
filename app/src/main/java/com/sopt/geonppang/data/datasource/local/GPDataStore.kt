@@ -25,13 +25,40 @@ class GPDataStore @Inject constructor(@ApplicationContext context: Context) {
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
+    var accessToken: String
+        set(value) = dataStore.edit { putString(ACCESS_TOKEN, value) }
+        get() = dataStore.getString(
+            ACCESS_TOKEN,
+            ""
+        ) ?: ""
+
+    var refreshToken: String
+        set(value) = dataStore.edit { putString(REFRESH_TOKEN, value) }
+        get() = dataStore.getString(
+            REFRESH_TOKEN,
+            ""
+        ) ?: ""
+
+    var isLogin: Boolean
+        set(value) = dataStore.edit { putBoolean(IS_LOGIN, value) }
+        get() = dataStore.getBoolean(IS_LOGIN, false)
+
+    fun clear() {
+        dataStore.edit {
+            clear()
+        }
+    }
 
     var userNickname: String
         set(value) = dataStore.edit { putString(NICKNAME, value) }
         get() = dataStore.getString(NICKNAME, "") ?: ""
 
     companion object {
-        const val FILE_NAME = "GunppangSharedPreferences"
+        const val FILE_NAME = "Gpdatastore"
+        const val ACCESS_TOKEN = "AccessToken"
+        const val REFRESH_TOKEN = "RefreshToken"
+        const val IS_LOGIN = "IsLogin"
         const val NICKNAME = "nickname"
     }
+
 }
