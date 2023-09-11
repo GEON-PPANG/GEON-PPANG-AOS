@@ -9,6 +9,6 @@ data class ResponseSignup(
         val memberId: Int,
         val type: String,
         val email: String,
-        val role: String,
+        val role:String,
     )
 }
