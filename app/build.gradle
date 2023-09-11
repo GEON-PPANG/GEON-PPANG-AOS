@@ -98,10 +98,12 @@ dependencies {
 
     // Amplitude
     implementation 'com.amplitude:analytics-android:1.+'
-    implementation 'androidx.core:core-splashscreen:1.0.0'
 
     // kakao
     implementation "com.kakao.sdk:v2-all:2.15.0"
+
+    implementation "androidx.room:room-runtime:2.3.0"
+    annotationProcessor "androidx.room:room-compiler:2.3.0"
 }
 
 ktlint {
