@@ -45,6 +45,17 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: echo "ACCESS_TOKEN=\"$ACCESS_TOKEN\"" >> local.properties
 
+      - name: Access KAKAO_NATIVE_APP_KEY
+        env:
+          ACCESS_TOKEN: ${{ secrets.KAKAO_NATIVE_APP_KEY }}
+        run: echo "KAKAO_NATIVE_APP_KEY=\"$KAKAO_NATIVE_APP_KEY\"" >> local.properties
+
+      - name: Access KAKAO_APP_KEY
+        env:
+          ACCESS_TOKEN: ${{ secrets.KAKAO_APP_KEY }}
+        run: echo "KAKAO_APP_KEY=\"$KAKAO_APP_KEY\"" >> local.properties
+        
+
       - name: Access AMPLITUDE_API_KEY
         env:
           AMPLITUDE_API_KEY: ${{ secrets.AMPLITUDE_API_KEY }}
