@@ -5,7 +5,7 @@ import com.sopt.geonppang.domain.model.Profile
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ResponseMypageInfo(
+data class ResponseMyPageInfo(
     val code: Int,
     val data: Data,
     val message: String

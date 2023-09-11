@@ -31,9 +31,9 @@ interface RepositoryModule {
 
     @Binds
     @Singleton
-    fun bindMypageRepository(
-        mypageRepositoryImpl: MypageRepositoryImpl,
-    ): MypageRepository
+    fun bindMyPageRepository(
+        myPageRepositoryImpl: MyPageRepositoryImpl,
+    ): MyPageRepository
 
     @Binds
     @Singleton

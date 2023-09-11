@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.mypage
+package com.sopt.geonppang.presentation.myPage
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

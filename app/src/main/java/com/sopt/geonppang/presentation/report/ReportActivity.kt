@@ -52,12 +52,12 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
     private fun addObservers() {
         viewModel.isReportCompleted.observe(this) { isReportCompleted ->
             if (isReportCompleted) {
-                showReportSucessBottomDialog()
+                showReportSuccessBottomDialog()
             }
         }
     }
 
-    private fun showReportSucessBottomDialog() {
+    private fun showReportSuccessBottomDialog() {
         ReportSuccessBottomDialogFragment().show(supportFragmentManager, REPORT_SUCCESS)
     }
 

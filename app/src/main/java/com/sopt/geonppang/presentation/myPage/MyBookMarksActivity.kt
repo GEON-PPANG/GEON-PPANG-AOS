@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.mypage
+package com.sopt.geonppang.presentation.myPage
 
 import android.content.Intent
 import android.os.Bundle
@@ -44,10 +44,10 @@ class MyBookMarksActivity :
     }
 
     private fun collectData() {
-        myPageViewModel.mypageBookmarkListState.flowWithLifecycle(lifecycle).onEach {
+        myPageViewModel.myPageBookmarkListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    myPageViewModel.fetchMypageBookmarkList()
+                    myPageViewModel.fetchMyPageBookmarkList()
                     bakeryAdapter.submitList(it.data)
                 }
 

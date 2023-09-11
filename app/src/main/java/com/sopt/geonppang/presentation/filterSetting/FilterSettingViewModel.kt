@@ -5,7 +5,6 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.geonppang.data.datasource.local.GPDataStore
 import com.sopt.geonppang.data.model.request.RequestSettingFilter
 import com.sopt.geonppang.domain.model.SelectedFilter
 import com.sopt.geonppang.domain.repository.FilterSettingRepository
@@ -37,18 +36,18 @@ class FilterSettingViewModel @Inject constructor(
         _isLastPage.value = boolean
     }
 
-    private val _currentItem: MutableLiveData<Int> = MutableLiveData()
-    val currentItem: LiveData<Int> = _currentItem
+    private val _currentPage: MutableLiveData<Int> = MutableLiveData()
+    val currentPage: LiveData<Int> = _currentPage
 
-    fun setCurrentItem(position: Int) {
-        _currentItem.value = position
+    fun setCurrentPage(position: Int) {
+        _currentPage.value = position
     }
 
-    private val _mainPurpose: MutableLiveData<MainPurposeType?> = MutableLiveData()
-    val mainPurpose: LiveData<MainPurposeType?> = _mainPurpose
+    private val _mainPurposeType: MutableLiveData<MainPurposeType?> = MutableLiveData()
+    val mainPurposeType: LiveData<MainPurposeType?> = _mainPurposeType
 
-    fun setMainPurpose(mainPurposeType: MainPurposeType) {
-        _mainPurpose.value = mainPurposeType
+    fun setMainPurposeType(mainPurposeType: MainPurposeType) {
+        _mainPurposeType.value = mainPurposeType
     }
 
     val breadFilterType: MutableLiveData<Map<BreadFilterType, Boolean>> = MutableLiveData(
@@ -60,14 +59,14 @@ class FilterSettingViewModel @Inject constructor(
         )
     )
 
-    fun setUserBreadType(breadType: BreadFilterType) {
+    fun setBreadFilterType(breadType: BreadFilterType) {
         val isSelected = breadFilterType.value?.get(breadType) ?: return
         breadFilterType.value = breadFilterType.value?.toMutableMap()?.apply {
             this[breadType] = !isSelected
         }
     }
 
-    val isUserBreadTypeSelected: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
+    val isBreadFilterTypeSelected: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         addSource(breadFilterType) { breadMap ->
             value = breadMap.any { it.value }
         }
@@ -81,23 +80,23 @@ class FilterSettingViewModel @Inject constructor(
         )
     )
 
-    fun setNutrientType(nutrientType: NutrientFilterType) {
+    fun setNutrientFilterType(nutrientType: NutrientFilterType) {
         val isSelected = nutrientFilterType.value?.get(nutrientType) ?: return
         nutrientFilterType.value = nutrientFilterType.value?.toMutableMap()?.apply {
             this[nutrientType] = !isSelected
         }
     }
 
-    val isUserNutrientFilterTypeSelected: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
+    val isNutrientFilterTypeSelected: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         addSource(nutrientFilterType) { nutrientMap ->
             value = nutrientMap.any { it.value }
         }
     }
 
-    val currentItemFilterSelected: MediatorLiveData<Boolean> = MediatorLiveData<Boolean>().apply {
-        addSource(currentItem) { currentItemValue ->
+    val isCurrentPageFilterSelected: MediatorLiveData<Boolean> = MediatorLiveData<Boolean>().apply {
+        addSource(currentPage) { currentItemValue ->
             value = when (currentItemValue) {
-                0 -> mainPurpose.value != null
+                0 -> mainPurposeType.value != null
                 1 -> breadFilterType.value?.any { it.value } ?: false
                 2 -> nutrientFilterType.value?.any { it.value } ?: false
                 else -> false
@@ -111,7 +110,7 @@ class FilterSettingViewModel @Inject constructor(
 
     fun setUserFilter() {
         viewModelScope.launch {
-            _mainPurpose.value?.let {
+            _mainPurposeType.value?.let {
                 RequestSettingFilter(
                     it.name,
                     RequestSettingFilter.BreadType(

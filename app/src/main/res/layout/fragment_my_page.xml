@@ -9,13 +9,13 @@
 
         <variable
             name="viewModel"
-            type="com.sopt.geonppang.presentation.mypage.MyPageViewModel" />
+            type="com.sopt.geonppang.presentation.myPage.MyPageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.mypage.MyPageFragment">
+        tools:context=".presentation.myPage.MyPageFragment">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_start"
@@ -101,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="@{viewModel.mypageInfoState.memberNickname}"
+                    android:text="@{viewModel.myPageInfoState.memberNickname}"
                     android:textAppearance="@style/TextAppearance.Title2"
                     android:textColor="@color/gray_600"
                     app:layout_constraintStart_toStartOf="@+id/chip_my_page_profile_purpose"
@@ -152,7 +152,7 @@
 
                         <com.google.android.material.chip.Chip
                             style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
-                            visibility="@{viewModel.mypageInfoState.breadType.glutenFree}"
+                            visibility="@{viewModel.myPageInfoState.breadType.glutenFree}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/background_1"
@@ -161,7 +161,7 @@
 
                         <com.google.android.material.chip.Chip
                             style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
-                            visibility="@{viewModel.mypageInfoState.breadType.vegan}"
+                            visibility="@{viewModel.myPageInfoState.breadType.vegan}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/background_1"
@@ -170,7 +170,7 @@
 
                         <com.google.android.material.chip.Chip
                             style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
-                            visibility="@{viewModel.mypageInfoState.breadType.nutFree}"
+                            visibility="@{viewModel.myPageInfoState.breadType.nutFree}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/background_1"
@@ -179,7 +179,7 @@
 
                         <com.google.android.material.chip.Chip
                             style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
-                            visibility="@{viewModel.mypageInfoState.breadType.sugarFree}"
+                            visibility="@{viewModel.myPageInfoState.breadType.sugarFree}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/background_1"

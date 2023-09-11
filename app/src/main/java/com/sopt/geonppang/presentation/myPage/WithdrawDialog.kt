@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.mypage
+package com.sopt.geonppang.presentation.myPage
 
 import android.content.Intent
 import android.os.Bundle

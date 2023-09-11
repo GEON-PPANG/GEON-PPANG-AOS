@@ -20,12 +20,12 @@ class DetailNoReviewAdapter() :
         return DetailNoReviewDataViewHolder(binding)
     }
 
+    override fun getItemCount(): Int = 1
+
     override fun onBindViewHolder(
         holder: DetailNoReviewDataViewHolder,
         position: Int
     ) {
         // Bind 할 내용 없음
     }
-
-    override fun getItemCount(): Int = 1
 }

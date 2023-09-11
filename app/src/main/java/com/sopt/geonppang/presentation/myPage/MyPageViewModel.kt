@@ -1,11 +1,11 @@
-package com.sopt.geonppang.presentation.mypage
+package com.sopt.geonppang.presentation.myPage
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.domain.model.Profile
-import com.sopt.geonppang.domain.repository.MypageRepository
+import com.sopt.geonppang.domain.repository.MyPageRepository
 import com.sopt.geonppang.presentation.type.MainPurposeType
 import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,21 +17,21 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyPageViewModel @Inject constructor(
-    private val mypageRepository: MypageRepository,
+    private val myPageRepository: MyPageRepository,
 ) : ViewModel() {
-    private var _mypageInfoState = MutableStateFlow<Profile?>(null)
-    val mypageInfoState get() = _mypageInfoState.asStateFlow()
+    private var _myPageInfoState = MutableStateFlow<Profile?>(null)
+    val myPageInfoState get() = _myPageInfoState.asStateFlow()
 
-    private var _mypageReviewListState =
+    private var _myPageReviewListState =
         MutableStateFlow<UiState<List<MyReview>>>(UiState.Loading)
-    val mypageReviewListState get() = _mypageReviewListState.asStateFlow()
+    val myPageReviewListState get() = _myPageReviewListState.asStateFlow()
 
     private var _myReviewCount = MutableStateFlow<Int?>(null)
     val myReviewCount get() = _myReviewCount.asStateFlow()
 
-    private var _mypageBookmarkListState =
+    private var _myPageBookmarkListState =
         MutableStateFlow<UiState<List<Bakery>>>(UiState.Loading)
-    val mypageBookmarkListState get() = _mypageBookmarkListState.asStateFlow()
+    val myPageBookmarkListState get() = _myPageBookmarkListState.asStateFlow()
 
     private var _myBookmarkCount = MutableStateFlow<Int?>(null)
     val myBookmarkCount get() = _myBookmarkCount.asStateFlow()
@@ -40,47 +40,47 @@ class MyPageViewModel @Inject constructor(
     val isFilterSelected = _isFilterSelected.asStateFlow()
 
     init {
-        fetchMypageReviewList()
-        fetchMypageBookmarkList()
+        fetchMyPageReviewList()
+        fetchMyPageBookmarkList()
     }
 
-    fun toMainPurposeTitleRes(): Int {
-        return when (mypageInfoState.value?.mainPurpose) {
+    fun setMainPurposeTitle(): Int {
+        return when (myPageInfoState.value?.mainPurpose) {
             MainPurposeType.DIET.name -> MainPurposeType.DIET.titleRes
             MainPurposeType.HEALTH.name -> MainPurposeType.HEALTH.titleRes
             else -> MainPurposeType.VEGAN.titleRes
         }
     }
 
-    fun fetchMypageInfo() {
+    fun fetchMyPageInfo() {
         viewModelScope.launch {
-            mypageRepository.fetchMypageInfo()
+            myPageRepository.fetchMypageInfo()
                 .onSuccess { myInfo ->
-                    _mypageInfoState.value = myInfo
+                    _myPageInfoState.value = myInfo
                     _isFilterSelected.value = (myInfo.mainPurpose != NONE)
                 }
         }
     }
 
-    private fun fetchMypageReviewList() {
+    private fun fetchMyPageReviewList() {
         viewModelScope.launch {
-            mypageRepository.fetchMyReview().onSuccess { myReviewList ->
-                _mypageReviewListState.value = UiState.Success(myReviewList)
+            myPageRepository.fetchMyReview().onSuccess { myReviewList ->
+                _myPageReviewListState.value = UiState.Success(myReviewList)
                 _myReviewCount.value = myReviewList.size
             }.onFailure { throwable ->
-                _mypageReviewListState.value = UiState.Error(throwable.message)
+                _myPageReviewListState.value = UiState.Error(throwable.message)
             }
         }
     }
 
-    fun fetchMypageBookmarkList() {
+    fun fetchMyPageBookmarkList() {
         viewModelScope.launch {
-            mypageRepository.fetchMyBookmark().onSuccess { myBookmarkList ->
-                _mypageBookmarkListState.value = UiState.Success(myBookmarkList)
+            myPageRepository.fetchMyBookmark().onSuccess { myBookmarkList ->
+                _myPageBookmarkListState.value = UiState.Success(myBookmarkList)
                 _myBookmarkCount.value = myBookmarkList.size
                 Timber.e(_myBookmarkCount.value.toString())
             }.onFailure { throwable ->
-                _mypageBookmarkListState.value = UiState.Error(throwable.message)
+                _myPageBookmarkListState.value = UiState.Error(throwable.message)
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.mypage
+package com.sopt.geonppang.presentation.myPage
 
 import android.content.Intent
 import android.os.Bundle
@@ -22,8 +22,6 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     private val viewModel by viewModels<MyPageViewModel>()
-    private lateinit var logoutDialog: LogoutDialog
-    private lateinit var withdrawDialog: WithdrawDialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,7 +35,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun initLayout() {
-        viewModel.fetchMypageInfo()
+        viewModel.fetchMyPageInfo()
         binding.includeMyPageSpeechBubble.ivSpeechBubble.setBackgroundResource(R.drawable.background_left_speech_bubble)
         binding.tvMyPageAppVersion.text = getString(R.string.tv_my_page_app_version, APP_VERSION)
     }
@@ -77,9 +75,9 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun collectData() {
-        viewModel.mypageInfoState.flowWithLifecycle(lifecycle).onEach {
+        viewModel.myPageInfoState.flowWithLifecycle(lifecycle).onEach {
             binding.chipMyPageProfilePurpose.text =
-                this.context?.getString(viewModel.toMainPurposeTitleRes()) ?: ""
+                this.context?.getString(viewModel.setMainPurposeTitle()) ?: ""
         }.launchIn(lifecycleScope)
 
         viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
@@ -113,13 +111,11 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun showLogoutDialog() {
-        logoutDialog = LogoutDialog()
-        logoutDialog.show(childFragmentManager, DIALOG)
+       LogoutDialog().show(childFragmentManager, DIALOG)
     }
 
     private fun showWithdrawDialog() {
-        withdrawDialog = WithdrawDialog()
-        withdrawDialog.show(childFragmentManager, DIALOG)
+        WithdrawDialog().show(childFragmentManager, DIALOG)
     }
 
     companion object {

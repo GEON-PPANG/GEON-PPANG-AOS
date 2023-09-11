@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.mypage
+package com.sopt.geonppang.presentation.myPage
 
 import android.content.Intent
 import android.os.Bundle
@@ -43,7 +43,7 @@ class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activ
     }
 
     private fun collectData() {
-        viewModel.mypageReviewListState.flowWithLifecycle(lifecycle).onEach {
+        viewModel.myPageReviewListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
                     myReviewAdapter.submitList(it.data)

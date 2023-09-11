@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.mypage
+package com.sopt.geonppang.presentation.myPage
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

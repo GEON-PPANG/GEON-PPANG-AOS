@@ -37,7 +37,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                 ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    viewModel.setCurrentItem(position)
+                    viewModel.setCurrentPage(position)
                 }
             })
 
@@ -104,22 +104,22 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
     }
 
     private fun addObservers() {
-        viewModel.mainPurpose.observe(this) { mainPurposeType ->
+        viewModel.mainPurposeType.observe(this) { mainPurposeType ->
             binding.btnFilterNext.isEnabled = mainPurposeType != null
         }
 
-        viewModel.isUserBreadTypeSelected.observe(this) { isUserBreadTypeSelected ->
+        viewModel.isBreadFilterTypeSelected.observe(this) { isUserBreadTypeSelected ->
             binding.btnFilterNext.isEnabled = isUserBreadTypeSelected
         }
 
-        viewModel.isUserNutrientFilterTypeSelected.observe(this) { isUserNutrientFilterTypeSelected ->
+        viewModel.isNutrientFilterTypeSelected.observe(this) { isUserNutrientFilterTypeSelected ->
             binding.btnFilterNext.isEnabled = isUserNutrientFilterTypeSelected
         }
 
-        viewModel.currentItem.observe(this) { currentItem ->
-            binding.tvFilterPageNumber.text = setPageText(currentItem + 1)
+        viewModel.currentPage.observe(this) { currentPage ->
+            binding.tvFilterPageNumber.text = setPageText(currentPage + 1)
 
-            when (currentItem) {
+            when (currentPage) {
                 0 -> {
                     if (viewModel.previousActivity.value == FilterInfoType.ONBOARDING) {
                         binding.ivFilterArrowLeft.setInvisibility(false)
@@ -132,7 +132,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
             }
         }
 
-        viewModel.currentItemFilterSelected.observe(this) { currentItemFilterSelected ->
+        viewModel.isCurrentPageFilterSelected.observe(this) { currentItemFilterSelected ->
             binding.btnFilterNext.isEnabled = currentItemFilterSelected
         }
     }

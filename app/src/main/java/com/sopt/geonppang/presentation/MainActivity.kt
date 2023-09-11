@@ -8,7 +8,7 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityMainBinding
 import com.sopt.geonppang.presentation.bakeryList.BakeryListFragment
 import com.sopt.geonppang.presentation.home.HomeFragment
-import com.sopt.geonppang.presentation.mypage.MyPageFragment
+import com.sopt.geonppang.presentation.myPage.MyPageFragment
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +27,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
         val initialFragment = if (isMyPageRequested) {
             navigateTo<MyPageFragment>()
-            R.id.menu_mypage
+            R.id.menu_my_page
         } else if (isBakeryListRequested) {
             navigateTo<BakeryListFragment>()
             R.id.menu_bakery_list
@@ -40,7 +40,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             when (menu.itemId) {
                 R.id.menu_home -> navigateTo<HomeFragment>()
                 R.id.menu_bakery_list -> navigateTo<BakeryListFragment>()
-                R.id.menu_mypage -> navigateTo<MyPageFragment>()
+                R.id.menu_my_page -> navigateTo<MyPageFragment>()
             }
             true
         }

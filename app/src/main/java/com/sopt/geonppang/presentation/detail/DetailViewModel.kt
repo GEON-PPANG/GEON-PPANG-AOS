@@ -9,6 +9,7 @@ import com.sopt.geonppang.domain.model.BookMark
 import com.sopt.geonppang.domain.model.DetailReview
 import com.sopt.geonppang.domain.model.ReviewData
 import com.sopt.geonppang.domain.repository.DetailRepository
+import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
 import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,10 +26,10 @@ class DetailViewModel @Inject constructor(
     val bakeryId: LiveData<Int> = _bakeryId
     private val _reviewList = MutableStateFlow<List<DetailReview>?>(null)
     val reviewList get() = _reviewList.asStateFlow()
-    private val _bakeryList = MutableStateFlow<BakeryInfo?>(null)
-    val bakeryList get() = _bakeryList.asStateFlow()
-    private val _bakeryListState = MutableStateFlow<UiState<BakeryInfo>>(UiState.Loading)
-    val bakeryListState get() = _bakeryListState.asStateFlow()
+    private val _bakeryInfo = MutableStateFlow<BakeryInfo?>(null)
+    val bakeryList get() = _bakeryInfo.asStateFlow()
+    private val _bakeryInfoState = MutableStateFlow<UiState<BakeryInfo>>(UiState.Loading)
+    val bakeryInfoState get() = _bakeryInfoState.asStateFlow()
     private val _reviewListState = MutableStateFlow<UiState<ReviewData>>(UiState.Loading)
     val reviewListState get() = _reviewListState.asStateFlow()
     private val _bookMarkState = MutableStateFlow<BookMark?>(null)
@@ -39,12 +40,12 @@ class DetailViewModel @Inject constructor(
             _bakeryId.value = bakeryId
             detailRepository.fetchDetailBakery(bakeryId)
                 .onSuccess { bakeryInfo ->
-                    _bakeryList.value = bakeryInfo
-                    _bakeryListState.value = UiState.Success(bakeryInfo)
+                    _bakeryInfo.value = bakeryInfo
+                    _bakeryInfoState.value = UiState.Success(bakeryInfo)
                     _bookMarkState.value = BookMark(bakeryInfo.bookMarkCount, bakeryInfo.isBooked)
                 }
                 .onFailure { throwable ->
-                    _bakeryListState.value = UiState.Error(throwable.message)
+                    _bakeryInfoState.value = UiState.Error(throwable.message)
                 }
         }
     }
@@ -74,12 +75,12 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    fun getBakeryInfo(): com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo {
-        return _bakeryList.value?.let { _bakeryInfo ->
-            com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo(
+    fun getBakeryInfo(): BakeryReviewWritingInfo {
+        return _bakeryInfo.value?.let { _bakeryInfo ->
+            BakeryReviewWritingInfo(
                 _bakeryInfo.bakeryName,
                 _bakeryInfo.bakeryPicture,
-                com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo.BreadType(
+                BakeryReviewWritingInfo.BreadType(
                     _bakeryInfo.breadType.isGlutenFree,
                     _bakeryInfo.breadType.isVegan,
                     _bakeryInfo.breadType.isNutFree,
@@ -88,6 +89,6 @@ class DetailViewModel @Inject constructor(
                 _bakeryInfo.firstNearStation,
                 _bakeryInfo.secondNearStation
             )
-        } ?: com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo("", "", null, "", "")
+        } ?: BakeryReviewWritingInfo("", "", null, "", "")
     }
 }

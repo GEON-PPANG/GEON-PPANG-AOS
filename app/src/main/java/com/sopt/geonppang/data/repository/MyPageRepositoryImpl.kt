@@ -1,24 +1,24 @@
 package com.sopt.geonppang.data.repository
 
-import com.sopt.geonppang.data.datasource.remote.MypageDataSource
+import com.sopt.geonppang.data.datasource.remote.MyPageDataSource
 import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.domain.model.Profile
-import com.sopt.geonppang.domain.repository.MypageRepository
+import com.sopt.geonppang.domain.repository.MyPageRepository
 import javax.inject.Inject
 
-class MypageRepositoryImpl @Inject constructor(
-    private val mypageDataSource: MypageDataSource,
-) : MypageRepository {
+class MyPageRepositoryImpl @Inject constructor(
+    private val myPageDataSource: MyPageDataSource,
+) : MyPageRepository {
     override suspend fun fetchMypageInfo(): Result<Profile> = runCatching {
-        mypageDataSource.fetchMypageInfo().toMypageInfo()
+        myPageDataSource.fetchMyPageInfo().toMypageInfo()
     }
 
     override suspend fun fetchMyBookmark(): Result<List<Bakery>> = runCatching {
-        mypageDataSource.fetchMyBookmarkList().toMypageBookmark()
+        myPageDataSource.fetchMyBookmarkList().toMypageBookmark()
     }
 
     override suspend fun fetchMyReview(): Result<List<MyReview>> = runCatching {
-        mypageDataSource.fetchMyReviewList().toMyReview()
+        myPageDataSource.fetchMyReviewList().toMyReview()
     }
 }

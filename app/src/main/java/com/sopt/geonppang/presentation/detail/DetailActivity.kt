@@ -31,7 +31,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private lateinit var detailBakeryInfoAdapter: DetailBakeryInfoAdapter
     private lateinit var detailMenuAdapter: DetailMenuAdapter
-    private lateinit var detailReviewDataAdapter: DetailReviewDataAdapter
+    private lateinit var detailReviewGraphAdapter: DetailReviewGraphAdapter
     private lateinit var detailReviewAdapter: DetailReviewAdapter
     private lateinit var detailNoReviewAdapter: DetailNoReviewAdapter
     private lateinit var concatAdapter: ConcatAdapter
@@ -60,14 +60,14 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
         detailBakeryInfoAdapter = DetailBakeryInfoAdapter(::moveToWebPage)
         detailMenuAdapter = DetailMenuAdapter()
-        detailReviewDataAdapter = DetailReviewDataAdapter()
+        detailReviewGraphAdapter = DetailReviewGraphAdapter()
         detailReviewAdapter = DetailReviewAdapter(::initChip, ::moveToReport)
         detailNoReviewAdapter = DetailNoReviewAdapter()
 
         concatAdapter = ConcatAdapter(
             detailBakeryInfoAdapter,
             detailMenuAdapter,
-            detailReviewDataAdapter,
+            detailReviewGraphAdapter,
             detailReviewAdapter
         )
         binding.rvDetail.adapter = concatAdapter
@@ -108,7 +108,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun collectData() {
-        viewModel.bakeryListState.flowWithLifecycle(lifecycle).onEach {
+        viewModel.bakeryInfoState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
                     detailBakeryInfoAdapter.setBakeryInfo(it.data)
@@ -134,14 +134,14 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         viewModel.reviewListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    detailReviewDataAdapter.setReviewData(it.data)
+                    detailReviewGraphAdapter.setReviewData(it.data)
                     detailReviewAdapter.submitList(it.data.detailReviewList)
 
                     if (it.data.totalReviewCount == 0) {
                         concatAdapter = ConcatAdapter(
                             detailBakeryInfoAdapter,
                             detailMenuAdapter,
-                            detailReviewDataAdapter,
+                            detailReviewGraphAdapter,
                             detailNoReviewAdapter
                         )
                     }
