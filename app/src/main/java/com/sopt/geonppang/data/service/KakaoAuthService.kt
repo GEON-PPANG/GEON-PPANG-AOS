@@ -12,35 +12,27 @@ import dagger.hilt.android.qualifiers.ActivityContext
 import timber.log.Timber
 import javax.inject.Inject
 
-class KakaoAuthService @Inject constructor(
-    @ActivityContext private val context: Context,
-) {
-    fun loginKakao() {
-        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-            if (error != null) {
-                Timber.e(ContentValues.TAG, "카카오계정으로 로그인 실패", error)
-            } else if (token != null) {
-                UserApiClient.instance.me { user, error ->
-                    Timber.i(ContentValues.TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
-                }
-            }
-        }
 
-        if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
-            UserApiClient.instance.loginWithKakaoTalk(context) { token, error ->
-                if (error != null) {
-                    Timber.e(ContentValues.TAG, "카카오톡으로 로그인 실패", error)
-                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
-                        return@loginWithKakaoTalk
-                    }
+class KakaoAuthService @Inject constructor(@ActivityContext private val context: Context) {
+    fun startKakaoLogin(kakaoLoginCallBack: (OAuthToken?, Throwable?) -> Unit) {
+        val kakaoLoginState =
+            if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) KAKAO_APP_LOGIN
+            else KAKAO_ACCOUNT_LOGIN
 
-                    UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
-                } else if (token != null) {
-                    Timber.i(ContentValues.TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
-                }
+        when (kakaoLoginState) {
+            KAKAO_APP_LOGIN -> {
+                UserApiClient.instance.loginWithKakaoTalk(
+                    context,
+                    callback = kakaoLoginCallBack
+                )
             }
-        } else {
-            UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
+
+            KAKAO_ACCOUNT_LOGIN -> {
+                UserApiClient.instance.loginWithKakaoAccount(
+                    context,
+                    callback = kakaoLoginCallBack
+                )
+            }
         }
     }
 
@@ -62,5 +54,10 @@ class KakaoAuthService @Inject constructor(
                 Log.i(TAG, "연결 끊기 성공. SDK에서 토큰 삭제 됨")
             }
         }
+    }
+
+    companion object {
+        const val KAKAO_APP_LOGIN = 0
+        const val KAKAO_ACCOUNT_LOGIN = 1
     }
 }
