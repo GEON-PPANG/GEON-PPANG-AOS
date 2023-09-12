@@ -90,7 +90,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     }
 
     private fun moveToSearch() {
-        startActivity(Intent(requireContext(), SearchActivity::class.java))
+        val intent = Intent(requireContext(), SearchActivity::class.java)
+        intent.putExtra(VIEW_TO_VIEW, HOME_TO_SEARCH)
+        startActivity(intent)
     }
 
     private fun moveToDetail(activityName: String, bakeryId: Int) {
@@ -111,6 +113,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         const val BAKERY_ID = "bakeryId"
         const val ACTIVITY_NAME = "activityName"
         const val FILTER_INFO = "filterInfo"
+        const val VIEW_TO_VIEW = "viewToView"
+        const val HOME_TO_SEARCH = "homeToSearch"
         const val CLICK_SEARCH_HOME = "click_search_home"
         const val START_FILTER_HOME = "start_filter_home"
     }
