@@ -20,6 +20,8 @@ class MyPageViewModel @Inject constructor(
 ) : ViewModel() {
     private var _profileInfo = MutableStateFlow<Profile?>(null)
     val profileInfo get() = _profileInfo.asStateFlow()
+    private var _isFilterSelected = MutableStateFlow(false)
+    val isFilterSelected = _isFilterSelected.asStateFlow()
     private var _myPageReviewListState =
         MutableStateFlow<UiState<List<MyReview>>>(UiState.Loading)
     val myPageReviewListState get() = _myPageReviewListState.asStateFlow()
@@ -30,8 +32,6 @@ class MyPageViewModel @Inject constructor(
     val myPageBookmarkListState get() = _myPageBookmarkListState.asStateFlow()
     private var _myBookmarkCount = MutableStateFlow<Int?>(null)
     val myBookmarkCount get() = _myBookmarkCount.asStateFlow()
-    private var _isFilterSelected = MutableStateFlow(false)
-    val isFilterSelected = _isFilterSelected.asStateFlow()
 
     init {
         fetchMyPageReviewList()
