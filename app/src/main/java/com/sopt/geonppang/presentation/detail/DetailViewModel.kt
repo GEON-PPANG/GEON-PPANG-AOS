@@ -1,16 +1,12 @@
 package com.sopt.geonppang.presentation.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.domain.model.BakeryInfo
 import com.sopt.geonppang.domain.model.BookMark
-import com.sopt.geonppang.domain.model.DetailReview
 import com.sopt.geonppang.domain.model.ReviewData
 import com.sopt.geonppang.domain.repository.DetailRepository
 import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
-import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,18 +18,14 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     private val detailRepository: DetailRepository,
 ) : ViewModel() {
-    private val _bakeryId: MutableLiveData<Int> = MutableLiveData()
-    val bakeryId: LiveData<Int> = _bakeryId
-    private val _reviewList = MutableStateFlow<List<DetailReview>?>(null)
-    val reviewList get() = _reviewList.asStateFlow()
+    private val _bakeryId = MutableStateFlow(-1)
+    val bakeryId get() = _bakeryId.asStateFlow()
     private val _bakeryInfo = MutableStateFlow<BakeryInfo?>(null)
-    val bakeryList get() = _bakeryInfo.asStateFlow()
-    private val _bakeryInfoState = MutableStateFlow<UiState<BakeryInfo>>(UiState.Loading)
-    val bakeryInfoState get() = _bakeryInfoState.asStateFlow()
-    private val _reviewListState = MutableStateFlow<UiState<ReviewData>>(UiState.Loading)
-    val reviewListState get() = _reviewListState.asStateFlow()
-    private val _bookMarkState = MutableStateFlow<BookMark?>(null)
-    val bookMarkState get() = _bookMarkState.asStateFlow()
+    val bakeryInfo get() = _bakeryInfo.asStateFlow()
+    private val _reviewData = MutableStateFlow<ReviewData?>(null)
+    val reviewData get() = _reviewData.asStateFlow()
+    private val _bookMarkInfo = MutableStateFlow<BookMark?>(null)
+    val bookMarkInfo get() = _bookMarkInfo.asStateFlow()
 
     fun fetchDetailBakeryInfo(bakeryId: Int) {
         viewModelScope.launch {
@@ -41,11 +33,10 @@ class DetailViewModel @Inject constructor(
             detailRepository.fetchDetailBakery(bakeryId)
                 .onSuccess { bakeryInfo ->
                     _bakeryInfo.value = bakeryInfo
-                    _bakeryInfoState.value = UiState.Success(bakeryInfo)
-                    _bookMarkState.value = BookMark(bakeryInfo.bookMarkCount, bakeryInfo.isBooked)
+                    _bookMarkInfo.value = BookMark(bakeryInfo.bookMarkCount, bakeryInfo.isBooked)
                 }
                 .onFailure { throwable ->
-                    _bakeryInfoState.value = UiState.Error(throwable.message)
+                    Timber.e(throwable.message)
                 }
         }
     }
@@ -54,11 +45,10 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             detailRepository.fetchDetailReview(bakeryId)
                 .onSuccess { reviewData ->
-                    _reviewListState.value = UiState.Success(reviewData)
-                    _reviewList.value = reviewData.detailReviewList
+                    _reviewData.value = reviewData
                 }
                 .onFailure { throwable ->
-                    _reviewListState.value = UiState.Error(throwable.message)
+                    Timber.e(throwable.message)
                 }
         }
     }
@@ -67,7 +57,7 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             detailRepository.doBookMark(bakeryId, isAddingBookMark)
                 .onSuccess { bookMark ->
-                    _bookMarkState.value = bookMark
+                    _bookMarkInfo.value = bookMark
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)

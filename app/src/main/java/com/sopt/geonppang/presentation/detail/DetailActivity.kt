@@ -20,7 +20,6 @@ import com.sopt.geonppang.presentation.report.ReportActivity
 import com.sopt.geonppang.presentation.reviewWriting.ReviewWritingActivity
 import com.sopt.geonppang.util.ChipFactory
 import com.sopt.geonppang.util.CustomSnackbar
-import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -98,65 +97,58 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }
 
         binding.ivDetailMap.setOnClickListener {
-            viewModel.bakeryList.value?.let { bakeryInfo ->
+            viewModel.bakeryInfo.value?.let { bakeryInfo ->
                 moveToWebBrowser(bakeryInfo.mapUrl)
+            }
+        }
+
+        binding.ivDetailBottomAppBarBookmark.setOnClickListener {
+            viewModel.bookMarkInfo.value?.isBookMarked?.let { isBookMarked ->
+                viewModel.doBookMark(bakeryId, !isBookMarked)
+
+                if (!isBookMarked) {
+                    CustomSnackbar.makeSnackbar(
+                        binding.root,
+                        getString(R.string.snackbar_save)
+                    )
+                }
             }
         }
     }
 
     private fun collectData() {
-        viewModel.bakeryInfoState.flowWithLifecycle(lifecycle).onEach {
-            when (it) {
-                is UiState.Success -> {
-                    detailBakeryInfoAdapter.setBakeryInfo(it.data)
-                    detailMenuAdapter.submitList(it.data.menuList)
-
-                    binding.ivDetailBottomAppBarBookmark.setOnClickListener {
-                        if (viewModel.bookMarkState.value?.isBookMarked == false) {
-                            CustomSnackbar.makeSnackbar(
-                                binding.root,
-                                getString(R.string.snackbar_save)
-                            )
-                        }
-                        viewModel.bookMarkState.value?.isBookMarked?.let { isBookMarked ->
-                            viewModel.doBookMark(bakeryId, !isBookMarked)
-                        }
-                    }
-                }
-
-                else -> {}
+        viewModel.bakeryInfo.flowWithLifecycle(lifecycle).onEach { bakeryInfo ->
+            bakeryInfo?.let { bakeryInfo ->
+                detailBakeryInfoAdapter.setBakeryInfo(bakeryInfo)
+                detailMenuAdapter.submitList(bakeryInfo.menuList)
             }
         }.launchIn(lifecycleScope)
 
-        viewModel.reviewListState.flowWithLifecycle(lifecycle).onEach {
-            when (it) {
-                is UiState.Success -> {
-                    detailReviewGraphAdapter.setReviewData(it.data)
-                    detailReviewAdapter.submitList(it.data.detailReviewList)
+        viewModel.reviewData.flowWithLifecycle(lifecycle).onEach { reviewData ->
+            reviewData?.let { reviewData ->
+                detailReviewGraphAdapter.setReviewData(reviewData)
+                detailReviewAdapter.submitList(reviewData.detailReviewList)
 
-                    if (it.data.totalReviewCount == 0) {
-                        concatAdapter = ConcatAdapter(
-                            detailBakeryInfoAdapter,
-                            detailMenuAdapter,
-                            detailReviewGraphAdapter,
-                            detailNoReviewAdapter
-                        )
-                    }
-
-                    binding.rvDetail.adapter = concatAdapter
+                if (reviewData.totalReviewCount == 0) {
+                    concatAdapter = ConcatAdapter(
+                        detailBakeryInfoAdapter,
+                        detailMenuAdapter,
+                        detailReviewGraphAdapter,
+                        detailNoReviewAdapter
+                    )
                 }
 
-                else -> {}
+                binding.rvDetail.adapter = concatAdapter
             }
         }.launchIn(lifecycleScope)
 
-        viewModel.bookMarkState.flowWithLifecycle(lifecycle).onEach {
+        viewModel.bookMarkInfo.flowWithLifecycle(lifecycle).onEach {
             viewModel.fetchDetailBakeryInfo(bakeryId)
         }.launchIn(lifecycleScope)
     }
 
     private fun initChip(chipGroup: ChipGroup, position: Int) {
-        viewModel.reviewList.value?.get(position)?.recommendKeywordList?.let { recommendKeywordList ->
+        viewModel.reviewData.value?.detailReviewList?.get(position)?.recommendKeywordList?.let { recommendKeywordList ->
             for (recommendKeyword in recommendKeywordList) {
                 chipGroup.addView(
                     recommendKeyword.recommendKeywordName.toChip
