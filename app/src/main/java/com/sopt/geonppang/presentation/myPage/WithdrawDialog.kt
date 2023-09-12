@@ -4,12 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.DialogMiddleBinding
 import com.sopt.geonppang.presentation.auth.SignActivity
 import com.sopt.geonppang.presentation.type.DialogType
 import com.sopt.geonppang.util.binding.BindingDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class WithdrawDialog : BindingDialogFragment<DialogMiddleBinding>(R.layout.dialog_middle) {
@@ -22,7 +24,7 @@ class WithdrawDialog : BindingDialogFragment<DialogMiddleBinding>(R.layout.dialo
 
         initLayout()
         addListeners()
-        addObservers()
+        collectData()
     }
 
     private fun initLayout() {
@@ -39,11 +41,13 @@ class WithdrawDialog : BindingDialogFragment<DialogMiddleBinding>(R.layout.dialo
         }
     }
 
-    private fun addObservers() {
-        viewModel.isWithdrawCompleted.observe(viewLifecycleOwner) { isWithdrawCompleted ->
-            if (isWithdrawCompleted) {
-                moveToSign()
-                dismiss()
+    private fun collectData() {
+        viewModel.isWithdrawCompleted.flowWithLifecycle(lifecycle).onEach {
+            it?.let { isWithdrawCompleted ->
+                if (isWithdrawCompleted) {
+                    moveToSign()
+                    dismiss()
+                }
             }
         }
     }

@@ -10,7 +10,7 @@ import javax.inject.Inject
 class MyPageRepositoryImpl @Inject constructor(
     private val mypageDataSource: MyPageDataSource,
 ) : MyPageRepository {
-    override suspend fun fetchMypageInfo(): Result<Profile> = runCatching {
+    override suspend fun fetchProfileInfo(): Result<Profile> = runCatching {
         mypageDataSource.fetchMyPageInfo().toMypageInfo()
     }
 

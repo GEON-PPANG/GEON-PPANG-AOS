@@ -1,11 +1,11 @@
 package com.sopt.geonppang.presentation.myPage
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -14,23 +14,15 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
-    private val _isWithdrawCompleted = MutableLiveData<Boolean>()
-    val isWithdrawCompleted: LiveData<Boolean> = _isWithdrawCompleted
-    private val _isLogoutCompleted = MutableLiveData<Boolean>()
-    val isLogoutCompleted: LiveData<Boolean> = _isLogoutCompleted
-
-    private fun setIsWithdrawCompleted(value: Boolean) {
-        _isWithdrawCompleted.value = value
-    }
-
-    private fun setIsLogoutCompleted(value: Boolean) {
-        _isLogoutCompleted.value = value
-    }
+    private val _isWithdrawCompleted = MutableStateFlow<Boolean?>(null)
+    val isWithdrawCompleted get() = _isWithdrawCompleted.asStateFlow()
+    private val _isLogoutCompleted = MutableStateFlow<Boolean?>(null)
+    val isLogoutCompleted = _isLogoutCompleted.asStateFlow()
 
     fun withdraw() {
         viewModelScope.launch {
             authRepository.withdraw().onSuccess {
-                setIsWithdrawCompleted(true)
+                _isWithdrawCompleted.value = true
             }.onFailure { throwable ->
                 Timber.e(throwable.message)
             }
@@ -40,7 +32,7 @@ class AuthViewModel @Inject constructor(
     fun logout() {
         viewModelScope.launch {
             authRepository.logout().onSuccess {
-                setIsLogoutCompleted(true)
+                _isLogoutCompleted.value = true
             }.onFailure { throwable ->
                 Timber.e(throwable.message)
             }

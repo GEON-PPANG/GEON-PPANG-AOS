@@ -12,15 +12,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class MyPageViewModel @Inject constructor(
     private val myPageRepository: MyPageRepository,
 ) : ViewModel() {
-    private var _myPageInfoState = MutableStateFlow<Profile?>(null)
-    val myPageInfoState get() = _myPageInfoState.asStateFlow()
+    private var _profileInfo = MutableStateFlow<Profile?>(null)
+    val profileInfo get() = _profileInfo.asStateFlow()
     private var _myPageReviewListState =
         MutableStateFlow<UiState<List<MyReview>>>(UiState.Loading)
     val myPageReviewListState get() = _myPageReviewListState.asStateFlow()
@@ -39,12 +38,12 @@ class MyPageViewModel @Inject constructor(
         fetchMyPageBookmarkList()
     }
 
-    fun fetchMyPageInfo() {
+    fun fetchProfileInfo() {
         viewModelScope.launch {
-            myPageRepository.fetchMypageInfo()
-                .onSuccess { myInfo ->
-                    _myPageInfoState.value = myInfo
-                    _isFilterSelected.value = (myInfo.mainPurpose != NONE)
+            myPageRepository.fetchProfileInfo()
+                .onSuccess { profile ->
+                    _profileInfo.value = profile
+                    _isFilterSelected.value = (profile.mainPurpose != NONE)
                 }
         }
     }
@@ -65,7 +64,6 @@ class MyPageViewModel @Inject constructor(
             myPageRepository.fetchMyBookmark().onSuccess { myBookmarkList ->
                 _myPageBookmarkListState.value = UiState.Success(myBookmarkList)
                 _myBookmarkCount.value = myBookmarkList.size
-                Timber.e(_myBookmarkCount.value.toString())
             }.onFailure { throwable ->
                 _myPageBookmarkListState.value = UiState.Error(throwable.message)
             }
@@ -73,7 +71,7 @@ class MyPageViewModel @Inject constructor(
     }
 
     fun setMainPurposeTitle(): Int {
-        return when (myPageInfoState.value?.mainPurpose) {
+        return when (profileInfo.value?.mainPurpose) {
             MainPurposeType.DIET.name -> MainPurposeType.DIET.titleRes
             MainPurposeType.HEALTH.name -> MainPurposeType.HEALTH.titleRes
             else -> MainPurposeType.VEGAN.titleRes

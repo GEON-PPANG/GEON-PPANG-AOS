@@ -12,6 +12,7 @@ import com.sopt.geonppang.databinding.FragmentMyPageBinding
 import com.sopt.geonppang.presentation.common.WebViewActivity
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingFragment
 import com.sopt.geonppang.util.setInvisibility
 import com.sopt.geonppang.util.setVisibility
@@ -35,7 +36,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun initLayout() {
-        viewModel.fetchMyPageInfo()
+        viewModel.fetchProfileInfo()
         binding.includeMyPageSpeechBubble.ivSpeechBubble.setBackgroundResource(R.drawable.background_left_speech_bubble)
         binding.tvMyPageAppVersion.text = getString(R.string.tv_my_page_app_version, APP_VERSION)
     }
@@ -75,7 +76,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun collectData() {
-        viewModel.myPageInfoState.flowWithLifecycle(lifecycle).onEach {
+        viewModel.profileInfo.flowWithLifecycle(lifecycle).onEach {
             binding.chipMyPageProfilePurpose.text =
                 this.context?.getString(viewModel.setMainPurposeTitle()) ?: ""
         }.launchIn(lifecycleScope)
@@ -85,8 +86,6 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
             binding.chipMyPageProfilePurpose.setInvisibility(isFilterSelected)
             binding.chipGroupMyPageProfileBread.setVisibility(isFilterSelected)
         }.launchIn(lifecycleScope)
-
-        binding.tvMyPageAppVersion.text = getString(R.string.tv_my_page_app_version, APP_VERSION)
     }
 
     private fun moveToStoreBakeryList() {
