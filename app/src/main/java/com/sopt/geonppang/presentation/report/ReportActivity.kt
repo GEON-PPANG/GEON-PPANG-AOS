@@ -27,12 +27,12 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
 
     private fun addListeners() {
         binding.etReportContent.setOnClickListener {
-            binding.scrollViewReport.smoothScrollTo(0, binding.etReportContent.top)
+            binding.svReport.smoothScrollTo(0, binding.etReportContent.top)
         }
 
         binding.etReportContent.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                binding.scrollViewReport.smoothScrollTo(0, binding.etReportContent.top)
+                binding.svReport.smoothScrollTo(0, binding.etReportContent.top)
             }
         }
 

@@ -71,7 +71,7 @@
                 app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_haccp_mark" />
 
             <ImageView
-                android:id="@+id/iv_item_detail_bakery_info_nongmo_mark"
+                android:id="@+id/iv_item_detail_bakery_info_non_gmo_mark"
                 visibility="@{bakeryInfo.isNonGMO}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

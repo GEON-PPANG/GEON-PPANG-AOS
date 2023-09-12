@@ -41,7 +41,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_bread_type_filter_duplicate_selection"
+            android:id="@+id/tv_bread_type_duplicate_selection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -58,7 +58,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toTopOf="@id/tv_bread_type_filter_duplicate_selection" />
+            app:layout_constraintTop_toTopOf="@id/tv_bread_type_duplicate_selection" />
 
         <include
             android:id="@+id/include_braed_type_gluten_free"
@@ -72,7 +72,7 @@
             app:breadType="@{BreadFilterType.GLUTENFREE}"
             app:layout_constraintEnd_toStartOf="@+id/view_center"
             app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@id/tv_bread_type_filter_duplicate_selection" />
+            app:layout_constraintTop_toBottomOf="@id/tv_bread_type_duplicate_selection" />
 
         <include
             android:id="@+id/include_braed_type_vegan"
@@ -86,7 +86,7 @@
             app:breadType="@{BreadFilterType.VEGAN}"
             app:layout_constraintEnd_toStartOf="@+id/gl_end"
             app:layout_constraintStart_toEndOf="@+id/view_center"
-            app:layout_constraintTop_toBottomOf="@id/tv_bread_type_filter_duplicate_selection" />
+            app:layout_constraintTop_toBottomOf="@id/tv_bread_type_duplicate_selection" />
 
         <include
             android:id="@+id/include_braed_type_nut_free"

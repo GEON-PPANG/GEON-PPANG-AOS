@@ -34,7 +34,7 @@
             app:layout_constraintGuide_end="@dimen/spacing24" />
 
         <ImageView
-            android:id="@+id/iv_back"
+            android:id="@+id/iv_detail_arrow_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -62,7 +62,7 @@
             android:layout_marginTop="10dp"
             android:background="@color/gray_200"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_back" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_detail_arrow_left" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_detail"
@@ -113,7 +113,7 @@
             tools:src="@drawable/ic_bookmark_unselected" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_crate_review"
+            android:id="@+id/btn_detail_crate_review"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

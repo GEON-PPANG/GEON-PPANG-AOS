@@ -75,7 +75,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun addListeners() {
-        binding.ivBack.setOnClickListener {
+        binding.ivDetailArrowLeft.setOnClickListener {
             val previousActivityName = intent.getStringExtra(ACTIVITY_NAME)
 
             when (previousActivityName) {
@@ -89,7 +89,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
             }
         }
 
-        binding.btnCrateReview.setOnClickListener {
+        binding.btnDetailCrateReview.setOnClickListener {
             moveToReviewWriting(bakeryId, viewModel.getBakeryInfo())
         }
 

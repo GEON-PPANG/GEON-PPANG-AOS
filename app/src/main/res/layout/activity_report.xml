@@ -26,7 +26,7 @@
             app:title="@{@string/report}" />
 
         <ScrollView
-            android:id="@+id/scroll_view_report"
+            android:id="@+id/sv_report"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/view_report_bottom_shadow"
@@ -180,7 +180,7 @@
                     android:id="@+id/et_report_content"
                     android:layout_width="0dp"
                     android:layout_height="198dp"
-                    android:layout_marginTop="@dimen/spacing16"
+                    android:layout_marginTop="12dp"
                     android:background="@drawable/background_report_box"
                     android:gravity="top"
                     android:hint="@string/report_content_hint"
@@ -193,6 +193,7 @@
                     android:textColor="@color/gray_700"
                     android:textColorHint="@color/gray_700"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/tv_report_content" />
 
