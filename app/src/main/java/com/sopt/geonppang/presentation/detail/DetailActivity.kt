@@ -117,15 +117,15 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun collectData() {
-        viewModel.bakeryInfo.flowWithLifecycle(lifecycle).onEach { bakeryInfo ->
-            bakeryInfo?.let { bakeryInfo ->
+        viewModel.bakeryInfo.flowWithLifecycle(lifecycle).onEach {
+            it?.let { bakeryInfo ->
                 detailBakeryInfoAdapter.setBakeryInfo(bakeryInfo)
                 detailMenuAdapter.submitList(bakeryInfo.menuList)
             }
         }.launchIn(lifecycleScope)
 
-        viewModel.reviewData.flowWithLifecycle(lifecycle).onEach { reviewData ->
-            reviewData?.let { reviewData ->
+        viewModel.reviewData.flowWithLifecycle(lifecycle).onEach {
+            it?.let { reviewData ->
                 detailReviewGraphAdapter.setReviewData(reviewData)
                 detailReviewAdapter.submitList(reviewData.detailReviewList)
 
