@@ -24,10 +24,14 @@ class MainPurposeFilterFragment :
 
     private fun addListeners() {
         binding.layoutMainPurposeSkip.setOnClickListener {
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            intent.flags =
-                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
+            moveToMain()
         }
+    }
+
+    private fun moveToMain() {
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        intent.flags =
+            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
     }
 }

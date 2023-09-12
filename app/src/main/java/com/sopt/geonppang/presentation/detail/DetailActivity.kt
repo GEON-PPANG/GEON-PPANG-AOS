@@ -15,6 +15,7 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityDetailBinding
 import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.common.WebViewActivity
+import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
 import com.sopt.geonppang.presentation.report.ReportActivity
 import com.sopt.geonppang.presentation.reviewWriting.ReviewWritingActivity
 import com.sopt.geonppang.util.ChipFactory
@@ -89,11 +90,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }
 
         binding.btnCrateReview.setOnClickListener {
-            val intent = Intent(this, ReviewWritingActivity::class.java)
-            intent.putExtra(BAKERY_ID, bakeryId)
-            intent.putExtra(BAKERY_INFO, viewModel.getBakeryInfo())
-            startActivity(intent)
-            finish()
+            moveToReviewWriting(bakeryId, viewModel.getBakeryInfo())
         }
 
         binding.fabDetail.setOnClickListener {
@@ -195,6 +192,14 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         val intent = Intent(this, ReportActivity::class.java)
         intent.putExtra(REVIEW_ID, id)
         startActivity(intent)
+    }
+
+    private fun moveToReviewWriting(bakeryId: Int, bakeryInfo: BakeryReviewWritingInfo) {
+        val intent = Intent(this, ReviewWritingActivity::class.java)
+        intent.putExtra(BAKERY_ID, bakeryId)
+        intent.putExtra(BAKERY_INFO, bakeryInfo)
+        startActivity(intent)
+        finish()
     }
 
     companion object {

@@ -34,12 +34,12 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         binding.vpFilterContainer.adapter = adapter
         binding.vpFilterContainer.isUserInputEnabled = false
         binding.vpFilterContainer.registerOnPageChangeCallback(object :
-                ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    viewModel.setCurrentPage(position)
-                }
-            })
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                viewModel.setCurrentPage(position)
+            }
+        })
 
         setPreviousActivity()
     }
@@ -64,23 +64,15 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
 
                     when (viewModel.previousActivity.value) {
                         FilterInfoType.BAKERY_LIST -> {
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                            intent.putExtra(BAKERY_LIST_FRAGMENT, BAKERY_LIST_FRAGMENT)
-                            startActivity(intent)
+                            moveToMain(BAKERY_LIST_FRAGMENT)
                         }
 
                         FilterInfoType.MY_PAGE -> {
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                            intent.putExtra(MY_PAGE_FRAGMENT, MY_PAGE_FRAGMENT)
-                            startActivity(intent)
+                            moveToMain(MY_PAGE_FRAGMENT)
                         }
 
                         FilterInfoType.HOME -> {
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                            startActivity(intent)
+                            moveToMain(null)
                         }
 
                         else -> {
@@ -135,6 +127,15 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         viewModel.isCurrentPageFilterSelected.observe(this) { currentItemFilterSelected ->
             binding.btnFilterNext.isEnabled = currentItemFilterSelected
         }
+    }
+
+    private fun moveToMain(initialFragment: String?) {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        if (!initialFragment.isNullOrEmpty()) {
+            intent.putExtra(initialFragment, initialFragment)
+        }
+        startActivity(intent)
     }
 
     private fun setPreviousActivity() {
