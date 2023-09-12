@@ -48,7 +48,7 @@ class BakeryListFragment :
         }
 
         binding.ivSearch.setOnClickListener {
-            startActivity(Intent(requireActivity(), SearchActivity::class.java))
+            moveToSearch()
         }
 
         binding.ivBakeryListFilter.setOnClickListener {
@@ -80,6 +80,12 @@ class BakeryListFragment :
         startActivity(intent)
     }
 
+    private fun moveToSearch() {
+        val intent = Intent(requireActivity(), SearchActivity::class.java)
+        intent.putExtra(VIEW_TO_VIEW, BAKERY_LIST_TO_SEARCH)
+        startActivity(intent)
+    }
+
     private fun moveToFilter() {
         val intent = Intent(requireContext(), FilterSettingActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
@@ -107,5 +113,7 @@ class BakeryListFragment :
     companion object {
         const val BAKERY_ID = "bakeryId"
         const val FILTER_INFO = "filterInfo"
+        const val VIEW_TO_VIEW = "viewToView"
+        const val BAKERY_LIST_TO_SEARCH = "bakeryListToSearch"
     }
 }
