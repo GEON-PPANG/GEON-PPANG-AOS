@@ -63,17 +63,17 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                     viewModel.setUserFilter()
 
                     when (viewModel.previousActivity.value) {
-                        FilterInfoType.BAKERYLIST -> {
+                        FilterInfoType.BAKERY_LIST -> {
                             val intent = Intent(this, MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                             intent.putExtra(BAKERY_LIST_FRAGMENT, BAKERY_LIST_FRAGMENT)
                             startActivity(intent)
                         }
 
-                        FilterInfoType.MYPAGE -> {
+                        FilterInfoType.MY_PAGE -> {
                             val intent = Intent(this, MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                            intent.putExtra(MYPAGE_FRAGMENT, MYPAGE_FRAGMENT)
+                            intent.putExtra(MY_PAGE_FRAGMENT, MY_PAGE_FRAGMENT)
                             startActivity(intent)
                         }
 
@@ -149,7 +149,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
 
     companion object {
         const val FILTER_INFO = "filterInfo"
-        const val MYPAGE_FRAGMENT = "MyPageFragment"
+        const val MY_PAGE_FRAGMENT = "MyPageFragment"
         const val BAKERY_LIST_FRAGMENT = "BakeryListFragment"
         const val PAGE_FORMAT = "%d/3"
     }

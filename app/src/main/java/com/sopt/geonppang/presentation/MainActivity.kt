@@ -21,7 +21,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     }
 
     private fun initLayout() {
-        val isMyPageRequested = intent.getStringExtra(MYPAGE_FRAGMENT) == MYPAGE_FRAGMENT
+        val isMyPageRequested = intent.getStringExtra(MY_PAGE_FRAGMENT) == MY_PAGE_FRAGMENT
         val isBakeryListRequested =
             intent.getStringExtra(BAKERY_LIST_FRAGMENT) == BAKERY_LIST_FRAGMENT
 
@@ -58,7 +58,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     }
 
     companion object {
-        const val MYPAGE_FRAGMENT = "MyPageFragment"
+        const val MY_PAGE_FRAGMENT = "MyPageFragment"
         const val BAKERY_LIST_FRAGMENT = "BakeryListFragment"
     }
 }

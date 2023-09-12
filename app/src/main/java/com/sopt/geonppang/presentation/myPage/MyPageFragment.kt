@@ -100,7 +100,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     private fun moveToFilter() {
         val intent = Intent(requireContext(), FilterSettingActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
-        intent.putExtra(FILTER_INFO, FilterInfoType.MYPAGE.name)
+        intent.putExtra(FILTER_INFO, FilterInfoType.MY_PAGE.name)
         startActivity(intent)
     }
 
