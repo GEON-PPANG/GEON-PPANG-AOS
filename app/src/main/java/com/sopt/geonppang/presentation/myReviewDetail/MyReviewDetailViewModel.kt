@@ -18,7 +18,6 @@ class MyReviewDetailViewModel @Inject constructor(
 ) : ViewModel() {
     private val _bakeryInfo = MutableStateFlow<MyReviewBakeryInfo?>(null)
     val bakeryInfo get() = _bakeryInfo.asStateFlow()
-
     private val _isLikeType = MutableStateFlow(true)
     val isLikeType get() = _isLikeType.asStateFlow()
     val isRecommendKeywordSelected = MutableStateFlow(
@@ -31,6 +30,14 @@ class MyReviewDetailViewModel @Inject constructor(
     )
     private val _myReviewText = MutableStateFlow("")
     val myReviewText get() = _myReviewText.asStateFlow()
+
+    private fun setSelectedRecommendKeyword(recommendKeyWordList: List<DetailReview.RecommendKeyword>) {
+        val selectedKeyWord = isRecommendKeywordSelected.value.toMutableMap()
+        for (recommendKeyword in recommendKeyWordList) {
+            selectedKeyWord[recommendKeyword.recommendKeywordId] = true
+        }
+        isRecommendKeywordSelected.value = selectedKeyWord
+    }
 
     fun setUserInfo(bakeryInfo: MyReviewBakeryInfo) {
         _bakeryInfo.value = bakeryInfo
@@ -48,14 +55,6 @@ class MyReviewDetailViewModel @Inject constructor(
                     Timber.e(throwable.message)
                 }
         }
-    }
-
-    private fun setSelectedRecommendKeyword(recommendKeyWordList: List<DetailReview.RecommendKeyword>) {
-        val selectedKeyWord = isRecommendKeywordSelected.value.toMutableMap()
-        for (recommendKeyword in recommendKeyWordList) {
-            selectedKeyWord[recommendKeyword.recommendKeywordId] = true
-        }
-        isRecommendKeywordSelected.value = selectedKeyWord
     }
 
     companion object {

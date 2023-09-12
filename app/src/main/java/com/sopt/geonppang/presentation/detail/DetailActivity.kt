@@ -158,16 +158,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }.launchIn(lifecycleScope)
     }
 
-    private fun moveToMain() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    private fun moveToTop(recyclerView: RecyclerView) {
-        recyclerView.smoothScrollToPosition(FIRST_POSITION)
-    }
-
     private fun initChip(chipGroup: ChipGroup, position: Int) {
         viewModel.reviewList.value?.get(position)?.recommendKeywordList?.let { recommendKeywordList ->
             for (recommendKeyword in recommendKeywordList) {
@@ -176,6 +166,16 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                 )
             }
         }
+    }
+
+    private fun moveToTop(recyclerView: RecyclerView) {
+        recyclerView.smoothScrollToPosition(FIRST_POSITION)
+    }
+
+    private fun moveToMain() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun moveToWebPage(link: String) {

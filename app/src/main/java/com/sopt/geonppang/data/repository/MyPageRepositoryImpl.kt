@@ -8,17 +8,17 @@ import com.sopt.geonppang.domain.repository.MyPageRepository
 import javax.inject.Inject
 
 class MyPageRepositoryImpl @Inject constructor(
-    private val myPageDataSource: MyPageDataSource,
+    private val mypageDataSource: MyPageDataSource,
 ) : MyPageRepository {
     override suspend fun fetchMypageInfo(): Result<Profile> = runCatching {
-        myPageDataSource.fetchMyPageInfo().toMypageInfo()
+        mypageDataSource.fetchMyPageInfo().toMypageInfo()
     }
 
     override suspend fun fetchMyBookmark(): Result<List<Bakery>> = runCatching {
-        myPageDataSource.fetchMyBookmarkList().toMypageBookmark()
+        mypageDataSource.fetchMyBookmarkList().toMypageBookmark()
     }
 
     override suspend fun fetchMyReview(): Result<List<MyReview>> = runCatching {
-        myPageDataSource.fetchMyReviewList().toMyReview()
+        mypageDataSource.fetchMyReviewList().toMyReview()
     }
 }

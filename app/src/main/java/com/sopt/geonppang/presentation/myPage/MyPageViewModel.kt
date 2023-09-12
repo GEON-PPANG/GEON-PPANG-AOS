@@ -21,35 +21,22 @@ class MyPageViewModel @Inject constructor(
 ) : ViewModel() {
     private var _myPageInfoState = MutableStateFlow<Profile?>(null)
     val myPageInfoState get() = _myPageInfoState.asStateFlow()
-
     private var _myPageReviewListState =
         MutableStateFlow<UiState<List<MyReview>>>(UiState.Loading)
     val myPageReviewListState get() = _myPageReviewListState.asStateFlow()
-
     private var _myReviewCount = MutableStateFlow<Int?>(null)
     val myReviewCount get() = _myReviewCount.asStateFlow()
-
     private var _myPageBookmarkListState =
         MutableStateFlow<UiState<List<Bakery>>>(UiState.Loading)
     val myPageBookmarkListState get() = _myPageBookmarkListState.asStateFlow()
-
     private var _myBookmarkCount = MutableStateFlow<Int?>(null)
     val myBookmarkCount get() = _myBookmarkCount.asStateFlow()
-
     private var _isFilterSelected = MutableStateFlow(false)
     val isFilterSelected = _isFilterSelected.asStateFlow()
 
     init {
         fetchMyPageReviewList()
         fetchMyPageBookmarkList()
-    }
-
-    fun setMainPurposeTitle(): Int {
-        return when (myPageInfoState.value?.mainPurpose) {
-            MainPurposeType.DIET.name -> MainPurposeType.DIET.titleRes
-            MainPurposeType.HEALTH.name -> MainPurposeType.HEALTH.titleRes
-            else -> MainPurposeType.VEGAN.titleRes
-        }
     }
 
     fun fetchMyPageInfo() {
@@ -82,6 +69,14 @@ class MyPageViewModel @Inject constructor(
             }.onFailure { throwable ->
                 _myPageBookmarkListState.value = UiState.Error(throwable.message)
             }
+        }
+    }
+
+    fun setMainPurposeTitle(): Int {
+        return when (myPageInfoState.value?.mainPurpose) {
+            MainPurposeType.DIET.name -> MainPurposeType.DIET.titleRes
+            MainPurposeType.HEALTH.name -> MainPurposeType.HEALTH.titleRes
+            else -> MainPurposeType.VEGAN.titleRes
         }
     }
 

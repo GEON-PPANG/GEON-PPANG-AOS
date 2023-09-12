@@ -25,31 +25,14 @@ class FilterSettingViewModel @Inject constructor(
 ) : ViewModel() {
     private val _selectedFilterState = MutableStateFlow<UiState<SelectedFilter>>(UiState.Loading)
     val selectedFilterState get() = _selectedFilterState.asStateFlow()
-
     private val _previousActivity = MutableStateFlow<FilterInfoType?>(null)
     val previousActivity get() = _previousActivity.asStateFlow()
-
     private val _isLastPage = MutableStateFlow(false)
     val isLastPage get() = _isLastPage.asStateFlow()
-
-    fun setIsLastPage(boolean: Boolean) {
-        _isLastPage.value = boolean
-    }
-
     private val _currentPage: MutableLiveData<Int> = MutableLiveData()
     val currentPage: LiveData<Int> = _currentPage
-
-    fun setCurrentPage(position: Int) {
-        _currentPage.value = position
-    }
-
     private val _mainPurposeType: MutableLiveData<MainPurposeType?> = MutableLiveData()
     val mainPurposeType: LiveData<MainPurposeType?> = _mainPurposeType
-
-    fun setMainPurposeType(mainPurposeType: MainPurposeType) {
-        _mainPurposeType.value = mainPurposeType
-    }
-
     val breadFilterType: MutableLiveData<Map<BreadFilterType, Boolean>> = MutableLiveData(
         mapOf(
             BreadFilterType.GLUTENFREE to false,
@@ -58,20 +41,11 @@ class FilterSettingViewModel @Inject constructor(
             BreadFilterType.SUGARFREE to false
         )
     )
-
-    fun setBreadFilterType(breadType: BreadFilterType) {
-        val isSelected = breadFilterType.value?.get(breadType) ?: return
-        breadFilterType.value = breadFilterType.value?.toMutableMap()?.apply {
-            this[breadType] = !isSelected
-        }
-    }
-
     val isBreadFilterTypeSelected: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         addSource(breadFilterType) { breadMap ->
             value = breadMap.any { it.value }
         }
     }
-
     val nutrientFilterType: MutableLiveData<Map<NutrientFilterType, Boolean>> = MutableLiveData(
         mapOf(
             NutrientFilterType.NUTRIENT to false,
@@ -79,20 +53,11 @@ class FilterSettingViewModel @Inject constructor(
             NutrientFilterType.NOT to false
         )
     )
-
-    fun setNutrientFilterType(nutrientType: NutrientFilterType) {
-        val isSelected = nutrientFilterType.value?.get(nutrientType) ?: return
-        nutrientFilterType.value = nutrientFilterType.value?.toMutableMap()?.apply {
-            this[nutrientType] = !isSelected
-        }
-    }
-
     val isNutrientFilterTypeSelected: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         addSource(nutrientFilterType) { nutrientMap ->
             value = nutrientMap.any { it.value }
         }
     }
-
     val isCurrentPageFilterSelected: MediatorLiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         addSource(currentPage) { currentItemValue ->
             value = when (currentItemValue) {
@@ -106,6 +71,32 @@ class FilterSettingViewModel @Inject constructor(
 
     fun setPreviousActivity(filterInfoType: FilterInfoType) {
         _previousActivity.value = filterInfoType
+    }
+
+    fun setIsLastPage(boolean: Boolean) {
+        _isLastPage.value = boolean
+    }
+
+    fun setCurrentPage(position: Int) {
+        _currentPage.value = position
+    }
+
+    fun setMainPurposeType(mainPurposeType: MainPurposeType) {
+        _mainPurposeType.value = mainPurposeType
+    }
+
+    fun setBreadFilterType(breadType: BreadFilterType) {
+        val isSelected = breadFilterType.value?.get(breadType) ?: return
+        breadFilterType.value = breadFilterType.value?.toMutableMap()?.apply {
+            this[breadType] = !isSelected
+        }
+    }
+
+    fun setNutrientFilterType(nutrientType: NutrientFilterType) {
+        val isSelected = nutrientFilterType.value?.get(nutrientType) ?: return
+        nutrientFilterType.value = nutrientFilterType.value?.toMutableMap()?.apply {
+            this[nutrientType] = !isSelected
+        }
     }
 
     fun setUserFilter() {

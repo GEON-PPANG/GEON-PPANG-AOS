@@ -22,12 +22,12 @@ class ReportViewModel @Inject constructor(
     private val _isReportCompleted = MutableLiveData<Boolean>()
     val isReportCompleted: LiveData<Boolean> = _isReportCompleted
 
-    fun setReportCategory(reportCategoryType: ReportCategoryType) {
-        _reportCategory.value = reportCategoryType
-    }
-
     private fun setIsReportCompleted(value: Boolean) {
         _isReportCompleted.value = value
+    }
+
+    fun setReportCategory(reportCategoryType: ReportCategoryType) {
+        _reportCategory.value = reportCategoryType
     }
 
     fun reportReview(reviewId: Int) {
