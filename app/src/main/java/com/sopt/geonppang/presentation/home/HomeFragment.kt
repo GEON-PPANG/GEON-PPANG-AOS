@@ -12,6 +12,7 @@ import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.search.SearchActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingFragment
 import com.sopt.geonppang.util.setVisibility
@@ -46,10 +47,12 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private fun addListeners() {
         binding.tvHomeSearch.setOnClickListener {
+            AmplitudeUtils.trackEvent(CLICK_SEARCH_HOME)
             moveToSearch()
         }
 
         binding.ivHomeFilter.setOnClickListener {
+            AmplitudeUtils.trackEvent(START_FILTER_HOME)
             moveToFilter()
         }
 
@@ -87,7 +90,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     }
 
     private fun moveToSearch() {
-        startActivity(Intent(requireContext(), SearchActivity::class.java))
+        val intent = Intent(requireContext(), SearchActivity::class.java)
+        intent.putExtra(VIEW_TO_VIEW, HOME_TO_SEARCH)
+        startActivity(intent)
     }
 
     private fun moveToDetail(activityName: String, bakeryId: Int) {
@@ -108,5 +113,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         const val BAKERY_ID = "bakeryId"
         const val ACTIVITY_NAME = "activityName"
         const val FILTER_INFO = "filterInfo"
+        const val VIEW_TO_VIEW = "viewToView"
+        const val HOME_TO_SEARCH = "homeToSearch"
+        const val CLICK_SEARCH_HOME = "click_search_home"
+        const val START_FILTER_HOME = "start_filter_home"
     }
 }

@@ -12,6 +12,7 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySearchBinding
 import com.sopt.geonppang.presentation.common.BakeryAdapter
 import com.sopt.geonppang.presentation.detail.DetailActivity
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
@@ -53,6 +54,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
 
         binding.etSearch.setOnKeyListener { _, keyCode, event ->
             if ((event.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                completeFilteringInParticularView()
                 viewModel.searchBakeryList()
                 hideKeyboard(binding.root)
                 true
@@ -82,6 +84,27 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         startActivity(intent)
     }
 
+    private fun completeFilteringInParticularView() {
+        val viewToView = intent.getStringExtra(VIEW_TO_VIEW)
+        when (viewToView) {
+            HOME_TO_SEARCH -> {
+                AmplitudeUtils.trackEventWithProperties(
+                    COMPLETE_SEARCH_HOME,
+                    KEYWORD,
+                    viewModel.inputSearch.value
+                )
+            }
+
+            BAKERY_LIST_TO_SEARCH -> {
+                AmplitudeUtils.trackEventWithProperties(
+                    COMPLETE_SEARCH_LIST,
+                    KEYWORD,
+                    viewModel.inputSearch.value
+                )
+            }
+        }
+    }
+
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         hideKeyboard(binding.root)
         return super.dispatchTouchEvent(ev)
@@ -89,5 +112,11 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
 
     companion object {
         const val BAKERY_ID = "bakeryId"
+        const val VIEW_TO_VIEW = "viewToView"
+        const val HOME_TO_SEARCH = "homeToSearch"
+        const val BAKERY_LIST_TO_SEARCH = "bakeryListToSearch"
+        const val COMPLETE_SEARCH_HOME = "complete_search_home"
+        const val COMPLETE_SEARCH_LIST = "complete_search_list"
+        const val KEYWORD = "keyword"
     }
 }

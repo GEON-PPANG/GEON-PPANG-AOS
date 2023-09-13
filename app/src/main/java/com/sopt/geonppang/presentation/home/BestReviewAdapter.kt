@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.geonppang.databinding.ItemHomeBestReviewBinding
 import com.sopt.geonppang.domain.model.BestReview
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.ItemDiffCallback
 
 class BestReviewAdapter(
@@ -28,6 +29,7 @@ class BestReviewAdapter(
             binding.executePendingBindings()
 
             binding.root.setOnClickListener {
+                AmplitudeUtils.trackEvent(CLICK_RECOMMEND_REVIEW)
                 moveToDetail(MAIN, review.bakeryId)
             }
         }
@@ -45,5 +47,6 @@ class BestReviewAdapter(
 
     companion object {
         const val MAIN = "mainActivity"
+        const val CLICK_RECOMMEND_REVIEW = "click_recommend_review"
     }
 }
