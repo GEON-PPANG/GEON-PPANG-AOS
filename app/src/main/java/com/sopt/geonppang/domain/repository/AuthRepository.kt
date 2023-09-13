@@ -6,7 +6,7 @@ import com.sopt.geonppang.data.model.response.ResponseSignup
 import com.sopt.geonppang.data.model.response.ResponseWithdraw
 
 interface AuthRepository {
-    suspend fun signup(requestSignup: RequestSignup, token: String): Result<ResponseSignup>
+    suspend fun signup(requestSignup: RequestSignup): Result<ResponseSignup>
     suspend fun withdraw(): Result<ResponseWithdraw>
     suspend fun logout(): Result<ResponseLogout>
 }

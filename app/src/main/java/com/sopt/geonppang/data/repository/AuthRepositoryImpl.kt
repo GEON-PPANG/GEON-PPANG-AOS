@@ -13,9 +13,8 @@ class AuthRepositoryImpl @Inject constructor(
 ) : AuthRepository {
     override suspend fun signup(
         requestSignup: RequestSignup,
-        token: String
     ): Result<ResponseSignup> =
-        runCatching { authDataSource.postSignup(requestSignup, token) }
+        runCatching { authDataSource.postSignup(requestSignup) }
 
     override suspend fun withdraw(): Result<ResponseWithdraw> =
         runCatching { authDataSource.withdraw() }

@@ -10,8 +10,8 @@ import javax.inject.Inject
 class AuthDataSource @Inject constructor(
     private val authService: AuthService,
 ) {
-    suspend fun postSignup(requestSignup: RequestSignup, token: String): ResponseSignup =
-        authService.postSignup(requestSignup, token)
+    suspend fun postSignup(requestSignup: RequestSignup): ResponseSignup =
+        authService.postSignup(requestSignup)
 
     suspend fun withdraw(): ResponseWithdraw = authService.withdraw()
     suspend fun logout(): ResponseLogout = authService.logout()

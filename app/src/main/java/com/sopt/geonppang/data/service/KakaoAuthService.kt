@@ -1,15 +1,11 @@
 package com.sopt.geonppang.data.service
 
-import android.content.ContentValues
 import android.content.Context
 import android.util.Log
 import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.model.ClientError
-import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.Constants.TAG
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.qualifiers.ActivityContext
-import timber.log.Timber
 import javax.inject.Inject
 
 

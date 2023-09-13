@@ -13,7 +13,6 @@ interface AuthService {
     @POST("auth/signup")
     suspend fun postSignup(
         @Body requestSignup: RequestSignup,
-        @Header("PlatformAccessToken") token: String,
     ): ResponseSignup
 
     @DELETE("auth/withdraw")
