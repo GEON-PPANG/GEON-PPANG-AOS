@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.DialogMiddleBinding
 import com.sopt.geonppang.presentation.auth.SignActivity
 import com.sopt.geonppang.presentation.type.DialogType
 import com.sopt.geonppang.util.binding.BindingDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
@@ -49,7 +51,7 @@ class WithdrawDialog : BindingDialogFragment<DialogMiddleBinding>(R.layout.dialo
                     dismiss()
                 }
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
     private fun moveToSign() {
