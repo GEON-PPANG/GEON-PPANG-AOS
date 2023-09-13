@@ -1,8 +1,5 @@
 package com.sopt.geonppang.presentation.filterSetting
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.model.request.RequestSettingFilter
@@ -15,7 +12,11 @@ import com.sopt.geonppang.presentation.type.NutrientFilterType
 import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,11 +30,11 @@ class FilterSettingViewModel @Inject constructor(
     val previousActivity get() = _previousActivity.asStateFlow()
     private val _isLastPage = MutableStateFlow(false)
     val isLastPage get() = _isLastPage.asStateFlow()
-    private val _currentPage: MutableLiveData<Int> = MutableLiveData()
-    val currentPage: LiveData<Int> = _currentPage
-    private val _mainPurposeType: MutableLiveData<MainPurposeType?> = MutableLiveData()
-    val mainPurposeType: LiveData<MainPurposeType?> = _mainPurposeType
-    val breadFilterType: MutableLiveData<Map<BreadFilterType, Boolean>> = MutableLiveData(
+    private val _currentPage = MutableStateFlow<Int?>(null)
+    val currentPage get() = _currentPage.asStateFlow()
+    private val _mainPurposeType = MutableStateFlow<MainPurposeType?>(null)
+    val mainPurposeType get() = _mainPurposeType.asStateFlow()
+    val breadFilterType: MutableStateFlow<Map<BreadFilterType, Boolean>> = MutableStateFlow(
         mapOf(
             BreadFilterType.GLUTENFREE to false,
             BreadFilterType.VEGAN to false,
@@ -41,33 +42,28 @@ class FilterSettingViewModel @Inject constructor(
             BreadFilterType.SUGARFREE to false
         )
     )
-    val isBreadFilterTypeSelected: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
-        addSource(breadFilterType) { breadMap ->
-            value = breadMap.any { it.value }
-        }
-    }
-    val nutrientFilterType: MutableLiveData<Map<NutrientFilterType, Boolean>> = MutableLiveData(
+    val isBreadFilterTypeSelected: StateFlow<Boolean> = breadFilterType.map { breadTypeMap ->
+        breadTypeMap.values.any { it }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
+    val nutrientFilterType: MutableStateFlow<Map<NutrientFilterType, Boolean>> = MutableStateFlow(
         mapOf(
             NutrientFilterType.NUTRIENT to false,
             NutrientFilterType.INGREDIENT to false,
             NutrientFilterType.NOT to false
         )
     )
-    val isNutrientFilterTypeSelected: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
-        addSource(nutrientFilterType) { nutrientMap ->
-            value = nutrientMap.any { it.value }
+    val isNutrientFilterTypeSelected: StateFlow<Boolean> =
+        nutrientFilterType.map { nutrientFilterType ->
+            nutrientFilterType.values.any { it }
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
+    val isCurrentPageFilterSelected: StateFlow<Boolean> = _currentPage.map { currentPage ->
+        when (currentPage) {
+            0 -> mainPurposeType.value != null
+            1 -> breadFilterType.value.any { it.value }
+            2 -> nutrientFilterType.value.any { it.value }
+            else -> false
         }
-    }
-    val isCurrentPageFilterSelected: MediatorLiveData<Boolean> = MediatorLiveData<Boolean>().apply {
-        addSource(currentPage) { currentItemValue ->
-            value = when (currentItemValue) {
-                0 -> mainPurposeType.value != null
-                1 -> breadFilterType.value?.any { it.value } ?: false
-                2 -> nutrientFilterType.value?.any { it.value } ?: false
-                else -> false
-            }
-        }
-    }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
     fun setPreviousActivity(filterInfoType: FilterInfoType) {
         _previousActivity.value = filterInfoType
@@ -86,15 +82,15 @@ class FilterSettingViewModel @Inject constructor(
     }
 
     fun setBreadFilterType(breadType: BreadFilterType) {
-        val isSelected = breadFilterType.value?.get(breadType) ?: return
-        breadFilterType.value = breadFilterType.value?.toMutableMap()?.apply {
+        val isSelected = breadFilterType.value[breadType] ?: return
+        breadFilterType.value = breadFilterType.value.toMutableMap().apply {
             this[breadType] = !isSelected
         }
     }
 
     fun setNutrientFilterType(nutrientType: NutrientFilterType) {
-        val isSelected = nutrientFilterType.value?.get(nutrientType) ?: return
-        nutrientFilterType.value = nutrientFilterType.value?.toMutableMap()?.apply {
+        val isSelected = nutrientFilterType.value[nutrientType] ?: return
+        nutrientFilterType.value = nutrientFilterType.value.toMutableMap().apply {
             this[nutrientType] = !isSelected
         }
     }
@@ -105,15 +101,15 @@ class FilterSettingViewModel @Inject constructor(
                 RequestSettingFilter(
                     it.name,
                     RequestSettingFilter.BreadType(
-                        breadFilterType.value?.get(BreadFilterType.GLUTENFREE) == true,
-                        breadFilterType.value?.get(BreadFilterType.VEGAN) == true,
-                        breadFilterType.value?.get(BreadFilterType.NUTFREE) == true,
-                        breadFilterType.value?.get(BreadFilterType.SUGARFREE) == true,
+                        breadFilterType.value[BreadFilterType.GLUTENFREE] == true,
+                        breadFilterType.value[BreadFilterType.VEGAN] == true,
+                        breadFilterType.value[BreadFilterType.NUTFREE] == true,
+                        breadFilterType.value[BreadFilterType.SUGARFREE] == true,
                     ),
                     RequestSettingFilter.NutrientType(
-                        nutrientFilterType.value?.get(NutrientFilterType.NUTRIENT) == true,
-                        nutrientFilterType.value?.get(NutrientFilterType.INGREDIENT) == true,
-                        nutrientFilterType.value?.get(NutrientFilterType.NOT) == true,
+                        nutrientFilterType.value[NutrientFilterType.NUTRIENT] == true,
+                        nutrientFilterType.value[NutrientFilterType.INGREDIENT] == true,
+                        nutrientFilterType.value[NutrientFilterType.NOT] == true,
                     )
                 )
             }?.let {

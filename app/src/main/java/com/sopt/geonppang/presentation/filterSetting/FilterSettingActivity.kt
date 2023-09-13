@@ -3,6 +3,8 @@ package com.sopt.geonppang.presentation.filterSetting
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
@@ -11,6 +13,8 @@ import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.setInvisibility
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_filter) {
@@ -25,7 +29,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
 
         initLayout()
         addListeners()
-        addObservers()
+        collectData()
     }
 
     private fun initLayout() {
@@ -95,21 +99,25 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         }
     }
 
-    private fun addObservers() {
-        viewModel.mainPurposeType.observe(this) { mainPurposeType ->
+    private fun collectData() {
+        viewModel.mainPurposeType.flowWithLifecycle(lifecycle).onEach { mainPurposeType ->
             binding.btnFilterNext.isEnabled = mainPurposeType != null
-        }
+        }.launchIn(lifecycleScope)
 
-        viewModel.isBreadFilterTypeSelected.observe(this) { isUserBreadTypeSelected ->
-            binding.btnFilterNext.isEnabled = isUserBreadTypeSelected
-        }
+        viewModel.isBreadFilterTypeSelected.flowWithLifecycle(lifecycle)
+            .onEach { isUserBreadTypeSelected ->
+                binding.btnFilterNext.isEnabled = isUserBreadTypeSelected
+            }.launchIn(lifecycleScope)
 
-        viewModel.isNutrientFilterTypeSelected.observe(this) { isUserNutrientFilterTypeSelected ->
-            binding.btnFilterNext.isEnabled = isUserNutrientFilterTypeSelected
-        }
+        viewModel.isNutrientFilterTypeSelected.flowWithLifecycle(lifecycle)
+            .onEach { isUserNutrientFilterTypeSelected ->
+                binding.btnFilterNext.isEnabled = isUserNutrientFilterTypeSelected
+            }.launchIn(lifecycleScope)
 
-        viewModel.currentPage.observe(this) { currentPage ->
-            binding.tvFilterPageNumber.text = setPageText(currentPage + 1)
+        viewModel.currentPage.flowWithLifecycle(lifecycle).onEach { currentPage ->
+            currentPage?.let {
+                binding.tvFilterPageNumber.text = setPageText(it + 1)
+            }
 
             when (currentPage) {
                 0 -> {
@@ -122,11 +130,12 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                     binding.ivFilterArrowLeft.setInvisibility(true)
                 }
             }
-        }
+        }.launchIn(lifecycleScope)
 
-        viewModel.isCurrentPageFilterSelected.observe(this) { currentItemFilterSelected ->
-            binding.btnFilterNext.isEnabled = currentItemFilterSelected
-        }
+        viewModel.isCurrentPageFilterSelected.flowWithLifecycle(lifecycle)
+            .onEach { currentItemFilterSelected ->
+                binding.btnFilterNext.isEnabled = currentItemFilterSelected
+            }.launchIn(lifecycleScope)
     }
 
     private fun moveToMain(initialFragment: String?) {
