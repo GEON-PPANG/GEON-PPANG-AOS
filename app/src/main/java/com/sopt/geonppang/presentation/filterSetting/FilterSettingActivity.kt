@@ -11,6 +11,7 @@ import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.UiState
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.setInvisibility
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,6 +54,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         binding.ivFilterArrowLeft.setOnClickListener {
             when (binding.vpFilterContainer.currentItem) {
                 0 -> {
+                    trackDeviationFromFilterView()
                     finish()
                 }
 
@@ -104,14 +106,17 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                 is UiState.Success -> {
                     when (viewModel.previousActivity.value) {
                         FilterInfoType.BAKERY_LIST -> {
+                            AmplitudeUtils.trackEvent(COMPLETE_FILTER_LIST)
                             moveToMain(BAKERY_LIST_FRAGMENT)
                         }
 
                         FilterInfoType.MY_PAGE -> {
+                            AmplitudeUtils.trackEvent(COMPLETE_FILTER_MY)
                             moveToMain(MY_PAGE_FRAGMENT)
                         }
 
                         FilterInfoType.HOME -> {
+                            AmplitudeUtils.trackEvent(COMPLETE_FILTER_HOME)
                             moveToMain(null)
                         }
 
@@ -148,10 +153,34 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         return String.format(PAGE_FORMAT, currentPage)
     }
 
+    private fun trackDeviationFromFilterView() {
+        when (viewModel.previousActivity.value) {
+            FilterInfoType.HOME -> {
+                AmplitudeUtils.trackEvent(CLICK_FILTER_BACK_HOME)
+            }
+
+            FilterInfoType.BAKERYLIST -> {
+                AmplitudeUtils.trackEvent(CLICK_FILTER_BACK_LIST)
+            }
+
+            FilterInfoType.MYPAGE -> {
+                AmplitudeUtils.trackEvent(CLICK_FILTER_BACK_MY)
+            }
+
+            else -> {}
+        }
+    }
+
     companion object {
         const val FILTER_INFO = "filterInfo"
         const val MY_PAGE_FRAGMENT = "MyPageFragment"
         const val BAKERY_LIST_FRAGMENT = "BakeryListFragment"
         const val PAGE_FORMAT = "%d/3"
+        const val CLICK_FILTER_BACK_HOME = "click_filter_back_home"
+        const val CLICK_FILTER_BACK_LIST = "click_filterback_list"
+        const val CLICK_FILTER_BACK_MY = "click_filter_back_mypage"
+        const val COMPLETE_FILTER_HOME = "complete_filter_home"
+        const val COMPLETE_FILTER_LIST = "complete_filter_list"
+        const val COMPLETE_FILTER_MY = "complete_filter_mypage"
     }
 }

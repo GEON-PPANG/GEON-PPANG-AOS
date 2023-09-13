@@ -12,6 +12,7 @@ plugins {
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def KAKAO_NATIVE_APP_KEY = properties["KAKAO_NATIVE_APP_KEY"]
 
 android {
     namespace 'com.sopt.geonppang'
@@ -27,6 +28,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "GP_BASE_URL", properties["GP_BASE_URL"]
         buildConfigField "String", "ACCESS_TOKEN", properties["ACCESS_TOKEN"]
+        buildConfigField "String", "AMPLITUDE_API_KEY", properties["AMPLITUDE_API_KEY"]
+        buildConfigField "String", "KAKAO_APP_KEY", properties["KAKAO_APP_KEY"]
+
+        manifestPlaceholders = [KAKAO_NATIVE_APP_KEY:KAKAO_NATIVE_APP_KEY]
     }
 
     buildTypes {
@@ -77,7 +82,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
     // Network
-    implementation 'com.squareup.okhttp3:okhttp-bom:4.10.0'
+    implementation 'com.squareup.okhttp3:okhttp-bom:4.11.0'
     implementation 'com.squareup.okhttp3:okhttp'
     implementation 'com.squareup.okhttp3:logging-interceptor'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -90,6 +95,12 @@ dependencies {
 
     // Splash
     implementation 'androidx.core:core-splashscreen:1.0.1'
+
+    // Amplitude
+    implementation 'com.amplitude:analytics-android:1.+'
+
+    // kakao
+    implementation "com.kakao.sdk:v2-all:2.15.0"
 }
 
 ktlint {

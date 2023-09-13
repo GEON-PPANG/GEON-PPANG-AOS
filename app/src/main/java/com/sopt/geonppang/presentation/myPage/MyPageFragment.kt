@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.myPage
+package com.sopt.geonppang.presentation.mypage
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +13,7 @@ import com.sopt.geonppang.presentation.common.WebViewActivity
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.UiState
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingFragment
 import com.sopt.geonppang.util.setInvisibility
 import com.sopt.geonppang.util.setVisibility
@@ -43,14 +44,17 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun addListeners() {
         binding.layoutMyPageBookmark.setOnClickListener {
+            AmplitudeUtils.trackEvent(CLICK_MY_STORE)
             moveToStoreBakeryList()
         }
 
         binding.layoutMyPageReview.setOnClickListener {
+            AmplitudeUtils.trackEvent(CLICK_MY_REVIEW)
             moveToMyReview()
         }
 
         binding.ivMyPageProfileRightArrow.setOnClickListener {
+            AmplitudeUtils.trackEvent(START_FILTER_MY)
             moveToFilter()
         }
 
@@ -123,5 +127,8 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         const val DIALOG = "dialog"
         const val TERMS_OF_USE = "https://sungah.notion.site/60361cdfe76a4ff0862eaaf0bdf72ab1?pvs=4"
         const val INQUIRY = "https://sungah.notion.site/14fce5b6dffc4eee9eccad2d2e7c79ef?pvs=4"
+        const val CLICK_MY_STORE = "click_mystore"
+        const val CLICK_MY_REVIEW = "click_myreview"
+        const val START_FILTER_MY = "start_filter_mypage"
     }
 }

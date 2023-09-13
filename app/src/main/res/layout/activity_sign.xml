@@ -13,7 +13,8 @@
             android:id="@+id/iv_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="177dp"
+            android:layout_marginHorizontal="121dp"
+            android:layout_marginTop="205dp"
             android:src="@drawable/img_gunbbang_splash"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -21,43 +22,39 @@
 
         <ImageView
             android:id="@+id/iv_logo_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="166dp"
             android:layout_marginTop="14dp"
+            android:adjustViewBounds="true"
             android:padding="4dp"
             android:src="@drawable/img_logo_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_logo" />
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_kakao"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing24"
+            android:layout_marginHorizontal="24dp"
             android:layout_marginTop="56dp"
             android:background="@drawable/shape_sign_kakao_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_logo_text">
 
-            <ImageView
-                android:layout_width="wrap_content"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_start_with_kakao"
+                style="@style/Widget.FullButton.Basic"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
-                android:src="@drawable/ic_kakao"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_start_with_kakao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
                 android:backgroundTint="@color/kakao_point"
+                android:drawableLeft="@drawable/ic_kakao"
                 android:paddingVertical="18dp"
                 android:text="@string/btn_kakao_sign"
+                android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.Headline"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -107,7 +104,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/view_line"
                 app:layout_constraintTop_toTopOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

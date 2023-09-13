@@ -3,6 +3,8 @@ package com.sopt.geonppang.presentation.reviewWriting
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityReviewWritingBinding
 import com.sopt.geonppang.presentation.detail.DetailActivity
@@ -11,6 +13,8 @@ import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class ReviewWritingActivity :
@@ -24,7 +28,7 @@ class ReviewWritingActivity :
 
         initLayout()
         addListeners()
-        addObservers()
+        collectData()
 
         val bakeryId = intent.getIntExtra(BAKERY_ID, -1)
         viewModel.setBakeryId(bakeryId)
@@ -64,8 +68,8 @@ class ReviewWritingActivity :
         }
     }
 
-    private fun addObservers() {
-        viewModel.reviewSuccessState.observe(this) {
+    private fun collectData() {
+        viewModel.reviewSuccessState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
                     moveToDetail()
@@ -73,12 +77,10 @@ class ReviewWritingActivity :
 
                 else -> {}
             }
-        }
-        viewModel.reviewCancelState.observe(this) { reviewCancelState ->
-            if (!reviewCancelState) {
-                moveToDetail()
-            }
-        }
+        }.launchIn(lifecycleScope)
+        viewModel.reviewCancelState.flowWithLifecycle(lifecycle).onEach { reviewCancelState ->
+            if (reviewCancelState == false) moveToDetail()
+        }.launchIn(lifecycleScope)
     }
 
     private fun showReviewSuccessDialog() {
