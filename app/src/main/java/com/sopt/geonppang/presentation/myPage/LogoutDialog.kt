@@ -4,11 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.flowWithLifecycle import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.DialogMiddleBinding
 import com.sopt.geonppang.presentation.auth.SignActivity
 import com.sopt.geonppang.presentation.type.DialogType
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -43,12 +45,14 @@ class LogoutDialog : BindingDialogFragment<DialogMiddleBinding>(R.layout.dialog_
     }
 
     private fun collectData() {
-        viewModel.isLogoutCompleted.flowWithLifecycle(lifecycle).onEach {
-            it?.let { isLogoutCompleted ->
-                if (isLogoutCompleted) {
+        viewModel.logoutState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
                     moveToSign()
                     dismiss()
                 }
+
+                else -> {}
             }
         }.launchIn(lifecycleScope)
     }

@@ -10,6 +10,7 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.DialogMiddleBinding
 import com.sopt.geonppang.presentation.auth.SignActivity
 import com.sopt.geonppang.presentation.type.DialogType
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -44,12 +45,14 @@ class WithdrawDialog : BindingDialogFragment<DialogMiddleBinding>(R.layout.dialo
     }
 
     private fun collectData() {
-        viewModel.isWithdrawCompleted.flowWithLifecycle(lifecycle).onEach {
-            it?.let { isWithdrawCompleted ->
-                if (isWithdrawCompleted) {
+        viewModel.withdrawState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
                     moveToSign()
                     dismiss()
                 }
+
+                else -> {}
             }
         }.launchIn(lifecycleScope)
     }
