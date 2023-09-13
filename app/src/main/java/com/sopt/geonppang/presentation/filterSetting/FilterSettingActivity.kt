@@ -159,11 +159,11 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                 AmplitudeUtils.trackEvent(CLICK_FILTER_BACK_HOME)
             }
 
-            FilterInfoType.BAKERYLIST -> {
+            FilterInfoType.BAKERY_LIST -> {
                 AmplitudeUtils.trackEvent(CLICK_FILTER_BACK_LIST)
             }
 
-            FilterInfoType.MYPAGE -> {
+            FilterInfoType.MY_PAGE -> {
                 AmplitudeUtils.trackEvent(CLICK_FILTER_BACK_MY)
             }
 

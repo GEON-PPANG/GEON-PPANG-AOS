@@ -8,7 +8,7 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityMainBinding
 import com.sopt.geonppang.presentation.bakeryList.BakeryListFragment
 import com.sopt.geonppang.presentation.home.HomeFragment
-import com.sopt.geonppang.presentation.myPage.MyPageFragment
+import com.sopt.geonppang.presentation.mypage.MyPageFragment
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
