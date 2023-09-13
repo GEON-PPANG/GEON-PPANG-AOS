@@ -13,6 +13,7 @@ import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.search.SearchActivity
 import com.sopt.geonppang.presentation.type.BakerySortType
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingFragment
 import com.sopt.geonppang.util.setVisibility
@@ -44,15 +45,17 @@ class BakeryListFragment :
     }
 
     private fun addListeners() {
-        binding.layoutBakeryListFilter.setOnClickListener {
+        binding.layoutBakeryListSortFilter.setOnClickListener {
             showBakeryListSortDialog()
         }
 
         binding.ivSearch.setOnClickListener {
+            AmplitudeUtils.trackEvent(CLICK_SEARCH_LIST)
             moveToSearch()
         }
 
         binding.ivBakeryListFilter.setOnClickListener {
+            AmplitudeUtils.trackEvent(START_FILTER_LIST)
             moveToFilter()
         }
         binding.includeHomeSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
@@ -70,10 +73,21 @@ class BakeryListFragment :
                 else -> {}
             }
         }.launchIn(lifecycleScope)
-        viewModel.isPersonalFilterApplied.flowWithLifecycle(lifecycle).onEach {
-            viewModel.fetchBakeryList()
-        }.launchIn(lifecycleScope)
-        viewModel.bakeryCategoryType.flowWithLifecycle(lifecycle).onEach {
+        viewModel.isPersonalFilterApplied.flowWithLifecycle(lifecycle)
+            .onEach { isPersonalFilterApplied ->
+                if (viewModel.isFilterSelected.value && isPersonalFilterApplied == false)
+                    AmplitudeUtils.trackEvent(CLICK_PERSONAL_FILTER_APPLY_OFF)
+                viewModel.fetchBakeryList()
+            }.launchIn(lifecycleScope)
+        viewModel.bakeryCategoryType.flowWithLifecycle(lifecycle).onEach { bakeryCategoryType ->
+            val selectedCategory = bakeryCategoryType.entries.filter { it.value }.map { it.key }
+            if (selectedCategory.isNotEmpty()) {
+                AmplitudeUtils.trackEventWithProperties(
+                    CLICK_CATEGORY,
+                    CATEGORY,
+                    selectedCategory
+                )
+            }
             viewModel.fetchBakeryList()
         }.launchIn(lifecycleScope)
         viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
@@ -123,5 +137,10 @@ class BakeryListFragment :
         const val FILTER_INFO = "filterInfo"
         const val VIEW_TO_VIEW = "viewToView"
         const val BAKERY_LIST_TO_SEARCH = "bakeryListToSearch"
+        const val CLICK_SEARCH_LIST = "click_search_list"
+        const val START_FILTER_LIST = "start_filter_list"
+        const val CLICK_PERSONAL_FILTER_APPLY_OFF = "click_filteroff"
+        const val CLICK_CATEGORY = "click_category"
+        const val CATEGORY = "category"
     }
 }

@@ -40,7 +40,6 @@ class BakeryListViewModel @Inject constructor(
 
     init {
         getUserFilter()
-        setInitPersonalFilterState()
     }
 
     fun setBakerySortType(bakerySortType: BakerySortType) {
@@ -89,6 +88,7 @@ class BakeryListViewModel @Inject constructor(
             getUserFilterRepository.getUserFilter()
                 .onSuccess { userFilterInfo ->
                     _isFilterSelected.value = (userFilterInfo.mainPurpose != NONE)
+                    setInitPersonalFilterState()
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
