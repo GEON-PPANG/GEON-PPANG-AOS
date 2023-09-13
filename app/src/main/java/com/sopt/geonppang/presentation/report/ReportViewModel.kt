@@ -5,11 +5,11 @@ import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.model.request.RequestReport
 import com.sopt.geonppang.domain.repository.ReportRepository
 import com.sopt.geonppang.presentation.type.ReportCategoryType
+import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,8 +19,8 @@ class ReportViewModel @Inject constructor(
     private val _reportCategory = MutableStateFlow<ReportCategoryType?>(null)
     val reportCategory get() = _reportCategory.asStateFlow()
     val reportContent = MutableStateFlow("")
-    private val _isReportCompleted = MutableStateFlow<Boolean?>(null)
-    val isReportCompleted get() = _isReportCompleted.asStateFlow()
+    private val _reportState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
+    val reportState get() = _reportState.asStateFlow()
 
     fun setReportCategory(reportCategoryType: ReportCategoryType) {
         _reportCategory.value = reportCategoryType
@@ -34,9 +34,9 @@ class ReportViewModel @Inject constructor(
                         reviewId,
                         RequestReport(content = reportContent, reportCategory = reportCategory.name)
                     ).onSuccess {
-                        _isReportCompleted.value = true
+                        _reportState.value = UiState.Success(true)
                     }.onFailure { throwable ->
-                        Timber.e(throwable.message)
+                        _reportState.value = UiState.Error(throwable.message)
                     }
                 }
             }

@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityReportBinding
 import com.sopt.geonppang.presentation.detail.DetailActivity
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,9 +55,13 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
     }
 
     private fun collectData() {
-        viewModel.isReportCompleted.flowWithLifecycle(lifecycle).onEach {
-            it?.let { isReportCompleted ->
-                if (isReportCompleted) showReportSuccessBottomDialog()
+        viewModel.reportState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
+                    showReportSuccessBottomDialog()
+                }
+
+                else -> {}
             }
         }.launchIn(lifecycleScope)
     }
