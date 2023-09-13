@@ -10,6 +10,7 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.setInvisibility
 import dagger.hilt.android.AndroidEntryPoint
@@ -65,27 +66,6 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
             when (binding.vpFilterContainer.currentItem) {
                 2 -> {
                     viewModel.setUserFilter()
-
-                    when (viewModel.previousActivity.value) {
-                        FilterInfoType.BAKERY_LIST -> {
-                            moveToMain(BAKERY_LIST_FRAGMENT)
-                        }
-
-                        FilterInfoType.MY_PAGE -> {
-                            moveToMain(MY_PAGE_FRAGMENT)
-                        }
-
-                        FilterInfoType.HOME -> {
-                            moveToMain(null)
-                        }
-
-                        else -> {
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.flags =
-                                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                            startActivity(intent)
-                        }
-                    }
                 }
 
                 else -> {
@@ -118,6 +98,35 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
             .onEach { isFilterBtnEnabled ->
                 binding.btnFilterNext.isEnabled = isFilterBtnEnabled
             }.launchIn(lifecycleScope)
+
+        viewModel.selectedFilterState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
+                    when (viewModel.previousActivity.value) {
+                        FilterInfoType.BAKERY_LIST -> {
+                            moveToMain(BAKERY_LIST_FRAGMENT)
+                        }
+
+                        FilterInfoType.MY_PAGE -> {
+                            moveToMain(MY_PAGE_FRAGMENT)
+                        }
+
+                        FilterInfoType.HOME -> {
+                            moveToMain(null)
+                        }
+
+                        else -> {
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(intent)
+                        }
+                    }
+                }
+
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun moveToMain(initialFragment: String?) {
