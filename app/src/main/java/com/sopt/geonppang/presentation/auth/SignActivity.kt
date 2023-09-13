@@ -3,7 +3,11 @@ package com.sopt.geonppang.presentation.auth
 import android.content.Intent
 import com.sopt.geonppang.BuildConfig
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.viewModels
+import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
+import com.kakao.sdk.common.util.Utility
 import com.sopt.geonppang.R
 import com.sopt.geonppang.data.service.KakaoAuthService
 import com.sopt.geonppang.databinding.ActivitySignBinding
@@ -17,6 +21,7 @@ class SignActivity :
     BindingActivity<ActivitySignBinding>(R.layout.activity_sign) {
     @Inject
     lateinit var kakaoAuthService: KakaoAuthService
+    private val kakoauthViewModel: KakaoAuthViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         KakaoSdk.init(this, BuildConfig.KAKAO_APP_KEY)
@@ -25,7 +30,7 @@ class SignActivity :
 
     private fun addListeners() {
         binding.btnStartWithKakao.setOnClickListener {
-            kakaoAuthService.loginKakao()
+            kakaoAuthService.startKakaoLogin(kakoauthViewModel.kakaoLoginCallback)
         }
         binding.tvLoginWithEmail.setOnClickListener {
             moveToLogin()
