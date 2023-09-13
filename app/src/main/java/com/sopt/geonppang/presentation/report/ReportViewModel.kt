@@ -1,13 +1,13 @@
 package com.sopt.geonppang.presentation.report
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.model.request.RequestReport
 import com.sopt.geonppang.domain.repository.ReportRepository
 import com.sopt.geonppang.presentation.type.ReportCategoryType
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -16,15 +16,11 @@ import javax.inject.Inject
 class ReportViewModel @Inject constructor(
     private val reportRepository: ReportRepository
 ) : ViewModel() {
-    private val _reportCategory: MutableLiveData<ReportCategoryType?> = MutableLiveData()
-    val reportCategory: LiveData<ReportCategoryType?> = _reportCategory
-    val reportContent = MutableLiveData("")
-    private val _isReportCompleted = MutableLiveData<Boolean>()
-    val isReportCompleted: LiveData<Boolean> = _isReportCompleted
-
-    private fun setIsReportCompleted(value: Boolean) {
-        _isReportCompleted.value = value
-    }
+    private val _reportCategory = MutableStateFlow<ReportCategoryType?>(null)
+    val reportCategory get() = _reportCategory.asStateFlow()
+    val reportContent = MutableStateFlow("")
+    private val _isReportCompleted = MutableStateFlow<Boolean?>(null)
+    val isReportCompleted get() = _isReportCompleted.asStateFlow()
 
     fun setReportCategory(reportCategoryType: ReportCategoryType) {
         _reportCategory.value = reportCategoryType
@@ -32,13 +28,13 @@ class ReportViewModel @Inject constructor(
 
     fun reportReview(reviewId: Int) {
         viewModelScope.launch {
-            reportContent.value?.let { reportContent ->
+            reportContent.value.let { reportContent ->
                 reportCategory.value?.let { reportCategory ->
                     reportRepository.reportReview(
                         reviewId,
                         RequestReport(content = reportContent, reportCategory = reportCategory.name)
-                    ).onSuccess { responseReport ->
-                        setIsReportCompleted(true)
+                    ).onSuccess {
+                        _isReportCompleted.value = true
                     }.onFailure { throwable ->
                         Timber.e(throwable.message)
                     }

@@ -2,12 +2,16 @@ package com.sopt.geonppang.presentation.report
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityReportBinding
 import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_report) {
@@ -22,7 +26,7 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
         reviewId = intent.getIntExtra(DetailActivity.REVIEW_ID, -1)
 
         addListeners()
-        addObservers()
+        collectData()
     }
 
     private fun addListeners() {
@@ -49,12 +53,12 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
         }
     }
 
-    private fun addObservers() {
-        viewModel.isReportCompleted.observe(this) { isReportCompleted ->
-            if (isReportCompleted) {
-                showReportSuccessBottomDialog()
+    private fun collectData() {
+        viewModel.isReportCompleted.flowWithLifecycle(lifecycle).onEach {
+            it?.let { isReportCompleted ->
+                if (isReportCompleted) showReportSuccessBottomDialog()
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
     private fun showReportSuccessBottomDialog() {
