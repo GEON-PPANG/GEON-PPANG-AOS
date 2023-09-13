@@ -1,13 +1,10 @@
 package com.sopt.geonppang.presentation.auth
 
 import android.content.Intent
-import com.sopt.geonppang.BuildConfig
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
-import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
-import com.kakao.sdk.common.util.Utility
+import com.sopt.geonppang.BuildConfig
 import com.sopt.geonppang.R
 import com.sopt.geonppang.data.service.KakaoAuthService
 import com.sopt.geonppang.databinding.ActivitySignBinding

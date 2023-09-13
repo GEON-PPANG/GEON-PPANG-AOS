@@ -6,7 +6,6 @@ import com.sopt.geonppang.data.model.response.ResponseSignup
 import com.sopt.geonppang.data.model.response.ResponseWithdraw
 import retrofit2.http.Body
 import retrofit2.http.DELETE
-import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface AuthService {

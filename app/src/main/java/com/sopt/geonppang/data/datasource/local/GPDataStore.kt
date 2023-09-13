@@ -60,5 +60,4 @@ class GPDataStore @Inject constructor(@ApplicationContext context: Context) {
         const val IS_LOGIN = "IsLogin"
         const val NICKNAME = "nickname"
     }
-
 }
