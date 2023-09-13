@@ -8,6 +8,7 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.setInvisibility
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,6 +49,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         binding.ivFilterArrowLeft.setOnClickListener {
             when (binding.vpFilterContainer.currentItem) {
                 0 -> {
+                    trackDeviationFromFilterView()
                     finish()
                 }
 
@@ -64,6 +66,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
 
                     when (viewModel.previousActivity.value) {
                         FilterInfoType.BAKERYLIST -> {
+                            AmplitudeUtils.trackEvent(COMPLETE_FILTER_LIST)
                             val intent = Intent(this, MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                             intent.putExtra(BAKERY_LIST_FRAGMENT, BAKERY_LIST_FRAGMENT)
@@ -71,6 +74,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                         }
 
                         FilterInfoType.MYPAGE -> {
+                            AmplitudeUtils.trackEvent(COMPLETE_FILTER_MY)
                             val intent = Intent(this, MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                             intent.putExtra(MYPAGE_FRAGMENT, MYPAGE_FRAGMENT)
@@ -78,6 +82,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                         }
 
                         FilterInfoType.HOME -> {
+                            AmplitudeUtils.trackEvent(COMPLETE_FILTER_HOME)
                             val intent = Intent(this, MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                             startActivity(intent)
@@ -147,10 +152,34 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         return String.format(PAGE_FORMAT, currentPage)
     }
 
+    private fun trackDeviationFromFilterView() {
+        when (viewModel.previousActivity.value) {
+            FilterInfoType.HOME -> {
+                AmplitudeUtils.trackEvent(CLICK_FILTER_BACK_HOME)
+            }
+
+            FilterInfoType.BAKERYLIST -> {
+                AmplitudeUtils.trackEvent(CLICK_FILTER_BACK_LIST)
+            }
+
+            FilterInfoType.MYPAGE -> {
+                AmplitudeUtils.trackEvent(CLICK_FILTER_BACK_MY)
+            }
+
+            else -> {}
+        }
+    }
+
     companion object {
         const val FILTER_INFO = "filterInfo"
         const val MYPAGE_FRAGMENT = "MyPageFragment"
         const val BAKERY_LIST_FRAGMENT = "BakeryListFragment"
         const val PAGE_FORMAT = "%d/3"
+        const val CLICK_FILTER_BACK_HOME = "click_filter_back_home"
+        const val CLICK_FILTER_BACK_LIST = "click_filterback_list"
+        const val CLICK_FILTER_BACK_MY = "click_filter_back_mypage"
+        const val COMPLETE_FILTER_HOME = "complete_filter_home"
+        const val COMPLETE_FILTER_LIST = "complete_filter_list"
+        const val COMPLETE_FILTER_MY = "complete_filter_mypage"
     }
 }

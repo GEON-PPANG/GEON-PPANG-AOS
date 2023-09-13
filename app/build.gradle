@@ -12,6 +12,7 @@ plugins {
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def KAKAO_NATIVE_APP_KEY = properties["KAKAO_NATIVE_APP_KEY"]
 
 android {
     namespace 'com.sopt.geonppang'
@@ -28,6 +29,9 @@ android {
         buildConfigField "String", "GP_BASE_URL", properties["GP_BASE_URL"]
         buildConfigField "String", "ACCESS_TOKEN", properties["ACCESS_TOKEN"]
         buildConfigField "String", "AMPLITUDE_API_KEY", properties["AMPLITUDE_API_KEY"]
+        buildConfigField "String", "KAKAO_APP_KEY", properties["KAKAO_APP_KEY"]
+
+        manifestPlaceholders = [KAKAO_NATIVE_APP_KEY:KAKAO_NATIVE_APP_KEY]
     }
 
     buildTypes {
@@ -94,6 +98,9 @@ dependencies {
 
     // Amplitude
     implementation 'com.amplitude:analytics-android:1.+'
+
+    // kakao
+    implementation "com.kakao.sdk:v2-all:2.15.0"
 }
 
 ktlint {
