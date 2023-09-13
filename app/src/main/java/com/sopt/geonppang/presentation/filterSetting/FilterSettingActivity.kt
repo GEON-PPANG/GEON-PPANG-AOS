@@ -89,10 +89,6 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                 }
 
                 else -> {
-                    if (binding.vpFilterContainer.currentItem == 1) {
-                        viewModel.setIsLastPage(true)
-                    }
-
                     binding.vpFilterContainer.currentItem++
                 }
             }

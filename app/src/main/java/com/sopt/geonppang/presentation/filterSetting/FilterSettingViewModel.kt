@@ -28,8 +28,6 @@ class FilterSettingViewModel @Inject constructor(
     val selectedFilterState get() = _selectedFilterState.asStateFlow()
     private val _previousActivity = MutableStateFlow<FilterInfoType?>(null)
     val previousActivity get() = _previousActivity.asStateFlow()
-    private val _isLastPage = MutableStateFlow(false)
-    val isLastPage get() = _isLastPage.asStateFlow()
     private val _currentPage = MutableStateFlow<Int?>(null)
     val currentPage get() = _currentPage.asStateFlow()
     private val _mainPurposeType = MutableStateFlow<MainPurposeType?>(null)
@@ -67,10 +65,6 @@ class FilterSettingViewModel @Inject constructor(
 
     fun setPreviousActivity(filterInfoType: FilterInfoType) {
         _previousActivity.value = filterInfoType
-    }
-
-    fun setIsLastPage(boolean: Boolean) {
-        _isLastPage.value = boolean
     }
 
     fun setCurrentPage(position: Int) {
