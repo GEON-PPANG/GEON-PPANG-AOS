@@ -96,20 +96,6 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
     }
 
     private fun collectData() {
-        viewModel.mainPurposeType.flowWithLifecycle(lifecycle).onEach { mainPurposeType ->
-            binding.btnFilterNext.isEnabled = mainPurposeType != null
-        }.launchIn(lifecycleScope)
-
-        viewModel.isBreadFilterTypeSelected.flowWithLifecycle(lifecycle)
-            .onEach { isUserBreadTypeSelected ->
-                binding.btnFilterNext.isEnabled = isUserBreadTypeSelected
-            }.launchIn(lifecycleScope)
-
-        viewModel.isNutrientFilterTypeSelected.flowWithLifecycle(lifecycle)
-            .onEach { isUserNutrientFilterTypeSelected ->
-                binding.btnFilterNext.isEnabled = isUserNutrientFilterTypeSelected
-            }.launchIn(lifecycleScope)
-
         viewModel.currentPage.flowWithLifecycle(lifecycle).onEach { currentPage ->
             currentPage?.let {
                 binding.tvFilterPageNumber.text = setPageText(it + 1)
@@ -128,9 +114,9 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
             }
         }.launchIn(lifecycleScope)
 
-        viewModel.isCurrentPageFilterSelected.flowWithLifecycle(lifecycle)
-            .onEach { currentItemFilterSelected ->
-                binding.btnFilterNext.isEnabled = currentItemFilterSelected
+        viewModel.isFilterBtnEnabled.flowWithLifecycle(lifecycle)
+            .onEach { isFilterBtnEnabled ->
+                binding.btnFilterNext.isEnabled = isFilterBtnEnabled
             }.launchIn(lifecycleScope)
     }
 

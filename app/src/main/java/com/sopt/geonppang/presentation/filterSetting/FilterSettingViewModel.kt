@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -40,9 +40,6 @@ class FilterSettingViewModel @Inject constructor(
             BreadFilterType.SUGARFREE to false
         )
     )
-    val isBreadFilterTypeSelected: StateFlow<Boolean> = breadFilterType.map { breadTypeMap ->
-        breadTypeMap.values.any { it }
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
     val nutrientFilterType: MutableStateFlow<Map<NutrientFilterType, Boolean>> = MutableStateFlow(
         mapOf(
             NutrientFilterType.NUTRIENT to false,
@@ -50,15 +47,16 @@ class FilterSettingViewModel @Inject constructor(
             NutrientFilterType.NOT to false
         )
     )
-    val isNutrientFilterTypeSelected: StateFlow<Boolean> =
-        nutrientFilterType.map { nutrientFilterType ->
-            nutrientFilterType.values.any { it }
-        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
-    val isCurrentPageFilterSelected: StateFlow<Boolean> = _currentPage.map { currentPage ->
+    val isFilterBtnEnabled: StateFlow<Boolean> = combine(
+        currentPage,
+        mainPurposeType,
+        breadFilterType,
+        nutrientFilterType
+    ) { currentPage, mainPurposeType, breadFilterType, nutrientFilterType ->
         when (currentPage) {
-            0 -> mainPurposeType.value != null
-            1 -> breadFilterType.value.any { it.value }
-            2 -> nutrientFilterType.value.any { it.value }
+            0 -> mainPurposeType != null
+            1 -> breadFilterType.any { it.value }
+            2 -> nutrientFilterType.any { it.value }
             else -> false
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
