@@ -30,8 +30,13 @@ class GPDataStore @Inject constructor(@ApplicationContext context: Context) {
         set(value) = dataStore.edit { putString(NICKNAME, value) }
         get() = dataStore.getString(NICKNAME, "") ?: ""
 
+    var isLogin: Boolean
+        set(value) = dataStore.edit { putBoolean(IS_LOGIN, value) }
+        get() = dataStore.getBoolean(IS_LOGIN, false)
+
     companion object {
         const val FILE_NAME = "GunppangSharedPreferences"
         const val NICKNAME = "nickname"
+        const val IS_LOGIN = "Islogin"
     }
 }
