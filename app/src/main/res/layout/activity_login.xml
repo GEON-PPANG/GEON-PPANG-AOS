@@ -162,6 +162,7 @@
             android:layout_marginBottom="24dp"
             android:backgroundTint="@{viewModel.loginPassword.length() > 0 ? @color/main_2 : @color/gray_200}"
             android:enabled="@{viewModel.loginPassword.length() > 0}"
+            android:onClick="@{() -> viewModel.login()}"
             android:paddingVertical="18dp"
             android:text="@string/login_text_phrase"
             android:textAppearance="@style/TextAppearance.BodyM1"
