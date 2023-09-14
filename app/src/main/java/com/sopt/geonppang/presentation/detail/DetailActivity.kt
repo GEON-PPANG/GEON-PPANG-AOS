@@ -205,6 +205,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         const val REVIEW_ID = "reviewId"
         const val FIRST_POSITION = 0
         const val VIEW_DETAIL_PAGE_AT = "view_detailpage_at"
+        const val SOURCE = "source"
         const val CLICK_NAVIGATION = "click_navigation"
         const val CLICK_MY_STORE = "click_mystore"
     }

@@ -9,6 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentHomeBinding
 import com.sopt.geonppang.presentation.detail.DetailActivity
+import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
+import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETAIL_PAGE_AT
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.search.SearchActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
@@ -96,6 +98,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     }
 
     private fun moveToDetail(activityName: String, bakeryId: Int) {
+        AmplitudeUtils.trackEventWithProperties(VIEW_DETAIL_PAGE_AT, SOURCE, HOME)
         val intent = Intent(requireContext(), DetailActivity::class.java)
         intent.putExtra(ACTIVITY_NAME, activityName)
         intent.putExtra(BAKERY_ID, bakeryId)
@@ -117,5 +120,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         const val HOME_TO_SEARCH = "homeToSearch"
         const val CLICK_SEARCH_HOME = "click_search_home"
         const val START_FILTER_HOME = "start_filter_home"
+        const val HOME = "HOME"
     }
 }
