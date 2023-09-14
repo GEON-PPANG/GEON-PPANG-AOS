@@ -27,5 +27,5 @@ interface AuthService {
     @POST("auth/login")
     suspend fun login(
         @Body requestLogin: RequestLogin
-    ) : Response<Unit>
+    ): Response<Unit>
 }

@@ -12,5 +12,5 @@ class AuthDataSource @Inject constructor(
 ) {
     suspend fun withdraw(): ResponseWithdraw = authService.withdraw()
     suspend fun logout(): ResponseLogout = authService.logout()
-    suspend fun login(requestLogin: RequestLogin) : Response<Unit> = authService.login(requestLogin)
+    suspend fun login(requestLogin: RequestLogin): Response<Unit> = authService.login(requestLogin)
 }

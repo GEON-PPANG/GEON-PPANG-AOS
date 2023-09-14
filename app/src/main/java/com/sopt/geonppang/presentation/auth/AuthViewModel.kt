@@ -9,8 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(
-) : ViewModel() {
+class AuthViewModel @Inject constructor() : ViewModel() {
     val inputEmail = MutableLiveData("")
     val inputPassword = MutableLiveData("")
     val inputPasswordCheck = MutableLiveData("")
