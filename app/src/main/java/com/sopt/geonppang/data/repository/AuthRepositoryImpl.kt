@@ -1,6 +1,7 @@
 package com.sopt.geonppang.data.repository
 
 import com.sopt.geonppang.data.datasource.remote.AuthDataSource
+import com.sopt.geonppang.data.model.request.RequestLogin
 import com.sopt.geonppang.data.model.response.ResponseLogout
 import com.sopt.geonppang.data.model.response.ResponseWithdraw
 import com.sopt.geonppang.domain.repository.AuthRepository
@@ -16,6 +17,6 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun logout(): Result<ResponseLogout> =
         runCatching { authDataSource.logout() }
 
-    override suspend fun login(): Result<Response<Unit>> =
-        runCatching { authDataSource.login() }
+    override suspend fun login(responseLogin: RequestLogin): Result<Response<Unit>> =
+        runCatching { authDataSource.login(responseLogin) }
 }

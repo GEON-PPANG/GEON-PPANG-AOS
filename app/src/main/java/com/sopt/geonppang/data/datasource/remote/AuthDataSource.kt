@@ -1,5 +1,6 @@
 package com.sopt.geonppang.data.datasource.remote
 
+import com.sopt.geonppang.data.model.request.RequestLogin
 import com.sopt.geonppang.data.model.response.ResponseLogout
 import com.sopt.geonppang.data.model.response.ResponseWithdraw
 import com.sopt.geonppang.data.service.AuthService
@@ -11,5 +12,5 @@ class AuthDataSource @Inject constructor(
 ) {
     suspend fun withdraw(): ResponseWithdraw = authService.withdraw()
     suspend fun logout(): ResponseLogout = authService.logout()
-    suspend fun login() : Response<Unit> = authService.login()
+    suspend fun login(requestLogin: RequestLogin) : Response<Unit> = authService.login(requestLogin)
 }

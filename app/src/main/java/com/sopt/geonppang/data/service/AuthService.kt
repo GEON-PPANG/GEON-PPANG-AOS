@@ -1,5 +1,6 @@
 package com.sopt.geonppang.data.service
 
+import com.sopt.geonppang.data.model.request.RequestLogin
 import com.sopt.geonppang.data.model.request.RequestSignup
 import com.sopt.geonppang.data.model.response.ResponseLogout
 import com.sopt.geonppang.data.model.response.ResponseSignup
@@ -24,5 +25,7 @@ interface AuthService {
     suspend fun logout(): ResponseLogout
 
     @POST("auth/login")
-    suspend fun login() : Response<Unit>
+    suspend fun login(
+        @Body requestLogin: RequestLogin
+    ) : Response<Unit>
 }
