@@ -24,13 +24,13 @@ import kotlinx.coroutines.flow.onEach
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModels()
 
-    lateinit var bestBakeryAdapter: BestBakeryAdapter
-    lateinit var bestReviewAdapter: BestReviewAdapter
+    private lateinit var bestBakeryAdapter: BestBakeryAdapter
+    private lateinit var bestReviewAdapter: BestReviewAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
         initLayout()
         addListeners()
