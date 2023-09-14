@@ -3,10 +3,8 @@ package com.sopt.geonppang.presentation.detail
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ItemDetailBakeryInfoBinding
 import com.sopt.geonppang.domain.model.BakeryInfo
-import com.sopt.geonppang.util.CustomSnackbar
 
 class DetailBakeryInfoAdapter(
     private val moveToWebPage: (String) -> Unit
@@ -21,12 +19,6 @@ class DetailBakeryInfoAdapter(
         ) {
             with(binding) {
                 binding.bakeryInfo = bakeryInfo
-                ivItemDetailBakeryInfoBookmark.setOnClickListener {
-                    CustomSnackbar.makeSnackbar(
-                        it,
-                        it.context.getString(R.string.snackbar_save)
-                    )
-                }
 
                 tvItemDetailBakeryInfoHomepage.setOnClickListener {
                     moveToWebPage(bakeryInfo.homepageUrl)
