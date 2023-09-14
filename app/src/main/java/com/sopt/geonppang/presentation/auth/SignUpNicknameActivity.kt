@@ -28,8 +28,7 @@ class SignUpNicknameActivity :
         }
 
         binding.btnDoubleCheck.setOnClickListener {
-            val bottomSheetDialog = SignUpNicknameBottomSheetDialog()
-            bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
+            showNicknameSuccessDialog()
         }
 
         binding.imgBackArrow.setOnClickListener {
@@ -38,12 +37,17 @@ class SignUpNicknameActivity :
 
         binding.btnNext.setOnClickListener {
             val intent = Intent(this, WelcomeActivity::class.java)
-            intent.putExtra(NICKNAME, viewModel.nickname.value)
+            intent.putExtra(NICKNAME, viewModel.inputNickname.value)
             startActivity(intent)
         }
     }
 
+    private fun showNicknameSuccessDialog() {
+        SignUpNicknameBottomSheetDialog().show(supportFragmentManager, NICKNAME_AVAILIABLE)
+    }
+
     companion object {
+        const val NICKNAME_AVAILIABLE = "nicknameAvailiable"
         const val NICKNAME = "nickName"
     }
 }
