@@ -25,6 +25,15 @@ class GPDataStore @Inject constructor(@ApplicationContext context: Context) {
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
+
+    // TODO 자료형 PlatformType으로 수정
+    var platformType: String
+        set(value) = dataStore.edit { putString(PLATFORM_TYPE, value) }
+        get() = dataStore.getString(
+            PLATFORM_TYPE,
+            ""
+        ) ?: ""
+
     var accessToken: String
         set(value) = dataStore.edit { putString(ACCESS_TOKEN, value) }
         get() = dataStore.getString(
@@ -55,6 +64,7 @@ class GPDataStore @Inject constructor(@ApplicationContext context: Context) {
 
     companion object {
         const val FILE_NAME = "Gpdatastore"
+        const val PLATFORM_TYPE = "platforType"
         const val ACCESS_TOKEN = "AccessToken"
         const val REFRESH_TOKEN = "RefreshToken"
         const val IS_LOGIN = "IsLogin"
