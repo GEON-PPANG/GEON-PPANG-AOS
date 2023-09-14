@@ -1,20 +1,35 @@
 package com.sopt.geonppang.presentation.auth
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.datasource.local.GPDataStore
+import com.sopt.geonppang.data.model.request.RequestSignup
+import com.sopt.geonppang.domain.repository.AuthRepository
+import com.sopt.geonppang.presentation.type.AuthRoleType
+import com.sopt.geonppang.presentation.type.PlatformType
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(private val gpDataStore: GPDataStore) : ViewModel() {
+class AuthViewModel @Inject constructor(
+    private val gpDataStore: GPDataStore,
+    private val authRepository: AuthRepository
+) : ViewModel() {
     val email = MutableLiveData("")
     val password = MutableLiveData("")
     val password_check = MutableLiveData("")
     val nickname = MutableLiveData("")
+    private val _authRoleType = MutableStateFlow<AuthRoleType?>(null)
+    val authRoleType get() = _authRoleType.asStateFlow()
 
     val isValidEmail: LiveData<Boolean> = email.map { email ->
         email.matches(Regex(EMAIL_PATTERN))
@@ -67,9 +82,37 @@ class AuthViewModel @Inject constructor(private val gpDataStore: GPDataStore) : 
         return isValidNickname.value == true
     }
 
+    // 현재 소셜 회원가입만 고려해 email, password, nickname을 임의로 ""로 해놓았습니다.
+    fun singUp(platformType: PlatformType, platformToken: String) {
+        gpDataStore.platformType = PlatformType.KAKAO.name
+        viewModelScope.launch {
+            authRepository.signup(
+                platformToken = platformToken,
+                RequestSignup(
+                    platformType.name,
+                    "",
+                    "",
+                    ""
+                )
+            )
+                .onSuccess { signUpResponse ->
+                    val responseBody = signUpResponse.body()?.toSignUpInfo()
+                    val responseHeader = signUpResponse.headers()
+                    _authRoleType.value =
+                        if (responseBody?.role == AuthRoleType.GUEST.name) AuthRoleType.GUEST else AuthRoleType.USER
+                    gpDataStore.accessToken = responseHeader[AUTHORIZATION].toString()
+                    Log.d("header", responseHeader[AUTHORIZATION].toString())
+                }
+                .onFailure { throwable ->
+                    Timber.e(throwable.message)
+                }
+        }
+    }
+
     companion object {
         const val EMAIL_PATTERN = "^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+\$"
         const val NICKNAME_PATTERN = "^[\\sㄱ-ㅎ가-힣0-9a-zA-Z]{1,8}\$"
         const val PASSWORD_PATTERN = "^(?=.*[A-Za-z])(?=.*[0-9]).{7,25}.\$"
+        const val AUTHORIZATION = "Authorization"
     }
 }
