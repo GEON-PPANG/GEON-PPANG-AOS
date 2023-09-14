@@ -75,17 +75,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun addListeners() {
         binding.ivDetailArrowLeft.setOnClickListener {
-            val previousActivityName = intent.getStringExtra(ACTIVITY_NAME)
-
-            when (previousActivityName) {
-                MAIN -> {
-                    moveToMain()
-                }
-
-                else -> {
-                    finish()
-                }
-            }
+            finish()
         }
 
         binding.btnDetailCrateReview.setOnClickListener {

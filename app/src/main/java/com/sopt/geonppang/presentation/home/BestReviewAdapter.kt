@@ -10,7 +10,7 @@ import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.ItemDiffCallback
 
 class BestReviewAdapter(
-    private val moveToDetail: (String, Int) -> Unit,
+    private val moveToDetail: (Int) -> Unit,
 ) : ListAdapter<BestReview, BestReviewAdapter.ReviewViewHolder>(
     ItemDiffCallback<BestReview>(
         onItemsTheSame = { old, new -> old.bakeryId == new.bakeryId },
@@ -23,14 +23,14 @@ class BestReviewAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(
             review: BestReview,
-            moveToDetail: (String, Int) -> Unit,
+            moveToDetail: (Int) -> Unit,
         ) {
             binding.review = review
             binding.executePendingBindings()
 
             binding.root.setOnClickListener {
                 AmplitudeUtils.trackEvent(CLICK_RECOMMEND_REVIEW)
-                moveToDetail(MAIN, review.bakeryId)
+                moveToDetail(review.bakeryId)
             }
         }
     }
@@ -46,7 +46,6 @@ class BestReviewAdapter(
     }
 
     companion object {
-        const val MAIN = "mainActivity"
         const val CLICK_RECOMMEND_REVIEW = "click_recommend_review"
     }
 }
