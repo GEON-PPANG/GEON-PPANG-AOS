@@ -18,6 +18,7 @@ import com.sopt.geonppang.presentation.common.WebViewActivity
 import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
 import com.sopt.geonppang.presentation.report.ReportActivity
 import com.sopt.geonppang.presentation.reviewWriting.ReviewWritingActivity
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.ChipFactory
 import com.sopt.geonppang.util.CustomSnackbar
 import com.sopt.geonppang.util.binding.BindingActivity
@@ -98,12 +99,14 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
         binding.ivDetailMap.setOnClickListener {
             viewModel.bakeryInfo.value?.let { bakeryInfo ->
+                AmplitudeUtils.trackEvent(CLICK_NAVIGATION)
                 moveToWebBrowser(bakeryInfo.mapUrl)
             }
         }
 
         binding.ivDetailBottomAppBarBookmark.setOnClickListener {
             viewModel.bookMarkInfo.value?.isBookMarked?.let { isBookMarked ->
+                AmplitudeUtils.trackEvent(CLICK_MY_STORE)
                 viewModel.doBookMark(bakeryId, !isBookMarked)
 
                 if (!isBookMarked) {
@@ -201,5 +204,8 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         const val MAIN = "mainActivity"
         const val REVIEW_ID = "reviewId"
         const val FIRST_POSITION = 0
+        const val VIEW_DETAIL_PAGE_AT = "view_detailpage_at"
+        const val CLICK_NAVIGATION = "click_navigation"
+        const val CLICK_MY_STORE = "click_mystore"
     }
 }
