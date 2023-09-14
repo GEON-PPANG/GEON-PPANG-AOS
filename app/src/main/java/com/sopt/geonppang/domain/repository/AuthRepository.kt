@@ -8,5 +8,5 @@ import retrofit2.Response
 interface AuthRepository {
     suspend fun withdraw(): Result<ResponseWithdraw>
     suspend fun logout(): Result<ResponseLogout>
-    suspend fun login(requestLogin: RequestLogin) : Result<Response<Unit>>
+    suspend fun login(requestLogin: RequestLogin): Result<Response<Unit>>
 }

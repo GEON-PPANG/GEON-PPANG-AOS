@@ -29,7 +29,7 @@ class LogInViewModel @Inject constructor(
                 .onSuccess {
                     gpDataStore.isLogin = true
                     _loginState.value = true
-                    //TODO 응답 코드 200 반환 받기 구현 예정
+                    // TODO 응답 코드 200 반환 받기 구현 예정
                 }.onFailure { throwable ->
                     _loginState.value = false
                     Timber.tag("로그인 실패").e(throwable.message)

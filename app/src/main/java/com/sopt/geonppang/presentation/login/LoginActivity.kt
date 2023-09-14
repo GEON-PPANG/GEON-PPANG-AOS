@@ -60,7 +60,6 @@ class LoginActivity :
         LoginFailBottomDialogFragment().show(supportFragmentManager, LOGIN_FAIL)
     }
 
-
     private fun moveToHome() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
