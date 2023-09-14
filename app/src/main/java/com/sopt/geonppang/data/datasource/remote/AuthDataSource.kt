@@ -5,13 +5,14 @@ import com.sopt.geonppang.data.model.response.ResponseLogout
 import com.sopt.geonppang.data.model.response.ResponseSignup
 import com.sopt.geonppang.data.model.response.ResponseWithdraw
 import com.sopt.geonppang.data.service.AuthService
+import retrofit2.Response
 import javax.inject.Inject
 
 class AuthDataSource @Inject constructor(
     private val authService: AuthService,
 ) {
-    suspend fun postSignup(requestSignup: RequestSignup): ResponseSignup =
-        authService.postSignup(requestSignup)
+    suspend fun postSignup(platformToken: String, requestSignup: RequestSignup): Response<ResponseSignup> =
+        authService.postSignup(platformToken, requestSignup)
 
     suspend fun withdraw(): ResponseWithdraw = authService.withdraw()
     suspend fun logout(): ResponseLogout = authService.logout()
