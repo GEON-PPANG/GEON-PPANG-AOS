@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.sopt.geonppang.presentation.mypage.MyPageViewModel" />
+            type="com.sopt.geonppang.presentation.myPage.MyPageViewModel" />
 
     </data>
 

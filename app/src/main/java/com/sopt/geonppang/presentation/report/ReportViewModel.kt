@@ -1,46 +1,42 @@
 package com.sopt.geonppang.presentation.report
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.model.request.RequestReport
 import com.sopt.geonppang.domain.repository.ReportRepository
 import com.sopt.geonppang.presentation.type.ReportCategoryType
+import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ReportViewModel @Inject constructor(
     private val reportRepository: ReportRepository
 ) : ViewModel() {
-    private val _reportCategory: MutableLiveData<ReportCategoryType?> = MutableLiveData()
-    val reportCategory: LiveData<ReportCategoryType?> = _reportCategory
-    val reportContent = MutableLiveData("")
-    private val _isReportCompleted = MutableLiveData<Boolean>()
-    val isReportCompleted: LiveData<Boolean> = _isReportCompleted
+    private val _reportCategory = MutableStateFlow<ReportCategoryType?>(null)
+    val reportCategory get() = _reportCategory.asStateFlow()
+    val reportContent = MutableStateFlow("")
+    private val _reportState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
+    val reportState get() = _reportState.asStateFlow()
 
     fun setReportCategory(reportCategoryType: ReportCategoryType) {
         _reportCategory.value = reportCategoryType
     }
 
-    private fun setIsReportCompleted(value: Boolean) {
-        _isReportCompleted.value = value
-    }
-
     fun reportReview(reviewId: Int) {
         viewModelScope.launch {
-            reportContent.value?.let { reportContent ->
+            reportContent.value.let { reportContent ->
                 reportCategory.value?.let { reportCategory ->
                     reportRepository.reportReview(
                         reviewId,
                         RequestReport(content = reportContent, reportCategory = reportCategory.name)
-                    ).onSuccess { responseReport ->
-                        setIsReportCompleted(true)
+                    ).onSuccess {
+                        _reportState.value = UiState.Success(true)
                     }.onFailure { throwable ->
-                        Timber.e(throwable.message)
+                        _reportState.value = UiState.Error(throwable.message)
                     }
                 }
             }

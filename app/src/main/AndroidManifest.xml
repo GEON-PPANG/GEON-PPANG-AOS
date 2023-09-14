@@ -44,12 +44,12 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".presentation.mypage.MyReviewActivity"
+            android:name=".presentation.myPage.MyReviewActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".presentation.mypage.MyBookMarksActivity"
+            android:name=".presentation.myPage.MyBookMarksActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />

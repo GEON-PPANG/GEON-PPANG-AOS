@@ -11,8 +11,8 @@
         android:icon="@drawable/selector_menu_storelist_icon"
         android:title="건빵집리스트" />
     <item
-        android:id="@+id/menu_mypage"
+        android:id="@+id/menu_my_page"
         android:enabled="true"
-        android:icon="@drawable/selector_menu_mypage_icon"
+        android:icon="@drawable/selector_menu_my_page_icon"
         android:title="마이페이지" />
 </menu>

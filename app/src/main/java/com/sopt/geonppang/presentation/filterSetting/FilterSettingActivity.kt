@@ -3,15 +3,20 @@ package com.sopt.geonppang.presentation.filterSetting
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.setInvisibility
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.activity_filter) {
@@ -26,7 +31,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
 
         initLayout()
         addListeners()
-        addObservers()
+        collectData()
     }
 
     private fun initLayout() {
@@ -38,7 +43,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                 ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    viewModel.setCurrentItem(position)
+                    viewModel.setCurrentPage(position)
                 }
             })
 
@@ -63,29 +68,56 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
             when (binding.vpFilterContainer.currentItem) {
                 2 -> {
                     viewModel.setUserFilter()
+                }
 
+                else -> {
+                    binding.vpFilterContainer.currentItem++
+                }
+            }
+        }
+    }
+
+    private fun collectData() {
+        viewModel.currentPage.flowWithLifecycle(lifecycle).onEach { currentPage ->
+            currentPage?.let {
+                binding.tvFilterPageNumber.text = setPageText(it + 1)
+            }
+
+            when (currentPage) {
+                0 -> {
+                    if (viewModel.previousActivity.value == FilterInfoType.ONBOARDING) {
+                        binding.ivFilterArrowLeft.setInvisibility(false)
+                    }
+                }
+
+                else -> {
+                    binding.ivFilterArrowLeft.setInvisibility(true)
+                }
+            }
+        }.launchIn(lifecycleScope)
+
+        viewModel.isFilterBtnEnabled.flowWithLifecycle(lifecycle)
+            .onEach { isFilterBtnEnabled ->
+                binding.btnFilterNext.isEnabled = isFilterBtnEnabled
+            }.launchIn(lifecycleScope)
+
+        viewModel.selectedFilterState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
                     when (viewModel.previousActivity.value) {
-                        FilterInfoType.BAKERYLIST -> {
+                        FilterInfoType.BAKERY_LIST -> {
                             AmplitudeUtils.trackEvent(COMPLETE_FILTER_LIST)
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                            intent.putExtra(BAKERY_LIST_FRAGMENT, BAKERY_LIST_FRAGMENT)
-                            startActivity(intent)
+                            moveToMain(BAKERY_LIST_FRAGMENT)
                         }
 
-                        FilterInfoType.MYPAGE -> {
+                        FilterInfoType.MY_PAGE -> {
                             AmplitudeUtils.trackEvent(COMPLETE_FILTER_MY)
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                            intent.putExtra(MYPAGE_FRAGMENT, MYPAGE_FRAGMENT)
-                            startActivity(intent)
+                            moveToMain(MY_PAGE_FRAGMENT)
                         }
 
                         FilterInfoType.HOME -> {
                             AmplitudeUtils.trackEvent(COMPLETE_FILTER_HOME)
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                            startActivity(intent)
+                            moveToMain(null)
                         }
 
                         else -> {
@@ -97,49 +129,18 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                     }
                 }
 
-                else -> {
-                    if (binding.vpFilterContainer.currentItem == 1) {
-                        viewModel.setIsLastPage(true)
-                    }
-
-                    binding.vpFilterContainer.currentItem++
-                }
+                else -> {}
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
-    private fun addObservers() {
-        viewModel.mainPurpose.observe(this) { mainPurposeType ->
-            binding.btnFilterNext.isEnabled = mainPurposeType != null
+    private fun moveToMain(initialFragment: String?) {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        if (!initialFragment.isNullOrEmpty()) {
+            intent.putExtra(initialFragment, initialFragment)
         }
-
-        viewModel.isUserBreadTypeSelected.observe(this) { isUserBreadTypeSelected ->
-            binding.btnFilterNext.isEnabled = isUserBreadTypeSelected
-        }
-
-        viewModel.isUserNutrientFilterTypeSelected.observe(this) { isUserNutrientFilterTypeSelected ->
-            binding.btnFilterNext.isEnabled = isUserNutrientFilterTypeSelected
-        }
-
-        viewModel.currentItem.observe(this) { currentItem ->
-            binding.tvFilterPageNumber.text = setPageText(currentItem + 1)
-
-            when (currentItem) {
-                0 -> {
-                    if (viewModel.previousActivity.value == FilterInfoType.ONBOARDING) {
-                        binding.ivFilterArrowLeft.setInvisibility(false)
-                    }
-                }
-
-                else -> {
-                    binding.ivFilterArrowLeft.setInvisibility(true)
-                }
-            }
-        }
-
-        viewModel.currentItemFilterSelected.observe(this) { currentItemFilterSelected ->
-            binding.btnFilterNext.isEnabled = currentItemFilterSelected
-        }
+        startActivity(intent)
     }
 
     private fun setPreviousActivity() {
@@ -158,11 +159,11 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                 AmplitudeUtils.trackEvent(CLICK_FILTER_BACK_HOME)
             }
 
-            FilterInfoType.BAKERYLIST -> {
+            FilterInfoType.BAKERY_LIST -> {
                 AmplitudeUtils.trackEvent(CLICK_FILTER_BACK_LIST)
             }
 
-            FilterInfoType.MYPAGE -> {
+            FilterInfoType.MY_PAGE -> {
                 AmplitudeUtils.trackEvent(CLICK_FILTER_BACK_MY)
             }
 
@@ -172,7 +173,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
 
     companion object {
         const val FILTER_INFO = "filterInfo"
-        const val MYPAGE_FRAGMENT = "MyPageFragment"
+        const val MY_PAGE_FRAGMENT = "MyPageFragment"
         const val BAKERY_LIST_FRAGMENT = "BakeryListFragment"
         const val PAGE_FORMAT = "%d/3"
         const val CLICK_FILTER_BACK_HOME = "click_filter_back_home"

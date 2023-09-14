@@ -2,12 +2,17 @@ package com.sopt.geonppang.presentation.report
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityReportBinding
 import com.sopt.geonppang.presentation.detail.DetailActivity
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_report) {
@@ -22,17 +27,17 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
         reviewId = intent.getIntExtra(DetailActivity.REVIEW_ID, -1)
 
         addListeners()
-        addObservers()
+        collectData()
     }
 
     private fun addListeners() {
         binding.etReportContent.setOnClickListener {
-            binding.scrollViewReport.smoothScrollTo(0, binding.etReportContent.top)
+            binding.svReport.smoothScrollTo(0, binding.etReportContent.top)
         }
 
         binding.etReportContent.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                binding.scrollViewReport.smoothScrollTo(0, binding.etReportContent.top)
+                binding.svReport.smoothScrollTo(0, binding.etReportContent.top)
             }
         }
 
@@ -49,15 +54,19 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
         }
     }
 
-    private fun addObservers() {
-        viewModel.isReportCompleted.observe(this) { isReportCompleted ->
-            if (isReportCompleted) {
-                showReportSucessBottomDialog()
+    private fun collectData() {
+        viewModel.reportState.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
+                    showReportSuccessBottomDialog()
+                }
+
+                else -> {}
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
-    private fun showReportSucessBottomDialog() {
+    private fun showReportSuccessBottomDialog() {
         ReportSuccessBottomDialogFragment().show(supportFragmentManager, REPORT_SUCCESS)
     }
 

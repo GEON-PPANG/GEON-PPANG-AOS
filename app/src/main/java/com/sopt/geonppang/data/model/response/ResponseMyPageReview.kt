@@ -7,7 +7,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ResponseMypageReview(
+data class ResponseMyPageReview(
     val code: Int,
     val message: String,
     val data: List<Data>,

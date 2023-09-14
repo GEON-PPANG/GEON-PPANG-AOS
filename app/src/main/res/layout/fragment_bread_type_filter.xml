@@ -41,7 +41,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_bread_type_filter_duplicate_selection"
+            android:id="@+id/tv_bread_type_duplicate_selection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -58,7 +58,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toTopOf="@id/tv_bread_type_filter_duplicate_selection" />
+            app:layout_constraintTop_toTopOf="@id/tv_bread_type_duplicate_selection" />
 
         <include
             android:id="@+id/include_braed_type_gluten_free"
@@ -68,11 +68,11 @@
             android:layout_height="162dp"
             android:layout_marginTop="36dp"
             android:layout_marginEnd="9dp"
-            android:onClick="@{()->viewModel.setUserBreadType(BreadFilterType.GLUTENFREE)}"
+            android:onClick="@{()->viewModel.setBreadFilterType(BreadFilterType.GLUTENFREE)}"
             app:breadType="@{BreadFilterType.GLUTENFREE}"
             app:layout_constraintEnd_toStartOf="@+id/view_center"
             app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@id/tv_bread_type_filter_duplicate_selection" />
+            app:layout_constraintTop_toBottomOf="@id/tv_bread_type_duplicate_selection" />
 
         <include
             android:id="@+id/include_braed_type_vegan"
@@ -82,11 +82,11 @@
             android:layout_height="162dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="36dp"
-            android:onClick="@{()->viewModel.setUserBreadType(BreadFilterType.VEGAN)}"
+            android:onClick="@{()->viewModel.setBreadFilterType(BreadFilterType.VEGAN)}"
             app:breadType="@{BreadFilterType.VEGAN}"
             app:layout_constraintEnd_toStartOf="@+id/gl_end"
             app:layout_constraintStart_toEndOf="@+id/view_center"
-            app:layout_constraintTop_toBottomOf="@id/tv_bread_type_filter_duplicate_selection" />
+            app:layout_constraintTop_toBottomOf="@id/tv_bread_type_duplicate_selection" />
 
         <include
             android:id="@+id/include_braed_type_nut_free"
@@ -96,7 +96,7 @@
             android:layout_height="162dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="9dp"
-            android:onClick="@{()->viewModel.setUserBreadType(BreadFilterType.NUTFREE)}"
+            android:onClick="@{()->viewModel.setBreadFilterType(BreadFilterType.NUTFREE)}"
             app:breadType="@{BreadFilterType.NUTFREE}"
             app:layout_constraintEnd_toStartOf="@+id/view_center"
             app:layout_constraintHorizontal_bias="0.0"
@@ -110,7 +110,7 @@
             android:layout_width="0dp"
             android:layout_height="162dp"
             android:layout_marginStart="8dp"
-            android:onClick="@{()->viewModel.setUserBreadType(BreadFilterType.SUGARFREE)}"
+            android:onClick="@{()->viewModel.setBreadFilterType(BreadFilterType.SUGARFREE)}"
             app:breadType="@{BreadFilterType.SUGARFREE}"
             app:layout_constraintEnd_toStartOf="@+id/gl_end"
             app:layout_constraintHorizontal_bias="0.0"

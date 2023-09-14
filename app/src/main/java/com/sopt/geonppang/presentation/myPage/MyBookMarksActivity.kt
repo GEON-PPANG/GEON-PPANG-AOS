@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.mypage
+package com.sopt.geonppang.presentation.myPage
 
 import android.content.Intent
 import android.os.Bundle
@@ -20,7 +20,8 @@ import timber.log.Timber
 class MyBookMarksActivity :
     BindingActivity<ActivityMyBookmarksBinding>(R.layout.activity_my_bookmarks) {
     private val myPageViewModel: MyPageViewModel by viewModels()
-    lateinit var bakeryAdapter: BakeryAdapter
+    private lateinit var bakeryAdapter: BakeryAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = myPageViewModel
@@ -43,10 +44,10 @@ class MyBookMarksActivity :
     }
 
     private fun collectData() {
-        myPageViewModel.mypageBookmarkListState.flowWithLifecycle(lifecycle).onEach {
+        myPageViewModel.myPageBookmarkListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    myPageViewModel.fetchMypageBookmarkList()
+                    myPageViewModel.fetchMyPageBookmarkList()
                     bakeryAdapter.submitList(it.data)
                 }
 

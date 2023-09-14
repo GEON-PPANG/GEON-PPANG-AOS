@@ -26,9 +26,10 @@
             app:title="@{@string/report}" />
 
         <ScrollView
-            android:id="@+id/scroll_view_report"
+            android:id="@+id/sv_report"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:fillViewport="true"
             app:layout_constraintBottom_toTopOf="@id/view_report_bottom_shadow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -180,7 +181,7 @@
                     android:id="@+id/et_report_content"
                     android:layout_width="0dp"
                     android:layout_height="198dp"
-                    android:layout_marginTop="@dimen/spacing16"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/background_report_box"
                     android:gravity="top"
                     android:hint="@string/report_content_hint"
@@ -209,7 +210,7 @@
                     tools:text="0/140자" />
 
                 <TextView
-                    android:id="@+id/tv_report_bottom"
+                    android:id="@+id/tv_report_notice"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="51dp"
@@ -222,7 +223,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/et_report_content" />
+                    app:layout_constraintTop_toBottomOf="@id/et_report_content"
+                    app:layout_constraintVertical_bias="1.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

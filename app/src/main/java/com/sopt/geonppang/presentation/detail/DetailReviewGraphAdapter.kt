@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sopt.geonppang.databinding.ItemDetailReviewGraphBinding
 import com.sopt.geonppang.domain.model.ReviewData
 
-class DetailReviewDataAdapter :
-    RecyclerView.Adapter<DetailReviewDataAdapter.DetailReviewDataViewHolder>() {
+class DetailReviewGraphAdapter :
+    RecyclerView.Adapter<DetailReviewGraphAdapter.DetailReviewDataViewHolder>() {
     private var reviewData: ReviewData? = null
 
     class DetailReviewDataViewHolder(val binding: ItemDetailReviewGraphBinding) :

@@ -1,4 +1,4 @@
-package com.sopt.geonppang.presentation.mypage
+package com.sopt.geonppang.presentation.myPage
 
 import android.content.Intent
 import android.os.Bundle
@@ -19,8 +19,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activity_my_review) {
     private val viewModel: MyPageViewModel by viewModels()
-
-    lateinit var myReviewAdapter: MyReviewAdapter
+    private lateinit var myReviewAdapter: MyReviewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +43,7 @@ class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activ
     }
 
     private fun collectData() {
-        viewModel.mypageReviewListState.flowWithLifecycle(lifecycle).onEach {
+        viewModel.myPageReviewListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
                     myReviewAdapter.submitList(it.data)

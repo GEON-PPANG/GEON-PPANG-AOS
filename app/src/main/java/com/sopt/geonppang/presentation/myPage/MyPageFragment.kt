@@ -11,6 +11,11 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentMyPageBinding
 import com.sopt.geonppang.presentation.common.WebViewActivity
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
+import com.sopt.geonppang.presentation.myPage.LogoutDialog
+import com.sopt.geonppang.presentation.myPage.MyBookMarksActivity
+import com.sopt.geonppang.presentation.myPage.MyPageViewModel
+import com.sopt.geonppang.presentation.myPage.MyReviewActivity
+import com.sopt.geonppang.presentation.myPage.WithdrawDialog
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingFragment
@@ -23,8 +28,6 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     private val viewModel by viewModels<MyPageViewModel>()
-    private lateinit var logoutDialog: LogoutDialog
-    private lateinit var withdrawDialog: WithdrawDialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,7 +41,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun initLayout() {
-        viewModel.fetchMypageInfo()
+        viewModel.fetchProfileInfo()
         binding.includeMyPageSpeechBubble.ivSpeechBubble.setBackgroundResource(R.drawable.background_left_speech_bubble)
         binding.tvMyPageAppVersion.text = getString(R.string.tv_my_page_app_version, APP_VERSION)
     }
@@ -81,9 +84,9 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun collectData() {
-        viewModel.mypageInfoState.flowWithLifecycle(lifecycle).onEach {
+        viewModel.profileInfo.flowWithLifecycle(lifecycle).onEach {
             binding.chipMyPageProfilePurpose.text =
-                this.context?.getString(viewModel.toMainPurposeTitleRes()) ?: ""
+                this.context?.getString(viewModel.setMainPurposeTitle()) ?: ""
         }.launchIn(lifecycleScope)
 
         viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
@@ -91,8 +94,6 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
             binding.chipMyPageProfilePurpose.setInvisibility(isFilterSelected)
             binding.chipGroupMyPageProfileBread.setVisibility(isFilterSelected)
         }.launchIn(lifecycleScope)
-
-        binding.tvMyPageAppVersion.text = getString(R.string.tv_my_page_app_version, APP_VERSION)
     }
 
     private fun moveToStoreBakeryList() {
@@ -106,7 +107,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     private fun moveToFilter() {
         val intent = Intent(requireContext(), FilterSettingActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
-        intent.putExtra(FILTER_INFO, FilterInfoType.MYPAGE.name)
+        intent.putExtra(FILTER_INFO, FilterInfoType.MY_PAGE.name)
         startActivity(intent)
     }
 
@@ -117,13 +118,11 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun showLogoutDialog() {
-        logoutDialog = LogoutDialog()
-        logoutDialog.show(childFragmentManager, DIALOG)
+        LogoutDialog().show(childFragmentManager, DIALOG)
     }
 
     private fun showWithdrawDialog() {
-        withdrawDialog = WithdrawDialog()
-        withdrawDialog.show(childFragmentManager, DIALOG)
+        WithdrawDialog().show(childFragmentManager, DIALOG)
     }
 
     companion object {
