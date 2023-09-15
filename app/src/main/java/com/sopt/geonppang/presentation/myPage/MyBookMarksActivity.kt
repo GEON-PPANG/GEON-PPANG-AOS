@@ -64,7 +64,7 @@ class MyBookMarksActivity :
     }
 
     private fun moveToDetail(bakeryId: Int) {
-        AmplitudeUtils.trackEventWithProperties(VIEW_DETAIL_PAGE_AT, SOURCE, MY_PAGE)
+        AmplitudeUtils.trackEventWithProperties(VIEW_DETAIL_PAGE_AT, SOURCE, MY_PAGE_MY_STORE)
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra(BAKERY_ID, bakeryId)
         startActivity(intent)
@@ -72,6 +72,6 @@ class MyBookMarksActivity :
 
     companion object {
         const val BAKERY_ID = "bakeryId"
-        const val MY_PAGE = "MYPAGE"
+        const val MY_PAGE_MY_STORE = "MYPAGE_MYSTORE"
     }
 }
