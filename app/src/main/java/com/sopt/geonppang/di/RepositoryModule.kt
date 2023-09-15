@@ -76,4 +76,10 @@ interface RepositoryModule {
     fun bindAuthRepository(
         authRepositoryImpl: AuthRepositoryImpl
     ): AuthRepository
+
+    @Binds
+    @Singleton
+    fun bindValidationRepository(
+        validationRepository: ValidationRepositoryImpl
+    ): ValidationRepository
 }
