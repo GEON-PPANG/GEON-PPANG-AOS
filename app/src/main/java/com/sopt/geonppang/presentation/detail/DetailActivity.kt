@@ -20,6 +20,7 @@ import com.sopt.geonppang.presentation.report.ReportActivity
 import com.sopt.geonppang.presentation.reviewWriting.ReviewWritingActivity
 import com.sopt.geonppang.util.ChipFactory
 import com.sopt.geonppang.util.CustomSnackbar
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -79,7 +80,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }
 
         binding.btnDetailCrateReview.setOnClickListener {
-            moveToReviewWriting(bakeryId, viewModel.getBakeryInfo())
+            moveToReviewWriting(bakeryId, viewModel.getBakeryInfoForReview())
         }
 
         binding.fabDetail.setOnClickListener {
@@ -93,15 +94,8 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }
 
         binding.ivDetailBottomAppBarBookmark.setOnClickListener {
-            viewModel.bookMarkInfo.value?.isBookMarked?.let { isBookMarked ->
+            viewModel.bakeryInfo.value?.isBooked?.let { isBookMarked ->
                 viewModel.doBookMark(bakeryId, !isBookMarked)
-
-                if (!isBookMarked) {
-                    CustomSnackbar.makeSnackbar(
-                        binding.root,
-                        getString(R.string.snackbar_save)
-                    )
-                }
             }
         }
     }
@@ -132,8 +126,21 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
             }
         }.launchIn(lifecycleScope)
 
-        viewModel.bookMarkInfo.flowWithLifecycle(lifecycle).onEach {
-            viewModel.fetchDetailBakeryInfo(bakeryId)
+        viewModel.bookMarkState.flowWithLifecycle(lifecycle).onEach { uiState ->
+            when (uiState) {
+                is UiState.Success -> {
+                    viewModel.fetchDetailBakeryInfo(bakeryId)
+
+                    if (uiState.data.isBookMarked) {
+                        CustomSnackbar.makeSnackbar(
+                            binding.root,
+                            getString(R.string.snackbar_save)
+                        )
+                    }
+                }
+
+                else -> {}
+            }
         }.launchIn(lifecycleScope)
     }
 
