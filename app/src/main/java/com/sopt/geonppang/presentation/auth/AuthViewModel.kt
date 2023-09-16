@@ -84,7 +84,7 @@ class AuthViewModel @Inject constructor(
 
     // 현재 소셜 회원가입만 고려해 email, password, nickname을 임의로 ""로 해놓았습니다.
     fun singUp(platformType: PlatformType, platformToken: String) {
-        gpDataStore.platformType = PlatformType.KAKAO.name
+        gpDataStore.platformType = platformType.name
         viewModelScope.launch {
             authRepository.signup(
                 platformToken = platformToken,
@@ -98,10 +98,16 @@ class AuthViewModel @Inject constructor(
                 .onSuccess { signUpResponse ->
                     val responseBody = signUpResponse.body()?.toSignUpInfo()
                     val responseHeader = signUpResponse.headers()
+                    val accessToken = responseHeader[AUTHORIZATION].toString()
+                    val refreshToken = responseHeader[AUTHORIZATION_REFRESH].toString()
                     _authRoleType.value =
                         if (responseBody?.role == AuthRoleType.GUEST.name) AuthRoleType.GUEST else AuthRoleType.USER
-                    gpDataStore.accessToken = responseHeader[AUTHORIZATION].toString()
-                    Log.d("header", responseHeader[AUTHORIZATION].toString())
+                    gpDataStore.accessToken = BEARER_PREFIX + accessToken
+                    if (_authRoleType.value == AuthRoleType.USER) {
+                        gpDataStore.refreshToken = BEARER_PREFIX + refreshToken
+                    }
+                    Log.d("header", gpDataStore.accessToken)
+                    Log.d("header2", gpDataStore.refreshToken)
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
@@ -114,5 +120,7 @@ class AuthViewModel @Inject constructor(
         const val NICKNAME_PATTERN = "^[\\sㄱ-ㅎ가-힣0-9a-zA-Z]{1,8}\$"
         const val PASSWORD_PATTERN = "^(?=.*[A-Za-z])(?=.*[0-9]).{7,25}.\$"
         const val AUTHORIZATION = "Authorization"
+        const val AUTHORIZATION_REFRESH = "Authorization-refresh"
+        const val BEARER_PREFIX = "Bearer "
     }
 }
