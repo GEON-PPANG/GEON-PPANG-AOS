@@ -1,13 +1,11 @@
 package com.sopt.geonppang.data.service
 
-import android.content.ContentValues
 import android.content.Context
 import android.util.Log
 import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.model.ClientError
-import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.Constants.TAG
 import com.kakao.sdk.user.UserApiClient
+import com.sopt.geonppang.presentation.type.PlatformType
 import dagger.hilt.android.qualifiers.ActivityContext
 import timber.log.Timber
 import javax.inject.Inject
@@ -15,32 +13,48 @@ import javax.inject.Inject
 class KakaoAuthService @Inject constructor(
     @ActivityContext private val context: Context,
 ) {
-    fun loginKakao() {
-        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+    private val kakaoLoginState =
+        if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) KAKAO_APP
+        else KAKAO_ACCOUNT
+
+    fun startKakaoLogin(
+        loginListener: (PlatformType, String) -> Unit
+    ) {
+        val kakaoLoginCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
-                Timber.e(ContentValues.TAG, "카카오계정으로 로그인 실패", error)
+                handleLoginError(error)
             } else if (token != null) {
-                UserApiClient.instance.me { user, error ->
-                    Timber.i(ContentValues.TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
-                }
+                Timber.tag("kakaoToken").d(token.accessToken)
+                handleLoginSuccess(token, loginListener)
             }
         }
 
-        if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
-            UserApiClient.instance.loginWithKakaoTalk(context) { token, error ->
-                if (error != null) {
-                    Timber.e(ContentValues.TAG, "카카오톡으로 로그인 실패", error)
-                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
-                        return@loginWithKakaoTalk
-                    }
-
-                    UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
-                } else if (token != null) {
-                    Timber.i(ContentValues.TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
-                }
+        when (kakaoLoginState) {
+            KAKAO_APP -> {
+                UserApiClient.instance.loginWithKakaoTalk(
+                    context, callback = kakaoLoginCallback
+                )
             }
-        } else {
-            UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
+
+            KAKAO_ACCOUNT -> {
+                UserApiClient.instance.loginWithKakaoAccount(
+                    context, callback = kakaoLoginCallback
+                )
+            }
+        }
+    }
+
+    private fun handleLoginSuccess(
+        oAuthToken: OAuthToken,
+        loginListener: (PlatformType, String) -> Unit
+    ) {
+        loginListener(PlatformType.KAKAO, oAuthToken.accessToken)
+    }
+
+    private fun handleLoginError(throwable: Throwable) {
+        when (kakaoLoginState) {
+            KAKAO_APP -> Timber.d("카카오톡으로 로그인 실패 (${throwable.message})")
+            KAKAO_ACCOUNT -> Timber.d("카카오 계정으로 로그인 실패 (${throwable.message})")
         }
     }
 
@@ -62,5 +76,10 @@ class KakaoAuthService @Inject constructor(
                 Log.i(TAG, "연결 끊기 성공. SDK에서 토큰 삭제 됨")
             }
         }
+    }
+
+    companion object {
+        const val KAKAO_APP = "kakao_app"
+        const val KAKAO_ACCOUNT = "kakao_account"
     }
 }

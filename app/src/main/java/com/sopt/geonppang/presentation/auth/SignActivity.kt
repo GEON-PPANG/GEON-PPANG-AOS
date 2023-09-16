@@ -1,9 +1,8 @@
 package com.sopt.geonppang.presentation.auth
 
 import android.content.Intent
-import com.sopt.geonppang.BuildConfig
 import android.os.Bundle
-import com.kakao.sdk.common.KakaoSdk
+import androidx.activity.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.data.service.KakaoAuthService
 import com.sopt.geonppang.databinding.ActivitySignBinding
@@ -17,17 +16,18 @@ class SignActivity :
     BindingActivity<ActivitySignBinding>(R.layout.activity_sign) {
     @Inject
     lateinit var kakaoAuthService: KakaoAuthService
+    private val authViewModel: AuthViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        KakaoSdk.init(this, BuildConfig.KAKAO_APP_KEY)
         addListeners()
     }
 
     private fun addListeners() {
         binding.btnStartWithKakao.setOnClickListener {
-            kakaoAuthService.loginKakao()
+            kakaoAuthService.startKakaoLogin(authViewModel::singUp)
         }
         binding.tvLoginWithEmail.setOnClickListener {
+            kakaoAuthService.disconnectKakao()
             moveToLogin()
         }
         binding.tvSignupWithEmail.setOnClickListener {
