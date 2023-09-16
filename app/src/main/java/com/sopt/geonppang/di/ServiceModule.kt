@@ -60,4 +60,9 @@ object ServiceModule {
     @Provides
     fun provideAuthService(retrofit: Retrofit): AuthService =
         retrofit.create(AuthService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideValidationService(retrofit: Retrofit): ValidationService=
+        retrofit.create(ValidationService::class.java)
 }
