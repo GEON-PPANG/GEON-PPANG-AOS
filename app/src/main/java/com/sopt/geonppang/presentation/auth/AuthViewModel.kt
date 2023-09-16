@@ -87,17 +87,22 @@ class AuthViewModel @Inject constructor(
         return isValidNickname.value == true
     }
 
-    // 현재 소셜 회원가입만 고려해 email, password, nickname을 임의로 ""로 해놓았습니다.
-    fun singUp(platformType: PlatformType, platformToken: String) {
+    fun signUp(
+        platformType: PlatformType,
+        platformToken: String,
+        email: String,
+        password: String,
+        nickName: String
+    ) {
         gpDataStore.platformType = platformType.name
         viewModelScope.launch {
             authRepository.signup(
                 platformToken = platformToken,
                 RequestSignup(
                     platformType.name,
-                    "",
-                    "",
-                    ""
+                    email,
+                    password,
+                    nickName
                 )
             )
                 .onSuccess { signUpResponse ->
@@ -111,8 +116,9 @@ class AuthViewModel @Inject constructor(
                     if (_authRoleType.value == AuthRoleType.USER) {
                         gpDataStore.refreshToken = BEARER_PREFIX + refreshToken
                     }
-                    Log.d("header", gpDataStore.accessToken)
-                    Log.d("header2", gpDataStore.refreshToken)
+                    _signUpState.value = UiState.Success(true)
+                    Timber.tag("access token").d(gpDataStore.accessToken)
+                    Timber.tag("refresh token").d(gpDataStore.refreshToken)
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
