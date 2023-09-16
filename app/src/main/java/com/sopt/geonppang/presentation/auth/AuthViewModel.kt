@@ -8,10 +8,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.datasource.local.GPDataStore
+import com.sopt.geonppang.data.model.request.RequestNicknameSetting
 import com.sopt.geonppang.data.model.request.RequestSignup
 import com.sopt.geonppang.domain.repository.AuthRepository
 import com.sopt.geonppang.presentation.type.AuthRoleType
 import com.sopt.geonppang.presentation.type.PlatformType
+import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -70,6 +72,9 @@ class AuthViewModel @Inject constructor(
         addSource(nickname) { value = checkNicknameCondition() }
     }
 
+    private val _signUpState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
+    val signUpState get() = _signUpState.asStateFlow()
+
     private fun isPasswordDoubleCheck(): Boolean {
         return password.value.toString() == password_check.value.toString() && !password.value.isNullOrBlank() && !password_check.value.isNullOrBlank()
     }
@@ -112,6 +117,20 @@ class AuthViewModel @Inject constructor(
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
                 }
+        }
+    }
+
+    fun settingNickName() {
+        viewModelScope.launch {
+            nickname.value?.let { nickname ->
+                authRepository.settingNickname(RequestNicknameSetting(nickname))
+                    .onSuccess {
+                        _signUpState.value = UiState.Success(true)
+                    }
+                    .onFailure { throwable ->
+                        Timber.e(throwable.message)
+                    }
+            }
         }
     }
 

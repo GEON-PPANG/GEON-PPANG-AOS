@@ -1,7 +1,9 @@
 package com.sopt.geonppang.data.service
 
+import com.sopt.geonppang.data.model.request.RequestNicknameSetting
 import com.sopt.geonppang.data.model.request.RequestSignup
 import com.sopt.geonppang.data.model.response.ResponseLogout
+import com.sopt.geonppang.data.model.response.ResponseNickNameSetting
 import com.sopt.geonppang.data.model.response.ResponseSignup
 import com.sopt.geonppang.data.model.response.ResponseWithdraw
 import retrofit2.Response
@@ -22,4 +24,9 @@ interface AuthService {
 
     @POST("auth/logout")
     suspend fun logout(): ResponseLogout
+
+    @POST("member/nickname")
+    suspend fun settingNickName(
+        @Body requestNicknameSetting: RequestNicknameSetting
+    ): ResponseNickNameSetting
 }
