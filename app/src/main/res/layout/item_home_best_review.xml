@@ -63,7 +63,7 @@
             android:layout_marginBottom="@dimen/spacing14"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@{review.reviewText}"
+            android:text="@{@string/home_best_review_text(review.reviewText)}"
             android:textAppearance="@style/TextAppearance.BodyB2"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/iv_best_review_image"
