@@ -120,6 +120,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
+            android:onClick="@{()->viewModel.doubleCheckNickname()}"
             android:enabled="@{viewModel.isValidNickname()}"
             android:paddingVertical="18dp"
             android:text="@string/txt_double_check_btn"

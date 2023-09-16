@@ -20,16 +20,12 @@ class SignUpNicknameActivity :
         binding.lifecycleOwner = this
 
         addListeners()
+        collectData()
     }
 
     private fun addListeners() {
         binding.root.setOnClickListener {
             hideKeyboard(it)
-        }
-
-        binding.btnDoubleCheck.setOnClickListener {
-            val bottomSheetDialog = SignUpNicknameBottomSheetDialog()
-            bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
         }
 
         binding.imgBackArrow.setOnClickListener {
@@ -41,6 +37,25 @@ class SignUpNicknameActivity :
             intent.putExtra(NICKNAME, viewModel.nickname.value)
             startActivity(intent)
         }
+    }
+
+    private fun collectData() {
+        viewModel.isNicknameDuplicated.observe(this) {
+            if (it == true) {
+                showNicknameSuccessDialog()
+            }
+            else{
+                showNicknameFailDialog()
+            }
+        }
+    }
+
+    private fun showNicknameSuccessDialog() {
+        SignUpNicknameSuccessBottomDialog().show(supportFragmentManager, "nicknameSuccessDialog")
+    }
+
+    private fun showNicknameFailDialog() {
+        SignUpNicknameFailBottomDialog().show(supportFragmentManager, "nicknameFailDialog")
     }
 
     companion object {

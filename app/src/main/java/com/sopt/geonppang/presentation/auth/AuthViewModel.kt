@@ -1,20 +1,33 @@
 package com.sopt.geonppang.presentation.auth
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
-import com.sopt.geonppang.data.datasource.local.GPDataStore
+import androidx.lifecycle.viewModelScope
+import com.sopt.geonppang.data.model.request.RequestValidationEmail
+import com.sopt.geonppang.data.model.request.RequestValidationNickname
+import com.sopt.geonppang.domain.repository.ValidationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(private val gpDataStore: GPDataStore) : ViewModel() {
+class AuthViewModel @Inject constructor(private val validationRepository: ValidationRepository) :
+    ViewModel() {
     val email = MutableLiveData("")
     val password = MutableLiveData("")
     val password_check = MutableLiveData("")
     val nickname = MutableLiveData("")
+
+    private val _isEmailDuplicated: MutableLiveData<Boolean> = MutableLiveData()
+    val isEmailDuplicated: MutableLiveData<Boolean> = _isEmailDuplicated
+
+    private val _isNicknameDuplicated: MutableLiveData<Boolean> = MutableLiveData()
+    val isNicknameDuplicated: LiveData<Boolean> = _isNicknameDuplicated
 
     val isValidEmail: LiveData<Boolean> = email.map { email ->
         email.matches(Regex(EMAIL_PATTERN))
@@ -31,12 +44,39 @@ class AuthViewModel @Inject constructor(private val gpDataStore: GPDataStore) : 
         /*조건에 맞는 비밀번호인지 확인*/
     }
 
-    // TODO 이메일 중복확인 구현 예정
-    /*val doubleCheckEmail: LiveData<Boolean> = email.map {
+//    fun initNickname(){
+//        _isNicknameDuplicated.value = null
+//    }
 
-    }*/
-    val doubleCheckNickname = MediatorLiveData<Boolean>().apply {
-        // Todo 닉네임 중복 확인 구현 예정
+    fun doubleCheckEmail() {
+        viewModelScope.launch {
+            Log.e("이메일 중복확인하기 http","이메일 중복확인 서버 통신 확인하기")
+            validationRepository.validateEmail(RequestValidationEmail(email.value))
+                .onSuccess {
+                    _isEmailDuplicated.value = true
+                    Log.e("이메일 중복확인하기!!! http","${_isEmailDuplicated.value}")
+                }
+                .onFailure { throwable ->
+                    Timber.e(throwable.message)
+                }
+        }
+    }
+
+    fun doubleCheckNickname() {
+        viewModelScope.launch {
+            validationRepository.validateNickname(RequestValidationNickname(nickname.value))
+                .onSuccess {
+                    //중복일 때 onSuccess
+                    _isNicknameDuplicated.value = false
+                    Log.e("isNicknameDuplicated","{${it.message}}")
+                }
+                .onFailure { throwable ->
+                    Timber.e(throwable.message)
+                    //중복이 아닐 떄는 Failure 로 온다
+                    _isNicknameDuplicated.value = true
+                    Log.e("isNicknameNotDuplicate","{${_isNicknameDuplicated.value}}")
+                }
+        }
     }
 
     /*다음 버튼 활성화 -> 중복확인이 true 이면 활성화 되어야 함*/
