@@ -1,8 +1,10 @@
 package com.sopt.geonppang.data.model.request
 
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class RequestValidationNickname(
-    val nickname: String,
+    @SerializedName("nickname")
+    val nickname: String?,
 )
