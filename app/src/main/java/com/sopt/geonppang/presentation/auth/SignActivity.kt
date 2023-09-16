@@ -6,11 +6,13 @@ import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
+import com.sopt.geonppang.data.datasource.local.GPDataStore
 import com.sopt.geonppang.data.service.KakaoAuthService
 import com.sopt.geonppang.databinding.ActivitySignBinding
 import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.login.LoginActivity
 import com.sopt.geonppang.presentation.type.AuthRoleType
+import com.sopt.geonppang.presentation.type.PlatformType
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -31,7 +33,7 @@ class SignActivity :
 
     private fun addListeners() {
         binding.btnStartWithKakao.setOnClickListener {
-            kakaoAuthService.startKakaoLogin(authViewModel::singUp)
+            kakaoAuthService.startKakaoLogin(authViewModel::signUp)
         }
         binding.tvLoginWithEmail.setOnClickListener {
             moveToLogin()
@@ -58,6 +60,8 @@ class SignActivity :
     }
 
     private fun moveToSignUp() {
+        val gpDataStore = GPDataStore(this)
+        gpDataStore.platformType = PlatformType.NONE.name
         startActivity(Intent(this, SignUpActivity::class.java))
     }
 
