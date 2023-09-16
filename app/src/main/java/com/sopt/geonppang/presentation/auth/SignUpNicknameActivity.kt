@@ -6,7 +6,9 @@ import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
+import com.sopt.geonppang.data.datasource.local.GPDataStore
 import com.sopt.geonppang.databinding.ActivitySignupNicknameBinding
+import com.sopt.geonppang.presentation.type.PlatformType
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
@@ -43,7 +45,7 @@ class SignUpNicknameActivity :
         }
 
         binding.btnNext.setOnClickListener {
-            viewModel.settingNickName()
+            completeSignUp()
         }
     }
 
@@ -59,6 +61,27 @@ class SignUpNicknameActivity :
         }.launchIn(lifecycleScope)
     }
 
+    private fun completeSignUp() {
+        val gpDataStore = GPDataStore(this)
+        when (gpDataStore.platformType) {
+            PlatformType.KAKAO.name -> {
+                viewModel.settingNickName()
+            }
+
+            PlatformType.NONE.name -> {
+                val email = intent.getStringExtra(EMAIL)
+                val password = intent.getStringExtra(PASSWORD)
+                viewModel.signUp(
+                    PlatformType.NONE,
+                    "",
+                    email ?: "",
+                    password ?: "",
+                    viewModel.nickname.value ?: ""
+                )
+            }
+        }
+    }
+
     private fun moveToWelcome() {
         val intent = Intent(this, WelcomeActivity::class.java)
         intent.putExtra(NICKNAME, viewModel.nickname.value)
@@ -67,5 +90,7 @@ class SignUpNicknameActivity :
 
     companion object {
         const val NICKNAME = "nickName"
+        const val EMAIL = "email"
+        const val PASSWORD = "password"
     }
 }
