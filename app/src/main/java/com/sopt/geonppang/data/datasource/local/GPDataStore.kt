@@ -26,12 +26,48 @@ class GPDataStore @Inject constructor(@ApplicationContext context: Context) {
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
 
+    // TODO 자료형 PlatformType으로 수정
+    var platformType: String
+        set(value) = dataStore.edit { putString(PLATFORM_TYPE, value) }
+        get() = dataStore.getString(
+            PLATFORM_TYPE,
+            ""
+        ) ?: ""
+
+    var accessToken: String
+        set(value) = dataStore.edit { putString(ACCESS_TOKEN, value) }
+        get() = dataStore.getString(
+            ACCESS_TOKEN,
+            ""
+        ) ?: ""
+
+    var refreshToken: String
+        set(value) = dataStore.edit { putString(REFRESH_TOKEN, value) }
+        get() = dataStore.getString(
+            REFRESH_TOKEN,
+            ""
+        ) ?: ""
+
+    var isLogin: Boolean
+        set(value) = dataStore.edit { putBoolean(IS_LOGIN, value) }
+        get() = dataStore.getBoolean(IS_LOGIN, false)
+
+    fun clear() {
+        dataStore.edit {
+            clear()
+        }
+    }
+
     var userNickname: String
         set(value) = dataStore.edit { putString(NICKNAME, value) }
         get() = dataStore.getString(NICKNAME, "") ?: ""
 
     companion object {
-        const val FILE_NAME = "GunppangSharedPreferences"
+        const val FILE_NAME = "Gpdatastore"
+        const val PLATFORM_TYPE = "platforType"
+        const val ACCESS_TOKEN = "AccessToken"
+        const val REFRESH_TOKEN = "RefreshToken"
+        const val IS_LOGIN = "IsLogin"
         const val NICKNAME = "nickname"
     }
 }

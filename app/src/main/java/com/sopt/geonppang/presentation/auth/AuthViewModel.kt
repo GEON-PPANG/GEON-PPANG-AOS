@@ -7,21 +7,32 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import com.sopt.geonppang.data.model.request.RequestValidationEmail
-import com.sopt.geonppang.data.model.request.RequestValidationNickname
+import com.sopt.geonppang.data.datasource.local.GPDataStore
+import com.sopt.geonppang.data.model.request.RequestSignup
+import com.sopt.geonppang.domain.repository.AuthRepository
 import com.sopt.geonppang.domain.repository.ValidationRepository
+import com.sopt.geonppang.presentation.type.AuthRoleType
+import com.sopt.geonppang.presentation.type.PlatformType
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
+class AuthViewModel @Inject constructor(
+    private val gpDataStore: GPDataStore,
+    private val authRepository: AuthRepository
+) : ViewModel() {
 class AuthViewModel @Inject constructor(private val validationRepository: ValidationRepository) :
     ViewModel() {
     val email = MutableLiveData("")
     val password = MutableLiveData("")
     val password_check = MutableLiveData("")
     val nickname = MutableLiveData("")
+    private val _authRoleType = MutableStateFlow<AuthRoleType?>(null)
+    val authRoleType get() = _authRoleType.asStateFlow()
 
     private val _isEmailDuplicated: MutableLiveData<Boolean> = MutableLiveData()
     val isEmailDuplicated: MutableLiveData<Boolean> = _isEmailDuplicated
@@ -105,6 +116,33 @@ class AuthViewModel @Inject constructor(private val validationRepository: Valida
 
     private fun checkNicknameCondition(): Boolean {
         return isValidNickname.value == true
+    }
+
+    // 현재 소셜 회원가입만 고려해 email, password, nickname을 임의로 ""로 해놓았습니다.
+    fun singUp(platformType: PlatformType, platformToken: String) {
+        gpDataStore.platformType = PlatformType.KAKAO.name
+        viewModelScope.launch {
+            authRepository.signup(
+                platformToken = platformToken,
+                RequestSignup(
+                    platformType.name,
+                    "",
+                    "",
+                    ""
+                )
+            )
+                .onSuccess { signUpResponse ->
+                    val responseBody = signUpResponse.body()?.toSignUpInfo()
+                    val responseHeader = signUpResponse.headers()
+                    _authRoleType.value =
+                        if (responseBody?.role == AuthRoleType.GUEST.name) AuthRoleType.GUEST else AuthRoleType.USER
+                    gpDataStore.accessToken = responseHeader[AUTHORIZATION].toString()
+                    Log.d("header", responseHeader[AUTHORIZATION].toString())
+                }
+                .onFailure { throwable ->
+                    Timber.e(throwable.message)
+                }
+        }
     }
 
     companion object {
