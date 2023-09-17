@@ -58,12 +58,13 @@ class KakaoAuthService @Inject constructor(
         }
     }
 
-    fun logoutKakao() {
+    fun logoutKakao(logoutListener: () -> Unit) {
         UserApiClient.instance.logout { error ->
             if (error != null) {
-                Log.e(TAG, "로그아웃 실패. SDK에서 토큰 삭제됨", error)
+                Timber.tag(TAG).e(error, "로그아웃 실패. SDK에서 토큰 삭제됨")
             } else {
-                Log.i(TAG, "로그아웃 성공. SDK에서 토큰 삭제됨")
+                logoutListener()
+                Timber.tag(TAG).i("로그아웃 성공. SDK에서 토큰 삭제됨")
             }
         }
     }
@@ -71,9 +72,9 @@ class KakaoAuthService @Inject constructor(
     fun disconnectKakao() {
         UserApiClient.instance.unlink { error ->
             if (error != null) {
-                Log.e(TAG, "연결 끊기 실패", error)
+                Timber.tag(TAG).e(error, "연결 끊기 실패")
             } else {
-                Log.i(TAG, "연결 끊기 성공. SDK에서 토큰 삭제 됨")
+                Timber.tag(TAG).i("연결 끊기 성공. SDK에서 토큰 삭제 됨")
             }
         }
     }
