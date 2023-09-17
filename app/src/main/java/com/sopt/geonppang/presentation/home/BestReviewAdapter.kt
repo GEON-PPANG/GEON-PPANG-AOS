@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ItemHomeBestReviewBinding
 import com.sopt.geonppang.domain.model.BestReview
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.ItemDiffCallback
+import com.sopt.geonppang.util.extension.loadingImage
 
 class BestReviewAdapter(
     private val moveToDetail: (String, Int) -> Unit,
@@ -32,6 +34,12 @@ class BestReviewAdapter(
                 AmplitudeUtils.trackEvent(CLICK_RECOMMEND_REVIEW)
                 moveToDetail(MAIN, review.bakeryId)
             }
+
+            binding.root.context.loadingImage(
+                imageUrl = review.bakeryImage,
+                imageView = binding.ivBestReviewImage,
+                loadingImage = R.drawable.img_bakery_image_loading_best_review
+            )
         }
     }
 
