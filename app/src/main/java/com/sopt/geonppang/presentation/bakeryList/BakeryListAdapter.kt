@@ -3,8 +3,10 @@ package com.sopt.geonppang.presentation.bakeryList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ItemBakeryBinding
 import com.sopt.geonppang.domain.model.Bakery
+import com.sopt.geonppang.util.extension.loadingImage
 
 class BakeryListAdapter(
     private val moveToDetail: (Int) -> Unit
@@ -19,12 +21,17 @@ class BakeryListAdapter(
             moveToDetail: (Int) -> Unit
         ) {
             binding.bakery = bakery
+            binding.executePendingBindings()
+
             binding.root.setOnClickListener {
                 moveToDetail(bakery.bakeryId)
             }
-            // TODO 가까운 전철역 하나 일 경우 수정 필요
-//            binding.setVisibility(bakery.secondNearStation != "")
-            binding.executePendingBindings()
+
+            binding.root.context.loadingImage(
+                imageUrl = bakery.bakeryPicture,
+                imageView = binding.ivBakery,
+                loadingImage = R.drawable.img_bakery_image_loading
+            )
         }
     }
 
