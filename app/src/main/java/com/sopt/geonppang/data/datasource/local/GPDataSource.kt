@@ -11,7 +11,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class GPDataStore @Inject constructor(@ApplicationContext context: Context) {
+class GPDataSource @Inject constructor(@ApplicationContext context: Context) {
     private val masterKey = MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
         .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
         .build()
@@ -57,10 +57,6 @@ class GPDataStore @Inject constructor(@ApplicationContext context: Context) {
             clear()
         }
     }
-
-    var userNickname: String
-        set(value) = dataStore.edit { putString(NICKNAME, value) }
-        get() = dataStore.getString(NICKNAME, "") ?: ""
 
     companion object {
         const val FILE_NAME = "Gpdatastore"

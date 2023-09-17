@@ -1,16 +1,18 @@
 package com.sopt.geonppang.data.interceptor
 
-import com.sopt.geonppang.BuildConfig
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
-class AuthInterceptor @Inject constructor() : Interceptor {
+class AuthInterceptor @Inject constructor(
+    private val gpDataSource: GPDataSource
+) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val authRequest =
-            originalRequest.newBuilder().addHeader("Authorization", BuildConfig.ACCESS_TOKEN)
+            originalRequest.newBuilder().addHeader("Authorization", gpDataSource.accessToken)
                 .build()
         val response = chain.proceed(authRequest)
 
