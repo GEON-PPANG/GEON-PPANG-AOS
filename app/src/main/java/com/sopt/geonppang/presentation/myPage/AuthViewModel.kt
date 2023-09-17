@@ -20,6 +20,7 @@ class AuthViewModel @Inject constructor(
     val withdrawState get() = _withdrawState.asStateFlow()
     private val _logoutState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val logoutState = _logoutState.asStateFlow()
+    val platformType = gpDataSource.platformType
 
     fun withdraw() {
         viewModelScope.launch {
