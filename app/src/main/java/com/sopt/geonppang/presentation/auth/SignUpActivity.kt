@@ -41,6 +41,14 @@ class SignUpActivity :
     }
 
     private fun moveToNickname() {
-        startActivity(Intent(this, SignUpNicknameActivity::class.java))
+        val intent = Intent(this, SignUpNicknameActivity::class.java)
+        intent.putExtra(EMAIL, viewModel.email.value)
+        intent.putExtra(PASSWORD, viewModel.password.value)
+        startActivity(intent)
+    }
+
+    companion object {
+        const val EMAIL = "email"
+        const val PASSWORD = "password"
     }
 }
