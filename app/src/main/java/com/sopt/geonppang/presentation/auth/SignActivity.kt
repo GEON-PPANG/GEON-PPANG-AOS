@@ -32,7 +32,7 @@ class SignActivity :
     }
 
     private fun addListeners() {
-        binding.btnStartWithKakao.setOnClickListener {
+        binding.btnStartKakao.setOnClickListener {
             kakaoAuthService.startKakaoLogin(authViewModel::signUp)
         }
         binding.tvLoginWithEmail.setOnClickListener {
