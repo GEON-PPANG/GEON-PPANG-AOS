@@ -4,6 +4,7 @@ import com.sopt.geonppang.data.datasource.remote.AuthDataSource
 import com.sopt.geonppang.data.model.request.RequestLogin
 import com.sopt.geonppang.data.model.request.RequestNicknameSetting
 import com.sopt.geonppang.data.model.request.RequestSignup
+import com.sopt.geonppang.data.model.response.ResponseLogin
 import com.sopt.geonppang.data.model.response.ResponseLogout
 import com.sopt.geonppang.data.model.response.ResponseNickNameSetting
 import com.sopt.geonppang.data.model.response.ResponseSignup
@@ -27,6 +28,10 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun logout(): Result<ResponseLogout> =
         runCatching { authDataSource.logout() }
 
-    override suspend fun login(responseLogin: RequestLogin): Result<Response<Unit>> =
+    override suspend fun settingNickname(nickName: RequestNicknameSetting): Result<ResponseNickNameSetting> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun login(responseLogin: RequestLogin): Result<ResponseLogin> =
         runCatching { authDataSource.login(responseLogin) }
 }

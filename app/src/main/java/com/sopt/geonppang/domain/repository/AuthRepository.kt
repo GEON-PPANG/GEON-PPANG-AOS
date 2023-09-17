@@ -3,6 +3,7 @@ package com.sopt.geonppang.domain.repository
 import com.sopt.geonppang.data.model.request.RequestNicknameSetting
 import com.sopt.geonppang.data.model.request.RequestSignup
 import com.sopt.geonppang.data.model.request.RequestLogin
+import com.sopt.geonppang.data.model.response.ResponseLogin
 import com.sopt.geonppang.data.model.response.ResponseLogout
 import com.sopt.geonppang.data.model.response.ResponseNickNameSetting
 import com.sopt.geonppang.data.model.response.ResponseSignup
@@ -18,5 +19,5 @@ interface AuthRepository {
     suspend fun withdraw(): Result<ResponseWithdraw>
     suspend fun logout(): Result<ResponseLogout>
     suspend fun settingNickname(nickName: RequestNicknameSetting): Result<ResponseNickNameSetting>
-    suspend fun login(requestLogin: RequestLogin): Result<Response<Unit>>
+    suspend fun login(requestLogin: RequestLogin): Result<ResponseLogin>
 }
