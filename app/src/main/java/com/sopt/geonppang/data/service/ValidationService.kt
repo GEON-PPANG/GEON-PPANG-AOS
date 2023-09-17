@@ -10,9 +10,10 @@ interface ValidationService {
     @POST("validation/nickname")
     suspend fun nickname(
         @Body requestValidationNickname: RequestValidationNickname
-    ):ResponseValidation
+    ): ResponseValidation
+
     @POST("validation/email")
     suspend fun email(
         @Body requestValidationEmail: RequestValidationEmail
-    ):ResponseValidation
+    ): ResponseValidation
 }

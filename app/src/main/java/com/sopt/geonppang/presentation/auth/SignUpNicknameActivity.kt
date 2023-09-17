@@ -58,8 +58,7 @@ class SignUpNicknameActivity :
         viewModel.isNicknameDuplicated.observe(this) {
             if (it == true) {
                 showNicknameSuccessDialog()
-            }
-            else{
+            } else {
                 showNicknameFailDialog()
             }
         }

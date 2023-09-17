@@ -2,7 +2,6 @@ package com.sopt.geonppang.presentation.auth
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.DialogBottomSignupNicknameSuccessBinding
 import com.sopt.geonppang.util.binding.BindingBottomSheetDialogFragment

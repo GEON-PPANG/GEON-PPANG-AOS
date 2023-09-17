@@ -10,6 +10,8 @@ import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.data.model.request.RequestNicknameSetting
 import com.sopt.geonppang.data.model.request.RequestSignup
+import com.sopt.geonppang.data.model.request.RequestValidationEmail
+import com.sopt.geonppang.data.model.request.RequestValidationNickname
 import com.sopt.geonppang.domain.repository.AuthRepository
 import com.sopt.geonppang.domain.repository.ValidationRepository
 import com.sopt.geonppang.presentation.type.AuthRoleType
@@ -25,7 +27,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val gpDataSource: GPDataSource,
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val validationRepository: ValidationRepository,
 ) : ViewModel() {
     val email = MutableLiveData("")
     val password = MutableLiveData("")
@@ -39,6 +42,9 @@ class AuthViewModel @Inject constructor(
 
     private val _isNicknameDuplicated: MutableLiveData<Boolean> = MutableLiveData()
     val isNicknameDuplicated: LiveData<Boolean> = _isNicknameDuplicated
+
+    private val _signUpState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
+    val signUpState get() = _signUpState.asStateFlow()
 
     val isValidEmail: LiveData<Boolean> = email.map { email ->
         email.matches(Regex(EMAIL_PATTERN))
@@ -55,17 +61,17 @@ class AuthViewModel @Inject constructor(
         /*조건에 맞는 비밀번호인지 확인*/
     }
 
-//    fun initNickname(){
-//        _isNicknameDuplicated.value = null
-//    }
+    fun initNickname() {
+        _isNicknameDuplicated.value = null
+    }
 
     fun doubleCheckEmail() {
         viewModelScope.launch {
-            Log.e("이메일 중복확인하기 http","이메일 중복확인 서버 통신 확인하기")
+            Log.e("이메일 중복확인하기 http", "이메일 중복확인 서버 통신 확인하기")
             validationRepository.validateEmail(RequestValidationEmail(email.value))
                 .onSuccess {
                     _isEmailDuplicated.value = true
-                    Log.e("이메일 중복확인하기!!! http","${_isEmailDuplicated.value}")
+                    Log.e("이메일 중복확인하기!!! http", "${_isEmailDuplicated.value}")
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
@@ -77,15 +83,15 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch {
             validationRepository.validateNickname(RequestValidationNickname(nickname.value))
                 .onSuccess {
-                    //중복일 때 onSuccess
+                    // 중복일 때 onSuccess
                     _isNicknameDuplicated.value = false
-                    Log.e("isNicknameDuplicated","{${it.message}}")
+                    Log.e("isNicknameDuplicated", "{${it.message}}")
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
-                    //중복이 아닐 떄는 Failure 로 온다
+                    // 중복이 아닐 떄는 Failure 로 온다
                     _isNicknameDuplicated.value = true
-                    Log.e("isNicknameNotDuplicate","{${_isNicknameDuplicated.value}}")
+                    Log.e("isNicknameNotDuplicate", "{${_isNicknameDuplicated.value}}")
                 }
         }
     }
@@ -105,9 +111,6 @@ class AuthViewModel @Inject constructor(
     val completeNickname = MediatorLiveData<Boolean>().apply {
         addSource(nickname) { value = checkNicknameCondition() }
     }
-
-    private val _signUpState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
-    val signUpState get() = _signUpState.asStateFlow()
 
     private fun isPasswordDoubleCheck(): Boolean {
         return password.value.toString() == password_check.value.toString() && !password.value.isNullOrBlank() && !password_check.value.isNullOrBlank()
