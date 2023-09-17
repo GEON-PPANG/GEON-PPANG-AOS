@@ -2,6 +2,7 @@ package com.sopt.geonppang.presentation.myPage
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.domain.repository.AuthRepository
 import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val gpDataSource: GPDataSource
 ) : ViewModel() {
     private val _withdrawState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val withdrawState get() = _withdrawState.asStateFlow()
@@ -23,6 +25,7 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch {
             authRepository.withdraw().onSuccess {
                 _withdrawState.value = UiState.Success(true)
+                gpDataSource.clear()
             }.onFailure { throwable ->
                 _withdrawState.value = UiState.Error(throwable.message)
             }
@@ -33,6 +36,7 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch {
             authRepository.logout().onSuccess {
                 _logoutState.value = UiState.Success(true)
+                gpDataSource.clear()
             }.onFailure { throwable ->
                 _logoutState.value = UiState.Error(throwable.message)
             }
