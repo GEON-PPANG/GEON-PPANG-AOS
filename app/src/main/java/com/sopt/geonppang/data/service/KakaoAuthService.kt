@@ -18,7 +18,7 @@ class KakaoAuthService @Inject constructor(
         else KAKAO_ACCOUNT
 
     fun startKakaoLogin(
-        loginListener: (PlatformType, String) -> Unit
+        loginListener: (platformType: PlatformType, platformToken: String, email: String, password: String, nickname: String) -> Unit
     ) {
         val kakaoLoginCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
@@ -46,9 +46,9 @@ class KakaoAuthService @Inject constructor(
 
     private fun handleLoginSuccess(
         oAuthToken: OAuthToken,
-        loginListener: (PlatformType, String) -> Unit
+        loginListener: (platformType: PlatformType, platformToken: String, email: String, password: String, nickname: String) -> Unit
     ) {
-        loginListener(PlatformType.KAKAO, oAuthToken.accessToken)
+        loginListener(PlatformType.KAKAO, oAuthToken.accessToken, "", "", "")
     }
 
     private fun handleLoginError(throwable: Throwable) {
