@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
-import com.sopt.geonppang.data.datasource.local.GPDataStore
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.ActivitySignupNicknameBinding
 import com.sopt.geonppang.presentation.type.PlatformType
 import com.sopt.geonppang.util.UiState
@@ -62,8 +62,8 @@ class SignUpNicknameActivity :
     }
 
     private fun completeSignUp() {
-        val gpDataStore = GPDataStore(this)
-        when (gpDataStore.platformType) {
+        val gpDataSource = GPDataSource(this)
+        when (gpDataSource.platformType) {
             PlatformType.KAKAO.name -> {
                 viewModel.settingNickName()
             }

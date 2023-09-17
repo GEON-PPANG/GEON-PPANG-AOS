@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
-import com.sopt.geonppang.data.datasource.local.GPDataStore
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.data.service.KakaoAuthService
 import com.sopt.geonppang.databinding.ActivitySignBinding
 import com.sopt.geonppang.presentation.MainActivity
@@ -60,8 +60,8 @@ class SignActivity :
     }
 
     private fun moveToSignUp() {
-        val gpDataStore = GPDataStore(this)
-        gpDataStore.platformType = PlatformType.NONE.name
+        val gpDataSource = GPDataSource(this)
+        gpDataSource.platformType = PlatformType.NONE.name
         startActivity(Intent(this, SignUpActivity::class.java))
     }
 

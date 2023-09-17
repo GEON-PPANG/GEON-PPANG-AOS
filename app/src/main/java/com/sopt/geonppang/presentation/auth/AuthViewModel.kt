@@ -1,13 +1,12 @@
 package com.sopt.geonppang.presentation.auth
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import com.sopt.geonppang.data.datasource.local.GPDataStore
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.data.model.request.RequestNicknameSetting
 import com.sopt.geonppang.data.model.request.RequestSignup
 import com.sopt.geonppang.domain.repository.AuthRepository
@@ -23,7 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val gpDataStore: GPDataStore,
+    private val gpDataSource: GPDataSource,
     private val authRepository: AuthRepository
 ) : ViewModel() {
     val email = MutableLiveData("")
@@ -94,7 +93,7 @@ class AuthViewModel @Inject constructor(
         password: String,
         nickName: String
     ) {
-        gpDataStore.platformType = platformType.name
+        gpDataSource.platformType = platformType.name
         viewModelScope.launch {
             authRepository.signup(
                 platformToken = platformToken,
@@ -112,13 +111,13 @@ class AuthViewModel @Inject constructor(
                     val refreshToken = responseHeader[AUTHORIZATION_REFRESH].toString()
                     _authRoleType.value =
                         if (responseBody?.role == AuthRoleType.GUEST.name) AuthRoleType.GUEST else AuthRoleType.USER
-                    gpDataStore.accessToken = BEARER_PREFIX + accessToken
+                    gpDataSource.accessToken = BEARER_PREFIX + accessToken
                     if (_authRoleType.value == AuthRoleType.USER) {
-                        gpDataStore.refreshToken = BEARER_PREFIX + refreshToken
+                        gpDataSource.refreshToken = BEARER_PREFIX + refreshToken
                     }
                     _signUpState.value = UiState.Success(true)
-                    Timber.tag("access token").d(gpDataStore.accessToken)
-                    Timber.tag("refresh token").d(gpDataStore.refreshToken)
+                    Timber.tag("access token").d(gpDataSource.accessToken)
+                    Timber.tag("refresh token").d(gpDataSource.refreshToken)
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
