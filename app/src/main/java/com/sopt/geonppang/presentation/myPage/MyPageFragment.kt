@@ -11,11 +11,6 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentMyPageBinding
 import com.sopt.geonppang.presentation.common.WebViewActivity
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
-import com.sopt.geonppang.presentation.myPage.LogoutDialog
-import com.sopt.geonppang.presentation.myPage.MyBookMarksActivity
-import com.sopt.geonppang.presentation.myPage.MyPageViewModel
-import com.sopt.geonppang.presentation.myPage.MyReviewActivity
-import com.sopt.geonppang.presentation.myPage.WithdrawDialog
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingFragment
