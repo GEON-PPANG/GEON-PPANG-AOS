@@ -35,7 +35,7 @@ class HomeViewModel @Inject constructor(
         getUserFilter()
     }
 
-    private fun fetchBestBakeryList() {
+    fun fetchBestBakeryList() {
         viewModelScope.launch {
             homeRepository.fetchBestBakery()
                 .onSuccess { bestBakeryList ->
@@ -47,7 +47,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun fetchBestReviewList() {
+    fun fetchBestReviewList() {
         viewModelScope.launch {
             homeRepository.fetchBestReview()
                 .onSuccess { bestReviewList ->

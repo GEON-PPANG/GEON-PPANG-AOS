@@ -36,7 +36,6 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_best_bakery"
-            image="@{bakery.bakeryImage}"
             android:layout_width="186dp"
             android:layout_height="122dp"
             android:scaleType="centerCrop"

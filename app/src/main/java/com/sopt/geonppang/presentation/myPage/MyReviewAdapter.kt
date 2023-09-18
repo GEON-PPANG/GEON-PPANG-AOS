@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ItemMyReviewBinding
 import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
 import com.sopt.geonppang.presentation.model.MyReviewBakeryInfo
 import com.sopt.geonppang.util.ItemDiffCallback
+import com.sopt.geonppang.util.extension.loadingImage
 
 class MyReviewAdapter(
     private val moveToReviewDetail: (Int, MyReviewBakeryInfo) -> Unit,
@@ -47,6 +49,12 @@ class MyReviewAdapter(
                 )
             }
             binding.executePendingBindings()
+
+            binding.root.context.loadingImage(
+                imageUrl = review.bakery.bakeryPicture,
+                imageView = binding.ivBakery,
+                loadingImage = R.drawable.img_bakery_image_loading
+            )
         }
     }
 

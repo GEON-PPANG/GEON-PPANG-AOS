@@ -9,6 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentBakeryListBinding
 import com.sopt.geonppang.presentation.detail.DetailActivity
+import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
+import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETAIL_PAGE_AT
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.search.SearchActivity
 import com.sopt.geonppang.presentation.type.BakerySortType
@@ -27,7 +29,7 @@ class BakeryListFragment :
     BakerySortTypeListener {
     private val viewModel: BakeryListViewModel by viewModels()
 
-    lateinit var bakeryAdapter: BakeryListAdapter
+    private lateinit var bakeryAdapter: BakeryListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -97,6 +99,7 @@ class BakeryListFragment :
     }
 
     private fun moveToDetail(bakeryId: Int) {
+        AmplitudeUtils.trackEventWithProperties(VIEW_DETAIL_PAGE_AT, SOURCE, LIST)
         val intent = Intent(requireContext(), DetailActivity::class.java)
         intent.putExtra(BAKERY_ID, bakeryId)
         startActivity(intent)
@@ -142,5 +145,6 @@ class BakeryListFragment :
         const val CLICK_PERSONAL_FILTER_APPLY_OFF = "click_filteroff"
         const val CLICK_CATEGORY = "click_category"
         const val CATEGORY = "category"
+        const val LIST = "LIST"
     }
 }

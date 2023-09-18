@@ -3,10 +3,9 @@ package com.sopt.geonppang.presentation.detail
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ItemDetailBakeryInfoBinding
 import com.sopt.geonppang.domain.model.BakeryInfo
-import com.sopt.geonppang.util.CustomSnackbar
+import com.sopt.geonppang.util.AmplitudeUtils
 
 class DetailBakeryInfoAdapter(
     private val moveToWebPage: (String) -> Unit
@@ -21,18 +20,14 @@ class DetailBakeryInfoAdapter(
         ) {
             with(binding) {
                 binding.bakeryInfo = bakeryInfo
-                ivItemDetailBakeryInfoBookmark.setOnClickListener {
-                    CustomSnackbar.makeSnackbar(
-                        it,
-                        it.context.getString(R.string.snackbar_save)
-                    )
-                }
 
                 tvItemDetailBakeryInfoHomepage.setOnClickListener {
+                    AmplitudeUtils.trackEvent(CLICK_WEBSITE)
                     moveToWebPage(bakeryInfo.homepageUrl)
                 }
 
                 tvItemDetailBakeryInfoInstagram.setOnClickListener {
+                    AmplitudeUtils.trackEvent(CLICK_INSTAGRAM)
                     moveToWebPage(bakeryInfo.instagramUrl)
                 }
             }
@@ -55,5 +50,10 @@ class DetailBakeryInfoAdapter(
         bakeryInfoList.clear()
         bakeryInfoList.add(bakeryInfo)
         notifyDataSetChanged()
+    }
+
+    companion object {
+        const val CLICK_WEBSITE = "click_website"
+        const val CLICK_INSTAGRAM = "click_instagram"
     }
 }

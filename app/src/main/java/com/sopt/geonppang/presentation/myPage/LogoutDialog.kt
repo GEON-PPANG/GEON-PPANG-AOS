@@ -7,17 +7,23 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
+import com.sopt.geonppang.data.service.KakaoAuthService
 import com.sopt.geonppang.databinding.DialogMiddleBinding
 import com.sopt.geonppang.presentation.auth.SignActivity
 import com.sopt.geonppang.presentation.type.DialogType
+import com.sopt.geonppang.presentation.type.PlatformType
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LogoutDialog : BindingDialogFragment<DialogMiddleBinding>(R.layout.dialog_middle) {
+    @Inject
+    lateinit var kakaoSignService: KakaoAuthService
+
     private val viewModel by viewModels<AuthViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,7 +46,15 @@ class LogoutDialog : BindingDialogFragment<DialogMiddleBinding>(R.layout.dialog_
         }
 
         binding.btnDialogYes.setOnClickListener {
-            viewModel.logout()
+            when (viewModel.platformType) {
+                PlatformType.NONE.name -> {
+                    viewModel.logout()
+                }
+
+                PlatformType.KAKAO.name -> {
+                    kakaoSignService.logoutKakao(viewModel::logout)
+                }
+            }
         }
     }
 
