@@ -17,6 +17,7 @@ import com.sopt.geonppang.presentation.common.WebViewActivity
 import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
 import com.sopt.geonppang.presentation.report.ReportActivity
 import com.sopt.geonppang.presentation.reviewWriting.ReviewWritingActivity
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.ChipFactory
 import com.sopt.geonppang.util.CustomSnackbar
 import com.sopt.geonppang.util.UiState
@@ -79,6 +80,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }
 
         binding.btnDetailCrateReview.setOnClickListener {
+            AmplitudeUtils.trackEvent(START_REVIEW_WRITING)
             moveToReviewWriting(bakeryId, viewModel.getBakeryInfoForReview())
         }
 
@@ -88,6 +90,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
         binding.ivDetailMap.setOnClickListener {
             viewModel.bakeryInfo.value?.let { bakeryInfo ->
+                AmplitudeUtils.trackEvent(CLICK_NAVIGATION)
                 moveToWebBrowser(bakeryInfo.mapUrl)
             }
         }
@@ -128,6 +131,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         viewModel.bookMarkState.flowWithLifecycle(lifecycle).onEach { uiState ->
             when (uiState) {
                 is UiState.Success -> {
+                    AmplitudeUtils.trackEvent(CLICK_MY_STORE)
                     viewModel.fetchDetailBakeryInfo(bakeryId)
 
                     if (uiState.data.isBookMarked) {
@@ -187,5 +191,10 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         const val BAKERY_INFO = "bakeryInfo"
         const val REVIEW_ID = "reviewId"
         const val FIRST_POSITION = 0
+        const val VIEW_DETAIL_PAGE_AT = "view_detailpage_at"
+        const val SOURCE = "source"
+        const val CLICK_NAVIGATION = "click_navigation"
+        const val CLICK_MY_STORE = "click_mystore"
+        const val START_REVIEW_WRITING = "start_reviewwriting"
     }
 }

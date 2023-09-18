@@ -12,6 +12,8 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySearchBinding
 import com.sopt.geonppang.presentation.common.BakeryAdapter
 import com.sopt.geonppang.presentation.detail.DetailActivity
+import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
+import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETAIL_PAGE_AT
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
@@ -79,6 +81,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
     }
 
     private fun moveToDetail(bakeryId: Int) {
+        AmplitudeUtils.trackEventWithProperties(VIEW_DETAIL_PAGE_AT, SOURCE, SEARCH)
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra(BAKERY_ID, bakeryId)
         startActivity(intent)
@@ -118,5 +121,6 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         const val COMPLETE_SEARCH_HOME = "complete_search_home"
         const val COMPLETE_SEARCH_LIST = "complete_search_list"
         const val KEYWORD = "keyword"
+        const val SEARCH = "SEARCH"
     }
 }
