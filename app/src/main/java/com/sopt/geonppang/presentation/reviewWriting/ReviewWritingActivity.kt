@@ -49,6 +49,7 @@ class ReviewWritingActivity :
 
         binding.etWriteYourReview.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
+                AmplitudeUtils.trackEvent(CLICK_REVIEW_WRITING_TEXT)
                 binding.layoutScrollView.smoothScrollTo(0, binding.etWriteYourReview.top)
             }
         }
@@ -62,10 +63,12 @@ class ReviewWritingActivity :
         }
 
         binding.layoutParent.setOnClickListener {
+            binding.etWriteYourReview.clearFocus()
             hideKeyboard(it)
         }
 
         binding.layoutScrollViewConstraint.setOnClickListener {
+            binding.etWriteYourReview.clearFocus()
             hideKeyboard(it)
         }
     }
@@ -141,5 +144,6 @@ class ReviewWritingActivity :
         const val OPTION = "option"
         const val CLICK_RECOMMEND_KEYWORD = "click_recommend_keyword"
         const val KEYWORD = "keyword"
+        const val CLICK_REVIEW_WRITING_TEXT = "click_reviewwritng_text"
     }
 }
