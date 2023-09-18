@@ -59,6 +59,7 @@ class ReviewWritingActivity :
         }
 
         binding.toolbar.ivBack.setOnClickListener {
+            AmplitudeUtils.trackEvent(CLICK_REVIEW_WRITING_BACK)
             showReviewCancelDialog()
         }
 
@@ -145,5 +146,6 @@ class ReviewWritingActivity :
         const val CLICK_RECOMMEND_KEYWORD = "click_recommend_keyword"
         const val KEYWORD = "keyword"
         const val CLICK_REVIEW_WRITING_TEXT = "click_reviewwritng_text"
+        const val CLICK_REVIEW_WRITING_BACK = "click_reviewwriting_back"
     }
 }
