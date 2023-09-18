@@ -13,7 +13,7 @@ import com.sopt.geonppang.util.extension.loadingImage
 import com.sopt.geonppang.util.setVisibility
 
 class BestBakeryAdapter(
-    private val moveToDetail: (String, Int) -> Unit,
+    private val moveToDetail: (Int) -> Unit,
 ) : ListAdapter<BestBakery, BestBakeryAdapter.BakeryViewHolder>(
     ItemDiffCallback<BestBakery>(
         onItemsTheSame = { old, new -> old.bakeryId == new.bakeryId },
@@ -26,14 +26,14 @@ class BestBakeryAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(
             bakery: BestBakery,
-            moveToDetail: (String, Int) -> Unit,
+            moveToDetail: (Int) -> Unit,
         ) {
             binding.bakery = bakery
             binding.executePendingBindings()
 
             binding.root.setOnClickListener {
                 AmplitudeUtils.trackEvent(CLICK_RECOMMEND_STORE)
-                moveToDetail(MAIN, bakery.bakeryId)
+                moveToDetail(bakery.bakeryId)
             }
             binding.root.context.loadingImage(
                 imageUrl = bakery.bakeryImage,
@@ -55,7 +55,6 @@ class BestBakeryAdapter(
     }
 
     companion object {
-        const val MAIN = "mainActivity"
         const val CLICK_RECOMMEND_STORE = "click_recommend_store"
     }
 }
