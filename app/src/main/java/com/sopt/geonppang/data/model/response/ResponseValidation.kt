@@ -6,5 +6,10 @@ import kotlinx.serialization.Serializable
 data class ResponseValidation(
     val code: Int?,
     val message: String?,
-    val data: String?,
-)
+    val data: Data?,
+) {
+    @Serializable
+    data class Data(
+        val available: Boolean,
+    )
+}
