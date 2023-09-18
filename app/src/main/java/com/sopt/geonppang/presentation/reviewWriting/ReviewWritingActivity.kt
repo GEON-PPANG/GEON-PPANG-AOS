@@ -119,17 +119,17 @@ class ReviewWritingActivity :
     private fun showReviewSuccessDialog() {
         ReviewSuccessBottomDialogFragment(::moveToDetail).show(
             supportFragmentManager,
-            "reviewSuccessDialog"
+            REVIEW_SUCCESS_DIALOG
         )
     }
 
     private fun showReviewCancelDialog() {
-        ReviewCancelBottomDialogFragment().show(supportFragmentManager, "reviewCancelDialog")
+        ReviewCancelBottomDialogFragment().show(supportFragmentManager, REVIEW_CANCEL_DIALOG)
     }
 
     private fun moveToDetail() {
         val intent = Intent(this, DetailActivity::class.java)
-        viewModel.bakeryId.value?.let { id ->
+        viewModel.bakeryId.value.let { id ->
             intent.putExtra(BAKERY_ID, id)
         }
         startActivity(intent)
@@ -150,6 +150,8 @@ class ReviewWritingActivity :
     companion object {
         const val BAKERY_ID = "bakeryId"
         const val BAKERY_INFO = "bakeryInfo"
+        const val REVIEW_SUCCESS_DIALOG = "reviewSuccessDialog"
+        const val REVIEW_CANCEL_DIALOG = "reviewCancelDialog"
         const val LIKE = "좋았어요"
         const val BAD = "아쉬웠어요"
         const val CLICK_REVIEW_WRITING_OPTION = "click_reviewwriting_option"

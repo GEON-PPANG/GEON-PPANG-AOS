@@ -80,7 +80,7 @@ class ReviewWritingViewModel @Inject constructor(private val reviewWritingReposi
 
     private fun getKeyWordTypeList(): List<RequestReviewWriting.KeywordName> {
         val trueKeyWordTypes = mutableListOf<RequestReviewWriting.KeywordName>()
-        userKeyWordType.value?.forEach { (keyWordType, value) ->
+        userKeyWordType.value.forEach { (keyWordType, value) ->
             if (value) {
                 trueKeyWordTypes.add(RequestReviewWriting.KeywordName(keyWordType.keywordType))
             }
@@ -94,8 +94,8 @@ class ReviewWritingViewModel @Inject constructor(private val reviewWritingReposi
 
     fun writeReview() {
         viewModelScope.launch {
-            reviewText.value?.let { reviewText ->
-                _bakeryId.value?.let {
+            reviewText.value.let { reviewText ->
+                _bakeryId.value.let {
                     reviewWritingRepository.writeReview(
                         it,
                         RequestReviewWriting(
