@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.model.request.RequestReport
 import com.sopt.geonppang.domain.repository.ReportRepository
 import com.sopt.geonppang.presentation.type.ReportCategoryType
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,6 +24,11 @@ class ReportViewModel @Inject constructor(
     val reportState get() = _reportState.asStateFlow()
 
     fun setReportCategory(reportCategoryType: ReportCategoryType) {
+        AmplitudeUtils.trackEventWithProperties(
+            CLICK_REVIEW_REPORT_OPTION,
+            OPTION,
+            reportCategoryType.name
+        )
         _reportCategory.value = reportCategoryType
     }
 
@@ -41,5 +47,10 @@ class ReportViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    companion object {
+        const val CLICK_REVIEW_REPORT_OPTION = "click_reviewreport_option"
+        const val OPTION = "option"
     }
 }
