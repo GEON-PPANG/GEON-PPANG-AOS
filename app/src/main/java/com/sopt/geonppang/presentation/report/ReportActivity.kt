@@ -59,9 +59,14 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
     }
 
     private fun collectData() {
-        viewModel.reportState.flowWithLifecycle(lifecycle).onEach {
-            when (it) {
+        viewModel.reportState.flowWithLifecycle(lifecycle).onEach { uiState ->
+            when (uiState) {
                 is UiState.Success -> {
+                    AmplitudeUtils.trackEvent(CLICK_REVIEW_REPORT_COMPLETE)
+                    AmplitudeUtils.trackEventWithMapProperties(
+                        COMPLETE_REVIEW_REPORT,
+                        mapOf(OPTION to uiState.data.reportCategory, TEXT to uiState.data.content)
+                    )
                     showReportSuccessBottomDialog()
                 }
 
@@ -78,5 +83,9 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
         const val REPORT_SUCCESS = "reportSuccessDialog"
         const val CLICK_REVIEW_REPORT_TEXT = "click_reviewreport_text"
         const val CLICK_REVIEW_REPORT_BACK = "click_reviewreport_back"
+        const val CLICK_REVIEW_REPORT_COMPLETE = "click_reviewreport_complete"
+        const val COMPLETE_REVIEW_REPORT = "complete_reviewreport"
+        const val OPTION = "option"
+        const val TEXT = "text"
     }
 }
