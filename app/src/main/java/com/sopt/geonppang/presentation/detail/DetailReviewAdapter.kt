@@ -36,7 +36,7 @@ class DetailReviewAdapter(
             }
 
             binding.tvItemDetailReviewReport.setOnClickListener {
-                AmplitudeUtils.trackEvent(CLICK_REVIEW_REPORT)
+                AmplitudeUtils.trackEvent(START_REVIEW_REPORT)
                 moveToReport(detailReview.reviewId)
             }
         }
@@ -53,6 +53,6 @@ class DetailReviewAdapter(
     }
 
     companion object {
-        const val CLICK_REVIEW_REPORT = "click_reviewreport"
+        const val START_REVIEW_REPORT = "start_reviewreport"
     }
 }

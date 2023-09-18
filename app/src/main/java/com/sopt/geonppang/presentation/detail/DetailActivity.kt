@@ -90,6 +90,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }
 
         binding.btnDetailCrateReview.setOnClickListener {
+            AmplitudeUtils.trackEvent(START_REVIEW_WRITING)
             moveToReviewWriting(bakeryId, viewModel.getBakeryInfo())
         }
 
@@ -208,5 +209,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         const val SOURCE = "source"
         const val CLICK_NAVIGATION = "click_navigation"
         const val CLICK_MY_STORE = "click_mystore"
+        const val START_REVIEW_WRITING = "start_reviewwriting"
     }
 }
