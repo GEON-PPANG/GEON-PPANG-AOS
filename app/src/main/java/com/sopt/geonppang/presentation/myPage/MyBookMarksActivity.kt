@@ -9,6 +9,9 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityMyBookmarksBinding
 import com.sopt.geonppang.presentation.common.BakeryAdapter
 import com.sopt.geonppang.presentation.detail.DetailActivity
+import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
+import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETAIL_PAGE_AT
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,6 +64,7 @@ class MyBookMarksActivity :
     }
 
     private fun moveToDetail(bakeryId: Int) {
+        AmplitudeUtils.trackEventWithProperties(VIEW_DETAIL_PAGE_AT, SOURCE, MY_PAGE_MY_STORE)
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra(BAKERY_ID, bakeryId)
         startActivity(intent)
@@ -68,5 +72,6 @@ class MyBookMarksActivity :
 
     companion object {
         const val BAKERY_ID = "bakeryId"
+        const val MY_PAGE_MY_STORE = "MYPAGE_MYSTORE"
     }
 }

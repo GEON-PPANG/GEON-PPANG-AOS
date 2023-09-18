@@ -19,7 +19,7 @@ class ReportViewModel @Inject constructor(
     private val _reportCategory = MutableStateFlow<ReportCategoryType?>(null)
     val reportCategory get() = _reportCategory.asStateFlow()
     val reportContent = MutableStateFlow("")
-    private val _reportState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
+    private val _reportState = MutableStateFlow<UiState<RequestReport>>(UiState.Loading)
     val reportState get() = _reportState.asStateFlow()
 
     fun setReportCategory(reportCategoryType: ReportCategoryType) {
@@ -30,11 +30,13 @@ class ReportViewModel @Inject constructor(
         viewModelScope.launch {
             reportContent.value.let { reportContent ->
                 reportCategory.value?.let { reportCategory ->
+                    val requestReport =
+                        RequestReport(content = reportContent, reportCategory = reportCategory.name)
                     reportRepository.reportReview(
                         reviewId,
-                        RequestReport(content = reportContent, reportCategory = reportCategory.name)
+                        requestReport
                     ).onSuccess {
-                        _reportState.value = UiState.Success(true)
+                        _reportState.value = UiState.Success(requestReport)
                     }.onFailure { throwable ->
                         _reportState.value = UiState.Error(throwable.message)
                     }
