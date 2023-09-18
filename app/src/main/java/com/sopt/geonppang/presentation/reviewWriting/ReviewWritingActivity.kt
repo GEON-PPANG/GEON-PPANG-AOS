@@ -52,7 +52,7 @@ class ReviewWritingActivity :
         }
 
         binding.btnReviewSuccess.setOnClickListener {
-            showReviewSuccessDialog()
+            viewModel.writeReview()
         }
 
         binding.toolbar.ivBack.setOnClickListener {
@@ -72,7 +72,7 @@ class ReviewWritingActivity :
         viewModel.reviewSuccessState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    moveToDetail()
+                    showReviewSuccessDialog()
                 }
 
                 else -> {}
@@ -84,7 +84,7 @@ class ReviewWritingActivity :
     }
 
     private fun showReviewSuccessDialog() {
-        ReviewSuccessBottomDialogFragment().show(supportFragmentManager, "reviewSuccessDialog")
+        ReviewSuccessBottomDialogFragment(::moveToDetail).show(supportFragmentManager, "reviewSuccessDialog")
     }
 
     private fun showReviewCancelDialog() {

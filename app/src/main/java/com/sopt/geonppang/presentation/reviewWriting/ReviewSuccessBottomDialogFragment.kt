@@ -9,7 +9,9 @@ import com.sopt.geonppang.util.binding.BindingBottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ReviewSuccessBottomDialogFragment :
+class ReviewSuccessBottomDialogFragment(
+    private val moveToDetail: () -> Unit
+) :
     BindingBottomSheetDialogFragment<DialogBottomReviewWritingSuccessBinding>(R.layout.dialog_bottom_review_writing_success) {
     private val viewModel: ReviewWritingViewModel by activityViewModels()
 
@@ -22,8 +24,8 @@ class ReviewSuccessBottomDialogFragment :
 
     private fun addListeners() {
         binding.btnReviewWritingSuccess.setOnClickListener {
-            viewModel.writeReview()
             dismiss()
+            moveToDetail()
         }
     }
 }
