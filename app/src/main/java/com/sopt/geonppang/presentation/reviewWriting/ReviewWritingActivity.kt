@@ -9,6 +9,7 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityReviewWritingBinding
 import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
+import com.sopt.geonppang.presentation.type.KeyWordType
 import com.sopt.geonppang.presentation.type.LikeType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
@@ -75,10 +76,19 @@ class ReviewWritingActivity :
     }
 
     private fun collectData() {
-        viewModel.reviewSuccessState.flowWithLifecycle(lifecycle).onEach {
-            when (it) {
+        viewModel.reviewSuccessState.flowWithLifecycle(lifecycle).onEach { uiState ->
+            when (uiState) {
                 is UiState.Success -> {
                     AmplitudeUtils.trackEvent(CLICK_REVIEW_WRITING_COMPLETE)
+                    uiState.data.likeType?.let { likeType ->
+                        AmplitudeUtils.trackEventWithMapProperties(
+                            COMPLETE_REVIEW_WRITING, mapOf(
+                                OPTION to getStringByLikeType(likeType),
+                                KEYWORD to getSelectedKeyWord(uiState.data.userKeyWordType),
+                                TEXT to uiState.data.reviewText
+                            )
+                        )
+                    }
                     showReviewSuccessDialog()
                 }
 
@@ -98,15 +108,11 @@ class ReviewWritingActivity :
             }
         }.launchIn(lifecycleScope)
         viewModel.userKeyWordType.flowWithLifecycle(lifecycle).onEach { keywordType ->
-            val selectedKeyword =
-                keywordType.entries.filter { it.value }.map { getString(it.key.keywordNameRes) }
-            if (selectedKeyword.isNotEmpty()) {
-                AmplitudeUtils.trackEventWithProperties(
-                    CLICK_RECOMMEND_KEYWORD,
-                    KEYWORD,
-                    selectedKeyword
-                )
-            }
+            AmplitudeUtils.trackEventWithProperties(
+                CLICK_RECOMMEND_KEYWORD,
+                KEYWORD,
+                getSelectedKeyWord(keywordType)
+            )
         }.launchIn(lifecycleScope)
     }
 
@@ -137,17 +143,23 @@ class ReviewWritingActivity :
         }
     }
 
+    private fun getSelectedKeyWord(inputKeyWordType: Map<KeyWordType, Boolean>): List<String> {
+        return inputKeyWordType.entries.filter { it.value }.map { getString(it.key.keywordNameRes) }
+    }
+
     companion object {
         const val BAKERY_ID = "bakeryId"
         const val BAKERY_INFO = "bakeryInfo"
         const val LIKE = "좋았어요"
         const val BAD = "아쉬웠어요"
         const val CLICK_REVIEW_WRITING_OPTION = "click_reviewwriting_option"
-        const val OPTION = "option"
         const val CLICK_RECOMMEND_KEYWORD = "click_recommend_keyword"
-        const val KEYWORD = "keyword"
         const val CLICK_REVIEW_WRITING_TEXT = "click_reviewwritng_text"
         const val CLICK_REVIEW_WRITING_BACK = "click_reviewwriting_back"
         const val CLICK_REVIEW_WRITING_COMPLETE = "click_reviewwriting_complete"
+        const val COMPLETE_REVIEW_WRITING = "complete_reviewwriting"
+        const val OPTION = "option"
+        const val KEYWORD = "keyword"
+        const val TEXT = "text"
     }
 }
