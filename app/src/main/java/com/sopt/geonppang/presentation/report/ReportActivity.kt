@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityReportBinding
 import com.sopt.geonppang.presentation.detail.DetailActivity
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
@@ -46,6 +47,7 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
         }
 
         binding.includeReportToolbar.ivBack.setOnClickListener {
+            AmplitudeUtils.trackEvent(CLICK_REVIEW_REPORT_BACK)
             finish()
         }
 
@@ -72,5 +74,6 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
 
     companion object {
         const val REPORT_SUCCESS = "reportSuccessDialog"
+        const val CLICK_REVIEW_REPORT_BACK = "click_reviewreport_back"
     }
 }
