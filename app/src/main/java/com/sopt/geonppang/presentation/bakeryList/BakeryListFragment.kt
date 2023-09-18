@@ -29,7 +29,7 @@ class BakeryListFragment :
     BakerySortTypeListener {
     private val viewModel: BakeryListViewModel by viewModels()
 
-    lateinit var bakeryAdapter: BakeryListAdapter
+    private lateinit var bakeryAdapter: BakeryListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

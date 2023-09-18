@@ -26,17 +26,23 @@ import kotlinx.coroutines.flow.onEach
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModels()
 
-    lateinit var bestBakeryAdapter: BestBakeryAdapter
-    lateinit var bestReviewAdapter: BestReviewAdapter
+    private lateinit var bestBakeryAdapter: BestBakeryAdapter
+    private lateinit var bestReviewAdapter: BestReviewAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
         initLayout()
         addListeners()
         collectData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchBestBakeryList()
+        viewModel.fetchBestReviewList()
     }
 
     private fun initLayout() {
@@ -97,10 +103,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         startActivity(intent)
     }
 
-    private fun moveToDetail(activityName: String, bakeryId: Int) {
+    private fun moveToDetail(bakeryId: Int) {
         AmplitudeUtils.trackEventWithProperties(VIEW_DETAIL_PAGE_AT, SOURCE, HOME)
         val intent = Intent(requireContext(), DetailActivity::class.java)
-        intent.putExtra(ACTIVITY_NAME, activityName)
         intent.putExtra(BAKERY_ID, bakeryId)
         startActivity(intent)
     }
@@ -114,7 +119,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     companion object {
         const val BAKERY_ID = "bakeryId"
-        const val ACTIVITY_NAME = "activityName"
         const val FILTER_INFO = "filterInfo"
         const val VIEW_TO_VIEW = "viewToView"
         const val HOME_TO_SEARCH = "homeToSearch"

@@ -56,7 +56,6 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
 
         binding.etSearch.setOnKeyListener { _, keyCode, event ->
             if ((event.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                completeFilteringInParticularView()
                 viewModel.searchBakeryList()
                 hideKeyboard(binding.root)
                 true
@@ -70,6 +69,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         viewModel.searchState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    completeFilteringInParticularView()
                     viewModel.searchBakeryList()
                     searchCountAdapter.setSearchData(it.data)
                     bakeryAdapter.submitList(it.data.bakeryList)

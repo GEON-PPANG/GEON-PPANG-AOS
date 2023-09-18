@@ -12,7 +12,6 @@ plugins {
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
-def KAKAO_NATIVE_APP_KEY = properties["KAKAO_NATIVE_APP_KEY"]
 
 android {
     namespace 'com.sopt.geonppang'
@@ -31,7 +30,7 @@ android {
         buildConfigField "String", "AMPLITUDE_API_KEY", properties["AMPLITUDE_API_KEY"]
         buildConfigField "String", "KAKAO_APP_KEY", properties["KAKAO_APP_KEY"]
 
-        manifestPlaceholders = [KAKAO_NATIVE_APP_KEY:KAKAO_NATIVE_APP_KEY]
+        manifestPlaceholders = [KAKAO_APP_KEY: properties["KAKAO_APP_KEY"]]
     }
 
     buildTypes {

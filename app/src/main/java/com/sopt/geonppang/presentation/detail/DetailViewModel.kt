@@ -7,6 +7,7 @@ import com.sopt.geonppang.domain.model.BookMark
 import com.sopt.geonppang.domain.model.ReviewData
 import com.sopt.geonppang.domain.repository.DetailRepository
 import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
+import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -24,8 +25,8 @@ class DetailViewModel @Inject constructor(
     val bakeryInfo get() = _bakeryInfo.asStateFlow()
     private val _reviewData = MutableStateFlow<ReviewData?>(null)
     val reviewData get() = _reviewData.asStateFlow()
-    private val _bookMarkInfo = MutableStateFlow<BookMark?>(null)
-    val bookMarkInfo get() = _bookMarkInfo.asStateFlow()
+    private val _bookMarkState = MutableStateFlow<UiState<BookMark>>(UiState.Loading)
+    val bookMarkState get() = _bookMarkState.asStateFlow()
 
     fun fetchDetailBakeryInfo(bakeryId: Int) {
         viewModelScope.launch {
@@ -33,7 +34,6 @@ class DetailViewModel @Inject constructor(
             detailRepository.fetchDetailBakery(bakeryId)
                 .onSuccess { bakeryInfo ->
                     _bakeryInfo.value = bakeryInfo
-                    _bookMarkInfo.value = BookMark(bakeryInfo.bookMarkCount, bakeryInfo.isBooked)
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
@@ -57,15 +57,15 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             detailRepository.doBookMark(bakeryId, isAddingBookMark)
                 .onSuccess { bookMark ->
-                    _bookMarkInfo.value = bookMark
+                    _bookMarkState.value = UiState.Success(bookMark)
                 }
                 .onFailure { throwable ->
-                    Timber.e(throwable.message)
+                    _bookMarkState.value = UiState.Error(throwable.message)
                 }
         }
     }
 
-    fun getBakeryInfo(): BakeryReviewWritingInfo {
+    fun getBakeryInfoForReview(): BakeryReviewWritingInfo {
         return _bakeryInfo.value?.let { _bakeryInfo ->
             BakeryReviewWritingInfo(
                 _bakeryInfo.bakeryName,

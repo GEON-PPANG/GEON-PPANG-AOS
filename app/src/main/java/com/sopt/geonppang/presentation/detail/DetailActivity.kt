@@ -21,6 +21,7 @@ import com.sopt.geonppang.presentation.reviewWriting.ReviewWritingActivity
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.ChipFactory
 import com.sopt.geonppang.util.CustomSnackbar
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -76,22 +77,12 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun addListeners() {
         binding.ivDetailArrowLeft.setOnClickListener {
-            val previousActivityName = intent.getStringExtra(ACTIVITY_NAME)
-
-            when (previousActivityName) {
-                MAIN -> {
-                    moveToMain()
-                }
-
-                else -> {
-                    finish()
-                }
-            }
+            finish()
         }
 
         binding.btnDetailCrateReview.setOnClickListener {
             AmplitudeUtils.trackEvent(START_REVIEW_WRITING)
-            moveToReviewWriting(bakeryId, viewModel.getBakeryInfo())
+            moveToReviewWriting(bakeryId, viewModel.getBakeryInfoForReview())
         }
 
         binding.fabDetail.setOnClickListener {
@@ -106,16 +97,9 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }
 
         binding.ivDetailBottomAppBarBookmark.setOnClickListener {
-            viewModel.bookMarkInfo.value?.isBookMarked?.let { isBookMarked ->
+            viewModel.bakeryInfo.value?.isBooked?.let { isBookMarked ->
                 AmplitudeUtils.trackEvent(CLICK_MY_STORE)
                 viewModel.doBookMark(bakeryId, !isBookMarked)
-
-                if (!isBookMarked) {
-                    CustomSnackbar.makeSnackbar(
-                        binding.root,
-                        getString(R.string.snackbar_save)
-                    )
-                }
             }
         }
     }
@@ -146,8 +130,21 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
             }
         }.launchIn(lifecycleScope)
 
-        viewModel.bookMarkInfo.flowWithLifecycle(lifecycle).onEach {
-            viewModel.fetchDetailBakeryInfo(bakeryId)
+        viewModel.bookMarkState.flowWithLifecycle(lifecycle).onEach { uiState ->
+            when (uiState) {
+                is UiState.Success -> {
+                    viewModel.fetchDetailBakeryInfo(bakeryId)
+
+                    if (uiState.data.isBookMarked) {
+                        CustomSnackbar.makeSnackbar(
+                            binding.root,
+                            getString(R.string.snackbar_save)
+                        )
+                    }
+                }
+
+                else -> {}
+            }
         }.launchIn(lifecycleScope)
     }
 
@@ -163,14 +160,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun moveToTop(recyclerView: RecyclerView) {
         recyclerView.smoothScrollToPosition(FIRST_POSITION)
-    }
-
-    private fun moveToMain() {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.flags =
-            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-        finish()
     }
 
     private fun moveToWebPage(link: String) {
@@ -201,8 +190,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     companion object {
         const val BAKERY_ID = "bakeryId"
         const val BAKERY_INFO = "bakeryInfo"
-        const val ACTIVITY_NAME = "activityName"
-        const val MAIN = "mainActivity"
         const val REVIEW_ID = "reviewId"
         const val FIRST_POSITION = 0
         const val VIEW_DETAIL_PAGE_AT = "view_detailpage_at"
