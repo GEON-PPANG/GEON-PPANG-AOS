@@ -18,7 +18,6 @@ class LoginFailBottomDialogFragment :
     private fun addListeners() {
         binding.btnLoginFailConfirm.setOnClickListener {
             dismiss()
-            requireActivity().finish()
         }
     }
 }
