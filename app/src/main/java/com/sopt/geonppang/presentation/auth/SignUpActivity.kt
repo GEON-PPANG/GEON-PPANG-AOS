@@ -39,12 +39,8 @@ class SignUpActivity :
         binding.toolbar.ivBack.setOnClickListener {
             finish()
         }
-        binding.tvEmailErrorMsg.setOnClickListener{
-            viewModel.isNicknameDuplicated.observe(this){
-                if(it == true){
-                    binding.tvEmailErrorMsg.setTextColor(ContextCompat.getColor(this, R.color.main_3))
-                }
-            }
+        binding.tvEmailErrorMsg.setOnClickListener {
+
         }
     }
 
