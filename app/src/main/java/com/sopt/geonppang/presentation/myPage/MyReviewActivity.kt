@@ -7,8 +7,11 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityMyReviewBinding
+import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
+import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETAIL_PAGE_AT
 import com.sopt.geonppang.presentation.model.MyReviewBakeryInfo
 import com.sopt.geonppang.presentation.myReviewDetail.MyReviewDetailActivity
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,6 +62,7 @@ class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activ
     }
 
     private fun moveToReviewDetail(reviewId: Int, myReviewDetailInfo: MyReviewBakeryInfo) {
+        AmplitudeUtils.trackEventWithProperties(VIEW_DETAIL_PAGE_AT, SOURCE, MY_PAGE_MY_REVIEW)
         val intent = Intent(this, MyReviewDetailActivity::class.java)
         intent.putExtra(REVIEW_ID, reviewId)
         intent.putExtra(BAKERY_INFO, myReviewDetailInfo)
@@ -68,5 +72,6 @@ class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activ
     companion object {
         const val REVIEW_ID = "reviewId"
         const val BAKERY_INFO = "bakeryInfo"
+        const val MY_PAGE_MY_REVIEW = "MYPAGE_MYREVIEW"
     }
 }

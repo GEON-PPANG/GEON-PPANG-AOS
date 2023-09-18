@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.databinding.ItemDetailReviewBinding
 import com.sopt.geonppang.domain.model.DetailReview
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.ItemDiffCallback
 
 class DetailReviewAdapter(
@@ -35,6 +36,7 @@ class DetailReviewAdapter(
             }
 
             binding.tvItemDetailReviewReport.setOnClickListener {
+                AmplitudeUtils.trackEvent(START_REVIEW_REPORT)
                 moveToReport(detailReview.reviewId)
             }
         }
@@ -48,5 +50,9 @@ class DetailReviewAdapter(
 
     override fun onBindViewHolder(holder: DetailReviewViewHolder, position: Int) {
         holder.onBind(getItem(position), initChip, moveToReport, position)
+    }
+
+    companion object {
+        const val START_REVIEW_REPORT = "start_reviewreport"
     }
 }
