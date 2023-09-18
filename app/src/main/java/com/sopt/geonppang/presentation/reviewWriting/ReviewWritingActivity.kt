@@ -82,7 +82,8 @@ class ReviewWritingActivity :
                     AmplitudeUtils.trackEvent(CLICK_REVIEW_WRITING_COMPLETE)
                     uiState.data.likeType?.let { likeType ->
                         AmplitudeUtils.trackEventWithMapProperties(
-                            COMPLETE_REVIEW_WRITING, mapOf(
+                            COMPLETE_REVIEW_WRITING,
+                            mapOf(
                                 OPTION to getStringByLikeType(likeType),
                                 KEYWORD to getSelectedKeyWord(uiState.data.userKeyWordType),
                                 TEXT to uiState.data.reviewText
