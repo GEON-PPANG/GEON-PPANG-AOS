@@ -9,6 +9,8 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityReviewWritingBinding
 import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
+import com.sopt.geonppang.presentation.type.LikeType
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
@@ -81,10 +83,22 @@ class ReviewWritingActivity :
         viewModel.reviewCancelState.flowWithLifecycle(lifecycle).onEach { reviewCancelState ->
             if (reviewCancelState == false) moveToDetail()
         }.launchIn(lifecycleScope)
+        viewModel.isLike.flowWithLifecycle(lifecycle).onEach {
+            it?.let { likeType ->
+                AmplitudeUtils.trackEventWithProperties(
+                    CLICK_REVIEW_WRITING_OPTION,
+                    OPTION,
+                    getStringByLikeType(likeType)
+                )
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun showReviewSuccessDialog() {
-        ReviewSuccessBottomDialogFragment(::moveToDetail).show(supportFragmentManager, "reviewSuccessDialog")
+        ReviewSuccessBottomDialogFragment(::moveToDetail).show(
+            supportFragmentManager,
+            "reviewSuccessDialog"
+        )
     }
 
     private fun showReviewCancelDialog() {
@@ -100,8 +114,21 @@ class ReviewWritingActivity :
         finish()
     }
 
+    private fun getStringByLikeType(likeType: LikeType): String {
+        return when (likeType) {
+            LikeType.LIKE -> LIKE
+            LikeType.BAD -> BAD
+        }
+    }
+
     companion object {
         const val BAKERY_ID = "bakeryId"
         const val BAKERY_INFO = "bakeryInfo"
+        const val LIKE = "좋았어요"
+        const val BAD = "아쉬웠어요"
+        const val CLICK_REVIEW_WRITING_OPTION = "click_reviewwriting_option"
+        const val OPTION = "option"
+        const val CLICK_RECOMMEND_KEYWORD = "click_recommend_keyword"
+        const val KEYWORD = "keyword"
     }
 }
