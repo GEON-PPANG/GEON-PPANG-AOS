@@ -1,7 +1,5 @@
 package com.sopt.geonppang.presentation.login
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.datasource.local.GPDataSource
@@ -24,7 +22,7 @@ class LogInViewModel @Inject constructor(
     private val _loginState = MutableStateFlow<Boolean?>(null)
     val loginState get() = _loginState.asStateFlow()
 
-    fun initLogin(){
+    fun initLogin() {
         _loginState.value = null
     }
 
@@ -32,21 +30,21 @@ class LogInViewModel @Inject constructor(
         viewModelScope.launch {
             authRepository.login(RequestLogin(loginEmail.value, loginPassword.value))
                 .onSuccess { loginResponse ->
-                    Log.e("로그인 상태 확인","${loginResponse}")
+                    // Log.e("로그인 상태 확인","${loginResponse}")
                     val responseHeader = loginResponse.headers()
                     val accessToken = responseHeader[AUTHORIZATION].toString()
                     if (loginResponse.code() == 200) {
-                        Log.e("로그인 성공", "${loginResponse.code()}")
+                        // Log.e("로그인 성공", "${loginResponse.code()}")
                         gpDataSource.accessToken = BEARER_PREFIX + accessToken
                         gpDataSource.isLogin = true
                         _loginState.value = true
                     }
-                    if (loginResponse.code() == 400){
-                        Log.e("로그인 실패", "${loginResponse.code()}")
+                    if (loginResponse.code() == 400) {
+                        // Log.e("로그인 실패", "${loginResponse.code()}")
                         _loginState.value = false
                     }
-                    if(loginResponse.code()==500){
-                        Log.e("서버 오류","${loginResponse.code()}")
+                    if (loginResponse.code() == 500) {
+                        // Log.e("서버 오류", "${loginResponse.code()}")
                     }
                 }.onFailure { throwable ->
                     Timber.tag("로그인 실패 on Failure").e(throwable.message)
@@ -56,8 +54,6 @@ class LogInViewModel @Inject constructor(
 
     companion object {
         const val AUTHORIZATION = "Authorization"
-        const val AUTHORIZATION_REFRESH = "Authorization-refresh"
         const val BEARER_PREFIX = "Bearer "
-
     }
 }

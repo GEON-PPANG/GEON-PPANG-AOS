@@ -26,7 +26,7 @@ class LoginActivity :
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        //autoLogin()
+        // autoLogin()
         addListener()
         collectData()
     }
@@ -48,11 +48,11 @@ class LoginActivity :
             when (loginState) {
                 true -> {
                     moveToHome()
-                    Log.e("로그인 성공시", "{${loginState}}")
+                    // Log.e("로그인 성공시", "{${loginState}}")
                 }
 
                 false -> {
-                    Log.e("로그인 실패시", "{${loginState}}")
+                    // Log.e("로그인 실패시", "{${loginState}}")
                     showLoginFailDialog()
                     viewModel.initLogin()
                 }
