@@ -24,6 +24,7 @@
     <string name="email_validate_to_use">사용 가능한 이메일입니다</string>
     <string name="txt_double_check_btn">중복확인</string>
     <string name="txt_next_btn">다음</string>
+    <string name="txt_start_btn">시작하기</string>
     <string name="tv_password">비밀번호</string>
     <string name="password_hint">영문, 숫자 포함 8자리 이상</string>
     <string name="tv_double_check_password">비밀번호 재확인</string>

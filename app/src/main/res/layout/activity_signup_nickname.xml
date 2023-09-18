@@ -74,19 +74,19 @@
             app:layout_constraintTop_toBottomOf="@id/tv_input_email_phrase">
 
             <TextView
-                android:id="@+id/tv_email_text"
+                android:id="@+id/tv_nickname_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/tv_nickname"
                 android:textAppearance="@style/TextAppearance.Subhead"
-                android:textColor="@{!viewModel.email.empty &amp; !viewModel.isValidEmail() ? @color/error : @color/gray_400}" />
+                android:textColor="@{!viewModel.nickname.empty &amp; !viewModel.isValidNickname() ? @color/error : @color/gray_400}" />
 
 
             <EditText
-                android:id="@+id/et_write_your_email"
-                android:layout_width="wrap_content"
+                android:id="@+id/et_write_your_nickname"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="4dp"
@@ -112,7 +112,7 @@
             android:textAppearance="@style/TextAppearance.CaptionM1"
             android:textColor="@color/error"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linear_nickname" /><!--visibility viewModel 만든 후 구현 예정-->
+            app:layout_constraintTop_toBottomOf="@+id/linear_nickname" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_double_check"
@@ -138,12 +138,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="@{viewModel.isValidNickname() == true ? @color/main_2 : @color/gray_200}"
-            android:enabled="@{viewModel.completeNickname}"
+            android:backgroundTint="@{viewModel.isValidNickname() &amp; viewModel.isNicknameUsable() &amp; viewModel.isNicknameUsable() != null ? @color/main_2 : @color/gray_200}"
+            android:enabled="@{viewModel.isValidNickname() &amp; viewModel.isNicknameUsable() &amp; viewModel.isNicknameUsable() != null}"
             android:paddingVertical="18dp"
-            android:text="@string/txt_next_btn"
+            android:text="@{viewModel.isValidNickname() &amp; viewModel.isNicknameUsable() &amp; viewModel.isNicknameUsable() != null ? @string/txt_start_btn : @string/txt_next_btn }"
             android:textAppearance="@style/TextAppearance.BodyM1"
-            android:textColor="@{viewModel.isValidNickname() == true ? @color/white : @color/gray_400}"
+            android:textColor="@{viewModel.isValidNickname() &amp; viewModel.isNicknameUsable() &amp; viewModel.isNicknameUsable() != null ? @color/white : @color/gray_400}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"

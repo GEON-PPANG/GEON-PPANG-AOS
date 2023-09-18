@@ -37,11 +37,14 @@ class AuthViewModel @Inject constructor(
     private val _authRoleType = MutableStateFlow<AuthRoleType?>(null)
     val authRoleType get() = _authRoleType.asStateFlow()
 
-    private val _isEmailDuplicated: MutableLiveData<Boolean> = MutableLiveData()
-    val isEmailDuplicated: MutableLiveData<Boolean> = _isEmailDuplicated
+    private val _isEmailUsable: MutableLiveData<Boolean> = MutableLiveData()
+    val isEmailUsable: LiveData<Boolean> = _isEmailUsable
 
-    private val _isNicknameDuplicated: MutableLiveData<Boolean> = MutableLiveData()
-    val isNicknameDuplicated: LiveData<Boolean> = _isNicknameDuplicated
+    private val _isNicknameUsable: MutableLiveData<Boolean?> = MutableLiveData()
+    val isNicknameUsable: LiveData<Boolean?> = _isNicknameUsable
+
+    private var _nicknameLen: MutableLiveData<Int> = MutableLiveData()
+    val nicknameLen: LiveData<Int> = _nicknameLen
 
     private val _signUpState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val signUpState get() = _signUpState.asStateFlow()
@@ -62,7 +65,7 @@ class AuthViewModel @Inject constructor(
     }
 
     fun initNickname() {
-        _isNicknameDuplicated.value = null
+        _isNicknameUsable.value = null
     }
 
     fun doubleCheckEmail() {
@@ -70,8 +73,8 @@ class AuthViewModel @Inject constructor(
             Log.e("이메일 중복확인하기 http", "이메일 중복확인 서버 통신 확인하기")
             validationRepository.validateEmail(RequestValidationEmail(email.value))
                 .onSuccess {
-                    _isEmailDuplicated.value = true
-                    Log.e("이메일 중복확인하기!!! http", "${_isEmailDuplicated.value}")
+                    _isEmailUsable.value = true
+                    Log.e("이메일 중복확인하기!!! http", "${_isEmailUsable.value}")
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
@@ -83,15 +86,18 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch {
             validationRepository.validateNickname(RequestValidationNickname(nickname.value))
                 .onSuccess {
-                    // 중복일 때 onSuccess
-                    _isNicknameDuplicated.value = false
-                    Log.e("isNicknameDuplicated", "{${it.message}}")
+                    if (it.code == 200) {
+                        // 중복 아닐 때
+                        _isNicknameUsable.value = it.data?.available
+                        // nickname.value?.length.also { _nicknameLen }
+                        Log.e("isNicknameDuplicated", "{${it.message} ${_isNicknameUsable.value}}")
+                    }
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
-                    // 중복이 아닐 떄는 Failure 로 온다
-                    _isNicknameDuplicated.value = true
-                    Log.e("isNicknameNotDuplicate", "{${_isNicknameDuplicated.value}}")
+                    // 중복
+                    _isNicknameUsable.value = false
+                    Log.e("isNicknameNotDuplicate", "{${_isNicknameUsable.value}}")
                 }
         }
     }
