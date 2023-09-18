@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ItemHomeBestBakeryBinding
 import com.sopt.geonppang.domain.model.BestBakery
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.ItemDiffCallback
+import com.sopt.geonppang.util.extension.loadingImage
 import com.sopt.geonppang.util.setVisibility
 
 class BestBakeryAdapter(
@@ -33,7 +35,11 @@ class BestBakeryAdapter(
                 AmplitudeUtils.trackEvent(CLICK_RECOMMEND_STORE)
                 moveToDetail(MAIN, bakery.bakeryId)
             }
-
+            binding.root.context.loadingImage(
+                imageUrl = bakery.bakeryImage,
+                imageView = binding.ivBestBakery,
+                loadingImage = R.drawable.img_bakery_image_loading_best_bakery
+            )
             binding.chipHomeSecondNearStation.setVisibility(bakery.secondNearStation != "")
         }
     }
