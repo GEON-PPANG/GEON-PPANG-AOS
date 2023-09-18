@@ -13,7 +13,6 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityDetailBinding
-import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.common.WebViewActivity
 import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
 import com.sopt.geonppang.presentation.report.ReportActivity
@@ -98,7 +97,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
         binding.ivDetailBottomAppBarBookmark.setOnClickListener {
             viewModel.bakeryInfo.value?.isBooked?.let { isBookMarked ->
-                AmplitudeUtils.trackEvent(CLICK_MY_STORE)
                 viewModel.doBookMark(bakeryId, !isBookMarked)
             }
         }
@@ -133,6 +131,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         viewModel.bookMarkState.flowWithLifecycle(lifecycle).onEach { uiState ->
             when (uiState) {
                 is UiState.Success -> {
+                    AmplitudeUtils.trackEvent(CLICK_MY_STORE)
                     viewModel.fetchDetailBakeryInfo(bakeryId)
 
                     if (uiState.data.isBookMarked) {
