@@ -1,7 +1,6 @@
 package com.sopt.geonppang.data.service
 
 import android.content.Context
-import android.util.Log
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.Constants.TAG
 import com.kakao.sdk.user.UserApiClient
@@ -58,22 +57,24 @@ class KakaoAuthService @Inject constructor(
         }
     }
 
-    fun logoutKakao() {
+    fun logoutKakao(logoutListener: () -> Unit) {
         UserApiClient.instance.logout { error ->
             if (error != null) {
-                Log.e(TAG, "로그아웃 실패. SDK에서 토큰 삭제됨", error)
+                Timber.tag(TAG).e(error, "카카오 로그아웃 실패. SDK에서 토큰 삭제됨")
             } else {
-                Log.i(TAG, "로그아웃 성공. SDK에서 토큰 삭제됨")
+                logoutListener()
+                Timber.tag(TAG).i("카카오 로그아웃 성공. SDK에서 토큰 삭제됨")
             }
         }
     }
 
-    fun disconnectKakao() {
+    fun withdrawKakao(withdrawListener: () -> Unit) {
         UserApiClient.instance.unlink { error ->
             if (error != null) {
-                Log.e(TAG, "연결 끊기 실패", error)
+                Timber.tag(TAG).e(error, "카카오 회원 탈퇴 실패")
             } else {
-                Log.i(TAG, "연결 끊기 성공. SDK에서 토큰 삭제 됨")
+                withdrawListener()
+                Timber.tag(TAG).i("카카오 회원 탈퇴 성공. SDK에서 토큰 삭제 됨")
             }
         }
     }
