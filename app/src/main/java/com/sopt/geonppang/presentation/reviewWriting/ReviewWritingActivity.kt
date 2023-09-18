@@ -92,6 +92,17 @@ class ReviewWritingActivity :
                 )
             }
         }.launchIn(lifecycleScope)
+        viewModel.userKeyWordType.flowWithLifecycle(lifecycle).onEach { keywordType ->
+            val selectedKeyword =
+                keywordType.entries.filter { it.value }.map { getString(it.key.keywordNameRes) }
+            if (selectedKeyword.isNotEmpty()) {
+                AmplitudeUtils.trackEventWithProperties(
+                    CLICK_RECOMMEND_KEYWORD,
+                    KEYWORD,
+                    selectedKeyword
+                )
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun showReviewSuccessDialog() {
