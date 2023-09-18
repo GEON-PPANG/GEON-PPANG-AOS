@@ -90,5 +90,7 @@ class SignUpNicknameActivity :
 
     companion object {
         const val NICKNAME = "nickName"
+        const val EMAIL = "email"
+        const val PASSWORD = "password"
     }
 }
