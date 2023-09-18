@@ -73,6 +73,16 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
                 else -> {}
             }
         }.launchIn(lifecycleScope)
+
+        viewModel.reportCategory.flowWithLifecycle(lifecycle).onEach {
+            it?.let { reportCategoryType ->
+                AmplitudeUtils.trackEventWithProperties(
+                    CLICK_REVIEW_REPORT_OPTION,
+                    OPTION,
+                    reportCategoryType.name
+                )
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun showReportSuccessBottomDialog() {
@@ -81,6 +91,7 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
 
     companion object {
         const val REPORT_SUCCESS = "reportSuccessDialog"
+        const val CLICK_REVIEW_REPORT_OPTION = "click_reviewreport_option"
         const val CLICK_REVIEW_REPORT_TEXT = "click_reviewreport_text"
         const val CLICK_REVIEW_REPORT_BACK = "click_reviewreport_back"
         const val CLICK_REVIEW_REPORT_COMPLETE = "click_reviewreport_complete"
