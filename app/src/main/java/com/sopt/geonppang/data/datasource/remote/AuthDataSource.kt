@@ -1,8 +1,8 @@
 package com.sopt.geonppang.data.datasource.remote
 
+import com.sopt.geonppang.data.model.request.RequestLogin
 import com.sopt.geonppang.data.model.request.RequestNicknameSetting
 import com.sopt.geonppang.data.model.request.RequestSignup
-import com.sopt.geonppang.data.model.request.RequestLogin
 import com.sopt.geonppang.data.model.response.ResponseLogin
 import com.sopt.geonppang.data.model.response.ResponseLogout
 import com.sopt.geonppang.data.model.response.ResponseNickNameSetting
@@ -25,5 +25,5 @@ class AuthDataSource @Inject constructor(
     suspend fun logout(): ResponseLogout = authService.logout()
     suspend fun settingNickname(nickname: RequestNicknameSetting): ResponseNickNameSetting =
         authService.settingNickName(nickname)
-    suspend fun login(requestLogin: RequestLogin): ResponseLogin = authService.login(requestLogin)
+    suspend fun login(requestLogin: RequestLogin): Response<ResponseLogin> = authService.login(requestLogin)
 }

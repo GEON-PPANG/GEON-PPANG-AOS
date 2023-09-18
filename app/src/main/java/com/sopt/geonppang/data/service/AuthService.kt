@@ -30,7 +30,7 @@ interface AuthService {
     @POST("auth/login")
     suspend fun login(
         @Body requestLogin: RequestLogin
-    ): ResponseLogin
+    ): Response<ResponseLogin>
 
     @POST("member/nickname")
     suspend fun settingNickName(

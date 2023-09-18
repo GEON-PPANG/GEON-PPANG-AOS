@@ -32,6 +32,6 @@ class AuthRepositoryImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun login(responseLogin: RequestLogin): Result<ResponseLogin> =
+    override suspend fun login(responseLogin: RequestLogin): Result<Response<ResponseLogin>> =
         runCatching { authDataSource.login(responseLogin) }
 }
