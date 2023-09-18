@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sopt.geonppang.databinding.ItemDetailBakeryInfoBinding
 import com.sopt.geonppang.domain.model.BakeryInfo
 import com.sopt.geonppang.util.AmplitudeUtils
-import com.sopt.geonppang.util.CustomSnackbar
 
 class DetailBakeryInfoAdapter(
     private val moveToWebPage: (String) -> Unit
