@@ -38,6 +38,7 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
 
         binding.etReportContent.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
+                AmplitudeUtils.trackEvent(CLICK_REVIEW_REPORT_TEXT)
                 binding.svReport.smoothScrollTo(0, binding.etReportContent.top)
             }
         }
@@ -52,6 +53,7 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
         }
 
         binding.layoutReport.setOnClickListener {
+            binding.etReportContent.clearFocus()
             hideKeyboard(it)
         }
     }
@@ -74,6 +76,7 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
 
     companion object {
         const val REPORT_SUCCESS = "reportSuccessDialog"
+        const val CLICK_REVIEW_REPORT_TEXT = "click_reviewreport_text"
         const val CLICK_REVIEW_REPORT_BACK = "click_reviewreport_back"
     }
 }
