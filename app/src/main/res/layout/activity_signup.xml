@@ -52,7 +52,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
-                    android:background="@{!viewModel.inputEmail.empty &amp; !viewModel.isValidEmail()? @drawable/background_need_change_status : @drawable/background_normal_status   }"
+                    android:background="@{!viewModel.email.empty &amp; !viewModel.isValidEmail()? @drawable/background_need_change_status : @drawable/background_normal_status   }"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="@id/tv_input_phrase"
                     app:layout_constraintStart_toStartOf="@id/tv_input_phrase"
@@ -70,7 +70,7 @@
                             android:layout_marginTop="16dp"
                             android:text="@string/tv_email"
                             android:textAppearance="@style/TextAppearance.BodyB2"
-                            android:textColor="@{!viewModel.inputEmail.empty &amp; !viewModel.isValidEmail() ? @color/error : @color/gray_400}"
+                            android:textColor="@{!viewModel.email.empty &amp; !viewModel.isValidEmail() ? @color/error : @color/gray_400}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,7 +85,7 @@
                             android:hint="@string/email_hint"
                             android:inputType="textEmailAddress"
                             android:paddingVertical="5dp"
-                            android:text="@={viewModel.inputEmail}"
+                            android:text="@={viewModel.email}"
                             android:textAppearance="@style/TextAppearance.Headline"
                             android:textColorHint="@color/gray_300"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -117,7 +117,7 @@
 
                 <TextView
                     android:id="@+id/tv_email_error_msg"
-                    visibility="@{!viewModel.inputEmail.empty &amp; !viewModel.isValidEmail()}"
+                    visibility="@{!viewModel.email.empty &amp; !viewModel.isValidEmail()}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -133,7 +133,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:background="@{!viewModel.inputPassword.empty &amp; !viewModel.isValidPassword()? @drawable/background_need_change_status : @drawable/background_normal_status }"
+                    android:background="@{!viewModel.password.empty &amp; !viewModel.isValidPassword()? @drawable/background_need_change_status : @drawable/background_normal_status }"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="@id/linear_email"
                     app:layout_constraintStart_toStartOf="@id/linear_email"
@@ -147,7 +147,7 @@
                         android:layout_marginTop="16dp"
                         android:text="@string/tv_password"
                         android:textAppearance="@style/TextAppearance.BodyB2"
-                        android:textColor="@{!viewModel.inputPassword.empty &amp; !viewModel.isValidPassword() ? @color/error : @color/gray_400}" />
+                        android:textColor="@{!viewModel.password.empty &amp; !viewModel.isValidPassword() ? @color/error : @color/gray_400}" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/CustomTextInputLayout"
@@ -167,7 +167,7 @@
                             android:inputType="textPassword"
                             android:padding="0dp"
                             android:paddingStart="18dp"
-                            android:text="@={viewModel.inputPassword}"
+                            android:text="@={viewModel.password}"
                             android:textAppearance="@style/TextAppearance.Headline"
                             android:textColorHint="@color/gray_300"
                             android:translationY="-5dp" />
@@ -177,7 +177,7 @@
 
                 <TextView
                     android:id="@+id/tv_password1_error_msg"
-                    visibility="@{!viewModel.inputPassword.empty &amp; !viewModel.isValidPassword()}"
+                    visibility="@{!viewModel.password.empty &amp; !viewModel.isValidPassword()}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -192,7 +192,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
-                    android:background="@{!viewModel.inputPasswordCheck.empty &amp; !viewModel.completePassword? @drawable/background_need_change_status : @drawable/background_normal_status }"
+                    android:background="@{!viewModel.password_check.empty &amp; !viewModel.completePassword? @drawable/background_need_change_status : @drawable/background_normal_status }"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="@id/linear_password"
                     app:layout_constraintStart_toStartOf="@id/linear_password"
@@ -206,7 +206,7 @@
                         android:layout_marginTop="16dp"
                         android:text="@string/tv_double_check_password"
                         android:textAppearance="@style/TextAppearance.BodyB2"
-                        android:textColor="@{!viewModel.inputPasswordCheck.empty &amp; !viewModel.completePassword ? @color/error : @color/gray_400}" />
+                        android:textColor="@{!viewModel.password_check.empty &amp; !viewModel.completePassword ? @color/error : @color/gray_400}" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/CustomTextInputLayout"
@@ -226,7 +226,7 @@
                             android:inputType="textPassword"
                             android:padding="0dp"
                             android:paddingStart="18dp"
-                            android:text="@={viewModel.inputPasswordCheck}"
+                            android:text="@={viewModel.password_check}"
                             android:textAppearance="@style/TextAppearance.Headline"
                             android:textColorHint="@color/gray_300"
                             android:translationY="-5dp" />
@@ -237,7 +237,7 @@
 
                 <TextView
                     android:id="@+id/tv_password2_error_msg"
-                    visibility="@{!viewModel.inputPasswordCheck.empty &amp; !viewModel.completePassword}"
+                    visibility="@{!viewModel.password_check.empty &amp; !viewModel.completePassword}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
