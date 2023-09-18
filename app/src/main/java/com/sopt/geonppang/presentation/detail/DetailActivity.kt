@@ -13,7 +13,6 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityDetailBinding
-import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.common.WebViewActivity
 import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
 import com.sopt.geonppang.presentation.report.ReportActivity
@@ -158,14 +157,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         recyclerView.smoothScrollToPosition(FIRST_POSITION)
     }
 
-    private fun moveToMain() {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.flags =
-            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-        finish()
-    }
-
     private fun moveToWebPage(link: String) {
         Intent(this, WebViewActivity::class.java).apply {
             putExtra(WebViewActivity.WEB_VIEW_LINK, link)
@@ -194,8 +185,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     companion object {
         const val BAKERY_ID = "bakeryId"
         const val BAKERY_INFO = "bakeryInfo"
-        const val ACTIVITY_NAME = "activityName"
-        const val MAIN = "mainActivity"
         const val REVIEW_ID = "reviewId"
         const val FIRST_POSITION = 0
     }
