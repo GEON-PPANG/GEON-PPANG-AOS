@@ -2,13 +2,15 @@ package com.sopt.geonppang.presentation.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.ActivityLoginBinding
-import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.auth.SignUpActivity
+import com.sopt.geonppang.presentation.home.HomeFragment
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +26,7 @@ class LoginActivity :
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        //autoLogin()
         addListener()
         collectData()
     }
@@ -45,10 +48,13 @@ class LoginActivity :
             when (loginState) {
                 true -> {
                     moveToHome()
+                    Log.e("로그인 성공시", "{${loginState}}")
                 }
 
                 false -> {
+                    Log.e("로그인 실패시", "{${loginState}}")
                     showLoginFailDialog()
+                    viewModel.initLogin()
                 }
 
                 else -> {}
@@ -61,12 +67,18 @@ class LoginActivity :
     }
 
     private fun moveToHome() {
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, HomeFragment::class.java))
         finish()
     }
 
     private fun moveToSignup() {
         startActivity(Intent(this, SignUpActivity::class.java))
+    }
+
+    private fun autoLogin() {
+        val gpDataSource = GPDataSource(this)
+        if (gpDataSource.isLogin)
+            moveToHome()
     }
 
     companion object {
