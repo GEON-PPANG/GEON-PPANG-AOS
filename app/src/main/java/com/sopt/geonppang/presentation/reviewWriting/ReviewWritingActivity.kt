@@ -78,6 +78,7 @@ class ReviewWritingActivity :
         viewModel.reviewSuccessState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    AmplitudeUtils.trackEvent(CLICK_REVIEW_WRITING_COMPLETE)
                     showReviewSuccessDialog()
                 }
 
@@ -147,5 +148,6 @@ class ReviewWritingActivity :
         const val KEYWORD = "keyword"
         const val CLICK_REVIEW_WRITING_TEXT = "click_reviewwritng_text"
         const val CLICK_REVIEW_WRITING_BACK = "click_reviewwriting_back"
+        const val CLICK_REVIEW_WRITING_COMPLETE = "click_reviewwriting_complete"
     }
 }
