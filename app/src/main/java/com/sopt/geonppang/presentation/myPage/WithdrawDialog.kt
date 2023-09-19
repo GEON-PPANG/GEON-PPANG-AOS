@@ -41,11 +41,11 @@ class WithdrawDialog : BindingDialogFragment<DialogMiddleBinding>(R.layout.dialo
     }
 
     private fun addListeners() {
-        binding.btnDialogNo.setOnClickListener {
+        binding.btnDialogRight.setOnClickListener {
             dismiss()
         }
 
-        binding.btnDialogYes.setOnClickListener {
+        binding.btnDialogLeft.setOnClickListener {
             when (viewModel.platformType) {
                 PlatformType.NONE.name -> {
                     viewModel.withdraw()
