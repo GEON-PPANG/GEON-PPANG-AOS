@@ -30,21 +30,18 @@ class LogInViewModel @Inject constructor(
         viewModelScope.launch {
             authRepository.login(RequestLogin(loginEmail.value, loginPassword.value))
                 .onSuccess { loginResponse ->
-                    // Log.e("로그인 상태 확인","${loginResponse}")
                     val responseHeader = loginResponse.headers()
                     val accessToken = responseHeader[AUTHORIZATION].toString()
                     if (loginResponse.code() == 200) {
-                        // Log.e("로그인 성공", "${loginResponse.code()}")
                         gpDataSource.accessToken = BEARER_PREFIX + accessToken
                         gpDataSource.isLogin = true
                         _loginState.value = true
                     }
                     if (loginResponse.code() == 400) {
-                        // Log.e("로그인 실패", "${loginResponse.code()}")
                         _loginState.value = false
                     }
                     if (loginResponse.code() == 500) {
-                        // Log.e("서버 오류", "${loginResponse.code()}")
+                        Timber.tag("서버 오류")
                     }
                 }.onFailure { throwable ->
                     Timber.tag("로그인 실패 on Failure").e(throwable.message)
