@@ -12,6 +12,7 @@ import com.sopt.geonppang.databinding.DialogMiddleBinding
 import com.sopt.geonppang.presentation.auth.SignActivity
 import com.sopt.geonppang.presentation.type.DialogType
 import com.sopt.geonppang.presentation.type.PlatformType
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,6 +63,7 @@ class LogoutDialog : BindingDialogFragment<DialogMiddleBinding>(R.layout.dialog_
         viewModel.logoutState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    AmplitudeUtils.trackEvent(LOGOUT_APP)
                     moveToSign()
                     dismiss()
                 }
@@ -76,5 +78,9 @@ class LogoutDialog : BindingDialogFragment<DialogMiddleBinding>(R.layout.dialog_
         intent.flags =
             Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
+    }
+
+    companion object {
+        const val LOGOUT_APP = "logout_app"
     }
 }
