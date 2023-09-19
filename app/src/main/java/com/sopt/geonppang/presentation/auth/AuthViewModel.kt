@@ -40,35 +40,37 @@ class AuthViewModel @Inject constructor(
     private val _isEmailUsable: MutableLiveData<Boolean?> = MutableLiveData()
     val isEmailUsable: LiveData<Boolean?> = _isEmailUsable
 
+    private val _emailReadytoUse: MutableLiveData<Boolean> = MutableLiveData()
+    val emailReadytoUse: LiveData<Boolean?> = _emailReadytoUse
+
     private val _isNicknameUsable: MutableLiveData<Boolean?> = MutableLiveData()
     val isNicknameUsable: LiveData<Boolean?> = _isNicknameUsable
-
-    private var _nicknameLen: MutableLiveData<Int> = MutableLiveData()
-    val nicknameLen: LiveData<Int> = _nicknameLen
 
     private val _signUpState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val signUpState get() = _signUpState.asStateFlow()
 
     val isValidEmail: LiveData<Boolean> = email.map { email ->
         email.matches(Regex(EMAIL_PATTERN))
-        /*조건에 만족하는 이메일인지 확인*/
     }
 
     val isValidNickname: LiveData<Boolean> = nickname.map { nickname ->
         nickname.matches(Regex(NICKNAME_PATTERN))
-        /*조건에 맞는 닉네임인지 확인*/
     }
 
     val isValidPassword: LiveData<Boolean> = password.map { password ->
         password.matches(Regex(PASSWORD_PATTERN))
-        /*조건에 맞는 비밀번호인지 확인*/
+    }
+
+    val completePassword = MediatorLiveData<Boolean>().apply {
+        addSource(password) { value = isPasswordDoubleCheck() }
+        addSource(password_check) { value = isPasswordDoubleCheck() }
     }
 
     fun initNickname() {
         _isNicknameUsable.value = null
     }
 
-    fun initEmail(){
+    fun initEmail() {
         _isEmailUsable.value = null
     }
 
@@ -77,14 +79,16 @@ class AuthViewModel @Inject constructor(
             validationRepository.validateEmail(RequestValidationEmail(email.value))
                 .onSuccess {
                     _isEmailUsable.value = it.data?.available
-                    Log.e("isEmailUsable","${it.message}, ${it.data?.available}, ${_isEmailUsable.value}")
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
                     _isEmailUsable.value = false
-                    Log.e("isEmailUsable","${isEmailUsable.value}")
                 }
         }
+    }
+
+    private fun isPasswordDoubleCheck(): Boolean {
+        return password.value.toString() == password_check.value.toString() && !password.value.isNullOrBlank() && !password_check.value.isNullOrBlank()
     }
 
     fun doubleCheckNickname() {
@@ -92,47 +96,16 @@ class AuthViewModel @Inject constructor(
             validationRepository.validateNickname(RequestValidationNickname(nickname.value))
                 .onSuccess {
                     if (it.code == 200) {
-                        // 중복 아닐 때
                         _isNicknameUsable.value = it.data?.available
-                        // nickname.value?.length.also { _nicknameLen }
                         Log.e("isNicknameDuplicated", "{${it.message} ${_isNicknameUsable.value}}")
                     }
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
-                    // 중복
                     _isNicknameUsable.value = false
                     Log.e("isNicknameNotDuplicate", "{${_isNicknameUsable.value}}")
                 }
         }
-    }
-
-    /*다음 버튼 활성화 -> 중복확인이 true 이면 활성화 되어야 함*/
-    val completeEmail = MediatorLiveData<Boolean>().apply {
-        addSource(email) { value = checkEmailCondition() }
-    }
-
-    /*비밀번호 다음 버튼 활성화*/
-    val completePassword = MediatorLiveData<Boolean>().apply {
-        addSource(password) { value = isPasswordDoubleCheck() }
-        addSource(password_check) { value = isPasswordDoubleCheck() }
-    }
-
-    /*다음 버튼 활성화 -> 중복 확인이 되면 활성화 되어야 함*/
-    val completeNickname = MediatorLiveData<Boolean>().apply {
-        addSource(nickname) { value = checkNicknameCondition() }
-    }
-
-    private fun isPasswordDoubleCheck(): Boolean {
-        return password.value.toString() == password_check.value.toString() && !password.value.isNullOrBlank() && !password_check.value.isNullOrBlank()
-    }
-
-    private fun checkEmailCondition(): Boolean {
-        return isValidEmail.value == true
-    }
-
-    private fun checkNicknameCondition(): Boolean {
-        return isValidNickname.value == true
     }
 
     fun signUp(

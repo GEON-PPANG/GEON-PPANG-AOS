@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySignupBinding
 import com.sopt.geonppang.util.binding.BindingActivity
@@ -42,13 +43,35 @@ class SignUpActivity :
         }
     }
 
-    private fun addObserver(){
-        viewModel.email.observe(this){
-            if(viewModel.isEmailUsable.value != null){
+    private fun addObserver() {
+        viewModel.email.observe(this) {
+            if (viewModel.isEmailUsable.value != null) {
                 viewModel.initEmail()
-                Log.e("isEmailUsable_addObserver","{${viewModel.isEmailUsable.value}}")
             }
         }
+
+        viewModel.isEmailUsable.observe(this) {
+            val emailValidationFail = ContextCompat.getDrawable(this, R.drawable.background_need_change_status)
+            val emailValidationTrue = ContextCompat.getDrawable(this, R.drawable.background_email_double_check_true_status)
+
+            if (viewModel.isEmailUsable.value == true) {
+                binding.tvEmailText.setTextColor(ContextCompat.getColor(this, R.color.main_3))
+                binding.linearEmail.background = emailValidationTrue
+            } else {
+                binding.tvEmailText.setTextColor(ContextCompat.getColor(this, R.color.error))
+                binding.linearEmail.background = emailValidationFail
+            }
+        }
+    }
+
+    private fun setTextColor() {
+        Log.e("ddd", "dddddddddddddd")
+        if (viewModel.isEmailUsable.value == true) {
+            binding.tvEmailText.setTextColor(ContextCompat.getColor(this, R.color.main_3))
+        } else {
+            binding.tvEmailText.setTextColor(ContextCompat.getColor(this, R.color.error))
+        }
+
     }
 
     private fun moveToNickname() {
