@@ -51,8 +51,12 @@ class SignUpActivity :
         }
 
         viewModel.isEmailUsable.observe(this) {
-            val emailValidationFail = ContextCompat.getDrawable(this, R.drawable.background_need_change_status)
-            val emailValidationTrue = ContextCompat.getDrawable(this, R.drawable.background_email_double_check_true_status)
+            val emailValidationFail =
+                ContextCompat.getDrawable(this, R.drawable.background_need_change_status)
+            val emailValidationTrue = ContextCompat.getDrawable(
+                this,
+                R.drawable.background_email_double_check_true_status
+            )
 
             if (viewModel.isEmailUsable.value == true) {
                 binding.tvEmailText.setTextColor(ContextCompat.getColor(this, R.color.main_3))
@@ -71,7 +75,6 @@ class SignUpActivity :
         } else {
             binding.tvEmailText.setTextColor(ContextCompat.getColor(this, R.color.error))
         }
-
     }
 
     private fun moveToNickname() {
