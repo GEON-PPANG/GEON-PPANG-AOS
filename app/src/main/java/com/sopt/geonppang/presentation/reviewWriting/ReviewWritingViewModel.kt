@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.model.request.RequestReviewWriting
 import com.sopt.geonppang.domain.repository.ReviewWritingRepository
+import com.sopt.geonppang.presentation.model.AmplitudeReviewWritingInfo
 import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
 import com.sopt.geonppang.presentation.type.KeyWordType
 import com.sopt.geonppang.presentation.type.LikeType
@@ -29,7 +30,8 @@ class ReviewWritingViewModel @Inject constructor(private val reviewWritingReposi
     val bakeryId get() = _bakeryId.asStateFlow()
     private val _isLike = MutableStateFlow<LikeType?>(null)
     val isLike get() = _isLike.asStateFlow()
-    private val _reviewSuccessState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
+    private val _reviewSuccessState =
+        MutableStateFlow<UiState<AmplitudeReviewWritingInfo>>(UiState.Loading)
     val reviewSuccessState get() = _reviewSuccessState
     private val _reviewCancelState = MutableStateFlow<Boolean?>(null)
     val reviewCancelState get() = _reviewCancelState
@@ -78,7 +80,7 @@ class ReviewWritingViewModel @Inject constructor(private val reviewWritingReposi
 
     private fun getKeyWordTypeList(): List<RequestReviewWriting.KeywordName> {
         val trueKeyWordTypes = mutableListOf<RequestReviewWriting.KeywordName>()
-        userKeyWordType.value?.forEach { (keyWordType, value) ->
+        userKeyWordType.value.forEach { (keyWordType, value) ->
             if (value) {
                 trueKeyWordTypes.add(RequestReviewWriting.KeywordName(keyWordType.keywordType))
             }
@@ -92,8 +94,8 @@ class ReviewWritingViewModel @Inject constructor(private val reviewWritingReposi
 
     fun writeReview() {
         viewModelScope.launch {
-            reviewText.value?.let { reviewText ->
-                _bakeryId.value?.let {
+            reviewText.value.let { reviewText ->
+                _bakeryId.value.let {
                     reviewWritingRepository.writeReview(
                         it,
                         RequestReviewWriting(
@@ -103,7 +105,13 @@ class ReviewWritingViewModel @Inject constructor(private val reviewWritingReposi
                         )
                     )
                         .onSuccess {
-                            _reviewSuccessState.value = UiState.Success(true)
+                            _reviewSuccessState.value = UiState.Success(
+                                AmplitudeReviewWritingInfo(
+                                    likeType = _isLike.value,
+                                    userKeyWordType = userKeyWordType.value,
+                                    reviewText = reviewText
+                                )
+                            )
                         }
                         .onFailure { throwable ->
                             _reviewSuccessState.value = UiState.Error(throwable.message)
