@@ -3,12 +3,18 @@ package com.sopt.geonppang.presentation.login
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.ActivityLoginBinding
 import com.sopt.geonppang.presentation.auth.SignUpActivity
+import com.sopt.geonppang.presentation.home.HomeFragment
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class LoginActivity :
@@ -19,7 +25,9 @@ class LoginActivity :
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        autoLogin()
         addListener()
+        collectData()
     }
 
     private fun addListener() {
@@ -34,7 +42,43 @@ class LoginActivity :
         }
     }
 
+    private fun collectData() {
+        viewModel.loginState.flowWithLifecycle(lifecycle).onEach { loginState ->
+            when (loginState) {
+                true -> {
+                    moveToHome()
+                }
+
+                false -> {
+                    showLoginFailDialog()
+                    viewModel.initLogin()
+                }
+
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
+    }
+
+    private fun showLoginFailDialog() {
+        LoginFailBottomDialogFragment().show(supportFragmentManager, LOGIN_FAIL)
+    }
+
+    private fun moveToHome() {
+        startActivity(Intent(this, HomeFragment::class.java))
+        finish()
+    }
+
     private fun moveToSignup() {
         startActivity(Intent(this, SignUpActivity::class.java))
+    }
+
+    private fun autoLogin() {
+        val gpDataSource = GPDataSource(this)
+        if (gpDataSource.isLogin)
+            moveToHome()
+    }
+
+    companion object {
+        const val LOGIN_FAIL = "loginFail"
     }
 }

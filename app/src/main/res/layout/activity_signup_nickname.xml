@@ -81,7 +81,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/tv_nickname"
                 android:textAppearance="@style/TextAppearance.Subhead"
-                android:textColor="@{!viewModel.email.empty &amp; !viewModel.isValidEmail() ? @color/error : @color/gray_400}" />
+                android:textColor="@{!viewModel.nickname.empty &amp; !viewModel.isValidNickname() ? @color/error : @color/gray_400}" />
 
 
             <EditText

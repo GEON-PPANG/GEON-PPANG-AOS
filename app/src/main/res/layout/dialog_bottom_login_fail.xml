@@ -49,7 +49,7 @@
             app:layout_constraintTop_toBottomOf="@id/iv_review_writing_success" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_review_writing_success"
+            android:id="@+id/btn_login_fail_confirm"
             style="@style/Widget.FullButton.Basic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
