@@ -70,7 +70,7 @@
                             android:layout_marginTop="16dp"
                             android:text="@string/tv_email"
                             android:textAppearance="@style/TextAppearance.BodyB2"
-                            android:textColor="@{!viewModel.email.empty &amp; !viewModel.isValidEmail() ? @color/error : @color/gray_400}"
+                            android:textColor="@{viewModel.isValidEmail() ? (viewModel.isEmailUsable ? @color/main_3 : @color/error) : @color/error}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -101,6 +101,7 @@
                             android:layout_marginTop="36dp"
                             android:layout_marginEnd="18dp"
                             android:backgroundTint="@color/main_3"
+                            android:onClick="@{()->viewModel.doubleCheckEmail()}"
                             android:paddingHorizontal="10dp"
                             android:paddingVertical="4dp"
                             android:text="@string/txt_double_check_btn"
@@ -114,17 +115,20 @@
 
 
                 </LinearLayout>
-
+                <!--(!viewModel.email.empty &amp; !viewModel.isValidEmail()) : 올바른 이메일 입력
+                    isEmailUsable == true : 사용가능한 이메일입니다
+                    isEmailUsable == false : 이미 존재하는 이메일입니다 -->
+                <!--@{viewModel.isEmailUsable ? (@{viewModel.isValidEmail() ? '올바른 이메일 입력' : '이메일 형식 오류'}) : (viewModel.isEmailUsable ? '사용가능한 이메일입니다' : '이미 존재하는 이메일입니다')}-->
                 <TextView
                     android:id="@+id/tv_email_error_msg"
-                    visibility="@{!viewModel.email.empty &amp; !viewModel.isValidEmail()}"
+                    visibility="@{!viewModel.email.empty &amp; !viewModel.isValidEmail() || viewModel.isEmailUsable() != null}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_marginRight="24dp"
-                    android:text="@string/email_error_msg"
+                    android:text="@{viewModel.isValidEmail() ? (viewModel.isEmailUsable ? @string/email_validate_to_use : @string/email_already_exist) : @string/email_error_msg}"
                     android:textAppearance="@style/TextAppearance.CaptionM1"
-                    android:textColor="@color/error"
+                    android:textColor="@{viewModel.isValidEmail() ? (viewModel.isEmailUsable ? @color/main_3 : @color/error) : @color/error}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linear_email" />
 
