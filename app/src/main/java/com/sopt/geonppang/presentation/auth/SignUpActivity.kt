@@ -68,15 +68,6 @@ class SignUpActivity :
         }
     }
 
-    private fun setTextColor() {
-        Log.e("ddd", "dddddddddddddd")
-        if (viewModel.isEmailUsable.value == true) {
-            binding.tvEmailText.setTextColor(ContextCompat.getColor(this, R.color.main_3))
-        } else {
-            binding.tvEmailText.setTextColor(ContextCompat.getColor(this, R.color.error))
-        }
-    }
-
     private fun moveToNickname() {
         val intent = Intent(this, SignUpNicknameActivity::class.java)
         intent.putExtra(EMAIL, viewModel.email.value)
