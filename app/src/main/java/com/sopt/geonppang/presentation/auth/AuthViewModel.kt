@@ -37,8 +37,8 @@ class AuthViewModel @Inject constructor(
     private val _authRoleType = MutableStateFlow<AuthRoleType?>(null)
     val authRoleType get() = _authRoleType.asStateFlow()
 
-    private val _isEmailUsable: MutableLiveData<Boolean> = MutableLiveData()
-    val isEmailUsable: LiveData<Boolean> = _isEmailUsable
+    private val _isEmailUsable: MutableLiveData<Boolean?> = MutableLiveData()
+    val isEmailUsable: LiveData<Boolean?> = _isEmailUsable
 
     private val _isNicknameUsable: MutableLiveData<Boolean?> = MutableLiveData()
     val isNicknameUsable: LiveData<Boolean?> = _isNicknameUsable
@@ -68,16 +68,21 @@ class AuthViewModel @Inject constructor(
         _isNicknameUsable.value = null
     }
 
+    fun initEmail(){
+        _isEmailUsable.value = null
+    }
+
     fun doubleCheckEmail() {
         viewModelScope.launch {
-            Log.e("이메일 중복확인하기 http", "이메일 중복확인 서버 통신 확인하기")
             validationRepository.validateEmail(RequestValidationEmail(email.value))
                 .onSuccess {
-                    _isEmailUsable.value = true
-                    Log.e("이메일 중복확인하기!!! http", "${_isEmailUsable.value}")
+                    _isEmailUsable.value = it.data?.available
+                    Log.e("isEmailUsable","${it.message}, ${it.data?.available}, ${_isEmailUsable.value}")
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
+                    _isEmailUsable.value = false
+                    Log.e("isEmailUsable","${isEmailUsable.value}")
                 }
         }
     }

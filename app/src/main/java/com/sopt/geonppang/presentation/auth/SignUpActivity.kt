@@ -2,6 +2,7 @@ package com.sopt.geonppang.presentation.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySignupBinding
@@ -20,6 +21,7 @@ class SignUpActivity :
         binding.lifecycleOwner = this
 
         addListeners()
+        addObserver()
     }
 
     private fun addListeners() {
@@ -38,7 +40,14 @@ class SignUpActivity :
         binding.toolbar.ivBack.setOnClickListener {
             finish()
         }
-        binding.tvEmailErrorMsg.setOnClickListener {
+    }
+
+    private fun addObserver(){
+        viewModel.email.observe(this){
+            if(viewModel.isEmailUsable.value != null){
+                viewModel.initEmail()
+                Log.e("isEmailUsable_addObserver","{${viewModel.isEmailUsable.value}}")
+            }
         }
     }
 
