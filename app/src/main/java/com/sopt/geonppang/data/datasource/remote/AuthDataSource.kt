@@ -23,7 +23,7 @@ class AuthDataSource @Inject constructor(
 
     suspend fun withdraw(): ResponseWithdraw = authService.withdraw()
     suspend fun logout(): ResponseLogout = authService.logout()
-    suspend fun settingNickname(nickname: RequestNicknameSetting): ResponseNickNameSetting =
+    suspend fun settingNickname(nickname: RequestNicknameSetting): Response<ResponseNickNameSetting> =
         authService.settingNickName(nickname)
     suspend fun login(requestLogin: RequestLogin): Response<ResponseLogin> = authService.login(requestLogin)
 }
