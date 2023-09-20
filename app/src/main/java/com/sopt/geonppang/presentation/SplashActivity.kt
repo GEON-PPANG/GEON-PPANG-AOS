@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.ActivitySplashBinding
 import com.sopt.geonppang.presentation.auth.SignActivity
 import com.sopt.geonppang.util.binding.BindingActivity
@@ -18,18 +19,27 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
         installSplashScreen()
         super.onCreate(savedInstanceState)
         loadSplashScreen()
+        setAutoLogin()
     }
 
     private fun loadSplashScreen() {
         lifecycleScope.launch {
             delay(1500L)
-            moveToSign()
             finish()
         }
     }
 
+    private fun setAutoLogin() {
+        val gpDataSource = GPDataSource(this)
+        if (gpDataSource.isLogin) moveToHome()
+        else moveToSign()
+    }
+
+    private fun moveToHome() {
+        startActivity(Intent(this, MainActivity::class.java))
+    }
+
     private fun moveToSign() {
         startActivity(Intent(this, SignActivity::class.java))
-        finish()
     }
 }
