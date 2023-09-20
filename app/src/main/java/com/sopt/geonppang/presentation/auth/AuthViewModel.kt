@@ -40,9 +40,6 @@ class AuthViewModel @Inject constructor(
     private val _isEmailUsable: MutableLiveData<Boolean?> = MutableLiveData()
     val isEmailUsable: LiveData<Boolean?> = _isEmailUsable
 
-    private val _emailReadytoUse: MutableLiveData<Boolean> = MutableLiveData()
-    val emailReadytoUse: LiveData<Boolean?> = _emailReadytoUse
-
     private val _isNicknameUsable: MutableLiveData<Boolean?> = MutableLiveData()
     val isNicknameUsable: LiveData<Boolean?> = _isNicknameUsable
 
