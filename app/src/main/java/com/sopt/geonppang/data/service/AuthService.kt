@@ -35,5 +35,5 @@ interface AuthService {
     @POST("member/nickname")
     suspend fun settingNickName(
         @Body requestNicknameSetting: RequestNicknameSetting
-    ): ResponseNickNameSetting
+    ): Response<ResponseNickNameSetting>
 }

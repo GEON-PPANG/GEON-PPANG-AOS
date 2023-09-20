@@ -2,11 +2,13 @@ package com.sopt.geonppang.presentation.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.FragmentHomeBinding
 import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
@@ -37,6 +39,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         initLayout()
         addListeners()
         collectData()
+
+        Log.d("access token", GPDataSource(requireActivity()).accessToken)
+        Log.d("refresh token", GPDataSource(requireActivity()).refreshToken)
     }
 
     override fun onResume() {

@@ -129,7 +129,13 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch {
             nickname.value?.let { nickname ->
                 authRepository.settingNickname(RequestNicknameSetting(nickname))
-                    .onSuccess {
+                    .onSuccess { response ->
+                        val responseHeader = response.headers()
+                        val accessToken = responseHeader[AUTHORIZATION].toString()
+                        val refreshToken = responseHeader[AUTHORIZATION_REFRESH].toString()
+                        gpDataSource.accessToken = BEARER_PREFIX + accessToken
+                        gpDataSource.refreshToken = BEARER_PREFIX + refreshToken
+
                         _signUpState.value = UiState.Success(true)
                     }
                     .onFailure { throwable ->
