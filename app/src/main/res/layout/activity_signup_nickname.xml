@@ -67,7 +67,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:background="@{!viewModel.nickname.empty &amp; !viewModel.isValidNickname()? @drawable/background_need_change_status : @drawable/background_normal_status }"
+            android:background="@{!viewModel.nickname.empty &amp; !viewModel.isValidNickname? @drawable/background_need_change_status : @drawable/background_normal_status }"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
@@ -81,7 +81,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/tv_nickname"
                 android:textAppearance="@style/TextAppearance.Subhead"
-                android:textColor="@{!viewModel.nickname.empty &amp; !viewModel.isValidNickname() ? @color/error : @color/gray_400}" />
+                android:textColor="@{!viewModel.nickname.empty &amp; !viewModel.isValidNickname? @color/error : @color/gray_400}" />
 
 
             <EditText
@@ -103,7 +103,7 @@
 
         <TextView
             android:id="@+id/tv_email_error_msg"
-            visibility="@{!viewModel.nickname.empty &amp; !viewModel.isValidNickname()}"
+            visibility="@{!viewModel.nickname.empty &amp; !viewModel.isValidNickname}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -120,17 +120,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
+            android:enabled="@{viewModel.isValidNickname}"
             android:onClick="@{()->viewModel.doubleCheckNickname()}"
-            android:enabled="@{viewModel.isValidNickname()}"
             android:paddingVertical="18dp"
             android:text="@string/txt_double_check_btn"
             android:textAppearance="@style/TextAppearance.BodyB1"
-            android:textColor="@{viewModel.isValidNickname() == true ? @color/main_2 : @color/gray_400}"
+            android:textColor="@{viewModel.isValidNickname? @color/main_2 : @color/gray_400}"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@id/linear_nickname"
             app:rippleColor="@color/white"
-            app:strokeColor="@{viewModel.isValidNickname() == true ? @color/main_2 : @color/gray_300}" />
+            app:strokeColor="@{viewModel.isValidNickname? @color/main_2 : @color/gray_300}" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_next"
@@ -138,12 +138,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="@{viewModel.isNicknameUsable() ? @color/main_2 : @color/gray_200}"
-            android:enabled="@{viewModel.isNicknameUsable()}"
+            android:backgroundTint="@color/gray_200"
             android:paddingVertical="18dp"
-            android:text="@{viewModel.isNicknameUsable()? @string/txt_start_btn : @string/txt_next_btn }"
+            android:text="@string/txt_next_btn"
             android:textAppearance="@style/TextAppearance.BodyM1"
-            android:textColor="@{viewModel.isNicknameUsable()? @color/white : @color/gray_400}"
+            android:textColor="@color/gray_400"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"

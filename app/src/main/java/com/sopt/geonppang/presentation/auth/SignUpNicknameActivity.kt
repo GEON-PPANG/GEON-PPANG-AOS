@@ -3,6 +3,7 @@ package com.sopt.geonppang.presentation.auth
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
@@ -27,7 +28,6 @@ class SignUpNicknameActivity :
         binding.lifecycleOwner = this
 
         addListeners()
-        addObserver()
         collectData()
     }
 
@@ -55,23 +55,42 @@ class SignUpNicknameActivity :
                 else -> {}
             }
         }.launchIn(lifecycleScope)
-    }
 
-    private fun addObserver() {
-        viewModel.isNicknameUsable.observe(this) {
-            if (it == true) {
-                showNicknameSuccessDialog()
-            }
-            if (it == false) {
-                showNicknameFailDialog()
-            }
-        }
+        viewModel.isNicknameUsable.flowWithLifecycle(lifecycle).onEach { isNicknameUsable ->
+            val passwordValidationTrue = ContextCompat.getColorStateList(this, R.color.main_2)
+            val passwordValidationFalse = ContextCompat.getColorStateList(this, R.color.gray_200)
+            when (isNicknameUsable) {
+                is UiState.Success -> {
+                    showNicknameSuccessDialog()
+                    binding.btnNext.isEnabled
+                    binding.btnNext.setTextColor(ContextCompat.getColor(this, R.color.white))
+                    binding.btnNext.text = getString(R.string.txt_start_btn)
+                    binding.btnNext.backgroundTintList = passwordValidationTrue
+                }
 
-        viewModel.nickname.observe(this) {
-            if (viewModel.isNicknameUsable.value != null) {
+                is UiState.Error -> {
+                    showNicknameFailDialog()
+                    binding.btnNext.isEnabled = false
+                    binding.btnNext.setTextColor(ContextCompat.getColor(this, R.color.gray_400))
+                    binding.btnNext.text = getString(R.string.txt_next_btn)
+                    binding.btnNext.backgroundTintList = passwordValidationFalse
+                }
+
+                else -> {}
+            }
+
+        }.launchIn(lifecycleScope)
+
+        viewModel.nickname.flowWithLifecycle(lifecycle).onEach {
+            val passwordValidationFalse = ContextCompat.getColorStateList(this, R.color.gray_200)
+            if (viewModel.isNicknameUsable.value != UiState.Loading) {
                 viewModel.initNickname()
+                binding.btnNext.isEnabled = false
+                binding.btnNext.setTextColor(ContextCompat.getColor(this, R.color.gray_400))
+                binding.btnNext.text = getString(R.string.txt_next_btn)
+                binding.btnNext.backgroundTintList = passwordValidationFalse
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
     private fun completeSignUp() {

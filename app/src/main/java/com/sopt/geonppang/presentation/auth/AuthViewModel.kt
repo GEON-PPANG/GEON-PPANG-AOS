@@ -1,6 +1,5 @@
 package com.sopt.geonppang.presentation.auth
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,7 +18,11 @@ import com.sopt.geonppang.presentation.type.PlatformType
 import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -30,29 +33,29 @@ class AuthViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val validationRepository: ValidationRepository,
 ) : ViewModel() {
-    val email = MutableLiveData("")
+    val email = MutableStateFlow("")
     val password = MutableLiveData("")
-    val password_check = MutableLiveData("")
-    val nickname = MutableLiveData("")
+    val passwordCheck = MutableLiveData("")
+    val nickname = MutableStateFlow("")
     private val _authRoleType = MutableStateFlow<AuthRoleType?>(null)
     val authRoleType get() = _authRoleType.asStateFlow()
 
-    private val _isEmailUsable: MutableLiveData<Boolean?> = MutableLiveData()
-    val isEmailUsable: LiveData<Boolean?> = _isEmailUsable
+    private val _isEmailUsable = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
+    val isEmailUsable get() = _isEmailUsable.asStateFlow()
 
-    private val _isNicknameUsable: MutableLiveData<Boolean?> = MutableLiveData()
-    val isNicknameUsable: LiveData<Boolean?> = _isNicknameUsable
+    private val _isNicknameUsable = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
+    val isNicknameUsable get() = _isNicknameUsable.asStateFlow()
 
     private val _signUpState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val signUpState get() = _signUpState.asStateFlow()
 
-    val isValidEmail: LiveData<Boolean> = email.map { email ->
+    val isValidEmail: StateFlow<Boolean> = email.map { email ->
         email.matches(Regex(EMAIL_PATTERN))
-    }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
-    val isValidNickname: LiveData<Boolean> = nickname.map { nickname ->
+    val isValidNickname: StateFlow<Boolean> = nickname.map { nickname ->
         nickname.matches(Regex(NICKNAME_PATTERN))
-    }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
     val isValidPassword: LiveData<Boolean> = password.map { password ->
         password.matches(Regex(PASSWORD_PATTERN))
@@ -60,32 +63,32 @@ class AuthViewModel @Inject constructor(
 
     val completePassword = MediatorLiveData<Boolean>().apply {
         addSource(password) { value = isPasswordDoubleCheck() }
-        addSource(password_check) { value = isPasswordDoubleCheck() }
+        addSource(passwordCheck) { value = isPasswordDoubleCheck() }
     }
 
     fun initNickname() {
-        _isNicknameUsable.value = null
+        _isNicknameUsable.value = UiState.Empty
     }
 
     fun initEmail() {
-        _isEmailUsable.value = null
+        _isEmailUsable.value = UiState.Empty
     }
 
     fun doubleCheckEmail() {
         viewModelScope.launch {
             validationRepository.validateEmail(RequestValidationEmail(email.value))
                 .onSuccess {
-                    _isEmailUsable.value = it.data?.available
+                    _isEmailUsable.value = UiState.Success(true)
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
-                    _isEmailUsable.value = false
+                    _isEmailUsable.value = UiState.Error("false")
                 }
         }
     }
 
     private fun isPasswordDoubleCheck(): Boolean {
-        return password.value.toString() == password_check.value.toString() && !password.value.isNullOrBlank() && !password_check.value.isNullOrBlank()
+        return password.value == passwordCheck.value && !password.value.isNullOrBlank() && !passwordCheck.value.isNullOrBlank()
     }
 
     fun doubleCheckNickname() {
@@ -93,14 +96,15 @@ class AuthViewModel @Inject constructor(
             validationRepository.validateNickname(RequestValidationNickname(nickname.value))
                 .onSuccess {
                     if (it.code == 200) {
-                        _isNicknameUsable.value = it.data?.available
-                        Log.e("isNicknameDuplicated", "{${it.message} ${_isNicknameUsable.value}}")
+                        _isNicknameUsable.value = UiState.Success(true)
+                        Timber.tag("isNicknameDuplicated")
+                            .e("{" + it.message + " " + _isNicknameUsable.value + "}")
                     }
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
-                    _isNicknameUsable.value = false
-                    Log.e("isNicknameNotDuplicate", "{${_isNicknameUsable.value}}")
+                    _isNicknameUsable.value = UiState.Error("false")
+                    Timber.tag("isNicknameNotDuplicate").e("{" + _isNicknameUsable.value + "}")
                 }
         }
     }
