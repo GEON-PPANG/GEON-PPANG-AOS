@@ -27,6 +27,10 @@ class LogInViewModel @Inject constructor(
         _loginState.value = UiState.Loading
     }
 
+    fun setAutoLogin() {
+        gpDataSource.isLogin = true
+    }
+
     fun login() {
         viewModelScope.launch {
             authRepository.login(RequestLogin(loginEmail.value, loginPassword.value))
@@ -39,6 +43,7 @@ class LogInViewModel @Inject constructor(
                         gpDataSource.refreshToken = BEARER_PREFIX + refreshToken
                         gpDataSource.isLogin = true
                         _loginState.value = UiState.Success(true)
+                        setAutoLogin()
                     }
                     if (loginResponse.code() == 400) {
                         _loginState.value = UiState.Error(loginResponse.message())
@@ -50,10 +55,6 @@ class LogInViewModel @Inject constructor(
                     Timber.tag("로그인 실패 on Failure").e(throwable.message)
                 }
         }
-    }
-
-    fun setAutoLogin() {
-        gpDataSource.isLogin = true
     }
 
     companion object {

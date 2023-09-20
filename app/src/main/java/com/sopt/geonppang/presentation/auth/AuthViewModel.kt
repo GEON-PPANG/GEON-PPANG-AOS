@@ -86,6 +86,10 @@ class AuthViewModel @Inject constructor(
         return isValidNickname.value == true
     }
 
+    fun setAutoLogin() {
+        gpDataSource.isLogin = true
+    }
+
     fun signUp(
         platformType: PlatformType,
         platformToken: String,
@@ -115,7 +119,9 @@ class AuthViewModel @Inject constructor(
                     if (_authRoleType.value == AuthRoleType.USER) {
                         gpDataSource.refreshToken = BEARER_PREFIX + refreshToken
                     }
+
                     _signUpState.value = UiState.Success(true)
+                    setAutoLogin()
                     Timber.tag("access token").d(gpDataSource.accessToken)
                     Timber.tag("refresh token").d(gpDataSource.refreshToken)
                 }
@@ -131,6 +137,7 @@ class AuthViewModel @Inject constructor(
                 authRepository.settingNickname(RequestNicknameSetting(nickname))
                     .onSuccess {
                         _signUpState.value = UiState.Success(true)
+                        setAutoLogin()
                     }
                     .onFailure { throwable ->
                         Timber.e(throwable.message)
