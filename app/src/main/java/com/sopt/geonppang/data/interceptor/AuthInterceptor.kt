@@ -22,7 +22,7 @@ class AuthInterceptor @Inject constructor(
         val authRequest =
             originalRequest.newBuilder().addHeader("Authorization", gpDataSource.accessToken)
                 .build()
-        val response = chain.proceed(if (gpDataSource.isLogin) authRequest else originalRequest)
+        val response = chain.proceed(authRequest)
 
         when (response.code) {
             401 -> {

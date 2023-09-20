@@ -119,11 +119,7 @@ class AuthViewModel @Inject constructor(
                     if (_authRoleType.value == AuthRoleType.USER) {
                         gpDataSource.refreshToken = BEARER_PREFIX + refreshToken
                     }
-
                     _signUpState.value = UiState.Success(true)
-                    setAutoLogin()
-                    Timber.tag("access token").d(gpDataSource.accessToken)
-                    Timber.tag("refresh token").d(gpDataSource.refreshToken)
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
@@ -137,6 +133,7 @@ class AuthViewModel @Inject constructor(
                 authRepository.settingNickname(RequestNicknameSetting(nickname))
                     .onSuccess {
                         _signUpState.value = UiState.Success(true)
+                        // 소셜 회원가입 시 자동 로그인 설정
                         setAutoLogin()
                     }
                     .onFailure { throwable ->
