@@ -7,8 +7,8 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityLoginBinding
+import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.auth.SignUpActivity
-import com.sopt.geonppang.presentation.home.HomeFragment
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
@@ -64,7 +64,9 @@ class LoginActivity :
     }
 
     private fun moveToHome() {
-        startActivity(Intent(this, HomeFragment::class.java))
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
         finish()
     }
 
