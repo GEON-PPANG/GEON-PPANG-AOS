@@ -55,7 +55,7 @@ class AuthInterceptor @Inject constructor(
                         CoroutineScope(Dispatchers.Main).launch {
                             startActivity(
                                 Intent(this@with, SignActivity::class.java)
-                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             )
                         }
                     }
