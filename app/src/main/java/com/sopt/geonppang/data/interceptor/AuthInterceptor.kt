@@ -47,7 +47,6 @@ class AuthInterceptor @Inject constructor(
                     refreshTokenResponse.close()
                     val newRequest = originalRequest.newBuilder()
                         .addHeader(ACCESS_TOKEN, gpDataSource.accessToken)
-                        .addHeader(REFRESH_TOKEN, gpDataSource.refreshToken)
                         .build()
                     return chain.proceed(newRequest)
                 } else {
