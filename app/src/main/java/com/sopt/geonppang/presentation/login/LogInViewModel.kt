@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.data.model.request.RequestLogin
 import com.sopt.geonppang.domain.repository.AuthRepository
+import com.sopt.geonppang.presentation.type.PlatformType
 import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -41,6 +42,7 @@ class LogInViewModel @Inject constructor(
                     if (loginResponse.code() == 200) {
                         gpDataSource.accessToken = BEARER_PREFIX + accessToken
                         gpDataSource.refreshToken = BEARER_PREFIX + refreshToken
+                        gpDataSource.platformType = PlatformType.NONE.name
                         gpDataSource.isLogin = true
                         _loginState.value = UiState.Success(true)
                         setAutoLogin()
