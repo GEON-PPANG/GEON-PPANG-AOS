@@ -6,7 +6,6 @@ import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
-import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.ActivityLoginBinding
 import com.sopt.geonppang.presentation.auth.SignUpActivity
 import com.sopt.geonppang.presentation.home.HomeFragment
@@ -26,7 +25,6 @@ class LoginActivity :
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        autoLogin()
         addListener()
         collectData()
     }
@@ -48,6 +46,7 @@ class LoginActivity :
             when (loginState) {
                 is UiState.Success -> {
                     moveToHome()
+                    viewModel.setAutoLogin()
                 }
 
                 is UiState.Error -> {
@@ -71,12 +70,6 @@ class LoginActivity :
 
     private fun moveToSignup() {
         startActivity(Intent(this, SignUpActivity::class.java))
-    }
-
-    private fun autoLogin() {
-        val gpDataSource = GPDataSource(this)
-        if (gpDataSource.isLogin)
-            moveToHome()
     }
 
     companion object {

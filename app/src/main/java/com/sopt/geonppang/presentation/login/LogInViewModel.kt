@@ -52,6 +52,10 @@ class LogInViewModel @Inject constructor(
         }
     }
 
+    fun setAutoLogin() {
+        gpDataSource.isLogin = true
+    }
+
     companion object {
         const val AUTHORIZATION = "Authorization"
         const val AUTHORIZATION_REFRESH = "Authorization-refresh"
