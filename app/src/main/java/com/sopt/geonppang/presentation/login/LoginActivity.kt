@@ -10,6 +10,7 @@ import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.ActivityLoginBinding
 import com.sopt.geonppang.presentation.auth.SignUpActivity
 import com.sopt.geonppang.presentation.home.HomeFragment
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,11 +46,11 @@ class LoginActivity :
     private fun collectData() {
         viewModel.loginState.flowWithLifecycle(lifecycle).onEach { loginState ->
             when (loginState) {
-                true -> {
+                is UiState.Success -> {
                     moveToHome()
                 }
 
-                false -> {
+                is UiState.Error -> {
                     showLoginFailDialog()
                     viewModel.initLogin()
                 }
