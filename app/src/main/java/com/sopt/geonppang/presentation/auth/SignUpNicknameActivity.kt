@@ -59,18 +59,18 @@ class SignUpNicknameActivity :
     }
 
     private fun addObserver() {
-        /*중복확인 값이 저장되는 현상..
-        * 1. 귤 입력
-        * 2. 성공 바텀 시트
-        * 2. 닉네임 하나라도 지우면 시작하기 버튼은 다시 다음버튼으로 비활성화*/
         viewModel.isNicknameUsable.observe(this) {
             if (it == true) {
-                Log.e("nicknamebottom", "success")
                 showNicknameSuccessDialog()
             }
             if (it == false) {
-                Log.e("nicknamebottom", "false")
                 showNicknameFailDialog()
+            }
+        }
+
+        viewModel.nickname.observe(this) {
+            if (viewModel.isNicknameUsable.value != null) {
+                viewModel.initNickname()
             }
         }
     }
