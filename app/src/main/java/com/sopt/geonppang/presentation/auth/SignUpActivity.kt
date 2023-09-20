@@ -27,7 +27,6 @@ class SignUpActivity :
         binding.lifecycleOwner = this
 
         addListeners()
-        addObserver()
         collectData()
     }
 
@@ -80,7 +79,6 @@ class SignUpActivity :
                         tvEmailErrorMsg.visibility = View.VISIBLE
                         btnNext.backgroundTintList = nextButtonTrue
                         btnNext.setTextColor(ContextCompat.getColor(root.context, R.color.white))
-
                     }
                 }
 
@@ -122,10 +120,6 @@ class SignUpActivity :
                 }
             }
         }.launchIn(lifecycleScope)
-    }
-
-    private fun addObserver() {
-
     }
 
     private fun moveToNickname() {

@@ -78,7 +78,6 @@ class SignUpNicknameActivity :
 
                 else -> {}
             }
-
         }.launchIn(lifecycleScope)
 
         viewModel.nickname.flowWithLifecycle(lifecycle).onEach {
