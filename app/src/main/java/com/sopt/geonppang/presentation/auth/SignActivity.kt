@@ -51,6 +51,7 @@ class SignActivity :
                 }
 
                 AuthRoleType.USER -> {
+                    authViewModel.setAutoLogin()
                     moveToMain()
                 }
 

@@ -6,10 +6,10 @@ import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
-import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.ActivityLoginBinding
+import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.auth.SignUpActivity
-import com.sopt.geonppang.presentation.home.HomeFragment
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +25,6 @@ class LoginActivity :
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        autoLogin()
         addListener()
         collectData()
     }
@@ -45,11 +44,12 @@ class LoginActivity :
     private fun collectData() {
         viewModel.loginState.flowWithLifecycle(lifecycle).onEach { loginState ->
             when (loginState) {
-                true -> {
+                is UiState.Success -> {
                     moveToHome()
+                    viewModel.setAutoLogin()
                 }
 
-                false -> {
+                is UiState.Error -> {
                     showLoginFailDialog()
                     viewModel.initLogin()
                 }
@@ -64,18 +64,14 @@ class LoginActivity :
     }
 
     private fun moveToHome() {
-        startActivity(Intent(this, HomeFragment::class.java))
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
         finish()
     }
 
     private fun moveToSignup() {
         startActivity(Intent(this, SignUpActivity::class.java))
-    }
-
-    private fun autoLogin() {
-        val gpDataSource = GPDataSource(this)
-        if (gpDataSource.isLogin)
-            moveToHome()
     }
 
     companion object {
