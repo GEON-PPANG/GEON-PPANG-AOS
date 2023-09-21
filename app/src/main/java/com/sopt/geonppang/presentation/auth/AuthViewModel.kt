@@ -81,7 +81,8 @@ class AuthViewModel @Inject constructor(
     val nicknameReady: StateFlow<Boolean> =
         combine(
             isValidNickname,
-            isNicknameUsable.map { it is UiState.Success && it.data }) { isValidNickname, isNicknameUsable ->
+            isNicknameUsable.map { it is UiState.Success && it.data }
+        ) { isValidNickname, isNicknameUsable ->
             isValidNickname && isNicknameUsable
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
