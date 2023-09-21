@@ -2,6 +2,7 @@ package com.sopt.geonppang.presentation.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -13,13 +14,16 @@ import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class SignUpActivity :
     BindingActivity<ActivitySignupBinding>(R.layout.activity_signup) {
     private val viewModel: AuthViewModel by viewModels()
+    private var flag = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +53,6 @@ class SignUpActivity :
     }
 
     private fun collectData() {
-
         viewModel.isEmailUsable.flowWithLifecycle(lifecycle).onEach { isEmailUsable ->
             val emailValidationFail =
                 ContextCompat.getDrawable(this, R.drawable.background_need_change_status)
@@ -59,6 +62,7 @@ class SignUpActivity :
             )
             val nextButtonTrue = ContextCompat.getColorStateList(this, R.color.main_2)
             val nextButtonFalse = ContextCompat.getColorStateList(this, R.color.gray_200)
+
             when (isEmailUsable) {
                 is UiState.Success -> {
                     with(binding) {
@@ -77,8 +81,7 @@ class SignUpActivity :
                         )
                         tvEmailErrorMsg.text = getString(R.string.email_validate_to_use)
                         tvEmailErrorMsg.visibility = View.VISIBLE
-                        btnNext.backgroundTintList = nextButtonTrue
-                        btnNext.setTextColor(ContextCompat.getColor(root.context, R.color.white))
+                        flag = true
                     }
                 }
 
@@ -99,9 +102,9 @@ class SignUpActivity :
                         )
                         tvEmailErrorMsg.text = getString(R.string.email_already_exist)
                         tvEmailErrorMsg.visibility = View.VISIBLE
-                        btnNext.isEnabled = false
+                        /*btnNext.isEnabled = false
                         btnNext.backgroundTintList = nextButtonFalse
-                        btnNext.setTextColor(ContextCompat.getColor(root.context, R.color.gray_400))
+                        btnNext.setTextColor(ContextCompat.getColor(root.context, R.color.gray_400))*/
                     }
                 }
 
@@ -111,13 +114,25 @@ class SignUpActivity :
 
         viewModel.email.flowWithLifecycle(lifecycle).onEach {
             val nextButtonFalse = ContextCompat.getColorStateList(this, R.color.gray_200)
-            if (viewModel.isEmailUsable.value != UiState.Loading) {
+            if (viewModel.isEmailUsable.value != UiState.Loading)
                 viewModel.initEmail()
-                with(binding) {
-                    btnNext.isEnabled = false
-                    btnNext.backgroundTintList = nextButtonFalse
-                    btnNext.setTextColor(ContextCompat.getColor(root.context, R.color.gray_400))
-                }
+
+            with(binding) {
+                tvEmailErrorMsg.visibility = View.VISIBLE
+                tvEmailErrorMsg.text = getString(R.string.email_error_msg)
+                btnNext.isEnabled = false
+                btnNext.backgroundTintList = nextButtonFalse
+                btnNext.setTextColor(ContextCompat.getColor(root.context, R.color.gray_400))
+            }
+
+        }.launchIn(lifecycleScope)
+
+        viewModel.passwordCheck.flowWithLifecycle(lifecycle).onEach {
+            val nextButtonTrue = ContextCompat.getColorStateList(this, R.color.main_2)
+            if(flag && viewModel.isPasswordDoubleCheck()){
+                binding.btnNext.isEnabled = true
+                binding.btnNext.backgroundTintList = nextButtonTrue
+                binding.btnNext.setTextColor(ContextCompat.getColor(this, R.color.white))
             }
         }.launchIn(lifecycleScope)
     }

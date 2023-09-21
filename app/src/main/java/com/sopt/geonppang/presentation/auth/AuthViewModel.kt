@@ -1,10 +1,7 @@
 package com.sopt.geonppang.presentation.auth
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.data.model.request.RequestNicknameSetting
@@ -21,6 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -34,9 +32,13 @@ class AuthViewModel @Inject constructor(
     private val validationRepository: ValidationRepository,
 ) : ViewModel() {
     val email = MutableStateFlow("")
-    val password = MutableLiveData("")
-    val passwordCheck = MutableLiveData("")
+    val password = MutableStateFlow("")
+    val passwordCheck = MutableStateFlow("")
     val nickname = MutableStateFlow("")
+
+    private val _flag = MutableStateFlow("")
+    val flag get() = _flag
+
     private val _authRoleType = MutableStateFlow<AuthRoleType?>(null)
     val authRoleType get() = _authRoleType.asStateFlow()
 
@@ -57,21 +59,25 @@ class AuthViewModel @Inject constructor(
         nickname.matches(Regex(NICKNAME_PATTERN))
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
-    val isValidPassword: LiveData<Boolean> = password.map { password ->
+    val isValidPassword: StateFlow<Boolean> = password.map { password ->
         password.matches(Regex(PASSWORD_PATTERN))
-    }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
-    val completePassword = MediatorLiveData<Boolean>().apply {
-        addSource(password) { value = isPasswordDoubleCheck() }
-        addSource(passwordCheck) { value = isPasswordDoubleCheck() }
-    }
+    val completePassword: StateFlow<Boolean> =
+        combine(password, passwordCheck) { _, _ ->
+            isPasswordDoubleCheck()
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
     fun initNickname() {
         _isNicknameUsable.value = UiState.Empty
     }
 
     fun initEmail() {
-        _isEmailUsable.value = UiState.Empty
+        _isEmailUsable.value = UiState.Loading
+    }
+
+    fun isPasswordDoubleCheck(): Boolean {
+        return password.value == passwordCheck.value
     }
 
     fun doubleCheckEmail() {
@@ -85,10 +91,6 @@ class AuthViewModel @Inject constructor(
                     _isEmailUsable.value = UiState.Error("false")
                 }
         }
-    }
-
-    private fun isPasswordDoubleCheck(): Boolean {
-        return password.value == passwordCheck.value && !password.value.isNullOrBlank() && !passwordCheck.value.isNullOrBlank()
     }
 
     fun doubleCheckNickname() {
