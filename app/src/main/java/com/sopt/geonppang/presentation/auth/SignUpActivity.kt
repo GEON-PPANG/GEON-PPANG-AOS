@@ -2,7 +2,6 @@ package com.sopt.geonppang.presentation.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -14,9 +13,7 @@ import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
@@ -129,7 +126,7 @@ class SignUpActivity :
 
         viewModel.passwordCheck.flowWithLifecycle(lifecycle).onEach {
             val nextButtonTrue = ContextCompat.getColorStateList(this, R.color.main_2)
-            if(flag && viewModel.isPasswordDoubleCheck()){
+            if (flag && viewModel.isPasswordDoubleCheck()) {
                 binding.btnNext.isEnabled = true
                 binding.btnNext.backgroundTintList = nextButtonTrue
                 binding.btnNext.setTextColor(ContextCompat.getColor(this, R.color.white))

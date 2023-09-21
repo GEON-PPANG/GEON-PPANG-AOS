@@ -1,6 +1,5 @@
 package com.sopt.geonppang.presentation.auth
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.datasource.local.GPDataSource
