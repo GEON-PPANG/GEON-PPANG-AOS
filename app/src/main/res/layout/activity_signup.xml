@@ -257,22 +257,20 @@
                     android:layout_marginHorizontal="24dp"
                     android:layout_marginTop="202dp"
                     android:layout_marginBottom="24dp"
-                    android:backgroundTint="@color/gray_200"
+                    android:backgroundTint="@{viewModel.signupReady? @color/main_2 : @color/gray_200}"
+                    android:enabled="@{viewModel.signupReady}"
                     android:paddingVertical="18dp"
                     android:text="@string/txt_next_btn"
                     android:textAppearance="@style/TextAppearance.BodyM1"
-                    android:textColor="@color/gray_400"
+                    android:textColor="@{viewModel.signupReady? @color/white:@color/gray_400}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/linear_password_double_check"
                     app:layout_constraintStart_toStartOf="@id/linear_password_double_check"
                     app:layout_constraintTop_toBottomOf="@id/linear_password_double_check"
                     app:rippleColor="@color/main_3" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </layout>

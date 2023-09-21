@@ -99,12 +99,8 @@ class SignUpActivity :
                         )
                         tvEmailErrorMsg.text = getString(R.string.email_already_exist)
                         tvEmailErrorMsg.visibility = View.VISIBLE
-                        /*btnNext.isEnabled = false
-                        btnNext.backgroundTintList = nextButtonFalse
-                        btnNext.setTextColor(ContextCompat.getColor(root.context, R.color.gray_400))*/
                     }
                 }
-
                 else -> {}
             }
         }.launchIn(lifecycleScope)
@@ -117,19 +113,6 @@ class SignUpActivity :
             with(binding) {
                 tvEmailErrorMsg.visibility = View.VISIBLE
                 tvEmailErrorMsg.text = getString(R.string.email_error_msg)
-                btnNext.isEnabled = false
-                btnNext.backgroundTintList = nextButtonFalse
-                btnNext.setTextColor(ContextCompat.getColor(root.context, R.color.gray_400))
-            }
-
-        }.launchIn(lifecycleScope)
-
-        viewModel.passwordCheck.flowWithLifecycle(lifecycle).onEach {
-            val nextButtonTrue = ContextCompat.getColorStateList(this, R.color.main_2)
-            if (flag && viewModel.isPasswordDoubleCheck()) {
-                binding.btnNext.isEnabled = true
-                binding.btnNext.backgroundTintList = nextButtonTrue
-                binding.btnNext.setTextColor(ContextCompat.getColor(this, R.color.white))
             }
         }.launchIn(lifecycleScope)
     }

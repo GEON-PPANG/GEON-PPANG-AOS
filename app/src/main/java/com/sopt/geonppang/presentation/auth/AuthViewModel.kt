@@ -33,6 +33,7 @@ class AuthViewModel @Inject constructor(
     val email = MutableStateFlow("")
     val password = MutableStateFlow("")
     val passwordCheck = MutableStateFlow("")
+
     val nickname = MutableStateFlow("")
 
     private val _flag = MutableStateFlow("")
@@ -63,8 +64,18 @@ class AuthViewModel @Inject constructor(
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
     val completePassword: StateFlow<Boolean> =
-        combine(password, passwordCheck) { _, _ ->
-            isPasswordDoubleCheck()
+        combine(password, passwordCheck) { password, passwordCheck ->
+            password == passwordCheck
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
+
+    val signupReady: StateFlow<Boolean> =
+        combine(
+            isValidEmail,
+            isEmailUsable.map { it is UiState.Success && it.data },
+            isValidPassword,
+            completePassword
+        ) { isValidEmail, isEmailUsable, isValidPassword, completePassword ->
+            isValidEmail && isEmailUsable && isValidPassword && completePassword
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
     fun initNickname() {
