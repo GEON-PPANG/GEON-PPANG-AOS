@@ -174,7 +174,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:background="@color/background_2"
                     android:paddingHorizontal="@dimen/spacing24"
                     android:paddingVertical="@dimen/spacing20"
                     android:text="@string/home_caption"
