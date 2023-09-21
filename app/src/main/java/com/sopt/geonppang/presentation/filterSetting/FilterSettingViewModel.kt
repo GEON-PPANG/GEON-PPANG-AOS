@@ -2,6 +2,7 @@ package com.sopt.geonppang.presentation.filterSetting
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.data.model.request.RequestSettingFilter
 import com.sopt.geonppang.domain.model.SelectedFilter
 import com.sopt.geonppang.domain.repository.FilterSettingRepository
@@ -22,6 +23,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FilterSettingViewModel @Inject constructor(
+    gpDataSource: GPDataSource,
     private val filterRepository: FilterSettingRepository
 ) : ViewModel() {
     private val _selectedFilterState = MutableStateFlow<UiState<SelectedFilter>>(UiState.Loading)
@@ -60,6 +62,8 @@ class FilterSettingViewModel @Inject constructor(
             else -> false
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
+
+    val platformType = gpDataSource.platformType
 
     fun setPreviousActivity(filterInfoType: FilterInfoType) {
         _previousActivity.value = filterInfoType
