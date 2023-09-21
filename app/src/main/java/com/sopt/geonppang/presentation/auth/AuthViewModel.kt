@@ -78,16 +78,18 @@ class AuthViewModel @Inject constructor(
             isValidEmail && isEmailUsable && isValidPassword && completePassword
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
+    val nicknameReady: StateFlow<Boolean> =
+        combine(isValidNickname, isNicknameUsable.map { it is UiState.Success && it.data }
+        ) { isValidNickname, isNicknameUsable ->
+            isValidNickname && isNicknameUsable
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
+
     fun initNickname() {
         _isNicknameUsable.value = UiState.Empty
     }
 
     fun initEmail() {
         _isEmailUsable.value = UiState.Loading
-    }
-
-    fun isPasswordDoubleCheck(): Boolean {
-        return password.value == passwordCheck.value
     }
 
     fun doubleCheckEmail() {
