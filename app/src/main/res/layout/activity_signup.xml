@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -89,8 +90,8 @@
                             android:textAppearance="@style/TextAppearance.Headline"
                             android:textColorHint="@color/gray_300"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/btn_double_check_email"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_email_text" />
 
                         <com.google.android.material.button.MaterialButton
@@ -101,6 +102,7 @@
                             android:layout_marginTop="36dp"
                             android:layout_marginEnd="18dp"
                             android:backgroundTint="@color/main_3"
+                            android:onClick="@{()->viewModel.doubleCheckEmail()}"
                             android:paddingHorizontal="10dp"
                             android:paddingVertical="4dp"
                             android:text="@string/txt_double_check_btn"
@@ -124,7 +126,7 @@
                     android:layout_marginRight="24dp"
                     android:text="@string/email_error_msg"
                     android:textAppearance="@style/TextAppearance.CaptionM1"
-                    android:textColor="@color/error"
+                    android:textColor="@{!viewModel.email.empty &amp; !viewModel.isValidEmail() ? @color/error : @color/main_3}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linear_email" />
 
@@ -192,7 +194,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
-                    android:background="@{!viewModel.password_check.empty &amp; !viewModel.completePassword? @drawable/background_need_change_status : @drawable/background_normal_status }"
+                    android:background="@{!viewModel.passwordCheck.empty &amp; !viewModel.completePassword? @drawable/background_need_change_status : @drawable/background_normal_status }"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="@id/linear_password"
                     app:layout_constraintStart_toStartOf="@id/linear_password"
@@ -206,7 +208,7 @@
                         android:layout_marginTop="16dp"
                         android:text="@string/tv_double_check_password"
                         android:textAppearance="@style/TextAppearance.BodyB2"
-                        android:textColor="@{!viewModel.password_check.empty &amp; !viewModel.completePassword ? @color/error : @color/gray_400}" />
+                        android:textColor="@{!viewModel.passwordCheck.empty &amp; !viewModel.completePassword ? @color/error : @color/gray_400}" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/CustomTextInputLayout"
@@ -226,7 +228,7 @@
                             android:inputType="textPassword"
                             android:padding="0dp"
                             android:paddingStart="18dp"
-                            android:text="@={viewModel.password_check}"
+                            android:text="@={viewModel.passwordCheck}"
                             android:textAppearance="@style/TextAppearance.Headline"
                             android:textColorHint="@color/gray_300"
                             android:translationY="-5dp" />
@@ -237,7 +239,7 @@
 
                 <TextView
                     android:id="@+id/tv_password2_error_msg"
-                    visibility="@{!viewModel.password_check.empty &amp; !viewModel.completePassword}"
+                    visibility="@{!viewModel.passwordCheck.empty &amp; !viewModel.completePassword}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -255,23 +257,20 @@
                     android:layout_marginHorizontal="24dp"
                     android:layout_marginTop="202dp"
                     android:layout_marginBottom="24dp"
-                    android:backgroundTint="@{viewModel.completePassword == true ? @color/main_2 : @color/gray_200}"
-                    android:enabled="@{viewModel.completePassword}"
+                    android:backgroundTint="@{viewModel.signupReady? @color/main_2 : @color/gray_200}"
+                    android:enabled="@{viewModel.signupReady}"
                     android:paddingVertical="18dp"
                     android:text="@string/txt_next_btn"
                     android:textAppearance="@style/TextAppearance.BodyM1"
-                    android:textColor="@{viewModel.completePassword == true ? @color/white : @color/gray_400}"
+                    android:textColor="@{viewModel.signupReady? @color/white:@color/gray_400}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/linear_password_double_check"
                     app:layout_constraintStart_toStartOf="@id/linear_password_double_check"
                     app:layout_constraintTop_toBottomOf="@id/linear_password_double_check"
                     app:rippleColor="@color/main_3" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </layout>
