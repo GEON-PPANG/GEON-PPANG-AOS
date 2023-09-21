@@ -11,6 +11,7 @@ import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.auth.SignActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.presentation.type.PlatformType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
@@ -122,7 +123,15 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                         }
 
                         FilterInfoType.ONBOARDING -> {
-                            moveToSign()
+                            when (viewModel.platformType) {
+                                PlatformType.NONE.name -> {
+                                    moveToSign()
+                                }
+
+                                PlatformType.KAKAO.name -> {
+                                    moveOnBoardingToMain()
+                                }
+                            }
                         }
 
                         else -> {}
@@ -133,6 +142,13 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                 }
             }
         }.launchIn(lifecycleScope)
+    }
+
+    private fun moveOnBoardingToMain() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags =
+            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
     }
 
     private fun moveToMain(initialFragment: String?) {
