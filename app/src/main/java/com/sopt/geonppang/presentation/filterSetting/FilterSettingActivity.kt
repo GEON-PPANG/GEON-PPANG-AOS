@@ -9,9 +9,10 @@ import androidx.viewpager2.widget.ViewPager2
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
+import com.sopt.geonppang.presentation.auth.SignActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
-import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.AmplitudeUtils
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.setInvisibility
 import dagger.hilt.android.AndroidEntryPoint
@@ -120,16 +121,16 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                             moveToMain(null)
                         }
 
-                        else -> {
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.flags =
-                                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                            startActivity(intent)
+                        FilterInfoType.ONBOARDING -> {
+                            moveToSign()
                         }
+
+                        else -> {}
                     }
                 }
 
-                else -> {}
+                else -> {
+                }
             }
         }.launchIn(lifecycleScope)
     }
@@ -140,6 +141,13 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         if (!initialFragment.isNullOrEmpty()) {
             intent.putExtra(initialFragment, initialFragment)
         }
+        startActivity(intent)
+    }
+
+    private fun moveToSign() {
+        val intent = Intent(this, SignActivity::class.java)
+        intent.flags =
+            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
     }
 

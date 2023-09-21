@@ -28,7 +28,7 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun logout(): Result<ResponseLogout> =
         runCatching { authDataSource.logout() }
 
-    override suspend fun settingNickname(nickName: RequestNicknameSetting): Result<ResponseNickNameSetting> =
+    override suspend fun settingNickname(nickName: RequestNicknameSetting): Result<Response<ResponseNickNameSetting>> =
         runCatching { authDataSource.settingNickname(nickName) }
 
     override suspend fun login(responseLogin: RequestLogin): Result<Response<ResponseLogin>> =

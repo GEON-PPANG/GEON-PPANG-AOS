@@ -47,7 +47,6 @@ class AuthInterceptor @Inject constructor(
                     refreshTokenResponse.close()
                     val newRequest = originalRequest.newBuilder()
                         .addHeader(ACCESS_TOKEN, gpDataSource.accessToken)
-                        .addHeader(REFRESH_TOKEN, gpDataSource.refreshToken)
                         .build()
                     return chain.proceed(newRequest)
                 } else {
@@ -55,7 +54,7 @@ class AuthInterceptor @Inject constructor(
                         CoroutineScope(Dispatchers.Main).launch {
                             startActivity(
                                 Intent(this@with, SignActivity::class.java)
-                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             )
                         }
                     }

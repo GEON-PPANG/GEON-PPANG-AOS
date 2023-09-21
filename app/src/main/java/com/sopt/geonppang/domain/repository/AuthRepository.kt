@@ -18,6 +18,6 @@ interface AuthRepository {
 
     suspend fun withdraw(): Result<ResponseWithdraw>
     suspend fun logout(): Result<ResponseLogout>
-    suspend fun settingNickname(nickName: RequestNicknameSetting): Result<ResponseNickNameSetting>
+    suspend fun settingNickname(nickName: RequestNicknameSetting): Result<Response<ResponseNickNameSetting>>
     suspend fun login(requestLogin: RequestLogin): Result<Response<ResponseLogin>>
 }

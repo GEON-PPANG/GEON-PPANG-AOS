@@ -30,8 +30,6 @@ class HomeViewModel @Inject constructor(
     val isFilterSelected get() = _isFilterSelected.asStateFlow()
 
     init {
-        fetchBestBakeryList()
-        fetchBestReviewList()
         getUserFilter()
     }
 
