@@ -9,6 +9,7 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityLoginBinding
 import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.auth.SignUpActivity
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
@@ -45,6 +46,7 @@ class LoginActivity :
         viewModel.loginState.flowWithLifecycle(lifecycle).onEach { loginState ->
             when (loginState) {
                 is UiState.Success -> {
+                    AmplitudeUtils.trackEvent(LOGIN_APP)
                     moveToHome()
                     viewModel.setAutoLogin()
                 }
@@ -76,5 +78,6 @@ class LoginActivity :
 
     companion object {
         const val LOGIN_FAIL = "loginFail"
+        const val LOGIN_APP = "login_app"
     }
 }
