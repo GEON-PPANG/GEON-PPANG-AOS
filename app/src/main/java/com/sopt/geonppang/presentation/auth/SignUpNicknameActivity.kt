@@ -57,23 +57,13 @@ class SignUpNicknameActivity :
         }.launchIn(lifecycleScope)
 
         viewModel.isNicknameUsable.flowWithLifecycle(lifecycle).onEach { isNicknameUsable ->
-            val passwordValidationTrue = ContextCompat.getColorStateList(this, R.color.main_2)
-            val passwordValidationFalse = ContextCompat.getColorStateList(this, R.color.gray_200)
             when (isNicknameUsable) {
                 is UiState.Success -> {
                     showNicknameSuccessDialog()
-                    binding.btnNext.isEnabled
-                    binding.btnNext.setTextColor(ContextCompat.getColor(this, R.color.white))
-                    binding.btnNext.text = getString(R.string.txt_start_btn)
-                    binding.btnNext.backgroundTintList = passwordValidationTrue
                 }
 
                 is UiState.Error -> {
                     showNicknameFailDialog()
-                    binding.btnNext.isEnabled = false
-                    binding.btnNext.setTextColor(ContextCompat.getColor(this, R.color.gray_400))
-                    binding.btnNext.text = getString(R.string.txt_next_btn)
-                    binding.btnNext.backgroundTintList = passwordValidationFalse
                 }
 
                 else -> {}
@@ -81,13 +71,8 @@ class SignUpNicknameActivity :
         }.launchIn(lifecycleScope)
 
         viewModel.nickname.flowWithLifecycle(lifecycle).onEach {
-            val passwordValidationFalse = ContextCompat.getColorStateList(this, R.color.gray_200)
             if (viewModel.isNicknameUsable.value != UiState.Loading) {
                 viewModel.initNickname()
-                binding.btnNext.isEnabled = false
-                binding.btnNext.setTextColor(ContextCompat.getColor(this, R.color.gray_400))
-                binding.btnNext.text = getString(R.string.txt_next_btn)
-                binding.btnNext.backgroundTintList = passwordValidationFalse
             }
         }.launchIn(lifecycleScope)
     }
