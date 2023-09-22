@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.sopt.geonppang.R
-import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.FragmentMainPurposeFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.auth.SignActivity
-import com.sopt.geonppang.presentation.type.PlatformType
 import com.sopt.geonppang.util.binding.BindingFragment
 
 class MainPurposeFilterFragment :
@@ -27,16 +25,7 @@ class MainPurposeFilterFragment :
 
     private fun addListeners() {
         binding.layoutMainPurposeSkip.setOnClickListener {
-            val gpDataSource = GPDataSource(requireContext())
-            when (gpDataSource.platformType) {
-                PlatformType.NONE.name -> {
-                    moveToSign()
-                }
-
-                PlatformType.KAKAO.name -> {
-                    moveToMain()
-                }
-            }
+            moveToMain()
         }
     }
 
