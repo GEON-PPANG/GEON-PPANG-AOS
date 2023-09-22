@@ -38,10 +38,6 @@ class BakeryListViewModel @Inject constructor(
     private val _isFilterSelected = MutableStateFlow(false)
     val isFilterSelected get() = _isFilterSelected.asStateFlow()
 
-    init {
-        getUserFilter()
-    }
-
     fun setBakerySortType(bakerySortType: BakerySortType) {
         _bakerySort.value = bakerySortType
     }
@@ -83,7 +79,7 @@ class BakeryListViewModel @Inject constructor(
         }
     }
 
-    private fun getUserFilter() {
+    fun getUserFilter() {
         viewModelScope.launch {
             getUserFilterRepository.getUserFilter()
                 .onSuccess { userFilterInfo ->
