@@ -25,8 +25,8 @@
     </style>
 
     <style name="Radius5.Top">
-        <item name="cornerSizeTopLeft">5dp</item>
-        <item name="cornerSizeTopRight">5dp</item>
+        <item name="boxCornerRadiusTopStart">5dp</item>
+        <item name="boxCornerRadiusTopEnd">5dp</item>
     </style>
 
     <!--splash-->
@@ -117,7 +117,7 @@
     </style>
 
     <style name="Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M2" parent="Widget.Material3.Chip.Style.Bread.Filter.Category.Point">
-        <item name="android:paddingVertical">2dp</item>
+        <item name="android:paddingVertical">4dp</item>
         <item name="textStartPadding">6dp</item>
         <item name="textEndPadding">6dp</item>
         <item name="android:textAppearance">@style/TextAppearance.CaptionM2</item>
