@@ -43,7 +43,7 @@
 
     <!--  home  -->
     <string name="home_title">%s님\n건빵에 오신걸 환영해요!</string>
-    <string name="home_best_title1">%s님 맞춤\t</string>
+    <string name="home_best_title1">%s님 맞춤</string>
     <string name="home_best_bakery_title2">BEST 건빵집</string>
     <string name="home_search_hint">궁금한 건빵집을 입력해주세요!</string>
     <string name="home_best_review_title2">BEST 리뷰</string>
