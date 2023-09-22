@@ -15,26 +15,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_speech_bubble_title"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_speech_bubble"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing12"
-        android:text="@string/home_bubble_speech_title"
-        android:textAppearance="@style/TextAppearance.CaptionM2"
-        android:textColor="@color/gray_400"
-        app:layout_constraintBottom_toBottomOf="@id/iv_speech_bubble_close"
-        app:layout_constraintStart_toStartOf="@id/iv_speech_bubble"
-        app:layout_constraintTop_toTopOf="@id/iv_speech_bubble_close" />
+        android:layout_marginHorizontal="@dimen/spacing12"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_speech_bubble"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/iv_speech_bubble_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="@dimen/spacing12"
-        android:src="@drawable/ic_close"
-        app:layout_constraintEnd_toEndOf="@id/iv_speech_bubble"
-        app:layout_constraintTop_toTopOf="@id/iv_speech_bubble" />
+        <TextView
+            android:id="@+id/tv_speech_bubble_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_bubble_speech_title"
+            android:textAppearance="@style/TextAppearance.CaptionM2"
+            android:textColor="@color/gray_400"
+            app:layout_constraintBottom_toBottomOf="@id/iv_speech_bubble_close"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_speech_bubble_close" />
+
+        <ImageView
+            android:id="@+id/iv_speech_bubble_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@+id/tv_speech_bubble_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
