@@ -102,6 +102,7 @@
 
     <!--    snackbar    -->
     <string name="snackbar_save">저장되었어요 !</string>
+    <string name="snackbar_save_cancel">저장이 취소되었어요 !</string>
 
     <!--  bakery list view  -->
     <string name="bakery_list_sort">정렬</string>
