@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sopt.geonppang.R
 import kotlin.math.roundToInt
 
-
 class CustomItemDecoration(
     private val context: Context,
     private val isFirstDividerDrawing: Boolean = true
@@ -42,7 +41,6 @@ class CustomItemDecoration(
         }
     }
 }
-
 
 val Int.dp: Int
     get() = (this * Resources.getSystem().displayMetrics.density).roundToInt()
