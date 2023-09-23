@@ -34,10 +34,12 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="@dimen/spacing16" />
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <ImageView
             android:id="@+id/iv_best_bakery"
             android:layout_width="186dp"
             android:layout_height="122dp"
+            android:background="@drawable/shape_border_top_radius_5"
+            android:clipToOutline="true"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

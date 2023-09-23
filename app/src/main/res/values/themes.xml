@@ -24,11 +24,6 @@
         <item name="cornerSize">5dp</item>
     </style>
 
-    <style name="Radius5.Top">
-        <item name="boxCornerRadiusTopStart">5dp</item>
-        <item name="boxCornerRadiusTopEnd">5dp</item>
-    </style>
-
     <!--splash-->
     <style name="Theme.GeonPpang.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/white</item>
