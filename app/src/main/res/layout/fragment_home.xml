@@ -48,7 +48,7 @@
             android:background="@drawable/background_search_box"
             android:drawablePadding="@dimen/spacing16"
             android:gravity="center_vertical"
-            android:hint="@string/home_search_hint"
+            android:hint="@string/search_hint"
             android:paddingHorizontal="@dimen/spacing16"
             android:paddingVertical="@dimen/spacing10"
             android:textAppearance="@style/TextAppearance.BodyM2"
