@@ -12,6 +12,7 @@ import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETA
 import com.sopt.geonppang.presentation.model.MyReviewBakeryInfo
 import com.sopt.geonppang.presentation.myReviewDetail.MyReviewDetailActivity
 import com.sopt.geonppang.util.AmplitudeUtils
+import com.sopt.geonppang.util.CustomItemDecoration
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +37,10 @@ class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activ
 
     private fun initLayout() {
         myReviewAdapter = MyReviewAdapter(::moveToReviewDetail)
-        binding.rvMyReviewList.adapter = myReviewAdapter
+        binding.rvMyReviewList.apply {
+            adapter = myReviewAdapter
+            addItemDecoration(CustomItemDecoration(this@MyReviewActivity))
+        }
     }
 
     private fun addListeners() {

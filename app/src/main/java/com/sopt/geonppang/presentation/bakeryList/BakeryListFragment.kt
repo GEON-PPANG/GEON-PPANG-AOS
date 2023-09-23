@@ -16,6 +16,7 @@ import com.sopt.geonppang.presentation.search.SearchActivity
 import com.sopt.geonppang.presentation.type.BakerySortType
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.AmplitudeUtils
+import com.sopt.geonppang.util.CustomItemDecoration
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingFragment
 import com.sopt.geonppang.util.setVisibility
@@ -43,7 +44,10 @@ class BakeryListFragment :
 
     private fun initLayout() {
         bakeryAdapter = BakeryListAdapter(::moveToDetail)
-        binding.rvBakeryList.adapter = bakeryAdapter
+        binding.rvBakeryList.apply {
+            adapter = bakeryAdapter
+            addItemDecoration(CustomItemDecoration(requireContext()))
+        }
     }
 
     private fun addListeners() {
