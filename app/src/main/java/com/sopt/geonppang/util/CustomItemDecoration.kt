@@ -10,7 +10,8 @@ import kotlin.math.roundToInt
 
 
 class CustomItemDecoration(
-    private val context: Context
+    private val context: Context,
+    private val isFirstDividerDrawing: Boolean = true
 ) : RecyclerView.ItemDecoration() {
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
@@ -26,10 +27,22 @@ class CustomItemDecoration(
                 view.bottom.toFloat() + (view.layoutParams as RecyclerView.LayoutParams).bottomMargin
             val bottom = top + height
 
-            c.drawRect(left + widthMargin, top, right - widthMargin, bottom, paint)
+            when (isFirstDividerDrawing) {
+                true -> {
+                    if (i != parent.childCount - 1) {
+                        c.drawRect(left + widthMargin, top, right - widthMargin, bottom, paint)
+                    }
+                }
+
+                false -> {
+                    if (i != 0 && i != parent.childCount - 1)
+                        c.drawRect(left + widthMargin, top, right - widthMargin, bottom, paint)
+                }
+            }
         }
     }
 }
+
 
 val Int.dp: Int
     get() = (this * Resources.getSystem().displayMetrics.density).roundToInt()
