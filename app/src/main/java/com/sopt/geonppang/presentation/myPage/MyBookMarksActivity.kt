@@ -35,6 +35,11 @@ class MyBookMarksActivity :
         collectData()
     }
 
+    override fun onResume() {
+        super.onResume()
+        myPageViewModel.fetchMyPageBookmarkList()
+    }
+
     private fun initLayout() {
         bakeryAdapter = BakeryAdapter(::moveToDetail)
         binding.rvStoreList.adapter = bakeryAdapter
@@ -50,7 +55,6 @@ class MyBookMarksActivity :
         myPageViewModel.myPageBookmarkListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    myPageViewModel.fetchMyPageBookmarkList()
                     bakeryAdapter.submitList(it.data)
                 }
 

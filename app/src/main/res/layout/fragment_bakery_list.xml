@@ -148,28 +148,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_line_bottom">
 
-            <CheckBox
-                android:id="@+id/check_bakery_list_my_filter"
-                style="@style/Style.CheckBox"
+            <LinearLayout
+                android:id="@+id/layout_bakery_list_my_filtaer_apply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing24"
-                android:checked="@{viewModel.isPersonalFilterApplied}"
                 android:onClick="@{() -> viewModel.setPersonalFilter()}"
+                android:padding="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:text="@string/bakery_list_my_filter_apply"
-                android:textAppearance="@style/TextAppearance.CaptionB1"
-                android:textColor="@color/gray_600"
-                app:layout_constraintBottom_toBottomOf="@id/check_bakery_list_my_filter"
-                app:layout_constraintStart_toEndOf="@id/check_bakery_list_my_filter"
-                app:layout_constraintTop_toTopOf="@id/check_bakery_list_my_filter" />
+                <CheckBox
+                    android:id="@+id/check_bakery_list_my_filter"
+                    style="@style/Style.CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.isPersonalFilterApplied}"
+                    android:onClick="@{() -> viewModel.setPersonalFilter()}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="@string/bakery_list_my_filter_apply"
+                    android:textAppearance="@style/TextAppearance.CaptionB1"
+                    android:textColor="@color/gray_600" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/layout_bakery_list_sort_filter"

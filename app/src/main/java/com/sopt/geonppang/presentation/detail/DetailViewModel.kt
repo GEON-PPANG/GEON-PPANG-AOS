@@ -46,6 +46,7 @@ class DetailViewModel @Inject constructor(
             detailRepository.fetchDetailReview(bakeryId)
                 .onSuccess { reviewData ->
                     _reviewData.value = reviewData
+                    fetchDetailBakeryInfo(bakeryId)
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
