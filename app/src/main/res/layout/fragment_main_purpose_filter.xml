@@ -19,103 +19,123 @@
         android:layout_height="match_parent"
         tools:context=".presentation.filterSetting.MainPurposeFilterActivity">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gl_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="@dimen/spacing24" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gl_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="@dimen/spacing24" />
-
-        <TextView
-            android:id="@+id/tv_main_purpose_filter_title"
+        <ScrollView
+            android:id="@+id/sv_main_purpose_filter"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/main_purpose_title"
-            android:textAppearance="@style/TextAppearance.Title1"
-            android:textColor="@color/gray_700"
-            app:layout_constraintEnd_toStartOf="@+id/gl_end"
-            app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <include
-            android:id="@+id/include_main_purpose_health"
-            layout="@layout/view_main_purpose_button"
-            selected="@{viewModel.mainPurposeType == MainPurposeType.HEALTH}"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:onClick="@{() -> viewModel.setMainPurposeType(MainPurposeType.HEALTH)}"
-            app:layout_constraintEnd_toEndOf="@id/gl_end"
-            app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@+id/tv_main_purpose_filter_title"
-            app:mainPurposeType="@{MainPurposeType.HEALTH}" />
-
-        <include
-            android:id="@+id/include_main_purpose_diet"
-            layout="@layout/view_main_purpose_button"
-            selected="@{viewModel.mainPurposeType == MainPurposeType.DIET}"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:onClick="@{() -> viewModel.setMainPurposeType(MainPurposeType.DIET)}"
-            app:layout_constraintEnd_toEndOf="@id/gl_end"
-            app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@+id/include_main_purpose_health"
-            app:mainPurposeType="@{MainPurposeType.DIET}" />
-
-        <include
-            android:id="@+id/include_main_purpose_vegan"
-            layout="@layout/view_main_purpose_button"
-            selected="@{viewModel.mainPurposeType == MainPurposeType.VEGAN}"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:onClick="@{() -> viewModel.setMainPurposeType(MainPurposeType.VEGAN)}"
-            app:layout_constraintEnd_toEndOf="@id/gl_end"
-            app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@+id/include_main_purpose_diet"
-            app:mainPurposeType="@{MainPurposeType.VEGAN}" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_main_purpose_skip"
-            visibility="@{viewModel.previousActivity == FilterInfoType.ONBOARDING}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing24"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/gl_end">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tv_main_purpose_skip"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:text="@string/filter_skip"
-                android:textAppearance="@style/TextAppearance.BodyM2"
-                android:textColor="@color/gray_500"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/iv_main_purpose_filter_skip"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:paddingBottom="@dimen/spacing24">
 
-            <ImageView
-                android:id="@+id/iv_main_purpose_filter_skip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_filter_arrow_right"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/spacing24" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/spacing24" />
 
+                <TextView
+                    android:id="@+id/tv_main_purpose_filter_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/main_purpose_title"
+                    android:textAppearance="@style/TextAppearance.Title1"
+                    android:textColor="@color/gray_700"
+                    app:layout_constraintEnd_toStartOf="@+id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_main_purpose_skip"
+                    invisibility="@{viewModel.previousActivity == FilterInfoType.ONBOARDING}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_main_purpose_filter_title">
+
+                    <TextView
+                        android:id="@+id/tv_main_purpose_skip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:text="@string/filter_skip"
+                        android:textAppearance="@style/TextAppearance.BodyM2"
+                        android:textColor="@color/gray_500"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/iv_main_purpose_filter_skip"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_main_purpose_filter_skip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_filter_arrow_right"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <include
+                    android:id="@+id/include_main_purpose_health"
+                    layout="@layout/view_main_purpose_button"
+                    selected="@{viewModel.mainPurposeType == MainPurposeType.HEALTH}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:onClick="@{() -> viewModel.setMainPurposeType(MainPurposeType.HEALTH)}"
+                    app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_main_purpose_skip"
+                    app:mainPurposeType="@{MainPurposeType.HEALTH}" />
+
+                <include
+                    android:id="@+id/include_main_purpose_diet"
+                    layout="@layout/view_main_purpose_button"
+                    selected="@{viewModel.mainPurposeType == MainPurposeType.DIET}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:onClick="@{() -> viewModel.setMainPurposeType(MainPurposeType.DIET)}"
+                    app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@+id/include_main_purpose_health"
+                    app:mainPurposeType="@{MainPurposeType.DIET}" />
+
+                <include
+                    android:id="@+id/include_main_purpose_vegan"
+                    layout="@layout/view_main_purpose_button"
+                    selected="@{viewModel.mainPurposeType == MainPurposeType.VEGAN}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:onClick="@{() -> viewModel.setMainPurposeType(MainPurposeType.VEGAN)}"
+                    app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@+id/include_main_purpose_diet"
+                    app:mainPurposeType="@{MainPurposeType.VEGAN}" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
