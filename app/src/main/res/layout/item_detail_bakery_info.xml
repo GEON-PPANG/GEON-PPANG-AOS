@@ -206,7 +206,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:paddingBottom="20dp"
+            android:paddingBottom="19dp"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@+id/gl_start"
             app:layout_constraintTop_toBottomOf="@+id/view_item_detail_bakery_info_first_line">
@@ -249,7 +249,7 @@
             visibility="@{!bakeryInfo.homepageUrl.isEmpty() || !bakeryInfo.instagramUrl.isEmpty()}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
+            android:paddingBottom="18dp"
             app:layout_constraintEnd_toStartOf="@+id/gl_end"
             app:layout_constraintStart_toStartOf="@+id/gl_start"
             app:layout_constraintTop_toBottomOf="@+id/layout_item_detail_bakery_info">
@@ -258,6 +258,8 @@
                 android:id="@+id/iv_item_detail_bakery_info_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:paddingEnd="6dp"
                 android:src="@drawable/ic_link"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -267,26 +269,30 @@
                 visibility="@{!bakeryInfo.homepageUrl.isEmpty()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:paddingHorizontal="2dp"
+                android:paddingVertical="4dp"
                 android:text="@string/detail_homepage"
                 android:textAppearance="@style/TextAppearance.Subhead"
                 android:textColor="@color/gray_400"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_item_detail_bakery_info_link"
+                app:layout_constraintEnd_toStartOf="@id/tv_item_detail_bakery_info_instagram"
                 app:layout_constraintStart_toEndOf="@+id/iv_item_detail_bakery_info_link"
-                app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_link" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_item_detail_bakery_info_instagram"
                 visibility="@{!bakeryInfo.instagramUrl.isEmpty()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="4dp"
+                android:paddingHorizontal="2dp"
+                android:paddingVertical="4dp"
                 android:text="@string/detail_instagram"
                 android:textAppearance="@style/TextAppearance.Subhead"
                 android:textColor="@color/gray_400"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_item_detail_bakery_info_homepage"
                 app:layout_constraintStart_toEndOf="@+id/tv_item_detail_bakery_info_homepage"
-                app:layout_constraintTop_toTopOf="@+id/tv_item_detail_bakery_info_homepage" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
