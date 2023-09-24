@@ -33,11 +33,6 @@ class MyPageViewModel @Inject constructor(
     private var _myBookmarkCount = MutableStateFlow<Int?>(null)
     val myBookmarkCount get() = _myBookmarkCount.asStateFlow()
 
-    init {
-        fetchMyPageReviewList()
-        fetchMyPageBookmarkList()
-    }
-
     fun fetchProfileInfo() {
         viewModelScope.launch {
             myPageRepository.fetchProfileInfo()
@@ -48,7 +43,7 @@ class MyPageViewModel @Inject constructor(
         }
     }
 
-    private fun fetchMyPageReviewList() {
+    fun fetchMyPageReviewList() {
         viewModelScope.launch {
             myPageRepository.fetchMyReview().onSuccess { myReviewList ->
                 _myPageReviewListState.value = UiState.Success(myReviewList)

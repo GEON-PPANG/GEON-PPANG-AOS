@@ -36,6 +36,7 @@ class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activ
     }
 
     private fun initLayout() {
+        viewModel.fetchMyPageReviewList()
         myReviewAdapter = MyReviewAdapter(::moveToReviewDetail)
         binding.rvMyReviewList.apply {
             adapter = myReviewAdapter

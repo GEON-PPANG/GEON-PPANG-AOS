@@ -26,7 +26,7 @@ class HomeViewModel @Inject constructor(
     val bestReviewListState get() = _bestReviewListState.asStateFlow()
     private val _nickName = MutableStateFlow<String?>(null)
     val nickName get() = _nickName.asStateFlow()
-    private val _isFilterSelected = MutableStateFlow<Boolean>(false)
+    private val _isFilterSelected = MutableStateFlow<Boolean?>(null)
     val isFilterSelected get() = _isFilterSelected.asStateFlow()
 
     init {
@@ -38,6 +38,7 @@ class HomeViewModel @Inject constructor(
             homeRepository.fetchBestBakery()
                 .onSuccess { bestBakeryList ->
                     _bestBakeryListState.value = UiState.Success(bestBakeryList)
+                    fetchBestReviewList()
                 }
                 .onFailure { throwable ->
                     _bestBakeryListState.value = UiState.Error(throwable.message)
@@ -45,7 +46,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun fetchBestReviewList() {
+    private fun fetchBestReviewList() {
         viewModelScope.launch {
             homeRepository.fetchBestReview()
                 .onSuccess { bestReviewList ->

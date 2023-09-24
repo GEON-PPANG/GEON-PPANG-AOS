@@ -57,7 +57,7 @@
             android:id="@+id/tv_item_detail_review_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="11dp"
+            android:layout_marginEnd="7dp"
             android:text="@{review.createdAt}"
             android:textAppearance="@style/TextAppearance.CaptionM1"
             android:textColor="@color/gray_400"
@@ -70,11 +70,13 @@
             android:id="@+id/tv_item_detail_review_report"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="23dp"
+            android:padding="4dp"
             android:text="@string/detail_declare"
             android:textAppearance="@style/TextAppearance.CaptionM1"
             android:textColor="@color/gray_300"
             app:layout_constraintBottom_toBottomOf="@+id/iv_item_detail_review_profile_img"
-            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/iv_item_detail_review_profile_img" />
 
         <com.google.android.material.chip.ChipGroup

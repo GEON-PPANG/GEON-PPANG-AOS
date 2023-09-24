@@ -56,7 +56,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initLayout() {
-        viewModel.fetchDetailBakeryInfo(bakeryId)
         viewModel.fetchDetailReview(bakeryId)
 
         detailBakeryInfoAdapter = DetailBakeryInfoAdapter(::moveToWebPage)
@@ -138,6 +137,11 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                         CustomSnackbar.makeSnackbar(
                             binding.root,
                             getString(R.string.snackbar_save)
+                        )
+                    } else {
+                        CustomSnackbar.makeSnackbar(
+                            binding.root,
+                            getString(R.string.snackbar_save_cancel)
                         )
                     }
                 }
