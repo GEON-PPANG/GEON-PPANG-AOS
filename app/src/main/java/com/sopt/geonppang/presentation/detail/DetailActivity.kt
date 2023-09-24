@@ -56,7 +56,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initLayout() {
-        viewModel.fetchDetailBakeryInfo(bakeryId)
         viewModel.fetchDetailReview(bakeryId)
 
         detailBakeryInfoAdapter = DetailBakeryInfoAdapter(::moveToWebPage)
