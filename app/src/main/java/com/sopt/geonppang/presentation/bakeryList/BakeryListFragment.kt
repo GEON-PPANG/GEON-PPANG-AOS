@@ -20,6 +20,7 @@ import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingFragment
 import com.sopt.geonppang.util.setVisibility
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -42,6 +43,7 @@ class BakeryListFragment :
     }
 
     private fun initLayout() {
+        viewModel.getUserFilter()
         bakeryAdapter = BakeryListAdapter(::moveToDetail)
         binding.rvBakeryList.adapter = bakeryAdapter
     }
@@ -79,7 +81,6 @@ class BakeryListFragment :
             .onEach { isPersonalFilterApplied ->
                 if (viewModel.isFilterSelected.value && isPersonalFilterApplied == false)
                     AmplitudeUtils.trackEvent(CLICK_PERSONAL_FILTER_APPLY_OFF)
-                viewModel.fetchBakeryList()
             }.launchIn(lifecycleScope)
         viewModel.bakeryCategoryType.flowWithLifecycle(lifecycle).onEach { bakeryCategoryType ->
             val selectedCategory = bakeryCategoryType.entries.filter { it.value }.map { it.key }
@@ -90,6 +91,13 @@ class BakeryListFragment :
                     selectedCategory
                 )
             }
+        }.launchIn(lifecycleScope)
+        combine(
+            viewModel.isPersonalFilterApplied,
+            viewModel.bakeryCategoryType,
+            viewModel.bakerySort
+        ) { isPersonalFilterApplied, bakeryCategoryType, bakerySort ->
+        }.flowWithLifecycle(lifecycle).onEach {
             viewModel.fetchBakeryList()
         }.launchIn(lifecycleScope)
         viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
@@ -132,7 +140,6 @@ class BakeryListFragment :
     // BakeryListDialog에서 부터 받아온 데이터를 처리
     override fun onBakerySortTypeSelected(bakerySortType: BakerySortType) {
         viewModel.setBakerySortType(bakerySortType)
-        viewModel.fetchBakeryList()
     }
 
     companion object {

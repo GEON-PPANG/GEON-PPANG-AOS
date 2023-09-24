@@ -39,12 +39,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         collectData()
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.fetchBestBakeryList()
-        viewModel.fetchBestReviewList()
-    }
-
     private fun initLayout() {
         bestBakeryAdapter = BestBakeryAdapter(::moveToDetail)
         binding.rvHomeBestBakeryList.adapter = bestBakeryAdapter
@@ -93,7 +87,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
             binding.tvHomeBestBakeryTitle1.setVisibility(isFilterSelected)
             binding.tvHomeBestReviewTitle1.setVisibility(isFilterSelected)
-            binding.includeHomeSpeechBubble.root.setVisibility(!isFilterSelected)
+            binding.includeHomeSpeechBubble.root.setVisibility(isFilterSelected != true)
+
+            if (isFilterSelected != null)
+                viewModel.fetchBestBakeryList()
         }.launchIn(lifecycleScope)
     }
 
