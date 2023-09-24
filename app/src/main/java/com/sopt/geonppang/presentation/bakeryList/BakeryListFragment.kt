@@ -107,6 +107,7 @@ class BakeryListFragment :
         viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
             binding.includeHomeSpeechBubble.root.setVisibility(!isFilterSelected)
             binding.checkBakeryListMyFilter.isEnabled = isFilterSelected
+            binding.layoutBakeryListMyFiltaerApply.isEnabled = isFilterSelected
         }.launchIn(lifecycleScope)
     }
 
