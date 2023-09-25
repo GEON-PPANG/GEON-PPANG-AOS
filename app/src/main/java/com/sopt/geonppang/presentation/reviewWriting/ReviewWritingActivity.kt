@@ -157,7 +157,7 @@ class ReviewWritingActivity :
         const val BAD = "아쉬웠어요"
         const val CLICK_REVIEW_WRITING_OPTION = "click_reviewwriting_option"
         const val CLICK_RECOMMEND_KEYWORD = "click_recommend_keyword"
-        const val CLICK_REVIEW_WRITING_TEXT = "click_reviewwritng_text"
+        const val CLICK_REVIEW_WRITING_TEXT = "click_reviewwriting_text"
         const val CLICK_REVIEW_WRITING_BACK = "click_reviewwriting_back"
         const val CLICK_REVIEW_WRITING_COMPLETE = "click_reviewwriting_complete"
         const val COMPLETE_REVIEW_WRITING = "complete_reviewwriting"
