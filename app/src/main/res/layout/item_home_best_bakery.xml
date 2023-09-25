@@ -34,14 +34,16 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="@dimen/spacing16" />
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <ImageView
             android:id="@+id/iv_best_bakery"
             android:layout_width="186dp"
             android:layout_height="122dp"
+            android:background="@drawable/shape_border_top_radius_5"
+            android:clipToOutline="true"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/Radius5.Top" />
+            tools:src="@drawable/ic_launcher_background" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -59,7 +61,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="-8dp"
-                android:src="@drawable/ic_haccp_mark" />
+                android:src="@mipmap/ic_haccp_mark_26" />
 
             <ImageView
                 android:id="@+id/iv_vegan_mark"

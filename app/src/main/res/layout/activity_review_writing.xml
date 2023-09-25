@@ -167,8 +167,11 @@
                     android:id="@+id/line2"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="14dp"
                     android:background="@color/gray_200"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_bakery_info" />
 
                 <TextView
@@ -314,7 +317,7 @@
                     android:textColor="@color/gray_700"
                     android:textColorHint="@color/enable_review_writing_color"
                     app:layout_constraintTop_toBottomOf="@id/cg_review_recommend_chip_select"
-                    tools:hint="추가로 좋았던 점이 있다면 말씀해주세요!" />
+                    tools:hint="추가로 좋았던 점이 있다면 말씀해 주세요!" />
 
                 <TextView
                     android:id="@+id/tv_review_text_count"

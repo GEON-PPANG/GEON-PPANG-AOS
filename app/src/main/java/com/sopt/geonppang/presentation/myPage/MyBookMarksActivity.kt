@@ -12,6 +12,7 @@ import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETAIL_PAGE_AT
 import com.sopt.geonppang.util.AmplitudeUtils
+import com.sopt.geonppang.util.CustomItemDecoration
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,7 +43,10 @@ class MyBookMarksActivity :
 
     private fun initLayout() {
         bakeryAdapter = BakeryAdapter(::moveToDetail)
-        binding.rvStoreList.adapter = bakeryAdapter
+        binding.rvStoreList.apply {
+            adapter = bakeryAdapter
+            addItemDecoration(CustomItemDecoration(this@MyBookMarksActivity))
+        }
     }
 
     private fun addListeners() {

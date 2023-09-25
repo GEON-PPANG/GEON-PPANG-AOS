@@ -35,8 +35,9 @@
             android:id="@+id/iv_bakery"
             android:layout_width="82dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/spacing20"
+            android:layout_marginVertical="@dimen/spacing20"
             android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toTopOf="parent"
@@ -59,7 +60,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="-8dp"
-                android:src="@drawable/ic_haccp_mark" />
+                android:src="@mipmap/ic_haccp_mark_26" />
 
             <ImageView
                 android:id="@+id/iv_vegan_mark"
@@ -185,15 +186,5 @@
             app:layout_constraintStart_toEndOf="@+id/iv_bakery_map"
             app:layout_constraintTop_toTopOf="@+id/iv_bakery_map"
             tools:text="건대역∙강남역" />
-
-        <View
-            android:id="@+id/view_line_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="@dimen/spacing10"
-            android:layout_marginTop="20dp"
-            android:background="@color/gray_200"
-            app:layout_constraintTop_toBottomOf="@id/iv_bakery"
-            tools:layout_editor_absoluteX="-16dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
