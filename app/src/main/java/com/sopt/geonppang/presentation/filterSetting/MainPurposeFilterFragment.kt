@@ -7,7 +7,7 @@ import androidx.fragment.app.activityViewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentMainPurposeFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
-import com.sopt.geonppang.presentation.auth.SignActivity
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingFragment
 
 class MainPurposeFilterFragment :
@@ -27,6 +27,10 @@ class MainPurposeFilterFragment :
         binding.layoutMainPurposeSkip.setOnClickListener {
             moveToMain()
         }
+
+        binding.tvMainPurposeSkip.setOnClickListener {
+            AmplitudeUtils.trackEvent(CLICK_SKIP)
+        }
     }
 
     private fun moveToMain() {
@@ -36,10 +40,7 @@ class MainPurposeFilterFragment :
         startActivity(intent)
     }
 
-    private fun moveToSign() {
-        val intent = Intent(requireContext(), SignActivity::class.java)
-        intent.flags =
-            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
+    companion object{
+        const val CLICK_SKIP = "click_skip"
     }
 }
