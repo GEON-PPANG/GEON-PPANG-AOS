@@ -61,7 +61,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="-8dp"
-                android:src="@drawable/ic_haccp_mark" />
+                android:src="@mipmap/ic_haccp_mark_26" />
 
             <ImageView
                 android:id="@+id/iv_vegan_mark"

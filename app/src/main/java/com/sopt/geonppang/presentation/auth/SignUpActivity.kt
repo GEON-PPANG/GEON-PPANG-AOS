@@ -57,9 +57,6 @@ class SignUpActivity :
                 this,
                 R.drawable.background_email_double_check_true_status
             )
-            val nextButtonTrue = ContextCompat.getColorStateList(this, R.color.main_2)
-            val nextButtonFalse = ContextCompat.getColorStateList(this, R.color.gray_200)
-
             when (isEmailUsable) {
                 is UiState.Success -> {
                     with(binding) {
@@ -101,12 +98,12 @@ class SignUpActivity :
                         tvEmailErrorMsg.visibility = View.VISIBLE
                     }
                 }
+
                 else -> {}
             }
         }.launchIn(lifecycleScope)
 
         viewModel.email.flowWithLifecycle(lifecycle).onEach {
-            val nextButtonFalse = ContextCompat.getColorStateList(this, R.color.gray_200)
             if (viewModel.isEmailUsable.value != UiState.Loading)
                 viewModel.initEmail()
 

@@ -68,6 +68,8 @@
             <TextView
                 android:id="@+id/tv_login_with_email"
                 android:layout_width="wrap_content"
+                android:paddingVertical="6dp"
+                android:paddingHorizontal="10dp"
                 android:layout_height="wrap_content"
                 android:text="@string/sign_login_with_email"
                 android:textAppearance="@style/TextAppearance.CaptionB1"
@@ -92,6 +94,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sign_signup_with_email"
+                android:paddingVertical="6dp"
+                android:paddingHorizontal="10dp"
                 android:textAppearance="@style/TextAppearance.CaptionB1"
                 android:textColor="@color/gray_400"
                 app:layout_constraintBottom_toBottomOf="parent"

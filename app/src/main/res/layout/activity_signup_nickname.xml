@@ -41,18 +41,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_sign_up_page_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="3/6"
-            android:textAppearance="@style/TextAppearance.Subhead"
-            android:textColor="@color/gray_300"
-            app:layout_constraintBottom_toBottomOf="@id/img_back_arrow"
-            app:layout_constraintEnd_toEndOf="@id/gl_end"
-            app:layout_constraintTop_toTopOf="@id/img_back_arrow" />
-
-        <TextView
             android:id="@+id/tv_input_email_phrase"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
