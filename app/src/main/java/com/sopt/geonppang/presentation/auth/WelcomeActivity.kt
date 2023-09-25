@@ -7,6 +7,7 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityWelcomeBinding
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -22,6 +23,7 @@ class WelcomeActivity : BindingActivity<ActivityWelcomeBinding>(R.layout.activit
     private fun initLayout() {
         val nickName = intent.getStringExtra(NICKNAME)
         binding.tvStartWelcomeTitle.text = this.getString(R.string.welcome_to_geonppang, nickName)
+        AmplitudeUtils.trackEventWithProperties(COMPLETE_NICKNAME, NICKNAME, nickName)
     }
 
     private fun loadWelcomeScreen() {
@@ -43,5 +45,6 @@ class WelcomeActivity : BindingActivity<ActivityWelcomeBinding>(R.layout.activit
     companion object {
         const val NICKNAME = "nickName"
         const val FILTER_INFO = "filterInfo"
+        const val COMPLETE_NICKNAME = "complete_nickname"
     }
 }
