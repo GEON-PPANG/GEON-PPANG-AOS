@@ -85,7 +85,7 @@
     <string name="detail_more_info">가게 상세정보</string>
     <string name="detail_homepage"><u>웹사이트</u></string>
     <string name="detail_instagram"><u>인스타그램</u></string>
-    <string name="detail_notice">홈페이지에 성분정보가 있어요!</string>
+    <string name="detail_notice">웹사이트에 성분정보가 있어요!</string>
     <string name="detail_menu">가게 메뉴</string>
     <string name="detail_menu_notice">가게 상세정보 및 메뉴는 업체에서 제공한 정보를 바탕으로 합니다. 건빵집 방문 시 한 번 더 확인하시기를 권장합니다.</string>
     <string name="detail_review">건빵 리뷰</string>
