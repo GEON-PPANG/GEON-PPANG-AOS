@@ -15,6 +15,7 @@ import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETAIL_PAGE_AT
 import com.sopt.geonppang.util.AmplitudeUtils
+import com.sopt.geonppang.util.CustomItemDecoration
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
@@ -42,7 +43,14 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
     private fun initLayout() {
         searchCountAdapter = SearchCountAdapter()
         bakeryAdapter = BakeryAdapter(::moveToDetail)
-        binding.rvSearchBakeryList.adapter = ConcatAdapter(searchCountAdapter, bakeryAdapter)
+        binding.rvSearchBakeryList.apply {
+            adapter = ConcatAdapter(searchCountAdapter, bakeryAdapter)
+            addItemDecoration(
+                CustomItemDecoration(
+                    this@SearchActivity, false
+                )
+            )
+        }
     }
 
     private fun addListeners() {

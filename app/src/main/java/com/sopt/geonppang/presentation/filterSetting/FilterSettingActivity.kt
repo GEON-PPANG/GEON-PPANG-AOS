@@ -11,7 +11,6 @@ import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.auth.SignActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
-import com.sopt.geonppang.presentation.type.PlatformType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
@@ -48,7 +47,6 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                     viewModel.setCurrentPage(position)
                 }
             })
-
         setPreviousActivity()
     }
 
@@ -123,15 +121,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                         }
 
                         FilterInfoType.ONBOARDING -> {
-                            when (viewModel.platformType) {
-                                PlatformType.NONE.name -> {
-                                    moveToSign()
-                                }
-
-                                PlatformType.KAKAO.name -> {
-                                    moveOnBoardingToMain()
-                                }
-                            }
+                            moveOnBoardingToMain()
                         }
 
                         else -> {}
