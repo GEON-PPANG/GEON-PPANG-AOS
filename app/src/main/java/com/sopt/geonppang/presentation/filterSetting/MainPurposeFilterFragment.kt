@@ -40,7 +40,7 @@ class MainPurposeFilterFragment :
         startActivity(intent)
     }
 
-    companion object{
+    companion object {
         const val CLICK_SKIP = "click_skip"
     }
 }
