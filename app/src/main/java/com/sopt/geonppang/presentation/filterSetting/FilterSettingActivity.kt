@@ -48,6 +48,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                 }
             })
         setPreviousActivity()
+        AmplitudeUtils.trackEvent(START_FILTER_ONBOARDING)
     }
 
     private fun addListeners() {
@@ -68,6 +69,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
             when (binding.vpFilterContainer.currentItem) {
                 2 -> {
                     viewModel.setUserFilter()
+                    AmplitudeUtils.trackEvent(START_FILTER_ONBOARDING)
                 }
 
                 else -> {
@@ -150,13 +152,6 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         startActivity(intent)
     }
 
-    private fun moveToSign() {
-        val intent = Intent(this, SignActivity::class.java)
-        intent.flags =
-            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-    }
-
     private fun setPreviousActivity() {
         intent.getStringExtra(FILTER_INFO)?.let { filterInfoType ->
             viewModel.setPreviousActivity(FilterInfoType.valueOf(filterInfoType))
@@ -196,5 +191,6 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         const val COMPLETE_FILTER_HOME = "complete_filter_home"
         const val COMPLETE_FILTER_LIST = "complete_filter_list"
         const val COMPLETE_FILTER_MY = "complete_filter_mypage"
+        const val START_FILTER_ONBOARDING = "start_filter_onboarding"
     }
 }
