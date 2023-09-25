@@ -138,6 +138,11 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                             binding.root,
                             getString(R.string.snackbar_save)
                         )
+                    } else {
+                        CustomSnackbar.makeSnackbar(
+                            binding.root,
+                            getString(R.string.snackbar_save_cancel)
+                        )
                     }
                 }
 

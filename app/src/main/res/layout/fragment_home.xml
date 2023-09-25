@@ -48,7 +48,7 @@
             android:background="@drawable/background_search_box"
             android:drawablePadding="@dimen/spacing16"
             android:gravity="center_vertical"
-            android:hint="@string/home_search_hint"
+            android:hint="@string/search_hint"
             android:paddingHorizontal="@dimen/spacing16"
             android:paddingVertical="@dimen/spacing10"
             android:textAppearance="@style/TextAppearance.BodyM2"
@@ -105,12 +105,13 @@
                         android:layout_height="wrap_content"
                         android:text="@{@string/home_best_title1(viewModel.nickName)}"
                         android:textAppearance="@style/TextAppearance.Title2"
-                        tools:text="바이블님 맞춤 " />
+                        tools:text="바이블님 맞춤" />
 
                     <TextView
                         android:id="@+id/tv_home_best_bakery_title2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
                         android:text="@string/home_best_bakery_title2"
                         android:textAppearance="@style/TextAppearance.Title2"
                         android:textColor="@color/point_1" />
@@ -144,12 +145,13 @@
                         android:layout_height="wrap_content"
                         android:text="@{@string/home_best_title1(viewModel.nickName)}"
                         android:textAppearance="@style/TextAppearance.Title2"
-                        tools:text="바이블님 맞춤 " />
+                        tools:text="바이블님 맞춤" />
 
                     <TextView
                         android:id="@+id/tv_home_best_review_title2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
                         android:text="@string/home_best_review_title2"
                         android:textAppearance="@style/TextAppearance.Title2"
                         android:textColor="@color/point_1"
