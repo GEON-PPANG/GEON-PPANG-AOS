@@ -12,10 +12,11 @@ class ReviewSuccessBottomDialogFragment(
     private val moveToDetail: () -> Unit
 ) :
     BindingBottomSheetDialogFragment<DialogBottomReviewWritingSuccessBinding>(R.layout.dialog_bottom_review_writing_success) {
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this.viewLifecycleOwner
+
+        isCancelable = false
 
         addListeners()
     }
@@ -27,3 +28,5 @@ class ReviewSuccessBottomDialogFragment(
         }
     }
 }
+
+

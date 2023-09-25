@@ -12,6 +12,7 @@ import com.sopt.geonppang.presentation.type.PlatformType
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
+import com.sopt.geonppang.util.extension.setOnSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -39,7 +40,7 @@ class SignUpNicknameActivity :
             finish()
         }
 
-        binding.btnNext.setOnClickListener {
+        binding.btnNext.setOnSingleClickListener {
             completeSignUp()
         }
     }

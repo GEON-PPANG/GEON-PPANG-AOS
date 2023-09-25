@@ -14,6 +14,7 @@ import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingFragment
+import com.sopt.geonppang.util.extension.setOnSingleClickListener
 import com.sopt.geonppang.util.setInvisibility
 import com.sopt.geonppang.util.setVisibility
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,12 +43,12 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun addListeners() {
-        binding.layoutMyPageBookmark.setOnClickListener {
+        binding.layoutMyPageBookmark.setOnSingleClickListener {
             AmplitudeUtils.trackEvent(CLICK_MY_STORE)
             moveToStoreBakeryList()
         }
 
-        binding.layoutMyPageReview.setOnClickListener {
+        binding.layoutMyPageReview.setOnSingleClickListener {
             AmplitudeUtils.trackEvent(CLICK_MY_REVIEW)
             moveToMyReview()
         }

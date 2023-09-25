@@ -9,6 +9,7 @@ import com.sopt.geonppang.databinding.ItemBakeryBinding
 import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.util.ItemDiffCallback
 import com.sopt.geonppang.util.extension.loadingImage
+import com.sopt.geonppang.util.extension.setOnSingleClickListener
 
 class BakeryAdapter(
     private val moveToDetail: (Int) -> Unit,
@@ -29,7 +30,7 @@ class BakeryAdapter(
             binding.bakery = bakery
             binding.executePendingBindings()
 
-            binding.root.setOnClickListener {
+            binding.root.setOnSingleClickListener {
                 moveToDetail(bakery.bakeryId)
             }
 

@@ -10,6 +10,7 @@ import com.sopt.geonppang.domain.model.BestReview
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.ItemDiffCallback
 import com.sopt.geonppang.util.extension.loadingImage
+import com.sopt.geonppang.util.extension.setOnSingleClickListener
 
 class BestReviewAdapter(
     private val moveToDetail: (Int) -> Unit,
@@ -30,7 +31,7 @@ class BestReviewAdapter(
             binding.review = review
             binding.executePendingBindings()
 
-            binding.root.setOnClickListener {
+            binding.root.setOnSingleClickListener {
                 AmplitudeUtils.trackEvent(CLICK_RECOMMEND_REVIEW)
                 moveToDetail(review.bakeryId)
             }
