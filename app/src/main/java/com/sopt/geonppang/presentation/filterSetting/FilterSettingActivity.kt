@@ -8,12 +8,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
-import com.sopt.geonppang.domain.model.SelectedFilter
 import com.sopt.geonppang.presentation.MainActivity
-import com.sopt.geonppang.presentation.reviewWriting.ReviewWritingActivity
 import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.presentation.type.FilterInfoType
-import com.sopt.geonppang.presentation.type.LikeType
 import com.sopt.geonppang.presentation.type.NutrientFilterType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
