@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.data.model.request.RequestSettingFilter
-import com.sopt.geonppang.domain.model.SelectedFilter
 import com.sopt.geonppang.domain.repository.FilterSettingRepository
+import com.sopt.geonppang.presentation.model.AmplitudeFilterSettingInfo
 import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.presentation.type.MainPurposeType
@@ -26,7 +26,7 @@ class FilterSettingViewModel @Inject constructor(
     gpDataSource: GPDataSource,
     private val filterRepository: FilterSettingRepository
 ) : ViewModel() {
-    private val _selectedFilterState = MutableStateFlow<UiState<SelectedFilter>>(UiState.Loading)
+    private val _selectedFilterState = MutableStateFlow<UiState<AmplitudeFilterSettingInfo>>(UiState.Loading)
     val selectedFilterState get() = _selectedFilterState.asStateFlow()
     private val _previousActivity = MutableStateFlow<FilterInfoType?>(null)
     val previousActivity get() = _previousActivity.asStateFlow()
@@ -112,8 +112,14 @@ class FilterSettingViewModel @Inject constructor(
                 filterRepository.setUserFilter(
                     it
                 )
-                    .onSuccess { selectedFilter ->
-                        _selectedFilterState.value = UiState.Success(selectedFilter)
+                    .onSuccess {
+                        _selectedFilterState.value = UiState.Success(
+                            AmplitudeFilterSettingInfo(
+                                mainPurposeType = _mainPurposeType.value,
+                                breadType = breadFilterType.value,
+                                ingredientType = nutrientFilterType.value,
+                            )
+                        )
                     }
                     .onFailure { throwable ->
                         _selectedFilterState.value = UiState.Error(throwable.message)

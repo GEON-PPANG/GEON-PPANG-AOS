@@ -10,7 +10,11 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.domain.model.SelectedFilter
 import com.sopt.geonppang.presentation.MainActivity
+import com.sopt.geonppang.presentation.reviewWriting.ReviewWritingActivity
+import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.presentation.type.LikeType
+import com.sopt.geonppang.presentation.type.NutrientFilterType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
@@ -41,12 +45,12 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         binding.vpFilterContainer.adapter = adapter
         binding.vpFilterContainer.isUserInputEnabled = false
         binding.vpFilterContainer.registerOnPageChangeCallback(object :
-                ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    viewModel.setCurrentPage(position)
-                }
-            })
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                viewModel.setCurrentPage(position)
+            }
+        })
         setPreviousActivity()
         AmplitudeUtils.trackEvent(START_FILTER_ONBOARDING)
     }
@@ -122,14 +126,16 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
 
                         FilterInfoType.ONBOARDING -> {
                             moveOnBoardingToMain()
-                            AmplitudeUtils.trackEventWithMapProperties(
-                                COMPLETE_FILTER_ONBOARDING,
-                                mapOf(
-                                    MAIN_PURPOSE to it.data.mainPurpose,
-                                    BREAD_TYPE to getStringBreadType(it.data.breadType),
-                                    INGREDIENTS_TYPE to getStringIngredientType(it.data.nutrientType)
+                            it.data.mainPurposeType?.let { mainPurposeType ->
+                                AmplitudeUtils.trackEventWithMapProperties(
+                                    COMPLETE_FILTER_ONBOARDING,
+                                    mapOf(
+                                        MAIN_PURPOSE to mainPurposeType,
+                                        BREAD_TYPE to getStringBreadType(it.data.breadType),
+                                        INGREDIENTS_TYPE to getStringIngredientType(it.data.ingredientType)
+                                    )
                                 )
-                            )
+                            }
                         }
 
                         else -> {}
@@ -185,52 +191,12 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         }
     }
 
-    private fun getStringBreadType(breadType: SelectedFilter.BreadType): String {
-        val selectedTypes = mutableListOf<String>()
-
-        if (breadType.isGlutenFree) {
-            selectedTypes.add(getString(R.string.bread_type_gluten_free_title))
-        }
-
-        if (breadType.isVegan) {
-            selectedTypes.add(getString(R.string.bread_type_vegan_title))
-        }
-
-        if (breadType.isNutFree) {
-            selectedTypes.add(getString(R.string.bread_type_nut_free_title))
-        }
-
-        if (breadType.isSugarFree) {
-            selectedTypes.add(getString(R.string.bread_type_sugar_free_title))
-        }
-
-        if (selectedTypes.isEmpty()) {
-            return ""
-        }
-
-        return selectedTypes.joinToString(", ")
+    private fun getStringBreadType(breadType: Map<BreadFilterType, Boolean>): List<String> {
+        return breadType.entries.filter { it.value }.map { getString(it.key.amplitudeRes) }
     }
 
-    private fun getStringIngredientType(ingredientType: SelectedFilter.NutrientType): String {
-        val selectedTypes = mutableListOf<String>()
-
-        if (ingredientType.isIngredientOpen) {
-            selectedTypes.add(getString(R.string.nutrient_type_ingredient_open))
-        }
-
-        if (ingredientType.isNutrientOpen) {
-            selectedTypes.add(getString(R.string.nutrient_type_nutrient_open))
-        }
-
-        if (ingredientType.isNotOpen) {
-            selectedTypes.add(getString(R.string.nutrient_type_not_open))
-        }
-
-        if (selectedTypes.isEmpty()) {
-            return ""
-        }
-
-        return selectedTypes.joinToString(", ")
+    private fun getStringIngredientType(ingredientType: Map<NutrientFilterType, Boolean>): List<String> {
+        return ingredientType.entries.filter { it.value }.map { getString(it.key.amplitudeRes) }
     }
 
     companion object {
