@@ -123,7 +123,8 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                         FilterInfoType.ONBOARDING -> {
                             moveOnBoardingToMain()
                             AmplitudeUtils.trackEventWithMapProperties(
-                                COMPLETE_FILTER_ONBOARDING, mapOf(
+                                COMPLETE_FILTER_ONBOARDING,
+                                mapOf(
                                     MAIN_PURPOSE to it.data.mainPurpose,
                                     BREAD_TYPE to getStringBreadType(it.data.breadType),
                                     INGREDIENTS_TYPE to getStringIngredientType(it.data.nutrientType)
@@ -210,7 +211,6 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         return selectedTypes.joinToString(", ")
     }
 
-
     private fun getStringIngredientType(ingredientType: SelectedFilter.NutrientType): String {
         val selectedTypes = mutableListOf<String>()
 
@@ -232,7 +232,6 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
 
         return selectedTypes.joinToString(", ")
     }
-
 
     companion object {
         const val FILTER_INFO = "filterInfo"

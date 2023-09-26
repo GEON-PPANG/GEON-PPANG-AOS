@@ -84,7 +84,7 @@ class SignActivity :
         startActivity(intent)
     }
 
-    companion object{
+    companion object {
         const val START_SIGNUP = "start_signup"
         const val SIGNUP_TYPE = "signup_type"
         const val EMAIL = "email"
