@@ -132,18 +132,25 @@
     <string name="main_purpose_type_vegan_title">비건 · 채식지향</string>
     <string name="main_purpose_type_vegan_des">종교 , 환경 , 동물 , 노동권을 위한 비거니즘</string>
 
+    <string name="bread_type_gluten_free_ampl">glutenfree</string>
     <string name="bread_type_gluten_free_title">글루텐프리</string>
     <string name="bread_type_gluten_free_des">NO 글루텐\nLOW 글루텐</string>
+    <string name="bread_type_vegan_ampl">vegan</string>
     <string name="bread_type_vegan_title">비건빵</string>
     <string name="bread_type_vegan_des">NO 동물성재료\n(유제품 , 계란 등)</string>
+    <string name="bread_type_nut_free_ampl">nutfree</string>
     <string name="bread_type_nut_free_title">넛프리</string>
     <string name="bread_type_nut_free_des">NO 견과류</string>
+    <string name="bread_type_sugar_free_ampl">sugarfree</string>
     <string name="bread_type_sugar_free_title">대체당</string>
     <string name="bread_type_sugar_free_des">알룰로스, 스테비아,\n에리스리톨, 말티톨 등</string>
 
     <string name="nutrient_type_nutrient_open">영양성분까지 꼼꼼히 볼래요!</string>
+    <string name="nutrient_type_nutrient_open_ampl">materials</string>
     <string name="nutrient_type_ingredient_open">어떤 재료가 들어갔는지 볼래요!</string>
+    <string name="nutrient_type_ingredient_open_ampl">ingredients</string>
     <string name="nutrient_type_not_open">성분 정보는 괜찮아요!</string>
+    <string name="nutrient_type_not_open_ampl">private</string>
 
     <string name="welcome_to_geonppang">%s님\n건빵에 오신 걸 환영해요!</string>
 
