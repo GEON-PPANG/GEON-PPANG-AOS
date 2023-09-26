@@ -26,7 +26,7 @@ class HomeViewModel @Inject constructor(
     val bestReviewListState get() = _bestReviewListState.asStateFlow()
     private val _nickName = MutableStateFlow("")
     val nickName get() = _nickName.asStateFlow()
-    private val _isFilterSelected = MutableStateFlow<Boolean?>(null)
+    private val _isFilterSelected = MutableStateFlow(true)
     val isFilterSelected get() = _isFilterSelected.asStateFlow()
 
     init {

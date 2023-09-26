@@ -88,7 +88,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
             binding.includeMyPageSpeechBubble.root.setVisibility(!isFilterSelected)
             binding.chipMyPageProfilePurpose.setInvisibility(isFilterSelected)
-            binding.chipGroupMyPageProfileBread.setVisibility(isFilterSelected)
+            binding.chipGroupMyPageProfileBread.setInvisibility(isFilterSelected)
         }.launchIn(lifecycleScope)
     }
 

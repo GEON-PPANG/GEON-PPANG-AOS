@@ -87,7 +87,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
             binding.tvHomeBestBakeryTitle1.setVisibility(isFilterSelected)
             binding.tvHomeBestReviewTitle1.setVisibility(isFilterSelected)
-            binding.includeHomeSpeechBubble.root.setVisibility(isFilterSelected != true)
+            binding.includeHomeSpeechBubble.root.setVisibility(!isFilterSelected)
 
             if (isFilterSelected != null)
                 viewModel.fetchBestBakeryList()
