@@ -10,6 +10,7 @@ import com.sopt.geonppang.domain.model.BestBakery
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.ItemDiffCallback
 import com.sopt.geonppang.util.extension.loadingImage
+import com.sopt.geonppang.util.extension.setOnSingleClickListener
 import com.sopt.geonppang.util.setVisibility
 
 class BestBakeryAdapter(
@@ -31,7 +32,7 @@ class BestBakeryAdapter(
             binding.bakery = bakery
             binding.executePendingBindings()
 
-            binding.root.setOnClickListener {
+            binding.root.setOnSingleClickListener {
                 AmplitudeUtils.trackEvent(CLICK_RECOMMEND_STORE)
                 moveToDetail(bakery.bakeryId)
             }
