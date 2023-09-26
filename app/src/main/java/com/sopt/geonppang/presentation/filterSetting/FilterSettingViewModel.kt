@@ -26,7 +26,8 @@ class FilterSettingViewModel @Inject constructor(
     gpDataSource: GPDataSource,
     private val filterRepository: FilterSettingRepository
 ) : ViewModel() {
-    private val _selectedFilterState = MutableStateFlow<UiState<AmplitudeFilterSettingInfo>>(UiState.Loading)
+    private val _selectedFilterState =
+        MutableStateFlow<UiState<AmplitudeFilterSettingInfo>>(UiState.Loading)
     val selectedFilterState get() = _selectedFilterState.asStateFlow()
     private val _previousActivity = MutableStateFlow<FilterInfoType?>(null)
     val previousActivity get() = _previousActivity.asStateFlow()
