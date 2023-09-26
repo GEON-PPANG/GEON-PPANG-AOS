@@ -15,6 +15,7 @@ import com.sopt.geonppang.presentation.type.NutrientFilterType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
+import com.sopt.geonppang.util.extension.setOnSingleClickListener
 import com.sopt.geonppang.util.setInvisibility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -66,7 +67,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
             }
         }
 
-        binding.btnFilterNext.setOnClickListener {
+        binding.btnFilterNext.setOnSingleClickListener {
             when (binding.vpFilterContainer.currentItem) {
                 2 -> {
                     viewModel.setUserFilter()

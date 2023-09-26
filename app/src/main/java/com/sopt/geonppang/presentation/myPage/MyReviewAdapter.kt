@@ -11,6 +11,7 @@ import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
 import com.sopt.geonppang.presentation.model.MyReviewBakeryInfo
 import com.sopt.geonppang.util.ItemDiffCallback
 import com.sopt.geonppang.util.extension.loadingImage
+import com.sopt.geonppang.util.extension.setOnSingleClickListener
 
 class MyReviewAdapter(
     private val moveToReviewDetail: (Int, MyReviewBakeryInfo) -> Unit,
@@ -30,7 +31,7 @@ class MyReviewAdapter(
             moveToReviewDetail: (Int, MyReviewBakeryInfo) -> Unit,
         ) {
             binding.review = review
-            binding.root.setOnClickListener {
+            binding.root.setOnSingleClickListener {
                 moveToReviewDetail(
                     review.reviewId,
                     MyReviewBakeryInfo(
