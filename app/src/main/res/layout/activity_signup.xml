@@ -134,7 +134,7 @@
                     android:id="@+id/linear_password"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="28dp"
                     android:background="@{!viewModel.password.empty &amp; !viewModel.isValidPassword()? @drawable/background_need_change_status : @drawable/background_normal_status }"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="@id/linear_email"
