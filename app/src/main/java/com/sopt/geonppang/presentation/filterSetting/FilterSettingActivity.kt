@@ -43,12 +43,12 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         binding.vpFilterContainer.adapter = adapter
         binding.vpFilterContainer.isUserInputEnabled = false
         binding.vpFilterContainer.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                viewModel.setCurrentPage(position)
-            }
-        })
+                ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    viewModel.setCurrentPage(position)
+                }
+            })
         setPreviousActivity()
         AmplitudeUtils.trackEvent(START_FILTER_ONBOARDING)
     }
@@ -69,13 +69,22 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
 
         binding.btnFilterNext.setOnSingleClickListener {
             when (binding.vpFilterContainer.currentItem) {
-                2 -> {
-                    viewModel.setUserFilter()
-                }
-
-                else -> {
+                0 -> {
+                    AmplitudeUtils.trackEvent(FILTER_SETTING_FIRST_PAGE)
                     binding.vpFilterContainer.currentItem++
                 }
+
+                1 -> {
+                    AmplitudeUtils.trackEvent(FILTER_SETTING_SECOND_PAGE)
+                    binding.vpFilterContainer.currentItem++
+                }
+
+                2 -> {
+                    viewModel.setUserFilter()
+                    AmplitudeUtils.trackEvent(FILTER_SETTING_LAST_PAGE)
+                }
+
+                else -> {}
             }
         }
     }
@@ -213,5 +222,8 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         const val MAIN_PURPOSE = "main purpose"
         const val BREAD_TYPE = "breadtype"
         const val INGREDIENTS_TYPE = "ingredients type"
+        const val FILTER_SETTING_FIRST_PAGE = "click_mainpurpose"
+        const val FILTER_SETTING_SECOND_PAGE = "click_breadtype"
+        const val FILTER_SETTING_LAST_PAGE = "click_ingredients type"
     }
 }
