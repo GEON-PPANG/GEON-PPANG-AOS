@@ -22,6 +22,7 @@ import com.sopt.geonppang.util.ChipFactory
 import com.sopt.geonppang.util.CustomSnackbar
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
+import com.sopt.geonppang.util.extension.setOnSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -94,7 +95,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
             }
         }
 
-        binding.ivDetailBottomAppBarBookmark.setOnClickListener {
+        binding.ivDetailBottomAppBarBookmark.setOnSingleClickListener {
             viewModel.bakeryInfo.value?.isBooked?.let { isBookMarked ->
                 viewModel.doBookMark(bakeryId, !isBookMarked)
             }
