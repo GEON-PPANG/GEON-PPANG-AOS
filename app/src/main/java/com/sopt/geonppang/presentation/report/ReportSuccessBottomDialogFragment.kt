@@ -12,6 +12,8 @@ class ReportSuccessBottomDialogFragment :
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this.viewLifecycleOwner
 
+        isCancelable = false
+
         addListeners()
     }
 

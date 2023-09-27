@@ -9,6 +9,7 @@ import com.sopt.geonppang.databinding.ItemDetailReviewBinding
 import com.sopt.geonppang.domain.model.DetailReview
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.ItemDiffCallback
+import com.sopt.geonppang.util.extension.setOnSingleClickListener
 
 class DetailReviewAdapter(
     private val initChip: (ChipGroup, Int) -> Unit,
@@ -35,7 +36,7 @@ class DetailReviewAdapter(
                 initChip(this, position)
             }
 
-            binding.tvItemDetailReviewReport.setOnClickListener {
+            binding.tvItemDetailReviewReport.setOnSingleClickListener {
                 AmplitudeUtils.trackEvent(START_REVIEW_REPORT)
                 moveToReport(detailReview.reviewId)
             }
