@@ -43,12 +43,12 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         binding.vpFilterContainer.adapter = adapter
         binding.vpFilterContainer.isUserInputEnabled = false
         binding.vpFilterContainer.registerOnPageChangeCallback(object :
-                ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    viewModel.setCurrentPage(position)
-                }
-            })
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                viewModel.setCurrentPage(position)
+            }
+        })
         setPreviousActivity()
         AmplitudeUtils.trackEvent(START_FILTER_ONBOARDING)
     }
@@ -190,11 +190,11 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
     }
 
     private fun getStringBreadType(breadType: Map<BreadFilterType, Boolean>): List<String> {
-        return breadType.entries.filter { it.value }.map { getString(it.key.amplitudeRes) }
+        return breadType.entries.filter { it.value }.map { it.key.name }
     }
 
     private fun getStringIngredientType(ingredientType: Map<NutrientFilterType, Boolean>): List<String> {
-        return ingredientType.entries.filter { it.value }.map { getString(it.key.amplitudeRes) }
+        return ingredientType.entries.filter { it.value }.map { it.key.name }
     }
 
     companion object {
