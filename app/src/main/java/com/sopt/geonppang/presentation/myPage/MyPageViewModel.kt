@@ -65,11 +65,12 @@ class MyPageViewModel @Inject constructor(
         }
     }
 
-    fun setMainPurposeTitle(): Int {
+    fun setMainPurposeTitle(): Int? {
         return when (profileInfo.value?.mainPurpose) {
             MainPurposeType.DIET.name -> MainPurposeType.DIET.titleRes
             MainPurposeType.HEALTH.name -> MainPurposeType.HEALTH.titleRes
-            else -> MainPurposeType.VEGAN.titleRes
+            MainPurposeType.VEGAN.name -> MainPurposeType.VEGAN.titleRes
+            else -> null
         }
     }
 
