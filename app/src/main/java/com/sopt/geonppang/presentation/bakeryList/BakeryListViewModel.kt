@@ -35,7 +35,7 @@ class BakeryListViewModel @Inject constructor(
             BakeryCategoryType.BRUNCH to false,
         )
     )
-    private val _isFilterSelected = MutableStateFlow(false)
+    private val _isFilterSelected = MutableStateFlow(true)
     val isFilterSelected get() = _isFilterSelected.asStateFlow()
 
     fun setBakerySortType(bakerySortType: BakerySortType) {

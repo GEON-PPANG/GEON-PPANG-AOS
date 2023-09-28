@@ -36,6 +36,7 @@
             app:itemIconTint="@drawable/menu_selector_color"
             app:itemPaddingBottom="4dp"
             app:itemPaddingTop="14dp"
+            app:itemRippleColor="@android:color/transparent"
             app:itemTextAppearanceActive="@style/TextAppearance.CaptionB1"
             app:itemTextAppearanceInactive="@style/TextAppearance.CaptionB1"
             app:itemTextColor="@drawable/menu_selector_color"

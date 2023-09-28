@@ -20,7 +20,7 @@ class MyPageViewModel @Inject constructor(
 ) : ViewModel() {
     private var _profileInfo = MutableStateFlow<Profile?>(null)
     val profileInfo get() = _profileInfo.asStateFlow()
-    private var _isFilterSelected = MutableStateFlow(false)
+    private var _isFilterSelected = MutableStateFlow(true)
     val isFilterSelected = _isFilterSelected.asStateFlow()
     private var _myPageReviewListState =
         MutableStateFlow<UiState<List<MyReview>>>(UiState.Loading)
@@ -65,11 +65,12 @@ class MyPageViewModel @Inject constructor(
         }
     }
 
-    fun setMainPurposeTitle(): Int {
+    fun setMainPurposeTitle(): Int? {
         return when (profileInfo.value?.mainPurpose) {
             MainPurposeType.DIET.name -> MainPurposeType.DIET.titleRes
             MainPurposeType.HEALTH.name -> MainPurposeType.HEALTH.titleRes
-            else -> MainPurposeType.VEGAN.titleRes
+            MainPurposeType.VEGAN.name -> MainPurposeType.VEGAN.titleRes
+            else -> null
         }
     }
 

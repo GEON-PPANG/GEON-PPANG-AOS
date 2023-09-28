@@ -82,13 +82,13 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     private fun collectData() {
         viewModel.profileInfo.flowWithLifecycle(lifecycle).onEach {
             binding.chipMyPageProfilePurpose.text =
-                this.context?.getString(viewModel.setMainPurposeTitle()) ?: ""
+                viewModel.setMainPurposeTitle()?.let { it1 -> this.context?.getString(it1) } ?: ""
         }.launchIn(lifecycleScope)
 
         viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
             binding.includeMyPageSpeechBubble.root.setVisibility(!isFilterSelected)
             binding.chipMyPageProfilePurpose.setInvisibility(isFilterSelected)
-            binding.chipGroupMyPageProfileBread.setVisibility(isFilterSelected)
+            binding.chipGroupMyPageProfileBread.setInvisibility(isFilterSelected)
         }.launchIn(lifecycleScope)
     }
 
