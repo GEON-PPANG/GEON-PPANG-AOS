@@ -13,6 +13,7 @@ import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.login.LoginActivity
 import com.sopt.geonppang.presentation.type.AuthRoleType
 import com.sopt.geonppang.presentation.type.PlatformType
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -34,12 +35,14 @@ class SignActivity :
     private fun addListeners() {
         binding.btnStartKakao.setOnClickListener {
             kakaoAuthService.startKakaoLogin(authViewModel::signUp)
+            AmplitudeUtils.trackEventWithProperties(START_SIGNUP, SIGNUP_TYPE, KAKAO)
         }
         binding.tvLoginWithEmail.setOnClickListener {
             moveToLogin()
         }
         binding.tvSignupWithEmail.setOnClickListener {
             moveToSignUp()
+            AmplitudeUtils.trackEventWithProperties(START_SIGNUP, SIGNUP_TYPE, EMAIL)
         }
     }
 
@@ -79,5 +82,12 @@ class SignActivity :
         intent.flags =
             Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
+    }
+
+    companion object {
+        const val START_SIGNUP = "start_signup"
+        const val SIGNUP_TYPE = "signup_type"
+        const val EMAIL = "email"
+        const val KAKAO = "kakao"
     }
 }

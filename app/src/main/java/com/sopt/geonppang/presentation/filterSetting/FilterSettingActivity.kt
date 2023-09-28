@@ -9,8 +9,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
-import com.sopt.geonppang.presentation.auth.SignActivity
+import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.presentation.type.NutrientFilterType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
@@ -49,6 +50,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                 }
             })
         setPreviousActivity()
+        AmplitudeUtils.trackEvent(START_FILTER_ONBOARDING)
     }
 
     private fun addListeners() {
@@ -67,13 +69,22 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
 
         binding.btnFilterNext.setOnSingleClickListener {
             when (binding.vpFilterContainer.currentItem) {
-                2 -> {
-                    viewModel.setUserFilter()
-                }
-
-                else -> {
+                0 -> {
+                    AmplitudeUtils.trackEvent(FILTER_SETTING_FIRST_PAGE)
                     binding.vpFilterContainer.currentItem++
                 }
+
+                1 -> {
+                    AmplitudeUtils.trackEvent(FILTER_SETTING_SECOND_PAGE)
+                    binding.vpFilterContainer.currentItem++
+                }
+
+                2 -> {
+                    viewModel.setUserFilter()
+                    AmplitudeUtils.trackEvent(FILTER_SETTING_LAST_PAGE)
+                }
+
+                else -> {}
             }
         }
     }
@@ -97,10 +108,9 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
             }
         }.launchIn(lifecycleScope)
 
-        viewModel.isFilterBtnEnabled.flowWithLifecycle(lifecycle)
-            .onEach { isFilterBtnEnabled ->
-                binding.btnFilterNext.isEnabled = isFilterBtnEnabled
-            }.launchIn(lifecycleScope)
+        viewModel.isFilterBtnEnabled.flowWithLifecycle(lifecycle).onEach { isFilterBtnEnabled ->
+            binding.btnFilterNext.isEnabled = isFilterBtnEnabled
+        }.launchIn(lifecycleScope)
 
         viewModel.selectedFilterState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
@@ -123,6 +133,16 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
 
                         FilterInfoType.ONBOARDING -> {
                             moveOnBoardingToMain()
+                            it.data.mainPurposeType?.let { mainPurposeType ->
+                                AmplitudeUtils.trackEventWithMapProperties(
+                                    COMPLETE_FILTER_ONBOARDING,
+                                    mapOf(
+                                        MAIN_PURPOSE to mainPurposeType,
+                                        BREAD_TYPE to getStringBreadType(it.data.breadType),
+                                        INGREDIENTS_TYPE to getStringIngredientType(it.data.ingredientType)
+                                    )
+                                )
+                            }
                         }
 
                         else -> {}
@@ -137,8 +157,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
 
     private fun moveOnBoardingToMain() {
         val intent = Intent(this, MainActivity::class.java)
-        intent.flags =
-            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
     }
 
@@ -148,13 +167,6 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         if (!initialFragment.isNullOrEmpty()) {
             intent.putExtra(initialFragment, initialFragment)
         }
-        startActivity(intent)
-    }
-
-    private fun moveToSign() {
-        val intent = Intent(this, SignActivity::class.java)
-        intent.flags =
-            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
     }
 
@@ -186,6 +198,14 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         }
     }
 
+    private fun getStringBreadType(breadType: Map<BreadFilterType, Boolean>): List<String> {
+        return breadType.entries.filter { it.value }.map { it.key.name }
+    }
+
+    private fun getStringIngredientType(ingredientType: Map<NutrientFilterType, Boolean>): List<String> {
+        return ingredientType.entries.filter { it.value }.map { it.key.name }
+    }
+
     companion object {
         const val FILTER_INFO = "filterInfo"
         const val MY_PAGE_FRAGMENT = "MyPageFragment"
@@ -197,5 +217,13 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         const val COMPLETE_FILTER_HOME = "complete_filter_home"
         const val COMPLETE_FILTER_LIST = "complete_filter_list"
         const val COMPLETE_FILTER_MY = "complete_filter_mypage"
+        const val START_FILTER_ONBOARDING = "start_filter_onboarding"
+        const val COMPLETE_FILTER_ONBOARDING = "complete_filter_onboarding"
+        const val MAIN_PURPOSE = "main purpose"
+        const val BREAD_TYPE = "breadtype"
+        const val INGREDIENTS_TYPE = "ingredients type"
+        const val FILTER_SETTING_FIRST_PAGE = "click_mainpurpose"
+        const val FILTER_SETTING_SECOND_PAGE = "click_breadtype"
+        const val FILTER_SETTING_LAST_PAGE = "click_ingredients type"
     }
 }
