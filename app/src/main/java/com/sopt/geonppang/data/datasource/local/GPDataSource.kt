@@ -64,6 +64,5 @@ class GPDataSource @Inject constructor(@ApplicationContext context: Context) {
         const val ACCESS_TOKEN = "AccessToken"
         const val REFRESH_TOKEN = "RefreshToken"
         const val IS_LOGIN = "IsLogin"
-        const val NICKNAME = "nickname"
     }
 }

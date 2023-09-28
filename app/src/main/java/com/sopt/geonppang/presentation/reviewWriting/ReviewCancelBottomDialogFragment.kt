@@ -34,7 +34,7 @@ class ReviewCancelBottomDialogFragment :
     }
 
     companion object {
-        const val CLICK_REVIEW_WRITING_STOP = "click_reviewwrting_stop"
-        const val CLICK_REVIEW_WRITING_CONTINUE = "click_reviewwrting_continue"
+        const val CLICK_REVIEW_WRITING_STOP = "click_reviewwriting_stop"
+        const val CLICK_REVIEW_WRITING_CONTINUE = "click_reviewwriting_continue"
     }
 }
