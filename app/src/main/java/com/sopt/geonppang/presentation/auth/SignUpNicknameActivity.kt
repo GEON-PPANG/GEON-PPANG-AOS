@@ -82,6 +82,9 @@ class SignUpNicknameActivity :
                 viewModel.initNickname()
             }
         }.launchIn(lifecycleScope)
+        viewModel.memberId.flowWithLifecycle(lifecycle).onEach { memberId ->
+            AmplitudeUtils.setUserId(GUNBBANG + memberId)
+        }.launchIn(lifecycleScope)
     }
 
     private fun completeSignUp() {
@@ -125,5 +128,6 @@ class SignUpNicknameActivity :
         const val PASSWORD = "password"
         const val COMPLETE_NICKNAME = "complete_nickname"
         const val COMPLETE_SIGNUP = "complete_signup"
+        const val GUNBBANG = "gunbbang"
     }
 }

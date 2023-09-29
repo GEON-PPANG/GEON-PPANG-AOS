@@ -35,9 +35,8 @@ class AuthViewModel @Inject constructor(
     val passwordCheck = MutableStateFlow("")
 
     val nickname = MutableStateFlow("")
-
-    private val _flag = MutableStateFlow("")
-    val flag get() = _flag
+    private val _memberId = MutableStateFlow<Int?>(null)
+    val memberId get() = _memberId.asStateFlow()
 
     private val _authRoleType = MutableStateFlow<AuthRoleType?>(null)
     val authRoleType get() = _authRoleType.asStateFlow()
@@ -159,6 +158,9 @@ class AuthViewModel @Inject constructor(
                         gpDataSource.refreshToken = BEARER_PREFIX + refreshToken
                     }
                     _signUpState.value = UiState.Success(true)
+                    if (platformType == PlatformType.NONE) {
+                        _memberId.value = responseBody?.memberId
+                    }
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
@@ -172,6 +174,7 @@ class AuthViewModel @Inject constructor(
                 authRepository.settingNickname(RequestNicknameSetting(nickname))
                     .onSuccess { response ->
                         val responseHeader = response.headers()
+                        val responseBody = response.body()
                         val accessToken = responseHeader[AUTHORIZATION].toString()
                         val refreshToken = responseHeader[AUTHORIZATION_REFRESH].toString()
                         gpDataSource.accessToken = BEARER_PREFIX + accessToken
@@ -180,6 +183,7 @@ class AuthViewModel @Inject constructor(
                         _signUpState.value = UiState.Success(true)
                         // 소셜 회원가입 시 자동 로그인 설정
                         setAutoLogin()
+                        _memberId.value = responseBody?.data?.memberId
                     }
                     .onFailure { throwable ->
                         Timber.e(throwable.message)

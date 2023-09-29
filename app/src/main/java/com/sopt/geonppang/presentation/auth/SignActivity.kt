@@ -55,6 +55,7 @@ class SignActivity :
 
                 AuthRoleType.USER -> {
                     authViewModel.setAutoLogin()
+                    AmplitudeUtils.trackEvent(LOGIN_APP)
                     moveToMain()
                 }
 
@@ -89,5 +90,6 @@ class SignActivity :
         const val SIGNUP_TYPE = "signup type"
         const val EMAIL = "EMAIL"
         const val KAKAO = "KAKAO"
+        const val LOGIN_APP = "login_app"
     }
 }

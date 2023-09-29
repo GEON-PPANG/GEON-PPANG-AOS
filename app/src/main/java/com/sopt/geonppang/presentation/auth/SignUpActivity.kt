@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.onEach
 class SignUpActivity :
     BindingActivity<ActivitySignupBinding>(R.layout.activity_signup) {
     private val viewModel: AuthViewModel by viewModels()
-    private var flag = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +74,6 @@ class SignUpActivity :
                         )
                         tvEmailErrorMsg.text = getString(R.string.email_validate_to_use)
                         tvEmailErrorMsg.visibility = View.VISIBLE
-                        flag = true
                     }
                 }
 
