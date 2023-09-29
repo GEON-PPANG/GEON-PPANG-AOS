@@ -9,6 +9,7 @@ import com.sopt.geonppang.databinding.FragmentMainPurposeFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingFragment
+import com.sopt.geonppang.util.extension.setOnSingleClickListener
 
 class MainPurposeFilterFragment :
     BindingFragment<FragmentMainPurposeFilterBinding>(R.layout.fragment_main_purpose_filter) {
@@ -28,7 +29,7 @@ class MainPurposeFilterFragment :
             moveToMain()
         }
 
-        binding.tvMainPurposeSkip.setOnClickListener {
+        binding.tvMainPurposeSkip.setOnSingleClickListener {
             AmplitudeUtils.trackEvent(CLICK_SKIP)
         }
     }
