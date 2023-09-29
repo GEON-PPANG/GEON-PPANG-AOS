@@ -7,7 +7,6 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityWelcomeBinding
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
-import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
