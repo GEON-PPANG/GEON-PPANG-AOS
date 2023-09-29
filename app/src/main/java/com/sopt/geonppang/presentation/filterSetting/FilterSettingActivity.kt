@@ -68,23 +68,24 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         }
 
         binding.btnFilterNext.setOnSingleClickListener {
-            when (binding.vpFilterContainer.currentItem) {
-                0 -> {
-                    AmplitudeUtils.trackEvent(FILTER_SETTING_FIRST_PAGE)
-                    binding.vpFilterContainer.currentItem++
-                }
-
-                1 -> {
-                    AmplitudeUtils.trackEvent(FILTER_SETTING_SECOND_PAGE)
-                    binding.vpFilterContainer.currentItem++
-                }
-
+            val currentPosition = binding.vpFilterContainer.currentItem
+            val eventToTrack = when (currentPosition) {
+                0 -> FILTER_SETTING_FIRST_PAGE
+                1 -> FILTER_SETTING_SECOND_PAGE
                 2 -> {
                     viewModel.setUserFilter()
-                    AmplitudeUtils.trackEvent(FILTER_SETTING_LAST_PAGE)
+                    FILTER_SETTING_LAST_PAGE
                 }
 
-                else -> {}
+                else -> null
+            }
+
+            if (viewModel.previousActivity.value == FilterInfoType.ONBOARDING && eventToTrack != null) {
+                AmplitudeUtils.trackEvent(eventToTrack)
+            }
+
+            if (currentPosition < 2) {
+                binding.vpFilterContainer.currentItem++
             }
         }
     }
