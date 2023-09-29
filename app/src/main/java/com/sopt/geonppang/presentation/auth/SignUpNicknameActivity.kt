@@ -83,7 +83,8 @@ class SignUpNicknameActivity :
             }
         }.launchIn(lifecycleScope)
         viewModel.memberId.flowWithLifecycle(lifecycle).onEach { memberId ->
-            AmplitudeUtils.setUserId(GUNBBANG + memberId)
+            if (memberId != null)
+                AmplitudeUtils.setUserId(GUNBBANG + memberId)
         }.launchIn(lifecycleScope)
     }
 
