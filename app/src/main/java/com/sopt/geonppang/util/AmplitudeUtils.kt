@@ -30,4 +30,8 @@ object AmplitudeUtils {
     fun trackEventWithMapProperties(eventName: String, properties: Map<String, Any>) {
         amplitude.track(eventName, properties)
     }
+
+    fun setUserId(userId: String){
+        amplitude.setUserId(userId)
+    }
 }
