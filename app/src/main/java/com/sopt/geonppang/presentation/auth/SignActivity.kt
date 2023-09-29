@@ -86,8 +86,8 @@ class SignActivity :
 
     companion object {
         const val START_SIGNUP = "start_signup"
-        const val SIGNUP_TYPE = "signup_type"
-        const val EMAIL = "email"
-        const val KAKAO = "kakao"
+        const val SIGNUP_TYPE = "signup type"
+        const val EMAIL = "EMAIL"
+        const val KAKAO = "KAKAO"
     }
 }
