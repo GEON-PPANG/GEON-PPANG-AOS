@@ -23,7 +23,6 @@ class WelcomeActivity : BindingActivity<ActivityWelcomeBinding>(R.layout.activit
     private fun initLayout() {
         val nickName = intent.getStringExtra(NICKNAME)
         binding.tvStartWelcomeTitle.text = this.getString(R.string.welcome_to_geonppang, nickName)
-        AmplitudeUtils.trackEventWithProperties(COMPLETE_NICKNAME, NICKNAME, nickName)
     }
 
     private fun loadWelcomeScreen() {
@@ -43,8 +42,7 @@ class WelcomeActivity : BindingActivity<ActivityWelcomeBinding>(R.layout.activit
     }
 
     companion object {
-        const val NICKNAME = "nickName"
+        const val NICKNAME = "nickname"
         const val FILTER_INFO = "filterInfo"
-        const val COMPLETE_NICKNAME = "complete_nickname"
     }
 }
