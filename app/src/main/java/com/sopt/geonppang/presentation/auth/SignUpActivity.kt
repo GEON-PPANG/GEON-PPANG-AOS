@@ -9,7 +9,6 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySignupBinding
-import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
@@ -44,7 +43,6 @@ class SignUpActivity :
         }
         binding.btnNext.setOnClickListener {
             moveToNickname()
-            AmplitudeUtils.trackEvent(COMPLETE_SIGNUP)
         }
         binding.toolbar.ivBack.setOnClickListener {
             finish()
@@ -126,6 +124,5 @@ class SignUpActivity :
     companion object {
         const val EMAIL = "email"
         const val PASSWORD = "password"
-        const val COMPLETE_SIGNUP = "complete_signup"
     }
 }

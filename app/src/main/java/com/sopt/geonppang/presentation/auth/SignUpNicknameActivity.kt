@@ -9,6 +9,7 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.ActivitySignupNicknameBinding
 import com.sopt.geonppang.presentation.type.PlatformType
+import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.hideKeyboard
@@ -49,6 +50,12 @@ class SignUpNicknameActivity :
         viewModel.signUpState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    AmplitudeUtils.trackEventWithProperties(
+                        COMPLETE_NICKNAME,
+                        NICKNAME,
+                        viewModel.nickname.value
+                    )
+                    AmplitudeUtils.trackEvent(COMPLETE_SIGNUP)
                     moveToWelcome()
                 }
 
@@ -113,8 +120,10 @@ class SignUpNicknameActivity :
     }
 
     companion object {
-        const val NICKNAME = "nickName"
+        const val NICKNAME = "nickname"
         const val EMAIL = "email"
         const val PASSWORD = "password"
+        const val COMPLETE_NICKNAME = "complete_nickname"
+        const val COMPLETE_SIGNUP = "complete_signup"
     }
 }

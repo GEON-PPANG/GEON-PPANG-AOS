@@ -96,7 +96,7 @@ dependencies {
     implementation 'androidx.core:core-splashscreen:1.0.1'
 
     // Amplitude
-    implementation 'com.amplitude:analytics-android:1.+'
+    implementation 'com.amplitude:analytics-android:1.11.1'
 
     // kakao
     implementation "com.kakao.sdk:v2-all:2.15.0"
