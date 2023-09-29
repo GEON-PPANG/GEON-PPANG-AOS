@@ -129,7 +129,7 @@
             android:backgroundTint="@{viewModel.nicknameReady? @color/main_2 : @color/gray_200}"
             android:enabled="@{viewModel.nicknameReady}"
             android:paddingVertical="18dp"
-            android:text="@string/txt_next_btn"
+            android:text="@string/txt_start_btn"
             android:textAppearance="@style/TextAppearance.BodyM1"
             android:textColor="@{viewModel.nicknameReady? @color/white : @color/gray_400}"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -138,6 +138,4 @@
             app:rippleColor="@color/main_3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </layout>
