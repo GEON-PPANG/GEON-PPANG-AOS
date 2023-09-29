@@ -31,7 +31,7 @@ object AmplitudeUtils {
         amplitude.track(eventName, properties)
     }
 
-    fun setUserId(userId: String){
+    fun setUserId(userId: String) {
         amplitude.setUserId(userId)
     }
 }
