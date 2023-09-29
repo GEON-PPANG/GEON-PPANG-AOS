@@ -18,6 +18,7 @@ data class ResponseSignup(
     )
 
     fun toSignUpInfo() = SignUpInfo(
+        memberId = data.memberId,
         role = data.role,
         type = data.type
     )
