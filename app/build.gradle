@@ -27,16 +27,21 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "GP_BASE_URL", properties["GP_BASE_URL"]
         buildConfigField "String", "ACCESS_TOKEN", properties["ACCESS_TOKEN"]
-        buildConfigField "String", "AMPLITUDE_API_KEY", properties["AMPLITUDE_API_KEY"]
         buildConfigField "String", "KAKAO_APP_KEY", properties["KAKAO_APP_KEY"]
 
         manifestPlaceholders = [KAKAO_APP_KEY: properties["KAKAO_APP_KEY"]]
     }
 
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+            buildConfigField "String", "AMPLITUDE_API_KEY", properties["AMPLITUDE_API_DEV_KEY"]
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "AMPLITUDE_API_KEY", properties["AMPLITUDE_API_PROD_KEY"]
         }
     }
     compileOptions {
