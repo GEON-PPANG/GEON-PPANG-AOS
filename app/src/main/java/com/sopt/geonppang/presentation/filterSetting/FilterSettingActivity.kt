@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
+import com.sopt.geonppang.presentation.model.AmplitudeFilterSettingInfo
 import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.presentation.type.NutrientFilterType
@@ -43,12 +44,12 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         binding.vpFilterContainer.adapter = adapter
         binding.vpFilterContainer.isUserInputEnabled = false
         binding.vpFilterContainer.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                viewModel.setCurrentPage(position)
-            }
-        })
+                ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    viewModel.setCurrentPage(position)
+                }
+            })
         setPreviousActivity()
     }
 
@@ -117,32 +118,27 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                 is UiState.Success -> {
                     when (viewModel.previousActivity.value) {
                         FilterInfoType.BAKERY_LIST -> {
-                            AmplitudeUtils.trackEvent(COMPLETE_FILTER_LIST)
+                            AmplitudeUtils.trackEvent(CLICK_FILTER_COMPLETE_LIST)
+                            completeFilterPropertyEvent(COMPLETE_FILTER_LIST, it)
                             moveToMain(BAKERY_LIST_FRAGMENT)
                         }
 
                         FilterInfoType.MY_PAGE -> {
-                            AmplitudeUtils.trackEvent(COMPLETE_FILTER_MY)
+                            AmplitudeUtils.trackEvent(CLICK_FILTER_BACK_MY)
+                            completeFilterPropertyEvent(COMPLETE_FILTER_MY, it)
                             moveToMain(MY_PAGE_FRAGMENT)
                         }
 
                         FilterInfoType.HOME -> {
-                            AmplitudeUtils.trackEvent(COMPLETE_FILTER_HOME)
+                            AmplitudeUtils.trackEvent(CLICK_FILTER_COMPLETE_HOME)
+                            completeFilterPropertyEvent(COMPLETE_FILTER_HOME, it)
                             moveToMain(null)
                         }
 
                         FilterInfoType.ONBOARDING -> {
+                            AmplitudeUtils.trackEvent(CLICK_FILTER_COMPLETE_ONBOARDING)
+                            completeFilterPropertyEvent(COMPLETE_FILTER_ONBOARDING, it)
                             moveOnBoardingToMain()
-                            it.data.mainPurposeType?.let { mainPurposeType ->
-                                AmplitudeUtils.trackEventWithMapProperties(
-                                    COMPLETE_FILTER_ONBOARDING,
-                                    mapOf(
-                                        MAIN_PURPOSE to mainPurposeType,
-                                        BREAD_TYPE to getStringBreadType(it.data.breadType),
-                                        INGREDIENTS_TYPE to getStringIngredientType(it.data.ingredientType)
-                                    )
-                                )
-                            }
                         }
 
                         else -> {}
@@ -178,6 +174,22 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
 
     private fun setPageText(currentPage: Int): String {
         return String.format(PAGE_FORMAT, currentPage)
+    }
+
+    private fun completeFilterPropertyEvent(
+        eventName: String,
+        property: UiState.Success<AmplitudeFilterSettingInfo>
+    ) {
+        property.data.mainPurposeType?.let { mainPurposeType ->
+            AmplitudeUtils.trackEventWithMapProperties(
+                eventName,
+                mapOf(
+                    MAIN_PURPOSE to mainPurposeType,
+                    BREAD_TYPE to getStringBreadType(property.data.breadType),
+                    INGREDIENTS_TYPE to getStringIngredientType(property.data.ingredientType)
+                )
+            )
+        }
     }
 
     private fun trackDeviationFromFilterView() {
@@ -225,5 +237,9 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         const val FILTER_SETTING_FIRST_PAGE = "click_mainpurpose"
         const val FILTER_SETTING_SECOND_PAGE = "click_breadtype"
         const val FILTER_SETTING_LAST_PAGE = "click_ingredients type"
+        const val CLICK_FILTER_COMPLETE_ONBOARDING = "click_filter_complete_onboarding"
+        const val CLICK_FILTER_COMPLETE_HOME = "click_filter_complete_home"
+        const val CLICK_FILTER_COMPLETE_LIST = "click_filter_complete_list"
+        const val CLICK_FILTER_COMPLETE_MY = "click_filter_complete_mypage"
     }
 }
