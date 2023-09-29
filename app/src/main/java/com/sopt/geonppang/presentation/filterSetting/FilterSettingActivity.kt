@@ -124,7 +124,7 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                         }
 
                         FilterInfoType.MY_PAGE -> {
-                            AmplitudeUtils.trackEvent(CLICK_FILTER_BACK_MY)
+                            AmplitudeUtils.trackEvent(CLICK_FILTER_COMPLETE_MY)
                             completeFilterPropertyEvent(COMPLETE_FILTER_MY, it)
                             moveToMain(MY_PAGE_FRAGMENT)
                         }
