@@ -44,7 +44,6 @@ class SignUpActivity :
         }
         binding.btnNext.setOnClickListener {
             moveToNickname()
-            AmplitudeUtils.trackEvent(COMPLETE_SIGNUP)
         }
         binding.toolbar.ivBack.setOnClickListener {
             finish()
@@ -126,6 +125,5 @@ class SignUpActivity :
     companion object {
         const val EMAIL = "email"
         const val PASSWORD = "password"
-        const val COMPLETE_SIGNUP = "complete_signup"
     }
 }

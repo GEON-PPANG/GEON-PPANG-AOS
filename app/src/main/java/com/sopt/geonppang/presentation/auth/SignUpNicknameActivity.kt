@@ -50,7 +50,12 @@ class SignUpNicknameActivity :
         viewModel.signUpState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    AmplitudeUtils.trackEventWithProperties(COMPLETE_NICKNAME, NICKNAME, viewModel.nickname.value)
+                    AmplitudeUtils.trackEventWithProperties(
+                        COMPLETE_NICKNAME,
+                        NICKNAME,
+                        viewModel.nickname.value
+                    )
+                    AmplitudeUtils.trackEvent(COMPLETE_SIGNUP)
                     moveToWelcome()
                 }
 
@@ -119,5 +124,6 @@ class SignUpNicknameActivity :
         const val EMAIL = "email"
         const val PASSWORD = "password"
         const val COMPLETE_NICKNAME = "complete_nickname"
+        const val COMPLETE_SIGNUP = "complete_signup"
     }
 }
