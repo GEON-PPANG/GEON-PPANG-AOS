@@ -50,6 +50,7 @@ class SignUpNicknameActivity :
         viewModel.signUpState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    viewModel.setAutoLogin()
                     AmplitudeUtils.trackEventWithProperties(
                         COMPLETE_NICKNAME,
                         NICKNAME,
