@@ -50,6 +50,7 @@ class SignUpNicknameActivity :
         viewModel.signUpState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    viewModel.setAutoLogin()
                     AmplitudeUtils.trackEventWithProperties(
                         COMPLETE_NICKNAME,
                         NICKNAME,
@@ -83,7 +84,8 @@ class SignUpNicknameActivity :
             }
         }.launchIn(lifecycleScope)
         viewModel.memberId.flowWithLifecycle(lifecycle).onEach { memberId ->
-            AmplitudeUtils.setUserId(GUNBBANG + memberId)
+            if (memberId != null)
+                AmplitudeUtils.setUserId(GUNBBANG + memberId)
         }.launchIn(lifecycleScope)
     }
 

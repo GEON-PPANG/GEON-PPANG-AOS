@@ -175,6 +175,4 @@
             app:rippleColor="@color/main_3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </layout>

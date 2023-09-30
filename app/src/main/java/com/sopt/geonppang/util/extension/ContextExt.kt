@@ -5,27 +5,13 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
-import android.widget.Toast
 import coil.Coil
 import coil.request.ImageRequest
-
-fun Context.showToast(message: String, isShort: Boolean = true) {
-    val duration = if (isShort) Toast.LENGTH_SHORT else Toast.LENGTH_LONG
-    Toast.makeText(this, message, duration).show()
-}
-
-fun Context.showKeyboard(view: View, isShown: Boolean = true) {
-    (getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).run {
-        if (isShown) showSoftInput(view, 0)
-        else hideSoftInputFromWindow(view.windowToken, 0)
-    }
-}
 
 fun Context.hideKeyboard(view: View) {
     val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 }
-
 fun Context.loadingImage(imageUrl: String, imageView: ImageView, loadingImage: Int) {
     imageUrl.let { url ->
         val imageRequest = ImageRequest.Builder(this)

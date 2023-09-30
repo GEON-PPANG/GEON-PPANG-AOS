@@ -54,7 +54,7 @@ class LogInViewModel @Inject constructor(
                         Timber.tag("서버 오류")
                     }
                 }.onFailure { throwable ->
-                    Timber.tag("로그인 실패 on Failure").e(throwable.message)
+                    Timber.tag("로그인 실패 on Failure").e(throwable)
                 }
         }
     }

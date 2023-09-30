@@ -54,12 +54,16 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ secrets.KAKAO_APP_KEY }}
         run: echo "KAKAO_APP_KEY=\"$KAKAO_APP_KEY\"" >> local.properties
-        
 
-      - name: Access AMPLITUDE_API_KEY
+      - name: Access AMPLITUDE_API_DEV_KEY
         env:
-          AMPLITUDE_API_KEY: ${{ secrets.AMPLITUDE_API_KEY }}
-        run: echo "AMPLITUDE_API_KEY=\"AMPLITUDE_API_KEY\"" >> local.properties
+          AMPLITUDE_API_KEY: ${{ secrets.AMPLITUDE_API_DEV_KEY }}
+        run: echo "AMPLITUDE_API_DEV_KEY=\"AMPLITUDE_API_DEV_KEY\"" >> local.properties
+
+      - name: Access AMPLITUDE_API_PROD_KEY
+        env:
+          AMPLITUDE_API_KEY: ${{ secrets.AMPLITUDE_API_PROD_KEY }}
+        run: echo "AMPLITUDE_API_PROD_KEY=\"AMPLITUDE_API_PROD_KEY\"" >> local.properties
 
       - name: Touch local properties
         run: touch local.properties
