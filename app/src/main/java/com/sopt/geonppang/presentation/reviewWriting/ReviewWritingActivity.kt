@@ -57,6 +57,7 @@ class ReviewWritingActivity :
         }
 
         binding.btnReviewSuccess.setOnSingleClickListener {
+            AmplitudeUtils.trackEvent(CLICK_REVIEW_WRITING_COMPLETE)
             viewModel.writeReview()
         }
 
@@ -80,7 +81,6 @@ class ReviewWritingActivity :
         viewModel.reviewSuccessState.flowWithLifecycle(lifecycle).onEach { uiState ->
             when (uiState) {
                 is UiState.Success -> {
-                    AmplitudeUtils.trackEvent(CLICK_REVIEW_WRITING_COMPLETE)
                     uiState.data.likeType?.let { likeType ->
                         AmplitudeUtils.trackEventWithMapProperties(
                             COMPLETE_REVIEW_WRITING,

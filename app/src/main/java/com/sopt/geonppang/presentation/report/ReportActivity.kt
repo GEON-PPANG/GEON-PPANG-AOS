@@ -45,6 +45,7 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
         }
 
         binding.btnReport.setOnSingleClickListener {
+            AmplitudeUtils.trackEvent(CLICK_REVIEW_REPORT_COMPLETE)
             viewModel.reportReview(reviewId)
         }
 
@@ -63,7 +64,6 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
         viewModel.reportState.flowWithLifecycle(lifecycle).onEach { uiState ->
             when (uiState) {
                 is UiState.Success -> {
-                    AmplitudeUtils.trackEvent(CLICK_REVIEW_REPORT_COMPLETE)
                     AmplitudeUtils.trackEventWithMapProperties(
                         COMPLETE_REVIEW_REPORT,
                         mapOf(OPTION to uiState.data.reportCategory, TEXT to uiState.data.content)

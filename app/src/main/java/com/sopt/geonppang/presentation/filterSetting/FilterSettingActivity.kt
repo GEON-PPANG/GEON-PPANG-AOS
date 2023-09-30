@@ -67,25 +67,44 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
             }
         }
 
+        // TODO 로직 수정
         binding.btnFilterNext.setOnSingleClickListener {
-            val currentPosition = binding.vpFilterContainer.currentItem
-            val eventToTrack = when (currentPosition) {
-                0 -> FILTER_SETTING_FIRST_PAGE
-                1 -> FILTER_SETTING_SECOND_PAGE
-                2 -> {
-                    viewModel.setUserFilter()
-                    FILTER_SETTING_LAST_PAGE
+            when (binding.vpFilterContainer.currentItem) {
+                0 -> {
+                    if (viewModel.previousActivity.value == FilterInfoType.ONBOARDING)
+                        AmplitudeUtils.trackEvent(FILTER_SETTING_FIRST_PAGE)
+                    binding.vpFilterContainer.currentItem++
                 }
 
-                else -> null
-            }
+                1 -> {
+                    if (viewModel.previousActivity.value == FilterInfoType.ONBOARDING)
+                        AmplitudeUtils.trackEvent(FILTER_SETTING_SECOND_PAGE)
+                    binding.vpFilterContainer.currentItem++
+                }
 
-            if (viewModel.previousActivity.value == FilterInfoType.ONBOARDING && eventToTrack != null) {
-                AmplitudeUtils.trackEvent(eventToTrack)
-            }
+                2 -> {
+                    viewModel.setUserFilter()
+                    when (viewModel.previousActivity.value) {
+                        FilterInfoType.ONBOARDING -> {
+                            AmplitudeUtils.trackEvent(FILTER_SETTING_LAST_PAGE)
+                            AmplitudeUtils.trackEvent(CLICK_FILTER_COMPLETE_ONBOARDING)
+                        }
 
-            if (currentPosition < 2) {
-                binding.vpFilterContainer.currentItem++
+                        FilterInfoType.BAKERY_LIST -> {
+                            AmplitudeUtils.trackEvent(CLICK_FILTER_COMPLETE_LIST)
+                        }
+
+                        FilterInfoType.MY_PAGE -> {
+                            AmplitudeUtils.trackEvent(CLICK_FILTER_COMPLETE_MY)
+                        }
+
+                        FilterInfoType.HOME -> {
+                            AmplitudeUtils.trackEvent(CLICK_FILTER_COMPLETE_HOME)
+                        }
+
+                        else -> {}
+                    }
+                }
             }
         }
     }
@@ -119,25 +138,21 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                 is UiState.Success -> {
                     when (viewModel.previousActivity.value) {
                         FilterInfoType.BAKERY_LIST -> {
-                            AmplitudeUtils.trackEvent(CLICK_FILTER_COMPLETE_LIST)
                             completeFilterPropertyEvent(COMPLETE_FILTER_LIST, it)
                             moveToMain(BAKERY_LIST_FRAGMENT)
                         }
 
                         FilterInfoType.MY_PAGE -> {
-                            AmplitudeUtils.trackEvent(CLICK_FILTER_COMPLETE_MY)
                             completeFilterPropertyEvent(COMPLETE_FILTER_MY, it)
                             moveToMain(MY_PAGE_FRAGMENT)
                         }
 
                         FilterInfoType.HOME -> {
-                            AmplitudeUtils.trackEvent(CLICK_FILTER_COMPLETE_HOME)
                             completeFilterPropertyEvent(COMPLETE_FILTER_HOME, it)
                             moveToMain(null)
                         }
 
                         FilterInfoType.ONBOARDING -> {
-                            AmplitudeUtils.trackEvent(CLICK_FILTER_COMPLETE_ONBOARDING)
                             completeFilterPropertyEvent(COMPLETE_FILTER_ONBOARDING, it)
                             moveOnBoardingToMain()
                         }
