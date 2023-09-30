@@ -44,12 +44,12 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         binding.vpFilterContainer.adapter = adapter
         binding.vpFilterContainer.isUserInputEnabled = false
         binding.vpFilterContainer.registerOnPageChangeCallback(object :
-                ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    viewModel.setCurrentPage(position)
-                }
-            })
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                viewModel.setCurrentPage(position)
+            }
+        })
         setPreviousActivity()
     }
 
@@ -80,7 +80,6 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                     if (viewModel.previousActivity.value == FilterInfoType.ONBOARDING)
                         AmplitudeUtils.trackEvent(FILTER_SETTING_SECOND_PAGE)
                     binding.vpFilterContainer.currentItem++
-
                 }
 
                 2 -> {
@@ -106,7 +105,6 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
                         else -> {}
 
                     }
-
                 }
             }
         }
