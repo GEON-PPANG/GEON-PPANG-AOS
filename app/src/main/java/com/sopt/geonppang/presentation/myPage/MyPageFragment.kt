@@ -1,6 +1,7 @@
 package com.sopt.geonppang.presentation.myPage
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -75,7 +76,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         }
 
         binding.tvMyPageInquiry.setOnClickListener {
-            moveToWebPage(INQUIRY)
+            moveToWebBrowser(INQUIRY)
         }
     }
 
@@ -111,6 +112,11 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         Intent(requireContext(), WebViewActivity::class.java).apply {
             putExtra(WebViewActivity.WEB_VIEW_LINK, link)
         }.also { startActivity(it) }
+    }
+
+    private fun moveToWebBrowser(link: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+        startActivity(intent)
     }
 
     private fun showLogoutDialog() {
