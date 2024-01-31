@@ -8,15 +8,15 @@ enum class MainPurposeType(
     @StringRes val desRes: Int,
 ) {
     HEALTH(
-        R.string.main_purpose_type_health_title,
-        R.string.main_purpose_type_health_des
+        titleRes = R.string.main_purpose_type_health_title,
+        desRes = R.string.main_purpose_type_health_des
     ),
     DIET(
-        R.string.main_purpose_type_diet_title,
-        R.string.main_purpose_type_diet_des
+        titleRes = R.string.main_purpose_type_diet_title,
+        desRes = R.string.main_purpose_type_diet_des
     ),
     VEGAN(
-        R.string.main_purpose_type_vegan_title,
-        R.string.main_purpose_type_vegan_des
+        titleRes = R.string.main_purpose_type_vegan_title,
+        desRes = R.string.main_purpose_type_vegan_des
     )
 }
