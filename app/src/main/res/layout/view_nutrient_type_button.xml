@@ -6,40 +6,41 @@
     <data>
 
         <variable
-            name="mainPurposeType"
-            type="com.sopt.geonppang.presentation.type.MainPurposeType" />
+            name="nutrientType"
+            type="com.sopt.geonppang.presentation.type.NutrientFilterType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_main_purpose"
+        android:id="@+id/layout_nutrient_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_item_3_division_filter_button"
         android:paddingVertical="25dp">
 
         <TextView
-            android:id="@+id/tv_main_purpose_type_title"
+            android:id="@+id/tv_nutrient_type_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{mainPurposeType.titleRes}"
+            android:text="@{nutrientType.titleRes}"
             android:textAppearance="@style/TextAppearance.Title2"
             android:textColor="@drawable/selector_item_filter_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="건강 · 체질" />
+            tools:text="영양성분 보기" />
 
         <TextView
-            android:id="@+id/tv_main_purpose_type_description"
+            android:id="@+id/tv_nutrient_type_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{mainPurposeType.desRes}"
+            android:text="@{nutrientType.desRes}"
             android:textAppearance="@style/TextAppearance.BodyM1"
             android:textColor="@drawable/selector_item_filter_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_main_purpose_type_title"
-            tools:text="아토피 , 알레르기 , 암 , 당뇨 , 소화문제" />
+            app:layout_constraintTop_toBottomOf="@id/tv_nutrient_type_title"
+            tools:text="영양성분까지 공개한 건빵집을 볼래요!" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

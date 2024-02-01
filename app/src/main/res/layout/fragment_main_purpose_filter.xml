@@ -10,8 +10,6 @@
             type="com.sopt.geonppang.presentation.filterSetting.FilterSettingViewModel" />
 
         <import type="com.sopt.geonppang.presentation.type.MainPurposeType" />
-
-        <import type="com.sopt.geonppang.presentation.type.FilterInfoType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,44 +53,9 @@
                     android:text="@string/main_purpose_title"
                     android:textAppearance="@style/TextAppearance.Title1"
                     android:textColor="@color/gray_700"
-                    app:layout_constraintEnd_toStartOf="@+id/gl_end"
+                    app:layout_constraintEnd_toStartOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_main_purpose_skip"
-                    invisibility="@{viewModel.previousActivity == FilterInfoType.ONBOARDING}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="4dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_main_purpose_filter_title">
-
-                    <TextView
-                        android:id="@+id/tv_main_purpose_skip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
-                        android:text="@string/filter_skip"
-                        android:textAppearance="@style/TextAppearance.BodyM2"
-                        android:textColor="@color/gray_500"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/iv_main_purpose_filter_skip"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/iv_main_purpose_filter_skip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_filter_arrow_right"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <include
                     android:id="@+id/include_main_purpose_health"
@@ -100,11 +63,11 @@
                     selected="@{viewModel.mainPurposeType == MainPurposeType.HEALTH}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="34dp"
                     android:onClick="@{() -> viewModel.setMainPurposeType(MainPurposeType.HEALTH)}"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_main_purpose_skip"
+                    app:layout_constraintTop_toBottomOf="@id/tv_main_purpose_filter_title"
                     app:mainPurposeType="@{MainPurposeType.HEALTH}" />
 
                 <include
@@ -117,7 +80,7 @@
                     android:onClick="@{() -> viewModel.setMainPurposeType(MainPurposeType.DIET)}"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@+id/include_main_purpose_health"
+                    app:layout_constraintTop_toBottomOf="@id/include_main_purpose_health"
                     app:mainPurposeType="@{MainPurposeType.DIET}" />
 
                 <include
@@ -130,7 +93,7 @@
                     android:onClick="@{() -> viewModel.setMainPurposeType(MainPurposeType.VEGAN)}"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@+id/include_main_purpose_diet"
+                    app:layout_constraintTop_toBottomOf="@id/include_main_purpose_diet"
                     app:mainPurposeType="@{MainPurposeType.VEGAN}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
