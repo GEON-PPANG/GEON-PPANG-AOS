@@ -6,12 +6,12 @@
     <data>
 
         <variable
-            name="mainPurposeType"
-            type="com.sopt.geonppang.presentation.type.MainPurposeType" />
+            name="mainPurposeFilterType"
+            type="com.sopt.geonppang.presentation.type.MainPurposeFilterType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_main_purpose"
+        android:id="@+id/layout_main_purpose_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_item_3_division_filter_button"
@@ -21,7 +21,7 @@
             android:id="@+id/tv_main_purpose_type_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{mainPurposeType.titleRes}"
+            android:text="@{mainPurposeFilterType.titleRes}"
             android:textAppearance="@style/TextAppearance.Title2"
             android:textColor="@drawable/selector_item_filter_text"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{mainPurposeType.desRes}"
+            android:text="@{mainPurposeFilterType.desRes}"
             android:textAppearance="@style/TextAppearance.BodyM1"
             android:textColor="@drawable/selector_item_filter_text"
             app:layout_constraintEnd_toEndOf="parent"

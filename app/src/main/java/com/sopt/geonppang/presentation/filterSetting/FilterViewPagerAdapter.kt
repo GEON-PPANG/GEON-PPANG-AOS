@@ -8,7 +8,7 @@ class FilterViewPagerAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
 
     private val filterFragments =
-        listOf(MainPurposeFilterFragment(), BreadTypeFilterFragment(), NutrientTypeFilterFragment())
+        listOf(MainPurposeTypeFilterFragment(), BreadTypeFilterFragment(), NutrientTypeFilterFragment())
 
     override fun getItemCount(): Int = filterFragments.size
 

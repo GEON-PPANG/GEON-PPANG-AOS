@@ -8,7 +8,7 @@ import com.sopt.geonppang.domain.repository.FilterSettingRepository
 import com.sopt.geonppang.presentation.model.AmplitudeFilterSettingInfo
 import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.presentation.type.FilterInfoType
-import com.sopt.geonppang.presentation.type.MainPurposeType
+import com.sopt.geonppang.presentation.type.MainPurposeFilterType
 import com.sopt.geonppang.presentation.type.NutrientFilterType
 import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,7 +33,7 @@ class FilterSettingViewModel @Inject constructor(
     val previousActivity get() = _previousActivity.asStateFlow()
     private val _currentPage = MutableStateFlow<Int?>(null)
     val currentPage get() = _currentPage.asStateFlow()
-    private val _mainPurposeType = MutableStateFlow<MainPurposeType?>(null)
+    private val _mainPurposeType = MutableStateFlow<MainPurposeFilterType?>(null)
     val mainPurposeType get() = _mainPurposeType.asStateFlow()
     val breadFilterType: MutableStateFlow<Map<BreadFilterType, Boolean>> = MutableStateFlow(
         mapOf(
@@ -47,7 +47,7 @@ class FilterSettingViewModel @Inject constructor(
         mapOf(
             NutrientFilterType.NUTRIENT to false,
             NutrientFilterType.INGREDIENT to false,
-            NutrientFilterType.NOT to false
+            NutrientFilterType.ALL to false
         )
     )
     val isFilterBtnEnabled: StateFlow<Boolean> = combine(
@@ -74,7 +74,7 @@ class FilterSettingViewModel @Inject constructor(
         _currentPage.value = position
     }
 
-    fun setMainPurposeType(mainPurposeType: MainPurposeType) {
+    fun setMainPurposeType(mainPurposeType: MainPurposeFilterType) {
         _mainPurposeType.value = mainPurposeType
     }
 
@@ -106,7 +106,7 @@ class FilterSettingViewModel @Inject constructor(
                     RequestSettingFilter.NutrientType(
                         nutrientFilterType.value[NutrientFilterType.NUTRIENT] == true,
                         nutrientFilterType.value[NutrientFilterType.INGREDIENT] == true,
-                        nutrientFilterType.value[NutrientFilterType.NOT] == true,
+                        nutrientFilterType.value[NutrientFilterType.ALL] == true,
                     )
                 )
             }?.let {

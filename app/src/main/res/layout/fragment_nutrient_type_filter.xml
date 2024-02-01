@@ -58,7 +58,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <include
-                    android:id="@+id/include_nutrient_type_nutrient"
+                    android:id="@+id/include_nutrient_type_filter_nutrient"
                     layout="@layout/view_nutrient_type_button"
                     selected="@{viewModel.nutrientFilterType.get(NutrientFilterType.NUTRIENT)}"
                     android:layout_width="0dp"
@@ -71,7 +71,7 @@
                     app:nutrientType="@{NutrientFilterType.NUTRIENT}" />
 
                 <include
-                    android:id="@+id/include_nutrient_type_ingredient"
+                    android:id="@+id/include_nutrient_type_filter_ingredient"
                     layout="@layout/view_nutrient_type_button"
                     selected="@{viewModel.nutrientFilterType.get(NutrientFilterType.INGREDIENT)}"
                     android:layout_width="0dp"
@@ -80,11 +80,11 @@
                     android:onClick="@{()->viewModel.setNutrientFilterType(NutrientFilterType.INGREDIENT)}"
                     app:layout_constraintEnd_toStartOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/include_nutrient_type_nutrient"
+                    app:layout_constraintTop_toBottomOf="@id/include_nutrient_type_filter_nutrient"
                     app:nutrientType="@{NutrientFilterType.INGREDIENT}" />
 
                 <include
-                    android:id="@+id/tv_nutrient_type_not"
+                    android:id="@+id/tv_nutrient_type_filter_all"
                     layout="@layout/view_nutrient_type_button"
                     selected="@{viewModel.nutrientFilterType.get(NutrientFilterType.ALL)}"
                     android:layout_width="0dp"
@@ -93,7 +93,7 @@
                     android:onClick="@{()->viewModel.setNutrientFilterType(NutrientFilterType.ALL)}"
                     app:layout_constraintEnd_toStartOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/include_nutrient_type_ingredient"
+                    app:layout_constraintTop_toBottomOf="@id/include_nutrient_type_filter_ingredient"
                     app:nutrientType="@{NutrientFilterType.ALL}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

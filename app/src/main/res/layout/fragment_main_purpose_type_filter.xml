@@ -9,7 +9,7 @@
             name="viewModel"
             type="com.sopt.geonppang.presentation.filterSetting.FilterSettingViewModel" />
 
-        <import type="com.sopt.geonppang.presentation.type.MainPurposeType" />
+        <import type="com.sopt.geonppang.presentation.type.MainPurposeFilterType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
         tools:context=".presentation.filterSetting.MainPurposeFilterActivity">
 
         <ScrollView
-            android:id="@+id/sv_main_purpose_filter"
+            android:id="@+id/sv_main_purpose_type_filter"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -46,7 +46,7 @@
                     app:layout_constraintGuide_end="@dimen/spacing24" />
 
                 <TextView
-                    android:id="@+id/tv_main_purpose_filter_title"
+                    android:id="@+id/tv_main_purpose_type_filter_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
@@ -58,43 +58,43 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <include
-                    android:id="@+id/include_main_purpose_health"
-                    layout="@layout/view_main_purpose_button"
-                    selected="@{viewModel.mainPurposeType == MainPurposeType.HEALTH}"
+                    android:id="@+id/include_main_purpose_type_filter_health"
+                    layout="@layout/view_main_purpose_type_button"
+                    selected="@{viewModel.mainPurposeType == MainPurposeFilterType.HEALTH}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="34dp"
-                    android:onClick="@{() -> viewModel.setMainPurposeType(MainPurposeType.HEALTH)}"
+                    android:onClick="@{() -> viewModel.setMainPurposeType(MainPurposeFilterType.HEALTH)}"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/tv_main_purpose_filter_title"
-                    app:mainPurposeType="@{MainPurposeType.HEALTH}" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_main_purpose_type_filter_title"
+                    app:mainPurposeType="@{MainPurposeFilterType.HEALTH}" />
 
                 <include
-                    android:id="@+id/include_main_purpose_diet"
-                    layout="@layout/view_main_purpose_button"
-                    selected="@{viewModel.mainPurposeType == MainPurposeType.DIET}"
+                    android:id="@+id/include_main_purpose_type_filter_diet"
+                    layout="@layout/view_main_purpose_type_button"
+                    selected="@{viewModel.mainPurposeType == MainPurposeFilterType.DIET}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:onClick="@{() -> viewModel.setMainPurposeType(MainPurposeType.DIET)}"
+                    android:onClick="@{() -> viewModel.setMainPurposeType(MainPurposeFilterType.DIET)}"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/include_main_purpose_health"
-                    app:mainPurposeType="@{MainPurposeType.DIET}" />
+                    app:layout_constraintTop_toBottomOf="@id/include_main_purpose_type_filter_health"
+                    app:mainPurposeType="@{MainPurposeFilterType.DIET}" />
 
                 <include
-                    android:id="@+id/include_main_purpose_vegan"
-                    layout="@layout/view_main_purpose_button"
-                    selected="@{viewModel.mainPurposeType == MainPurposeType.VEGAN}"
+                    android:id="@+id/include_main_purpose_type_filter_vegan"
+                    layout="@layout/view_main_purpose_type_button"
+                    selected="@{viewModel.mainPurposeType == MainPurposeFilterType.VEGAN}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:onClick="@{() -> viewModel.setMainPurposeType(MainPurposeType.VEGAN)}"
+                    android:onClick="@{() -> viewModel.setMainPurposeType(MainPurposeFilterType.VEGAN)}"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/include_main_purpose_diet"
-                    app:mainPurposeType="@{MainPurposeType.VEGAN}" />
+                    app:layout_constraintTop_toBottomOf="@id/include_main_purpose_type_filter_diet"
+                    app:mainPurposeType="@{MainPurposeFilterType.VEGAN}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

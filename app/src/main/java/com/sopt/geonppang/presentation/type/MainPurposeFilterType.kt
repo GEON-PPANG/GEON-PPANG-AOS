@@ -3,7 +3,7 @@ package com.sopt.geonppang.presentation.type
 import androidx.annotation.StringRes
 import com.sopt.geonppang.R
 
-enum class MainPurposeType(
+enum class MainPurposeFilterType(
     @StringRes val titleRes: Int,
     @StringRes val desRes: Int,
 ) {
