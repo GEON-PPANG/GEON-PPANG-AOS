@@ -10,6 +10,8 @@
             type="com.sopt.geonppang.presentation.filterSetting.FilterSettingViewModel" />
 
         <import type="com.sopt.geonppang.presentation.type.MainPurposeFilterType" />
+
+        <import type="com.sopt.geonppang.presentation.type.FilterInfoType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +23,7 @@
             android:id="@+id/sv_main_purpose_type_filter"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,8 +31,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/spacing24">
+                android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gl_start"
@@ -68,7 +70,7 @@
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/tv_main_purpose_type_filter_title"
-                    app:mainPurposeType="@{MainPurposeFilterType.HEALTH}" />
+                    app:mainPurposeFilterType="@{MainPurposeFilterType.HEALTH}" />
 
                 <include
                     android:id="@+id/include_main_purpose_type_filter_diet"
@@ -81,7 +83,7 @@
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/include_main_purpose_type_filter_health"
-                    app:mainPurposeType="@{MainPurposeFilterType.DIET}" />
+                    app:mainPurposeFilterType="@{MainPurposeFilterType.DIET}" />
 
                 <include
                     android:id="@+id/include_main_purpose_type_filter_vegan"
@@ -94,7 +96,45 @@
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/include_main_purpose_type_filter_diet"
-                    app:mainPurposeType="@{MainPurposeFilterType.VEGAN}" />
+                    app:mainPurposeFilterType="@{MainPurposeFilterType.VEGAN}" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_main_purpose_type_filter_skip"
+                    invisibility="@{viewModel.previousActivity == FilterInfoType.ONBOARDING}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="20dp"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/include_main_purpose_type_filter_vegan"
+                    app:layout_constraintVertical_bias="1.0">
+
+                    <TextView
+                        android:id="@+id/tv_main_purpose_type_filter_skip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:text="@string/filter_skip"
+                        android:textAppearance="@style/TextAppearance.BodyM2"
+                        android:textColor="@color/gray_500"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/iv_main_purpose_type_filter_skip"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_main_purpose_type_filter_skip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_filter_arrow_right"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
