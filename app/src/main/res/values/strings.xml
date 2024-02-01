@@ -121,7 +121,7 @@
 
     <string name="filter_ask_bread_type">어떤 빵을 원하시나요?</string>
     <string name="filter_duplicate_selection">중복선택이 가능해요!</string>
-    <string name="filter_ask_nutrient_type">어떤 성분을 원하시나요?</string>
+    <string name="filter_ask_nutrient_type">원하시는 성분공개 정도를\n선택해주세요!</string>
     <string name="start_geon_ppang">시작하기</string>
 
     <string name="main_purpose_title">맞춤 빵집 추천을 위해\n건빵을 찾은 이유를 알려주세요!</string>
