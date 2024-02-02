@@ -43,13 +43,8 @@ class FilterSettingViewModel @Inject constructor(
             BreadFilterType.SUGARFREE to false
         )
     )
-    val nutrientFilterType: MutableStateFlow<Map<NutrientFilterType, Boolean>> = MutableStateFlow(
-        mapOf(
-            NutrientFilterType.NUTRIENT to false,
-            NutrientFilterType.INGREDIENT to false,
-            NutrientFilterType.ALL to false
-        )
-    )
+    private val _nutrientFilterType = MutableStateFlow<NutrientFilterType?>(null)
+    val nutrientFilterType get() = _nutrientFilterType.asStateFlow()
     val isFilterBtnEnabled: StateFlow<Boolean> = combine(
         currentPage,
         mainPurposeType,
@@ -59,7 +54,7 @@ class FilterSettingViewModel @Inject constructor(
         when (currentPage) {
             0 -> mainPurposeType != null
             1 -> breadFilterType.any { it.value }
-            2 -> nutrientFilterType.any { it.value }
+            2 -> nutrientFilterType != null
             else -> false
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
@@ -86,10 +81,7 @@ class FilterSettingViewModel @Inject constructor(
     }
 
     fun setNutrientFilterType(nutrientType: NutrientFilterType) {
-        val isSelected = nutrientFilterType.value[nutrientType] ?: return
-        nutrientFilterType.value = nutrientFilterType.value.toMutableMap().apply {
-            this[nutrientType] = !isSelected
-        }
+        _nutrientFilterType.value = nutrientType
     }
 
     fun setUserFilter() {

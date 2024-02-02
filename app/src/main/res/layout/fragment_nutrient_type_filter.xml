@@ -60,7 +60,7 @@
                 <include
                     android:id="@+id/include_nutrient_type_filter_nutrient"
                     layout="@layout/view_nutrient_type_button"
-                    selected="@{viewModel.nutrientFilterType.get(NutrientFilterType.NUTRIENT)}"
+                    selected="@{viewModel.nutrientFilterType == NutrientFilterType.NUTRIENT}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="34dp"
@@ -73,7 +73,7 @@
                 <include
                     android:id="@+id/include_nutrient_type_filter_ingredient"
                     layout="@layout/view_nutrient_type_button"
-                    selected="@{viewModel.nutrientFilterType.get(NutrientFilterType.INGREDIENT)}"
+                    selected="@{viewModel.nutrientFilterType == NutrientFilterType.INGREDIENT}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -86,7 +86,7 @@
                 <include
                     android:id="@+id/tv_nutrient_type_filter_all"
                     layout="@layout/view_nutrient_type_button"
-                    selected="@{viewModel.nutrientFilterType.get(NutrientFilterType.ALL)}"
+                    selected="@{viewModel.nutrientFilterType == NutrientFilterType.ALL}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
