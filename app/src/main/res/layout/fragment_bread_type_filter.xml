@@ -78,7 +78,7 @@
                 <include
                     android:id="@+id/include_bread_type_filter_gluten_free"
                     layout="@layout/view_bread_type_button"
-                    selected="@{viewModel.breadFilterType.get(BreadFilterType.GLUTENFREE)}"
+                    selected="@{viewModel.breadFilterTypeList.contains(BreadFilterType.GLUTENFREE.id)}"
                     android:layout_width="0dp"
                     android:layout_height="162dp"
                     android:layout_marginTop="36dp"
@@ -92,7 +92,7 @@
                 <include
                     android:id="@+id/include_bread_type_filter_vegan"
                     layout="@layout/view_bread_type_button"
-                    selected="@{viewModel.breadFilterType.get(BreadFilterType.VEGAN)}"
+                    selected="@{viewModel.breadFilterTypeList.contains(BreadFilterType.VEGAN.id)}"
                     android:layout_width="0dp"
                     android:layout_height="162dp"
                     android:layout_marginStart="8dp"
@@ -105,7 +105,7 @@
                 <include
                     android:id="@+id/include_bread_type_filter_nut_free"
                     layout="@layout/view_bread_type_button"
-                    selected="@{viewModel.breadFilterType.get(BreadFilterType.NUTFREE)}"
+                    selected="@{viewModel.breadFilterTypeList.contains(BreadFilterType.NUTFREE.id)}"
                     android:layout_width="0dp"
                     android:layout_height="162dp"
                     android:layout_marginTop="20dp"
@@ -119,7 +119,7 @@
                 <include
                     android:id="@+id/include_bread_type_filter_sugar_free"
                     layout="@layout/view_bread_type_button"
-                    selected="@{viewModel.breadFilterType.get(BreadFilterType.SUGARFREE)}"
+                    selected="@{viewModel.breadFilterTypeList.contains(BreadFilterType.SUGARFREE.id)}"
                     android:layout_width="0dp"
                     android:layout_height="162dp"
                     android:layout_marginStart="8dp"

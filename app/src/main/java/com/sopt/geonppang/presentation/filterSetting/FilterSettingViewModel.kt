@@ -3,7 +3,6 @@ package com.sopt.geonppang.presentation.filterSetting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.datasource.local.GPDataSource
-import com.sopt.geonppang.data.model.request.RequestSettingFilter
 import com.sopt.geonppang.domain.repository.FilterSettingRepository
 import com.sopt.geonppang.presentation.model.AmplitudeFilterSettingInfo
 import com.sopt.geonppang.presentation.type.BreadFilterType
@@ -35,25 +34,18 @@ class FilterSettingViewModel @Inject constructor(
     val currentPage get() = _currentPage.asStateFlow()
     private val _mainPurposeType = MutableStateFlow<MainPurposeFilterType?>(null)
     val mainPurposeType get() = _mainPurposeType.asStateFlow()
-    val breadFilterType: MutableStateFlow<Map<BreadFilterType, Boolean>> = MutableStateFlow(
-        mapOf(
-            BreadFilterType.GLUTENFREE to false,
-            BreadFilterType.VEGAN to false,
-            BreadFilterType.NUTFREE to false,
-            BreadFilterType.SUGARFREE to false
-        )
-    )
+    val breadFilterTypeList: MutableStateFlow<List<Int>> = MutableStateFlow(emptyList())
     private val _nutrientFilterType = MutableStateFlow<NutrientFilterType?>(null)
     val nutrientFilterType get() = _nutrientFilterType.asStateFlow()
     val isFilterBtnEnabled: StateFlow<Boolean> = combine(
         currentPage,
         mainPurposeType,
-        breadFilterType,
+        breadFilterTypeList,
         nutrientFilterType
     ) { currentPage, mainPurposeType, breadFilterType, nutrientFilterType ->
         when (currentPage) {
             0 -> mainPurposeType != null
-            1 -> breadFilterType.any { it.value }
+            1 -> breadFilterType.isNotEmpty()
             2 -> nutrientFilterType != null
             else -> false
         }
@@ -74,9 +66,9 @@ class FilterSettingViewModel @Inject constructor(
     }
 
     fun setBreadFilterType(breadType: BreadFilterType) {
-        val isSelected = breadFilterType.value[breadType] ?: return
-        breadFilterType.value = breadFilterType.value.toMutableMap().apply {
-            this[breadType] = !isSelected
+        breadFilterTypeList.value = breadFilterTypeList.value.toMutableList().apply {
+            if (!remove(breadType.id)) add(breadType.id)
+            sort()
         }
     }
 
