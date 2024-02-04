@@ -58,43 +58,43 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <include
-                    android:id="@+id/include_nutrient_type_filter_nutrient"
+                    android:id="@+id/include_nutrient_type_filter_materials"
                     layout="@layout/view_nutrient_type_button"
-                    selected="@{viewModel.nutrientFilterType == NutrientFilterType.NUTRIENT}"
+                    selected="@{viewModel.nutrientFilterType == NutrientFilterType.MATERIALS}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="34dp"
-                    android:onClick="@{()->viewModel.setNutrientFilterType(NutrientFilterType.NUTRIENT)}"
+                    android:onClick="@{()->viewModel.setNutrientFilterType(NutrientFilterType.MATERIALS)}"
                     app:layout_constraintEnd_toStartOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/tv_nutrient_type_filter_title"
-                    app:nutrientType="@{NutrientFilterType.NUTRIENT}" />
+                    app:nutrientType="@{NutrientFilterType.MATERIALS}" />
 
                 <include
-                    android:id="@+id/include_nutrient_type_filter_ingredient"
+                    android:id="@+id/include_nutrient_type_filter_ingredients"
                     layout="@layout/view_nutrient_type_button"
-                    selected="@{viewModel.nutrientFilterType == NutrientFilterType.INGREDIENT}"
+                    selected="@{viewModel.nutrientFilterType == NutrientFilterType.INGREDIENTS}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:onClick="@{()->viewModel.setNutrientFilterType(NutrientFilterType.INGREDIENT)}"
+                    android:onClick="@{()->viewModel.setNutrientFilterType(NutrientFilterType.INGREDIENTS)}"
                     app:layout_constraintEnd_toStartOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/include_nutrient_type_filter_nutrient"
-                    app:nutrientType="@{NutrientFilterType.INGREDIENT}" />
+                    app:layout_constraintTop_toBottomOf="@id/include_nutrient_type_filter_materials"
+                    app:nutrientType="@{NutrientFilterType.INGREDIENTS}" />
 
                 <include
-                    android:id="@+id/tv_nutrient_type_filter_all"
+                    android:id="@+id/tv_nutrient_type_filter_private"
                     layout="@layout/view_nutrient_type_button"
-                    selected="@{viewModel.nutrientFilterType == NutrientFilterType.ALL}"
+                    selected="@{viewModel.nutrientFilterType == NutrientFilterType.PRIVATE}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:onClick="@{()->viewModel.setNutrientFilterType(NutrientFilterType.ALL)}"
+                    android:onClick="@{()->viewModel.setNutrientFilterType(NutrientFilterType.PRIVATE)}"
                     app:layout_constraintEnd_toStartOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/include_nutrient_type_filter_ingredient"
-                    app:nutrientType="@{NutrientFilterType.ALL}" />
+                    app:layout_constraintTop_toBottomOf="@id/include_nutrient_type_filter_ingredients"
+                    app:nutrientType="@{NutrientFilterType.PRIVATE}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
