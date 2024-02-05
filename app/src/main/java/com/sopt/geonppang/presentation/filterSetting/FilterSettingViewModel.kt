@@ -83,8 +83,8 @@ class FilterSettingViewModel @Inject constructor(
                 _nutrientFilterType.value?.let { nutrientFilterType ->
                     RequestSettingFilter(
                         mainPurpose = mainPurposeFilterType.name,
-                        breadType = breadFilterTypeList.value,
-                        nutrientType = listOf(nutrientFilterType.id)
+                        breadTypeList = breadFilterTypeList.value,
+                        nutrientTypeList = listOf(nutrientFilterType.id)
                     )
                 }
             }?.let { requestSettingFilter ->

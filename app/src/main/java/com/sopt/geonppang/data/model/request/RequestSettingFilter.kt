@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class RequestSettingFilter(
     val mainPurpose: String,
-    val breadType: List<Int>,
-    val nutrientType: List<Int>
+    val breadTypeList: List<Int>,
+    val nutrientTypeList: List<Int>
 )
