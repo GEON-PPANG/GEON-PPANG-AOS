@@ -6,6 +6,6 @@ import com.sopt.geonppang.presentation.type.NutrientFilterType
 
 data class AmplitudeFilterSettingInfo(
     val mainPurposeType: MainPurposeFilterType?,
-    val breadType: Map<BreadFilterType, Boolean>,
-    val ingredientType: Map<NutrientFilterType, Boolean>
+    val breadType: List<String>,
+    val ingredientType: NutrientFilterType?
 )

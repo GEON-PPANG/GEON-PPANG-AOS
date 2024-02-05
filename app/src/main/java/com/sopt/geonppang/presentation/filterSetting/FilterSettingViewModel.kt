@@ -3,6 +3,7 @@ package com.sopt.geonppang.presentation.filterSetting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.geonppang.data.datasource.local.GPDataSource
+import com.sopt.geonppang.data.model.request.RequestSettingFilter
 import com.sopt.geonppang.domain.repository.FilterSettingRepository
 import com.sopt.geonppang.presentation.model.AmplitudeFilterSettingInfo
 import com.sopt.geonppang.presentation.type.BreadFilterType
@@ -78,31 +79,25 @@ class FilterSettingViewModel @Inject constructor(
 
     fun setUserFilter() {
         viewModelScope.launch {
-            _mainPurposeType.value?.let {
-                RequestSettingFilter(
-                    it.name,
-                    RequestSettingFilter.BreadType(
-                        breadFilterType.value[BreadFilterType.GLUTENFREE] == true,
-                        breadFilterType.value[BreadFilterType.VEGAN] == true,
-                        breadFilterType.value[BreadFilterType.NUTFREE] == true,
-                        breadFilterType.value[BreadFilterType.SUGARFREE] == true,
-                    ),
-                    RequestSettingFilter.NutrientType(
-                        nutrientFilterType.value[NutrientFilterType.NUTRIENT] == true,
-                        nutrientFilterType.value[NutrientFilterType.INGREDIENT] == true,
-                        nutrientFilterType.value[NutrientFilterType.ALL] == true,
+            _mainPurposeType.value?.let { mainPurposeFilterType ->
+                _nutrientFilterType.value?.let { nutrientFilterType ->
+                    RequestSettingFilter(
+                        mainPurpose = mainPurposeFilterType.name,
+                        breadType = breadFilterTypeList.value,
+                        nutrientType = listOf(nutrientFilterType.id)
                     )
-                )
-            }?.let {
-                filterRepository.setUserFilter(
-                    it
-                )
+                }
+            }?.let { requestSettingFilter ->
+                filterRepository.setUserFilter(requestSettingFilter)
                     .onSuccess {
                         _selectedFilterState.value = UiState.Success(
                             AmplitudeFilterSettingInfo(
                                 mainPurposeType = _mainPurposeType.value,
-                                breadType = breadFilterType.value,
-                                ingredientType = nutrientFilterType.value,
+                                breadType = breadFilterTypeList.value.mapNotNull { breadFilterTypeId ->
+                                    BreadFilterType.values()
+                                        .find { it.id == breadFilterTypeId }?.name
+                                },
+                                ingredientType = _nutrientFilterType.value,
                             )
                         )
                     }
