@@ -6,6 +6,7 @@
     <string name="sign_signup_with_email">이메일로 회원가입</string>
     <string name="btn_kakao_sign">카카오로 계속하기</string>
     <string name="btn_signup_text">회원가입</string>
+    <string name="tv_look_around">둘러보기</string>
 
     <!--login-->
     <string name="login_text_phrase">로그인</string>
