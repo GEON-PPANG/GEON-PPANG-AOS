@@ -15,6 +15,10 @@
     <string name="login_goto_signup"><u>회원가입하기</u></string>
     <string name="login_bottom_message">이메일 및 비밀번호를\n확인해주세요</string>
 
+    <!--login needed-->
+    <string name="login_needed_phrase">별사탕님 맞춤 건빵을 추천하려면</string>
+    <string name="login_need">이 필요해요!</string>
+
     <!--signup-->
     <string name="tv_signup_notice_phrase">회원가입을 위한\n정보를 알려주세요!</string>
     <string name="tv_email">이메일</string>
