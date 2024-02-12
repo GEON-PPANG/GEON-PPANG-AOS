@@ -9,6 +9,18 @@
         android:background="@color/background_2"
         tools:context=".presentation.SplashActivity">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="76dp"
+            android:padding="5dp"
+            android:text="@string/tv_look_around"
+            android:textAppearance="@style/TextAppearance.CaptionB1"
+            android:textColor="@color/gray_300"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/iv_logo"
             android:layout_width="wrap_content"
@@ -68,9 +80,9 @@
             <TextView
                 android:id="@+id/tv_login_with_email"
                 android:layout_width="wrap_content"
-                android:paddingVertical="6dp"
-                android:paddingHorizontal="10dp"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
                 android:text="@string/sign_login_with_email"
                 android:textAppearance="@style/TextAppearance.CaptionB1"
                 android:textColor="@color/gray_400"
@@ -93,9 +105,9 @@
                 android:id="@+id/tv_signup_with_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/sign_signup_with_email"
-                android:paddingVertical="6dp"
                 android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="@string/sign_signup_with_email"
                 android:textAppearance="@style/TextAppearance.CaptionB1"
                 android:textColor="@color/gray_400"
                 app:layout_constraintBottom_toBottomOf="parent"
