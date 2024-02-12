@@ -1,5 +1,5 @@
 package com.sopt.geonppang.presentation.type
 
 enum class AuthRoleType {
-    USER, GUEST
+    ROLE_MEMBER, ROLE_GUEST
 }
