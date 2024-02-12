@@ -50,6 +50,7 @@ class SignUpNicknameActivity :
         viewModel.signUpState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    // 회원가입 성공시에만 자동 로그인 설정 (소셜 회원가입도 닉네임까지 설정이 완료된 시점에)
                     viewModel.setAutoLogin()
                     AmplitudeUtils.trackEventWithProperties(
                         COMPLETE_NICKNAME,
@@ -83,6 +84,7 @@ class SignUpNicknameActivity :
                 viewModel.initNickname()
             }
         }.launchIn(lifecycleScope)
+
         viewModel.memberId.flowWithLifecycle(lifecycle).onEach { memberId ->
             if (memberId != null)
                 AmplitudeUtils.setUserId(GUNBBANG + memberId)
@@ -90,12 +92,13 @@ class SignUpNicknameActivity :
     }
 
     private fun completeSignUp() {
-        val gpDataSource = GPDataSource(this)
-        when (gpDataSource.platformType) {
+        when (viewModel.platformType) {
+            // 카카오 회원가입
             PlatformType.KAKAO.name -> {
                 viewModel.settingNickName()
             }
 
+            // 자체 회원가입
             PlatformType.NONE.name -> {
                 val email = intent.getStringExtra(EMAIL)
                 val password = intent.getStringExtra(PASSWORD)

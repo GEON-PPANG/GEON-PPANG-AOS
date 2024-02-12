@@ -17,13 +17,20 @@ class AuthInterceptor @Inject constructor(
     private val context: Application,
 ) : Interceptor {
 
+    // TODO dana 경우에 따른 분기 처리 필요
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val authRequest =
             originalRequest.newBuilder().addHeader("Authorization", gpDataSource.accessToken)
                 .build()
-        val response = chain.proceed(authRequest)
+        val response = chain.proceed(
+            if(gpDataSource.accessToken.isNotBlank()){
+                authRequest
+            } else {
+                originalRequest
+            })
 
+        // TODO dana 이걸 suspend로 한다면? 해결되지 않을까? 고민하기
         when (response.code) {
             401 -> {
                 response.close()

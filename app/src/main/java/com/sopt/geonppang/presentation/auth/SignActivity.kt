@@ -48,14 +48,16 @@ class SignActivity :
     }
 
     private fun collectData() {
+        // 카카오 회원 가입, 로그인
         authViewModel.authRoleType.flowWithLifecycle(lifecycle).onEach { role ->
             when (role) {
-                AuthRoleType.GUEST -> {
+                // 카카오 회원가입인 경우 닉네임 페이지로 이동
+                AuthRoleType.ROLE_GUEST -> {
                     moveToNickNameSetting()
                 }
 
-                AuthRoleType.USER -> {
-                    authViewModel.setAutoLogin()
+                // 카카오 로그인인 경우 홈으로 이동
+                AuthRoleType.ROLE_MEMBER -> {
                     AmplitudeUtils.trackEvent(LOGIN_APP)
                     moveToMain()
                 }
