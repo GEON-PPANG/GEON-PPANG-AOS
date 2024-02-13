@@ -10,6 +10,7 @@
         tools:context=".presentation.SplashActivity">
 
         <TextView
+            android:id="@+id/tv_look_around"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
