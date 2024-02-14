@@ -11,29 +11,20 @@ data class ResponseGetUserFilter(
 ) {
     @Serializable
     data class Data(
-        val breadType: BreadType,
+        val breadTypeList: List<BreadTypeId>,
         val mainPurpose: String,
         val memberId: Int,
         val nickname: String,
-        val nutrientType: NutrientType
+        val nutrientTypeList: List<NutrientTypeId>
     ) {
         @Serializable
-        data class BreadType(
-            val breadTypeId: Int,
-            val breadTypeName: String,
-            val isGlutenFree: Boolean,
-            val isNutFree: Boolean,
-            val isSugarFree: Boolean,
-            val isVegan: Boolean
+        data class BreadTypeId(
+            val breadTypeId: Int
         )
 
         @Serializable
-        data class NutrientType(
-            val isIngredientOpen: Boolean,
-            val isNotOpen: Boolean,
-            val isNutrientOpen: Boolean,
-            val nutrientTypeId: Int,
-            val nutrientTypeName: String
+        data class NutrientTypeId(
+            val nutrientTypeId: Int
         )
     }
 

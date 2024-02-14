@@ -47,79 +47,54 @@
 
                 <TextView
                     android:id="@+id/tv_nutrient_type_filter_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:text="@string/filter_ask_nutrient_type"
                     android:textAppearance="@style/TextAppearance.Title1"
                     android:textColor="@color/gray_700"
+                    app:layout_constraintEnd_toStartOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/tv_nutrient_type_filter_duplicate_selection"
-                    android:layout_width="wrap_content"
+                <include
+                    android:id="@+id/include_nutrient_type_filter_materials"
+                    layout="@layout/view_nutrient_type_button"
+                    selected="@{viewModel.nutrientFilterType == NutrientFilterType.MATERIALS}"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/filter_duplicate_selection"
-                    android:textAppearance="@style/TextAppearance.Subhead"
-                    android:textColor="@color/gray_400"
+                    android:layout_marginTop="34dp"
+                    android:onClick="@{()->viewModel.setNutrientFilterType(NutrientFilterType.MATERIALS)}"
+                    app:layout_constraintEnd_toStartOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/tv_nutrient_type_filter_title" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_nutrient_type_filter_title"
+                    app:nutrientType="@{NutrientFilterType.MATERIALS}" />
 
-                <TextView
-                    android:id="@+id/tv_nutrient_type_nutrient"
-                    selected="@{viewModel.nutrientFilterType.get(NutrientFilterType.NUTRIENT)}"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="48dp"
-                    android:background="@drawable/selector_item_3_division_filter_button"
-                    android:onClick="@{()->viewModel.setNutrientFilterType(NutrientFilterType.NUTRIENT)}"
-                    android:paddingVertical="39dp"
-                    android:text="@{NutrientFilterType.NUTRIENT.titleRes}"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.Title2"
-                    android:textColor="@drawable/selector_item_filter_text"
-                    app:layout_constraintEnd_toStartOf="@+id/gl_end"
-                    app:layout_constraintStart_toStartOf="@+id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_nutrient_type_filter_duplicate_selection"
-                    tools:text="영양성분 공개" />
-
-                <TextView
-                    android:id="@+id/tv_nutrient_type_ingredient"
-                    selected="@{viewModel.nutrientFilterType.get(NutrientFilterType.INGREDIENT)}"
+                <include
+                    android:id="@+id/include_nutrient_type_filter_ingredients"
+                    layout="@layout/view_nutrient_type_button"
+                    selected="@{viewModel.nutrientFilterType == NutrientFilterType.INGREDIENTS}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/selector_item_3_division_filter_button"
-                    android:onClick="@{()->viewModel.setNutrientFilterType(NutrientFilterType.INGREDIENT)}"
-                    android:paddingVertical="39dp"
-                    android:text="@{NutrientFilterType.INGREDIENT.titleRes}"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.Title2"
-                    android:textColor="@drawable/selector_item_filter_text"
-                    app:layout_constraintEnd_toStartOf="@+id/gl_end"
-                    app:layout_constraintStart_toStartOf="@+id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_nutrient_type_nutrient"
-                    tools:text="원재료 공개" />
+                    android:onClick="@{()->viewModel.setNutrientFilterType(NutrientFilterType.INGREDIENTS)}"
+                    app:layout_constraintEnd_toStartOf="@id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/include_nutrient_type_filter_materials"
+                    app:nutrientType="@{NutrientFilterType.INGREDIENTS}" />
 
-                <TextView
-                    android:id="@+id/tv_nutrient_type_not"
-                    selected="@{viewModel.nutrientFilterType.get(NutrientFilterType.NOT)}"
+                <include
+                    android:id="@+id/tv_nutrient_type_filter_private"
+                    layout="@layout/view_nutrient_type_button"
+                    selected="@{viewModel.nutrientFilterType == NutrientFilterType.PRIVATE}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/selector_item_3_division_filter_button"
-                    android:onClick="@{()->viewModel.setNutrientFilterType(NutrientFilterType.NOT)}"
-                    android:paddingVertical="39dp"
-                    android:text="@{NutrientFilterType.NOT.titleRes}"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.Title2"
-                    android:textColor="@drawable/selector_item_filter_text"
-                    app:layout_constraintEnd_toStartOf="@+id/gl_end"
-                    app:layout_constraintStart_toStartOf="@+id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_nutrient_type_ingredient"
-                    tools:text="비공개" />
+                    android:onClick="@{()->viewModel.setNutrientFilterType(NutrientFilterType.PRIVATE)}"
+                    app:layout_constraintEnd_toStartOf="@id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/include_nutrient_type_filter_ingredients"
+                    app:nutrientType="@{NutrientFilterType.PRIVATE}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

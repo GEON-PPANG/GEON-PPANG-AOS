@@ -121,29 +121,32 @@
 
     <string name="filter_ask_bread_type">어떤 빵을 원하시나요?</string>
     <string name="filter_duplicate_selection">중복선택이 가능해요!</string>
-    <string name="filter_ask_nutrient_type">어떤 성분을 원하시나요?</string>
+    <string name="filter_ask_nutrient_type">원하시는 성분공개 정도를\n선택해주세요!</string>
     <string name="start_geon_ppang">시작하기</string>
 
     <string name="main_purpose_title">맞춤 빵집 추천을 위해\n건빵을 찾은 이유를 알려주세요!</string>
     <string name="main_purpose_type_health_title">건강 · 체질</string>
-    <string name="main_purpose_type_health_des">아토피 , 알레르기 , 암 , 당뇨 , 소화문제</string>
+    <string name="main_purpose_type_health_des">아토피, 알레르기, 당뇨, 소화불량 등이 있어요.</string>
     <string name="main_purpose_type_diet_title">맛 · 다이어트</string>
-    <string name="main_purpose_type_diet_des">그냥 맛있어서! 식이 관리를 위해</string>
+    <string name="main_purpose_type_diet_des">맛있어서 먹거나, 체중조절이 필요해요.</string>
     <string name="main_purpose_type_vegan_title">비건 · 채식지향</string>
-    <string name="main_purpose_type_vegan_des">종교 , 환경 , 동물 , 노동권을 위한 비거니즘</string>
+    <string name="main_purpose_type_vegan_des">종교, 환경, 동물, 노동권 문제에 공감해요.</string>
 
     <string name="bread_type_gluten_free_title">글루텐프리</string>
-    <string name="bread_type_gluten_free_des">NO 글루텐\nLOW 글루텐</string>
+    <string name="bread_type_gluten_free_des">NO 글루텐</string>
     <string name="bread_type_vegan_title">비건빵</string>
-    <string name="bread_type_vegan_des">NO 동물성재료\n(유제품 , 계란 등)</string>
+    <string name="bread_type_vegan_des">NO 동물성재료\n(유제품, 계란 등)</string>
     <string name="bread_type_nut_free_title">넛프리</string>
     <string name="bread_type_nut_free_des">NO 견과류</string>
     <string name="bread_type_sugar_free_title">대체당</string>
-    <string name="bread_type_sugar_free_des">알룰로스, 스테비아,\n에리스리톨, 말티톨 등</string>
+    <string name="bread_type_sugar_free_des">NO 설탕\n(비설탕감미료)</string>
 
-    <string name="nutrient_type_nutrient_open">영양성분까지 꼼꼼히 볼래요!</string>
-    <string name="nutrient_type_ingredient_open">어떤 재료가 들어갔는지 볼래요!</string>
-    <string name="nutrient_type_not_open">성분 정보는 괜찮아요!</string>
+    <string name="nutrient_type_nutrient_open_title">영양성분 보기</string>
+    <string name="nutrient_type_nutrient_open_des">영양성분까지 공개한 건빵집을 볼래요!</string>
+    <string name="nutrient_type_ingredient_open_title">원재료 보기</string>
+    <string name="nutrient_type_ingredient_open_des">원재료를 공개한 건빵집을 볼래요!</string>
+    <string name="nutrient_type_all_open_title">모든 건빵집 보기</string>
+    <string name="nutrient_type_all_open_des">일단 더 많은 건빵집을 볼래요!</string>
 
     <string name="welcome_to_geonppang">%s님\n건빵에 오신 걸 환영해요!</string>
 

@@ -10,9 +10,7 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.model.AmplitudeFilterSettingInfo
-import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.presentation.type.FilterInfoType
-import com.sopt.geonppang.presentation.type.NutrientFilterType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
@@ -197,14 +195,16 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
         property: UiState.Success<AmplitudeFilterSettingInfo>
     ) {
         property.data.mainPurposeType?.let { mainPurposeType ->
-            AmplitudeUtils.trackEventWithMapProperties(
-                eventName,
-                mapOf(
-                    MAIN_PURPOSE to mainPurposeType,
-                    BREAD_TYPE to getStringBreadType(property.data.breadType),
-                    INGREDIENTS_TYPE to getStringIngredientType(property.data.ingredientType)
+            property.data.ingredientType?.let { ingredientType ->
+                AmplitudeUtils.trackEventWithMapProperties(
+                    eventName,
+                    mapOf(
+                        MAIN_PURPOSE to mainPurposeType,
+                        BREAD_TYPE to property.data.breadType,
+                        INGREDIENTS_TYPE to ingredientType
+                    )
                 )
-            )
+            }
         }
     }
 
@@ -224,14 +224,6 @@ class FilterSettingActivity : BindingActivity<ActivityFilterBinding>(R.layout.ac
 
             else -> {}
         }
-    }
-
-    private fun getStringBreadType(breadType: Map<BreadFilterType, Boolean>): List<String> {
-        return breadType.entries.filter { it.value }.map { it.key.name }
-    }
-
-    private fun getStringIngredientType(ingredientType: Map<NutrientFilterType, Boolean>): List<String> {
-        return ingredientType.entries.filter { it.value }.map { it.key.name }
     }
 
     companion object {

@@ -4,15 +4,23 @@ import androidx.annotation.StringRes
 import com.sopt.geonppang.R
 
 enum class NutrientFilterType(
-    @StringRes val titleRes: Int
+    val id: Int,
+    @StringRes val titleRes: Int,
+    @StringRes val desRes: Int
 ) {
-    NUTRIENT(
-        R.string.nutrient_type_nutrient_open
+    MATERIALS(
+        id = 2,
+        titleRes = R.string.nutrient_type_nutrient_open_title,
+        desRes = R.string.nutrient_type_nutrient_open_des
     ),
-    INGREDIENT(
-        R.string.nutrient_type_ingredient_open
+    INGREDIENTS(
+        id = 1,
+        titleRes = R.string.nutrient_type_ingredient_open_title,
+        desRes = R.string.nutrient_type_ingredient_open_des
     ),
-    NOT(
-        R.string.nutrient_type_not_open
+    PRIVATE(
+        id = 3,
+        titleRes = R.string.nutrient_type_all_open_title,
+        desRes = R.string.nutrient_type_all_open_des
     )
 }
