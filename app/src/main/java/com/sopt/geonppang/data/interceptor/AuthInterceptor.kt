@@ -24,20 +24,20 @@ class AuthInterceptor @Inject constructor(
             originalRequest.newBuilder().addHeader("Authorization", gpDataSource.accessToken)
                 .build()
         val response = chain.proceed(
-            if(gpDataSource.accessToken.isNotBlank()){
+            if (gpDataSource.accessToken.isNotBlank()) {
                 authRequest
             } else {
                 originalRequest
-            })
+            }
+        )
 
         when (response.code) {
             401 -> {
                 response.close()
-                val refreshTokenRequest = originalRequest.newBuilder().get()
-                    .url("${BuildConfig.GP_BASE_URL}auth/refresh")
-                    .addHeader(ACCESS_TOKEN, gpDataSource.accessToken)
-                    .addHeader(REFRESH_TOKEN, gpDataSource.refreshToken)
-                    .build()
+                val refreshTokenRequest =
+                    originalRequest.newBuilder().get().url("${BuildConfig.GP_BASE_URL}auth/refresh")
+                        .addHeader(ACCESS_TOKEN, gpDataSource.accessToken)
+                        .addHeader(REFRESH_TOKEN, gpDataSource.refreshToken).build()
                 val refreshTokenResponse = chain.proceed(refreshTokenRequest)
 
                 if (refreshTokenResponse.isSuccessful) {
@@ -52,15 +52,16 @@ class AuthInterceptor @Inject constructor(
 
                     refreshTokenResponse.close()
                     val newRequest = originalRequest.newBuilder()
-                        .addHeader(ACCESS_TOKEN, gpDataSource.accessToken)
-                        .build()
+                        .addHeader(ACCESS_TOKEN, gpDataSource.accessToken).build()
                     return chain.proceed(newRequest)
                 } else {
                     with(context) {
                         CoroutineScope(Dispatchers.Main).launch {
                             startActivity(
-                                Intent(this@with, SignActivity::class.java)
-                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                Intent(
+                                    this@with,
+                                    SignActivity::class.java
+                                ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             )
                         }
                     }
