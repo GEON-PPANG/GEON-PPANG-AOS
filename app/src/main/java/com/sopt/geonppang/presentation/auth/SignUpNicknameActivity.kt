@@ -1,6 +1,6 @@
 package com.sopt.geonppang.presentation.auth
 
- import android.content.Intent
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
