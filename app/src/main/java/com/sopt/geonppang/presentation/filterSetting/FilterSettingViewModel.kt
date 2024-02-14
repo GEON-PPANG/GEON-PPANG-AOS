@@ -10,6 +10,7 @@ import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.presentation.type.MainPurposeFilterType
 import com.sopt.geonppang.presentation.type.NutrientFilterType
+import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +24,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FilterSettingViewModel @Inject constructor(
-    gpDataSource: GPDataSource,
+    private val gpDataSource: GPDataSource,
     private val filterRepository: FilterSettingRepository
 ) : ViewModel() {
     private val _selectedFilterState =
@@ -100,6 +101,10 @@ class FilterSettingViewModel @Inject constructor(
                                 ingredientType = _nutrientFilterType.value,
                             )
                         )
+
+                        // 필터를 설정할 때, userRoleType을 selectedMember로 설정 하기
+                        // TODO: dana filter 설정할 때마다 재설정하는게 맞는가,,
+                        gpDataSource.userRoleType = UserRoleType.FILTER_SELECTED_MEMBER.name
                     }
                     .onFailure { throwable ->
                         _selectedFilterState.value = UiState.Error(throwable.message)

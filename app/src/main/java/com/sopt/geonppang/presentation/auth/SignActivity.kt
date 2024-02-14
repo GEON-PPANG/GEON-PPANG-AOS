@@ -13,7 +13,9 @@ import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.login.LoginActivity
 import com.sopt.geonppang.presentation.type.AuthRoleType
 import com.sopt.geonppang.presentation.type.PlatformType
+import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.AmplitudeUtils
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.setOnSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,19 +47,37 @@ class SignActivity :
             moveToSignUp()
             AmplitudeUtils.trackEventWithProperties(START_SIGNUP, SIGNUP_TYPE, EMAIL)
         }
+
+        // TODO: dana 둘러보기 코드 작성 후 지우기
+        binding.ivLogoText.setOnSingleClickListener {
+            GPDataSource(this).userRoleType = UserRoleType.NONE_MEMBER.name
+            moveToMain()
+        }
     }
 
     private fun collectData() {
+        // 카카오 회원 가입, 로그인
         authViewModel.authRoleType.flowWithLifecycle(lifecycle).onEach { role ->
             when (role) {
-                AuthRoleType.GUEST -> {
+                // 카카오 회원가입인 경우 닉네임 페이지로 이동
+                AuthRoleType.ROLE_GUEST -> {
                     moveToNickNameSetting()
                 }
 
-                AuthRoleType.USER -> {
-                    authViewModel.setAutoLogin()
+                // 카카오 로그인인 경우 홈으로 이동
+                AuthRoleType.ROLE_MEMBER -> {
                     AmplitudeUtils.trackEvent(LOGIN_APP)
                     moveToMain()
+                }
+
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
+
+        authViewModel.signUpState.flowWithLifecycle(lifecycle).onEach { signUpState ->
+            when (signUpState) {
+                is UiState.Success -> {
+                    authViewModel.setAutoLogin()
                 }
 
                 else -> {}

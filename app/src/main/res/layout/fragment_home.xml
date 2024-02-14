@@ -105,6 +105,7 @@
                         android:layout_height="wrap_content"
                         android:text="@{@string/home_best_title1(viewModel.nickName)}"
                         android:textAppearance="@style/TextAppearance.Title2"
+                        android:visibility="gone"
                         tools:text="바이블님 맞춤" />
 
                     <TextView
@@ -145,6 +146,7 @@
                         android:layout_height="wrap_content"
                         android:text="@{@string/home_best_title1(viewModel.nickName)}"
                         android:textAppearance="@style/TextAppearance.Title2"
+                        android:visibility="gone"
                         tools:text="바이블님 맞춤" />
 
                     <TextView
@@ -193,6 +195,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintTop_toBottomOf="@id/iv_home_filter" />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -52,6 +52,13 @@ class GPDataSource @Inject constructor(@ApplicationContext context: Context) {
         set(value) = dataStore.edit { putBoolean(IS_LOGIN, value) }
         get() = dataStore.getBoolean(IS_LOGIN, false)
 
+    var userRoleType: String
+        set(value) = dataStore.edit { putString(USER_ROLE_TYPE, value) }
+        get() = dataStore.getString(
+            USER_ROLE_TYPE,
+            ""
+        ) ?: ""
+
     fun clear() {
         dataStore.edit {
             clear()
@@ -64,5 +71,6 @@ class GPDataSource @Inject constructor(@ApplicationContext context: Context) {
         const val ACCESS_TOKEN = "AccessToken"
         const val REFRESH_TOKEN = "RefreshToken"
         const val IS_LOGIN = "IsLogin"
+        const val USER_ROLE_TYPE = "UserRoleType"
     }
 }
