@@ -13,7 +13,9 @@ import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.login.LoginActivity
 import com.sopt.geonppang.presentation.type.AuthRoleType
 import com.sopt.geonppang.presentation.type.PlatformType
+import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.AmplitudeUtils
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
 import com.sopt.geonppang.util.extension.setOnSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,6 +47,12 @@ class SignActivity :
             moveToSignUp()
             AmplitudeUtils.trackEventWithProperties(START_SIGNUP, SIGNUP_TYPE, EMAIL)
         }
+
+        // TODO: dana 둘러보기 코드 작성 후 지우기
+        binding.ivLogoText.setOnSingleClickListener {
+            GPDataSource(this).userRoleType = UserRoleType.NONE_MEMBER.name
+            moveToMain()
+        }
     }
 
     private fun collectData() {
@@ -60,6 +68,16 @@ class SignActivity :
                 AuthRoleType.ROLE_MEMBER -> {
                     AmplitudeUtils.trackEvent(LOGIN_APP)
                     moveToMain()
+                }
+
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
+
+        authViewModel.signUpState.flowWithLifecycle(lifecycle).onEach { signUpState ->
+            when (signUpState) {
+                is UiState.Success -> {
+                    authViewModel.setAutoLogin()
                 }
 
                 else -> {}

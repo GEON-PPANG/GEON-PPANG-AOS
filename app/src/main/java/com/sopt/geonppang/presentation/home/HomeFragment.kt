@@ -14,6 +14,7 @@ import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETA
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.search.SearchActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingFragment
@@ -84,13 +85,24 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             }
         }.launchIn(lifecycleScope)
 
-        viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
-            binding.tvHomeBestBakeryTitle1.setVisibility(isFilterSelected)
-            binding.tvHomeBestReviewTitle1.setVisibility(isFilterSelected)
-            binding.includeHomeSpeechBubble.root.setVisibility(!isFilterSelected)
+        // 유저 상태에 따른 ui 분기 처리
+        viewModel.userRoleType.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                UserRoleType.NONE_MEMBER.name -> {
+                    viewModel.setNickName("별사탕")
+                }
 
-            if (isFilterSelected != null)
-                viewModel.fetchBestBakeryList()
+                UserRoleType.FILTER_SELECTED_MEMBER.name -> {
+                    binding.tvHomeBestBakeryTitle1.setVisibility(true)
+                    binding.tvHomeBestReviewTitle1.setVisibility(true)
+                }
+
+                UserRoleType.FILTER_UNSELECTED_MEMBER.name -> {
+                    binding.includeHomeSpeechBubble.root.setVisibility(true)
+                }
+
+                else -> {}
+            }
         }.launchIn(lifecycleScope)
     }
 
