@@ -11,6 +11,7 @@ import com.sopt.geonppang.domain.repository.AuthRepository
 import com.sopt.geonppang.domain.repository.ValidationRepository
 import com.sopt.geonppang.presentation.type.AuthRoleType
 import com.sopt.geonppang.presentation.type.PlatformType
+import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -164,7 +165,7 @@ class AuthViewModel @Inject constructor(
                     gpDataSource.accessToken = BEARER_PREFIX + accessToken
 
                     // 카카오 로그인, 자체 회원 가입인 경우메만 리프래시 토큰을 저장하고 회원가입 상태를 success로 지정
-                    if(_authRoleType.value == AuthRoleType.ROLE_MEMBER) {
+                    if (_authRoleType.value == AuthRoleType.ROLE_MEMBER) {
                         gpDataSource.refreshToken = BEARER_PREFIX + refreshToken
 
                         _signUpState.value = UiState.Success(true)
@@ -199,6 +200,7 @@ class AuthViewModel @Inject constructor(
 
                         _signUpState.value = UiState.Success(true)
                         _memberId.value = responseBody?.data?.memberId
+                        gpDataSource.userRoleType = UserRoleType.FILTER_UNSELECTED_MEMBER.name
                     }
                     .onFailure { throwable ->
                         Timber.e(throwable.message)

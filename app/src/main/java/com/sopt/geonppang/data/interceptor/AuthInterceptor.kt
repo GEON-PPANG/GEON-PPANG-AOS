@@ -30,7 +30,6 @@ class AuthInterceptor @Inject constructor(
                 originalRequest
             })
 
-        // TODO dana 이걸 suspend로 한다면? 해결되지 않을까? 고민하기
         when (response.code) {
             401 -> {
                 response.close()
