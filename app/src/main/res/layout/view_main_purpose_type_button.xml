@@ -6,22 +6,22 @@
     <data>
 
         <variable
-            name="mainPurposeType"
-            type="com.sopt.geonppang.presentation.type.MainPurposeType" />
+            name="mainPurposeFilterType"
+            type="com.sopt.geonppang.presentation.type.MainPurposeFilterType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_main_purpose"
+        android:id="@+id/layout_main_purpose_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_item_3_division_filter_button"
         android:paddingVertical="25dp">
 
         <TextView
-            android:id="@+id/tv_main_purpose_health_title"
+            android:id="@+id/tv_main_purpose_type_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{mainPurposeType.titleRes}"
+            android:text="@{mainPurposeFilterType.titleRes}"
             android:textAppearance="@style/TextAppearance.Title2"
             android:textColor="@drawable/selector_item_filter_text"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,12 +34,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{mainPurposeType.desRes}"
+            android:text="@{mainPurposeFilterType.desRes}"
             android:textAppearance="@style/TextAppearance.BodyM1"
             android:textColor="@drawable/selector_item_filter_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_main_purpose_health_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_main_purpose_type_title"
             tools:text="아토피 , 알레르기 , 암 , 당뇨 , 소화문제" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -6,7 +6,7 @@ import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.domain.model.Profile
 import com.sopt.geonppang.domain.repository.MyPageRepository
-import com.sopt.geonppang.presentation.type.MainPurposeType
+import com.sopt.geonppang.presentation.type.MainPurposeFilterType
 import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -67,9 +67,9 @@ class MyPageViewModel @Inject constructor(
 
     fun setMainPurposeTitle(): Int? {
         return when (profileInfo.value?.mainPurpose) {
-            MainPurposeType.DIET.name -> MainPurposeType.DIET.titleRes
-            MainPurposeType.HEALTH.name -> MainPurposeType.HEALTH.titleRes
-            MainPurposeType.VEGAN.name -> MainPurposeType.VEGAN.titleRes
+            MainPurposeFilterType.DIET.name -> MainPurposeFilterType.DIET.titleRes
+            MainPurposeFilterType.HEALTH.name -> MainPurposeFilterType.HEALTH.titleRes
+            MainPurposeFilterType.VEGAN.name -> MainPurposeFilterType.VEGAN.titleRes
             else -> null
         }
     }

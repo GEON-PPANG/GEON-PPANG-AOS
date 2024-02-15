@@ -8,8 +8,9 @@ import com.sopt.geonppang.domain.repository.FilterSettingRepository
 import com.sopt.geonppang.presentation.model.AmplitudeFilterSettingInfo
 import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.presentation.type.FilterInfoType
-import com.sopt.geonppang.presentation.type.MainPurposeType
+import com.sopt.geonppang.presentation.type.MainPurposeFilterType
 import com.sopt.geonppang.presentation.type.NutrientFilterType
+import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +24,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FilterSettingViewModel @Inject constructor(
-    gpDataSource: GPDataSource,
+    private val gpDataSource: GPDataSource,
     private val filterRepository: FilterSettingRepository
 ) : ViewModel() {
     private val _selectedFilterState =
@@ -33,33 +34,21 @@ class FilterSettingViewModel @Inject constructor(
     val previousActivity get() = _previousActivity.asStateFlow()
     private val _currentPage = MutableStateFlow<Int?>(null)
     val currentPage get() = _currentPage.asStateFlow()
-    private val _mainPurposeType = MutableStateFlow<MainPurposeType?>(null)
+    private val _mainPurposeType = MutableStateFlow<MainPurposeFilterType?>(null)
     val mainPurposeType get() = _mainPurposeType.asStateFlow()
-    val breadFilterType: MutableStateFlow<Map<BreadFilterType, Boolean>> = MutableStateFlow(
-        mapOf(
-            BreadFilterType.GLUTENFREE to false,
-            BreadFilterType.VEGAN to false,
-            BreadFilterType.NUTFREE to false,
-            BreadFilterType.SUGARFREE to false
-        )
-    )
-    val nutrientFilterType: MutableStateFlow<Map<NutrientFilterType, Boolean>> = MutableStateFlow(
-        mapOf(
-            NutrientFilterType.NUTRIENT to false,
-            NutrientFilterType.INGREDIENT to false,
-            NutrientFilterType.NOT to false
-        )
-    )
+    val breadFilterTypeList: MutableStateFlow<List<Int>> = MutableStateFlow(emptyList())
+    private val _nutrientFilterType = MutableStateFlow<NutrientFilterType?>(null)
+    val nutrientFilterType get() = _nutrientFilterType.asStateFlow()
     val isFilterBtnEnabled: StateFlow<Boolean> = combine(
         currentPage,
         mainPurposeType,
-        breadFilterType,
+        breadFilterTypeList,
         nutrientFilterType
     ) { currentPage, mainPurposeType, breadFilterType, nutrientFilterType ->
         when (currentPage) {
             0 -> mainPurposeType != null
-            1 -> breadFilterType.any { it.value }
-            2 -> nutrientFilterType.any { it.value }
+            1 -> breadFilterType.isNotEmpty()
+            2 -> nutrientFilterType != null
             else -> false
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
@@ -74,53 +63,48 @@ class FilterSettingViewModel @Inject constructor(
         _currentPage.value = position
     }
 
-    fun setMainPurposeType(mainPurposeType: MainPurposeType) {
+    fun setMainPurposeType(mainPurposeType: MainPurposeFilterType) {
         _mainPurposeType.value = mainPurposeType
     }
 
     fun setBreadFilterType(breadType: BreadFilterType) {
-        val isSelected = breadFilterType.value[breadType] ?: return
-        breadFilterType.value = breadFilterType.value.toMutableMap().apply {
-            this[breadType] = !isSelected
+        breadFilterTypeList.value = breadFilterTypeList.value.toMutableList().apply {
+            if (!remove(breadType.id)) add(breadType.id)
+            sort()
         }
     }
 
     fun setNutrientFilterType(nutrientType: NutrientFilterType) {
-        val isSelected = nutrientFilterType.value[nutrientType] ?: return
-        nutrientFilterType.value = nutrientFilterType.value.toMutableMap().apply {
-            this[nutrientType] = !isSelected
-        }
+        _nutrientFilterType.value = nutrientType
     }
 
     fun setUserFilter() {
         viewModelScope.launch {
-            _mainPurposeType.value?.let {
-                RequestSettingFilter(
-                    it.name,
-                    RequestSettingFilter.BreadType(
-                        breadFilterType.value[BreadFilterType.GLUTENFREE] == true,
-                        breadFilterType.value[BreadFilterType.VEGAN] == true,
-                        breadFilterType.value[BreadFilterType.NUTFREE] == true,
-                        breadFilterType.value[BreadFilterType.SUGARFREE] == true,
-                    ),
-                    RequestSettingFilter.NutrientType(
-                        nutrientFilterType.value[NutrientFilterType.NUTRIENT] == true,
-                        nutrientFilterType.value[NutrientFilterType.INGREDIENT] == true,
-                        nutrientFilterType.value[NutrientFilterType.NOT] == true,
+            _mainPurposeType.value?.let { mainPurposeFilterType ->
+                _nutrientFilterType.value?.let { nutrientFilterType ->
+                    RequestSettingFilter(
+                        mainPurpose = mainPurposeFilterType.name,
+                        breadTypeList = breadFilterTypeList.value,
+                        nutrientTypeList = listOf(nutrientFilterType.id)
                     )
-                )
-            }?.let {
-                filterRepository.setUserFilter(
-                    it
-                )
+                }
+            }?.let { requestSettingFilter ->
+                filterRepository.setUserFilter(requestSettingFilter)
                     .onSuccess {
                         _selectedFilterState.value = UiState.Success(
                             AmplitudeFilterSettingInfo(
                                 mainPurposeType = _mainPurposeType.value,
-                                breadType = breadFilterType.value,
-                                ingredientType = nutrientFilterType.value,
+                                breadType = breadFilterTypeList.value.mapNotNull { breadFilterTypeId ->
+                                    BreadFilterType.values()
+                                        .find { it.id == breadFilterTypeId }?.name
+                                },
+                                ingredientType = _nutrientFilterType.value,
                             )
                         )
+
+                        // 필터를 설정할 때, userRoleType을 selectedMember로 설정 하기
+                        // TODO: dana filter 설정할 때마다 재설정하는게 맞는가,,
+                        gpDataSource.userRoleType = UserRoleType.FILTER_SELECTED_MEMBER.name
                     }
                     .onFailure { throwable ->
                         _selectedFilterState.value = UiState.Error(throwable.message)
