@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="loginNeedType"
+            type="com.sopt.geonppang.presentation.type.LoginNeededType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,13 +53,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing16"
-            android:text="@string/login_needed_phrase"
+            android:text="@{loginNeedType.titleRes}"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Title2"
             android:textColor="@color/gray_500"
             app:layout_constraintEnd_toStartOf="@+id/gl_end"
             app:layout_constraintStart_toStartOf="@+id/gl_start"
-            app:layout_constraintTop_toBottomOf="@id/iv_login_needed" />
+            app:layout_constraintTop_toBottomOf="@id/iv_login_needed"
+            tools:text="@string/login_needed_phrase" />
 
         <LinearLayout
             android:id="@+id/layout_login_needed"
