@@ -17,5 +17,8 @@ enum class LoginNeededType(
     ),
     LOGIN_NEEDED_WRITE_REVIEW(
         R.string.login_needed_phrase_bakery_write_review
+    ),
+    LOGIN_NEEDED_MY_PAGE(
+        R.string.login_needed_phrase_bakery_write_review
     )
 }

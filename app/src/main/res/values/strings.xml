@@ -22,6 +22,7 @@
     <string name="login_needed_phrase_bakery_report_review">리뷰를 신고하려면</string>
     <string name="login_needed_phrase_bakery_write_review">리뷰를 작성하려면</string>
     <string name="login_needed_phrase_bakery_bookmark">건빵집을 저장하려면</string>
+    <string name="login_needed_phrase_my_page">별사탕님의 페이지를 만들려면</string>
 
     <!--signup-->
     <string name="tv_signup_notice_phrase">회원가입을 위한\n정보를 알려주세요!</string>
