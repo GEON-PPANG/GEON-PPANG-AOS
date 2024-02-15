@@ -12,11 +12,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.ActivityDetailBinding
+import com.sopt.geonppang.presentation.common.LoginNeededDialog
 import com.sopt.geonppang.presentation.common.WebViewActivity
 import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
 import com.sopt.geonppang.presentation.report.ReportActivity
 import com.sopt.geonppang.presentation.reviewWriting.ReviewWritingActivity
+import com.sopt.geonppang.presentation.type.LoginNeededType
+import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.ChipFactory
 import com.sopt.geonppang.util.CustomSnackbar
@@ -37,6 +41,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     private lateinit var detailReviewAdapter: DetailReviewAdapter
     private lateinit var detailNoReviewAdapter: DetailNoReviewAdapter
     private lateinit var concatAdapter: ConcatAdapter
+    private lateinit var gpDataSource: GPDataSource
     private var bakeryId = -1
 
     private val String.toChip: Chip
@@ -62,7 +67,8 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         detailBakeryInfoAdapter = DetailBakeryInfoAdapter(::moveToWebPage)
         detailMenuAdapter = DetailMenuAdapter()
         detailReviewGraphAdapter = DetailReviewGraphAdapter()
-        detailReviewAdapter = DetailReviewAdapter(::initChip, ::moveToReport)
+        detailReviewAdapter =
+            DetailReviewAdapter(::initChip, ::moveToReport, ::showLoginNeedDialogReportReview)
         detailNoReviewAdapter = DetailNoReviewAdapter()
 
         concatAdapter = ConcatAdapter(
@@ -81,7 +87,11 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
         binding.btnDetailCrateReview.setOnClickListener {
             AmplitudeUtils.trackEvent(START_REVIEW_WRITING)
-            moveToReviewWriting(bakeryId, viewModel.getBakeryInfoForReview())
+            gpDataSource = GPDataSource(it.context)
+            if (gpDataSource.userRoleType == UserRoleType.NONE_MEMBER.name) {
+                showLoginNeedDialogWriteReview()
+            } else
+                moveToReviewWriting(bakeryId, viewModel.getBakeryInfoForReview())
         }
 
         binding.fabDetail.setOnClickListener {
@@ -96,10 +106,35 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }
 
         binding.ivDetailBottomAppBarBookmark.setOnSingleClickListener {
+            gpDataSource = GPDataSource(it.context)
+            if (gpDataSource.userRoleType == UserRoleType.NONE_MEMBER.name) {
+                showLoginNeedDialogBookmark()
+            }
             viewModel.bakeryInfo.value?.isBooked?.let { isBookMarked ->
                 viewModel.doBookMark(bakeryId, !isBookMarked)
             }
         }
+    }
+
+    private fun showLoginNeedDialogBookmark() {
+        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_BOOKMARK).show(
+            supportFragmentManager,
+            "loginNeededDialog"
+        )
+    }
+
+    private fun showLoginNeedDialogWriteReview() {
+        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_WRITE_REVIEW).show(
+            supportFragmentManager,
+            "loginNeededDialog"
+        )
+    }
+
+    private fun showLoginNeedDialogReportReview() {
+        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_REPORT_REVIEW).show(
+            supportFragmentManager,
+            "loginNeededDialog"
+        )
     }
 
     private fun collectData() {
