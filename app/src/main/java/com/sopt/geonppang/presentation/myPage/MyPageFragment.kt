@@ -44,7 +44,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun addListeners() {
-        //TODO 주영 - 비회원인 경우 마이페이지 요소를 누른다면 모두 dialog 띄움
+        // TODO 주영 - 비회원인 경우 마이페이지 요소를 누른다면 모두 dialog 띄움
         binding.layoutMyPageBookmark.setOnSingleClickListener {
             AmplitudeUtils.trackEvent(CLICK_MY_STORE)
             moveToStoreBakeryList()

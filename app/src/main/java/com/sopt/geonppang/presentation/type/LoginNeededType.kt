@@ -3,9 +3,9 @@ package com.sopt.geonppang.presentation.type
 import androidx.annotation.StringRes
 import com.sopt.geonppang.R
 
-enum class LoginNeededType (
+enum class LoginNeededType(
     @StringRes val titleRes: Int,
-){
+) {
     LOGIN_NEEDED_FILTER(
         R.string.login_needed_phrase
     ),

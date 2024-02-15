@@ -62,7 +62,7 @@ class BakeryListFragment :
             moveToSearch()
         }
 
-        //TODO 주영 - 비회원이 필터 선택하는 경우 로그인 유도 필터 띄우기
+        // TODO 주영 - 비회원이 필터 선택하는 경우 로그인 유도 필터 띄우기
         binding.ivBakeryListFilter.setOnClickListener {
             AmplitudeUtils.trackEvent(START_FILTER_LIST)
             moveToFilter()
