@@ -22,6 +22,7 @@ import com.sopt.geonppang.presentation.type.LoginNeededType
 import com.sopt.geonppang.presentation.type.PlatformType
 import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.AmplitudeUtils
+import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingBottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -87,6 +88,16 @@ class LoginNeededDialog(
                     } else
                         gpDataSource.userRoleType = UserRoleType.FILTER_UNSELECTED_MEMBER.name
                     moveToMain()
+                }
+
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
+
+        authViewModel.signUpState.flowWithLifecycle(lifecycle).onEach { signUpState ->
+            when (signUpState) {
+                is UiState.Success -> {
+                    authViewModel.setAutoLogin()
                 }
 
                 else -> {}
