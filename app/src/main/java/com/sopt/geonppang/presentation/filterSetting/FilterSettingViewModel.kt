@@ -30,6 +30,8 @@ class FilterSettingViewModel @Inject constructor(
     private val _selectedFilterState =
         MutableStateFlow<UiState<AmplitudeFilterSettingInfo>>(UiState.Loading)
     val selectedFilterState get() = _selectedFilterState.asStateFlow()
+    private val _filterStatus = MutableStateFlow<Boolean?>(null)
+    val filterStatus get() = _filterStatus.asStateFlow()
     private val _previousActivity = MutableStateFlow<FilterInfoType?>(null)
     val previousActivity get() = _previousActivity.asStateFlow()
     private val _currentPage = MutableStateFlow<Int?>(null)
@@ -105,6 +107,7 @@ class FilterSettingViewModel @Inject constructor(
                         // 필터를 설정할 때, userRoleType을 selectedMember로 설정 하기
                         // TODO: dana filter 설정할 때마다 재설정하는게 맞는가,,
                         gpDataSource.userRoleType = UserRoleType.FILTER_SELECTED_MEMBER.name
+                        _filterStatus.value = true
                     }
                     .onFailure { throwable ->
                         _selectedFilterState.value = UiState.Error(throwable.message)
