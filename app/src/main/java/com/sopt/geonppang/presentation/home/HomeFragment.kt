@@ -7,13 +7,16 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.FragmentHomeBinding
+import com.sopt.geonppang.presentation.common.LoginNeededDialog
 import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETAIL_PAGE_AT
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.search.SearchActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.presentation.type.LoginNeededType
 import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
@@ -29,6 +32,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private lateinit var bestBakeryAdapter: BestBakeryAdapter
     private lateinit var bestReviewAdapter: BestReviewAdapter
+    private lateinit var gpDataSource: GPDataSource
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,12 +60,23 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
         binding.ivHomeFilter.setOnClickListener {
             AmplitudeUtils.trackEvent(START_FILTER_HOME)
-            moveToFilter()
+            gpDataSource = GPDataSource(it.context)
+            if (gpDataSource.userRoleType == UserRoleType.NONE_MEMBER.name) {
+                showLoginNeedDialog()
+            } else
+                moveToFilter()
         }
 
         binding.includeHomeSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
             binding.includeHomeSpeechBubble.root.setVisibility(false)
         }
+    }
+
+    private fun showLoginNeedDialog() {
+        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_FILTER).show(
+            parentFragmentManager,
+            "loginNeededDialog"
+        )
     }
 
     private fun collectData() {
