@@ -52,7 +52,7 @@
             android:id="@+id/tv_login_needed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing16"
+            android:layout_marginTop="@dimen/spacing24"
             android:text="@{loginNeedType.titleRes}"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Title2"
@@ -62,32 +62,33 @@
             app:layout_constraintTop_toBottomOf="@id/iv_login_needed"
             tools:text="@string/login_needed_phrase" />
 
-        <LinearLayout
-            android:id="@+id/layout_login_needed"
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/login_text_phrase"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Title2"
+            android:textColor="@color/main_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_need"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_login_needed" />
+
+        <TextView
+            android:id="@+id/tv_need"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/login_need"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Title2"
+            android:textColor="@color/gray_500"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
-            app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@id/tv_login_needed">
+            app:layout_constraintStart_toEndOf="@+id/tv_login"
+            app:layout_constraintTop_toBottomOf="@id/tv_login_needed" />
 
-            <TextView
-                android:id="@+id/tv_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login_text_phrase"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.Title2"
-                android:textColor="@color/main_2" />
-
-            <TextView
-                android:id="@+id/tv_need"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login_need"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.Title2"
-                android:textColor="@color/gray_500" />
-        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_start_kakao"
@@ -102,9 +103,9 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Headline"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_login_needed" />
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_need" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -119,7 +120,7 @@
             android:id="@+id/layout_start_with_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="18dp"
             android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/btn_start_kakao"
