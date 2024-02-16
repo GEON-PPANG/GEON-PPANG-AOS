@@ -7,7 +7,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.FragmentBakeryListBinding
+import com.sopt.geonppang.presentation.common.LoginNeededDialog
 import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETAIL_PAGE_AT
@@ -15,6 +17,8 @@ import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.search.SearchActivity
 import com.sopt.geonppang.presentation.type.BakerySortType
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.presentation.type.LoginNeededType
+import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.CustomItemDecoration
 import com.sopt.geonppang.util.UiState
@@ -32,6 +36,7 @@ class BakeryListFragment :
     private val viewModel: BakeryListViewModel by viewModels()
 
     private lateinit var bakeryAdapter: BakeryListAdapter
+    private lateinit var gpDataSource: GPDataSource
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,13 +49,16 @@ class BakeryListFragment :
     }
 
     private fun initLayout() {
-        viewModel.getUserFilter()
+        gpDataSource = GPDataSource(requireContext())
+        if (gpDataSource.userRoleType != UserRoleType.NONE_MEMBER.name)
+            viewModel.getUserFilter()
         bakeryAdapter = BakeryListAdapter(::moveToDetail)
         binding.rvBakeryList.apply {
             adapter = bakeryAdapter
             addItemDecoration(CustomItemDecoration(requireContext()))
         }
     }
+
 
     private fun addListeners() {
         binding.layoutBakeryListSortFilter.setOnClickListener {
@@ -62,10 +70,13 @@ class BakeryListFragment :
             moveToSearch()
         }
 
-        // TODO 주영 - 비회원이 필터 선택하는 경우 로그인 유도 필터 띄우기
         binding.ivBakeryListFilter.setOnClickListener {
             AmplitudeUtils.trackEvent(START_FILTER_LIST)
-            moveToFilter()
+            gpDataSource = GPDataSource(requireContext())
+            if (gpDataSource.userRoleType == UserRoleType.NONE_MEMBER.name)
+                showLoginNeedDialog()
+            else
+                moveToFilter()
         }
         binding.includeHomeSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
             binding.includeHomeSpeechBubble.root.visibility = View.INVISIBLE
@@ -141,6 +152,13 @@ class BakeryListFragment :
         }
         bakeryListSortBottomSheetDialog.setDataListener(this)
         bakeryListSortBottomSheetDialog.show(parentFragmentManager, "bakeryListSortDialog")
+    }
+
+    private fun showLoginNeedDialog() {
+        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_FILTER).show(
+            parentFragmentManager,
+            "bakeryListLoginNeedDialog"
+        )
     }
 
     // BakeryListDialog에서 부터 받아온 데이터를 처리

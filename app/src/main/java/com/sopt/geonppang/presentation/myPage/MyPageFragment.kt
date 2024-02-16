@@ -9,10 +9,14 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.BuildConfig
 import com.sopt.geonppang.R
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.FragmentMyPageBinding
+import com.sopt.geonppang.presentation.common.LoginNeededDialog
 import com.sopt.geonppang.presentation.common.WebViewActivity
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.presentation.type.LoginNeededType
+import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingFragment
 import com.sopt.geonppang.util.extension.setOnSingleClickListener
@@ -25,6 +29,7 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     private val viewModel by viewModels<MyPageViewModel>()
+    private lateinit var gpDataSource: GPDataSource
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,34 +43,52 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun initLayout() {
-        viewModel.fetchProfileInfo()
+        if (!getUserRole())
+            viewModel.fetchProfileInfo()
         binding.includeMyPageSpeechBubble.ivSpeechBubble.setBackgroundResource(R.drawable.background_left_speech_bubble)
         binding.tvMyPageAppVersion.text = getString(R.string.tv_my_page_app_version, APP_VERSION)
     }
 
+    // 이렇게 함수를 만들어서 매번 호출하는게 좋은 것인지
+    // BakeryListFragment 처럼 버튼을 누를 때마다 해당 뷰의 context를 전달하는게 맞는지 고민
+    private fun getUserRole(): Boolean {
+        gpDataSource = GPDataSource(requireContext())
+        return gpDataSource.userRoleType == UserRoleType.NONE_MEMBER.name
+    }
+
     private fun addListeners() {
-        // TODO 주영 - 비회원인 경우 마이페이지 요소를 누른다면 모두 dialog 띄움
         binding.layoutMyPageBookmark.setOnSingleClickListener {
             AmplitudeUtils.trackEvent(CLICK_MY_STORE)
-            moveToStoreBakeryList()
+            if (getUserRole())
+                showLoginNeedDialog()
+            else
+                moveToStoreBakeryList()
         }
 
         binding.layoutMyPageReview.setOnSingleClickListener {
             AmplitudeUtils.trackEvent(CLICK_MY_REVIEW)
-            moveToMyReview()
+            if (getUserRole())
+                showLoginNeedDialog()
+            else moveToMyReview()
         }
 
         binding.ivMyPageProfileRightArrow.setOnClickListener {
             AmplitudeUtils.trackEvent(START_FILTER_MY)
-            moveToFilter()
+            if (getUserRole())
+                showLoginNeedDialog()
+            else moveToFilter()
         }
 
         binding.tvMyPageLogout.setOnClickListener {
-            showLogoutDialog()
+            if (getUserRole())
+                showLoginNeedDialog()
+            else showLogoutDialog()
         }
 
         binding.tvMyPageWithdraw.setOnClickListener {
-            showWithdrawDialog()
+            if (getUserRole())
+                showLoginNeedDialog()
+            else showWithdrawDialog()
         }
 
         binding.includeMyPageSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
@@ -73,11 +96,15 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         }
 
         binding.tvMyPageTermsOfUse.setOnClickListener {
-            moveToWebPage(TERMS_OF_USE)
+            if (getUserRole())
+                showLoginNeedDialog()
+            else moveToWebPage(TERMS_OF_USE)
         }
 
         binding.tvMyPageInquiry.setOnClickListener {
-            moveToWebBrowser(INQUIRY)
+            if (getUserRole())
+                showLoginNeedDialog()
+            else moveToWebBrowser(INQUIRY)
         }
     }
 
@@ -126,6 +153,13 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun showWithdrawDialog() {
         WithdrawDialog().show(childFragmentManager, DIALOG)
+    }
+
+    private fun showLoginNeedDialog() {
+        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_MY_PAGE).show(
+            parentFragmentManager,
+            "myPageLoginNeedDialog"
+        )
     }
 
     companion object {

@@ -80,6 +80,11 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         binding.rvDetail.adapter = concatAdapter
     }
 
+    private fun getUserRole(): Boolean {
+        gpDataSource = GPDataSource(this)
+        return gpDataSource.userRoleType == UserRoleType.NONE_MEMBER.name
+    }
+
     private fun addListeners() {
         binding.ivDetailArrowLeft.setOnClickListener {
             finish()
