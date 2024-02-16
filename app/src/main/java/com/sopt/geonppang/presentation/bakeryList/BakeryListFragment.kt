@@ -59,7 +59,6 @@ class BakeryListFragment :
         }
     }
 
-
     private fun addListeners() {
         binding.layoutBakeryListSortFilter.setOnClickListener {
             showBakeryListSortDialog()
