@@ -50,6 +50,10 @@ class LoginNeededDialog(
         collectData()
     }
 
+    private fun initLayout() {
+        binding.loginNeedType = loginNeededType
+    }
+
     private fun addListener() {
         binding.ivDismiss.setOnClickListener { dismiss() }
 
@@ -64,10 +68,6 @@ class LoginNeededDialog(
         binding.tvLoginWithEmail.setOnClickListener {
             moveToLogIn()
         }
-    }
-
-    private fun initLayout() {
-        binding.loginNeedType = loginNeededType
     }
 
     private fun collectData() {

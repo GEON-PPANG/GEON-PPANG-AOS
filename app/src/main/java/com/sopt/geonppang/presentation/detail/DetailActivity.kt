@@ -116,27 +116,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }
     }
 
-    private fun showLoginNeedDialogBookmark() {
-        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_BOOKMARK).show(
-            supportFragmentManager,
-            "loginNeededDialog"
-        )
-    }
-
-    private fun showLoginNeedDialogWriteReview() {
-        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_WRITE_REVIEW).show(
-            supportFragmentManager,
-            "loginNeededDialog"
-        )
-    }
-
-    private fun showLoginNeedDialogReportReview() {
-        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_REPORT_REVIEW).show(
-            supportFragmentManager,
-            "loginNeededDialog"
-        )
-    }
-
     private fun collectData() {
         viewModel.bakeryInfo.flowWithLifecycle(lifecycle).onEach {
             it?.let { bakeryInfo ->
@@ -224,6 +203,27 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         intent.putExtra(BAKERY_INFO, bakeryInfo)
         startActivity(intent)
         finish()
+    }
+
+    private fun showLoginNeedDialogBookmark() {
+        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_BOOKMARK).show(
+            supportFragmentManager,
+            "loginNeededDialog"
+        )
+    }
+
+    private fun showLoginNeedDialogWriteReview() {
+        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_WRITE_REVIEW).show(
+            supportFragmentManager,
+            "loginNeededDialog"
+        )
+    }
+
+    private fun showLoginNeedDialogReportReview() {
+        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_REPORT_REVIEW).show(
+            supportFragmentManager,
+            "loginNeededDialog"
+        )
     }
 
     companion object {

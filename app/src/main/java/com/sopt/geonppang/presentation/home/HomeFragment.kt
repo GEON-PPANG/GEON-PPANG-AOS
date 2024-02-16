@@ -61,22 +61,15 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         binding.ivHomeFilter.setOnClickListener {
             AmplitudeUtils.trackEvent(START_FILTER_HOME)
             gpDataSource = GPDataSource(it.context)
-            if (gpDataSource.userRoleType == UserRoleType.NONE_MEMBER.name) {
+            if (gpDataSource.userRoleType == UserRoleType.NONE_MEMBER.name)
                 showLoginNeedDialog()
-            } else
+            else
                 moveToFilter()
         }
 
         binding.includeHomeSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
             binding.includeHomeSpeechBubble.root.setVisibility(false)
         }
-    }
-
-    private fun showLoginNeedDialog() {
-        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_FILTER).show(
-            parentFragmentManager,
-            "loginNeededDialog"
-        )
     }
 
     private fun collectData() {
@@ -139,6 +132,13 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
         intent.putExtra(FILTER_INFO, FilterInfoType.HOME.name)
         startActivity(intent)
+    }
+
+    private fun showLoginNeedDialog() {
+        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_FILTER).show(
+            parentFragmentManager,
+            "loginNeededDialog"
+        )
     }
 
     companion object {
