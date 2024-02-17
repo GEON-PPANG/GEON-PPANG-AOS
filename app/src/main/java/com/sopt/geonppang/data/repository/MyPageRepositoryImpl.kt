@@ -2,6 +2,7 @@ package com.sopt.geonppang.data.repository
 
 import com.sopt.geonppang.data.datasource.remote.MyPageDataSource
 import com.sopt.geonppang.domain.model.Bakery
+import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.domain.model.Profile
 import com.sopt.geonppang.domain.repository.MyPageRepository
@@ -14,7 +15,7 @@ class MyPageRepositoryImpl @Inject constructor(
         mypageDataSource.fetchMyPageInfo().toMypageInfo()
     }
 
-    override suspend fun fetchMyBookmark(): Result<List<Bakery>> = runCatching {
+    override suspend fun fetchMyBookmark(): Result<List<BakeryInformation>> = runCatching {
         mypageDataSource.fetchMyBookmarkList().toMypageBookmark()
     }
 
