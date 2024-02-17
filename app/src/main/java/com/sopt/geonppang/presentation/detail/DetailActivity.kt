@@ -13,16 +13,22 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityDetailBinding
+import com.sopt.geonppang.domain.model.BakeryInfo
+import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.presentation.common.WebViewActivity
 import com.sopt.geonppang.presentation.model.BakeryReviewWritingInfo
 import com.sopt.geonppang.presentation.report.ReportActivity
 import com.sopt.geonppang.presentation.reviewWriting.ReviewWritingActivity
+import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.ChipFactory
 import com.sopt.geonppang.util.CustomSnackbar
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
+import com.sopt.geonppang.util.extension.breadTypeListToChips
 import com.sopt.geonppang.util.extension.setOnSingleClickListener
+import com.sopt.geonppang.util.extension.toBreadTypePointM1Chip
+import com.sopt.geonppang.util.extension.toReviewRecommendedKeyWordChip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -38,11 +44,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     private lateinit var detailNoReviewAdapter: DetailNoReviewAdapter
     private lateinit var concatAdapter: ConcatAdapter
     private var bakeryId = -1
-
-    private val String.toChip: Chip
-        get() = ChipFactory.create(layoutInflater).also {
-            it.text = this
-        }
+    lateinit var breadTypeList: List<BreadFilterType>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,10 +61,10 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     private fun initLayout() {
         viewModel.fetchDetailReview(bakeryId)
 
-        detailBakeryInfoAdapter = DetailBakeryInfoAdapter(::moveToWebPage)
+        detailBakeryInfoAdapter = DetailBakeryInfoAdapter(::moveToWebPage, ::initBreadTypeChips)
         detailMenuAdapter = DetailMenuAdapter()
         detailReviewGraphAdapter = DetailReviewGraphAdapter()
-        detailReviewAdapter = DetailReviewAdapter(::initChip, ::moveToReport)
+        detailReviewAdapter = DetailReviewAdapter(::initRecommendKeyWordChip, ::moveToReport)
         detailNoReviewAdapter = DetailNoReviewAdapter()
 
         concatAdapter = ConcatAdapter(
@@ -103,10 +105,13 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun collectData() {
-        viewModel.bakeryInfo.flowWithLifecycle(lifecycle).onEach {
+        viewModel.bakeryInfo.flowWithLifecycle(lifecycle).onEach { it ->
             it?.let { bakeryInfo ->
                 detailBakeryInfoAdapter.setBakeryInfo(bakeryInfo)
                 detailMenuAdapter.submitList(bakeryInfo.menuList)
+                breadTypeList = bakeryInfo.breadTypeIdList
+
+
             }
         }.launchIn(lifecycleScope)
 
@@ -152,13 +157,26 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }.launchIn(lifecycleScope)
     }
 
-    private fun initChip(chipGroup: ChipGroup, position: Int) {
+    private fun initRecommendKeyWordChip(chipGroup: ChipGroup, position: Int) {
         viewModel.reviewData.value?.detailReviewList?.get(position)?.recommendKeywordList?.let { recommendKeywordList ->
             for (recommendKeyword in recommendKeywordList) {
                 chipGroup.addView(
-                    recommendKeyword.recommendKeywordName.toChip
+                    recommendKeyword.recommendKeywordName.toReviewRecommendedKeyWordChip(
+                        layoutInflater
+                    )
                 )
             }
+        }
+    }
+
+    private fun initBreadTypeChips(chipGroup: ChipGroup) {
+        if (breadTypeList.isNotEmpty()) {
+            chipGroup.breadTypeListToChips(
+                breadTypeList = breadTypeList,
+                toChip = {
+                    this.toBreadTypePointM1Chip(layoutInflater)
+                }
+            )
         }
     }
 

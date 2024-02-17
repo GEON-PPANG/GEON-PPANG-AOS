@@ -14,8 +14,10 @@ import com.sopt.geonppang.presentation.type.LikeType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
+import com.sopt.geonppang.util.extension.breadTypeListToChips
 import com.sopt.geonppang.util.extension.hideKeyboard
 import com.sopt.geonppang.util.extension.setOnSingleClickListener
+import com.sopt.geonppang.util.extension.toBreadTypePointM2Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -41,7 +43,17 @@ class ReviewWritingActivity :
     private fun initLayout() {
         val bakeryReviewWritingInfo =
             intent.getParcelableExtra<BakeryReviewWritingInfo>(BAKERY_INFO)
-        bakeryReviewWritingInfo?.let { viewModel.setBakeryInfo(it) }
+        bakeryReviewWritingInfo?.let { bakeryInfo ->
+            viewModel.setBakeryInfo(bakeryInfo)
+
+            binding.cgBakeryBreadTypes
+                .breadTypeListToChips(
+                    breadTypeList = bakeryInfo.breadTypeList,
+                    toChip = {
+                        this.toBreadTypePointM2Chip(layoutInflater)
+                    }
+                )
+        }
     }
 
     private fun addListeners() {
