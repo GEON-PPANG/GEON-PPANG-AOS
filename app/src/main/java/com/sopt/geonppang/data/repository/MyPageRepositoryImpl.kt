@@ -1,7 +1,6 @@
 package com.sopt.geonppang.data.repository
 
 import com.sopt.geonppang.data.datasource.remote.MyPageDataSource
-import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.domain.model.Profile
