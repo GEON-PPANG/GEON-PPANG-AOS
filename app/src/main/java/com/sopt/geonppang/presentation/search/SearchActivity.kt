@@ -8,8 +8,10 @@ import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
+import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySearchBinding
+import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.presentation.common.BakeryAdapter
 import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
@@ -18,7 +20,9 @@ import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.CustomItemDecoration
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
+import com.sopt.geonppang.util.extension.breadTypeListToChips
 import com.sopt.geonppang.util.extension.hideKeyboard
+import com.sopt.geonppang.util.extension.toBreadTypePointM2Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -29,6 +33,8 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
 
     private lateinit var bakeryAdapter: BakeryAdapter
     private lateinit var searchCountAdapter: SearchCountAdapter
+
+    private var bakeryInformationList = listOf<BakeryInformation>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +48,7 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
 
     private fun initLayout() {
         searchCountAdapter = SearchCountAdapter()
-        bakeryAdapter = BakeryAdapter(::moveToDetail)
+        bakeryAdapter = BakeryAdapter(::moveToDetail, ::initBreadTypeChips)
         binding.rvSearchBakeryList.apply {
             adapter = ConcatAdapter(searchCountAdapter, bakeryAdapter)
             addItemDecoration(
@@ -80,6 +86,8 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
                     completeFilteringInParticularView()
                     viewModel.searchBakeryList()
                     searchCountAdapter.setSearchData(it.data)
+
+                    bakeryInformationList = it.data.bakeryList
                     bakeryAdapter.submitList(it.data.bakeryList)
                 }
 
@@ -119,6 +127,19 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         hideKeyboard(binding.root)
         return super.dispatchTouchEvent(ev)
+    }
+
+    private fun initBreadTypeChips(chipGroup: ChipGroup, position: Int) {
+        if (bakeryInformationList.isNotEmpty()) {
+            bakeryInformationList.get(position).breadTypeList.let { breadTypeIdList ->
+                chipGroup.breadTypeListToChips(
+                    breadTypeList = breadTypeIdList,
+                    toChip = {
+                        this.toBreadTypePointM2Chip(layoutInflater)
+                    }
+                )
+            }
+        }
     }
 
     companion object {
