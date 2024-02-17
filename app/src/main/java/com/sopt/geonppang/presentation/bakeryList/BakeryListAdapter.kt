@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ItemBakeryBinding
-import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.util.extension.loadingImage
 import com.sopt.geonppang.util.extension.setOnSingleClickListener

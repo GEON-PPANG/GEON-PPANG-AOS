@@ -13,7 +13,6 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.util.ChipFactory
 
-
 fun String.toBreadTypeGrayChip(layoutInflater: LayoutInflater): Chip {
     return ChipFactory.create(layoutInflater, R.layout.view_bread_type_chip_gray)
 }
