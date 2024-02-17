@@ -4,9 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <import type="com.sopt.geonppang.presentation.type.BreadFilterType" />
-
         <variable
             name="viewModel"
             type="com.sopt.geonppang.presentation.myReviewDetail.MyReviewDetailViewModel" />
@@ -34,7 +31,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_scroll_view_constraint"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gl_start"
@@ -95,7 +92,7 @@
                         tools:text="건대 건빵집" />
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/cg_bakery_category"
+                        android:id="@+id/cg_bakery_bread_types"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp"
@@ -103,44 +100,7 @@
                         app:chipSpacingVertical="5dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@id/tv_bakery_title"
-                        app:layout_constraintTop_toBottomOf="@id/tv_bakery_title">
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M2"
-                            visibility="@{viewModel.bakeryInfo.breadType.glutenFree}"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/background_1"
-                            android:text="@{BreadFilterType.GLUTENFREE.titleRes}"
-                            tools:text="글루텐프리" />
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M2"
-                            visibility="@{viewModel.bakeryInfo.breadType.vegan}"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/background_1"
-                            android:text="@{BreadFilterType.VEGAN.titleRes}"
-                            tools:text="비건빵" />
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M2"
-                            visibility="@{viewModel.bakeryInfo.breadType.nutFree}"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/background_1"
-                            android:text="@{BreadFilterType.NUTFREE.titleRes}"
-                            tools:text="넛프리" />
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M2"
-                            visibility="@{viewModel.bakeryInfo.breadType.sugarFree}"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/background_1"
-                            android:text="@{BreadFilterType.SUGARFREE.titleRes}"
-                            tools:text="대체당" />
-                    </com.google.android.material.chip.ChipGroup>
+                        app:layout_constraintTop_toBottomOf="@id/tv_bakery_title" />
 
                     <ImageView
                         android:id="@+id/iv_bakery_map"

@@ -128,45 +128,7 @@
                     app:chipSpacingHorizontal="4dp"
                     app:layout_constraintEnd_toStartOf="@+id/iv_my_page_profile_right_arrow"
                     app:layout_constraintStart_toStartOf="@+id/tv_my_page_profile_nickname"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_profile_nickname">
-
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
-                        visibility="@{viewModel.profileInfo.breadType.glutenFree}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/background_1"
-                        android:text="@{BreadFilterType.GLUTENFREE.titleRes}"
-                        tools:text="글루텐프리" />
-
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
-                        visibility="@{viewModel.profileInfo.breadType.vegan}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/background_1"
-                        android:text="@{BreadFilterType.VEGAN.titleRes}"
-                        tools:text="비건빵" />
-
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
-                        visibility="@{viewModel.profileInfo.breadType.nutFree}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/background_1"
-                        android:text="@{BreadFilterType.NUTFREE.titleRes}"
-                        tools:text="넛프리" />
-
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Gray"
-                        visibility="@{viewModel.profileInfo.breadType.sugarFree}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/background_1"
-                        android:text="@{BreadFilterType.SUGARFREE.titleRes}"
-                        tools:text="대체당" />
-
-                </com.google.android.material.chip.ChipGroup>
+                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_profile_nickname"/>
 
                 <include
                     android:id="@+id/include_my_page_speech_bubble"
@@ -174,6 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="@+id/tv_my_page_profile_nickname"
                     app:layout_constraintTop_toBottomOf="@+id/tv_my_page_profile_nickname" />
 
