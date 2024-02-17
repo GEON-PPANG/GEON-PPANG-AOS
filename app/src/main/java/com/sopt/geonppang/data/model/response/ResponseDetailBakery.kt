@@ -1,8 +1,8 @@
 package com.sopt.geonppang.data.model.response
 
 import com.sopt.geonppang.domain.model.BakeryInfo
-import com.sopt.geonppang.domain.model.BreadType
 import com.sopt.geonppang.domain.model.Menu
+import com.sopt.geonppang.presentation.type.BreadFilterType
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -18,7 +18,7 @@ data class ResponseDetailBakery(
         val bakeryName: String,
         val bakeryPicture: String,
         val bookMarkCount: Int,
-        val breadType: BreadType,
+        val breadTypeList: List<BreadTypeIdDto>,
         val closedDay: String,
         val firstNearStation: String,
         val mapUrl: String,
@@ -34,16 +34,6 @@ data class ResponseDetailBakery(
         val reviewCount: Int,
         val secondNearStation: String,
     ) {
-        @Serializable
-        data class BreadType(
-            val breadTypeId: Int,
-            val breadTypeName: String,
-            val isGlutenFree: Boolean,
-            val isNutFree: Boolean,
-            val isSugarFree: Boolean,
-            val isVegan: Boolean
-        )
-
         @Serializable
         data class Menu(
             val menuId: Int,
@@ -78,13 +68,10 @@ data class ResponseDetailBakery(
                 menuPrice = menu.menuPrice
             )
         },
-        breadType = BreadType(
-            breadTypeId = data.breadType.breadTypeId,
-            breadTypeName = data.breadType.breadTypeName,
-            isGlutenFree = data.breadType.isGlutenFree,
-            isVegan = data.breadType.isVegan,
-            isNutFree = data.breadType.isNutFree,
-            isSugarFree = data.breadType.isSugarFree
-        )
+        breadTypeIdList = data.breadTypeList.mapNotNull { breadTypeIdDto ->
+            BreadFilterType.values().find {
+                it.id == breadTypeIdDto.breadTypeId
+            }
+        }
     )
 }

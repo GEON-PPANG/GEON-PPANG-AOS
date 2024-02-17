@@ -1,6 +1,8 @@
 package com.sopt.geonppang.data.model.response
 
 import com.sopt.geonppang.domain.model.SelectedFilter
+import com.sopt.geonppang.presentation.type.BreadFilterType
+import com.sopt.geonppang.presentation.type.NutrientFilterType
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -11,30 +13,24 @@ data class ResponseSettingFilter(
 ) {
     @Serializable
     data class Data(
-        val breadTypeList: List<BreadTypeId>,
+        val breadTypeList: List<BreadTypeIdDto>,
         val mainPurpose: String,
         val memberId: Int,
         val nickname: String,
-        val nutrientTypeList: List<NutrientTypeId>
-    )
-
-    @Serializable
-    data class BreadTypeId(
-        val breadTypeId: Int
-    )
-
-    @Serializable
-    data class NutrientTypeId(
-        val nutrientTypeId: Int
+        val nutrientTypeList: List<NutrientTypeIdDto>
     )
 
     fun toSelectedFilter() = SelectedFilter(
         mainPurpose = data.mainPurpose,
-        breadTypeList = data.breadTypeList.map { breadType -> SelectedFilter.BreadTypeId(breadTypeId = breadType.breadTypeId) },
-        nutrientTypeList = data.nutrientTypeList.map { nutrientType ->
-            SelectedFilter.NutrientTypeId(
-                nutrientTypeId = nutrientType.nutrientTypeId
-            )
+        breadTypeList = data.breadTypeList.mapNotNull { breadType ->
+            BreadFilterType.values().find {
+                it.id == breadType.breadTypeId
+            }
+        },
+        nutrientTypeList = data.nutrientTypeList.mapNotNull { nutrientTypeIdDto ->
+            NutrientFilterType.values().find {
+                it.id == nutrientTypeIdDto.nutrientTypeId
+            }
         }
     )
 }

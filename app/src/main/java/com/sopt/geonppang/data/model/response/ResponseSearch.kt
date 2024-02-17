@@ -1,8 +1,8 @@
 package com.sopt.geonppang.data.model.response
 
-import com.sopt.geonppang.domain.model.Bakery
-import com.sopt.geonppang.domain.model.BreadType
+import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.domain.model.Search
+import com.sopt.geonppang.presentation.type.BreadFilterType
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -22,29 +22,19 @@ data class ResponseSearch(
             val bakeryName: String,
             val bakeryPicture: String,
             val bookMarkCount: Int,
-            val breadType: BreadType,
+            val breadTypeList: List<BreadTypeIdDto>,
             val firstNearStation: String,
             val isHACCP: Boolean,
             val isNonGMO: Boolean,
             val isVegan: Boolean,
             val reviewCount: Int,
             val secondNearStation: String,
-        ) {
-            @Serializable
-            data class BreadType(
-                val breadTypeId: Int,
-                val breadTypeName: String,
-                val isGlutenFree: Boolean,
-                val isNutFree: Boolean,
-                val isSugarFree: Boolean,
-                val isVegan: Boolean,
-            )
-        }
+        )
 
         fun toSearch() = Search(
             resultCount = resultCount,
             bakeryList = bakeryList.map { searchBakery ->
-                Bakery(
+                BakeryInformation(
                     bakeryId = searchBakery.bakeryId,
                     bakeryName = searchBakery.bakeryName,
                     bakeryPicture = searchBakery.bakeryPicture,
@@ -54,14 +44,11 @@ data class ResponseSearch(
                     isNonGMO = searchBakery.isNonGMO,
                     isVegan = searchBakery.isVegan,
                     isHACCP = searchBakery.isHACCP,
-                    breadType = BreadType(
-                        searchBakery.breadType.breadTypeId,
-                        searchBakery.breadType.breadTypeName,
-                        searchBakery.breadType.isGlutenFree,
-                        searchBakery.breadType.isVegan,
-                        searchBakery.breadType.isNutFree,
-                        searchBakery.breadType.isSugarFree,
-                    )
+                    breadTypeList = searchBakery.breadTypeList.mapNotNull { breadTypeIdDto ->
+                        BreadFilterType.values().find {
+                            it.id == breadTypeIdDto.breadTypeId
+                        }
+                    }
                 )
             }
         )
