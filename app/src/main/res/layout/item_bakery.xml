@@ -139,8 +139,8 @@
 
         <TextView
             android:id="@+id/tv_nearest_station"
-            android:layout_width="72dp"
-            android:layout_height="17dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:text="@{bakery.secondNearStation.empty ? bakery.firstNearStation : @string/nearest_station(bakery.firstNearStation, bakery.secondNearStation)}"
             android:textAppearance="@style/TextAppearance.CaptionM1"
