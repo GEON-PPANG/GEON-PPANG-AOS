@@ -13,6 +13,7 @@ import com.sopt.geonppang.presentation.common.BakeryAdapter
 import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETAIL_PAGE_AT
+import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.CustomItemDecoration
 import com.sopt.geonppang.util.UiState
@@ -85,17 +86,16 @@ class MyBookMarksActivity :
         startActivity(intent)
     }
 
-    private fun initBreadTypeChips(chipGroup: ChipGroup, position: Int) {
-        if (myBookMarkBakeryList.isNotEmpty()) {
-            myBookMarkBakeryList.get(position).breadTypeList.let { breadTypeList ->
-                chipGroup.breadTypeListToChips(
-                    breadTypeList = breadTypeList,
-                    toChip = {
-                        this.toBreadTypePointM2Chip(layoutInflater)
-                    }
-                )
+    private fun initBreadTypeChips(
+        chipGroup: ChipGroup,
+        breadTypeList: List<BreadFilterType>
+    ) {
+        chipGroup.breadTypeListToChips(
+            breadTypeList = breadTypeList,
+            toChip = {
+                this.toBreadTypePointM2Chip(layoutInflater)
             }
-        }
+        )
     }
 
     companion object {

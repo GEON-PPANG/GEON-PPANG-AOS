@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.ConcatAdapter
 import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivitySearchBinding
-import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.presentation.common.BakeryAdapter
 import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETAIL_PAGE_AT
+import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.CustomItemDecoration
 import com.sopt.geonppang.util.UiState
@@ -33,8 +33,6 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
 
     private lateinit var bakeryAdapter: BakeryAdapter
     private lateinit var searchCountAdapter: SearchCountAdapter
-
-    private var bakeryInformationList = listOf<BakeryInformation>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,8 +84,6 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
                     completeFilteringInParticularView()
                     viewModel.searchBakeryList()
                     searchCountAdapter.setSearchData(it.data)
-
-                    bakeryInformationList = it.data.bakeryList
                     bakeryAdapter.submitList(it.data.bakeryList)
                 }
 
@@ -129,17 +125,16 @@ class SearchActivity : BindingActivity<ActivitySearchBinding>(R.layout.activity_
         return super.dispatchTouchEvent(ev)
     }
 
-    private fun initBreadTypeChips(chipGroup: ChipGroup, position: Int) {
-        if (bakeryInformationList.isNotEmpty()) {
-            bakeryInformationList.get(position).breadTypeList.let { breadTypeIdList ->
-                chipGroup.breadTypeListToChips(
-                    breadTypeList = breadTypeIdList,
-                    toChip = {
-                        this.toBreadTypePointM2Chip(layoutInflater)
-                    }
-                )
+    private fun initBreadTypeChips(
+        chipGroup: ChipGroup,
+        breadTypeList: List<BreadFilterType>
+    ) {
+        chipGroup.breadTypeListToChips(
+            breadTypeList = breadTypeList,
+            toChip = {
+                this.toBreadTypePointM2Chip(layoutInflater)
             }
-        }
+        )
     }
 
     companion object {
