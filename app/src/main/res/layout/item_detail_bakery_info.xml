@@ -228,7 +228,7 @@
 
             <TextView
                 android:id="@+id/tv_item_detail_bakery_info_homepage"
-                visibility="@{!bakeryInfo.homepageUrl.isEmpty()}"
+                visibility="@{!bakeryInfo.homepageUrl.trim().isEmpty()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -244,7 +244,7 @@
 
             <TextView
                 android:id="@+id/tv_item_detail_bakery_info_instagram"
-                visibility="@{!bakeryInfo.instagramUrl.isEmpty()}"
+                visibility="@{!bakeryInfo.instagramUrl.trim().isEmpty()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
