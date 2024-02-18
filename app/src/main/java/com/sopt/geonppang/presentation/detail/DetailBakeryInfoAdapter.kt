@@ -3,12 +3,14 @@ package com.sopt.geonppang.presentation.detail
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.databinding.ItemDetailBakeryInfoBinding
 import com.sopt.geonppang.domain.model.BakeryInfo
 import com.sopt.geonppang.util.AmplitudeUtils
 
 class DetailBakeryInfoAdapter(
-    private val moveToWebPage: (String) -> Unit
+    private val moveToWebPage: (String) -> Unit,
+    private val initBreadTypeChips: (ChipGroup) -> Unit,
 ) : RecyclerView.Adapter<DetailBakeryInfoAdapter.DetailBakeryInfoViewHolder>() {
     private val bakeryInfoList: MutableList<BakeryInfo> = mutableListOf()
 
@@ -16,10 +18,13 @@ class DetailBakeryInfoAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(
             bakeryInfo: BakeryInfo,
-            moveToWebPage: (String) -> Unit
+            moveToWebPage: (String) -> Unit,
+            initBreadTypeChips: (ChipGroup) -> Unit,
         ) {
             with(binding) {
                 binding.bakeryInfo = bakeryInfo
+
+                initBreadTypeChips(binding.chipGroupItemDetailBakeryInfoBreadType)
 
                 tvItemDetailBakeryInfoHomepage.setOnClickListener {
                     AmplitudeUtils.trackEvent(CLICK_WEBSITE)
@@ -43,7 +48,7 @@ class DetailBakeryInfoAdapter(
     override fun getItemCount(): Int = bakeryInfoList.size
 
     override fun onBindViewHolder(holder: DetailBakeryInfoViewHolder, position: Int) {
-        holder.onBind(bakeryInfoList[position], moveToWebPage)
+        holder.onBind(bakeryInfoList[position], moveToWebPage, initBreadTypeChips)
     }
 
     fun setBakeryInfo(bakeryInfo: BakeryInfo) {

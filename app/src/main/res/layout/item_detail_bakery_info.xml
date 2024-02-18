@@ -108,45 +108,7 @@
             app:chipSpacingHorizontal="4dp"
             app:layout_constraintEnd_toEndOf="@+id/tv_item_detail_bakery_info_bakery_name"
             app:layout_constraintStart_toStartOf="@+id/tv_item_detail_bakery_info_bakery_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_item_detail_bakery_info_bakery_name">
-
-            <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M1"
-                visibility="@{bakeryInfo.breadType.isGlutenFree}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/background_1"
-                android:text="@{BreadFilterType.GLUTENFREE.titleRes}"
-                tools:text="글루텐프리" />
-
-            <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M1"
-                visibility="@{bakeryInfo.breadType.isVegan}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/background_1"
-                android:text="@{BreadFilterType.VEGAN.titleRes}"
-                tools:text="비건빵" />
-
-            <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M1"
-                visibility="@{bakeryInfo.breadType.isNutFree}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/background_1"
-                android:text="@{BreadFilterType.NUTFREE.titleRes}"
-                tools:text="넛프리" />
-
-            <com.google.android.material.chip.Chip
-                style="@style/Widget.Material3.Chip.Style.Bread.Filter.Category.Point.M1"
-                visibility="@{bakeryInfo.breadType.isSugarFree}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/background_1"
-                android:text="@{BreadFilterType.SUGARFREE.titleRes}"
-                tools:text="대체당" />
-
-        </com.google.android.material.chip.ChipGroup>
+            app:layout_constraintTop_toBottomOf="@id/tv_item_detail_bakery_info_bakery_name"/>
 
         <ImageView
             android:id="@+id/iv_item_detail_bakery_info_bookmark"

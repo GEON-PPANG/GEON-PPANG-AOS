@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.BuildConfig
@@ -12,10 +13,13 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentMyPageBinding
 import com.sopt.geonppang.presentation.common.WebViewActivity
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
+import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingFragment
+import com.sopt.geonppang.util.extension.breadTypeListToChips
 import com.sopt.geonppang.util.extension.setOnSingleClickListener
+import com.sopt.geonppang.util.extension.toBreadTypeGrayChip
 import com.sopt.geonppang.util.setInvisibility
 import com.sopt.geonppang.util.setVisibility
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +29,8 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     private val viewModel by viewModels<MyPageViewModel>()
+
+    lateinit var myBreadTypeList: List<BreadFilterType>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -81,16 +87,34 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun collectData() {
-        viewModel.profileInfo.flowWithLifecycle(lifecycle).onEach {
+        // 생명 주기 상태가 최소 CREATED 일 때만 수집하도록 제한
+        viewModel.profileInfo.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.CREATED
+        ).onEach { profile ->
             binding.chipMyPageProfilePurpose.text =
                 viewModel.setMainPurposeTitle()?.let { it1 -> this.context?.getString(it1) } ?: ""
-        }.launchIn(lifecycleScope)
 
-        viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
-            binding.includeMyPageSpeechBubble.root.setVisibility(!isFilterSelected)
-            binding.chipMyPageProfilePurpose.setInvisibility(isFilterSelected)
-            binding.chipGroupMyPageProfileBread.setInvisibility(isFilterSelected)
-        }.launchIn(lifecycleScope)
+            profile?.let { profile ->
+                myBreadTypeList = profile.breadTypeList
+                initBreadTypeChips(myBreadTypeList)
+            }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+        viewModel.isFilterSelected.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach { isFilterSelected ->
+                binding.includeMyPageSpeechBubble.root.setVisibility(!isFilterSelected)
+                binding.chipMyPageProfilePurpose.setInvisibility(isFilterSelected)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+    private fun initBreadTypeChips(breadTypeList: List<BreadFilterType>) {
+        binding.chipGroupMyPageProfileBread.breadTypeListToChips(
+            breadTypeList = breadTypeList,
+            toChip = {
+                this.toBreadTypeGrayChip(layoutInflater)
+            }
+        )
     }
 
     private fun moveToStoreBakeryList() {

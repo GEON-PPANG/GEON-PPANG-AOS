@@ -5,20 +5,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ItemBakeryBinding
-import com.sopt.geonppang.domain.model.Bakery
+import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.util.extension.loadingImage
 import com.sopt.geonppang.util.extension.setOnSingleClickListener
 
 class BakeryListAdapter(
     private val moveToDetail: (Int) -> Unit
 ) : RecyclerView.Adapter<BakeryListAdapter.BakeryViewHolder>() {
-    private val bakeryList: MutableList<Bakery> = mutableListOf()
+    private val bakeryList: MutableList<BakeryInformation> = mutableListOf()
 
     class BakeryViewHolder(
         private val binding: ItemBakeryBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(
-            bakery: Bakery,
+            bakery: BakeryInformation,
             moveToDetail: (Int) -> Unit
         ) {
             binding.bakery = bakery
@@ -48,7 +48,7 @@ class BakeryListAdapter(
         holder.onBind(bakeryList[position], moveToDetail)
     }
 
-    fun setBakeryList(bakeries: MutableList<Bakery>) {
+    fun setBakeryList(bakeries: MutableList<BakeryInformation>) {
         bakeryList.clear()
         bakeryList.addAll(bakeries)
         notifyDataSetChanged()

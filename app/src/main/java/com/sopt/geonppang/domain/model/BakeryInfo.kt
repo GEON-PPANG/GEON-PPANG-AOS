@@ -1,5 +1,7 @@
 package com.sopt.geonppang.domain.model
 
+import com.sopt.geonppang.presentation.type.BreadFilterType
+
 data class BakeryInfo(
     val bakeryId: Int,
     val bakeryName: String,
@@ -7,7 +9,7 @@ data class BakeryInfo(
     val isHACCP: Boolean,
     val isVegan: Boolean,
     val isNonGMO: Boolean,
-    val breadType: BreadType,
+    val breadTypeIdList: List<BreadFilterType>,
     val firstNearStation: String,
     val secondNearStation: String,
     val isBooked: Boolean,

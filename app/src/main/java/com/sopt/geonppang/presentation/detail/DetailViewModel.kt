@@ -71,15 +71,10 @@ class DetailViewModel @Inject constructor(
             BakeryReviewWritingInfo(
                 _bakeryInfo.bakeryName,
                 _bakeryInfo.bakeryPicture,
-                BakeryReviewWritingInfo.BreadType(
-                    _bakeryInfo.breadType.isGlutenFree,
-                    _bakeryInfo.breadType.isVegan,
-                    _bakeryInfo.breadType.isNutFree,
-                    _bakeryInfo.breadType.isSugarFree,
-                ),
+                _bakeryInfo.breadTypeIdList,
                 _bakeryInfo.firstNearStation,
                 _bakeryInfo.secondNearStation
             )
-        } ?: BakeryReviewWritingInfo("", "", null, "", "")
+        } ?: BakeryReviewWritingInfo("", "", listOf(), "", "")
     }
 }

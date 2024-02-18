@@ -5,8 +5,10 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityMyBookmarksBinding
+import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.presentation.common.BakeryAdapter
 import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
@@ -15,6 +17,8 @@ import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.CustomItemDecoration
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
+import com.sopt.geonppang.util.extension.breadTypeListToChips
+import com.sopt.geonppang.util.extension.toBreadTypePointM2Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -25,6 +29,8 @@ class MyBookMarksActivity :
     BindingActivity<ActivityMyBookmarksBinding>(R.layout.activity_my_bookmarks) {
     private val myPageViewModel: MyPageViewModel by viewModels()
     private lateinit var bakeryAdapter: BakeryAdapter
+
+    private var myBookMarkBakeryList = listOf<BakeryInformation>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +48,7 @@ class MyBookMarksActivity :
     }
 
     private fun initLayout() {
-        bakeryAdapter = BakeryAdapter(::moveToDetail)
+        bakeryAdapter = BakeryAdapter(::moveToDetail, ::initBreadTypeChips)
         binding.rvStoreList.apply {
             adapter = bakeryAdapter
             addItemDecoration(CustomItemDecoration(this@MyBookMarksActivity))
@@ -59,6 +65,7 @@ class MyBookMarksActivity :
         myPageViewModel.myPageBookmarkListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    myBookMarkBakeryList = it.data
                     bakeryAdapter.submitList(it.data)
                 }
 
@@ -76,6 +83,19 @@ class MyBookMarksActivity :
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra(BAKERY_ID, bakeryId)
         startActivity(intent)
+    }
+
+    private fun initBreadTypeChips(chipGroup: ChipGroup, position: Int) {
+        if (myBookMarkBakeryList.isNotEmpty()) {
+            myBookMarkBakeryList.get(position).breadTypeList.let { breadTypeList ->
+                chipGroup.breadTypeListToChips(
+                    breadTypeList = breadTypeList,
+                    toChip = {
+                        this.toBreadTypePointM2Chip(layoutInflater)
+                    }
+                )
+            }
+        }
     }
 
     companion object {
