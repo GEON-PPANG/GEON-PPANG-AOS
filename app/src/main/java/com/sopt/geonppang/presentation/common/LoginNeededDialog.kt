@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
@@ -73,7 +74,10 @@ class LoginNeededDialog(
     private fun collectData() {
         gpDataSource = GPDataSource(requireContext())
         // 카카오 회원 가입, 로그인
-        authViewModel.authRoleType.flowWithLifecycle(lifecycle).onEach { role ->
+        authViewModel.authRoleType.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.CREATED
+        ).onEach { role ->
             when (role) {
                 // 카카오 회원가입인 경우 닉네임 페이지로 이동
                 AuthRoleType.ROLE_GUEST -> {
@@ -92,9 +96,12 @@ class LoginNeededDialog(
 
                 else -> {}
             }
-        }.launchIn(lifecycleScope)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
-        authViewModel.signUpState.flowWithLifecycle(lifecycle).onEach { signUpState ->
+        authViewModel.signUpState.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.CREATED
+        ).onEach { signUpState ->
             when (signUpState) {
                 is UiState.Success -> {
                     authViewModel.setAutoLogin()
@@ -102,7 +109,7 @@ class LoginNeededDialog(
 
                 else -> {}
             }
-        }.launchIn(lifecycleScope)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun moveToNickNameSetting() {
