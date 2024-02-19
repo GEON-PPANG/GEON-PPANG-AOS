@@ -12,5 +12,6 @@ interface BakeryService {
         @Query("isHard") isHard: Boolean,
         @Query("isDessert") isDessert: Boolean,
         @Query("isBrunch") isBrunch: Boolean,
+        @Query("pageNumber") pageNumber: Int
     ): ResponseBakeryList
 }
