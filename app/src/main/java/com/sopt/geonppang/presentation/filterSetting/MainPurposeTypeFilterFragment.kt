@@ -25,12 +25,9 @@ class MainPurposeTypeFilterFragment :
     }
 
     private fun addListeners() {
-        binding.layoutMainPurposeTypeFilterSkip.setOnClickListener {
-            moveToMain()
-        }
-
-        binding.tvMainPurposeTypeFilterSkip.setOnSingleClickListener {
+        binding.layoutMainPurposeTypeFilterSkip.setOnSingleClickListener {
             AmplitudeUtils.trackEvent(CLICK_SKIP)
+            moveToMain()
         }
     }
 
