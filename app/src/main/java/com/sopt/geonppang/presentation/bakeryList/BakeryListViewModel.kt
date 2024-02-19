@@ -2,6 +2,7 @@ package com.sopt.geonppang.presentation.bakeryList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.domain.model.Bakery
 import com.sopt.geonppang.domain.repository.BakeryRepository
 import com.sopt.geonppang.domain.repository.GetUserFilterRepository
@@ -17,6 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BakeryListViewModel @Inject constructor(
+    private val gpDataSource: GPDataSource,
     private val bakeryRepository: BakeryRepository,
     private val getUserFilterRepository: GetUserFilterRepository
 ) : ViewModel() {
@@ -37,6 +39,8 @@ class BakeryListViewModel @Inject constructor(
     )
     private val _isFilterSelected = MutableStateFlow(true)
     val isFilterSelected get() = _isFilterSelected.asStateFlow()
+    private val _userRoleType = MutableStateFlow(gpDataSource.userRoleType)
+    val userRoleType get() = _userRoleType
 
     fun setBakerySortType(bakerySortType: BakerySortType) {
         _bakerySort.value = bakerySortType

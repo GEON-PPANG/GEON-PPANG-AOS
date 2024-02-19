@@ -7,7 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
-import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.FragmentBakeryListBinding
 import com.sopt.geonppang.presentation.common.LoginNeededDialog
 import com.sopt.geonppang.presentation.detail.DetailActivity
@@ -36,7 +35,6 @@ class BakeryListFragment :
     private val viewModel: BakeryListViewModel by viewModels()
 
     private lateinit var bakeryAdapter: BakeryListAdapter
-    private lateinit var gpDataSource: GPDataSource
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,8 +47,8 @@ class BakeryListFragment :
     }
 
     private fun initLayout() {
-        gpDataSource = GPDataSource(requireContext())
-        if (gpDataSource.userRoleType != UserRoleType.NONE_MEMBER.name)
+        val getUserRole = viewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name
+        if (!getUserRole)
             viewModel.getUserFilter()
         bakeryAdapter = BakeryListAdapter(::moveToDetail)
         binding.rvBakeryList.apply {
@@ -70,9 +68,9 @@ class BakeryListFragment :
         }
 
         binding.ivBakeryListFilter.setOnClickListener {
+            val getUserRole = viewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name
             AmplitudeUtils.trackEvent(START_FILTER_LIST)
-            gpDataSource = GPDataSource(requireContext())
-            if (gpDataSource.userRoleType == UserRoleType.NONE_MEMBER.name)
+            if (getUserRole)
                 showLoginNeedDialog()
             else
                 moveToFilter()
@@ -156,7 +154,7 @@ class BakeryListFragment :
     private fun showLoginNeedDialog() {
         LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_FILTER).show(
             parentFragmentManager,
-            "bakeryListLoginNeedDialog"
+            LOGIN_NEEDED
         )
     }
 
@@ -176,5 +174,6 @@ class BakeryListFragment :
         const val CLICK_CATEGORY = "click_category"
         const val CATEGORY = "category"
         const val LIST = "LIST"
+        const val LOGIN_NEEDED = "loginNeededBakeryList"
     }
 }

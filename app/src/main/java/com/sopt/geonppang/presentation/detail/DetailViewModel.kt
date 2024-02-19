@@ -2,6 +2,7 @@ package com.sopt.geonppang.presentation.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.domain.model.BakeryInfo
 import com.sopt.geonppang.domain.model.BookMark
 import com.sopt.geonppang.domain.model.ReviewData
@@ -17,6 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
+    private val gpDataSource: GPDataSource,
     private val detailRepository: DetailRepository,
 ) : ViewModel() {
     private val _bakeryId = MutableStateFlow(-1)
@@ -27,6 +29,8 @@ class DetailViewModel @Inject constructor(
     val reviewData get() = _reviewData.asStateFlow()
     private val _bookMarkState = MutableStateFlow<UiState<BookMark>>(UiState.Loading)
     val bookMarkState get() = _bookMarkState.asStateFlow()
+    private val _userRoleType = MutableStateFlow(gpDataSource.userRoleType)
+    val userRoleType get() = _userRoleType.asStateFlow()
 
     fun fetchDetailBakeryInfo(bakeryId: Int) {
         viewModelScope.launch {

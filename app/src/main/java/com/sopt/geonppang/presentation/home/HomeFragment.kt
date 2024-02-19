@@ -32,7 +32,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private lateinit var bestBakeryAdapter: BestBakeryAdapter
     private lateinit var bestReviewAdapter: BestReviewAdapter
-    private lateinit var gpDataSource: GPDataSource
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,8 +59,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
         binding.ivHomeFilter.setOnClickListener {
             AmplitudeUtils.trackEvent(START_FILTER_HOME)
-            gpDataSource = GPDataSource(it.context)
-            if (gpDataSource.userRoleType == UserRoleType.NONE_MEMBER.name)
+            if (viewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name)
                 showLoginNeedDialog()
             else
                 moveToFilter()
@@ -136,8 +134,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private fun showLoginNeedDialog() {
         LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_FILTER).show(
-            parentFragmentManager,
-            "loginNeededDialog"
+            parentFragmentManager, LOGIN_NEEDED_FILTER
         )
     }
 
@@ -149,5 +146,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         const val CLICK_SEARCH_HOME = "click_search_home"
         const val START_FILTER_HOME = "start_filter_home"
         const val HOME = "HOME"
+        const val LOGIN_NEEDED_FILTER = "loginNeededFilter"
     }
 }

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
-import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.ActivityDetailBinding
 import com.sopt.geonppang.presentation.common.LoginNeededDialog
 import com.sopt.geonppang.presentation.common.WebViewActivity
@@ -64,7 +63,11 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         detailBakeryInfoAdapter = DetailBakeryInfoAdapter(::moveToWebPage, ::initBreadTypeChips)
         detailMenuAdapter = DetailMenuAdapter()
         detailReviewGraphAdapter = DetailReviewGraphAdapter()
-        detailReviewAdapter = DetailReviewAdapter(::initRecommendKeyWordChip, ::moveToReport)
+        detailReviewAdapter = DetailReviewAdapter(
+            ::initRecommendKeyWordChip,
+            ::moveToReport,
+            ::showLoginNeedDialogReportReview
+        )
         detailNoReviewAdapter = DetailNoReviewAdapter()
 
         concatAdapter = ConcatAdapter(
@@ -76,20 +79,15 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         binding.rvDetail.adapter = concatAdapter
     }
 
-    private fun getUserRole(): Boolean {
-        gpDataSource = GPDataSource(this)
-        return gpDataSource.userRoleType == UserRoleType.NONE_MEMBER.name
-    }
-
     private fun addListeners() {
+        val getUserRole = viewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name
         binding.ivDetailArrowLeft.setOnClickListener {
             finish()
         }
 
         binding.btnDetailCrateReview.setOnClickListener {
             AmplitudeUtils.trackEvent(START_REVIEW_WRITING)
-            gpDataSource = GPDataSource(it.context)
-            if (gpDataSource.userRoleType == UserRoleType.NONE_MEMBER.name) {
+            if (getUserRole) {
                 showLoginNeedDialogWriteReview()
             } else
                 moveToReviewWriting(bakeryId, viewModel.getBakeryInfoForReview())
@@ -107,12 +105,12 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }
 
         binding.ivDetailBottomAppBarBookmark.setOnSingleClickListener {
-            gpDataSource = GPDataSource(it.context)
-            if (gpDataSource.userRoleType == UserRoleType.NONE_MEMBER.name) {
+            if (getUserRole) {
                 showLoginNeedDialogBookmark()
-            }
-            viewModel.bakeryInfo.value?.isBooked?.let { isBookMarked ->
-                viewModel.doBookMark(bakeryId, !isBookMarked)
+            } else {
+                viewModel.bakeryInfo.value?.isBooked?.let { isBookMarked ->
+                    viewModel.doBookMark(bakeryId, !isBookMarked)
+                }
             }
         }
     }
@@ -222,22 +220,19 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun showLoginNeedDialogBookmark() {
         LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_BOOKMARK).show(
-            supportFragmentManager,
-            "loginNeededDialog"
+            supportFragmentManager, LOGIN_NEEDED_BOOKMARK
         )
     }
 
     private fun showLoginNeedDialogWriteReview() {
         LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_WRITE_REVIEW).show(
-            supportFragmentManager,
-            "loginNeededDialog"
+            supportFragmentManager, LOGIN_NEEDED_WRITE_REVIEW
         )
     }
 
     private fun showLoginNeedDialogReportReview() {
         LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_REPORT_REVIEW).show(
-            supportFragmentManager,
-            "loginNeededDialog"
+            supportFragmentManager, LOGIN_NEEDED_REPORT_REVEIW
         )
     }
 
@@ -251,5 +246,8 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         const val CLICK_NAVIGATION = "click_navigation"
         const val CLICK_MY_STORE = "click_mystore"
         const val START_REVIEW_WRITING = "start_reviewwriting"
+        const val LOGIN_NEEDED_BOOKMARK = "loginNeededBookmark"
+        const val LOGIN_NEEDED_WRITE_REVIEW = "loginNeededWriteReview"
+        const val LOGIN_NEEDED_REPORT_REVEIW = "loginNeededReportReview"
     }
 }
