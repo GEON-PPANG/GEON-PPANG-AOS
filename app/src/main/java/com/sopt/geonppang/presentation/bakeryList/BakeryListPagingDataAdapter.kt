@@ -2,17 +2,23 @@ package com.sopt.geonppang.presentation.bakeryList
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ItemBakeryBinding
 import com.sopt.geonppang.domain.model.BakeryInformation
+import com.sopt.geonppang.util.ItemDiffCallback
 import com.sopt.geonppang.util.extension.loadingImage
 import com.sopt.geonppang.util.extension.setOnSingleClickListener
 
-class BakeryListAdapter(
+class BakeryListPagingDataAdapter(
     private val moveToDetail: (Int) -> Unit
-) : RecyclerView.Adapter<BakeryListAdapter.BakeryViewHolder>() {
-    private val bakeryList: MutableList<BakeryInformation> = mutableListOf()
+) : PagingDataAdapter<BakeryInformation, BakeryListPagingDataAdapter.BakeryViewHolder>(
+    ItemDiffCallback(
+        onItemsTheSame = { old, new -> old.bakeryId == new.bakeryId },
+        onContentsTheSame = { old, new -> old == new }
+    )
+) {
 
     class BakeryViewHolder(
         private val binding: ItemBakeryBinding,
@@ -42,15 +48,7 @@ class BakeryListAdapter(
         return BakeryViewHolder(binding)
     }
 
-    override fun getItemCount() = bakeryList.size
-
     override fun onBindViewHolder(holder: BakeryViewHolder, position: Int) {
-        holder.onBind(bakeryList[position], moveToDetail)
-    }
-
-    fun setBakeryList(bakeries: MutableList<BakeryInformation>) {
-        bakeryList.clear()
-        bakeryList.addAll(bakeries)
-        notifyDataSetChanged()
+        getItem(position)?.let { holder.onBind(it, moveToDetail) }
     }
 }
