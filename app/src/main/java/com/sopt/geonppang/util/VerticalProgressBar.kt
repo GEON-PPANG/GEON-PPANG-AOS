@@ -28,7 +28,7 @@ class VerticalProgressBar @JvmOverloads constructor(
         typedArray.recycle()
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
         val width = width.toFloat()
@@ -43,7 +43,7 @@ class VerticalProgressBar @JvmOverloads constructor(
             height.toInt()
         )
 
-        canvas?.let { canvas ->
+        canvas.let { canvas ->
             backgroundDrawable?.draw(canvas)
             progressDrawable?.draw(canvas)
         }

@@ -39,7 +39,7 @@ class MyReviewDetailViewModel @Inject constructor(
         isRecommendKeywordSelected.value = selectedKeyWord
     }
 
-    fun setUserInfo(bakeryInfo: MyReviewBakeryInfo) {
+    fun setBakeryInfo(bakeryInfo: MyReviewBakeryInfo) {
         _bakeryInfo.value = bakeryInfo
     }
 

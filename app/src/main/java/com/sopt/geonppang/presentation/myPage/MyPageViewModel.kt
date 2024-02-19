@@ -2,7 +2,7 @@ package com.sopt.geonppang.presentation.myPage
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.geonppang.domain.model.Bakery
+import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.domain.model.Profile
 import com.sopt.geonppang.domain.repository.MyPageRepository
@@ -28,7 +28,7 @@ class MyPageViewModel @Inject constructor(
     private var _myReviewCount = MutableStateFlow<Int?>(null)
     val myReviewCount get() = _myReviewCount.asStateFlow()
     private var _myPageBookmarkListState =
-        MutableStateFlow<UiState<List<Bakery>>>(UiState.Loading)
+        MutableStateFlow<UiState<List<BakeryInformation>>>(UiState.Loading)
     val myPageBookmarkListState get() = _myPageBookmarkListState.asStateFlow()
     private var _myBookmarkCount = MutableStateFlow<Int?>(null)
     val myBookmarkCount get() = _myBookmarkCount.asStateFlow()

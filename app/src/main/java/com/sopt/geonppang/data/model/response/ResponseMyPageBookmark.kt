@@ -1,7 +1,7 @@
 package com.sopt.geonppang.data.model.response
 
-import com.sopt.geonppang.domain.model.Bakery
-import com.sopt.geonppang.domain.model.BreadType
+import com.sopt.geonppang.domain.model.BakeryInformation
+import com.sopt.geonppang.presentation.type.BreadFilterType
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -22,21 +22,11 @@ data class ResponseMyPageBookmark(
         val secondNearStation: String,
         val bookMarkCount: Int,
         val reviewCount: Int,
-        val breadType: BreadType
-    ) {
-        @Serializable
-        data class BreadType(
-            val breadTypeId: Int,
-            val breadTypeName: String,
-            val isGlutenFree: Boolean,
-            val isVegan: Boolean,
-            val isNutFree: Boolean,
-            val isSugarFree: Boolean,
-        )
-    }
+        val breadTypeList: List<BreadTypeIdDto>
+    )
 
     fun toMypageBookmark() = data.map { myBookmark ->
-        Bakery(
+        BakeryInformation(
             bakeryId = myBookmark.bakeryId,
             bakeryName = myBookmark.bakeryName,
             bakeryPicture = myBookmark.bakeryPicture,
@@ -46,14 +36,11 @@ data class ResponseMyPageBookmark(
             isNonGMO = myBookmark.isNonGMO,
             isVegan = myBookmark.isVegan,
             isHACCP = myBookmark.isHACCP,
-            breadType = BreadType(
-                myBookmark.breadType.breadTypeId,
-                myBookmark.breadType.breadTypeName,
-                myBookmark.breadType.isGlutenFree,
-                myBookmark.breadType.isVegan,
-                myBookmark.breadType.isNutFree,
-                myBookmark.breadType.isSugarFree,
-            )
+            breadTypeList = myBookmark.breadTypeList.mapNotNull { breadTypeIdDto ->
+                BreadFilterType.values().find {
+                    it.id == breadTypeIdDto.breadTypeId
+                }
+            }
         )
     }
 }

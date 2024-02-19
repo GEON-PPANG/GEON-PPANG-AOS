@@ -5,8 +5,10 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityMyReviewBinding
+import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETAIL_PAGE_AT
 import com.sopt.geonppang.presentation.model.MyReviewBakeryInfo
@@ -15,6 +17,8 @@ import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.CustomItemDecoration
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
+import com.sopt.geonppang.util.extension.breadTypeListToChips
+import com.sopt.geonppang.util.extension.toBreadTypePointM2Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -24,6 +28,8 @@ import timber.log.Timber
 class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activity_my_review) {
     private val viewModel: MyPageViewModel by viewModels()
     private lateinit var myReviewAdapter: MyReviewAdapter
+
+    private var myReviewList = listOf<MyReview>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +43,7 @@ class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activ
 
     private fun initLayout() {
         viewModel.fetchMyPageReviewList()
-        myReviewAdapter = MyReviewAdapter(::moveToReviewDetail)
+        myReviewAdapter = MyReviewAdapter(::moveToReviewDetail, ::initBreadTypeChips)
         binding.rvMyReviewList.apply {
             adapter = myReviewAdapter
             addItemDecoration(CustomItemDecoration(this@MyReviewActivity))
@@ -54,6 +60,7 @@ class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activ
         viewModel.myPageReviewListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
+                    myReviewList = it.data
                     myReviewAdapter.submitList(it.data)
                 }
 
@@ -72,6 +79,19 @@ class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activ
         intent.putExtra(REVIEW_ID, reviewId)
         intent.putExtra(BAKERY_INFO, myReviewDetailInfo)
         startActivity(intent)
+    }
+
+    private fun initBreadTypeChips(chipGroup: ChipGroup, position: Int) {
+        if (myReviewList.isNotEmpty()) {
+            myReviewList.get(position).bakery.breadTypeList.let { breadTypeIdList ->
+                chipGroup.breadTypeListToChips(
+                    breadTypeList = breadTypeIdList,
+                    toChip = {
+                        this.toBreadTypePointM2Chip(layoutInflater)
+                    }
+                )
+            }
+        }
     }
 
     companion object {

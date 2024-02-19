@@ -86,7 +86,7 @@ class BakeryListFragment :
         viewModel.bakeryListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    bakeryAdapter.setBakeryList(it.data.toMutableList())
+//                    bakeryAdapter.setBakeryList(it.data.toMutableList())
                 }
 
                 else -> {}

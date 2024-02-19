@@ -1,8 +1,8 @@
 package com.sopt.geonppang.data.model.response
 
-import com.sopt.geonppang.domain.model.Bakery
-import com.sopt.geonppang.domain.model.BreadType
+import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.domain.model.MyReview
+import com.sopt.geonppang.presentation.type.BreadFilterType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -25,24 +25,14 @@ data class ResponseMyPageReview(
         val isNonGmo: Boolean,
         val firstNearStation: String,
         val secondNearStation: String,
-        val breadType: BreadType,
+        val breadTypeList: List<BreadTypeIdDto>,
         val reviewId: Int,
         val createdAt: String,
-    ) {
-        @Serializable
-        data class BreadType(
-            val breadTypeId: Int,
-            val breadTypeName: String,
-            val isGlutenFree: Boolean,
-            val isVegan: Boolean,
-            val isNutFree: Boolean,
-            val isSugarFree: Boolean,
-        )
-    }
+    )
 
     fun toMyReview() = data.map { myReview ->
         MyReview(
-            bakery = Bakery(
+            bakery = BakeryInformation(
                 myReview.bakeryId,
                 myReview.bakeryName,
                 myReview.isHACCP,
@@ -52,14 +42,11 @@ data class ResponseMyPageReview(
                 myReview.secondNearStation,
                 null,
                 myReview.bakeryPicture,
-                breadType = BreadType(
-                    myReview.breadType.breadTypeId,
-                    myReview.breadType.breadTypeName,
-                    myReview.breadType.isGlutenFree,
-                    myReview.breadType.isVegan,
-                    myReview.breadType.isNutFree,
-                    myReview.breadType.isSugarFree
-                )
+                breadTypeList = myReview.breadTypeList.mapNotNull { breadTypeIdDto ->
+                    BreadFilterType.values().find {
+                        it.id == breadTypeIdDto.breadTypeId
+                    }
+                }
             ),
             reviewId = myReview.reviewId,
             date = myReview.createdAt

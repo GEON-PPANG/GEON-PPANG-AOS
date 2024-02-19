@@ -6,12 +6,15 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityMyReviewDetailBinding
 import com.sopt.geonppang.presentation.model.MyReviewBakeryInfo
 import com.sopt.geonppang.util.binding.BindingActivity
+import com.sopt.geonppang.util.extension.breadTypeListToChips
+import com.sopt.geonppang.util.extension.toBreadTypePointM2Chip
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MyReviewDetailActivity :
     BindingActivity<ActivityMyReviewDetailBinding>(R.layout.activity_my_review_detail) {
     private val myReviewDetailViewModel: MyReviewDetailViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = myReviewDetailViewModel
@@ -24,9 +27,17 @@ class MyReviewDetailActivity :
     private fun initLayout() {
         val reviewId = intent.getIntExtra(REVIEW_ID, -1)
         myReviewDetailViewModel.fetchMyReviewDetail(reviewId)
+
         val bakeryInfo = intent.getParcelableExtra<MyReviewBakeryInfo>(BAKERY_INFO)
         bakeryInfo?.let { bakeryInfo ->
-            myReviewDetailViewModel.setUserInfo(bakeryInfo)
+            myReviewDetailViewModel.setBakeryInfo(bakeryInfo)
+            binding.cgBakeryBreadTypes
+                .breadTypeListToChips(
+                    breadTypeList = bakeryInfo.breadTypeList,
+                    toChip = {
+                        this.toBreadTypePointM2Chip(layoutInflater)
+                    }
+                )
         }
     }
 
