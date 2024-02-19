@@ -17,21 +17,21 @@ import com.sopt.geonppang.presentation.type.BakerySortType
 import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.CustomItemDecoration
-import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingFragment
 import com.sopt.geonppang.util.setVisibility
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class BakeryListFragment :
     BindingFragment<FragmentBakeryListBinding>(R.layout.fragment_bakery_list),
     BakerySortTypeListener {
     private val viewModel: BakeryListViewModel by viewModels()
-
-    private lateinit var bakeryAdapter: BakeryListAdapter
+    private lateinit var bakeryAdapter: BakeryListPagingDataAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,7 +45,8 @@ class BakeryListFragment :
 
     private fun initLayout() {
         viewModel.getUserFilter()
-        bakeryAdapter = BakeryListAdapter(::moveToDetail)
+
+        bakeryAdapter = BakeryListPagingDataAdapter(::moveToDetail)
         binding.rvBakeryList.apply {
             adapter = bakeryAdapter
             addItemDecoration(CustomItemDecoration(requireContext()))
@@ -72,38 +73,31 @@ class BakeryListFragment :
     }
 
     private fun collectData() {
-        viewModel.bakeryListState.flowWithLifecycle(lifecycle).onEach {
-            when (it) {
-                is UiState.Success -> {
-//                    bakeryAdapter.setBakeryList(it.data.toMutableList())
+        viewModel.bakeryListFilterType.flowWithLifecycle(viewLifecycleOwner.lifecycle).onEach {
+            lifecycleScope.launch {
+                viewModel.fetchBakeryListPagingData().collectLatest {
+                    bakeryAdapter.submitData(it)
                 }
+            }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
-                else -> {}
-            }
-        }.launchIn(lifecycleScope)
-        viewModel.isPersonalFilterApplied.flowWithLifecycle(lifecycle)
-            .onEach { isPersonalFilterApplied ->
-                if (viewModel.isFilterSelected.value && isPersonalFilterApplied == false)
-                    AmplitudeUtils.trackEvent(CLICK_PERSONAL_FILTER_APPLY_OFF)
-            }.launchIn(lifecycleScope)
-        viewModel.bakeryCategoryType.flowWithLifecycle(lifecycle).onEach { bakeryCategoryType ->
-            val selectedCategory = bakeryCategoryType.entries.filter { it.value }.map { it.key }
-            if (selectedCategory.isNotEmpty()) {
-                AmplitudeUtils.trackEventWithProperties(
-                    CLICK_CATEGORY,
-                    CATEGORY,
-                    selectedCategory
-                )
-            }
-        }.launchIn(lifecycleScope)
-        combine(
-            viewModel.isPersonalFilterApplied,
-            viewModel.bakeryCategoryType,
-            viewModel.bakerySort
-        ) { isPersonalFilterApplied, bakeryCategoryType, bakerySort ->
-        }.flowWithLifecycle(lifecycle).onEach {
-            viewModel.fetchBakeryList()
-        }.launchIn(lifecycleScope)
+        viewModel.bakeryListFilterType
+            .map { it.isPersonalFilterApplied }
+            .flowWithLifecycle(viewLifecycleOwner.lifecycle).onEach {
+                AmplitudeUtils.trackEvent(CLICK_PERSONAL_FILTER_APPLY_OFF)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+//        viewModel.bakeryCategoryType.flowWithLifecycle(lifecycle).onEach { bakeryCategoryType ->
+//            val selectedCategory = bakeryCategoryType.entries.filter { it.value }.map { it.key }
+//            if (selectedCategory.isNotEmpty()) {
+//                AmplitudeUtils.trackEventWithProperties(
+//                    CLICK_CATEGORY,
+//                    CATEGORY,
+//                    selectedCategory
+//                )
+//            }
+//        }.launchIn(lifecycleScope)
+
         viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
             binding.includeHomeSpeechBubble.root.setVisibility(!isFilterSelected)
             binding.checkBakeryListMyFilter.isEnabled = isFilterSelected
@@ -136,7 +130,7 @@ class BakeryListFragment :
 
         // BakeryListSortDialog로 현재 정렬 정보 전달
         bakeryListSortBottomSheetDialog.arguments = Bundle().apply {
-            putString("bakerySortType", viewModel.bakerySort.value?.sortType)
+            putString("bakerySortType", viewModel.bakeryListFilterType.value.sortType.sortType)
         }
         bakeryListSortBottomSheetDialog.setDataListener(this)
         bakeryListSortBottomSheetDialog.show(parentFragmentManager, "bakeryListSortDialog")
