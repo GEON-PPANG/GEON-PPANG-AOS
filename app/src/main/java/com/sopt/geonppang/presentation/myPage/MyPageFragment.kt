@@ -10,7 +10,6 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.BuildConfig
 import com.sopt.geonppang.R
-import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.FragmentMyPageBinding
 import com.sopt.geonppang.presentation.common.LoginNeededDialog
 import com.sopt.geonppang.presentation.common.WebViewActivity
@@ -33,8 +32,6 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     private val viewModel by viewModels<MyPageViewModel>()
-    private lateinit var gpDataSource: GPDataSource
-
     lateinit var myBreadTypeList: List<BreadFilterType>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,23 +46,19 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun initLayout() {
-        if (!getUserRole())
+        if (viewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name)
+            viewModel.fetchNoneMemberProfileInfo()
+        else
             viewModel.fetchProfileInfo()
         binding.includeMyPageSpeechBubble.ivSpeechBubble.setBackgroundResource(R.drawable.background_left_speech_bubble)
         binding.tvMyPageAppVersion.text = getString(R.string.tv_my_page_app_version, APP_VERSION)
     }
 
-    // 이렇게 함수를 만들어서 매번 호출하는게 좋은 것인지
-    // BakeryListFragment 처럼 버튼을 누를 때마다 해당 뷰의 context를 전달하는게 맞는지 고민
-    private fun getUserRole(): Boolean {
-        gpDataSource = GPDataSource(requireContext())
-        return gpDataSource.userRoleType == UserRoleType.NONE_MEMBER.name
-    }
-
     private fun addListeners() {
+        val getUserRole = viewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name
         binding.layoutMyPageBookmark.setOnSingleClickListener {
             AmplitudeUtils.trackEvent(CLICK_MY_STORE)
-            if (getUserRole())
+            if (getUserRole)
                 showLoginNeedDialog()
             else
                 moveToStoreBakeryList()
@@ -73,26 +66,26 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
         binding.layoutMyPageReview.setOnSingleClickListener {
             AmplitudeUtils.trackEvent(CLICK_MY_REVIEW)
-            if (getUserRole())
+            if (getUserRole)
                 showLoginNeedDialog()
             else moveToMyReview()
         }
 
         binding.ivMyPageProfileRightArrow.setOnClickListener {
             AmplitudeUtils.trackEvent(START_FILTER_MY)
-            if (getUserRole())
+            if (getUserRole)
                 showLoginNeedDialog()
             else moveToFilter()
         }
 
         binding.tvMyPageLogout.setOnClickListener {
-            if (getUserRole())
+            if (getUserRole)
                 showLoginNeedDialog()
             else showLogoutDialog()
         }
 
         binding.tvMyPageWithdraw.setOnClickListener {
-            if (getUserRole())
+            if (getUserRole)
                 showLoginNeedDialog()
             else showWithdrawDialog()
         }
@@ -102,13 +95,13 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         }
 
         binding.tvMyPageTermsOfUse.setOnClickListener {
-            if (getUserRole())
+            if (getUserRole)
                 showLoginNeedDialog()
             else moveToWebPage(TERMS_OF_USE)
         }
 
         binding.tvMyPageInquiry.setOnClickListener {
-            if (getUserRole())
+            if (getUserRole)
                 showLoginNeedDialog()
             else moveToWebBrowser(INQUIRY)
         }
@@ -181,8 +174,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun showLoginNeedDialog() {
         LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_MY_PAGE).show(
-            parentFragmentManager,
-            "myPageLoginNeedDialog"
+            parentFragmentManager, LOGIN_NEEDED_MY_PAGE
         )
     }
 
@@ -195,5 +187,6 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         const val CLICK_MY_STORE = "click_mystore"
         const val CLICK_MY_REVIEW = "click_myreview"
         const val START_FILTER_MY = "start_filter_mypage"
+        const val LOGIN_NEEDED_MY_PAGE = "loginNeededMyPage"
     }
 }

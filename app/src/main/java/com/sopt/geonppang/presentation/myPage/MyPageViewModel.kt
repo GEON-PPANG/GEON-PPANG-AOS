@@ -2,6 +2,7 @@ package com.sopt.geonppang.presentation.myPage
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.domain.model.Profile
@@ -16,6 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyPageViewModel @Inject constructor(
+    private val gpDataSource: GPDataSource,
     private val myPageRepository: MyPageRepository,
 ) : ViewModel() {
     private var _profileInfo = MutableStateFlow<Profile?>(null)
@@ -32,6 +34,8 @@ class MyPageViewModel @Inject constructor(
     val myPageBookmarkListState get() = _myPageBookmarkListState.asStateFlow()
     private var _myBookmarkCount = MutableStateFlow<Int?>(null)
     val myBookmarkCount get() = _myBookmarkCount.asStateFlow()
+    private val _userRoleType = MutableStateFlow(gpDataSource.userRoleType)
+    val userRoleType get() = _userRoleType.asStateFlow()
 
     fun fetchProfileInfo() {
         viewModelScope.launch {
@@ -41,6 +45,10 @@ class MyPageViewModel @Inject constructor(
                     _isFilterSelected.value = (profile.mainPurpose != NONE)
                 }
         }
+    }
+
+    fun fetchNoneMemberProfileInfo() {
+        _profileInfo.value = Profile("별사탕", "", listOf())
     }
 
     fun fetchMyPageReviewList() {
