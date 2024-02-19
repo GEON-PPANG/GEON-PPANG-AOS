@@ -106,6 +106,10 @@ dependencies {
 
     // kakao
     implementation "com.kakao.sdk:v2-all:2.15.0"
+
+    // paging
+    implementation 'androidx.paging:paging-runtime-ktx:3.2.1'
+    implementation 'androidx.paging:paging-common-android:3.3.0-alpha03'
 }
 
 ktlint {
