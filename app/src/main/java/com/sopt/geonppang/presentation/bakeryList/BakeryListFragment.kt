@@ -81,7 +81,7 @@ class BakeryListFragment :
     }
 
     private fun collectData() {
-        viewModel.bakeryListState.flowWithLifecycle(lifecycle).onEach {
+        viewModel.bakeryListState.flowWithLifecycle(viewLifecycleOwner.lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
 //                    bakeryAdapter.setBakeryList(it.data.toMutableList())
@@ -89,35 +89,40 @@ class BakeryListFragment :
 
                 else -> {}
             }
-        }.launchIn(lifecycleScope)
-        viewModel.isPersonalFilterApplied.flowWithLifecycle(lifecycle)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+        viewModel.isPersonalFilterApplied.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach { isPersonalFilterApplied ->
                 if (viewModel.isFilterSelected.value && isPersonalFilterApplied == false)
                     AmplitudeUtils.trackEvent(CLICK_PERSONAL_FILTER_APPLY_OFF)
-            }.launchIn(lifecycleScope)
-        viewModel.bakeryCategoryType.flowWithLifecycle(lifecycle).onEach { bakeryCategoryType ->
-            val selectedCategory = bakeryCategoryType.entries.filter { it.value }.map { it.key }
-            if (selectedCategory.isNotEmpty()) {
-                AmplitudeUtils.trackEventWithProperties(
-                    CLICK_CATEGORY,
-                    CATEGORY,
-                    selectedCategory
-                )
-            }
-        }.launchIn(lifecycleScope)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
+        viewModel.bakeryCategoryType.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach { bakeryCategoryType ->
+                val selectedCategory = bakeryCategoryType.entries.filter { it.value }.map { it.key }
+                if (selectedCategory.isNotEmpty()) {
+                    AmplitudeUtils.trackEventWithProperties(
+                        CLICK_CATEGORY,
+                        CATEGORY,
+                        selectedCategory
+                    )
+                }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
         combine(
             viewModel.isPersonalFilterApplied,
             viewModel.bakeryCategoryType,
             viewModel.bakerySort
         ) { isPersonalFilterApplied, bakeryCategoryType, bakerySort ->
-        }.flowWithLifecycle(lifecycle).onEach {
+        }.flowWithLifecycle(viewLifecycleOwner.lifecycle).onEach {
             viewModel.fetchBakeryList()
-        }.launchIn(lifecycleScope)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
         viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
             binding.includeHomeSpeechBubble.root.setVisibility(!isFilterSelected)
             binding.checkBakeryListMyFilter.isEnabled = isFilterSelected
             binding.layoutBakeryListMyFiltaerApply.isEnabled = isFilterSelected
-        }.launchIn(lifecycleScope)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+        viewModel.userRoleType.flowWithLifecycle(viewLifecycleOwner.lifecycle).onEach {
+            if (it == UserRoleType.NONE_MEMBER.name)
+                binding.checkBakeryListMyFilter.isEnabled = false
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun moveToDetail(bakeryId: Int) {
