@@ -6,7 +6,7 @@ import com.sopt.geonppang.data.service.BakeryService
 import com.sopt.geonppang.domain.model.BakeryListFilterType
 import javax.inject.Inject
 
-class BookPagingRepository @Inject constructor(
+class BakeryListPagingRepository @Inject constructor(
     private val bakeryService: BakeryService,
 ) {
     fun fetchBakeryList(

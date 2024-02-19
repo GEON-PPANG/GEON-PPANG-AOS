@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.sopt.geonppang.data.repository.BookPagingRepository
+import com.sopt.geonppang.data.repository.BakeryListPagingRepository
 import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.domain.model.BakeryListFilterType
 import com.sopt.geonppang.domain.repository.GetUserFilterRepository
@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BakeryListViewModel @Inject constructor(
-    private val bakeryListPagingRepository: BookPagingRepository,
+    private val bakeryListPagingRepository: BakeryListPagingRepository,
     private val getUserFilterRepository: GetUserFilterRepository
 ) : ViewModel() {
     private var _bakeryListFilterState = MutableStateFlow(BakeryListFilterType())
@@ -37,7 +37,7 @@ class BakeryListViewModel @Inject constructor(
     }
 
     // TODO: dana update 로직 수정 필요
-    fun setPersonalFilterAppliedState() {
+    fun setIsPersonalFilterAppliedState() {
         _bakeryListFilterState.update {
             it.copy(isPersonalFilterApplied = it.isPersonalFilterApplied == false)
         }
