@@ -24,7 +24,10 @@ class DetailBakeryInfoAdapter(
             with(binding) {
                 binding.bakeryInfo = bakeryInfo
 
-                initBreadTypeChips(binding.chipGroupItemDetailBakeryInfoBreadType)
+                with(binding.chipGroupItemDetailBakeryInfoBreadType) {
+                    this.removeAllViews()
+                    initBreadTypeChips(this)
+                }
 
                 tvItemDetailBakeryInfoHomepage.setOnClickListener {
                     AmplitudeUtils.trackEvent(CLICK_WEBSITE)

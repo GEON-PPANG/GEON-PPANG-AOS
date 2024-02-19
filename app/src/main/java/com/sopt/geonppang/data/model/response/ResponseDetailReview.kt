@@ -33,7 +33,7 @@ data class ResponseDetailReview(
                 val recommendKeywordName: String
             )
 
-            fun toRecommentKeyword() = recommendKeywordList.map { recommendKeyword ->
+            fun toRecommendKeyword() = recommendKeywordList.map { recommendKeyword ->
                 DetailReview.RecommendKeyword(
                     recommendKeywordId = recommendKeyword.recommendKeywordId,
                     recommendKeywordName = recommendKeyword.recommendKeywordName
@@ -53,7 +53,7 @@ data class ResponseDetailReview(
                     memberNickname = review.memberNickname,
                     reviewId = review.reviewId,
                     reviewText = review.reviewText,
-                    recommendKeywordList = review.toRecommentKeyword()
+                    recommendKeywordList = review.toRecommendKeyword()
                 )
             }
         )

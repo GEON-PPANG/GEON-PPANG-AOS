@@ -6,8 +6,10 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.sopt.geonppang.R
 import com.sopt.geonppang.data.datasource.local.GPDataSource
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.FragmentMainPurposeTypeFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
+import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingFragment
@@ -28,14 +30,11 @@ class MainPurposeTypeFilterFragment :
     }
 
     private fun addListeners() {
-        binding.layoutMainPurposeTypeFilterSkip.setOnClickListener {
+        binding.layoutMainPurposeTypeFilterSkip.setOnSingleClickListener {
+            AmplitudeUtils.trackEvent(CLICK_SKIP)
             gpDataSource = GPDataSource(it.context)
             gpDataSource.userRoleType = UserRoleType.FILTER_UNSELECTED_MEMBER.name
             moveToMain()
-        }
-
-        binding.tvMainPurposeTypeFilterSkip.setOnSingleClickListener {
-            AmplitudeUtils.trackEvent(CLICK_SKIP)
         }
     }
 
