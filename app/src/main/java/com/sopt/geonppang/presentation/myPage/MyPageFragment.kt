@@ -95,15 +95,11 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         }
 
         binding.tvMyPageTermsOfUse.setOnClickListener {
-            if (getUserRole)
-                showLoginNeedDialog()
-            else moveToWebPage(TERMS_OF_USE)
+            moveToWebPage(TERMS_OF_USE)
         }
 
         binding.tvMyPageInquiry.setOnClickListener {
-            if (getUserRole)
-                showLoginNeedDialog()
-            else moveToWebBrowser(INQUIRY)
+            moveToWebBrowser(INQUIRY)
         }
     }
 
