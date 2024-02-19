@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.sopt.geonppang.R
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.FragmentMainPurposeTypeFilterBinding
 import com.sopt.geonppang.presentation.MainActivity
+import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingFragment
 import com.sopt.geonppang.util.extension.setOnSingleClickListener
@@ -14,6 +16,7 @@ import com.sopt.geonppang.util.extension.setOnSingleClickListener
 class MainPurposeTypeFilterFragment :
     BindingFragment<FragmentMainPurposeTypeFilterBinding>(R.layout.fragment_main_purpose_type_filter) {
     private val viewModel: FilterSettingViewModel by activityViewModels()
+    private lateinit var gpDataSource: GPDataSource
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,6 +30,8 @@ class MainPurposeTypeFilterFragment :
     private fun addListeners() {
         binding.layoutMainPurposeTypeFilterSkip.setOnSingleClickListener {
             AmplitudeUtils.trackEvent(CLICK_SKIP)
+            gpDataSource = GPDataSource(it.context)
+            gpDataSource.userRoleType = UserRoleType.FILTER_UNSELECTED_MEMBER.name
             moveToMain()
         }
     }

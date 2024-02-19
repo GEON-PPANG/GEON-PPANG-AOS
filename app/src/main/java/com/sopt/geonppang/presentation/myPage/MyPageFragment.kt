@@ -11,10 +11,13 @@ import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.BuildConfig
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentMyPageBinding
+import com.sopt.geonppang.presentation.common.LoginNeededDialog
 import com.sopt.geonppang.presentation.common.WebViewActivity
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.presentation.type.LoginNeededType
+import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.binding.BindingFragment
 import com.sopt.geonppang.util.extension.breadTypeListToChips
@@ -29,7 +32,6 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     private val viewModel by viewModels<MyPageViewModel>()
-
     lateinit var myBreadTypeList: List<BreadFilterType>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,33 +46,48 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun initLayout() {
-        viewModel.fetchProfileInfo()
+        if (viewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name)
+            viewModel.fetchNoneMemberProfileInfo()
+        else
+            viewModel.fetchProfileInfo()
         binding.includeMyPageSpeechBubble.ivSpeechBubble.setBackgroundResource(R.drawable.background_left_speech_bubble)
         binding.tvMyPageAppVersion.text = getString(R.string.tv_my_page_app_version, APP_VERSION)
     }
 
     private fun addListeners() {
+        val getUserRole = viewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name
         binding.layoutMyPageBookmark.setOnSingleClickListener {
             AmplitudeUtils.trackEvent(CLICK_MY_STORE)
-            moveToStoreBakeryList()
+            if (getUserRole)
+                showLoginNeedDialog()
+            else
+                moveToStoreBakeryList()
         }
 
         binding.layoutMyPageReview.setOnSingleClickListener {
             AmplitudeUtils.trackEvent(CLICK_MY_REVIEW)
-            moveToMyReview()
+            if (getUserRole)
+                showLoginNeedDialog()
+            else moveToMyReview()
         }
 
         binding.ivMyPageProfileRightArrow.setOnClickListener {
             AmplitudeUtils.trackEvent(START_FILTER_MY)
-            moveToFilter()
+            if (getUserRole)
+                showLoginNeedDialog()
+            else moveToFilter()
         }
 
         binding.tvMyPageLogout.setOnClickListener {
-            showLogoutDialog()
+            if (getUserRole)
+                showLoginNeedDialog()
+            else showLogoutDialog()
         }
 
         binding.tvMyPageWithdraw.setOnClickListener {
-            showWithdrawDialog()
+            if (getUserRole)
+                showLoginNeedDialog()
+            else showWithdrawDialog()
         }
 
         binding.includeMyPageSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
@@ -151,6 +168,12 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         WithdrawDialog().show(childFragmentManager, DIALOG)
     }
 
+    private fun showLoginNeedDialog() {
+        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_MY_PAGE).show(
+            parentFragmentManager, LOGIN_NEEDED_MY_PAGE
+        )
+    }
+
     companion object {
         const val FILTER_INFO = "filterInfo"
         const val APP_VERSION = BuildConfig.VERSION_NAME
@@ -160,5 +183,6 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         const val CLICK_MY_STORE = "click_mystore"
         const val CLICK_MY_REVIEW = "click_myreview"
         const val START_FILTER_MY = "start_filter_mypage"
+        const val LOGIN_NEEDED_MY_PAGE = "loginNeededMyPage"
     }
 }

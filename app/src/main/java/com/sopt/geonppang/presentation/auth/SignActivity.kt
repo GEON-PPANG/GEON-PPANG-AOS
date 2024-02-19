@@ -48,8 +48,7 @@ class SignActivity :
             AmplitudeUtils.trackEventWithProperties(START_SIGNUP, SIGNUP_TYPE, EMAIL)
         }
 
-        // TODO: dana 둘러보기 코드 작성 후 지우기
-        binding.ivLogoText.setOnSingleClickListener {
+        binding.tvLookAround.setOnSingleClickListener {
             GPDataSource(this).userRoleType = UserRoleType.NONE_MEMBER.name
             moveToMain()
         }

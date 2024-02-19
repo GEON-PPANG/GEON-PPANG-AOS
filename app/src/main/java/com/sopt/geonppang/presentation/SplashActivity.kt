@@ -8,6 +8,7 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.ActivitySplashBinding
 import com.sopt.geonppang.presentation.auth.SignActivity
+import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -31,7 +32,7 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
 
     private fun setAutoLogin() {
         val gpDataSource = GPDataSource(this)
-        if (gpDataSource.isLogin) {
+        if (gpDataSource.isLogin or (gpDataSource.userRoleType == UserRoleType.NONE_MEMBER.name)) {
             moveToHome()
         } else moveToSign()
     }
