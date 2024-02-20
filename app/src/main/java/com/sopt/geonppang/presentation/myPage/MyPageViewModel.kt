@@ -12,6 +12,7 @@ import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,7 +21,7 @@ class MyPageViewModel @Inject constructor(
     private val gpDataSource: GPDataSource,
     private val myPageRepository: MyPageRepository,
 ) : ViewModel() {
-    private var _profileInfo = MutableStateFlow<Profile?>(null)
+    private var _profileInfo = MutableStateFlow(Profile())
     val profileInfo get() = _profileInfo.asStateFlow()
     private var _isFilterSelected = MutableStateFlow(true)
     val isFilterSelected = _isFilterSelected.asStateFlow()
@@ -47,8 +48,12 @@ class MyPageViewModel @Inject constructor(
         }
     }
 
-    fun fetchNoneMemberProfileInfo() {
-        _profileInfo.value = Profile("별사탕", "", listOf())
+    fun setNoneMemberNickname(defaultNoneMemberNickName: String) {
+        _profileInfo.update {
+            it.copy(
+                memberNickname = defaultNoneMemberNickName
+            )
+        }
     }
 
     fun fetchMyPageReviewList() {
@@ -74,7 +79,7 @@ class MyPageViewModel @Inject constructor(
     }
 
     fun setMainPurposeTitle(): Int? {
-        return when (profileInfo.value?.mainPurpose) {
+        return when (profileInfo.value.mainPurpose) {
             MainPurposeFilterType.DIET.name -> MainPurposeFilterType.DIET.titleRes
             MainPurposeFilterType.HEALTH.name -> MainPurposeFilterType.HEALTH.titleRes
             MainPurposeFilterType.VEGAN.name -> MainPurposeFilterType.VEGAN.titleRes

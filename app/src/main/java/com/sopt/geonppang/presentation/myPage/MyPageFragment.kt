@@ -47,7 +47,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun initLayout() {
         if (viewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name)
-            viewModel.fetchNoneMemberProfileInfo()
+            viewModel.setNoneMemberNickname(getString(R.string.user_role_type_member_none_title))
         else
             viewModel.fetchProfileInfo()
         binding.includeMyPageSpeechBubble.ivSpeechBubble.setBackgroundResource(R.drawable.background_left_speech_bubble)

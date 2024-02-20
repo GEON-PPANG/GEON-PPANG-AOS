@@ -213,5 +213,8 @@
 
     <string name="report_do_report">신고하기</string>
 
-    <string name="report_success_title">신고가 완료됐어요!</string>
+    <string name="report_success_title">신고가 완료됐어요!</string>탕
+
+    <!--  userRoleType  -->
+    <string name="user_role_type_member_none_title">별사탕</string>
 </resources>

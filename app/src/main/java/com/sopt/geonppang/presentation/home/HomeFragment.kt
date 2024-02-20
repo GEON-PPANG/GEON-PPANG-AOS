@@ -94,7 +94,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         viewModel.userRoleType.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 UserRoleType.NONE_MEMBER.name -> {
-                    viewModel.setNickName("별사탕")
+                    viewModel.setNickName(getString(R.string.user_role_type_member_none_title))
                 }
 
                 UserRoleType.FILTER_SELECTED_MEMBER.name -> {
