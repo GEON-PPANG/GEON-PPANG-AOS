@@ -16,11 +16,12 @@ class BakeryListPagingRepository @Inject constructor(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,
                 enablePlaceholders = false,
+                initialLoadSize = PAGE_SIZE
             ),
             pagingSourceFactory = {
                 BakeryListPagingSource(
                     bakeryService = bakeryService,
-                    sort = bakeryListFilterType.sortType.sortName,
+                    sort = bakeryListFilterType.sortType.sortType,
                     personal = bakeryListFilterType.isPersonalFilterApplied == true,
                     isHard = bakeryListFilterType.isHard,
                     isBrunch = bakeryListFilterType.isBrunch,
