@@ -9,13 +9,14 @@ import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ItemMyReviewBinding
 import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.presentation.model.MyReviewBakeryInfo
+import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.util.ItemDiffCallback
 import com.sopt.geonppang.util.extension.loadingImage
 import com.sopt.geonppang.util.extension.setOnSingleClickListener
 
 class MyReviewAdapter(
     private val moveToReviewDetail: (Int, MyReviewBakeryInfo) -> Unit,
-    private val initBreadTypeChips: (ChipGroup, Int) -> Unit,
+    private val initBreadTypeChips: (ChipGroup, List<BreadFilterType>) -> Unit,
 ) :
     ListAdapter<MyReview, MyReviewAdapter.MyReviewViewHolder>(
         ItemDiffCallback<MyReview>(
@@ -30,8 +31,7 @@ class MyReviewAdapter(
         fun onBind(
             review: MyReview,
             moveToReviewDetail: (Int, MyReviewBakeryInfo) -> Unit,
-            initBreadTypeChips: (ChipGroup, Int) -> Unit,
-            position: Int
+            initBreadTypeChips: (ChipGroup, List<BreadFilterType>) -> Unit,
         ) {
 
             binding.review = review
@@ -39,7 +39,7 @@ class MyReviewAdapter(
             // TODO: dana 다른 방식이 있는지 고민, 매 바인딩마다 removeAllViews 해야하는가 ?
             with(binding.cgBakeryBreadTypes) {
                 this.removeAllViews()
-                initBreadTypeChips(this, position)
+                initBreadTypeChips(this, review.bakery.breadTypeList)
             }
 
             binding.root.setOnSingleClickListener {
@@ -72,6 +72,6 @@ class MyReviewAdapter(
     }
 
     override fun onBindViewHolder(holder: MyReviewViewHolder, position: Int) {
-        holder.onBind(getItem(position), moveToReviewDetail, initBreadTypeChips, position)
+        holder.onBind(getItem(position), moveToReviewDetail, initBreadTypeChips)
     }
 }

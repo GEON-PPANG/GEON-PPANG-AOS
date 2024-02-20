@@ -2,85 +2,72 @@ package com.sopt.geonppang.presentation.bakeryList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.sopt.geonppang.data.datasource.local.GPDataSource
-import com.sopt.geonppang.domain.model.Bakery
-import com.sopt.geonppang.domain.repository.BakeryRepository
+import com.sopt.geonppang.data.repository.BakeryListPagingRepository
+import com.sopt.geonppang.domain.model.BakeryInformation
+import com.sopt.geonppang.domain.model.BakeryListFilterType
 import com.sopt.geonppang.domain.repository.GetUserFilterRepository
 import com.sopt.geonppang.presentation.type.BakeryCategoryType
 import com.sopt.geonppang.presentation.type.BakerySortType
-import com.sopt.geonppang.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class BakeryListViewModel @Inject constructor(
-    private val gpDataSource: GPDataSource,
-    private val bakeryRepository: BakeryRepository,
-    private val getUserFilterRepository: GetUserFilterRepository
+    private val bakeryListPagingRepository: BakeryListPagingRepository,
+    private val getUserFilterRepository: GetUserFilterRepository,
+    private val gpDataSource: GPDataSource
 ) : ViewModel() {
-    private var _bakerySort = MutableStateFlow(BakerySortType.DEFAULT)
-    val bakerySort get() = _bakerySort.asStateFlow()
-    private val _isPersonalFilterApplied = MutableStateFlow<Boolean?>(null)
-    val isPersonalFilterApplied get() = _isPersonalFilterApplied.asStateFlow()
+    private var _bakeryListFilterState = MutableStateFlow(BakeryListFilterType())
+    val bakeryListFilterType get() = _bakeryListFilterState.asStateFlow()
 
-    private var _bakeryListState = MutableStateFlow<UiState<List<Bakery>>>(UiState.Loading)
-    val bakeryListState get() = _bakeryListState.asStateFlow()
-
-    val bakeryCategoryType: MutableStateFlow<Map<BakeryCategoryType, Boolean>> = MutableStateFlow(
-        mapOf(
-            BakeryCategoryType.HARD to false,
-            BakeryCategoryType.DESSERT to false,
-            BakeryCategoryType.BRUNCH to false,
-        )
-    )
     private val _isFilterSelected = MutableStateFlow(true)
     val isFilterSelected get() = _isFilterSelected.asStateFlow()
     private val _userRoleType = MutableStateFlow(gpDataSource.userRoleType)
     val userRoleType get() = _userRoleType
 
     fun setBakerySortType(bakerySortType: BakerySortType) {
-        _bakerySort.value = bakerySortType
-    }
-
-    fun setPersonalFilter() {
-        _isPersonalFilterApplied.value?.let { isPersonalFilterApplied ->
-            _isPersonalFilterApplied.value = !isPersonalFilterApplied
+        _bakeryListFilterState.update {
+            it.copy(sortType = bakerySortType)
         }
     }
 
-    private fun setInitPersonalFilterState() {
-        _isPersonalFilterApplied.value = isFilterSelected.value
-    }
-
-    fun fetchBakeryList() {
-        viewModelScope.launch {
-            isPersonalFilterApplied.value?.let { isPersonalFilterApplied ->
-                bakeryRepository.fetchBakeryList(
-                    bakerySort.value.sortType,
-                    isPersonalFilterApplied,
-                    bakeryCategoryType.value[BakeryCategoryType.HARD] == true,
-                    bakeryCategoryType.value[BakeryCategoryType.DESSERT] == true,
-                    bakeryCategoryType.value.get(BakeryCategoryType.BRUNCH) == true
-                )
-                    .onSuccess { bakeryList ->
-                        _bakeryListState.value = UiState.Success(bakeryList)
-                    }
-                    .onFailure { throwable ->
-                        _bakeryListState.value = UiState.Error(throwable.message)
-                    }
-            }
+    // TODO: dana update 로직 수정 필요
+    fun setIsPersonalFilterAppliedState() {
+        _bakeryListFilterState.update {
+            it.copy(isPersonalFilterApplied = it.isPersonalFilterApplied == false)
         }
     }
 
     fun setBakeryCategoryType(bakeryCategory: BakeryCategoryType) {
-        val isChecked = bakeryCategoryType.value[bakeryCategory] ?: return
-        bakeryCategoryType.value = bakeryCategoryType.value.toMutableMap().apply {
-            this[bakeryCategory] = !isChecked
+        _bakeryListFilterState.update { bakeryListFilterState ->
+            when (bakeryCategory) {
+                BakeryCategoryType.HARD -> bakeryListFilterState.copy(isHard = !bakeryListFilterState.isHard)
+                BakeryCategoryType.DESSERT -> bakeryListFilterState.copy(isDessert = !bakeryListFilterState.isDessert)
+                BakeryCategoryType.BRUNCH -> bakeryListFilterState.copy(isBrunch = !bakeryListFilterState.isBrunch)
+            }
         }
+    }
+
+    // TODO: dana 필터 적용 상태(앱 내 유저 상태) 어떻게 관리할 건지 고민
+    private fun setInitPersonalFilterState() {
+        _bakeryListFilterState.update {
+            it.copy(isPersonalFilterApplied = _isFilterSelected.value)
+        }
+    }
+
+    fun fetchBakeryListPagingData(): Flow<PagingData<BakeryInformation>> {
+        return bakeryListPagingRepository.fetchBakeryList(
+            bakeryListFilterType = bakeryListFilterType.value
+        ).cachedIn(viewModelScope)
     }
 
     fun getUserFilter() {

@@ -48,6 +48,7 @@ class BakeryListSortBottomSheetDialog :
         }
     }
 
+    // TODO: dana callback Listener 안쓰는 방식으로 수정해보기
     fun setDataListener(listener: BakerySortTypeListener) {
         bakerySortTypeListener = listener
     }

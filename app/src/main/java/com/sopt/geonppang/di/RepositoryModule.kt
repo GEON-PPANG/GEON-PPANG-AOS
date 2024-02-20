@@ -25,12 +25,6 @@ interface RepositoryModule {
 
     @Binds
     @Singleton
-    fun bindBakeryRepository(
-        bakeryRepositoryImpl: BakeryRepositoryImpl,
-    ): BakeryRepository
-
-    @Binds
-    @Singleton
     fun bindMyPageRepository(
         myPageRepositoryImpl: MyPageRepositoryImpl,
     ): MyPageRepository

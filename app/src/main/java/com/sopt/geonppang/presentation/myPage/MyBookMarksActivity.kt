@@ -8,7 +8,6 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityMyBookmarksBinding
-import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.presentation.common.BakeryAdapter
 import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
@@ -30,8 +29,6 @@ class MyBookMarksActivity :
     BindingActivity<ActivityMyBookmarksBinding>(R.layout.activity_my_bookmarks) {
     private val myPageViewModel: MyPageViewModel by viewModels()
     private lateinit var bakeryAdapter: BakeryAdapter
-
-    private var myBookMarkBakeryList = listOf<BakeryInformation>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +63,6 @@ class MyBookMarksActivity :
         myPageViewModel.myPageBookmarkListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    myBookMarkBakeryList = it.data
                     bakeryAdapter.submitList(it.data)
                 }
 

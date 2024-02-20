@@ -43,7 +43,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     private lateinit var detailNoReviewAdapter: DetailNoReviewAdapter
     private lateinit var concatAdapter: ConcatAdapter
     private var bakeryId = -1
-    lateinit var breadTypeList: List<BreadFilterType>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,7 +119,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
             it?.let { bakeryInfo ->
                 detailBakeryInfoAdapter.setBakeryInfo(bakeryInfo)
                 detailMenuAdapter.submitList(bakeryInfo.menuList)
-                breadTypeList = bakeryInfo.breadTypeIdList
             }
         }.launchIn(lifecycleScope)
 
@@ -178,10 +176,10 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }
     }
 
-    private fun initBreadTypeChips(chipGroup: ChipGroup) {
-        if (breadTypeList.isNotEmpty()) {
+    private fun initBreadTypeChips(chipGroup: ChipGroup, breadFilterList: List<BreadFilterType>) {
+        if (breadFilterList.isNotEmpty()) {
             chipGroup.breadTypeListToChips(
-                breadTypeList = breadTypeList,
+                breadTypeList = breadFilterList,
                 toChip = {
                     this.toBreadTypePointM1Chip(layoutInflater)
                 }

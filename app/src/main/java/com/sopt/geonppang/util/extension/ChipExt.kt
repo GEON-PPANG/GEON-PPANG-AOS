@@ -2,7 +2,7 @@ package com.sopt.geonppang.util.extension
 
 /*
     author: dana
-    description: chip을 inflate 하는 것과 관련이 있는 확장함수들 모음
+    description: chip을 inflate 하는 것과 관련이 있는 확장 함수들 모음
  */
 
 import android.view.LayoutInflater

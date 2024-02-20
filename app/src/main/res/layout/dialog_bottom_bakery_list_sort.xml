@@ -56,7 +56,7 @@
 
             <TextView
                 android:id="@+id/tv_default"
-                selected="@{viewModel.bakerySort == bakerySortType.DEFAULT}"
+                selected="@{viewModel.bakeryListFilterType.sortType == bakerySortType.DEFAULT}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -69,7 +69,7 @@
 
             <ImageView
                 android:id="@+id/iv_default_check"
-                visibility="@{viewModel.bakerySort == bakerySortType.DEFAULT}"
+                visibility="@{viewModel.bakeryListFilterType.sortType == bakerySortType.DEFAULT}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_check"
@@ -92,7 +92,7 @@
 
             <TextView
                 android:id="@+id/tv_review_num"
-                selected="@{viewModel.bakerySort == bakerySortType.REVIEW}"
+                selected="@{viewModel.bakeryListFilterType.sortType == bakerySortType.REVIEW}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -105,7 +105,7 @@
 
             <ImageView
                 android:id="@+id/iv_review_num_check"
-                visibility="@{viewModel.bakerySort == bakerySortType.REVIEW}"
+                visibility="@{viewModel.bakeryListFilterType.sortType == bakerySortType.REVIEW}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_check"

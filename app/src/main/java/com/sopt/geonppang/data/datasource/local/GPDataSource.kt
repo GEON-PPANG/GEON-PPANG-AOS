@@ -52,6 +52,7 @@ class GPDataSource @Inject constructor(@ApplicationContext context: Context) {
         set(value) = dataStore.edit { putBoolean(IS_LOGIN, value) }
         get() = dataStore.getBoolean(IS_LOGIN, false)
 
+    // TODO: all 앱 내에서의 userRoleType 어떻게 관리할 것인지 논의
     var userRoleType: String
         set(value) = dataStore.edit { putString(USER_ROLE_TYPE, value) }
         get() = dataStore.getString(
