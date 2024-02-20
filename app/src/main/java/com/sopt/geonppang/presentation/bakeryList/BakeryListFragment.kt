@@ -8,6 +8,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentBakeryListBinding
+import com.sopt.geonppang.presentation.common.LoginNeededDialog
 import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETAIL_PAGE_AT
@@ -18,7 +19,6 @@ import com.sopt.geonppang.presentation.type.FilterInfoType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.CustomItemDecoration
 import com.sopt.geonppang.util.binding.BindingFragment
-import com.sopt.geonppang.util.setVisibility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.launchIn
@@ -44,9 +44,10 @@ class BakeryListFragment :
     }
 
     private fun initLayout() {
-        viewModel.getUserFilter()
-
-        bakeryAdapter = BakeryListPagingDataAdapter(::moveToDetail)
+        val getUserRole = viewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name
+        if (!getUserRole)
+            viewModel.getUserFilter()
+        bakeryAdapter = BakeryListAdapter(::moveToDetail)
         binding.rvBakeryList.apply {
             adapter = bakeryAdapter
             addItemDecoration(CustomItemDecoration(requireContext()))
@@ -64,8 +65,12 @@ class BakeryListFragment :
         }
 
         binding.ivBakeryListFilter.setOnClickListener {
+            val getUserRole = viewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name
             AmplitudeUtils.trackEvent(START_FILTER_LIST)
-            moveToFilter()
+            if (getUserRole)
+                showLoginNeedDialog()
+            else
+                moveToFilter()
         }
         binding.includeHomeSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
             binding.includeHomeSpeechBubble.root.visibility = View.INVISIBLE
@@ -102,7 +107,11 @@ class BakeryListFragment :
             binding.includeHomeSpeechBubble.root.setVisibility(!isFilterSelected)
             binding.checkBakeryListMyFilter.isEnabled = isFilterSelected
             binding.layoutBakeryListMyFiltaerApply.isEnabled = isFilterSelected
-        }.launchIn(lifecycleScope)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+        viewModel.userRoleType.flowWithLifecycle(viewLifecycleOwner.lifecycle).onEach {
+            if (it == UserRoleType.NONE_MEMBER.name)
+                binding.checkBakeryListMyFilter.isEnabled = false
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun moveToDetail(bakeryId: Int) {
@@ -134,6 +143,13 @@ class BakeryListFragment :
         }
         bakeryListSortBottomSheetDialog.setDataListener(this)
         bakeryListSortBottomSheetDialog.show(parentFragmentManager, "bakeryListSortDialog")
+    }
+
+    private fun showLoginNeedDialog() {
+        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_FILTER).show(
+            parentFragmentManager,
+            LOGIN_NEEDED
+        )
     }
 
     // BakeryListDialog에서 부터 받아온 데이터를 처리

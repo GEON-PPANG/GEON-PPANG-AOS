@@ -108,7 +108,7 @@
             app:chipSpacingHorizontal="4dp"
             app:layout_constraintEnd_toEndOf="@+id/tv_item_detail_bakery_info_bakery_name"
             app:layout_constraintStart_toStartOf="@+id/tv_item_detail_bakery_info_bakery_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_item_detail_bakery_info_bakery_name"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_item_detail_bakery_info_bakery_name" />
 
         <ImageView
             android:id="@+id/iv_item_detail_bakery_info_bookmark"
@@ -228,7 +228,7 @@
 
             <TextView
                 android:id="@+id/tv_item_detail_bakery_info_homepage"
-                visibility="@{!bakeryInfo.homepageUrl.isEmpty()}"
+                visibility="@{!bakeryInfo.homepageUrl.trim().isEmpty()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -244,7 +244,7 @@
 
             <TextView
                 android:id="@+id/tv_item_detail_bakery_info_instagram"
-                visibility="@{!bakeryInfo.instagramUrl.isEmpty()}"
+                visibility="@{!bakeryInfo.instagramUrl.trim().isEmpty()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -338,39 +338,27 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_item_detail_bakery_info_time_holiday"
             tools:text="수-금 12:00 ~ 19:00 / 토-일 13:00 ~ 19:00 " />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_item_detail_bakery_info_call"
-            visibility="@{!bakeryInfo.phoneNumber.isEmpty()}"
-            android:layout_width="0dp"
+        <ImageView
+            android:id="@+id/iv_item_detail_bakery_info_call"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/spacing16"
-            app:layout_constraintEnd_toStartOf="@+id/gl_end"
+            android:layout_marginTop="@dimen/spacing16"
+            android:src="@drawable/ic_call"
             app:layout_constraintStart_toStartOf="@+id/gl_start"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_detail_bakery_info_time">
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_detail_bakery_info_time" />
 
-            <ImageView
-                android:id="@+id/iv_item_detail_bakery_info_call"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_call"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_item_detail_bakery_info_call"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:text="@{bakeryInfo.phoneNumber}"
-                android:textAppearance="@style/TextAppearance.Subhead"
-                android:textColor="@color/gray_400"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_item_detail_bakery_info_call"
-                app:layout_constraintStart_toEndOf="@+id/iv_item_detail_bakery_info_call"
-                app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_call"
-                tools:text="02-033-3333" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_item_detail_bakery_info_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@{bakeryInfo.phoneNumber}"
+            android:textAppearance="@style/TextAppearance.Subhead"
+            android:textColor="@color/gray_400"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_item_detail_bakery_info_call"
+            app:layout_constraintStart_toEndOf="@+id/iv_item_detail_bakery_info_call"
+            app:layout_constraintTop_toTopOf="@+id/iv_item_detail_bakery_info_call"
+            tools:text="02-033-3333" />
 
         <View
             android:id="@+id/view_item_detail_bakery_info_second_line"
@@ -380,7 +368,7 @@
             android:background="@color/gray_200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_item_detail_bakery_info_call" />
+            app:layout_constraintTop_toBottomOf="@id/iv_item_detail_bakery_info_call" />
 
         <TextView
             android:id="@+id/tv_item_detail_bakery_info_menu"

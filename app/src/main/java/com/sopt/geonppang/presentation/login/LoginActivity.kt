@@ -6,9 +6,12 @@ import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.databinding.ActivityLoginBinding
 import com.sopt.geonppang.presentation.MainActivity
 import com.sopt.geonppang.presentation.auth.SignUpActivity
+import com.sopt.geonppang.presentation.filterSetting.FilterSettingViewModel
+import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
 import com.sopt.geonppang.util.binding.BindingActivity
@@ -21,6 +24,8 @@ import kotlinx.coroutines.flow.onEach
 class LoginActivity :
     BindingActivity<ActivityLoginBinding>(R.layout.activity_login) {
     private val viewModel: LogInViewModel by viewModels()
+    private val filterViewModel: FilterSettingViewModel by viewModels()
+    private lateinit var gpDataSource: GPDataSource
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
@@ -43,10 +48,15 @@ class LoginActivity :
     }
 
     private fun collectData() {
+        gpDataSource = GPDataSource(this)
         viewModel.loginState.flowWithLifecycle(lifecycle).onEach { loginState ->
             when (loginState) {
                 is UiState.Success -> {
                     AmplitudeUtils.trackEvent(LOGIN_APP)
+                    if (filterViewModel.filterStatus.value == true) {
+                        gpDataSource.userRoleType = UserRoleType.FILTER_SELECTED_MEMBER.name
+                    } else
+                        gpDataSource.userRoleType = UserRoleType.FILTER_UNSELECTED_MEMBER.name
                     moveToHome()
                     viewModel.setAutoLogin()
                 }

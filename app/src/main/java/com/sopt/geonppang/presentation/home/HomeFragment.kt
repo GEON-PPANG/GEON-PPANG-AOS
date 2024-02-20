@@ -8,12 +8,14 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.FragmentHomeBinding
+import com.sopt.geonppang.presentation.common.LoginNeededDialog
 import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETAIL_PAGE_AT
 import com.sopt.geonppang.presentation.filterSetting.FilterSettingActivity
 import com.sopt.geonppang.presentation.search.SearchActivity
 import com.sopt.geonppang.presentation.type.FilterInfoType
+import com.sopt.geonppang.presentation.type.LoginNeededType
 import com.sopt.geonppang.presentation.type.UserRoleType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.UiState
@@ -56,7 +58,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
         binding.ivHomeFilter.setOnClickListener {
             AmplitudeUtils.trackEvent(START_FILTER_HOME)
-            moveToFilter()
+            if (viewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name)
+                showLoginNeedDialog()
+            else
+                moveToFilter()
         }
 
         binding.includeHomeSpeechBubble.ivSpeechBubbleClose.setOnClickListener {
@@ -126,6 +131,12 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         startActivity(intent)
     }
 
+    private fun showLoginNeedDialog() {
+        LoginNeededDialog(LoginNeededType.LOGIN_NEEDED_FILTER).show(
+            parentFragmentManager, LOGIN_NEEDED_FILTER
+        )
+    }
+
     companion object {
         const val BAKERY_ID = "bakeryId"
         const val FILTER_INFO = "filterInfo"
@@ -134,5 +145,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         const val CLICK_SEARCH_HOME = "click_search_home"
         const val START_FILTER_HOME = "start_filter_home"
         const val HOME = "HOME"
+        const val LOGIN_NEEDED_FILTER = "loginNeededFilter"
     }
 }

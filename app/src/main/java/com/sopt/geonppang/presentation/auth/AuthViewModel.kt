@@ -51,6 +51,9 @@ class AuthViewModel @Inject constructor(
     private val _signUpState = MutableStateFlow<UiState<Boolean>>(UiState.Loading)
     val signUpState get() = _signUpState.asStateFlow()
 
+    private val _userRoleType = MutableStateFlow(gpDataSource.userRoleType)
+    val userRoleType get() = _userRoleType
+
     val isValidEmail: StateFlow<Boolean> = email.map { email ->
         email.matches(Regex(EMAIL_PATTERN))
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
