@@ -39,12 +39,12 @@ import kotlinx.coroutines.launch
 class BakeryListFragment :
     BindingFragment<FragmentBakeryListBinding>(R.layout.fragment_bakery_list),
     BakerySortTypeListener {
-    private val viewModel: BakeryListViewModel by viewModels()
+    private val bakeryListViewModel: BakeryListViewModel by viewModels()
     private lateinit var bakeryAdapter: BakeryListPagingDataAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewModel = viewModel
+        binding.viewModel = bakeryListViewModel
         binding.lifecycleOwner = this.viewLifecycleOwner
 
         initLayout()
@@ -53,13 +53,20 @@ class BakeryListFragment :
     }
 
     private fun initLayout() {
-        val getUserRole = viewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name
-        if (!getUserRole)
-            viewModel.getUserFilter()
         bakeryAdapter = BakeryListPagingDataAdapter(::moveToDetail, ::initBreadTypeChips)
         binding.rvBakeryList.apply {
             adapter = bakeryAdapter
             addItemDecoration(CustomItemDecoration(requireContext()))
+        }
+
+        val isFilterSelectedMember =
+            bakeryListViewModel.userRoleType.value == UserRoleType.FILTER_SELECTED_MEMBER.name
+
+        with(binding) {
+            includeHomeSpeechBubble.root.setVisibility(bakeryListViewModel.userRoleType.value == UserRoleType.FILTER_UNSELECTED_MEMBER.name)
+            checkBakeryListMyFilter.isEnabled = isFilterSelectedMember
+            checkBakeryListMyFilter.isChecked = isFilterSelectedMember
+            layoutBakeryListMyFiltaerApply.isEnabled = isFilterSelectedMember
         }
     }
 
@@ -84,25 +91,28 @@ class BakeryListFragment :
 
         // 비회원, 회원 분기처리
         binding.ivBakeryListFilter.setOnClickListener {
-            val getUserRole = viewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name
-            AmplitudeUtils.trackEvent(START_FILTER_LIST)
-            if (getUserRole)
+            val isMember = bakeryListViewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name
+
+            if (isMember) {
                 showLoginNeedDialog()
-            else
+            } else {
                 moveToFilter()
+                AmplitudeUtils.trackEvent(START_FILTER_LIST)
+            }
         }
     }
 
     private fun collectData() {
-        viewModel.bakeryListFilterType.flowWithLifecycle(viewLifecycleOwner.lifecycle).onEach {
-            lifecycleScope.launch {
-                viewModel.fetchBakeryListPagingData().collectLatest {
-                    bakeryAdapter.submitData(it)
+        bakeryListViewModel.bakeryListFilterType.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach {
+                lifecycleScope.launch {
+                    bakeryListViewModel.fetchBakeryListPagingData().collectLatest {
+                        bakeryAdapter.submitData(it)
+                    }
                 }
-            }
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
 
-        viewModel.bakeryListFilterType
+        bakeryListViewModel.bakeryListFilterType
             .map { it.isPersonalFilterApplied }
             .distinctUntilChanged()
             .flowWithLifecycle(viewLifecycleOwner.lifecycle).onEach { isPersonalFilterApplied ->
@@ -111,7 +121,7 @@ class BakeryListFragment :
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
 
-        viewModel.bakeryListFilterType
+        bakeryListViewModel.bakeryListFilterType
             .map {
                 listOfNotNull(
                     if (it.isHard) BakeryCategoryType.HARD.titleString else null,
@@ -131,17 +141,6 @@ class BakeryListFragment :
                 }
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
-
-        viewModel.isFilterSelected.flowWithLifecycle(lifecycle).onEach { isFilterSelected ->
-            binding.includeHomeSpeechBubble.root.setVisibility(!isFilterSelected)
-            binding.checkBakeryListMyFilter.isEnabled = isFilterSelected
-            binding.layoutBakeryListMyFiltaerApply.isEnabled = isFilterSelected
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
-
-        viewModel.userRoleType.flowWithLifecycle(viewLifecycleOwner.lifecycle).onEach {
-            if (it == UserRoleType.NONE_MEMBER.name)
-                binding.checkBakeryListMyFilter.isEnabled = false
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun initBreadTypeChips(chipGroup: ChipGroup, breadFilterList: List<BreadFilterType>) {
@@ -180,7 +179,10 @@ class BakeryListFragment :
 
         // BakeryListSortDialog로 현재 정렬 정보 전달
         bakeryListSortBottomSheetDialog.arguments = Bundle().apply {
-            putString("bakerySortType", viewModel.bakeryListFilterType.value.sortType.sortType)
+            putString(
+                "bakerySortType",
+                bakeryListViewModel.bakeryListFilterType.value.sortType.sortType
+            )
         }
         bakeryListSortBottomSheetDialog.setDataListener(this)
         bakeryListSortBottomSheetDialog.show(parentFragmentManager, "bakeryListSortDialog")
@@ -195,7 +197,7 @@ class BakeryListFragment :
 
     // BakeryListDialog에서 부터 받아온 데이터를 처리
     override fun onBakerySortTypeSelected(bakerySortType: BakerySortType) {
-        viewModel.setBakerySortType(bakerySortType)
+        bakeryListViewModel.setBakerySortType(bakerySortType)
     }
 
     companion object {

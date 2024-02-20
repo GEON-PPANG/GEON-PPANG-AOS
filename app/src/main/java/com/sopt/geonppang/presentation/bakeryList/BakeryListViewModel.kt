@@ -23,14 +23,11 @@ import javax.inject.Inject
 @HiltViewModel
 class BakeryListViewModel @Inject constructor(
     private val bakeryListPagingRepository: BakeryListPagingRepository,
-    private val getUserFilterRepository: GetUserFilterRepository,
     private val gpDataSource: GPDataSource
 ) : ViewModel() {
     private var _bakeryListFilterState = MutableStateFlow(BakeryListFilterType())
     val bakeryListFilterType get() = _bakeryListFilterState.asStateFlow()
 
-    private val _isFilterSelected = MutableStateFlow(true)
-    val isFilterSelected get() = _isFilterSelected.asStateFlow()
     private val _userRoleType = MutableStateFlow(gpDataSource.userRoleType)
     val userRoleType get() = _userRoleType
 
@@ -57,30 +54,10 @@ class BakeryListViewModel @Inject constructor(
         }
     }
 
-    // TODO: dana 필터 적용 상태(앱 내 유저 상태) 어떻게 관리할 건지 고민
-    private fun setInitPersonalFilterState() {
-        _bakeryListFilterState.update {
-            it.copy(isPersonalFilterApplied = _isFilterSelected.value)
-        }
-    }
-
     fun fetchBakeryListPagingData(): Flow<PagingData<BakeryInformation>> {
         return bakeryListPagingRepository.fetchBakeryList(
             bakeryListFilterType = bakeryListFilterType.value
         ).cachedIn(viewModelScope)
-    }
-
-    fun getUserFilter() {
-        viewModelScope.launch {
-            getUserFilterRepository.getUserFilter()
-                .onSuccess { userFilterInfo ->
-                    _isFilterSelected.value = (userFilterInfo.mainPurpose != NONE)
-                    setInitPersonalFilterState()
-                }
-                .onFailure { throwable ->
-                    Timber.e(throwable.message)
-                }
-        }
     }
 
     companion object {
