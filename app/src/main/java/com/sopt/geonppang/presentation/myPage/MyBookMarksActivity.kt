@@ -8,7 +8,6 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityMyBookmarksBinding
-import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.presentation.common.BakeryAdapter
 import com.sopt.geonppang.presentation.detail.DetailActivity
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
