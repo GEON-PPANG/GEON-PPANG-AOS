@@ -8,11 +8,11 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.R
 import com.sopt.geonppang.databinding.ActivityMyReviewBinding
-import com.sopt.geonppang.domain.model.MyReview
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.SOURCE
 import com.sopt.geonppang.presentation.detail.DetailActivity.Companion.VIEW_DETAIL_PAGE_AT
 import com.sopt.geonppang.presentation.model.MyReviewBakeryInfo
 import com.sopt.geonppang.presentation.myReviewDetail.MyReviewDetailActivity
+import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.util.AmplitudeUtils
 import com.sopt.geonppang.util.CustomItemDecoration
 import com.sopt.geonppang.util.UiState
@@ -28,8 +28,6 @@ import timber.log.Timber
 class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activity_my_review) {
     private val viewModel: MyPageViewModel by viewModels()
     private lateinit var myReviewAdapter: MyReviewAdapter
-
-    private var myReviewList = listOf<MyReview>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +58,6 @@ class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activ
         viewModel.myPageReviewListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    myReviewList = it.data
                     myReviewAdapter.submitList(it.data)
                 }
 
@@ -81,16 +78,14 @@ class MyReviewActivity : BindingActivity<ActivityMyReviewBinding>(R.layout.activ
         startActivity(intent)
     }
 
-    private fun initBreadTypeChips(chipGroup: ChipGroup, position: Int) {
-        if (myReviewList.isNotEmpty()) {
-            myReviewList.get(position).bakery.breadTypeList.let { breadTypeIdList ->
-                chipGroup.breadTypeListToChips(
-                    breadTypeList = breadTypeIdList,
-                    toChip = {
-                        this.toBreadTypePointM2Chip(layoutInflater)
-                    }
-                )
-            }
+    private fun initBreadTypeChips(chipGroup: ChipGroup, breadFilterList: List<BreadFilterType>) {
+        if (breadFilterList.isNotEmpty()) {
+            chipGroup.breadTypeListToChips(
+                breadTypeList = breadFilterList,
+                toChip = {
+                    this.toBreadTypePointM2Chip(layoutInflater)
+                }
+            )
         }
     }
 

@@ -31,8 +31,6 @@ class MyBookMarksActivity :
     private val myPageViewModel: MyPageViewModel by viewModels()
     private lateinit var bakeryAdapter: BakeryAdapter
 
-    private var myBookMarkBakeryList = listOf<BakeryInformation>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = myPageViewModel
@@ -66,7 +64,6 @@ class MyBookMarksActivity :
         myPageViewModel.myPageBookmarkListState.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
-                    myBookMarkBakeryList = it.data
                     bakeryAdapter.submitList(it.data)
                 }
 

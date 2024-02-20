@@ -6,11 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.ChipGroup
 import com.sopt.geonppang.databinding.ItemDetailBakeryInfoBinding
 import com.sopt.geonppang.domain.model.BakeryInfo
+import com.sopt.geonppang.presentation.type.BreadFilterType
 import com.sopt.geonppang.util.AmplitudeUtils
 
 class DetailBakeryInfoAdapter(
     private val moveToWebPage: (String) -> Unit,
-    private val initBreadTypeChips: (ChipGroup) -> Unit,
+    private val initBreadTypeChips: (ChipGroup, List<BreadFilterType>) -> Unit,
 ) : RecyclerView.Adapter<DetailBakeryInfoAdapter.DetailBakeryInfoViewHolder>() {
     private val bakeryInfoList: MutableList<BakeryInfo> = mutableListOf()
 
@@ -19,14 +20,14 @@ class DetailBakeryInfoAdapter(
         fun onBind(
             bakeryInfo: BakeryInfo,
             moveToWebPage: (String) -> Unit,
-            initBreadTypeChips: (ChipGroup) -> Unit,
+            initBreadTypeChips: (ChipGroup, List<BreadFilterType>) -> Unit,
         ) {
             with(binding) {
                 binding.bakeryInfo = bakeryInfo
 
                 with(binding.chipGroupItemDetailBakeryInfoBreadType) {
                     this.removeAllViews()
-                    initBreadTypeChips(this)
+                    initBreadTypeChips(this, bakeryInfo.breadTypeIdList)
                 }
 
                 tvItemDetailBakeryInfoHomepage.setOnClickListener {

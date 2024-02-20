@@ -34,7 +34,6 @@ class BakeryAdapter(
             binding.bakery = bakery
             binding.executePendingBindings()
 
-            // TODO: dana 다른 방식이 있는지 고민, 매 바인딩마다 removeAllViews 해야하는가 ?
             with(binding.cgBakeryBreadTypes) {
                 this.removeAllViews()
                 initBreadTypeChips(this, bakery.breadTypeList)

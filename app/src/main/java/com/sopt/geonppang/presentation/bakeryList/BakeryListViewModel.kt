@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.sopt.geonppang.data.datasource.local.GPDataSource
 import com.sopt.geonppang.data.repository.BakeryListPagingRepository
 import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.domain.model.BakeryListFilterType
@@ -22,13 +23,16 @@ import javax.inject.Inject
 @HiltViewModel
 class BakeryListViewModel @Inject constructor(
     private val bakeryListPagingRepository: BakeryListPagingRepository,
-    private val getUserFilterRepository: GetUserFilterRepository
+    private val getUserFilterRepository: GetUserFilterRepository,
+    private val gpDataSource: GPDataSource
 ) : ViewModel() {
     private var _bakeryListFilterState = MutableStateFlow(BakeryListFilterType())
     val bakeryListFilterType get() = _bakeryListFilterState.asStateFlow()
 
     private val _isFilterSelected = MutableStateFlow(true)
     val isFilterSelected get() = _isFilterSelected.asStateFlow()
+    private val _userRoleType = MutableStateFlow(gpDataSource.userRoleType)
+    val userRoleType get() = _userRoleType
 
     fun setBakerySortType(bakerySortType: BakerySortType) {
         _bakeryListFilterState.update {
