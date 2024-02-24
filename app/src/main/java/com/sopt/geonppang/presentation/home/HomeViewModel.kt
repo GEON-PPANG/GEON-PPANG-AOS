@@ -34,7 +34,7 @@ class HomeViewModel @Inject constructor(
     private val _userRoleType = MutableStateFlow(gpDataSource.userRoleType)
     val userRoleType get() = _userRoleType.asStateFlow()
 
-    // TODO: 무슨 회원인지 로컬 에서 관리
+    // TODO: 무슨 회원인지 로컬에서 관리
     init {
         // 비회원이 아닌 경우에만 호출 되도록
         if (_userRoleType.value != UserRoleType.NONE_MEMBER.name) {
