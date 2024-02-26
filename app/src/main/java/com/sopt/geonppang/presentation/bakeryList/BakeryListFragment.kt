@@ -61,12 +61,13 @@ class BakeryListFragment :
 
         val isFilterSelectedMember =
             bakeryListViewModel.userRoleType.value == UserRoleType.FILTER_SELECTED_MEMBER.name
+        val isNoneMember = bakeryListViewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name
 
         with(binding) {
             includeHomeSpeechBubble.root.setVisibility(bakeryListViewModel.userRoleType.value == UserRoleType.FILTER_UNSELECTED_MEMBER.name)
             checkBakeryListMyFilter.isEnabled = isFilterSelectedMember
             checkBakeryListMyFilter.isChecked = isFilterSelectedMember
-            layoutBakeryListMyFiltaerApply.isEnabled = isFilterSelectedMember
+            layoutBakeryListMyFilterApply.isEnabled = isFilterSelectedMember or isNoneMember
         }
     }
 
@@ -141,6 +142,12 @@ class BakeryListFragment :
                 }
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
+
+        bakeryListViewModel.showLoginNeed.flowWithLifecycle(viewLifecycleOwner.lifecycle).onEach {
+            if (it) {
+                showLoginNeedDialog()
+            }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun initBreadTypeChips(chipGroup: ChipGroup, breadFilterList: List<BreadFilterType>) {

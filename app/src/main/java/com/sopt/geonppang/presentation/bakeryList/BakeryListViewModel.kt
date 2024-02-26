@@ -10,6 +10,7 @@ import com.sopt.geonppang.domain.model.BakeryInformation
 import com.sopt.geonppang.domain.model.BakeryListFilterType
 import com.sopt.geonppang.presentation.type.BakeryCategoryType
 import com.sopt.geonppang.presentation.type.BakerySortType
+import com.sopt.geonppang.presentation.type.UserRoleType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,6 +29,9 @@ class BakeryListViewModel @Inject constructor(
     private val _userRoleType = MutableStateFlow(gpDataSource.userRoleType)
     val userRoleType get() = _userRoleType
 
+    private val _showLoginNeed = MutableStateFlow(false)
+    val showLoginNeed get() = _showLoginNeed
+
     fun setBakerySortType(bakerySortType: BakerySortType) {
         _bakeryListFilterState.update {
             it.copy(sortType = bakerySortType)
@@ -36,8 +40,12 @@ class BakeryListViewModel @Inject constructor(
 
     // TODO: dana update 로직 수정 필요
     fun setIsPersonalFilterAppliedState() {
-        _bakeryListFilterState.update {
-            it.copy(isPersonalFilterApplied = it.isPersonalFilterApplied == false)
+        if (_userRoleType.value == UserRoleType.NONE_MEMBER.name) {
+            _showLoginNeed.value = true
+        } else {
+            _bakeryListFilterState.update {
+                it.copy(isPersonalFilterApplied = it.isPersonalFilterApplied == false)
+            }
         }
     }
 
