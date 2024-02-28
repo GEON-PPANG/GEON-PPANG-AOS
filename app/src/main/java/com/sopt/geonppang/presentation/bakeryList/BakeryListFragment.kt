@@ -59,15 +59,12 @@ class BakeryListFragment :
             addItemDecoration(CustomItemDecoration(requireContext()))
         }
 
-        val isFilterSelectedMember =
-            bakeryListViewModel.userRoleType.value == UserRoleType.FILTER_SELECTED_MEMBER.name
-        val isNoneMember = bakeryListViewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name
+        val isFilterUnSelectedMember =
+            bakeryListViewModel.userRoleType.value == UserRoleType.FILTER_UNSELECTED_MEMBER.name
 
         with(binding) {
-            includeHomeSpeechBubble.root.setVisibility(bakeryListViewModel.userRoleType.value == UserRoleType.FILTER_UNSELECTED_MEMBER.name)
-            checkBakeryListMyFilter.isEnabled = isFilterSelectedMember
-            checkBakeryListMyFilter.isChecked = isFilterSelectedMember
-            layoutBakeryListMyFilterApply.isEnabled = isFilterSelectedMember or isNoneMember
+            includeHomeSpeechBubble.root.setVisibility(isFilterUnSelectedMember)
+            layoutBakeryListMyFilterApply.isEnabled = !isFilterUnSelectedMember
         }
     }
 
@@ -92,14 +89,19 @@ class BakeryListFragment :
 
         // 비회원, 회원 분기처리
         binding.ivBakeryListFilter.setOnClickListener {
-            val isMember = bakeryListViewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name
+            val isNoneMember =
+                bakeryListViewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name
 
-            if (isMember) {
+            if (isNoneMember) {
                 showLoginNeedDialog()
             } else {
                 moveToFilter()
                 AmplitudeUtils.trackEvent(START_FILTER_LIST)
             }
+        }
+
+        binding.layoutBakeryListMyFilterApply.setOnClickListener {
+            onApplyPersonalFilterClicked()
         }
     }
 
@@ -117,7 +119,7 @@ class BakeryListFragment :
             .map { it.isPersonalFilterApplied }
             .distinctUntilChanged()
             .flowWithLifecycle(viewLifecycleOwner.lifecycle).onEach { isPersonalFilterApplied ->
-                if (isPersonalFilterApplied == false) {
+                if (!isPersonalFilterApplied) {
                     AmplitudeUtils.trackEvent(CLICK_PERSONAL_FILTER_APPLY_OFF)
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -142,12 +144,6 @@ class BakeryListFragment :
                 }
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
-
-        bakeryListViewModel.showLoginNeed.flowWithLifecycle(viewLifecycleOwner.lifecycle).onEach {
-            if (it) {
-                showLoginNeedDialog()
-            }
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun initBreadTypeChips(chipGroup: ChipGroup, breadFilterList: List<BreadFilterType>) {
@@ -205,6 +201,17 @@ class BakeryListFragment :
     // BakeryListDialog에서 부터 받아온 데이터를 처리
     override fun onBakerySortTypeSelected(bakerySortType: BakerySortType) {
         bakeryListViewModel.setBakerySortType(bakerySortType)
+    }
+
+    private fun onApplyPersonalFilterClicked() {
+        val isNoneMember =
+            bakeryListViewModel.userRoleType.value == UserRoleType.NONE_MEMBER.name
+
+        if (isNoneMember) {
+            showLoginNeedDialog()
+        } else {
+            bakeryListViewModel.setIsPersonalFilterAppliedState()
+        }
     }
 
     companion object {

@@ -4,7 +4,7 @@ import com.sopt.geonppang.presentation.type.BakerySortType
 
 data class BakeryListFilterType(
     val sortType: BakerySortType = BakerySortType.DEFAULT,
-    val isPersonalFilterApplied: Boolean? = null,
+    val isPersonalFilterApplied: Boolean,
     val isHard: Boolean = false,
     val isDessert: Boolean = false,
     val isBrunch: Boolean = false

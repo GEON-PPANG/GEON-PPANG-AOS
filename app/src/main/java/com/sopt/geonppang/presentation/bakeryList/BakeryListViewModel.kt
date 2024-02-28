@@ -23,14 +23,15 @@ class BakeryListViewModel @Inject constructor(
     private val bakeryListPagingRepository: BakeryListPagingRepository,
     private val gpDataSource: GPDataSource
 ) : ViewModel() {
-    private var _bakeryListFilterState = MutableStateFlow(BakeryListFilterType())
+    private var _bakeryListFilterState = MutableStateFlow(
+        BakeryListFilterType(
+            isPersonalFilterApplied = gpDataSource.userRoleType == UserRoleType.FILTER_SELECTED_MEMBER.name
+        )
+    )
     val bakeryListFilterType get() = _bakeryListFilterState.asStateFlow()
 
     private val _userRoleType = MutableStateFlow(gpDataSource.userRoleType)
     val userRoleType get() = _userRoleType
-
-    private val _showLoginNeed = MutableStateFlow(false)
-    val showLoginNeed get() = _showLoginNeed
 
     fun setBakerySortType(bakerySortType: BakerySortType) {
         _bakeryListFilterState.update {
@@ -40,12 +41,8 @@ class BakeryListViewModel @Inject constructor(
 
     // TODO: dana update 로직 수정 필요
     fun setIsPersonalFilterAppliedState() {
-        if (_userRoleType.value == UserRoleType.NONE_MEMBER.name) {
-            _showLoginNeed.value = true
-        } else {
-            _bakeryListFilterState.update {
-                it.copy(isPersonalFilterApplied = it.isPersonalFilterApplied == false)
-            }
+        _bakeryListFilterState.update {
+            it.copy(isPersonalFilterApplied = !it.isPersonalFilterApplied)
         }
     }
 
