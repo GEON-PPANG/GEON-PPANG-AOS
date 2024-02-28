@@ -149,11 +149,10 @@
             app:layout_constraintTop_toBottomOf="@id/view_line_bottom">
 
             <LinearLayout
-                android:id="@+id/layout_bakery_list_my_filtaer_apply"
+                android:id="@+id/layout_bakery_list_my_filter_apply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing24"
-                android:onClick="@{() -> viewModel.setIsPersonalFilterAppliedState()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -163,7 +162,9 @@
                     style="@style/Style.CheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{() -> viewModel.setIsPersonalFilterAppliedState()}" />
+                    android:checked="@{viewModel.bakeryListFilterType.personalFilterApplied}"
+                    android:clickable="false"
+                    android:focusable="false" />
 
                 <TextView
                     android:layout_width="wrap_content"
