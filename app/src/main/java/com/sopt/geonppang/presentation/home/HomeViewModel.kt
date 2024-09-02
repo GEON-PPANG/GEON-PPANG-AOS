@@ -43,8 +43,7 @@ class HomeViewModel @Inject constructor(
         fetchBestList()
     }
 
-    // 하나의 스코프를 만들어서 각 함수들이 동기적으로 처리되도록 수정
-    fun fetchBestList() {
+    private fun fetchBestList() {
         viewModelScope.launch {
             homeRepository.fetchBestBakery()
                 .onSuccess { bestBakeryList ->
@@ -53,7 +52,9 @@ class HomeViewModel @Inject constructor(
                 .onFailure { throwable ->
                     _bestBakeryListState.value = UiState.Error(throwable.message)
                 }
+        }
 
+        viewModelScope.launch {
             homeRepository.fetchBestReview()
                 .onSuccess { bestReviewList ->
                     _bestReviewListState.value = UiState.Success(bestReviewList)
